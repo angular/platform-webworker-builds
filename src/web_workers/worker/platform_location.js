@@ -12,7 +12,6 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 import { PlatformLocation } from '@angular/common';
 import { Injectable } from '@angular/core';
-import { StringMapWrapper } from '../../facade/collection';
 import { StringWrapper } from '../../facade/lang';
 import { ClientMessageBrokerFactory, FnArg, UiArguments } from '../shared/client_message_broker';
 import { MessageBus } from '../shared/message_bus';
@@ -34,7 +33,7 @@ export var WebWorkerPlatformLocation = (function (_super) {
         this._channelSource.subscribe({
             next: function (msg) {
                 var listeners = null;
-                if (StringMapWrapper.contains(msg, 'event')) {
+                if (msg.hasOwnProperty('event')) {
                     var type = msg['event']['type'];
                     if (StringWrapper.equals(type, 'popstate')) {
                         listeners = _this._popStateListeners;

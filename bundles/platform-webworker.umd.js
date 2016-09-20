@@ -226,43 +226,8 @@
         return DateWrapper;
     }());
 
-    var Map$1 = _global.Map;
-    var Set = _global.Set;
-    // Safari and Internet Explorer do not support the iterable parameter to the
-    // Map constructor.  We work around that by manually adding the items.
-    var createMapFromPairs = (function () {
-        try {
-            if (new Map$1([[1, 2]]).size === 1) {
-                return function createMapFromPairs(pairs) { return new Map$1(pairs); };
-            }
-        }
-        catch (e) {
-        }
-        return function createMapAndPopulateFromPairs(pairs) {
-            var map = new Map$1();
-            for (var i = 0; i < pairs.length; i++) {
-                var pair = pairs[i];
-                map.set(pair[0], pair[1]);
-            }
-            return map;
-        };
-    })();
-    var createMapFromMap = (function () {
-        try {
-            if (new Map$1(new Map$1())) {
-                return function createMapFromMap(m) { return new Map$1(m); };
-            }
-        }
-        catch (e) {
-        }
-        return function createMapAndPopulateFromMap(m) {
-            var map = new Map$1();
-            m.forEach(function (v, k) { map.set(k, v); });
-            return map;
-        };
-    })();
     var _clearValues = (function () {
-        if ((new Map$1()).keys().next) {
+        if ((new Map()).keys().next) {
             return function _clearValues(m) {
                 var keyIterator = m.keys();
                 var k;
@@ -281,7 +246,7 @@
     // TODO(mlaval): remove the work around once we have a working polyfill of Array.from
     var _arrayFromMap = (function () {
         try {
-            if ((new Map$1()).values().next) {
+            if ((new Map()).values().next) {
                 return function createArrayFromMap(m, getValues) {
                     return getValues ? Array.from(m.values()) : Array.from(m.keys());
                 };
@@ -290,7 +255,7 @@
         catch (e) {
         }
         return function createArrayFromMapWithForeach(m, getValues) {
-            var res = ListWrapper.createFixedSize(m.size), i = 0;
+            var res = new Array(m.size), i = 0;
             m.forEach(function (v, k) {
                 res[i] = getValues ? v : k;
                 i++;
@@ -304,15 +269,6 @@
     var StringMapWrapper = (function () {
         function StringMapWrapper() {
         }
-        StringMapWrapper.create = function () {
-            // Note: We are not using Object.create(null) here due to
-            // performance!
-            // http://jsperf.com/ng2-object-create-null
-            return {};
-        };
-        StringMapWrapper.contains = function (map, key) {
-            return map.hasOwnProperty(key);
-        };
         StringMapWrapper.get = function (map, key) {
             return map.hasOwnProperty(key) ? map[key] : undefined;
         };
@@ -327,7 +283,6 @@
             }
             return true;
         };
-        StringMapWrapper.delete = function (map, key) { delete map[key]; };
         StringMapWrapper.forEach = function (map, callback) {
             for (var _i = 0, _a = Object.keys(map); _i < _a.length; _i++) {
                 var k = _a[_i];
@@ -492,25 +447,6 @@
         }
         return target;
     }
-    // Safari and Internet Explorer do not support the iterable parameter to the
-    // Set constructor.  We work around that by manually adding the items.
-    var createSetFromList = (function () {
-        var test = new Set([1, 2, 3]);
-        if (test.size === 3) {
-            return function createSetFromList(lst) { return new Set(lst); };
-        }
-        else {
-            return function createSetAndPopulateFromList(lst) {
-                var res = new Set(lst);
-                if (res.size !== lst.length) {
-                    for (var i = 0; i < lst.length; i++) {
-                        res.add(lst[i]);
-                    }
-                }
-                return res;
-            };
-        }
-    })();
 
     /**
      * @license
@@ -851,16 +787,11 @@
             this.value = this._getValueIfPresent(data, 'value');
         }
         /**
-         * Returns the value from the StringMap if present. Otherwise returns null
+         * Returns the value if present, otherwise returns null
          * @internal
          */
         MessageData.prototype._getValueIfPresent = function (data, key) {
-            if (StringMapWrapper.contains(data, key)) {
-                return StringMapWrapper.get(data, key);
-            }
-            else {
-                return null;
-            }
+            return data.hasOwnProperty(key) ? data[key] : null;
         };
         return MessageData;
     }());
@@ -994,7 +925,7 @@
     var PostMessageBusSink = (function () {
         function PostMessageBusSink(_postMessageTarget) {
             this._postMessageTarget = _postMessageTarget;
-            this._channels = StringMapWrapper.create();
+            this._channels = {};
             this._messageBuffer = [];
         }
         PostMessageBusSink.prototype.attachToZone = function (zone) {
@@ -1005,7 +936,7 @@
         PostMessageBusSink.prototype.initChannel = function (channel, runInZone) {
             var _this = this;
             if (runInZone === void 0) { runInZone = true; }
-            if (StringMapWrapper.contains(this._channels, channel)) {
+            if (this._channels.hasOwnProperty(channel)) {
                 throw new Error(channel + " has already been initialized");
             }
             var emitter = new EventEmitter(false);
@@ -1022,7 +953,7 @@
             });
         };
         PostMessageBusSink.prototype.to = function (channel) {
-            if (StringMapWrapper.contains(this._channels, channel)) {
+            if (this._channels.hasOwnProperty(channel)) {
                 return this._channels[channel].emitter;
             }
             else {
@@ -1041,7 +972,7 @@
     var PostMessageBusSource = (function () {
         function PostMessageBusSource(eventTarget) {
             var _this = this;
-            this._channels = StringMapWrapper.create();
+            this._channels = {};
             if (eventTarget) {
                 eventTarget.addEventListener('message', function (ev) { return _this._handleMessages(ev); });
             }
@@ -1054,7 +985,7 @@
         PostMessageBusSource.prototype.attachToZone = function (zone) { this._zone = zone; };
         PostMessageBusSource.prototype.initChannel = function (channel, runInZone) {
             if (runInZone === void 0) { runInZone = true; }
-            if (StringMapWrapper.contains(this._channels, channel)) {
+            if (this._channels.hasOwnProperty(channel)) {
                 throw new Error(channel + " has already been initialized");
             }
             var emitter = new EventEmitter(false);
@@ -1062,7 +993,7 @@
             this._channels[channel] = channelInfo;
         };
         PostMessageBusSource.prototype.from = function (channel) {
-            if (StringMapWrapper.contains(this._channels, channel)) {
+            if (this._channels.hasOwnProperty(channel)) {
                 return this._channels[channel].emitter;
             }
             else {
@@ -1077,7 +1008,7 @@
         };
         PostMessageBusSource.prototype._handleMessage = function (data) {
             var channel = data.channel;
-            if (StringMapWrapper.contains(this._channels, channel)) {
+            if (this._channels.hasOwnProperty(channel)) {
                 var channelInfo = this._channels[channel];
                 if (channelInfo.runInZone) {
                     this._zone.run(function () { channelInfo.emitter.emit(data.message); });
@@ -1193,7 +1124,7 @@
             _super.call(this);
             this._serializer = _serializer;
             this.channel = channel;
-            this._methods = new Map$1();
+            this._methods = new Map();
             this._sink = messageBus.to(channel);
             var source = messageBus.from(channel);
             source.subscribe({ next: function (message) { return _this._handleMessage(message); } });
@@ -1203,7 +1134,7 @@
             this._methods.set(methodName, function (message) {
                 var serializedArgs = message.args;
                 var numArgs = signature === null ? 0 : signature.length;
-                var deserializedArgs = ListWrapper.createFixedSize(numArgs);
+                var deserializedArgs = new Array(numArgs);
                 for (var i = 0; i < numArgs; i++) {
                     var serializedArg = serializedArgs[i];
                     deserializedArgs[i] = _this._serializer.deserialize(serializedArg, signature[i]);
@@ -1256,6 +1187,13 @@
     var EVENT_CHANNEL = 'ng-Events';
     var ROUTER_CHANNEL = 'ng-Router';
 
+    /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
     var MOUSE_EVENT_PROPERTIES = [
         'altKey', 'button', 'clientX', 'clientY', 'metaKey', 'movementX', 'movementY', 'offsetX',
         'offsetY', 'region', 'screenX', 'screenY', 'shiftKey'
@@ -1292,7 +1230,7 @@
         if (NODES_WITH_VALUE.has(e.target.tagName.toLowerCase())) {
             var target = e.target;
             serializedEvent['target'] = { 'value': target.value };
-            if (isPresent(target.files)) {
+            if (target.files) {
                 serializedEvent['target']['files'] = target.files;
             }
         }
@@ -1746,7 +1684,7 @@
             this._channelSource.subscribe({
                 next: function (msg) {
                     var listeners = null;
-                    if (StringMapWrapper.contains(msg, 'event')) {
+                    if (msg.hasOwnProperty('event')) {
                         var type = msg['event']['type'];
                         if (StringWrapper.equals(type, 'popstate')) {
                             listeners = _this._popStateListeners;

@@ -7,11 +7,10 @@
  */
 import { Injectable } from '@angular/core';
 import { EventEmitter } from '../../facade/async';
-import { StringMapWrapper } from '../../facade/collection';
 export var PostMessageBusSink = (function () {
     function PostMessageBusSink(_postMessageTarget) {
         this._postMessageTarget = _postMessageTarget;
-        this._channels = StringMapWrapper.create();
+        this._channels = {};
         this._messageBuffer = [];
     }
     PostMessageBusSink.prototype.attachToZone = function (zone) {
@@ -22,7 +21,7 @@ export var PostMessageBusSink = (function () {
     PostMessageBusSink.prototype.initChannel = function (channel, runInZone) {
         var _this = this;
         if (runInZone === void 0) { runInZone = true; }
-        if (StringMapWrapper.contains(this._channels, channel)) {
+        if (this._channels.hasOwnProperty(channel)) {
             throw new Error(channel + " has already been initialized");
         }
         var emitter = new EventEmitter(false);
@@ -39,7 +38,7 @@ export var PostMessageBusSink = (function () {
         });
     };
     PostMessageBusSink.prototype.to = function (channel) {
-        if (StringMapWrapper.contains(this._channels, channel)) {
+        if (this._channels.hasOwnProperty(channel)) {
             return this._channels[channel].emitter;
         }
         else {
@@ -58,7 +57,7 @@ export var PostMessageBusSink = (function () {
 export var PostMessageBusSource = (function () {
     function PostMessageBusSource(eventTarget) {
         var _this = this;
-        this._channels = StringMapWrapper.create();
+        this._channels = {};
         if (eventTarget) {
             eventTarget.addEventListener('message', function (ev) { return _this._handleMessages(ev); });
         }
@@ -71,7 +70,7 @@ export var PostMessageBusSource = (function () {
     PostMessageBusSource.prototype.attachToZone = function (zone) { this._zone = zone; };
     PostMessageBusSource.prototype.initChannel = function (channel, runInZone) {
         if (runInZone === void 0) { runInZone = true; }
-        if (StringMapWrapper.contains(this._channels, channel)) {
+        if (this._channels.hasOwnProperty(channel)) {
             throw new Error(channel + " has already been initialized");
         }
         var emitter = new EventEmitter(false);
@@ -79,7 +78,7 @@ export var PostMessageBusSource = (function () {
         this._channels[channel] = channelInfo;
     };
     PostMessageBusSource.prototype.from = function (channel) {
-        if (StringMapWrapper.contains(this._channels, channel)) {
+        if (this._channels.hasOwnProperty(channel)) {
             return this._channels[channel].emitter;
         }
         else {
@@ -94,7 +93,7 @@ export var PostMessageBusSource = (function () {
     };
     PostMessageBusSource.prototype._handleMessage = function (data) {
         var channel = data.channel;
-        if (StringMapWrapper.contains(this._channels, channel)) {
+        if (this._channels.hasOwnProperty(channel)) {
             var channelInfo = this._channels[channel];
             if (channelInfo.runInZone) {
                 this._zone.run(function () { channelInfo.emitter.emit(data.message); });

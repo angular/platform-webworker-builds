@@ -11,7 +11,6 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 import { Injectable } from '@angular/core';
-import { ListWrapper, Map } from '../../facade/collection';
 import { FunctionWrapper, isPresent } from '../../facade/lang';
 import { MessageBus } from '../shared/message_bus';
 import { Serializer } from '../shared/serializer';
@@ -75,7 +74,7 @@ export var ServiceMessageBroker_ = (function (_super) {
         this._methods.set(methodName, function (message) {
             var serializedArgs = message.args;
             var numArgs = signature === null ? 0 : signature.length;
-            var deserializedArgs = ListWrapper.createFixedSize(numArgs);
+            var deserializedArgs = new Array(numArgs);
             for (var i = 0; i < numArgs; i++) {
                 var serializedArg = serializedArgs[i];
                 deserializedArgs[i] = _this._serializer.deserialize(serializedArg, signature[i]);

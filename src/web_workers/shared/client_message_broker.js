@@ -147,16 +147,11 @@ var MessageData = (function () {
         this.value = this._getValueIfPresent(data, 'value');
     }
     /**
-     * Returns the value from the StringMap if present. Otherwise returns null
+     * Returns the value if present, otherwise returns null
      * @internal
      */
     MessageData.prototype._getValueIfPresent = function (data, key) {
-        if (StringMapWrapper.contains(data, key)) {
-            return StringMapWrapper.get(data, key);
-        }
-        else {
-            return null;
-        }
+        return data.hasOwnProperty(key) ? data[key] : null;
     };
     return MessageData;
 }());
