@@ -11,7 +11,6 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 import { Injectable } from '@angular/core';
-import { StringMapWrapper } from '../../facade/collection';
 import { DateWrapper, StringWrapper, isPresent, print, stringify } from '../../facade/lang';
 import { MessageBus } from './message_bus';
 import { Serializer } from './serializer';
@@ -142,7 +141,7 @@ export var ClientMessageBroker_ = (function (_super) {
 }(ClientMessageBroker));
 var MessageData = (function () {
     function MessageData(data) {
-        this.type = StringMapWrapper.get(data, 'type');
+        this.type = data['type'];
         this.id = this._getValueIfPresent(data, 'id');
         this.value = this._getValueIfPresent(data, 'value');
     }

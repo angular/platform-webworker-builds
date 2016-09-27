@@ -6,8 +6,7 @@
  * found in the LICENSE file at https://angular.io/license
  */
 import { Injectable, RenderComponentType, ViewEncapsulation } from '@angular/core';
-import { isArray, isPresent, serializeEnum } from '../../facade/lang';
-import { VIEW_ENCAPSULATION_VALUES } from '../../private_import_core';
+import { isArray, isPresent } from '../../facade/lang';
 import { RenderStore } from './render_store';
 import { LocationType } from './serialized_types';
 // PRIMITIVE is any type that does not need to be serialized (string, number, boolean)
@@ -38,7 +37,7 @@ export var Serializer = (function () {
             return this._serializeRenderComponentType(obj);
         }
         else if (type === ViewEncapsulation) {
-            return serializeEnum(obj);
+            return obj;
         }
         else if (type === LocationType) {
             return this._serializeLocation(obj);
@@ -52,29 +51,25 @@ export var Serializer = (function () {
         if (!isPresent(map)) {
             return null;
         }
-        if (isArray(map)) {
-            var obj = [];
-            map.forEach(function (val) { return obj.push(_this.deserialize(val, type, data)); });
-            return obj;
+        if (Array.isArray(map)) {
+            return map.map(function (val) { return _this.deserialize(val, type, data); });
         }
-        if (type == PRIMITIVE) {
+        if (type === PRIMITIVE) {
             return map;
         }
-        if (type == RenderStoreObject) {
+        if (type === RenderStoreObject) {
             return this._renderStore.deserialize(map);
         }
-        else if (type === RenderComponentType) {
+        if (type === RenderComponentType) {
             return this._deserializeRenderComponentType(map);
         }
-        else if (type === ViewEncapsulation) {
-            return VIEW_ENCAPSULATION_VALUES[map];
+        if (type === ViewEncapsulation) {
+            return map;
         }
-        else if (type === LocationType) {
+        if (type === LocationType) {
             return this._deserializeLocation(map);
         }
-        else {
-            throw new Error('No deserializer for ' + type.toString());
-        }
+        throw new Error('No deserializer for ' + type.toString());
     };
     Serializer.prototype._serializeLocation = function (loc) {
         return {
