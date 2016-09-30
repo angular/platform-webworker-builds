@@ -1734,7 +1734,7 @@
         };
         WebWorkerRootRenderer.prototype.renderComponent = function (componentType) {
             var result = this._componentRenderers.get(componentType.id);
-            if (isBlank(result)) {
+            if (!result) {
                 result = new WebWorkerRenderer(this, componentType);
                 this._componentRenderers.set(componentType.id, result);
                 var id = this._renderStore.allocateId();
@@ -1901,11 +1901,11 @@
         function NamedEventEmitter() {
         }
         NamedEventEmitter.prototype._getListeners = function (eventName) {
-            if (isBlank(this._listeners)) {
+            if (!this._listeners) {
                 this._listeners = new Map();
             }
             var listeners = this._listeners.get(eventName);
-            if (isBlank(listeners)) {
+            if (!listeners) {
                 listeners = [];
                 this._listeners.set(eventName, listeners);
             }

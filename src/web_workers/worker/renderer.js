@@ -7,7 +7,7 @@
  */
 import { Injectable, RenderComponentType, ViewEncapsulation } from '@angular/core';
 import { ListWrapper } from '../../facade/collection';
-import { isBlank, isPresent } from '../../facade/lang';
+import { isPresent } from '../../facade/lang';
 import { ClientMessageBrokerFactory, FnArg, UiArguments } from '../shared/client_message_broker';
 import { MessageBus } from '../shared/message_bus';
 import { EVENT_CHANNEL, RENDERER_CHANNEL } from '../shared/messaging_api';
@@ -40,7 +40,7 @@ export var WebWorkerRootRenderer = (function () {
     };
     WebWorkerRootRenderer.prototype.renderComponent = function (componentType) {
         var result = this._componentRenderers.get(componentType.id);
-        if (isBlank(result)) {
+        if (!result) {
             result = new WebWorkerRenderer(this, componentType);
             this._componentRenderers.set(componentType.id, result);
             var id = this._renderStore.allocateId();
@@ -207,11 +207,11 @@ export var NamedEventEmitter = (function () {
     function NamedEventEmitter() {
     }
     NamedEventEmitter.prototype._getListeners = function (eventName) {
-        if (isBlank(this._listeners)) {
+        if (!this._listeners) {
             this._listeners = new Map();
         }
         var listeners = this._listeners.get(eventName);
-        if (isBlank(listeners)) {
+        if (!listeners) {
             listeners = [];
             this._listeners.set(eventName, listeners);
         }
