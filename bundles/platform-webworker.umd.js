@@ -171,25 +171,6 @@
     function print(obj) {
         console.log(obj);
     }
-    var DateWrapper = (function () {
-        function DateWrapper() {
-        }
-        DateWrapper.create = function (year, month, day, hour, minutes, seconds, milliseconds) {
-            if (month === void 0) { month = 1; }
-            if (day === void 0) { day = 1; }
-            if (hour === void 0) { hour = 0; }
-            if (minutes === void 0) { minutes = 0; }
-            if (seconds === void 0) { seconds = 0; }
-            if (milliseconds === void 0) { milliseconds = 0; }
-            return new Date(year, month - 1, day, hour, minutes, seconds, milliseconds);
-        };
-        DateWrapper.fromISOString = function (str) { return new Date(str); };
-        DateWrapper.fromMillis = function (ms) { return new Date(ms); };
-        DateWrapper.toMillis = function (date) { return date.getTime(); };
-        DateWrapper.now = function () { return new Date(); };
-        DateWrapper.toJson = function (date) { return date.toJSON(); };
-        return DateWrapper;
-    }());
 
     /**
      * @license
@@ -446,7 +427,7 @@
             source.subscribe({ next: function (message) { return _this._handleMessage(message); } });
         }
         ClientMessageBroker_.prototype._generateMessageId = function (name) {
-            var time = stringify(DateWrapper.toMillis(DateWrapper.now()));
+            var time = stringify(new Date().getTime());
             var iteration = 0;
             var id = name + time + stringify(iteration);
             while (isPresent(this._pending[id])) {

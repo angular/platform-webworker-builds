@@ -11,7 +11,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 import { Injectable } from '@angular/core';
-import { DateWrapper, StringWrapper, isPresent, print, stringify } from '../../facade/lang';
+import { StringWrapper, isPresent, print, stringify } from '../../facade/lang';
 import { MessageBus } from './message_bus';
 import { Serializer } from './serializer';
 /**
@@ -68,7 +68,7 @@ export var ClientMessageBroker_ = (function (_super) {
         source.subscribe({ next: function (message) { return _this._handleMessage(message); } });
     }
     ClientMessageBroker_.prototype._generateMessageId = function (name) {
-        var time = stringify(DateWrapper.toMillis(DateWrapper.now()));
+        var time = stringify(new Date().getTime());
         var iteration = 0;
         var id = name + time + stringify(iteration);
         while (isPresent(this._pending[id])) {
