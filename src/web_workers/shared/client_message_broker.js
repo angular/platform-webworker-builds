@@ -11,7 +11,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 import { Injectable } from '@angular/core';
-import { StringWrapper, isPresent, print, stringify } from '../../facade/lang';
+import { isPresent, print, stringify } from '../../facade/lang';
 import { MessageBus } from './message_bus';
 import { Serializer } from './serializer';
 /**
@@ -124,10 +124,10 @@ export var ClientMessageBroker_ = (function (_super) {
     ClientMessageBroker_.prototype._handleMessage = function (message) {
         var data = new MessageData(message);
         // TODO(jteplitz602): replace these strings with messaging constants #3685
-        if (StringWrapper.equals(data.type, 'result') || StringWrapper.equals(data.type, 'error')) {
+        if (data.type === 'result' || data.type === 'error') {
             var id = data.id;
             if (this._pending.has(id)) {
-                if (StringWrapper.equals(data.type, 'result')) {
+                if (data.type === 'result') {
                     this._pending.get(id).resolve(data.value);
                 }
                 else {
