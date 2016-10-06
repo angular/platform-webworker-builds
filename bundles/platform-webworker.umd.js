@@ -52,6 +52,74 @@
         var newLineIndex = res.indexOf('\n');
         return newLineIndex === -1 ? res : res.substring(0, newLineIndex);
     }
+    var StringWrapper = (function () {
+        function StringWrapper() {
+        }
+        StringWrapper.fromCharCode = function (code) { return String.fromCharCode(code); };
+        StringWrapper.charCodeAt = function (s, index) { return s.charCodeAt(index); };
+        StringWrapper.split = function (s, regExp) { return s.split(regExp); };
+        StringWrapper.equals = function (s, s2) { return s === s2; };
+        StringWrapper.stripLeft = function (s, charVal) {
+            if (s && s.length) {
+                var pos = 0;
+                for (var i = 0; i < s.length; i++) {
+                    if (s[i] != charVal)
+                        break;
+                    pos++;
+                }
+                s = s.substring(pos);
+            }
+            return s;
+        };
+        StringWrapper.stripRight = function (s, charVal) {
+            if (s && s.length) {
+                var pos = s.length;
+                for (var i = s.length - 1; i >= 0; i--) {
+                    if (s[i] != charVal)
+                        break;
+                    pos--;
+                }
+                s = s.substring(0, pos);
+            }
+            return s;
+        };
+        StringWrapper.replace = function (s, from, replace) {
+            return s.replace(from, replace);
+        };
+        StringWrapper.replaceAll = function (s, from, replace) {
+            return s.replace(from, replace);
+        };
+        StringWrapper.slice = function (s, from, to) {
+            if (from === void 0) { from = 0; }
+            if (to === void 0) { to = null; }
+            return s.slice(from, to === null ? undefined : to);
+        };
+        StringWrapper.replaceAllMapped = function (s, from, cb) {
+            return s.replace(from, function () {
+                var matches = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    matches[_i - 0] = arguments[_i];
+                }
+                // Remove offset & string from the result array
+                matches.splice(-2, 2);
+                // The callback receives match, p1, ..., pn
+                return cb(matches);
+            });
+        };
+        StringWrapper.contains = function (s, substr) { return s.indexOf(substr) != -1; };
+        StringWrapper.compare = function (a, b) {
+            if (a < b) {
+                return -1;
+            }
+            else if (a > b) {
+                return 1;
+            }
+            else {
+                return 0;
+            }
+        };
+        return StringWrapper;
+    }());
     var NumberWrapper = (function () {
         function NumberWrapper() {
         }
@@ -415,10 +483,10 @@
         ClientMessageBroker_.prototype._handleMessage = function (message) {
             var data = new MessageData(message);
             // TODO(jteplitz602): replace these strings with messaging constants #3685
-            if (data.type === 'result' || data.type === 'error') {
+            if (StringWrapper.equals(data.type, 'result') || StringWrapper.equals(data.type, 'error')) {
                 var id = data.id;
                 if (this._pending.has(id)) {
-                    if (data.type === 'result') {
+                    if (StringWrapper.equals(data.type, 'result')) {
                         this._pending.get(id).resolve(data.value);
                     }
                     else {
@@ -1336,10 +1404,10 @@
                     var listeners = null;
                     if (msg.hasOwnProperty('event')) {
                         var type = msg['event']['type'];
-                        if (type === 'popstate') {
+                        if (StringWrapper.equals(type, 'popstate')) {
                             listeners = _this._popStateListeners;
                         }
-                        else if (type === 'hashchange') {
+                        else if (StringWrapper.equals(type, 'hashchange')) {
                             listeners = _this._hashChangeListeners;
                         }
                         if (listeners !== null) {
