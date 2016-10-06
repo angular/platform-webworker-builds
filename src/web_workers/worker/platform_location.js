@@ -12,7 +12,6 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 import { PlatformLocation } from '@angular/common';
 import { Injectable } from '@angular/core';
-import { StringWrapper } from '../../facade/lang';
 import { ClientMessageBrokerFactory, FnArg, UiArguments } from '../shared/client_message_broker';
 import { MessageBus } from '../shared/message_bus';
 import { ROUTER_CHANNEL } from '../shared/messaging_api';
@@ -35,10 +34,10 @@ export var WebWorkerPlatformLocation = (function (_super) {
                 var listeners = null;
                 if (msg.hasOwnProperty('event')) {
                     var type = msg['event']['type'];
-                    if (StringWrapper.equals(type, 'popstate')) {
+                    if (type === 'popstate') {
                         listeners = _this._popStateListeners;
                     }
-                    else if (StringWrapper.equals(type, 'hashchange')) {
+                    else if (type === 'hashchange') {
                         listeners = _this._hashChangeListeners;
                     }
                     if (listeners !== null) {
