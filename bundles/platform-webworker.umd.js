@@ -32,9 +32,6 @@
     function isBlank(obj) {
         return obj === undefined || obj === null;
     }
-    function isArray(obj) {
-        return Array.isArray(obj);
-    }
     function stringify(token) {
         if (typeof token === 'string') {
             return token;
@@ -52,54 +49,6 @@
         var newLineIndex = res.indexOf('\n');
         return newLineIndex === -1 ? res : res.substring(0, newLineIndex);
     }
-    var NumberWrapper = (function () {
-        function NumberWrapper() {
-        }
-        NumberWrapper.toFixed = function (n, fractionDigits) { return n.toFixed(fractionDigits); };
-        NumberWrapper.equal = function (a, b) { return a === b; };
-        NumberWrapper.parseIntAutoRadix = function (text) {
-            var result = parseInt(text);
-            if (isNaN(result)) {
-                throw new Error('Invalid integer literal when parsing ' + text);
-            }
-            return result;
-        };
-        NumberWrapper.parseInt = function (text, radix) {
-            if (radix == 10) {
-                if (/^(\-|\+)?[0-9]+$/.test(text)) {
-                    return parseInt(text, radix);
-                }
-            }
-            else if (radix == 16) {
-                if (/^(\-|\+)?[0-9ABCDEFabcdef]+$/.test(text)) {
-                    return parseInt(text, radix);
-                }
-            }
-            else {
-                var result = parseInt(text, radix);
-                if (!isNaN(result)) {
-                    return result;
-                }
-            }
-            throw new Error('Invalid integer literal when parsing ' + text + ' in base ' + radix);
-        };
-        Object.defineProperty(NumberWrapper, "NaN", {
-            get: function () { return NaN; },
-            enumerable: true,
-            configurable: true
-        });
-        NumberWrapper.isNumeric = function (value) { return !isNaN(value - parseFloat(value)); };
-        NumberWrapper.isNaN = function (value) { return isNaN(value); };
-        NumberWrapper.isInteger = function (value) { return Number.isInteger(value); };
-        return NumberWrapper;
-    }());
-    var FunctionWrapper = (function () {
-        function FunctionWrapper() {
-        }
-        FunctionWrapper.apply = function (fn, posArgs) { return fn.apply(null, posArgs); };
-        FunctionWrapper.bind = function (fn, scope) { return fn.bind(scope); };
-        return FunctionWrapper;
-    }());
     function print(obj) {
         console.log(obj);
     }
@@ -203,7 +152,7 @@
             if (!isPresent(obj)) {
                 return null;
             }
-            if (isArray(obj)) {
+            if (Array.isArray(obj)) {
                 return obj.map(function (v) { return _this.serialize(v, type); });
             }
             if (type == PRIMITIVE) {
@@ -212,18 +161,16 @@
             if (type == RenderStoreObject) {
                 return this._renderStore.serialize(obj);
             }
-            else if (type === _angular_core.RenderComponentType) {
+            if (type === _angular_core.RenderComponentType) {
                 return this._serializeRenderComponentType(obj);
             }
-            else if (type === _angular_core.ViewEncapsulation) {
+            if (type === _angular_core.ViewEncapsulation) {
                 return obj;
             }
-            else if (type === LocationType) {
+            if (type === LocationType) {
                 return this._serializeLocation(obj);
             }
-            else {
-                throw new Error('No serializer for ' + type.toString());
-            }
+            throw new Error('No serializer for ' + type.toString());
         };
         Serializer.prototype.deserialize = function (map, type, data) {
             var _this = this;
@@ -788,8 +735,8 @@
                     var serializedArg = serializedArgs[i];
                     deserializedArgs[i] = _this._serializer.deserialize(serializedArg, signature[i]);
                 }
-                var promise = FunctionWrapper.apply(method, deserializedArgs);
-                if (isPresent(returnType) && isPresent(promise)) {
+                var promise = method.apply(void 0, deserializedArgs);
+                if (isPresent(returnType) && promise) {
                     _this._wrapWebWorkerPromise(message.id, promise, returnType);
                 }
             });
@@ -1007,26 +954,26 @@
             var broker = this._brokerFactory.createMessageBroker(RENDERER_CHANNEL);
             this._bus.initChannel(EVENT_CHANNEL);
             this._eventDispatcher = new EventDispatcher(this._bus.to(EVENT_CHANNEL), this._serializer);
-            broker.registerMethod('renderComponent', [_angular_core.RenderComponentType, PRIMITIVE], FunctionWrapper.bind(this._renderComponent, this));
-            broker.registerMethod('selectRootElement', [RenderStoreObject, PRIMITIVE, PRIMITIVE], FunctionWrapper.bind(this._selectRootElement, this));
-            broker.registerMethod('createElement', [RenderStoreObject, RenderStoreObject, PRIMITIVE, PRIMITIVE], FunctionWrapper.bind(this._createElement, this));
-            broker.registerMethod('createViewRoot', [RenderStoreObject, RenderStoreObject, PRIMITIVE], FunctionWrapper.bind(this._createViewRoot, this));
-            broker.registerMethod('createTemplateAnchor', [RenderStoreObject, RenderStoreObject, PRIMITIVE], FunctionWrapper.bind(this._createTemplateAnchor, this));
-            broker.registerMethod('createText', [RenderStoreObject, RenderStoreObject, PRIMITIVE, PRIMITIVE], FunctionWrapper.bind(this._createText, this));
-            broker.registerMethod('projectNodes', [RenderStoreObject, RenderStoreObject, RenderStoreObject], FunctionWrapper.bind(this._projectNodes, this));
-            broker.registerMethod('attachViewAfter', [RenderStoreObject, RenderStoreObject, RenderStoreObject], FunctionWrapper.bind(this._attachViewAfter, this));
-            broker.registerMethod('detachView', [RenderStoreObject, RenderStoreObject], FunctionWrapper.bind(this._detachView, this));
-            broker.registerMethod('destroyView', [RenderStoreObject, RenderStoreObject, RenderStoreObject], FunctionWrapper.bind(this._destroyView, this));
-            broker.registerMethod('setElementProperty', [RenderStoreObject, RenderStoreObject, PRIMITIVE, PRIMITIVE], FunctionWrapper.bind(this._setElementProperty, this));
-            broker.registerMethod('setElementAttribute', [RenderStoreObject, RenderStoreObject, PRIMITIVE, PRIMITIVE], FunctionWrapper.bind(this._setElementAttribute, this));
-            broker.registerMethod('setBindingDebugInfo', [RenderStoreObject, RenderStoreObject, PRIMITIVE, PRIMITIVE], FunctionWrapper.bind(this._setBindingDebugInfo, this));
-            broker.registerMethod('setElementClass', [RenderStoreObject, RenderStoreObject, PRIMITIVE, PRIMITIVE], FunctionWrapper.bind(this._setElementClass, this));
-            broker.registerMethod('setElementStyle', [RenderStoreObject, RenderStoreObject, PRIMITIVE, PRIMITIVE], FunctionWrapper.bind(this._setElementStyle, this));
-            broker.registerMethod('invokeElementMethod', [RenderStoreObject, RenderStoreObject, PRIMITIVE, PRIMITIVE], FunctionWrapper.bind(this._invokeElementMethod, this));
-            broker.registerMethod('setText', [RenderStoreObject, RenderStoreObject, PRIMITIVE], FunctionWrapper.bind(this._setText, this));
-            broker.registerMethod('listen', [RenderStoreObject, RenderStoreObject, PRIMITIVE, PRIMITIVE], FunctionWrapper.bind(this._listen, this));
-            broker.registerMethod('listenGlobal', [RenderStoreObject, PRIMITIVE, PRIMITIVE, PRIMITIVE], FunctionWrapper.bind(this._listenGlobal, this));
-            broker.registerMethod('listenDone', [RenderStoreObject, RenderStoreObject], FunctionWrapper.bind(this._listenDone, this));
+            broker.registerMethod('renderComponent', [_angular_core.RenderComponentType, PRIMITIVE], this._renderComponent.bind(this));
+            broker.registerMethod('selectRootElement', [RenderStoreObject, PRIMITIVE, PRIMITIVE], this._selectRootElement.bind(this));
+            broker.registerMethod('createElement', [RenderStoreObject, RenderStoreObject, PRIMITIVE, PRIMITIVE], this._createElement.bind(this));
+            broker.registerMethod('createViewRoot', [RenderStoreObject, RenderStoreObject, PRIMITIVE], this._createViewRoot.bind(this));
+            broker.registerMethod('createTemplateAnchor', [RenderStoreObject, RenderStoreObject, PRIMITIVE], this._createTemplateAnchor.bind(this));
+            broker.registerMethod('createText', [RenderStoreObject, RenderStoreObject, PRIMITIVE, PRIMITIVE], this._createText.bind(this));
+            broker.registerMethod('projectNodes', [RenderStoreObject, RenderStoreObject, RenderStoreObject], this._projectNodes.bind(this));
+            broker.registerMethod('attachViewAfter', [RenderStoreObject, RenderStoreObject, RenderStoreObject], this._attachViewAfter.bind(this));
+            broker.registerMethod('detachView', [RenderStoreObject, RenderStoreObject], this._detachView.bind(this));
+            broker.registerMethod('destroyView', [RenderStoreObject, RenderStoreObject, RenderStoreObject], this._destroyView.bind(this));
+            broker.registerMethod('setElementProperty', [RenderStoreObject, RenderStoreObject, PRIMITIVE, PRIMITIVE], this._setElementProperty.bind(this));
+            broker.registerMethod('setElementAttribute', [RenderStoreObject, RenderStoreObject, PRIMITIVE, PRIMITIVE], this._setElementAttribute.bind(this));
+            broker.registerMethod('setBindingDebugInfo', [RenderStoreObject, RenderStoreObject, PRIMITIVE, PRIMITIVE], this._setBindingDebugInfo.bind(this));
+            broker.registerMethod('setElementClass', [RenderStoreObject, RenderStoreObject, PRIMITIVE, PRIMITIVE], this._setElementClass.bind(this));
+            broker.registerMethod('setElementStyle', [RenderStoreObject, RenderStoreObject, PRIMITIVE, PRIMITIVE], this._setElementStyle.bind(this));
+            broker.registerMethod('invokeElementMethod', [RenderStoreObject, RenderStoreObject, PRIMITIVE, PRIMITIVE], this._invokeElementMethod.bind(this));
+            broker.registerMethod('setText', [RenderStoreObject, RenderStoreObject, PRIMITIVE], this._setText.bind(this));
+            broker.registerMethod('listen', [RenderStoreObject, RenderStoreObject, PRIMITIVE, PRIMITIVE], this._listen.bind(this));
+            broker.registerMethod('listenGlobal', [RenderStoreObject, PRIMITIVE, PRIMITIVE, PRIMITIVE], this._listenGlobal.bind(this));
+            broker.registerMethod('listenDone', [RenderStoreObject, RenderStoreObject], this._listenDone.bind(this));
         };
         MessageBasedRenderer.prototype._renderComponent = function (renderComponentType, rendererId) {
             var renderer = this._rootRenderer.renderComponent(renderComponentType);
@@ -1243,18 +1190,18 @@
             this._brokerFactory = _brokerFactory;
             this._platformLocation = _platformLocation;
             this._serializer = _serializer;
-            this._platformLocation.onPopState(FunctionWrapper.bind(this._sendUrlChangeEvent, this));
-            this._platformLocation.onHashChange(FunctionWrapper.bind(this._sendUrlChangeEvent, this));
+            this._platformLocation.onPopState(this._sendUrlChangeEvent.bind(this));
+            this._platformLocation.onHashChange(this._sendUrlChangeEvent.bind(this));
             this._broker = this._brokerFactory.createMessageBroker(ROUTER_CHANNEL);
             this._channelSink = bus.to(ROUTER_CHANNEL);
         }
         MessageBasedPlatformLocation.prototype.start = function () {
-            this._broker.registerMethod('getLocation', null, FunctionWrapper.bind(this._getLocation, this), LocationType);
-            this._broker.registerMethod('setPathname', [PRIMITIVE], FunctionWrapper.bind(this._setPathname, this));
-            this._broker.registerMethod('pushState', [PRIMITIVE, PRIMITIVE, PRIMITIVE], FunctionWrapper.bind(this._platformLocation.pushState, this._platformLocation));
-            this._broker.registerMethod('replaceState', [PRIMITIVE, PRIMITIVE, PRIMITIVE], FunctionWrapper.bind(this._platformLocation.replaceState, this._platformLocation));
-            this._broker.registerMethod('forward', null, FunctionWrapper.bind(this._platformLocation.forward, this._platformLocation));
-            this._broker.registerMethod('back', null, FunctionWrapper.bind(this._platformLocation.back, this._platformLocation));
+            this._broker.registerMethod('getLocation', null, this._getLocation.bind(this), LocationType);
+            this._broker.registerMethod('setPathname', [PRIMITIVE], this._setPathname.bind(this));
+            this._broker.registerMethod('pushState', [PRIMITIVE, PRIMITIVE, PRIMITIVE], this._platformLocation.pushState.bind(this._platformLocation));
+            this._broker.registerMethod('replaceState', [PRIMITIVE, PRIMITIVE, PRIMITIVE], this._platformLocation.replaceState.bind(this._platformLocation));
+            this._broker.registerMethod('forward', null, this._platformLocation.forward.bind(this._platformLocation));
+            this._broker.registerMethod('back', null, this._platformLocation.back.bind(this._platformLocation));
         };
         MessageBasedPlatformLocation.prototype._getLocation = function () {
             return Promise.resolve(this._platformLocation.location);
@@ -1593,7 +1540,7 @@
         if (isPresent(source)) {
             for (var i = 0; i < source.length; i++) {
                 var item = source[i];
-                if (isArray(item)) {
+                if (Array.isArray(item)) {
                     _flattenArray(item, target);
                 }
                 else {

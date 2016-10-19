@@ -6,7 +6,7 @@
  * found in the LICENSE file at https://angular.io/license
  */
 import { Injectable, RenderComponentType, ViewEncapsulation } from '@angular/core';
-import { isArray, isPresent } from '../../facade/lang';
+import { isPresent } from '../../facade/lang';
 import { RenderStore } from './render_store';
 import { LocationType } from './serialized_types';
 // PRIMITIVE is any type that does not need to be serialized (string, number, boolean)
@@ -24,7 +24,7 @@ export var Serializer = (function () {
         if (!isPresent(obj)) {
             return null;
         }
-        if (isArray(obj)) {
+        if (Array.isArray(obj)) {
             return obj.map(function (v) { return _this.serialize(v, type); });
         }
         if (type == PRIMITIVE) {
@@ -33,18 +33,16 @@ export var Serializer = (function () {
         if (type == RenderStoreObject) {
             return this._renderStore.serialize(obj);
         }
-        else if (type === RenderComponentType) {
+        if (type === RenderComponentType) {
             return this._serializeRenderComponentType(obj);
         }
-        else if (type === ViewEncapsulation) {
+        if (type === ViewEncapsulation) {
             return obj;
         }
-        else if (type === LocationType) {
+        if (type === LocationType) {
             return this._serializeLocation(obj);
         }
-        else {
-            throw new Error('No serializer for ' + type.toString());
-        }
+        throw new Error('No serializer for ' + type.toString());
     };
     Serializer.prototype.deserialize = function (map, type, data) {
         var _this = this;
