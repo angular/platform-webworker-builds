@@ -6,6 +6,7 @@
  * found in the LICENSE file at https://angular.io/license
  */
 import { Injectable } from '@angular/core';
+import { FunctionWrapper } from '../../facade/lang';
 import { BrowserPlatformLocation } from '../../private_import_platform-browser';
 import { MessageBus } from '../shared/message_bus';
 import { ROUTER_CHANNEL } from '../shared/messaging_api';
@@ -17,18 +18,18 @@ export var MessageBasedPlatformLocation = (function () {
         this._brokerFactory = _brokerFactory;
         this._platformLocation = _platformLocation;
         this._serializer = _serializer;
-        this._platformLocation.onPopState(this._sendUrlChangeEvent.bind(this));
-        this._platformLocation.onHashChange(this._sendUrlChangeEvent.bind(this));
+        this._platformLocation.onPopState(FunctionWrapper.bind(this._sendUrlChangeEvent, this));
+        this._platformLocation.onHashChange(FunctionWrapper.bind(this._sendUrlChangeEvent, this));
         this._broker = this._brokerFactory.createMessageBroker(ROUTER_CHANNEL);
         this._channelSink = bus.to(ROUTER_CHANNEL);
     }
     MessageBasedPlatformLocation.prototype.start = function () {
-        this._broker.registerMethod('getLocation', null, this._getLocation.bind(this), LocationType);
-        this._broker.registerMethod('setPathname', [PRIMITIVE], this._setPathname.bind(this));
-        this._broker.registerMethod('pushState', [PRIMITIVE, PRIMITIVE, PRIMITIVE], this._platformLocation.pushState.bind(this._platformLocation));
-        this._broker.registerMethod('replaceState', [PRIMITIVE, PRIMITIVE, PRIMITIVE], this._platformLocation.replaceState.bind(this._platformLocation));
-        this._broker.registerMethod('forward', null, this._platformLocation.forward.bind(this._platformLocation));
-        this._broker.registerMethod('back', null, this._platformLocation.back.bind(this._platformLocation));
+        this._broker.registerMethod('getLocation', null, FunctionWrapper.bind(this._getLocation, this), LocationType);
+        this._broker.registerMethod('setPathname', [PRIMITIVE], FunctionWrapper.bind(this._setPathname, this));
+        this._broker.registerMethod('pushState', [PRIMITIVE, PRIMITIVE, PRIMITIVE], FunctionWrapper.bind(this._platformLocation.pushState, this._platformLocation));
+        this._broker.registerMethod('replaceState', [PRIMITIVE, PRIMITIVE, PRIMITIVE], FunctionWrapper.bind(this._platformLocation.replaceState, this._platformLocation));
+        this._broker.registerMethod('forward', null, FunctionWrapper.bind(this._platformLocation.forward, this._platformLocation));
+        this._broker.registerMethod('back', null, FunctionWrapper.bind(this._platformLocation.back, this._platformLocation));
     };
     MessageBasedPlatformLocation.prototype._getLocation = function () {
         return Promise.resolve(this._platformLocation.location);

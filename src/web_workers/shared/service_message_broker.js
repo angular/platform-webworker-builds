@@ -11,7 +11,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 import { Injectable } from '@angular/core';
-import { isPresent } from '../../facade/lang';
+import { FunctionWrapper, isPresent } from '../../facade/lang';
 import { MessageBus } from '../shared/message_bus';
 import { Serializer } from '../shared/serializer';
 /**
@@ -79,8 +79,8 @@ export var ServiceMessageBroker_ = (function (_super) {
                 var serializedArg = serializedArgs[i];
                 deserializedArgs[i] = _this._serializer.deserialize(serializedArg, signature[i]);
             }
-            var promise = method.apply(void 0, deserializedArgs);
-            if (isPresent(returnType) && promise) {
+            var promise = FunctionWrapper.apply(method, deserializedArgs);
+            if (isPresent(returnType) && isPresent(promise)) {
                 _this._wrapWebWorkerPromise(message.id, promise, returnType);
             }
         });
