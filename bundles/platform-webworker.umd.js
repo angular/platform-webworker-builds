@@ -9,6 +9,8 @@
     (factory((global.ng = global.ng || {}, global.ng.platformWebworker = global.ng.platformWebworker || {}),global.ng.core,global.ng.platformBrowser,global.Rx,global.Rx,global.ng.common));
 }(this, function (exports,_angular_core,_angular_platformBrowser,rxjs_Subject,rxjs_Observable,_angular_common) { 'use strict';
 
+    var APP_ID_RANDOM_PROVIDER = _angular_core.__core_private__.APP_ID_RANDOM_PROVIDER;
+
     var BROWSER_SANITIZATION_PROVIDERS = _angular_platformBrowser.__platform_browser_private__.BROWSER_SANITIZATION_PROVIDERS;
     var BrowserPlatformLocation = _angular_platformBrowser.__platform_browser_private__.BrowserPlatformLocation;
     var getDOM = _angular_platformBrowser.__platform_browser_private__.getDOM;
@@ -1105,6 +1107,7 @@
         { provide: _angular_platformBrowser.EVENT_MANAGER_PLUGINS, useClass: KeyEventsPlugin, multi: true },
         { provide: _angular_platformBrowser.EVENT_MANAGER_PLUGINS, useClass: HammerGesturesPlugin, multi: true },
         { provide: _angular_platformBrowser.HAMMER_GESTURE_CONFIG, useClass: _angular_platformBrowser.HammerGestureConfig },
+        APP_ID_RANDOM_PROVIDER,
         { provide: DomRootRenderer, useClass: DomRootRenderer_ },
         { provide: _angular_core.RootRenderer, useExisting: DomRootRenderer },
         { provide: SharedStylesHost, useExisting: DomSharedStylesHost },
