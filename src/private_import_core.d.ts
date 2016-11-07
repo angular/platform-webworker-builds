@@ -28,3 +28,4 @@ export declare var prepareFinalAnimationStyles: typeof r.prepareFinalAnimationSt
 export declare var balanceAnimationKeyframes: typeof r.balanceAnimationKeyframes;
 export declare var clearStyles: typeof r.clearStyles;
 export declare var collectAndResolveStyles: typeof r.collectAndResolveStyles;
+export declare var APP_ID_RANDOM_PROVIDER: typeof r.APP_ID_RANDOM_PROVIDER;
