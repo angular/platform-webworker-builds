@@ -20,5 +20,4 @@ export var prepareFinalAnimationStyles = r.prepareFinalAnimationStyles;
 export var balanceAnimationKeyframes = r.balanceAnimationKeyframes;
 export var clearStyles = r.clearStyles;
 export var collectAndResolveStyles = r.collectAndResolveStyles;
-export var APP_ID_RANDOM_PROVIDER = r.APP_ID_RANDOM_PROVIDER;
 //# sourceMappingURL=private_import_core.js.map
