@@ -106,6 +106,7 @@ export var Serializer = (function () {
     ];
     return Serializer;
 }());
+export var ANIMATION_WORKER_PLAYER_PREFIX = 'AnimationPlayer.';
 export var RenderStoreObject = (function () {
     function RenderStoreObject() {
     }

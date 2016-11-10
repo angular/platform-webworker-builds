@@ -13,11 +13,11 @@ import { RenderStore } from '../shared/render_store';
 import { RenderStoreObject, Serializer } from '../shared/serializer';
 export declare class WebWorkerRootRenderer implements RootRenderer {
     private _serializer;
-    private _renderStore;
+    renderStore: RenderStore;
     private _messageBroker;
     globalEvents: NamedEventEmitter;
     private _componentRenderers;
-    constructor(messageBrokerFactory: ClientMessageBrokerFactory, bus: MessageBus, _serializer: Serializer, _renderStore: RenderStore);
+    constructor(messageBrokerFactory: ClientMessageBrokerFactory, bus: MessageBus, _serializer: Serializer, renderStore: RenderStore);
     private _dispatchEvent(message);
     renderComponent(componentType: RenderComponentType): Renderer;
     runOnService(fnName: string, fnArgs: FnArg[]): void;
@@ -48,7 +48,7 @@ export declare class WebWorkerRenderer implements Renderer, RenderStoreObject {
     setText(renderNode: any, text: string): void;
     listen(renderElement: WebWorkerRenderNode, name: string, callback: Function): Function;
     listenGlobal(target: string, name: string, callback: Function): Function;
-    animate(element: any, startingStyles: AnimationStyles, keyframes: AnimationKeyframe[], duration: number, delay: number, easing: string): AnimationPlayer;
+    animate(renderElement: any, startingStyles: AnimationStyles, keyframes: AnimationKeyframe[], duration: number, delay: number, easing: string): AnimationPlayer;
 }
 export declare class NamedEventEmitter {
     private _listeners;
@@ -57,6 +57,14 @@ export declare class NamedEventEmitter {
     unlisten(eventName: string, callback: Function): void;
     dispatchEvent(eventName: string, event: any): void;
 }
+export declare class AnimationPlayerEmitter {
+    private _listeners;
+    private _getListeners(player, phaseName);
+    listen(player: AnimationPlayer, phaseName: string, callback: Function): void;
+    unlisten(player: AnimationPlayer): void;
+    dispatchEvent(player: AnimationPlayer, phaseName: string): void;
+}
 export declare class WebWorkerRenderNode {
     events: NamedEventEmitter;
+    animationPlayerEvents: AnimationPlayerEmitter;
 }

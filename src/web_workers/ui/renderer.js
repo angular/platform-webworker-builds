@@ -9,7 +9,7 @@ import { Injectable, RenderComponentType, RootRenderer } from '@angular/core';
 import { MessageBus } from '../shared/message_bus';
 import { EVENT_CHANNEL, RENDERER_CHANNEL } from '../shared/messaging_api';
 import { RenderStore } from '../shared/render_store';
-import { PRIMITIVE, RenderStoreObject, Serializer } from '../shared/serializer';
+import { ANIMATION_WORKER_PLAYER_PREFIX, PRIMITIVE, RenderStoreObject, Serializer } from '../shared/serializer';
 import { ServiceMessageBrokerFactory } from '../shared/service_message_broker';
 import { EventDispatcher } from '../ui/event_dispatcher';
 export var MessageBasedRenderer = (function () {
@@ -44,6 +44,31 @@ export var MessageBasedRenderer = (function () {
         broker.registerMethod('listen', [RenderStoreObject, RenderStoreObject, PRIMITIVE, PRIMITIVE], this._listen.bind(this));
         broker.registerMethod('listenGlobal', [RenderStoreObject, PRIMITIVE, PRIMITIVE, PRIMITIVE], this._listenGlobal.bind(this));
         broker.registerMethod('listenDone', [RenderStoreObject, RenderStoreObject], this._listenDone.bind(this));
+        broker.registerMethod('animate', [
+            RenderStoreObject, RenderStoreObject, PRIMITIVE, PRIMITIVE, PRIMITIVE, PRIMITIVE,
+            PRIMITIVE, PRIMITIVE
+        ], this._animate.bind(this));
+        this._bindAnimationPlayerMethods(broker);
+    };
+    MessageBasedRenderer.prototype._bindAnimationPlayerMethods = function (broker) {
+        var _this = this;
+        broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX + 'play', [RenderStoreObject, RenderStoreObject], function (player, element) { return player.play(); });
+        broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX + 'pause', [RenderStoreObject, RenderStoreObject], function (player, element) { return player.pause(); });
+        broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX + 'init', [RenderStoreObject, RenderStoreObject], function (player, element) { return player.init(); });
+        broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX + 'restart', [RenderStoreObject, RenderStoreObject], function (player, element) { return player.restart(); });
+        broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX + 'destroy', [RenderStoreObject, RenderStoreObject], function (player, element) {
+            player.destroy();
+            _this._renderStore.remove(player);
+        });
+        broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX + 'finish', [RenderStoreObject, RenderStoreObject], function (player, element) { return player.finish(); });
+        broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX + 'getPosition', [RenderStoreObject, RenderStoreObject], function (player, element) { return player.getPosition(); });
+        broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX + 'onStart', [RenderStoreObject, RenderStoreObject, PRIMITIVE], function (player, element) {
+            return _this._listenOnAnimationPlayer(player, element, 'onStart');
+        });
+        broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX + 'onDone', [RenderStoreObject, RenderStoreObject, PRIMITIVE], function (player, element) {
+            return _this._listenOnAnimationPlayer(player, element, 'onDone');
+        });
+        broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX + 'setPosition', [RenderStoreObject, RenderStoreObject, PRIMITIVE], function (player, element, position) { return player.setPosition(position); });
     };
     MessageBasedRenderer.prototype._renderComponent = function (renderComponentType, rendererId) {
         var renderer = this._rootRenderer.renderComponent(renderComponentType);
@@ -118,6 +143,22 @@ export var MessageBasedRenderer = (function () {
         this._renderStore.store(unregisterCallback, unlistenId);
     };
     MessageBasedRenderer.prototype._listenDone = function (renderer, unlistenCallback) { unlistenCallback(); };
+    MessageBasedRenderer.prototype._animate = function (renderer, element, startingStyles, keyframes, duration, delay, easing, playerId) {
+        var player = renderer.animate(element, startingStyles, keyframes, duration, delay, easing);
+        this._renderStore.store(player, playerId);
+    };
+    MessageBasedRenderer.prototype._listenOnAnimationPlayer = function (player, element, phaseName) {
+        var _this = this;
+        var onEventComplete = function () { _this._eventDispatcher.dispatchAnimationEvent(player, phaseName, element); };
+        // there is no need to register a unlistener value here since the
+        // internal player callbacks are removed when the player is destroyed
+        if (phaseName == 'onDone') {
+            player.onDone(function () { return onEventComplete(); });
+        }
+        else {
+            player.onStart(function () { return onEventComplete(); });
+        }
+    };
     MessageBasedRenderer.decorators = [
         { type: Injectable },
     ];

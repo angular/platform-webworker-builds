@@ -1,10 +1,3 @@
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 import { RenderStoreObject } from '../shared/serializer';
 import { serializeEventWithTarget, serializeGenericEvent, serializeKeyboardEvent, serializeMouseEvent, serializeTransitionEvent } from './event_serializer';
 export var EventDispatcher = (function () {
@@ -12,6 +5,14 @@ export var EventDispatcher = (function () {
         this._sink = _sink;
         this._serializer = _serializer;
     }
+    EventDispatcher.prototype.dispatchAnimationEvent = function (player, phaseName, element) {
+        this._sink.emit({
+            'element': this._serializer.serialize(element, RenderStoreObject),
+            'animationPlayer': this._serializer.serialize(player, RenderStoreObject),
+            'phaseName': phaseName
+        });
+        return true;
+    };
     EventDispatcher.prototype.dispatchRenderEvent = function (element, eventTarget, eventName, event) {
         var serializedEvent;
         // TODO (jteplitz602): support custom events #3350

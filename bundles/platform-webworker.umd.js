@@ -25,6 +25,7 @@
     var HammerGesturesPlugin = _angular_platformBrowser.__platform_browser_private__.HammerGesturesPlugin;
     var DomAdapter = _angular_platformBrowser.__platform_browser_private__.DomAdapter;
     var setRootDomAdapter = _angular_platformBrowser.__platform_browser_private__.setRootDomAdapter;
+    var WebAnimationsDriver = _angular_platformBrowser.__platform_browser_private__.WebAnimationsDriver;
 
     var ON_WEB_WORKER = new _angular_core.OpaqueToken('WebWorker.onWebWorker');
 
@@ -233,6 +234,7 @@
         ];
         return Serializer;
     }());
+    var ANIMATION_WORKER_PLAYER_PREFIX = 'AnimationPlayer.';
     var RenderStoreObject = (function () {
         function RenderStoreObject() {
         }
@@ -845,6 +847,14 @@
             this._sink = _sink;
             this._serializer = _serializer;
         }
+        EventDispatcher.prototype.dispatchAnimationEvent = function (player, phaseName, element) {
+            this._sink.emit({
+                'element': this._serializer.serialize(element, RenderStoreObject),
+                'animationPlayer': this._serializer.serialize(player, RenderStoreObject),
+                'phaseName': phaseName
+            });
+            return true;
+        };
         EventDispatcher.prototype.dispatchRenderEvent = function (element, eventTarget, eventName, event) {
             var serializedEvent;
             // TODO (jteplitz602): support custom events #3350
@@ -973,6 +983,31 @@
             broker.registerMethod('listen', [RenderStoreObject, RenderStoreObject, PRIMITIVE, PRIMITIVE], this._listen.bind(this));
             broker.registerMethod('listenGlobal', [RenderStoreObject, PRIMITIVE, PRIMITIVE, PRIMITIVE], this._listenGlobal.bind(this));
             broker.registerMethod('listenDone', [RenderStoreObject, RenderStoreObject], this._listenDone.bind(this));
+            broker.registerMethod('animate', [
+                RenderStoreObject, RenderStoreObject, PRIMITIVE, PRIMITIVE, PRIMITIVE, PRIMITIVE,
+                PRIMITIVE, PRIMITIVE
+            ], this._animate.bind(this));
+            this._bindAnimationPlayerMethods(broker);
+        };
+        MessageBasedRenderer.prototype._bindAnimationPlayerMethods = function (broker) {
+            var _this = this;
+            broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX + 'play', [RenderStoreObject, RenderStoreObject], function (player, element) { return player.play(); });
+            broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX + 'pause', [RenderStoreObject, RenderStoreObject], function (player, element) { return player.pause(); });
+            broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX + 'init', [RenderStoreObject, RenderStoreObject], function (player, element) { return player.init(); });
+            broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX + 'restart', [RenderStoreObject, RenderStoreObject], function (player, element) { return player.restart(); });
+            broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX + 'destroy', [RenderStoreObject, RenderStoreObject], function (player, element) {
+                player.destroy();
+                _this._renderStore.remove(player);
+            });
+            broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX + 'finish', [RenderStoreObject, RenderStoreObject], function (player, element) { return player.finish(); });
+            broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX + 'getPosition', [RenderStoreObject, RenderStoreObject], function (player, element) { return player.getPosition(); });
+            broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX + 'onStart', [RenderStoreObject, RenderStoreObject, PRIMITIVE], function (player, element) {
+                return _this._listenOnAnimationPlayer(player, element, 'onStart');
+            });
+            broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX + 'onDone', [RenderStoreObject, RenderStoreObject, PRIMITIVE], function (player, element) {
+                return _this._listenOnAnimationPlayer(player, element, 'onDone');
+            });
+            broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX + 'setPosition', [RenderStoreObject, RenderStoreObject, PRIMITIVE], function (player, element, position) { return player.setPosition(position); });
         };
         MessageBasedRenderer.prototype._renderComponent = function (renderComponentType, rendererId) {
             var renderer = this._rootRenderer.renderComponent(renderComponentType);
@@ -1047,6 +1082,22 @@
             this._renderStore.store(unregisterCallback, unlistenId);
         };
         MessageBasedRenderer.prototype._listenDone = function (renderer, unlistenCallback) { unlistenCallback(); };
+        MessageBasedRenderer.prototype._animate = function (renderer, element, startingStyles, keyframes, duration, delay, easing, playerId) {
+            var player = renderer.animate(element, startingStyles, keyframes, duration, delay, easing);
+            this._renderStore.store(player, playerId);
+        };
+        MessageBasedRenderer.prototype._listenOnAnimationPlayer = function (player, element, phaseName) {
+            var _this = this;
+            var onEventComplete = function () { _this._eventDispatcher.dispatchAnimationEvent(player, phaseName, element); };
+            // there is no need to register a unlistener value here since the
+            // internal player callbacks are removed when the player is destroyed
+            if (phaseName == 'onDone') {
+                player.onDone(function () { return onEventComplete(); });
+            }
+            else {
+                player.onStart(function () { return onEventComplete(); });
+            }
+        };
         MessageBasedRenderer.decorators = [
             { type: _angular_core.Injectable },
         ];
@@ -1180,8 +1231,9 @@
         instance.init(webWorker, bus);
     }
     function _resolveDefaultAnimationDriver() {
-        // web workers have not been tested or configured to
-        // work with animations just yet...
+        if (getDOM().supportsWebAnimation()) {
+            return new WebAnimationsDriver();
+        }
         return _angular_platformBrowser.AnimationDriver.NOOP;
     }
 
@@ -1437,10 +1489,10 @@
     }());
 
     var WebWorkerRootRenderer = (function () {
-        function WebWorkerRootRenderer(messageBrokerFactory, bus, _serializer, _renderStore) {
+        function WebWorkerRootRenderer(messageBrokerFactory, bus, _serializer, renderStore) {
             var _this = this;
             this._serializer = _serializer;
-            this._renderStore = _renderStore;
+            this.renderStore = renderStore;
             this.globalEvents = new NamedEventEmitter();
             this._componentRenderers = new Map();
             this._messageBroker = messageBrokerFactory.createMessageBroker(RENDERER_CHANNEL);
@@ -1449,15 +1501,23 @@
             source.subscribe({ next: function (message) { return _this._dispatchEvent(message); } });
         }
         WebWorkerRootRenderer.prototype._dispatchEvent = function (message) {
-            var eventName = message['eventName'];
-            var target = message['eventTarget'];
-            var event = deserializeGenericEvent(message['event']);
-            if (isPresent(target)) {
-                this.globalEvents.dispatchEvent(eventNameWithTarget(target, eventName), event);
+            var element = this._serializer.deserialize(message['element'], RenderStoreObject);
+            var playerData = message['animationPlayer'];
+            if (playerData) {
+                var phaseName = message['phaseName'];
+                var player = this._serializer.deserialize(playerData, RenderStoreObject);
+                element.animationPlayerEvents.dispatchEvent(player, phaseName);
             }
             else {
-                var element = this._serializer.deserialize(message['element'], RenderStoreObject);
-                element.events.dispatchEvent(eventName, event);
+                var eventName = message['eventName'];
+                var target = message['eventTarget'];
+                var event = deserializeGenericEvent(message['event']);
+                if (isPresent(target)) {
+                    this.globalEvents.dispatchEvent(eventNameWithTarget(target, eventName), event);
+                }
+                else {
+                    element.events.dispatchEvent(eventName, event);
+                }
             }
         };
         WebWorkerRootRenderer.prototype.renderComponent = function (componentType) {
@@ -1465,8 +1525,8 @@
             if (!result) {
                 result = new WebWorkerRenderer(this, componentType);
                 this._componentRenderers.set(componentType.id, result);
-                var id = this._renderStore.allocateId();
-                this._renderStore.store(result, id);
+                var id = this.renderStore.allocateId();
+                this.renderStore.store(result, id);
                 this.runOnService('renderComponent', [
                     new FnArg(componentType, _angular_core.RenderComponentType),
                     new FnArg(result, RenderStoreObject),
@@ -1480,14 +1540,14 @@
         };
         WebWorkerRootRenderer.prototype.allocateNode = function () {
             var result = new WebWorkerRenderNode();
-            var id = this._renderStore.allocateId();
-            this._renderStore.store(result, id);
+            var id = this.renderStore.allocateId();
+            this.renderStore.store(result, id);
             return result;
         };
-        WebWorkerRootRenderer.prototype.allocateId = function () { return this._renderStore.allocateId(); };
+        WebWorkerRootRenderer.prototype.allocateId = function () { return this.renderStore.allocateId(); };
         WebWorkerRootRenderer.prototype.destroyNodes = function (nodes) {
             for (var i = 0; i < nodes.length; i++) {
-                this._renderStore.remove(nodes[i]);
+                this.renderStore.remove(nodes[i]);
             }
         };
         WebWorkerRootRenderer.decorators = [
@@ -1619,9 +1679,16 @@
                 _this._runOnService('listenDone', [new FnArg(unlistenCallbackId, null)]);
             };
         };
-        WebWorkerRenderer.prototype.animate = function (element, startingStyles, keyframes, duration, delay, easing) {
-            // TODO
-            return null;
+        WebWorkerRenderer.prototype.animate = function (renderElement, startingStyles, keyframes, duration, delay, easing) {
+            var playerId = this._rootRenderer.allocateId();
+            this._runOnService('animate', [
+                new FnArg(renderElement, RenderStoreObject), new FnArg(startingStyles, null),
+                new FnArg(keyframes, null), new FnArg(duration, null), new FnArg(delay, null),
+                new FnArg(easing, null), new FnArg(playerId, null)
+            ]);
+            var player = new _AnimationWorkerRendererPlayer(this._rootRenderer, renderElement);
+            this._rootRenderer.renderStore.store(player, playerId);
+            return player;
         };
         return WebWorkerRenderer;
     }());
@@ -1651,14 +1718,90 @@
         };
         return NamedEventEmitter;
     }());
+    var AnimationPlayerEmitter = (function () {
+        function AnimationPlayerEmitter() {
+        }
+        AnimationPlayerEmitter.prototype._getListeners = function (player, phaseName) {
+            if (!this._listeners) {
+                this._listeners = new Map();
+            }
+            var phaseMap = this._listeners.get(player);
+            if (!phaseMap) {
+                this._listeners.set(player, phaseMap = {});
+            }
+            var phaseFns = phaseMap[phaseName];
+            if (!phaseFns) {
+                phaseFns = phaseMap[phaseName] = [];
+            }
+            return phaseFns;
+        };
+        AnimationPlayerEmitter.prototype.listen = function (player, phaseName, callback) {
+            this._getListeners(player, phaseName).push(callback);
+        };
+        AnimationPlayerEmitter.prototype.unlisten = function (player) { this._listeners.delete(player); };
+        AnimationPlayerEmitter.prototype.dispatchEvent = function (player, phaseName) {
+            var listeners = this._getListeners(player, phaseName);
+            for (var i = 0; i < listeners.length; i++) {
+                listeners[i]();
+            }
+        };
+        return AnimationPlayerEmitter;
+    }());
     function eventNameWithTarget(target, eventName) {
         return target + ":" + eventName;
     }
     var WebWorkerRenderNode = (function () {
         function WebWorkerRenderNode() {
             this.events = new NamedEventEmitter();
+            this.animationPlayerEvents = new AnimationPlayerEmitter();
         }
         return WebWorkerRenderNode;
+    }());
+    var _AnimationWorkerRendererPlayer = (function () {
+        function _AnimationWorkerRendererPlayer(_rootRenderer, _renderElement) {
+            this._rootRenderer = _rootRenderer;
+            this._renderElement = _renderElement;
+            this.parentPlayer = null;
+            this._destroyed = false;
+            this._started = false;
+        }
+        _AnimationWorkerRendererPlayer.prototype._runOnService = function (fnName, fnArgs) {
+            if (!this._destroyed) {
+                var fnArgsWithRenderer = [
+                    new FnArg(this, RenderStoreObject), new FnArg(this._renderElement, RenderStoreObject)
+                ].concat(fnArgs);
+                this._rootRenderer.runOnService(ANIMATION_WORKER_PLAYER_PREFIX + fnName, fnArgsWithRenderer);
+            }
+        };
+        _AnimationWorkerRendererPlayer.prototype.onStart = function (fn) {
+            this._renderElement.animationPlayerEvents.listen(this, 'onStart', fn);
+            this._runOnService('onStart', []);
+        };
+        _AnimationWorkerRendererPlayer.prototype.onDone = function (fn) {
+            this._renderElement.animationPlayerEvents.listen(this, 'onDone', fn);
+            this._runOnService('onDone', []);
+        };
+        _AnimationWorkerRendererPlayer.prototype.hasStarted = function () { return this._started; };
+        _AnimationWorkerRendererPlayer.prototype.init = function () { this._runOnService('init', []); };
+        _AnimationWorkerRendererPlayer.prototype.play = function () {
+            this._started = true;
+            this._runOnService('play', []);
+        };
+        _AnimationWorkerRendererPlayer.prototype.pause = function () { this._runOnService('pause', []); };
+        _AnimationWorkerRendererPlayer.prototype.restart = function () { this._runOnService('restart', []); };
+        _AnimationWorkerRendererPlayer.prototype.finish = function () { this._runOnService('finish', []); };
+        _AnimationWorkerRendererPlayer.prototype.destroy = function () {
+            if (!this._destroyed) {
+                this._renderElement.animationPlayerEvents.unlisten(this);
+                this._runOnService('destroy', []);
+                this._rootRenderer.renderStore.remove(this);
+                this._destroyed = true;
+            }
+        };
+        _AnimationWorkerRendererPlayer.prototype.reset = function () { this._runOnService('reset', []); };
+        _AnimationWorkerRendererPlayer.prototype.setPosition = function (p) { this._runOnService('setPosition', [new FnArg(p, null)]); };
+        _AnimationWorkerRendererPlayer.prototype.getPosition = function () { return 0; };
+        return _AnimationWorkerRendererPlayer;
     }());
 
     /**

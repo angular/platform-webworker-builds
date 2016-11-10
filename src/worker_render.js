@@ -8,7 +8,7 @@
 import { ErrorHandler, Injectable, Injector, NgZone, OpaqueToken, PLATFORM_INITIALIZER, RootRenderer, Testability, createPlatformFactory, isDevMode, platformCore } from '@angular/core';
 import { AnimationDriver, DOCUMENT, EVENT_MANAGER_PLUGINS, EventManager, HAMMER_GESTURE_CONFIG, HammerGestureConfig } from '@angular/platform-browser';
 import { APP_ID_RANDOM_PROVIDER } from './private_import_core';
-import { BROWSER_SANITIZATION_PROVIDERS, BrowserDomAdapter, BrowserGetTestability, DomEventsPlugin, DomRootRenderer, DomRootRenderer_, DomSharedStylesHost, HammerGesturesPlugin, KeyEventsPlugin, SharedStylesHost, getDOM } from './private_import_platform-browser';
+import { BROWSER_SANITIZATION_PROVIDERS, BrowserDomAdapter, BrowserGetTestability, DomEventsPlugin, DomRootRenderer, DomRootRenderer_, DomSharedStylesHost, HammerGesturesPlugin, KeyEventsPlugin, SharedStylesHost, WebAnimationsDriver, getDOM } from './private_import_platform-browser';
 import { ON_WEB_WORKER } from './web_workers/shared/api';
 import { ClientMessageBrokerFactory, ClientMessageBrokerFactory_ } from './web_workers/shared/client_message_broker';
 import { MessageBus } from './web_workers/shared/message_bus';
@@ -136,8 +136,9 @@ function spawnWebWorker(uri, instance) {
     instance.init(webWorker, bus);
 }
 function _resolveDefaultAnimationDriver() {
-    // web workers have not been tested or configured to
-    // work with animations just yet...
+    if (getDOM().supportsWebAnimation()) {
+        return new WebAnimationsDriver();
+    }
     return AnimationDriver.NOOP;
 }
 //# sourceMappingURL=worker_render.js.map

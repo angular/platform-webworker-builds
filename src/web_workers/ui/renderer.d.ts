@@ -19,6 +19,7 @@ export declare class MessageBasedRenderer {
     private _eventDispatcher;
     constructor(_brokerFactory: ServiceMessageBrokerFactory, _bus: MessageBus, _serializer: Serializer, _renderStore: RenderStore, _rootRenderer: RootRenderer);
     start(): void;
+    private _bindAnimationPlayerMethods(broker);
     private _renderComponent(renderComponentType, rendererId);
     private _selectRootElement(renderer, selector, elId);
     private _createElement(renderer, parentElement, name, elId);
@@ -39,4 +40,6 @@ export declare class MessageBasedRenderer {
     private _listen(renderer, renderElement, eventName, unlistenId);
     private _listenGlobal(renderer, eventTarget, eventName, unlistenId);
     private _listenDone(renderer, unlistenCallback);
+    private _animate(renderer, element, startingStyles, keyframes, duration, delay, easing, playerId);
+    private _listenOnAnimationPlayer(player, element, phaseName);
 }

@@ -20,4 +20,5 @@ export var KeyEventsPlugin = _.KeyEventsPlugin;
 export var HammerGesturesPlugin = _.HammerGesturesPlugin;
 export var DomAdapter = _.DomAdapter;
 export var setRootDomAdapter = _.setRootDomAdapter;
+export var WebAnimationsDriver = _.WebAnimationsDriver;
 //# sourceMappingURL=private_import_platform-browser.js.map

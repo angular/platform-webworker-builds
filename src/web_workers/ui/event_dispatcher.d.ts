@@ -11,5 +11,6 @@ export declare class EventDispatcher {
     private _sink;
     private _serializer;
     constructor(_sink: EventEmitter<any>, _serializer: Serializer);
+    dispatchAnimationEvent(player: any, phaseName: string, element: any): boolean;
     dispatchRenderEvent(element: any, eventTarget: string, eventName: string, event: any): boolean;
 }
