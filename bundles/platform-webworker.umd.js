@@ -606,12 +606,12 @@
         PostMessageBusSource.prototype._handleMessage = function (data) {
             var channel = data.channel;
             if (this._channels.hasOwnProperty(channel)) {
-                var channelInfo = this._channels[channel];
-                if (channelInfo.runInZone) {
-                    this._zone.run(function () { channelInfo.emitter.emit(data.message); });
+                var channelInfo_1 = this._channels[channel];
+                if (channelInfo_1.runInZone) {
+                    this._zone.run(function () { channelInfo_1.emitter.emit(data.message); });
                 }
                 else {
-                    channelInfo.emitter.emit(data.message);
+                    channelInfo_1.emitter.emit(data.message);
                 }
             }
         };
@@ -1511,12 +1511,12 @@
             else {
                 var eventName = message['eventName'];
                 var target = message['eventTarget'];
-                var event = deserializeGenericEvent(message['event']);
+                var event_1 = deserializeGenericEvent(message['event']);
                 if (isPresent(target)) {
-                    this.globalEvents.dispatchEvent(eventNameWithTarget(target, eventName), event);
+                    this.globalEvents.dispatchEvent(eventNameWithTarget(target, eventName), event_1);
                 }
                 else {
-                    element.events.dispatchEvent(eventName, event);
+                    element.events.dispatchEvent(eventName, event_1);
                 }
             }
         };

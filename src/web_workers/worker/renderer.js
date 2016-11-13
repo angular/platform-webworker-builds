@@ -37,12 +37,12 @@ export var WebWorkerRootRenderer = (function () {
         else {
             var eventName = message['eventName'];
             var target = message['eventTarget'];
-            var event = deserializeGenericEvent(message['event']);
+            var event_1 = deserializeGenericEvent(message['event']);
             if (isPresent(target)) {
-                this.globalEvents.dispatchEvent(eventNameWithTarget(target, eventName), event);
+                this.globalEvents.dispatchEvent(eventNameWithTarget(target, eventName), event_1);
             }
             else {
-                element.events.dispatchEvent(eventName, event);
+                element.events.dispatchEvent(eventName, event_1);
             }
         }
     };
