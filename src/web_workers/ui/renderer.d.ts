@@ -40,6 +40,6 @@ export declare class MessageBasedRenderer {
     private _listen(renderer, renderElement, eventName, unlistenId);
     private _listenGlobal(renderer, eventTarget, eventName, unlistenId);
     private _listenDone(renderer, unlistenCallback);
-    private _animate(renderer, element, startingStyles, keyframes, duration, delay, easing, playerId);
+    private _animate(renderer, element, startingStyles, keyframes, duration, delay, easing, previousPlayers, playerId);
     private _listenOnAnimationPlayer(player, element, phaseName);
 }

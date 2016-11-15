@@ -46,7 +46,7 @@ export var MessageBasedRenderer = (function () {
         broker.registerMethod('listenDone', [RenderStoreObject, RenderStoreObject], this._listenDone.bind(this));
         broker.registerMethod('animate', [
             RenderStoreObject, RenderStoreObject, PRIMITIVE, PRIMITIVE, PRIMITIVE, PRIMITIVE,
-            PRIMITIVE, PRIMITIVE
+            PRIMITIVE, PRIMITIVE, PRIMITIVE
         ], this._animate.bind(this));
         this._bindAnimationPlayerMethods(broker);
     };
@@ -143,8 +143,14 @@ export var MessageBasedRenderer = (function () {
         this._renderStore.store(unregisterCallback, unlistenId);
     };
     MessageBasedRenderer.prototype._listenDone = function (renderer, unlistenCallback) { unlistenCallback(); };
-    MessageBasedRenderer.prototype._animate = function (renderer, element, startingStyles, keyframes, duration, delay, easing, playerId) {
-        var player = renderer.animate(element, startingStyles, keyframes, duration, delay, easing);
+    MessageBasedRenderer.prototype._animate = function (renderer, element, startingStyles, keyframes, duration, delay, easing, previousPlayers, playerId) {
+        var _this = this;
+        var normalizedPreviousPlayers;
+        if (previousPlayers && previousPlayers.length) {
+            normalizedPreviousPlayers =
+                previousPlayers.map(function (playerId) { return _this._renderStore.deserialize(playerId); });
+        }
+        var player = renderer.animate(element, startingStyles, keyframes, duration, delay, easing, normalizedPreviousPlayers);
         this._renderStore.store(player, playerId);
     };
     MessageBasedRenderer.prototype._listenOnAnimationPlayer = function (player, element, phaseName) {

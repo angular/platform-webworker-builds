@@ -985,7 +985,7 @@
             broker.registerMethod('listenDone', [RenderStoreObject, RenderStoreObject], this._listenDone.bind(this));
             broker.registerMethod('animate', [
                 RenderStoreObject, RenderStoreObject, PRIMITIVE, PRIMITIVE, PRIMITIVE, PRIMITIVE,
-                PRIMITIVE, PRIMITIVE
+                PRIMITIVE, PRIMITIVE, PRIMITIVE
             ], this._animate.bind(this));
             this._bindAnimationPlayerMethods(broker);
         };
@@ -1082,8 +1082,14 @@
             this._renderStore.store(unregisterCallback, unlistenId);
         };
         MessageBasedRenderer.prototype._listenDone = function (renderer, unlistenCallback) { unlistenCallback(); };
-        MessageBasedRenderer.prototype._animate = function (renderer, element, startingStyles, keyframes, duration, delay, easing, playerId) {
-            var player = renderer.animate(element, startingStyles, keyframes, duration, delay, easing);
+        MessageBasedRenderer.prototype._animate = function (renderer, element, startingStyles, keyframes, duration, delay, easing, previousPlayers, playerId) {
+            var _this = this;
+            var normalizedPreviousPlayers;
+            if (previousPlayers && previousPlayers.length) {
+                normalizedPreviousPlayers =
+                    previousPlayers.map(function (playerId) { return _this._renderStore.deserialize(playerId); });
+            }
+            var player = renderer.animate(element, startingStyles, keyframes, duration, delay, easing, normalizedPreviousPlayers);
             this._renderStore.store(player, playerId);
         };
         MessageBasedRenderer.prototype._listenOnAnimationPlayer = function (player, element, phaseName) {
@@ -1679,12 +1685,15 @@
                 _this._runOnService('listenDone', [new FnArg(unlistenCallbackId, null)]);
             };
         };
-        WebWorkerRenderer.prototype.animate = function (renderElement, startingStyles, keyframes, duration, delay, easing) {
+        WebWorkerRenderer.prototype.animate = function (renderElement, startingStyles, keyframes, duration, delay, easing, previousPlayers) {
+            var _this = this;
+            if (previousPlayers === void 0) { previousPlayers = []; }
             var playerId = this._rootRenderer.allocateId();
+            var previousPlayerIds = previousPlayers.map(function (player) { return _this._rootRenderer.renderStore.serialize(player); });
             this._runOnService('animate', [
                 new FnArg(renderElement, RenderStoreObject), new FnArg(startingStyles, null),
                 new FnArg(keyframes, null), new FnArg(duration, null), new FnArg(delay, null),
-                new FnArg(easing, null), new FnArg(playerId, null)
+                new FnArg(easing, null), new FnArg(previousPlayerIds, null), new FnArg(playerId, null)
             ]);
             var player = new _AnimationWorkerRendererPlayer(this._rootRenderer, renderElement);
             this._rootRenderer.renderStore.store(player, playerId);

@@ -205,12 +205,15 @@ export var WebWorkerRenderer = (function () {
             _this._runOnService('listenDone', [new FnArg(unlistenCallbackId, null)]);
         };
     };
-    WebWorkerRenderer.prototype.animate = function (renderElement, startingStyles, keyframes, duration, delay, easing) {
+    WebWorkerRenderer.prototype.animate = function (renderElement, startingStyles, keyframes, duration, delay, easing, previousPlayers) {
+        var _this = this;
+        if (previousPlayers === void 0) { previousPlayers = []; }
         var playerId = this._rootRenderer.allocateId();
+        var previousPlayerIds = previousPlayers.map(function (player) { return _this._rootRenderer.renderStore.serialize(player); });
         this._runOnService('animate', [
             new FnArg(renderElement, RenderStoreObject), new FnArg(startingStyles, null),
             new FnArg(keyframes, null), new FnArg(duration, null), new FnArg(delay, null),
-            new FnArg(easing, null), new FnArg(playerId, null)
+            new FnArg(easing, null), new FnArg(previousPlayerIds, null), new FnArg(playerId, null)
         ]);
         var player = new _AnimationWorkerRendererPlayer(this._rootRenderer, renderElement);
         this._rootRenderer.renderStore.store(player, playerId);
