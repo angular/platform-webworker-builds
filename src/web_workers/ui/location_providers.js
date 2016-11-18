@@ -13,13 +13,17 @@ import { MessageBasedPlatformLocation } from './platform_location';
  * include these providers when setting up the render thread.
  * @experimental
  */
-export var WORKER_UI_LOCATION_PROVIDERS = [
+export var /** @type {?} */ WORKER_UI_LOCATION_PROVIDERS = [
     MessageBasedPlatformLocation, BrowserPlatformLocation,
     { provide: PLATFORM_INITIALIZER, useFactory: initUiLocation, multi: true, deps: [Injector] }
 ];
+/**
+ * @param {?} injector
+ * @return {?}
+ */
 function initUiLocation(injector) {
     return function () {
-        var zone = injector.get(NgZone);
+        var /** @type {?} */ zone = injector.get(NgZone);
         zone.runGuarded(function () { return injector.get(MessageBasedPlatformLocation).start(); });
     };
 }

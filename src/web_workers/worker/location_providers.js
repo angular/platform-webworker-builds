@@ -13,7 +13,7 @@ import { WebWorkerPlatformLocation } from './platform_location';
  * {@link ROUTER_PROVIDERS} and after them.
  * @experimental
  */
-export var WORKER_APP_LOCATION_PROVIDERS = [
+export var /** @type {?} */ WORKER_APP_LOCATION_PROVIDERS = [
     { provide: PlatformLocation, useClass: WebWorkerPlatformLocation }, {
         provide: APP_INITIALIZER,
         useFactory: appInitFnFactory,
@@ -21,6 +21,11 @@ export var WORKER_APP_LOCATION_PROVIDERS = [
         deps: [PlatformLocation, NgZone]
     }
 ];
+/**
+ * @param {?} platformLocation
+ * @param {?} zone
+ * @return {?}
+ */
 function appInitFnFactory(platformLocation, zone) {
     return function () { return zone.runGuarded(function () { return platformLocation.init(); }); };
 }
