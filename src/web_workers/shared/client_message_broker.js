@@ -15,37 +15,22 @@ import { isPresent, print, stringify } from '../../facade/lang';
 import { MessageBus } from './message_bus';
 import { Serializer } from './serializer';
 /**
- * @abstract
+ * @experimental WebWorker support in Angular is experimental.
  */
 export var ClientMessageBrokerFactory = (function () {
     function ClientMessageBrokerFactory() {
     }
-    /**
-     *  Initializes the given channel and attaches a new {@link ClientMessageBroker} to it.
-     * @abstract
-     * @param {?} channel
-     * @param {?=} runInZone
-     * @return {?}
-     */
-    ClientMessageBrokerFactory.prototype.createMessageBroker = function (channel, runInZone) { };
     return ClientMessageBrokerFactory;
 }());
 export var ClientMessageBrokerFactory_ = (function (_super) {
     __extends(ClientMessageBrokerFactory_, _super);
-    /**
-     * @param {?} _messageBus
-     * @param {?} _serializer
-     */
     function ClientMessageBrokerFactory_(_messageBus, _serializer) {
         _super.call(this);
         this._messageBus = _messageBus;
         this._serializer = _serializer;
     }
     /**
-     *  Initializes the given channel and attaches a new {@link ClientMessageBroker} to it.
-     * @param {?} channel
-     * @param {?=} runInZone
-     * @return {?}
+     * Initializes the given channel and attaches a new {@link ClientMessageBroker} to it.
      */
     ClientMessageBrokerFactory_.prototype.createMessageBroker = function (channel, runInZone) {
         if (runInZone === void 0) { runInZone = true; }
@@ -56,47 +41,22 @@ export var ClientMessageBrokerFactory_ = (function (_super) {
         { type: Injectable },
     ];
     /** @nocollapse */
-    ClientMessageBrokerFactory_.ctorParameters = function () { return [
+    ClientMessageBrokerFactory_.ctorParameters = [
         { type: MessageBus, },
         { type: Serializer, },
-    ]; };
+    ];
     return ClientMessageBrokerFactory_;
 }(ClientMessageBrokerFactory));
-function ClientMessageBrokerFactory__tsickle_Closure_declarations() {
-    /** @type {?} */
-    ClientMessageBrokerFactory_.decorators;
-    /**
-     * @nocollapse
-     * @type {?}
-     */
-    ClientMessageBrokerFactory_.ctorParameters;
-    /** @type {?} */
-    ClientMessageBrokerFactory_.prototype._serializer;
-    /** @type {?} */
-    ClientMessageBrokerFactory_.prototype._messageBus;
-}
 /**
- * @abstract
+ * @experimental WebWorker support in Angular is experimental.
  */
 export var ClientMessageBroker = (function () {
     function ClientMessageBroker() {
     }
-    /**
-     * @abstract
-     * @param {?} args
-     * @param {?} returnType
-     * @return {?}
-     */
-    ClientMessageBroker.prototype.runOnService = function (args, returnType) { };
     return ClientMessageBroker;
 }());
 export var ClientMessageBroker_ = (function (_super) {
     __extends(ClientMessageBroker_, _super);
-    /**
-     * @param {?} messageBus
-     * @param {?} _serializer
-     * @param {?} channel
-     */
     function ClientMessageBroker_(messageBus, _serializer, channel /** TODO #9100 */) {
         var _this = this;
         _super.call(this);
@@ -107,28 +67,19 @@ export var ClientMessageBroker_ = (function (_super) {
         var source = messageBus.from(channel);
         source.subscribe({ next: function (message) { return _this._handleMessage(message); } });
     }
-    /**
-     * @param {?} name
-     * @return {?}
-     */
     ClientMessageBroker_.prototype._generateMessageId = function (name) {
-        var /** @type {?} */ time = stringify(new Date().getTime());
-        var /** @type {?} */ iteration = 0;
-        var /** @type {?} */ id = name + time + stringify(iteration);
-        while (isPresent(((this) /** TODO #9100 */)._pending[id])) {
+        var time = stringify(new Date().getTime());
+        var iteration = 0;
+        var id = name + time + stringify(iteration);
+        while (isPresent(this._pending[id])) {
             id = "" + name + time + iteration;
             iteration++;
         }
         return id;
     };
-    /**
-     * @param {?} args
-     * @param {?} returnType
-     * @return {?}
-     */
     ClientMessageBroker_.prototype.runOnService = function (args, returnType) {
         var _this = this;
-        var /** @type {?} */ fnArgs = [];
+        var fnArgs = [];
         if (isPresent(args.args)) {
             args.args.forEach(function (argument) {
                 if (argument.type != null) {
@@ -139,10 +90,10 @@ export var ClientMessageBroker_ = (function (_super) {
                 }
             });
         }
-        var /** @type {?} */ promise;
-        var /** @type {?} */ id = null;
+        var promise;
+        var id = null;
         if (returnType != null) {
-            var /** @type {?} */ completer_1;
+            var completer_1;
             promise = new Promise(function (resolve, reject) { completer_1 = { resolve: resolve, reject: reject }; });
             id = this._generateMessageId(args.method);
             this._pending.set(id, completer_1);
@@ -163,22 +114,18 @@ export var ClientMessageBroker_ = (function (_super) {
             promise = null;
         }
         // TODO(jteplitz602): Create a class for these messages so we don't keep using StringMap #3685
-        var /** @type {?} */ message = { 'method': args.method, 'args': fnArgs };
+        var message = { 'method': args.method, 'args': fnArgs };
         if (id != null) {
-            ((message) /** TODO #9100 */)['id'] = id;
+            message['id'] = id;
         }
         this._sink.emit(message);
         return promise;
     };
-    /**
-     * @param {?} message
-     * @return {?}
-     */
     ClientMessageBroker_.prototype._handleMessage = function (message) {
-        var /** @type {?} */ data = new MessageData(message);
+        var data = new MessageData(message);
         // TODO(jteplitz602): replace these strings with messaging constants #3685
         if (data.type === 'result' || data.type === 'error') {
-            var /** @type {?} */ id = data.id;
+            var id = data.id;
             if (this._pending.has(id)) {
                 if (data.type === 'result') {
                     this._pending.get(id).resolve(data.value);
@@ -192,82 +139,39 @@ export var ClientMessageBroker_ = (function (_super) {
     };
     return ClientMessageBroker_;
 }(ClientMessageBroker));
-function ClientMessageBroker__tsickle_Closure_declarations() {
-    /** @type {?} */
-    ClientMessageBroker_.prototype._pending;
-    /** @type {?} */
-    ClientMessageBroker_.prototype._sink;
-    /** @type {?} */
-    ClientMessageBroker_.prototype._serializer;
-    /** @type {?} */
-    ClientMessageBroker_.prototype.channel;
-}
 var MessageData = (function () {
-    /**
-     * @param {?} data
-     */
     function MessageData(data) {
         this.type = data['type'];
         this.id = this._getValueIfPresent(data, 'id');
         this.value = this._getValueIfPresent(data, 'value');
     }
     /**
-     *  Returns the value if present, otherwise returns null
-     * @param {?} data
-     * @param {?} key
-     * @return {?}
+     * Returns the value if present, otherwise returns null
+     * @internal
      */
     MessageData.prototype._getValueIfPresent = function (data, key) {
         return data.hasOwnProperty(key) ? data[key] : null;
     };
     return MessageData;
 }());
-function MessageData_tsickle_Closure_declarations() {
-    /** @type {?} */
-    MessageData.prototype.type;
-    /** @type {?} */
-    MessageData.prototype.value;
-    /** @type {?} */
-    MessageData.prototype.id;
-}
 /**
  * @experimental WebWorker support in Angular is experimental.
  */
 export var FnArg = (function () {
-    /**
-     * @param {?} value
-     * @param {?} type
-     */
     function FnArg(value /** TODO #9100 */, type) {
         this.value = value;
         this.type = type;
     }
     return FnArg;
 }());
-function FnArg_tsickle_Closure_declarations() {
-    /** @type {?} */
-    FnArg.prototype.value;
-    /** @type {?} */
-    FnArg.prototype.type;
-}
 /**
  * @experimental WebWorker support in Angular is experimental.
  */
 export var UiArguments = (function () {
-    /**
-     * @param {?} method
-     * @param {?=} args
-     */
     function UiArguments(method, args) {
         this.method = method;
         this.args = args;
     }
     return UiArguments;
 }());
-function UiArguments_tsickle_Closure_declarations() {
-    /** @type {?} */
-    UiArguments.prototype.method;
-    /** @type {?} */
-    UiArguments.prototype.args;
-}
 //# sourceMappingURL=client_message_broker.js.map

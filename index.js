@@ -10,5 +10,5 @@
  * @description
  * Entry point for all public APIs of the platform-webworker package.
  */
-export { ClientMessageBroker, ClientMessageBrokerFactory, FnArg, UiArguments, MessageBus, PRIMITIVE, ReceivedMessage, ServiceMessageBroker, ServiceMessageBrokerFactory, WORKER_UI_LOCATION_PROVIDERS, WORKER_APP_LOCATION_PROVIDERS, WorkerAppModule, platformWorkerApp, platformWorkerUi, bootstrapWorkerUi } from './src/platform-webworker';
+export * from './src/platform-webworker';
 //# sourceMappingURL=index.js.map
