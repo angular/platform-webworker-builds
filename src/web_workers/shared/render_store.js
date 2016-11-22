@@ -12,16 +12,32 @@ export var RenderStore = (function () {
         this._lookupById = new Map();
         this._lookupByObject = new Map();
     }
+    /**
+     * @return {?}
+     */
     RenderStore.prototype.allocateId = function () { return this._nextIndex++; };
+    /**
+     * @param {?} obj
+     * @param {?} id
+     * @return {?}
+     */
     RenderStore.prototype.store = function (obj, id) {
         this._lookupById.set(id, obj);
         this._lookupByObject.set(obj, id);
     };
+    /**
+     * @param {?} obj
+     * @return {?}
+     */
     RenderStore.prototype.remove = function (obj) {
-        var index = this._lookupByObject.get(obj);
+        var /** @type {?} */ index = this._lookupByObject.get(obj);
         this._lookupByObject.delete(obj);
         this._lookupById.delete(index);
     };
+    /**
+     * @param {?} id
+     * @return {?}
+     */
     RenderStore.prototype.deserialize = function (id) {
         if (id == null) {
             return null;
@@ -31,6 +47,10 @@ export var RenderStore = (function () {
         }
         return this._lookupById.get(id);
     };
+    /**
+     * @param {?} obj
+     * @return {?}
+     */
     RenderStore.prototype.serialize = function (obj) {
         if (obj == null) {
             return null;
@@ -41,7 +61,22 @@ export var RenderStore = (function () {
         { type: Injectable },
     ];
     /** @nocollapse */
-    RenderStore.ctorParameters = [];
+    RenderStore.ctorParameters = function () { return []; };
     return RenderStore;
 }());
+function RenderStore_tsickle_Closure_declarations() {
+    /** @type {?} */
+    RenderStore.decorators;
+    /**
+     * @nocollapse
+     * @type {?}
+     */
+    RenderStore.ctorParameters;
+    /** @type {?} */
+    RenderStore.prototype._nextIndex;
+    /** @type {?} */
+    RenderStore.prototype._lookupById;
+    /** @type {?} */
+    RenderStore.prototype._lookupByObject;
+}
 //# sourceMappingURL=render_store.js.map

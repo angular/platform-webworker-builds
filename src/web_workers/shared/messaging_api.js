@@ -9,7 +9,7 @@
  * All channels used by angular's WebWorker components are listed here.
  * You should not use these channels in your application code.
  */
-export var RENDERER_CHANNEL = 'ng-Renderer';
-export var EVENT_CHANNEL = 'ng-Events';
-export var ROUTER_CHANNEL = 'ng-Router';
+export var /** @type {?} */ RENDERER_CHANNEL = 'ng-Renderer';
+export var /** @type {?} */ EVENT_CHANNEL = 'ng-Events';
+export var /** @type {?} */ ROUTER_CHANNEL = 'ng-Router';
 //# sourceMappingURL=messaging_api.js.map
