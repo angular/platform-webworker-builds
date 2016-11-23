@@ -15,19 +15,17 @@ export { WORKER_APP_LOCATION_PROVIDERS } from './web_workers/worker/location_pro
 export { WorkerAppModule, platformWorkerApp } from './worker_app';
 export { platformWorkerUi } from './worker_render';
 /**
- *  Bootstraps the worker ui.
-  * *
- * @param {?} workerScriptUri
- * @param {?=} customProviders
- * @return {?}
+ * Bootstraps the worker ui.
+ *
+ * @experimental
  */
 export function bootstrapWorkerUi(workerScriptUri, customProviders) {
     if (customProviders === void 0) { customProviders = []; }
     // For now, just creates the worker ui platform...
-    return Promise.resolve(platformWorkerUi((([{
+    return Promise.resolve(platformWorkerUi([{
             provide: WORKER_SCRIPT,
             useValue: workerScriptUri,
-        }]))
+        }]
         .concat(customProviders)));
 }
 //# sourceMappingURL=platform-webworker.js.map

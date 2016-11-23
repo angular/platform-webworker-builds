@@ -18,18 +18,15 @@ import { Serializer } from './web_workers/shared/serializer';
 import { ServiceMessageBrokerFactory, ServiceMessageBrokerFactory_ } from './web_workers/shared/service_message_broker';
 import { MessageBasedRenderer } from './web_workers/ui/renderer';
 /**
- *  Wrapper class that exposes the Worker
-  * and underlying {@link MessageBus} for lower level message passing.
-  * *
+ * Wrapper class that exposes the Worker
+ * and underlying {@link MessageBus} for lower level message passing.
+ *
+ * @experimental WebWorker support is currently experimental.
  */
 export var WebWorkerInstance = (function () {
     function WebWorkerInstance() {
     }
-    /**
-     * @param {?} worker
-     * @param {?} bus
-     * @return {?}
-     */
+    /** @internal */
     WebWorkerInstance.prototype.init = function (worker, bus) {
         this.worker = worker;
         this.bus = bus;
@@ -38,26 +35,13 @@ export var WebWorkerInstance = (function () {
         { type: Injectable },
     ];
     /** @nocollapse */
-    WebWorkerInstance.ctorParameters = function () { return []; };
+    WebWorkerInstance.ctorParameters = [];
     return WebWorkerInstance;
 }());
-function WebWorkerInstance_tsickle_Closure_declarations() {
-    /** @type {?} */
-    WebWorkerInstance.decorators;
-    /**
-     * @nocollapse
-     * @type {?}
-     */
-    WebWorkerInstance.ctorParameters;
-    /** @type {?} */
-    WebWorkerInstance.prototype.worker;
-    /** @type {?} */
-    WebWorkerInstance.prototype.bus;
-}
 /**
  * @experimental WebWorker support is currently experimental.
  */
-export var /** @type {?} */ WORKER_SCRIPT = new OpaqueToken('WebWorkerScript');
+export var WORKER_SCRIPT = new OpaqueToken('WebWorkerScript');
 /**
  * A multi-provider used to automatically call the `start()` method after the service is
  * created.
@@ -65,8 +49,8 @@ export var /** @type {?} */ WORKER_SCRIPT = new OpaqueToken('WebWorkerScript');
  * TODO(vicb): create an interface for startable services to implement
  * @experimental WebWorker support is currently experimental.
  */
-export var /** @type {?} */ WORKER_UI_STARTABLE_MESSAGING_SERVICE = new OpaqueToken('WorkerRenderStartableMsgService');
-export var /** @type {?} */ _WORKER_UI_PLATFORM_PROVIDERS = [
+export var WORKER_UI_STARTABLE_MESSAGING_SERVICE = new OpaqueToken('WorkerRenderStartableMsgService');
+export var _WORKER_UI_PLATFORM_PROVIDERS = [
     { provide: NgZone, useFactory: createNgZone, deps: [] },
     MessageBasedRenderer,
     { provide: WORKER_UI_STARTABLE_MESSAGING_SERVICE, useExisting: MessageBasedRenderer, multi: true },
@@ -101,41 +85,29 @@ export var /** @type {?} */ _WORKER_UI_PLATFORM_PROVIDERS = [
     },
     { provide: MessageBus, useFactory: messageBusFactory, deps: [WebWorkerInstance] }
 ];
-/**
- * @param {?} injector
- * @return {?}
- */
 function initializeGenericWorkerRenderer(injector) {
-    var /** @type {?} */ bus = injector.get(MessageBus);
-    var /** @type {?} */ zone = injector.get(NgZone);
+    var bus = injector.get(MessageBus);
+    var zone = injector.get(NgZone);
     bus.attachToZone(zone);
     // initialize message services after the bus has been created
-    var /** @type {?} */ services = injector.get(WORKER_UI_STARTABLE_MESSAGING_SERVICE);
+    var services = injector.get(WORKER_UI_STARTABLE_MESSAGING_SERVICE);
     zone.runGuarded(function () { services.forEach(function (svc) { svc.start(); }); });
 }
-/**
- * @param {?} instance
- * @return {?}
- */
 function messageBusFactory(instance) {
     return instance.bus;
 }
-/**
- * @param {?} injector
- * @return {?}
- */
 function initWebWorkerRenderPlatform(injector) {
     return function () {
         BrowserDomAdapter.makeCurrent();
         BrowserGetTestability.init();
-        var /** @type {?} */ scriptUri;
+        var scriptUri;
         try {
             scriptUri = injector.get(WORKER_SCRIPT);
         }
         catch (e) {
             throw new Error('You must provide your WebWorker\'s initialization script with the WORKER_SCRIPT token');
         }
-        var /** @type {?} */ instance = injector.get(WebWorkerInstance);
+        var instance = injector.get(WebWorkerInstance);
         spawnWebWorker(scriptUri, instance);
         initializeGenericWorkerRenderer(injector);
     };
@@ -143,41 +115,26 @@ function initWebWorkerRenderPlatform(injector) {
 /**
  * @experimental WebWorker support is currently experimental.
  */
-export var /** @type {?} */ platformWorkerUi = createPlatformFactory(platformCore, 'workerUi', _WORKER_UI_PLATFORM_PROVIDERS);
-/**
- * @return {?}
- */
+export var platformWorkerUi = createPlatformFactory(platformCore, 'workerUi', _WORKER_UI_PLATFORM_PROVIDERS);
 function _exceptionHandler() {
     return new ErrorHandler();
 }
-/**
- * @return {?}
- */
 function _document() {
     return getDOM().defaultDoc();
 }
-/**
- * @return {?}
- */
 function createNgZone() {
     return new NgZone({ enableLongStackTrace: isDevMode() });
 }
 /**
- *  Spawns a new class and initializes the WebWorkerInstance
- * @param {?} uri
- * @param {?} instance
- * @return {?}
+ * Spawns a new class and initializes the WebWorkerInstance
  */
 function spawnWebWorker(uri, instance) {
-    var /** @type {?} */ webWorker = new Worker(uri);
-    var /** @type {?} */ sink = new PostMessageBusSink(webWorker);
-    var /** @type {?} */ source = new PostMessageBusSource(webWorker);
-    var /** @type {?} */ bus = new PostMessageBus(sink, source);
+    var webWorker = new Worker(uri);
+    var sink = new PostMessageBusSink(webWorker);
+    var source = new PostMessageBusSource(webWorker);
+    var bus = new PostMessageBus(sink, source);
     instance.init(webWorker, bus);
 }
-/**
- * @return {?}
- */
 function _resolveDefaultAnimationDriver() {
     if (getDOM().supportsWebAnimation()) {
         return new WebAnimationsDriver();

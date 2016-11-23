@@ -1,20 +1,10 @@
 import { RenderStoreObject } from '../shared/serializer';
 import { serializeEventWithTarget, serializeGenericEvent, serializeKeyboardEvent, serializeMouseEvent, serializeTransitionEvent } from './event_serializer';
 export var EventDispatcher = (function () {
-    /**
-     * @param {?} _sink
-     * @param {?} _serializer
-     */
     function EventDispatcher(_sink, _serializer) {
         this._sink = _sink;
         this._serializer = _serializer;
     }
-    /**
-     * @param {?} player
-     * @param {?} phaseName
-     * @param {?} element
-     * @return {?}
-     */
     EventDispatcher.prototype.dispatchAnimationEvent = function (player, phaseName, element) {
         this._sink.emit({
             'element': this._serializer.serialize(element, RenderStoreObject),
@@ -23,15 +13,8 @@ export var EventDispatcher = (function () {
         });
         return true;
     };
-    /**
-     * @param {?} element
-     * @param {?} eventTarget
-     * @param {?} eventName
-     * @param {?} event
-     * @return {?}
-     */
     EventDispatcher.prototype.dispatchRenderEvent = function (element, eventTarget, eventName, event) {
-        var /** @type {?} */ serializedEvent;
+        var serializedEvent;
         // TODO (jteplitz602): support custom events #3350
         switch (event.type) {
             case 'click':
@@ -125,10 +108,4 @@ export var EventDispatcher = (function () {
     };
     return EventDispatcher;
 }());
-function EventDispatcher_tsickle_Closure_declarations() {
-    /** @type {?} */
-    EventDispatcher.prototype._sink;
-    /** @type {?} */
-    EventDispatcher.prototype._serializer;
-}
 //# sourceMappingURL=event_dispatcher.js.map
