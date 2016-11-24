@@ -14,18 +14,26 @@ import { LocationType } from './serialized_types';
 /**
  * @experimental WebWorker support in Angular is currently experimental.
  */
-export var PRIMITIVE = String;
+export var /** @type {?} */ PRIMITIVE = String;
 export var Serializer = (function () {
+    /**
+     * @param {?} _renderStore
+     */
     function Serializer(_renderStore) {
         this._renderStore = _renderStore;
     }
+    /**
+     * @param {?} obj
+     * @param {?} type
+     * @return {?}
+     */
     Serializer.prototype.serialize = function (obj, type) {
         var _this = this;
         if (!isPresent(obj)) {
             return null;
         }
         if (Array.isArray(obj)) {
-            return obj.map(function (v) { return _this.serialize(v, type); });
+            return ((obj)).map(function (v) { return _this.serialize(v, type); });
         }
         if (type == PRIMITIVE) {
             return obj;
@@ -44,13 +52,19 @@ export var Serializer = (function () {
         }
         throw new Error('No serializer for ' + type.toString());
     };
+    /**
+     * @param {?} map
+     * @param {?} type
+     * @param {?=} data
+     * @return {?}
+     */
     Serializer.prototype.deserialize = function (map, type, data) {
         var _this = this;
         if (!isPresent(map)) {
             return null;
         }
         if (Array.isArray(map)) {
-            return map.map(function (val) { return _this.deserialize(val, type, data); });
+            return ((map)).map(function (val) { return _this.deserialize(val, type, data); });
         }
         if (type === PRIMITIVE) {
             return map;
@@ -62,13 +76,17 @@ export var Serializer = (function () {
             return this._deserializeRenderComponentType(map);
         }
         if (type === ViewEncapsulation) {
-            return map;
+            return (map);
         }
         if (type === LocationType) {
             return this._deserializeLocation(map);
         }
         throw new Error('No deserializer for ' + type.toString());
     };
+    /**
+     * @param {?} loc
+     * @return {?}
+     */
     Serializer.prototype._serializeLocation = function (loc) {
         return {
             'href': loc.href,
@@ -82,9 +100,17 @@ export var Serializer = (function () {
             'origin': loc.origin
         };
     };
+    /**
+     * @param {?} loc
+     * @return {?}
+     */
     Serializer.prototype._deserializeLocation = function (loc) {
         return new LocationType(loc['href'], loc['protocol'], loc['host'], loc['hostname'], loc['port'], loc['pathname'], loc['search'], loc['hash'], loc['origin']);
     };
+    /**
+     * @param {?} obj
+     * @return {?}
+     */
     Serializer.prototype._serializeRenderComponentType = function (obj) {
         return {
             'id': obj.id,
@@ -94,6 +120,10 @@ export var Serializer = (function () {
             'styles': this.serialize(obj.styles, PRIMITIVE)
         };
     };
+    /**
+     * @param {?} map
+     * @return {?}
+     */
     Serializer.prototype._deserializeRenderComponentType = function (map) {
         return new RenderComponentType(map['id'], map['templateUrl'], map['slotCount'], this.deserialize(map['encapsulation'], ViewEncapsulation), this.deserialize(map['styles'], PRIMITIVE), {});
     };
@@ -101,12 +131,23 @@ export var Serializer = (function () {
         { type: Injectable },
     ];
     /** @nocollapse */
-    Serializer.ctorParameters = [
+    Serializer.ctorParameters = function () { return [
         { type: RenderStore, },
-    ];
+    ]; };
     return Serializer;
 }());
-export var ANIMATION_WORKER_PLAYER_PREFIX = 'AnimationPlayer.';
+function Serializer_tsickle_Closure_declarations() {
+    /** @type {?} */
+    Serializer.decorators;
+    /**
+     * @nocollapse
+     * @type {?}
+     */
+    Serializer.ctorParameters;
+    /** @type {?} */
+    Serializer.prototype._renderStore;
+}
+export var /** @type {?} */ ANIMATION_WORKER_PLAYER_PREFIX = 'AnimationPlayer.';
 export var RenderStoreObject = (function () {
     function RenderStoreObject() {
     }
