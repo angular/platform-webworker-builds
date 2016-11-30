@@ -20,39 +20,30 @@ import { WorkerDomAdapter } from './web_workers/worker/worker_adapter';
 /**
  * @experimental
  */
-export var /** @type {?} */ platformWorkerApp = createPlatformFactory(platformCore, 'workerApp');
-/**
- * @return {?}
- */
+export var platformWorkerApp = createPlatformFactory(platformCore, 'workerApp');
 export function errorHandler() {
     return new ErrorHandler();
 }
 // TODO(jteplitz602) remove this and compile with lib.webworker.d.ts (#3492)
-var /** @type {?} */ _postMessage = {
+var _postMessage = {
     postMessage: function (message, transferrables) {
-        ((postMessage))(message, transferrables);
+        postMessage(message, transferrables);
     }
 };
-/**
- * @param {?} zone
- * @return {?}
- */
 export function createMessageBus(zone) {
-    var /** @type {?} */ sink = new PostMessageBusSink(_postMessage);
-    var /** @type {?} */ source = new PostMessageBusSource();
-    var /** @type {?} */ bus = new PostMessageBus(sink, source);
+    var sink = new PostMessageBusSink(_postMessage);
+    var source = new PostMessageBusSource();
+    var bus = new PostMessageBus(sink, source);
     bus.attachToZone(zone);
     return bus;
 }
-/**
- * @return {?}
- */
 export function setupWebWorker() {
     WorkerDomAdapter.makeCurrent();
 }
 /**
- *  The ng module for the worker app side.
-  * *
+ * The ng module for the worker app side.
+ *
+ * @experimental
  */
 export var WorkerAppModule = (function () {
     function WorkerAppModule() {
@@ -73,16 +64,7 @@ export var WorkerAppModule = (function () {
                 },] },
     ];
     /** @nocollapse */
-    WorkerAppModule.ctorParameters = function () { return []; };
+    WorkerAppModule.ctorParameters = [];
     return WorkerAppModule;
 }());
-function WorkerAppModule_tsickle_Closure_declarations() {
-    /** @type {?} */
-    WorkerAppModule.decorators;
-    /**
-     * @nocollapse
-     * @type {?}
-     */
-    WorkerAppModule.ctorParameters;
-}
 //# sourceMappingURL=worker_app.js.map

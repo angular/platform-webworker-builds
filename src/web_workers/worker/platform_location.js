@@ -20,11 +20,6 @@ import { PRIMITIVE, Serializer } from '../shared/serializer';
 import { deserializeGenericEvent } from './event_deserializer';
 export var WebWorkerPlatformLocation = (function (_super) {
     __extends(WebWorkerPlatformLocation, _super);
-    /**
-     * @param {?} brokerFactory
-     * @param {?} bus
-     * @param {?} _serializer
-     */
     function WebWorkerPlatformLocation(brokerFactory, bus, _serializer) {
         var _this = this;
         _super.call(this);
@@ -55,64 +50,41 @@ export var WebWorkerPlatformLocation = (function (_super) {
             }
         });
     }
-    /**
-     * @return {?}
-     */
+    /** @internal **/
     WebWorkerPlatformLocation.prototype.init = function () {
         var _this = this;
-        var /** @type {?} */ args = new UiArguments('getLocation');
-        var /** @type {?} */ locationPromise = this._broker.runOnService(args, LocationType);
+        var args = new UiArguments('getLocation');
+        var locationPromise = this._broker.runOnService(args, LocationType);
         return locationPromise.then(function (val) {
             _this._location = val;
             return true;
         }, function (err) { throw new Error(err); });
     };
-    /**
-     * @return {?}
-     */
     WebWorkerPlatformLocation.prototype.getBaseHrefFromDOM = function () {
         throw new Error('Attempt to get base href from DOM from WebWorker. You must either provide a value for the APP_BASE_HREF token through DI or use the hash location strategy.');
     };
-    /**
-     * @param {?} fn
-     * @return {?}
-     */
     WebWorkerPlatformLocation.prototype.onPopState = function (fn) { this._popStateListeners.push(fn); };
-    /**
-     * @param {?} fn
-     * @return {?}
-     */
     WebWorkerPlatformLocation.prototype.onHashChange = function (fn) { this._hashChangeListeners.push(fn); };
     Object.defineProperty(WebWorkerPlatformLocation.prototype, "pathname", {
-        /**
-         * @return {?}
-         */
         get: function () {
             if (this._location === null) {
                 return null;
             }
             return this._location.pathname;
         },
-        /**
-         * @param {?} newPath
-         * @return {?}
-         */
         set: function (newPath) {
             if (this._location === null) {
                 throw new Error('Attempt to set pathname before value is obtained from UI');
             }
             this._location.pathname = newPath;
-            var /** @type {?} */ fnArgs = [new FnArg(newPath, PRIMITIVE)];
-            var /** @type {?} */ args = new UiArguments('setPathname', fnArgs);
+            var fnArgs = [new FnArg(newPath, PRIMITIVE)];
+            var args = new UiArguments('setPathname', fnArgs);
             this._broker.runOnService(args, null);
         },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(WebWorkerPlatformLocation.prototype, "search", {
-        /**
-         * @return {?}
-         */
         get: function () {
             if (this._location === null) {
                 return null;
@@ -123,9 +95,6 @@ export var WebWorkerPlatformLocation = (function (_super) {
         configurable: true
     });
     Object.defineProperty(WebWorkerPlatformLocation.prototype, "hash", {
-        /**
-         * @return {?}
-         */
         get: function () {
             if (this._location === null) {
                 return null;
@@ -135,72 +104,33 @@ export var WebWorkerPlatformLocation = (function (_super) {
         enumerable: true,
         configurable: true
     });
-    /**
-     * @param {?} state
-     * @param {?} title
-     * @param {?} url
-     * @return {?}
-     */
     WebWorkerPlatformLocation.prototype.pushState = function (state, title, url) {
-        var /** @type {?} */ fnArgs = [new FnArg(state, PRIMITIVE), new FnArg(title, PRIMITIVE), new FnArg(url, PRIMITIVE)];
-        var /** @type {?} */ args = new UiArguments('pushState', fnArgs);
+        var fnArgs = [new FnArg(state, PRIMITIVE), new FnArg(title, PRIMITIVE), new FnArg(url, PRIMITIVE)];
+        var args = new UiArguments('pushState', fnArgs);
         this._broker.runOnService(args, null);
     };
-    /**
-     * @param {?} state
-     * @param {?} title
-     * @param {?} url
-     * @return {?}
-     */
     WebWorkerPlatformLocation.prototype.replaceState = function (state, title, url) {
-        var /** @type {?} */ fnArgs = [new FnArg(state, PRIMITIVE), new FnArg(title, PRIMITIVE), new FnArg(url, PRIMITIVE)];
-        var /** @type {?} */ args = new UiArguments('replaceState', fnArgs);
+        var fnArgs = [new FnArg(state, PRIMITIVE), new FnArg(title, PRIMITIVE), new FnArg(url, PRIMITIVE)];
+        var args = new UiArguments('replaceState', fnArgs);
         this._broker.runOnService(args, null);
     };
-    /**
-     * @return {?}
-     */
     WebWorkerPlatformLocation.prototype.forward = function () {
-        var /** @type {?} */ args = new UiArguments('forward');
+        var args = new UiArguments('forward');
         this._broker.runOnService(args, null);
     };
-    /**
-     * @return {?}
-     */
     WebWorkerPlatformLocation.prototype.back = function () {
-        var /** @type {?} */ args = new UiArguments('back');
+        var args = new UiArguments('back');
         this._broker.runOnService(args, null);
     };
     WebWorkerPlatformLocation.decorators = [
         { type: Injectable },
     ];
     /** @nocollapse */
-    WebWorkerPlatformLocation.ctorParameters = function () { return [
+    WebWorkerPlatformLocation.ctorParameters = [
         { type: ClientMessageBrokerFactory, },
         { type: MessageBus, },
         { type: Serializer, },
-    ]; };
+    ];
     return WebWorkerPlatformLocation;
 }(PlatformLocation));
-function WebWorkerPlatformLocation_tsickle_Closure_declarations() {
-    /** @type {?} */
-    WebWorkerPlatformLocation.decorators;
-    /**
-     * @nocollapse
-     * @type {?}
-     */
-    WebWorkerPlatformLocation.ctorParameters;
-    /** @type {?} */
-    WebWorkerPlatformLocation.prototype._broker;
-    /** @type {?} */
-    WebWorkerPlatformLocation.prototype._popStateListeners;
-    /** @type {?} */
-    WebWorkerPlatformLocation.prototype._hashChangeListeners;
-    /** @type {?} */
-    WebWorkerPlatformLocation.prototype._location;
-    /** @type {?} */
-    WebWorkerPlatformLocation.prototype._channelSource;
-    /** @type {?} */
-    WebWorkerPlatformLocation.prototype._serializer;
-}
 //# sourceMappingURL=platform_location.js.map

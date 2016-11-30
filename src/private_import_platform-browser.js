@@ -6,19 +6,19 @@
  * found in the LICENSE file at https://angular.io/license
  */
 import { __platform_browser_private__ as _ } from '@angular/platform-browser';
-export var /** @type {?} */ BROWSER_SANITIZATION_PROVIDERS = _.BROWSER_SANITIZATION_PROVIDERS;
-export var /** @type {?} */ BrowserPlatformLocation = _.BrowserPlatformLocation;
-export var /** @type {?} */ getDOM = _.getDOM;
-export var /** @type {?} */ BrowserDomAdapter = _.BrowserDomAdapter;
-export var /** @type {?} */ BrowserGetTestability = _.BrowserGetTestability;
-export var /** @type {?} */ DomRootRenderer = _.DomRootRenderer;
-export var /** @type {?} */ DomRootRenderer_ = _.DomRootRenderer_;
-export var /** @type {?} */ DomEventsPlugin = _.DomEventsPlugin;
-export var /** @type {?} */ DomSharedStylesHost = _.DomSharedStylesHost;
-export var /** @type {?} */ SharedStylesHost = _.SharedStylesHost;
-export var /** @type {?} */ KeyEventsPlugin = _.KeyEventsPlugin;
-export var /** @type {?} */ HammerGesturesPlugin = _.HammerGesturesPlugin;
-export var /** @type {?} */ DomAdapter = _.DomAdapter;
-export var /** @type {?} */ setRootDomAdapter = _.setRootDomAdapter;
-export var /** @type {?} */ WebAnimationsDriver = _.WebAnimationsDriver;
+export var BROWSER_SANITIZATION_PROVIDERS = _.BROWSER_SANITIZATION_PROVIDERS;
+export var BrowserPlatformLocation = _.BrowserPlatformLocation;
+export var getDOM = _.getDOM;
+export var BrowserDomAdapter = _.BrowserDomAdapter;
+export var BrowserGetTestability = _.BrowserGetTestability;
+export var DomRootRenderer = _.DomRootRenderer;
+export var DomRootRenderer_ = _.DomRootRenderer_;
+export var DomEventsPlugin = _.DomEventsPlugin;
+export var DomSharedStylesHost = _.DomSharedStylesHost;
+export var SharedStylesHost = _.SharedStylesHost;
+export var KeyEventsPlugin = _.KeyEventsPlugin;
+export var HammerGesturesPlugin = _.HammerGesturesPlugin;
+export var DomAdapter = _.DomAdapter;
+export var setRootDomAdapter = _.setRootDomAdapter;
+export var WebAnimationsDriver = _.WebAnimationsDriver;
 //# sourceMappingURL=private_import_platform-browser.js.map
