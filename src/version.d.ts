@@ -8,6 +8,10 @@
 /**
  * @module
  * @description
- * Entry point for all public APIs of the platform-webworker package.
+ * Entry point for all public APIs of the common package.
  */
-export * from './src/platform-webworker';
+import { Version } from '@angular/core';
+/**
+ * @stable
+ */
+export declare const VERSION: Version;

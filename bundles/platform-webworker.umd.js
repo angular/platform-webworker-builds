@@ -1,5 +1,5 @@
 /**
- * @license Angular v2.3.0-rc.0-986abbe
+ * @license Angular v2.3.0-rc.0-16efb13
  * (c) 2010-2016 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1773,6 +1773,11 @@
       return _angular_platformBrowser.AnimationDriver.NOOP;
   }
 
+  /**
+   * @stable
+   */
+  var /** @type {?} */ VERSION = new _angular_core.Version('2.3.0-rc.0-16efb13');
+
   var MessageBasedPlatformLocation = (function () {
       /**
        * @param {?} _brokerFactory
@@ -3494,11 +3499,6 @@
           }]))
           .concat(customProviders)));
   }
-
-  /**
-   * @stable
-   */
-  var /** @type {?} */ VERSION = new _angular_core.Version('2.3.0-rc.0-986abbe');
 
   exports.VERSION = VERSION;
   exports.ClientMessageBroker = ClientMessageBroker;

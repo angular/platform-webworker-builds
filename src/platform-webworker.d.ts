@@ -6,6 +6,7 @@
  * found in the LICENSE file at https://angular.io/license
  */
 import { PlatformRef, Provider } from '@angular/core';
+export { VERSION } from './version';
 export { ClientMessageBroker, ClientMessageBrokerFactory, FnArg, UiArguments } from './web_workers/shared/client_message_broker';
 export { MessageBus, MessageBusSink, MessageBusSource } from './web_workers/shared/message_bus';
 export { PRIMITIVE } from './web_workers/shared/serializer';
