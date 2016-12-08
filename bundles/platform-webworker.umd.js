@@ -1,5 +1,5 @@
 /**
- * @license Angular v2.3.0-13b41bd
+ * @license Angular v2.3.0-65965c2
  * (c) 2010-2016 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1776,7 +1776,7 @@
   /**
    * @stable
    */
-  var /** @type {?} */ VERSION = new _angular_core.Version('2.3.0-13b41bd');
+  var /** @type {?} */ VERSION = new _angular_core.Version('2.3.0-65965c2');
 
   var MessageBasedPlatformLocation = (function () {
       /**
