@@ -5,7 +5,7 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import { ErrorHandler, Injectable, Injector, NgZone, OpaqueToken, PLATFORM_INITIALIZER, RootRenderer, Testability, createPlatformFactory, isDevMode, platformCore } from '@angular/core';
+import { ErrorHandler, Injectable, InjectionToken, Injector, NgZone, PLATFORM_INITIALIZER, RootRenderer, Testability, createPlatformFactory, isDevMode, platformCore } from '@angular/core';
 import { AnimationDriver, DOCUMENT, EVENT_MANAGER_PLUGINS, EventManager, HAMMER_GESTURE_CONFIG, HammerGestureConfig } from '@angular/platform-browser';
 import { APP_ID_RANDOM_PROVIDER } from './private_import_core';
 import { BROWSER_SANITIZATION_PROVIDERS, BrowserDomAdapter, BrowserGetTestability, DomEventsPlugin, DomRootRenderer, DomRootRenderer_, DomSharedStylesHost, HammerGesturesPlugin, KeyEventsPlugin, SharedStylesHost, WebAnimationsDriver, getDOM } from './private_import_platform-browser';
@@ -57,7 +57,7 @@ function WebWorkerInstance_tsickle_Closure_declarations() {
 /**
  * @experimental WebWorker support is currently experimental.
  */
-export var /** @type {?} */ WORKER_SCRIPT = new OpaqueToken('WebWorkerScript');
+export var /** @type {?} */ WORKER_SCRIPT = new InjectionToken('WebWorkerScript');
 /**
  * A multi-provider used to automatically call the `start()` method after the service is
  * created.
@@ -65,7 +65,7 @@ export var /** @type {?} */ WORKER_SCRIPT = new OpaqueToken('WebWorkerScript');
  * TODO(vicb): create an interface for startable services to implement
  * @experimental WebWorker support is currently experimental.
  */
-export var /** @type {?} */ WORKER_UI_STARTABLE_MESSAGING_SERVICE = new OpaqueToken('WorkerRenderStartableMsgService');
+export var /** @type {?} */ WORKER_UI_STARTABLE_MESSAGING_SERVICE = new InjectionToken('WorkerRenderStartableMsgService');
 export var /** @type {?} */ _WORKER_UI_PLATFORM_PROVIDERS = [
     { provide: NgZone, useFactory: createNgZone, deps: [] },
     MessageBasedRenderer,

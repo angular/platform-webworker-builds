@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.0.0-beta.3-5237b1c
+ * @license Angular v4.0.0-beta.3-d169c24
  * (c) 2010-2016 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -27,7 +27,7 @@
   var /** @type {?} */ setRootDomAdapter = _angular_platformBrowser.__platform_browser_private__.setRootDomAdapter;
   var /** @type {?} */ WebAnimationsDriver = _angular_platformBrowser.__platform_browser_private__.WebAnimationsDriver;
 
-  var /** @type {?} */ ON_WEB_WORKER = new _angular_core.OpaqueToken('WebWorker.onWebWorker');
+  var /** @type {?} */ ON_WEB_WORKER = new _angular_core.InjectionToken('WebWorker.onWebWorker');
 
   /**
    * @param {?} obj
@@ -1645,7 +1645,7 @@
   /**
    * @experimental WebWorker support is currently experimental.
    */
-  var /** @type {?} */ WORKER_SCRIPT = new _angular_core.OpaqueToken('WebWorkerScript');
+  var /** @type {?} */ WORKER_SCRIPT = new _angular_core.InjectionToken('WebWorkerScript');
   /**
    * A multi-provider used to automatically call the `start()` method after the service is
    * created.
@@ -1653,7 +1653,7 @@
    * TODO(vicb): create an interface for startable services to implement
    * @experimental WebWorker support is currently experimental.
    */
-  var /** @type {?} */ WORKER_UI_STARTABLE_MESSAGING_SERVICE = new _angular_core.OpaqueToken('WorkerRenderStartableMsgService');
+  var /** @type {?} */ WORKER_UI_STARTABLE_MESSAGING_SERVICE = new _angular_core.InjectionToken('WorkerRenderStartableMsgService');
   var /** @type {?} */ _WORKER_UI_PLATFORM_PROVIDERS = [
       { provide: _angular_core.NgZone, useFactory: createNgZone, deps: [] },
       MessageBasedRenderer,
@@ -1776,7 +1776,7 @@
   /**
    * @stable
    */
-  var /** @type {?} */ VERSION = new _angular_core.Version('4.0.0-beta.3-5237b1c');
+  var /** @type {?} */ VERSION = new _angular_core.Version('4.0.0-beta.3-d169c24');
 
   var MessageBasedPlatformLocation = (function () {
       /**

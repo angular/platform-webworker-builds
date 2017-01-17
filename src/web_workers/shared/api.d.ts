@@ -5,5 +5,5 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import { OpaqueToken } from '@angular/core';
-export declare const ON_WEB_WORKER: OpaqueToken;
+import { InjectionToken } from '@angular/core';
+export declare const ON_WEB_WORKER: InjectionToken<{}>;
