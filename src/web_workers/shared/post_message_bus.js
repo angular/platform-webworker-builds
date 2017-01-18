@@ -169,8 +169,8 @@ function PostMessageBusSource_tsickle_Closure_declarations() {
     PostMessageBusSource.prototype._channels;
 }
 /**
- *  A TypeScript implementation of {@link MessageBus} for communicating via JavaScript's
-  * postMessage API.
+ * A TypeScript implementation of {\@link MessageBus} for communicating via JavaScript's
+ * postMessage API.
  */
 export var PostMessageBus = (function () {
     /**
@@ -233,8 +233,8 @@ function PostMessageBus_tsickle_Closure_declarations() {
     PostMessageBus.prototype.source;
 }
 /**
- *  Helper class that wraps a channel's {@link EventEmitter} and
-  * keeps track of if it should run in the zone.
+ * Helper class that wraps a channel's {\@link EventEmitter} and
+ * keeps track of if it should run in the zone.
  */
 var _Channel = (function () {
     /**

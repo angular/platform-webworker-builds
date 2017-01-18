@@ -18,14 +18,16 @@ import { Serializer } from './web_workers/shared/serializer';
 import { ServiceMessageBrokerFactory, ServiceMessageBrokerFactory_ } from './web_workers/shared/service_message_broker';
 import { MessageBasedRenderer } from './web_workers/ui/renderer';
 /**
- *  Wrapper class that exposes the Worker
-  * and underlying {@link MessageBus} for lower level message passing.
-  * *
+ * Wrapper class that exposes the Worker
+ * and underlying {\@link MessageBus} for lower level message passing.
+ *
+ * \@experimental WebWorker support is currently experimental.
  */
 export var WebWorkerInstance = (function () {
     function WebWorkerInstance() {
     }
     /**
+     * \@internal
      * @param {?} worker
      * @param {?} bus
      * @return {?}
@@ -163,7 +165,7 @@ function createNgZone() {
     return new NgZone({ enableLongStackTrace: isDevMode() });
 }
 /**
- *  Spawns a new class and initializes the WebWorkerInstance
+ * Spawns a new class and initializes the WebWorkerInstance
  * @param {?} uri
  * @param {?} instance
  * @return {?}

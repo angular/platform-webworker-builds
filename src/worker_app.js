@@ -51,8 +51,9 @@ export function setupWebWorker() {
     WorkerDomAdapter.makeCurrent();
 }
 /**
- *  The ng module for the worker app side.
-  * *
+ * The ng module for the worker app side.
+ *
+ * \@experimental
  */
 export var WorkerAppModule = (function () {
     function WorkerAppModule() {

@@ -16,8 +16,9 @@ export { WORKER_APP_LOCATION_PROVIDERS } from './web_workers/worker/location_pro
 export { WorkerAppModule, platformWorkerApp } from './worker_app';
 export { platformWorkerUi } from './worker_render';
 /**
- *  Bootstraps the worker ui.
-  * *
+ * Bootstraps the worker ui.
+ *
+ * \@experimental
  * @param {?} workerScriptUri
  * @param {?=} customProviders
  * @return {?}

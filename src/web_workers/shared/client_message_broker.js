@@ -15,13 +15,14 @@ import { isPresent, print, stringify } from '../../facade/lang';
 import { MessageBus } from './message_bus';
 import { Serializer } from './serializer';
 /**
+ * \@experimental WebWorker support in Angular is experimental.
  * @abstract
  */
 export var ClientMessageBrokerFactory = (function () {
     function ClientMessageBrokerFactory() {
     }
     /**
-     *  Initializes the given channel and attaches a new {@link ClientMessageBroker} to it.
+     * Initializes the given channel and attaches a new {\@link ClientMessageBroker} to it.
      * @abstract
      * @param {?} channel
      * @param {?=} runInZone
@@ -42,7 +43,7 @@ export var ClientMessageBrokerFactory_ = (function (_super) {
         this._serializer = _serializer;
     }
     /**
-     *  Initializes the given channel and attaches a new {@link ClientMessageBroker} to it.
+     * Initializes the given channel and attaches a new {\@link ClientMessageBroker} to it.
      * @param {?} channel
      * @param {?=} runInZone
      * @return {?}
@@ -70,12 +71,16 @@ function ClientMessageBrokerFactory__tsickle_Closure_declarations() {
      * @type {?}
      */
     ClientMessageBrokerFactory_.ctorParameters;
-    /** @type {?} */
+    /**
+     * \@internal
+     * @type {?}
+     */
     ClientMessageBrokerFactory_.prototype._serializer;
     /** @type {?} */
     ClientMessageBrokerFactory_.prototype._messageBus;
 }
 /**
+ * \@experimental WebWorker support in Angular is experimental.
  * @abstract
  */
 export var ClientMessageBroker = (function () {
@@ -197,7 +202,10 @@ function ClientMessageBroker__tsickle_Closure_declarations() {
     ClientMessageBroker_.prototype._pending;
     /** @type {?} */
     ClientMessageBroker_.prototype._sink;
-    /** @type {?} */
+    /**
+     * \@internal
+     * @type {?}
+     */
     ClientMessageBroker_.prototype._serializer;
     /** @type {?} */
     ClientMessageBroker_.prototype.channel;
@@ -212,7 +220,8 @@ var MessageData = (function () {
         this.value = this._getValueIfPresent(data, 'value');
     }
     /**
-     *  Returns the value if present, otherwise returns null
+     * Returns the value if present, otherwise returns null
+     * \@internal
      * @param {?} data
      * @param {?} key
      * @return {?}
@@ -231,7 +240,7 @@ function MessageData_tsickle_Closure_declarations() {
     MessageData.prototype.id;
 }
 /**
- * @experimental WebWorker support in Angular is experimental.
+ * \@experimental WebWorker support in Angular is experimental.
  */
 export var FnArg = (function () {
     /**
@@ -251,7 +260,7 @@ function FnArg_tsickle_Closure_declarations() {
     FnArg.prototype.type;
 }
 /**
- * @experimental WebWorker support in Angular is experimental.
+ * \@experimental WebWorker support in Angular is experimental.
  */
 export var UiArguments = (function () {
     /**

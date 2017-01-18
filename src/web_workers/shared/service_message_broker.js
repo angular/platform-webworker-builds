@@ -15,13 +15,14 @@ import { isPresent } from '../../facade/lang';
 import { MessageBus } from '../shared/message_bus';
 import { Serializer } from '../shared/serializer';
 /**
+ * \@experimental WebWorker support in Angular is currently experimental.
  * @abstract
  */
 export var ServiceMessageBrokerFactory = (function () {
     function ServiceMessageBrokerFactory() {
     }
     /**
-     *  Initializes the given channel and attaches a new {@link ServiceMessageBroker} to it.
+     * Initializes the given channel and attaches a new {\@link ServiceMessageBroker} to it.
      * @abstract
      * @param {?} channel
      * @param {?=} runInZone
@@ -69,17 +70,21 @@ function ServiceMessageBrokerFactory__tsickle_Closure_declarations() {
      * @type {?}
      */
     ServiceMessageBrokerFactory_.ctorParameters;
-    /** @type {?} */
+    /**
+     * \@internal
+     * @type {?}
+     */
     ServiceMessageBrokerFactory_.prototype._serializer;
     /** @type {?} */
     ServiceMessageBrokerFactory_.prototype._messageBus;
 }
 /**
- *  Helper class for UIComponents that allows components to register methods.
-  * If a registered method message is received from the broker on the worker,
-  * the UIMessageBroker deserializes its arguments and calls the registered method.
-  * If that method returns a promise, the UIMessageBroker returns the result to the worker.
-  * *
+ * Helper class for UIComponents that allows components to register methods.
+ * If a registered method message is received from the broker on the worker,
+ * the UIMessageBroker deserializes its arguments and calls the registered method.
+ * If that method returns a promise, the UIMessageBroker returns the result to the worker.
+ *
+ * \@experimental WebWorker support in Angular is currently experimental.
  * @abstract
  */
 export var ServiceMessageBroker = (function () {
@@ -171,7 +176,7 @@ function ServiceMessageBroker__tsickle_Closure_declarations() {
     ServiceMessageBroker_.prototype.channel;
 }
 /**
- * @experimental WebWorker support in Angular is currently experimental.
+ * \@experimental WebWorker support in Angular is currently experimental.
  */
 export var ReceivedMessage = (function () {
     /**
