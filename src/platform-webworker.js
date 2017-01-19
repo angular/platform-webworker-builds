@@ -23,8 +23,7 @@ export { platformWorkerUi } from './worker_render';
  * @param {?=} customProviders
  * @return {?}
  */
-export function bootstrapWorkerUi(workerScriptUri, customProviders) {
-    if (customProviders === void 0) { customProviders = []; }
+export function bootstrapWorkerUi(workerScriptUri, customProviders = []) {
     // For now, just creates the worker ui platform...
     return Promise.resolve(platformWorkerUi((([{
             provide: WORKER_SCRIPT,

@@ -1,4 +1,4 @@
-export var LocationType = (function () {
+export class LocationType {
     /**
      * @param {?} href
      * @param {?} protocol
@@ -10,7 +10,7 @@ export var LocationType = (function () {
      * @param {?} hash
      * @param {?} origin
      */
-    function LocationType(href, protocol, host, hostname, port, pathname, search, hash, origin) {
+    constructor(href, protocol, host, hostname, port, pathname, search, hash, origin) {
         this.href = href;
         this.protocol = protocol;
         this.host = host;
@@ -21,8 +21,7 @@ export var LocationType = (function () {
         this.hash = hash;
         this.origin = origin;
     }
-    return LocationType;
-}());
+}
 function LocationType_tsickle_Closure_declarations() {
     /** @type {?} */
     LocationType.prototype.href;

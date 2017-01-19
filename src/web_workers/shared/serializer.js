@@ -5,7 +5,7 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import { Injectable, RenderComponentType, ViewEncapsulation } from '@angular/core';
+import { Injectable, RenderComponentType, ViewEncapsulation } from '@angular/core/index';
 import { isPresent } from '../../facade/lang';
 import { RenderStore } from './render_store';
 import { LocationType } from './serialized_types';
@@ -14,12 +14,12 @@ import { LocationType } from './serialized_types';
 /**
  * @experimental WebWorker support in Angular is currently experimental.
  */
-export var /** @type {?} */ PRIMITIVE = String;
-export var Serializer = (function () {
+export const /** @type {?} */ PRIMITIVE = String;
+export class Serializer {
     /**
      * @param {?} _renderStore
      */
-    function Serializer(_renderStore) {
+    constructor(_renderStore) {
         this._renderStore = _renderStore;
     }
     /**
@@ -27,13 +27,12 @@ export var Serializer = (function () {
      * @param {?} type
      * @return {?}
      */
-    Serializer.prototype.serialize = function (obj, type) {
-        var _this = this;
+    serialize(obj, type) {
         if (!isPresent(obj)) {
             return null;
         }
         if (Array.isArray(obj)) {
-            return ((obj)).map(function (v) { return _this.serialize(v, type); });
+            return ((obj)).map(v => this.serialize(v, type));
         }
         if (type == PRIMITIVE) {
             return obj;
@@ -51,20 +50,19 @@ export var Serializer = (function () {
             return this._serializeLocation(obj);
         }
         throw new Error('No serializer for ' + type.toString());
-    };
+    }
     /**
      * @param {?} map
      * @param {?} type
      * @param {?=} data
      * @return {?}
      */
-    Serializer.prototype.deserialize = function (map, type, data) {
-        var _this = this;
+    deserialize(map, type, data) {
         if (!isPresent(map)) {
             return null;
         }
         if (Array.isArray(map)) {
-            return ((map)).map(function (val) { return _this.deserialize(val, type, data); });
+            return ((map)).map(val => this.deserialize(val, type, data));
         }
         if (type === PRIMITIVE) {
             return map;
@@ -82,12 +80,12 @@ export var Serializer = (function () {
             return this._deserializeLocation(map);
         }
         throw new Error('No deserializer for ' + type.toString());
-    };
+    }
     /**
      * @param {?} loc
      * @return {?}
      */
-    Serializer.prototype._serializeLocation = function (loc) {
+    _serializeLocation(loc) {
         return {
             'href': loc.href,
             'protocol': loc.protocol,
@@ -99,19 +97,19 @@ export var Serializer = (function () {
             'hash': loc.hash,
             'origin': loc.origin
         };
-    };
+    }
     /**
      * @param {?} loc
      * @return {?}
      */
-    Serializer.prototype._deserializeLocation = function (loc) {
+    _deserializeLocation(loc) {
         return new LocationType(loc['href'], loc['protocol'], loc['host'], loc['hostname'], loc['port'], loc['pathname'], loc['search'], loc['hash'], loc['origin']);
-    };
+    }
     /**
      * @param {?} obj
      * @return {?}
      */
-    Serializer.prototype._serializeRenderComponentType = function (obj) {
+    _serializeRenderComponentType(obj) {
         return {
             'id': obj.id,
             'templateUrl': obj.templateUrl,
@@ -119,23 +117,22 @@ export var Serializer = (function () {
             'encapsulation': this.serialize(obj.encapsulation, ViewEncapsulation),
             'styles': this.serialize(obj.styles, PRIMITIVE)
         };
-    };
+    }
     /**
      * @param {?} map
      * @return {?}
      */
-    Serializer.prototype._deserializeRenderComponentType = function (map) {
+    _deserializeRenderComponentType(map) {
         return new RenderComponentType(map['id'], map['templateUrl'], map['slotCount'], this.deserialize(map['encapsulation'], ViewEncapsulation), this.deserialize(map['styles'], PRIMITIVE), {});
-    };
-    Serializer.decorators = [
-        { type: Injectable },
-    ];
-    /** @nocollapse */
-    Serializer.ctorParameters = function () { return [
-        { type: RenderStore, },
-    ]; };
-    return Serializer;
-}());
+    }
+}
+Serializer.decorators = [
+    { type: Injectable },
+];
+/** @nocollapse */
+Serializer.ctorParameters = () => [
+    { type: RenderStore, },
+];
 function Serializer_tsickle_Closure_declarations() {
     /** @type {?} */
     Serializer.decorators;
@@ -147,10 +144,7 @@ function Serializer_tsickle_Closure_declarations() {
     /** @type {?} */
     Serializer.prototype._renderStore;
 }
-export var /** @type {?} */ ANIMATION_WORKER_PLAYER_PREFIX = 'AnimationPlayer.';
-export var RenderStoreObject = (function () {
-    function RenderStoreObject() {
-    }
-    return RenderStoreObject;
-}());
+export const /** @type {?} */ ANIMATION_WORKER_PLAYER_PREFIX = 'AnimationPlayer.';
+export class RenderStoreObject {
+}
 //# sourceMappingURL=serializer.js.map

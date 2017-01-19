@@ -21,8 +21,8 @@ export declare class WebWorkerPlatformLocation extends PlatformLocation {
     onPopState(fn: LocationChangeListener): void;
     onHashChange(fn: LocationChangeListener): void;
     pathname: string;
-    search: string;
-    hash: string;
+    readonly search: string;
+    readonly hash: string;
     pushState(state: any, title: string, url: string): void;
     replaceState(state: any, title: string, url: string): void;
     forward(): void;

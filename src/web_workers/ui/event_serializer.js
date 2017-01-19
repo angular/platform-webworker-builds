@@ -5,17 +5,17 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var /** @type {?} */ MOUSE_EVENT_PROPERTIES = [
+const /** @type {?} */ MOUSE_EVENT_PROPERTIES = [
     'altKey', 'button', 'clientX', 'clientY', 'metaKey', 'movementX', 'movementY', 'offsetX',
     'offsetY', 'region', 'screenX', 'screenY', 'shiftKey'
 ];
-var /** @type {?} */ KEYBOARD_EVENT_PROPERTIES = [
+const /** @type {?} */ KEYBOARD_EVENT_PROPERTIES = [
     'altkey', 'charCode', 'code', 'ctrlKey', 'isComposing', 'key', 'keyCode', 'location', 'metaKey',
     'repeat', 'shiftKey', 'which'
 ];
-var /** @type {?} */ TRANSITION_EVENT_PROPERTIES = ['propertyName', 'elapsedTime', 'pseudoElement'];
-var /** @type {?} */ EVENT_PROPERTIES = ['type', 'bubbles', 'cancelable'];
-var /** @type {?} */ NODES_WITH_VALUE = new Set(['input', 'select', 'option', 'button', 'li', 'meter', 'progress', 'param', 'textarea']);
+const /** @type {?} */ TRANSITION_EVENT_PROPERTIES = ['propertyName', 'elapsedTime', 'pseudoElement'];
+const /** @type {?} */ EVENT_PROPERTIES = ['type', 'bubbles', 'cancelable'];
+const /** @type {?} */ NODES_WITH_VALUE = new Set(['input', 'select', 'option', 'button', 'li', 'meter', 'progress', 'param', 'textarea']);
 /**
  * @param {?} e
  * @return {?}
@@ -28,7 +28,7 @@ export function serializeGenericEvent(e) {
  * @return {?}
  */
 export function serializeEventWithTarget(e) {
-    var /** @type {?} */ serializedEvent = serializeEvent(e, EVENT_PROPERTIES);
+    const /** @type {?} */ serializedEvent = serializeEvent(e, EVENT_PROPERTIES);
     return addTarget(e, serializedEvent);
 }
 /**
@@ -43,7 +43,7 @@ export function serializeMouseEvent(e) {
  * @return {?}
  */
 export function serializeKeyboardEvent(e) {
-    var /** @type {?} */ serializedEvent = serializeEvent(e, KEYBOARD_EVENT_PROPERTIES);
+    const /** @type {?} */ serializedEvent = serializeEvent(e, KEYBOARD_EVENT_PROPERTIES);
     return addTarget(e, serializedEvent);
 }
 /**
@@ -51,7 +51,7 @@ export function serializeKeyboardEvent(e) {
  * @return {?}
  */
 export function serializeTransitionEvent(e) {
-    var /** @type {?} */ serializedEvent = serializeEvent(e, TRANSITION_EVENT_PROPERTIES);
+    const /** @type {?} */ serializedEvent = serializeEvent(e, TRANSITION_EVENT_PROPERTIES);
     return addTarget(e, serializedEvent);
 }
 /**
@@ -61,7 +61,7 @@ export function serializeTransitionEvent(e) {
  */
 function addTarget(e, serializedEvent) {
     if (NODES_WITH_VALUE.has(((e.target)).tagName.toLowerCase())) {
-        var /** @type {?} */ target = (e.target);
+        const /** @type {?} */ target = (e.target);
         serializedEvent['target'] = { 'value': target.value };
         if (target.files) {
             serializedEvent['target']['files'] = target.files;
@@ -75,9 +75,9 @@ function addTarget(e, serializedEvent) {
  * @return {?}
  */
 function serializeEvent(e, properties) {
-    var /** @type {?} */ serialized = {};
-    for (var /** @type {?} */ i = 0; i < properties.length; i++) {
-        var /** @type {?} */ prop = properties[i];
+    const /** @type {?} */ serialized = {};
+    for (let /** @type {?} */ i = 0; i < properties.length; i++) {
+        const /** @type {?} */ prop = properties[i];
         ((serialized) /** TODO #9100 */)[prop] = e[prop];
     }
     return serialized;
