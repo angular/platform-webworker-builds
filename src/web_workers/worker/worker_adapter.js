@@ -12,9 +12,9 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 import { DomAdapter, setRootDomAdapter } from '../../private_import_platform-browser';
 /**
- *  This adapter is required to log error messages.
-  * *
-  * Note: other methods all throw as the DOM is not accessible directly in web worker context.
+ * This adapter is required to log error messages.
+ *
+ * Note: other methods all throw as the DOM is not accessible directly in web worker context.
  */
 export var WorkerDomAdapter = (function (_super) {
     __extends(WorkerDomAdapter, _super);

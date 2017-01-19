@@ -56,6 +56,7 @@ export var WebWorkerPlatformLocation = (function (_super) {
         });
     }
     /**
+     * \@internal *
      * @return {?}
      */
     WebWorkerPlatformLocation.prototype.init = function () {
