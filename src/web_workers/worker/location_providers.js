@@ -5,15 +5,15 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import { PlatformLocation } from '@angular/common/index';
-import { APP_INITIALIZER, NgZone } from '@angular/core/index';
+import { PlatformLocation } from '@angular/common';
+import { APP_INITIALIZER, NgZone } from '@angular/core';
 import { WebWorkerPlatformLocation } from './platform_location';
 /**
  * Those providers should be added when the router is used in a worker context in addition to the
  * {@link ROUTER_PROVIDERS} and after them.
  * @experimental
  */
-export const /** @type {?} */ WORKER_APP_LOCATION_PROVIDERS = [
+export var /** @type {?} */ WORKER_APP_LOCATION_PROVIDERS = [
     { provide: PlatformLocation, useClass: WebWorkerPlatformLocation }, {
         provide: APP_INITIALIZER,
         useFactory: appInitFnFactory,
@@ -27,6 +27,6 @@ export const /** @type {?} */ WORKER_APP_LOCATION_PROVIDERS = [
  * @return {?}
  */
 function appInitFnFactory(platformLocation, zone) {
-    return () => zone.runGuarded(() => platformLocation.init());
+    return function () { return zone.runGuarded(function () { return platformLocation.init(); }); };
 }
 //# sourceMappingURL=location_providers.js.map

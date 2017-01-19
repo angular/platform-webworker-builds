@@ -5,22 +5,31 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
 import { DomAdapter, setRootDomAdapter } from '../../private_import_platform-browser';
 /**
  * This adapter is required to log error messages.
  *
  * Note: other methods all throw as the DOM is not accessible directly in web worker context.
  */
-export class WorkerDomAdapter extends DomAdapter {
+export var WorkerDomAdapter = (function (_super) {
+    __extends(WorkerDomAdapter, _super);
+    function WorkerDomAdapter() {
+        _super.apply(this, arguments);
+    }
     /**
      * @return {?}
      */
-    static makeCurrent() { setRootDomAdapter(new WorkerDomAdapter()); }
+    WorkerDomAdapter.makeCurrent = function () { setRootDomAdapter(new WorkerDomAdapter()); };
     /**
      * @param {?} error
      * @return {?}
      */
-    logError(error /** TODO #9100 */) {
+    WorkerDomAdapter.prototype.logError = function (error /** TODO #9100 */) {
         if (console.error) {
             console.error(error);
         }
@@ -28,17 +37,17 @@ export class WorkerDomAdapter extends DomAdapter {
             // tslint:disable-next-line:no-console
             console.log(error);
         }
-    }
+    };
     /**
      * @param {?} error
      * @return {?}
      */
-    log(error /** TODO #9100 */) { console.log(error); }
+    WorkerDomAdapter.prototype.log = function (error /** TODO #9100 */) { console.log(error); };
     /**
      * @param {?} error
      * @return {?}
      */
-    logGroup(error /** TODO #9100 */) {
+    WorkerDomAdapter.prototype.logGroup = function (error /** TODO #9100 */) {
         if (console.group) {
             console.group(error);
             this.logError(error);
@@ -47,465 +56,469 @@ export class WorkerDomAdapter extends DomAdapter {
             // tslint:disable-next-line:no-console
             console.log(error);
         }
-    }
+    };
     /**
      * @return {?}
      */
-    logGroupEnd() {
+    WorkerDomAdapter.prototype.logGroupEnd = function () {
         if (console.groupEnd) {
             console.groupEnd();
         }
-    }
+    };
     /**
      * @param {?} element
      * @param {?} name
      * @return {?}
      */
-    hasProperty(element /** TODO #9100 */, name) { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.hasProperty = function (element /** TODO #9100 */, name) { throw 'not implemented'; };
     /**
      * @param {?} el
      * @param {?} name
      * @param {?} value
      * @return {?}
      */
-    setProperty(el, name, value) { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.setProperty = function (el, name, value) { throw 'not implemented'; };
     /**
      * @param {?} el
      * @param {?} name
      * @return {?}
      */
-    getProperty(el, name) { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.getProperty = function (el, name) { throw 'not implemented'; };
     /**
      * @param {?} el
      * @param {?} methodName
      * @param {?} args
      * @return {?}
      */
-    invoke(el, methodName, args) { throw 'not implemented'; }
-    /**
-     * @return {?}
-     */
-    get attrToPropMap() { throw 'not implemented'; }
-    /**
-     * @param {?} value
-     * @return {?}
-     */
-    set attrToPropMap(value) { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.invoke = function (el, methodName, args) { throw 'not implemented'; };
+    Object.defineProperty(WorkerDomAdapter.prototype, "attrToPropMap", {
+        /**
+         * @return {?}
+         */
+        get: function () { throw 'not implemented'; },
+        /**
+         * @param {?} value
+         * @return {?}
+         */
+        set: function (value) { throw 'not implemented'; },
+        enumerable: true,
+        configurable: true
+    });
     /**
      * @param {?} templateHtml
      * @return {?}
      */
-    parse(templateHtml) { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.parse = function (templateHtml) { throw 'not implemented'; };
     /**
      * @param {?} selector
      * @return {?}
      */
-    query(selector) { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.query = function (selector) { throw 'not implemented'; };
     /**
      * @param {?} el
      * @param {?} selector
      * @return {?}
      */
-    querySelector(el /** TODO #9100 */, selector) {
+    WorkerDomAdapter.prototype.querySelector = function (el /** TODO #9100 */, selector) {
         throw 'not implemented';
-    }
+    };
     /**
      * @param {?} el
      * @param {?} selector
      * @return {?}
      */
-    querySelectorAll(el /** TODO #9100 */, selector) { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.querySelectorAll = function (el /** TODO #9100 */, selector) { throw 'not implemented'; };
     /**
      * @param {?} el
      * @param {?} evt
      * @param {?} listener
      * @return {?}
      */
-    on(el /** TODO #9100 */, evt /** TODO #9100 */, listener /** TODO #9100 */) {
+    WorkerDomAdapter.prototype.on = function (el /** TODO #9100 */, evt /** TODO #9100 */, listener /** TODO #9100 */) {
         throw 'not implemented';
-    }
+    };
     /**
      * @param {?} el
      * @param {?} evt
      * @param {?} listener
      * @return {?}
      */
-    onAndCancel(el /** TODO #9100 */, evt /** TODO #9100 */, listener /** TODO #9100 */) {
+    WorkerDomAdapter.prototype.onAndCancel = function (el /** TODO #9100 */, evt /** TODO #9100 */, listener /** TODO #9100 */) {
         throw 'not implemented';
-    }
+    };
     /**
      * @param {?} el
      * @param {?} evt
      * @return {?}
      */
-    dispatchEvent(el /** TODO #9100 */, evt /** TODO #9100 */) { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.dispatchEvent = function (el /** TODO #9100 */, evt /** TODO #9100 */) { throw 'not implemented'; };
     /**
      * @param {?} eventType
      * @return {?}
      */
-    createMouseEvent(eventType /** TODO #9100 */) { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.createMouseEvent = function (eventType /** TODO #9100 */) { throw 'not implemented'; };
     /**
      * @param {?} eventType
      * @return {?}
      */
-    createEvent(eventType) { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.createEvent = function (eventType) { throw 'not implemented'; };
     /**
      * @param {?} evt
      * @return {?}
      */
-    preventDefault(evt /** TODO #9100 */) { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.preventDefault = function (evt /** TODO #9100 */) { throw 'not implemented'; };
     /**
      * @param {?} evt
      * @return {?}
      */
-    isPrevented(evt /** TODO #9100 */) { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.isPrevented = function (evt /** TODO #9100 */) { throw 'not implemented'; };
     /**
      * @param {?} el
      * @return {?}
      */
-    getInnerHTML(el /** TODO #9100 */) { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.getInnerHTML = function (el /** TODO #9100 */) { throw 'not implemented'; };
     /**
      * @param {?} el
      * @return {?}
      */
-    getTemplateContent(el /** TODO #9100 */) { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.getTemplateContent = function (el /** TODO #9100 */) { throw 'not implemented'; };
     /**
      * @param {?} el
      * @return {?}
      */
-    getOuterHTML(el /** TODO #9100 */) { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.getOuterHTML = function (el /** TODO #9100 */) { throw 'not implemented'; };
     /**
      * @param {?} node
      * @return {?}
      */
-    nodeName(node /** TODO #9100 */) { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.nodeName = function (node /** TODO #9100 */) { throw 'not implemented'; };
     /**
      * @param {?} node
      * @return {?}
      */
-    nodeValue(node /** TODO #9100 */) { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.nodeValue = function (node /** TODO #9100 */) { throw 'not implemented'; };
     /**
      * @param {?} node
      * @return {?}
      */
-    type(node /** TODO #9100 */) { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.type = function (node /** TODO #9100 */) { throw 'not implemented'; };
     /**
      * @param {?} node
      * @return {?}
      */
-    content(node /** TODO #9100 */) { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.content = function (node /** TODO #9100 */) { throw 'not implemented'; };
     /**
      * @param {?} el
      * @return {?}
      */
-    firstChild(el /** TODO #9100 */) { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.firstChild = function (el /** TODO #9100 */) { throw 'not implemented'; };
     /**
      * @param {?} el
      * @return {?}
      */
-    nextSibling(el /** TODO #9100 */) { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.nextSibling = function (el /** TODO #9100 */) { throw 'not implemented'; };
     /**
      * @param {?} el
      * @return {?}
      */
-    parentElement(el /** TODO #9100 */) { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.parentElement = function (el /** TODO #9100 */) { throw 'not implemented'; };
     /**
      * @param {?} el
      * @return {?}
      */
-    childNodes(el /** TODO #9100 */) { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.childNodes = function (el /** TODO #9100 */) { throw 'not implemented'; };
     /**
      * @param {?} el
      * @return {?}
      */
-    childNodesAsList(el /** TODO #9100 */) { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.childNodesAsList = function (el /** TODO #9100 */) { throw 'not implemented'; };
     /**
      * @param {?} el
      * @return {?}
      */
-    clearNodes(el /** TODO #9100 */) { throw 'not implemented'; }
-    /**
-     * @param {?} el
-     * @param {?} node
-     * @return {?}
-     */
-    appendChild(el /** TODO #9100 */, node /** TODO #9100 */) { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.clearNodes = function (el /** TODO #9100 */) { throw 'not implemented'; };
     /**
      * @param {?} el
      * @param {?} node
      * @return {?}
      */
-    removeChild(el /** TODO #9100 */, node /** TODO #9100 */) { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.appendChild = function (el /** TODO #9100 */, node /** TODO #9100 */) { throw 'not implemented'; };
+    /**
+     * @param {?} el
+     * @param {?} node
+     * @return {?}
+     */
+    WorkerDomAdapter.prototype.removeChild = function (el /** TODO #9100 */, node /** TODO #9100 */) { throw 'not implemented'; };
     /**
      * @param {?} el
      * @param {?} newNode
      * @param {?} oldNode
      * @return {?}
      */
-    replaceChild(el /** TODO #9100 */, newNode /** TODO #9100 */, oldNode /** TODO #9100 */) {
+    WorkerDomAdapter.prototype.replaceChild = function (el /** TODO #9100 */, newNode /** TODO #9100 */, oldNode /** TODO #9100 */) {
         throw 'not implemented';
-    }
+    };
     /**
      * @param {?} el
      * @return {?}
      */
-    remove(el /** TODO #9100 */) { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.remove = function (el /** TODO #9100 */) { throw 'not implemented'; };
     /**
      * @param {?} el
      * @param {?} node
      * @return {?}
      */
-    insertBefore(el /** TODO #9100 */, node /** TODO #9100 */) { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.insertBefore = function (el /** TODO #9100 */, node /** TODO #9100 */) { throw 'not implemented'; };
     /**
      * @param {?} el
      * @param {?} nodes
      * @return {?}
      */
-    insertAllBefore(el /** TODO #9100 */, nodes /** TODO #9100 */) {
+    WorkerDomAdapter.prototype.insertAllBefore = function (el /** TODO #9100 */, nodes /** TODO #9100 */) {
         throw 'not implemented';
-    }
+    };
     /**
      * @param {?} el
      * @param {?} node
      * @return {?}
      */
-    insertAfter(el /** TODO #9100 */, node /** TODO #9100 */) { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.insertAfter = function (el /** TODO #9100 */, node /** TODO #9100 */) { throw 'not implemented'; };
     /**
      * @param {?} el
      * @param {?} value
      * @return {?}
      */
-    setInnerHTML(el /** TODO #9100 */, value /** TODO #9100 */) { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.setInnerHTML = function (el /** TODO #9100 */, value /** TODO #9100 */) { throw 'not implemented'; };
     /**
      * @param {?} el
      * @return {?}
      */
-    getText(el /** TODO #9100 */) { throw 'not implemented'; }
-    /**
-     * @param {?} el
-     * @param {?} value
-     * @return {?}
-     */
-    setText(el /** TODO #9100 */, value) { throw 'not implemented'; }
-    /**
-     * @param {?} el
-     * @return {?}
-     */
-    getValue(el /** TODO #9100 */) { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.getText = function (el /** TODO #9100 */) { throw 'not implemented'; };
     /**
      * @param {?} el
      * @param {?} value
      * @return {?}
      */
-    setValue(el /** TODO #9100 */, value) { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.setText = function (el /** TODO #9100 */, value) { throw 'not implemented'; };
     /**
      * @param {?} el
      * @return {?}
      */
-    getChecked(el /** TODO #9100 */) { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.getValue = function (el /** TODO #9100 */) { throw 'not implemented'; };
     /**
      * @param {?} el
      * @param {?} value
      * @return {?}
      */
-    setChecked(el /** TODO #9100 */, value) { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.setValue = function (el /** TODO #9100 */, value) { throw 'not implemented'; };
+    /**
+     * @param {?} el
+     * @return {?}
+     */
+    WorkerDomAdapter.prototype.getChecked = function (el /** TODO #9100 */) { throw 'not implemented'; };
+    /**
+     * @param {?} el
+     * @param {?} value
+     * @return {?}
+     */
+    WorkerDomAdapter.prototype.setChecked = function (el /** TODO #9100 */, value) { throw 'not implemented'; };
     /**
      * @param {?} text
      * @return {?}
      */
-    createComment(text) { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.createComment = function (text) { throw 'not implemented'; };
     /**
      * @param {?} html
      * @return {?}
      */
-    createTemplate(html /** TODO #9100 */) { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.createTemplate = function (html /** TODO #9100 */) { throw 'not implemented'; };
     /**
      * @param {?} tagName
      * @param {?=} doc
      * @return {?}
      */
-    createElement(tagName /** TODO #9100 */, doc /** TODO #9100 */) {
+    WorkerDomAdapter.prototype.createElement = function (tagName /** TODO #9100 */, doc /** TODO #9100 */) {
         throw 'not implemented';
-    }
+    };
     /**
      * @param {?} ns
      * @param {?} tagName
      * @param {?=} doc
      * @return {?}
      */
-    createElementNS(ns, tagName, doc /** TODO #9100 */) {
+    WorkerDomAdapter.prototype.createElementNS = function (ns, tagName, doc /** TODO #9100 */) {
         throw 'not implemented';
-    }
+    };
     /**
      * @param {?} text
      * @param {?=} doc
      * @return {?}
      */
-    createTextNode(text, doc /** TODO #9100 */) { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.createTextNode = function (text, doc /** TODO #9100 */) { throw 'not implemented'; };
     /**
      * @param {?} attrName
      * @param {?} attrValue
      * @param {?=} doc
      * @return {?}
      */
-    createScriptTag(attrName, attrValue, doc /** TODO #9100 */) {
+    WorkerDomAdapter.prototype.createScriptTag = function (attrName, attrValue, doc /** TODO #9100 */) {
         throw 'not implemented';
-    }
+    };
     /**
      * @param {?} css
      * @param {?=} doc
      * @return {?}
      */
-    createStyleElement(css, doc /** TODO #9100 */) {
+    WorkerDomAdapter.prototype.createStyleElement = function (css, doc /** TODO #9100 */) {
         throw 'not implemented';
-    }
+    };
     /**
      * @param {?} el
      * @return {?}
      */
-    createShadowRoot(el /** TODO #9100 */) { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.createShadowRoot = function (el /** TODO #9100 */) { throw 'not implemented'; };
     /**
      * @param {?} el
      * @return {?}
      */
-    getShadowRoot(el /** TODO #9100 */) { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.getShadowRoot = function (el /** TODO #9100 */) { throw 'not implemented'; };
     /**
      * @param {?} el
      * @return {?}
      */
-    getHost(el /** TODO #9100 */) { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.getHost = function (el /** TODO #9100 */) { throw 'not implemented'; };
     /**
      * @param {?} el
      * @return {?}
      */
-    getDistributedNodes(el /** TODO #9100 */) { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.getDistributedNodes = function (el /** TODO #9100 */) { throw 'not implemented'; };
     /**
      * @param {?} node
      * @return {?}
      */
-    clone(node) { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.clone = function (node) { throw 'not implemented'; };
     /**
      * @param {?} element
      * @param {?} name
      * @return {?}
      */
-    getElementsByClassName(element /** TODO #9100 */, name) {
+    WorkerDomAdapter.prototype.getElementsByClassName = function (element /** TODO #9100 */, name) {
         throw 'not implemented';
-    }
+    };
     /**
      * @param {?} element
      * @param {?} name
      * @return {?}
      */
-    getElementsByTagName(element /** TODO #9100 */, name) {
+    WorkerDomAdapter.prototype.getElementsByTagName = function (element /** TODO #9100 */, name) {
         throw 'not implemented';
-    }
+    };
     /**
      * @param {?} element
      * @return {?}
      */
-    classList(element /** TODO #9100 */) { throw 'not implemented'; }
-    /**
-     * @param {?} element
-     * @param {?} className
-     * @return {?}
-     */
-    addClass(element /** TODO #9100 */, className) { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.classList = function (element /** TODO #9100 */) { throw 'not implemented'; };
     /**
      * @param {?} element
      * @param {?} className
      * @return {?}
      */
-    removeClass(element /** TODO #9100 */, className) { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.addClass = function (element /** TODO #9100 */, className) { throw 'not implemented'; };
     /**
      * @param {?} element
      * @param {?} className
      * @return {?}
      */
-    hasClass(element /** TODO #9100 */, className) { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.removeClass = function (element /** TODO #9100 */, className) { throw 'not implemented'; };
+    /**
+     * @param {?} element
+     * @param {?} className
+     * @return {?}
+     */
+    WorkerDomAdapter.prototype.hasClass = function (element /** TODO #9100 */, className) { throw 'not implemented'; };
     /**
      * @param {?} element
      * @param {?} styleName
      * @param {?} styleValue
      * @return {?}
      */
-    setStyle(element /** TODO #9100 */, styleName, styleValue) {
+    WorkerDomAdapter.prototype.setStyle = function (element /** TODO #9100 */, styleName, styleValue) {
         throw 'not implemented';
-    }
+    };
     /**
      * @param {?} element
      * @param {?} styleName
      * @return {?}
      */
-    removeStyle(element /** TODO #9100 */, styleName) { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.removeStyle = function (element /** TODO #9100 */, styleName) { throw 'not implemented'; };
     /**
      * @param {?} element
      * @param {?} styleName
      * @return {?}
      */
-    getStyle(element /** TODO #9100 */, styleName) { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.getStyle = function (element /** TODO #9100 */, styleName) { throw 'not implemented'; };
     /**
      * @param {?} element
      * @param {?} styleName
      * @param {?=} styleValue
      * @return {?}
      */
-    hasStyle(element /** TODO #9100 */, styleName, styleValue) {
+    WorkerDomAdapter.prototype.hasStyle = function (element /** TODO #9100 */, styleName, styleValue) {
         throw 'not implemented';
-    }
+    };
     /**
      * @param {?} element
      * @return {?}
      */
-    tagName(element /** TODO #9100 */) { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.tagName = function (element /** TODO #9100 */) { throw 'not implemented'; };
     /**
      * @param {?} element
      * @return {?}
      */
-    attributeMap(element /** TODO #9100 */) { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.attributeMap = function (element /** TODO #9100 */) { throw 'not implemented'; };
     /**
      * @param {?} element
      * @param {?} attribute
      * @return {?}
      */
-    hasAttribute(element /** TODO #9100 */, attribute) {
+    WorkerDomAdapter.prototype.hasAttribute = function (element /** TODO #9100 */, attribute) {
         throw 'not implemented';
-    }
+    };
     /**
      * @param {?} element
      * @param {?} ns
      * @param {?} attribute
      * @return {?}
      */
-    hasAttributeNS(element /** TODO #9100 */, ns, attribute) {
+    WorkerDomAdapter.prototype.hasAttributeNS = function (element /** TODO #9100 */, ns, attribute) {
         throw 'not implemented';
-    }
+    };
     /**
      * @param {?} element
      * @param {?} attribute
      * @return {?}
      */
-    getAttribute(element /** TODO #9100 */, attribute) {
+    WorkerDomAdapter.prototype.getAttribute = function (element /** TODO #9100 */, attribute) {
         throw 'not implemented';
-    }
+    };
     /**
      * @param {?} element
      * @param {?} ns
      * @param {?} attribute
      * @return {?}
      */
-    getAttributeNS(element /** TODO #9100 */, ns, attribute) {
+    WorkerDomAdapter.prototype.getAttributeNS = function (element /** TODO #9100 */, ns, attribute) {
         throw 'not implemented';
-    }
+    };
     /**
      * @param {?} element
      * @param {?} name
      * @param {?} value
      * @return {?}
      */
-    setAttribute(element /** TODO #9100 */, name, value) {
+    WorkerDomAdapter.prototype.setAttribute = function (element /** TODO #9100 */, name, value) {
         throw 'not implemented';
-    }
+    };
     /**
      * @param {?} element
      * @param {?} ns
@@ -513,207 +526,208 @@ export class WorkerDomAdapter extends DomAdapter {
      * @param {?} value
      * @return {?}
      */
-    setAttributeNS(element /** TODO #9100 */, ns, name, value) {
+    WorkerDomAdapter.prototype.setAttributeNS = function (element /** TODO #9100 */, ns, name, value) {
         throw 'not implemented';
-    }
+    };
     /**
      * @param {?} element
      * @param {?} attribute
      * @return {?}
      */
-    removeAttribute(element /** TODO #9100 */, attribute) { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.removeAttribute = function (element /** TODO #9100 */, attribute) { throw 'not implemented'; };
     /**
      * @param {?} element
      * @param {?} ns
      * @param {?} attribute
      * @return {?}
      */
-    removeAttributeNS(element /** TODO #9100 */, ns, attribute) {
+    WorkerDomAdapter.prototype.removeAttributeNS = function (element /** TODO #9100 */, ns, attribute) {
         throw 'not implemented';
-    }
+    };
     /**
      * @param {?} el
      * @return {?}
      */
-    templateAwareRoot(el /** TODO #9100 */) { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.templateAwareRoot = function (el /** TODO #9100 */) { throw 'not implemented'; };
     /**
      * @return {?}
      */
-    createHtmlDocument() { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.createHtmlDocument = function () { throw 'not implemented'; };
     /**
      * @return {?}
      */
-    defaultDoc() { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.defaultDoc = function () { throw 'not implemented'; };
     /**
      * @param {?} el
      * @return {?}
      */
-    getBoundingClientRect(el /** TODO #9100 */) { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.getBoundingClientRect = function (el /** TODO #9100 */) { throw 'not implemented'; };
     /**
      * @return {?}
      */
-    getTitle() { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.getTitle = function () { throw 'not implemented'; };
     /**
      * @param {?} newTitle
      * @return {?}
      */
-    setTitle(newTitle) { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.setTitle = function (newTitle) { throw 'not implemented'; };
     /**
      * @param {?} n
      * @param {?} selector
      * @return {?}
      */
-    elementMatches(n /** TODO #9100 */, selector) { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.elementMatches = function (n /** TODO #9100 */, selector) { throw 'not implemented'; };
     /**
      * @param {?} el
      * @return {?}
      */
-    isTemplateElement(el) { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.isTemplateElement = function (el) { throw 'not implemented'; };
     /**
      * @param {?} node
      * @return {?}
      */
-    isTextNode(node /** TODO #9100 */) { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.isTextNode = function (node /** TODO #9100 */) { throw 'not implemented'; };
     /**
      * @param {?} node
      * @return {?}
      */
-    isCommentNode(node /** TODO #9100 */) { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.isCommentNode = function (node /** TODO #9100 */) { throw 'not implemented'; };
     /**
      * @param {?} node
      * @return {?}
      */
-    isElementNode(node /** TODO #9100 */) { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.isElementNode = function (node /** TODO #9100 */) { throw 'not implemented'; };
     /**
      * @param {?} node
      * @return {?}
      */
-    hasShadowRoot(node /** TODO #9100 */) { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.hasShadowRoot = function (node /** TODO #9100 */) { throw 'not implemented'; };
     /**
      * @param {?} node
      * @return {?}
      */
-    isShadowRoot(node /** TODO #9100 */) { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.isShadowRoot = function (node /** TODO #9100 */) { throw 'not implemented'; };
     /**
      * @param {?} node
      * @return {?}
      */
-    importIntoDoc(node) { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.importIntoDoc = function (node) { throw 'not implemented'; };
     /**
      * @param {?} node
      * @return {?}
      */
-    adoptNode(node) { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.adoptNode = function (node) { throw 'not implemented'; };
     /**
      * @param {?} element
      * @return {?}
      */
-    getHref(element /** TODO #9100 */) { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.getHref = function (element /** TODO #9100 */) { throw 'not implemented'; };
     /**
      * @param {?} event
      * @return {?}
      */
-    getEventKey(event /** TODO #9100 */) { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.getEventKey = function (event /** TODO #9100 */) { throw 'not implemented'; };
     /**
      * @param {?} element
      * @param {?} baseUrl
      * @param {?} href
      * @return {?}
      */
-    resolveAndSetHref(element /** TODO #9100 */, baseUrl, href) {
+    WorkerDomAdapter.prototype.resolveAndSetHref = function (element /** TODO #9100 */, baseUrl, href) {
         throw 'not implemented';
-    }
+    };
     /**
      * @return {?}
      */
-    supportsDOMEvents() { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.supportsDOMEvents = function () { throw 'not implemented'; };
     /**
      * @return {?}
      */
-    supportsNativeShadowDOM() { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.supportsNativeShadowDOM = function () { throw 'not implemented'; };
     /**
      * @param {?} target
      * @return {?}
      */
-    getGlobalEventTarget(target) { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.getGlobalEventTarget = function (target) { throw 'not implemented'; };
     /**
      * @return {?}
      */
-    getHistory() { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.getHistory = function () { throw 'not implemented'; };
     /**
      * @return {?}
      */
-    getLocation() { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.getLocation = function () { throw 'not implemented'; };
     /**
      * @return {?}
      */
-    getBaseHref() { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.getBaseHref = function () { throw 'not implemented'; };
     /**
      * @return {?}
      */
-    resetBaseElement() { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.resetBaseElement = function () { throw 'not implemented'; };
     /**
      * @return {?}
      */
-    getUserAgent() { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.getUserAgent = function () { throw 'not implemented'; };
     /**
      * @param {?} element
      * @param {?} name
      * @param {?} value
      * @return {?}
      */
-    setData(element /** TODO #9100 */, name, value) { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.setData = function (element /** TODO #9100 */, name, value) { throw 'not implemented'; };
     /**
      * @param {?} element
      * @return {?}
      */
-    getComputedStyle(element /** TODO #9100 */) { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.getComputedStyle = function (element /** TODO #9100 */) { throw 'not implemented'; };
     /**
      * @param {?} element
      * @param {?} name
      * @return {?}
      */
-    getData(element /** TODO #9100 */, name) { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.getData = function (element /** TODO #9100 */, name) { throw 'not implemented'; };
     /**
      * @param {?} name
      * @param {?} value
      * @return {?}
      */
-    setGlobalVar(name, value) { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.setGlobalVar = function (name, value) { throw 'not implemented'; };
     /**
      * @return {?}
      */
-    performanceNow() { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.performanceNow = function () { throw 'not implemented'; };
     /**
      * @return {?}
      */
-    getAnimationPrefix() { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.getAnimationPrefix = function () { throw 'not implemented'; };
     /**
      * @return {?}
      */
-    getTransitionEnd() { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.getTransitionEnd = function () { throw 'not implemented'; };
     /**
      * @return {?}
      */
-    supportsAnimation() { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.supportsAnimation = function () { throw 'not implemented'; };
     /**
      * @return {?}
      */
-    supportsWebAnimation() { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.supportsWebAnimation = function () { throw 'not implemented'; };
     /**
      * @return {?}
      */
-    supportsCookies() { return false; }
+    WorkerDomAdapter.prototype.supportsCookies = function () { return false; };
     /**
      * @param {?} name
      * @return {?}
      */
-    getCookie(name) { throw 'not implemented'; }
+    WorkerDomAdapter.prototype.getCookie = function (name) { throw 'not implemented'; };
     /**
      * @param {?} name
      * @param {?} value
      * @return {?}
      */
-    setCookie(name, value) { throw 'not implemented'; }
-}
+    WorkerDomAdapter.prototype.setCookie = function (name, value) { throw 'not implemented'; };
+    return WorkerDomAdapter;
+}(DomAdapter));
 //# sourceMappingURL=worker_adapter.js.map

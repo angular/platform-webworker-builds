@@ -14,7 +14,9 @@
  * \@experimental WebWorker support in Angular is currenlty experimental.
  * @abstract
  */
-export class MessageBus {
+export var MessageBus = (function () {
+    function MessageBus() {
+    }
     /**
      * Sets up a new channel on the MessageBus.
      * MUST be called before calling from or to on the channel.
@@ -27,7 +29,7 @@ export class MessageBus {
      * @param {?=} runInZone
      * @return {?}
      */
-    initChannel(channel, runInZone) { }
+    MessageBus.prototype.initChannel = function (channel, runInZone) { };
     /**
      * Assigns this bus to the given zone.
      * Any callbacks attached to channels where runInZone was set to true on initialization
@@ -36,7 +38,7 @@ export class MessageBus {
      * @param {?} zone
      * @return {?}
      */
-    attachToZone(zone) { }
+    MessageBus.prototype.attachToZone = function (zone) { };
     /**
      * Returns an {\@link EventEmitter} that emits every time a message
      * is received on the given channel.
@@ -44,7 +46,7 @@ export class MessageBus {
      * @param {?} channel
      * @return {?}
      */
-    from(channel) { }
+    MessageBus.prototype.from = function (channel) { };
     /**
      * Returns an {\@link EventEmitter} for the given channel
      * To publish methods to that channel just call next on the returned emitter
@@ -52,6 +54,7 @@ export class MessageBus {
      * @param {?} channel
      * @return {?}
      */
-    to(channel) { }
-}
+    MessageBus.prototype.to = function (channel) { };
+    return MessageBus;
+}());
 //# sourceMappingURL=message_bus.js.map

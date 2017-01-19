@@ -5,14 +5,14 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import { Injectable, RenderComponentType, RootRenderer } from '@angular/core/index';
+import { Injectable, RenderComponentType, RootRenderer } from '@angular/core';
 import { MessageBus } from '../shared/message_bus';
 import { EVENT_CHANNEL, RENDERER_CHANNEL } from '../shared/messaging_api';
 import { RenderStore } from '../shared/render_store';
 import { ANIMATION_WORKER_PLAYER_PREFIX, PRIMITIVE, RenderStoreObject, Serializer } from '../shared/serializer';
 import { ServiceMessageBrokerFactory } from '../shared/service_message_broker';
 import { EventDispatcher } from '../ui/event_dispatcher';
-export class MessageBasedRenderer {
+export var MessageBasedRenderer = (function () {
     /**
      * @param {?} _brokerFactory
      * @param {?} _bus
@@ -20,7 +20,7 @@ export class MessageBasedRenderer {
      * @param {?} _renderStore
      * @param {?} _rootRenderer
      */
-    constructor(_brokerFactory, _bus, _serializer, _renderStore, _rootRenderer) {
+    function MessageBasedRenderer(_brokerFactory, _bus, _serializer, _renderStore, _rootRenderer) {
         this._brokerFactory = _brokerFactory;
         this._bus = _bus;
         this._serializer = _serializer;
@@ -30,8 +30,8 @@ export class MessageBasedRenderer {
     /**
      * @return {?}
      */
-    start() {
-        const /** @type {?} */ broker = this._brokerFactory.createMessageBroker(RENDERER_CHANNEL);
+    MessageBasedRenderer.prototype.start = function () {
+        var /** @type {?} */ broker = this._brokerFactory.createMessageBroker(RENDERER_CHANNEL);
         this._bus.initChannel(EVENT_CHANNEL);
         this._eventDispatcher = new EventDispatcher(this._bus.to(EVENT_CHANNEL), this._serializer);
         broker.registerMethod('renderComponent', [RenderComponentType, PRIMITIVE], this._renderComponent.bind(this));
@@ -59,44 +59,49 @@ export class MessageBasedRenderer {
             PRIMITIVE, PRIMITIVE, PRIMITIVE
         ], this._animate.bind(this));
         this._bindAnimationPlayerMethods(broker);
-    }
+    };
     /**
      * @param {?} broker
      * @return {?}
      */
-    _bindAnimationPlayerMethods(broker) {
-        broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX + 'play', [RenderStoreObject, RenderStoreObject], (player, element) => player.play());
-        broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX + 'pause', [RenderStoreObject, RenderStoreObject], (player, element) => player.pause());
-        broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX + 'init', [RenderStoreObject, RenderStoreObject], (player, element) => player.init());
-        broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX + 'restart', [RenderStoreObject, RenderStoreObject], (player, element) => player.restart());
-        broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX + 'destroy', [RenderStoreObject, RenderStoreObject], (player, element) => {
+    MessageBasedRenderer.prototype._bindAnimationPlayerMethods = function (broker) {
+        var _this = this;
+        broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX + 'play', [RenderStoreObject, RenderStoreObject], function (player, element) { return player.play(); });
+        broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX + 'pause', [RenderStoreObject, RenderStoreObject], function (player, element) { return player.pause(); });
+        broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX + 'init', [RenderStoreObject, RenderStoreObject], function (player, element) { return player.init(); });
+        broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX + 'restart', [RenderStoreObject, RenderStoreObject], function (player, element) { return player.restart(); });
+        broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX + 'destroy', [RenderStoreObject, RenderStoreObject], function (player, element) {
             player.destroy();
-            this._renderStore.remove(player);
+            _this._renderStore.remove(player);
         });
-        broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX + 'finish', [RenderStoreObject, RenderStoreObject], (player, element) => player.finish());
-        broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX + 'getPosition', [RenderStoreObject, RenderStoreObject], (player, element) => player.getPosition());
-        broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX + 'onStart', [RenderStoreObject, RenderStoreObject, PRIMITIVE], (player, element) => this._listenOnAnimationPlayer(player, element, 'onStart'));
-        broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX + 'onDone', [RenderStoreObject, RenderStoreObject, PRIMITIVE], (player, element) => this._listenOnAnimationPlayer(player, element, 'onDone'));
-        broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX + 'setPosition', [RenderStoreObject, RenderStoreObject, PRIMITIVE], (player, element, position) => player.setPosition(position));
-    }
+        broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX + 'finish', [RenderStoreObject, RenderStoreObject], function (player, element) { return player.finish(); });
+        broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX + 'getPosition', [RenderStoreObject, RenderStoreObject], function (player, element) { return player.getPosition(); });
+        broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX + 'onStart', [RenderStoreObject, RenderStoreObject, PRIMITIVE], function (player, element) {
+            return _this._listenOnAnimationPlayer(player, element, 'onStart');
+        });
+        broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX + 'onDone', [RenderStoreObject, RenderStoreObject, PRIMITIVE], function (player, element) {
+            return _this._listenOnAnimationPlayer(player, element, 'onDone');
+        });
+        broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX + 'setPosition', [RenderStoreObject, RenderStoreObject, PRIMITIVE], function (player, element, position) { return player.setPosition(position); });
+    };
     /**
      * @param {?} renderComponentType
      * @param {?} rendererId
      * @return {?}
      */
-    _renderComponent(renderComponentType, rendererId) {
-        const /** @type {?} */ renderer = this._rootRenderer.renderComponent(renderComponentType);
+    MessageBasedRenderer.prototype._renderComponent = function (renderComponentType, rendererId) {
+        var /** @type {?} */ renderer = this._rootRenderer.renderComponent(renderComponentType);
         this._renderStore.store(renderer, rendererId);
-    }
+    };
     /**
      * @param {?} renderer
      * @param {?} selector
      * @param {?} elId
      * @return {?}
      */
-    _selectRootElement(renderer, selector, elId) {
+    MessageBasedRenderer.prototype._selectRootElement = function (renderer, selector, elId) {
         this._renderStore.store(renderer.selectRootElement(selector, null), elId);
-    }
+    };
     /**
      * @param {?} renderer
      * @param {?} parentElement
@@ -104,30 +109,30 @@ export class MessageBasedRenderer {
      * @param {?} elId
      * @return {?}
      */
-    _createElement(renderer, parentElement, name, elId) {
+    MessageBasedRenderer.prototype._createElement = function (renderer, parentElement, name, elId) {
         this._renderStore.store(renderer.createElement(parentElement, name, null), elId);
-    }
+    };
     /**
      * @param {?} renderer
      * @param {?} hostElement
      * @param {?} elId
      * @return {?}
      */
-    _createViewRoot(renderer, hostElement, elId) {
-        const /** @type {?} */ viewRoot = renderer.createViewRoot(hostElement);
+    MessageBasedRenderer.prototype._createViewRoot = function (renderer, hostElement, elId) {
+        var /** @type {?} */ viewRoot = renderer.createViewRoot(hostElement);
         if (this._renderStore.serialize(hostElement) !== elId) {
             this._renderStore.store(viewRoot, elId);
         }
-    }
+    };
     /**
      * @param {?} renderer
      * @param {?} parentElement
      * @param {?} elId
      * @return {?}
      */
-    _createTemplateAnchor(renderer, parentElement, elId) {
+    MessageBasedRenderer.prototype._createTemplateAnchor = function (renderer, parentElement, elId) {
         this._renderStore.store(renderer.createTemplateAnchor(parentElement, null), elId);
-    }
+    };
     /**
      * @param {?} renderer
      * @param {?} parentElement
@@ -135,47 +140,47 @@ export class MessageBasedRenderer {
      * @param {?} elId
      * @return {?}
      */
-    _createText(renderer, parentElement, value, elId) {
+    MessageBasedRenderer.prototype._createText = function (renderer, parentElement, value, elId) {
         this._renderStore.store(renderer.createText(parentElement, value, null), elId);
-    }
+    };
     /**
      * @param {?} renderer
      * @param {?} parentElement
      * @param {?} nodes
      * @return {?}
      */
-    _projectNodes(renderer, parentElement, nodes) {
+    MessageBasedRenderer.prototype._projectNodes = function (renderer, parentElement, nodes) {
         renderer.projectNodes(parentElement, nodes);
-    }
+    };
     /**
      * @param {?} renderer
      * @param {?} node
      * @param {?} viewRootNodes
      * @return {?}
      */
-    _attachViewAfter(renderer, node, viewRootNodes) {
+    MessageBasedRenderer.prototype._attachViewAfter = function (renderer, node, viewRootNodes) {
         renderer.attachViewAfter(node, viewRootNodes);
-    }
+    };
     /**
      * @param {?} renderer
      * @param {?} viewRootNodes
      * @return {?}
      */
-    _detachView(renderer, viewRootNodes) {
+    MessageBasedRenderer.prototype._detachView = function (renderer, viewRootNodes) {
         renderer.detachView(viewRootNodes);
-    }
+    };
     /**
      * @param {?} renderer
      * @param {?} hostElement
      * @param {?} viewAllNodes
      * @return {?}
      */
-    _destroyView(renderer, hostElement, viewAllNodes) {
+    MessageBasedRenderer.prototype._destroyView = function (renderer, hostElement, viewAllNodes) {
         renderer.destroyView(hostElement, viewAllNodes);
-        for (let /** @type {?} */ i = 0; i < viewAllNodes.length; i++) {
+        for (var /** @type {?} */ i = 0; i < viewAllNodes.length; i++) {
             this._renderStore.remove(viewAllNodes[i]);
         }
-    }
+    };
     /**
      * @param {?} renderer
      * @param {?} renderElement
@@ -183,9 +188,9 @@ export class MessageBasedRenderer {
      * @param {?} propertyValue
      * @return {?}
      */
-    _setElementProperty(renderer, renderElement, propertyName, propertyValue) {
+    MessageBasedRenderer.prototype._setElementProperty = function (renderer, renderElement, propertyName, propertyValue) {
         renderer.setElementProperty(renderElement, propertyName, propertyValue);
-    }
+    };
     /**
      * @param {?} renderer
      * @param {?} renderElement
@@ -193,9 +198,9 @@ export class MessageBasedRenderer {
      * @param {?} attributeValue
      * @return {?}
      */
-    _setElementAttribute(renderer, renderElement, attributeName, attributeValue) {
+    MessageBasedRenderer.prototype._setElementAttribute = function (renderer, renderElement, attributeName, attributeValue) {
         renderer.setElementAttribute(renderElement, attributeName, attributeValue);
-    }
+    };
     /**
      * @param {?} renderer
      * @param {?} renderElement
@@ -203,9 +208,9 @@ export class MessageBasedRenderer {
      * @param {?} propertyValue
      * @return {?}
      */
-    _setBindingDebugInfo(renderer, renderElement, propertyName, propertyValue) {
+    MessageBasedRenderer.prototype._setBindingDebugInfo = function (renderer, renderElement, propertyName, propertyValue) {
         renderer.setBindingDebugInfo(renderElement, propertyName, propertyValue);
-    }
+    };
     /**
      * @param {?} renderer
      * @param {?} renderElement
@@ -213,9 +218,9 @@ export class MessageBasedRenderer {
      * @param {?} isAdd
      * @return {?}
      */
-    _setElementClass(renderer, renderElement, className, isAdd) {
+    MessageBasedRenderer.prototype._setElementClass = function (renderer, renderElement, className, isAdd) {
         renderer.setElementClass(renderElement, className, isAdd);
-    }
+    };
     /**
      * @param {?} renderer
      * @param {?} renderElement
@@ -223,9 +228,9 @@ export class MessageBasedRenderer {
      * @param {?} styleValue
      * @return {?}
      */
-    _setElementStyle(renderer, renderElement, styleName, styleValue) {
+    MessageBasedRenderer.prototype._setElementStyle = function (renderer, renderElement, styleName, styleValue) {
         renderer.setElementStyle(renderElement, styleName, styleValue);
-    }
+    };
     /**
      * @param {?} renderer
      * @param {?} renderElement
@@ -233,18 +238,18 @@ export class MessageBasedRenderer {
      * @param {?} args
      * @return {?}
      */
-    _invokeElementMethod(renderer, renderElement, methodName, args) {
+    MessageBasedRenderer.prototype._invokeElementMethod = function (renderer, renderElement, methodName, args) {
         renderer.invokeElementMethod(renderElement, methodName, args);
-    }
+    };
     /**
      * @param {?} renderer
      * @param {?} renderNode
      * @param {?} text
      * @return {?}
      */
-    _setText(renderer, renderNode, text) {
+    MessageBasedRenderer.prototype._setText = function (renderer, renderNode, text) {
         renderer.setText(renderNode, text);
-    }
+    };
     /**
      * @param {?} renderer
      * @param {?} renderElement
@@ -252,10 +257,13 @@ export class MessageBasedRenderer {
      * @param {?} unlistenId
      * @return {?}
      */
-    _listen(renderer, renderElement, eventName, unlistenId) {
-        const /** @type {?} */ unregisterCallback = renderer.listen(renderElement, eventName, (event /** TODO #9100 */) => this._eventDispatcher.dispatchRenderEvent(renderElement, null, eventName, event));
+    MessageBasedRenderer.prototype._listen = function (renderer, renderElement, eventName, unlistenId) {
+        var _this = this;
+        var /** @type {?} */ unregisterCallback = renderer.listen(renderElement, eventName, function (event /** TODO #9100 */) {
+            return _this._eventDispatcher.dispatchRenderEvent(renderElement, null, eventName, event);
+        });
         this._renderStore.store(unregisterCallback, unlistenId);
-    }
+    };
     /**
      * @param {?} renderer
      * @param {?} eventTarget
@@ -263,16 +271,19 @@ export class MessageBasedRenderer {
      * @param {?} unlistenId
      * @return {?}
      */
-    _listenGlobal(renderer, eventTarget, eventName, unlistenId) {
-        const /** @type {?} */ unregisterCallback = renderer.listenGlobal(eventTarget, eventName, (event /** TODO #9100 */) => this._eventDispatcher.dispatchRenderEvent(null, eventTarget, eventName, event));
+    MessageBasedRenderer.prototype._listenGlobal = function (renderer, eventTarget, eventName, unlistenId) {
+        var _this = this;
+        var /** @type {?} */ unregisterCallback = renderer.listenGlobal(eventTarget, eventName, function (event /** TODO #9100 */) {
+            return _this._eventDispatcher.dispatchRenderEvent(null, eventTarget, eventName, event);
+        });
         this._renderStore.store(unregisterCallback, unlistenId);
-    }
+    };
     /**
      * @param {?} renderer
      * @param {?} unlistenCallback
      * @return {?}
      */
-    _listenDone(renderer, unlistenCallback) { unlistenCallback(); }
+    MessageBasedRenderer.prototype._listenDone = function (renderer, unlistenCallback) { unlistenCallback(); };
     /**
      * @param {?} renderer
      * @param {?} element
@@ -285,44 +296,47 @@ export class MessageBasedRenderer {
      * @param {?} playerId
      * @return {?}
      */
-    _animate(renderer, element, startingStyles, keyframes, duration, delay, easing, previousPlayers, playerId) {
-        let /** @type {?} */ normalizedPreviousPlayers;
+    MessageBasedRenderer.prototype._animate = function (renderer, element, startingStyles, keyframes, duration, delay, easing, previousPlayers, playerId) {
+        var _this = this;
+        var /** @type {?} */ normalizedPreviousPlayers;
         if (previousPlayers && previousPlayers.length) {
             normalizedPreviousPlayers =
-                previousPlayers.map(playerId => this._renderStore.deserialize(playerId));
+                previousPlayers.map(function (playerId) { return _this._renderStore.deserialize(playerId); });
         }
-        const /** @type {?} */ player = renderer.animate(element, startingStyles, keyframes, duration, delay, easing, normalizedPreviousPlayers);
+        var /** @type {?} */ player = renderer.animate(element, startingStyles, keyframes, duration, delay, easing, normalizedPreviousPlayers);
         this._renderStore.store(player, playerId);
-    }
+    };
     /**
      * @param {?} player
      * @param {?} element
      * @param {?} phaseName
      * @return {?}
      */
-    _listenOnAnimationPlayer(player, element, phaseName) {
-        const /** @type {?} */ onEventComplete = () => { this._eventDispatcher.dispatchAnimationEvent(player, phaseName, element); };
+    MessageBasedRenderer.prototype._listenOnAnimationPlayer = function (player, element, phaseName) {
+        var _this = this;
+        var /** @type {?} */ onEventComplete = function () { _this._eventDispatcher.dispatchAnimationEvent(player, phaseName, element); };
         // there is no need to register a unlistener value here since the
         // internal player callbacks are removed when the player is destroyed
         if (phaseName == 'onDone') {
-            player.onDone(() => onEventComplete());
+            player.onDone(function () { return onEventComplete(); });
         }
         else {
-            player.onStart(() => onEventComplete());
+            player.onStart(function () { return onEventComplete(); });
         }
-    }
-}
-MessageBasedRenderer.decorators = [
-    { type: Injectable },
-];
-/** @nocollapse */
-MessageBasedRenderer.ctorParameters = () => [
-    { type: ServiceMessageBrokerFactory, },
-    { type: MessageBus, },
-    { type: Serializer, },
-    { type: RenderStore, },
-    { type: RootRenderer, },
-];
+    };
+    MessageBasedRenderer.decorators = [
+        { type: Injectable },
+    ];
+    /** @nocollapse */
+    MessageBasedRenderer.ctorParameters = function () { return [
+        { type: ServiceMessageBrokerFactory, },
+        { type: MessageBus, },
+        { type: Serializer, },
+        { type: RenderStore, },
+        { type: RootRenderer, },
+    ]; };
+    return MessageBasedRenderer;
+}());
 function MessageBasedRenderer_tsickle_Closure_declarations() {
     /** @type {?} */
     MessageBasedRenderer.decorators;

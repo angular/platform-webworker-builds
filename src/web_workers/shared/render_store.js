@@ -5,9 +5,9 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import { Injectable } from '@angular/core/index';
-export class RenderStore {
-    constructor() {
+import { Injectable } from '@angular/core';
+export var RenderStore = (function () {
+    function RenderStore() {
         this._nextIndex = 0;
         this._lookupById = new Map();
         this._lookupByObject = new Map();
@@ -15,30 +15,30 @@ export class RenderStore {
     /**
      * @return {?}
      */
-    allocateId() { return this._nextIndex++; }
+    RenderStore.prototype.allocateId = function () { return this._nextIndex++; };
     /**
      * @param {?} obj
      * @param {?} id
      * @return {?}
      */
-    store(obj, id) {
+    RenderStore.prototype.store = function (obj, id) {
         this._lookupById.set(id, obj);
         this._lookupByObject.set(obj, id);
-    }
+    };
     /**
      * @param {?} obj
      * @return {?}
      */
-    remove(obj) {
-        const /** @type {?} */ index = this._lookupByObject.get(obj);
+    RenderStore.prototype.remove = function (obj) {
+        var /** @type {?} */ index = this._lookupByObject.get(obj);
         this._lookupByObject.delete(obj);
         this._lookupById.delete(index);
-    }
+    };
     /**
      * @param {?} id
      * @return {?}
      */
-    deserialize(id) {
+    RenderStore.prototype.deserialize = function (id) {
         if (id == null) {
             return null;
         }
@@ -46,23 +46,24 @@ export class RenderStore {
             return null;
         }
         return this._lookupById.get(id);
-    }
+    };
     /**
      * @param {?} obj
      * @return {?}
      */
-    serialize(obj) {
+    RenderStore.prototype.serialize = function (obj) {
         if (obj == null) {
             return null;
         }
         return this._lookupByObject.get(obj);
-    }
-}
-RenderStore.decorators = [
-    { type: Injectable },
-];
-/** @nocollapse */
-RenderStore.ctorParameters = () => [];
+    };
+    RenderStore.decorators = [
+        { type: Injectable },
+    ];
+    /** @nocollapse */
+    RenderStore.ctorParameters = function () { return []; };
+    return RenderStore;
+}());
 function RenderStore_tsickle_Closure_declarations() {
     /** @type {?} */
     RenderStore.decorators;
