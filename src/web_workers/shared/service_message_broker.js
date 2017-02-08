@@ -96,7 +96,7 @@ export class ServiceMessageBroker_ extends ServiceMessageBroker {
     constructor(messageBus, _serializer, channel /** TODO #9100 */) {
         super();
         this._serializer = _serializer;
-        this.channel = channel;
+        this.channel = channel; /** TODO #9100 */
         this._methods = new Map();
         this._sink = messageBus.to(channel);
         const source = messageBus.from(channel);

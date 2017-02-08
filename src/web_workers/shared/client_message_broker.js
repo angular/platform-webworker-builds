@@ -89,7 +89,7 @@ export class ClientMessageBroker_ extends ClientMessageBroker {
      */
     constructor(messageBus, _serializer, channel /** TODO #9100 */) {
         super();
-        this.channel = channel;
+        this.channel = channel; /** TODO #9100 */
         this._pending = new Map();
         this._sink = messageBus.to(channel);
         this._serializer = _serializer;
@@ -229,7 +229,7 @@ export class FnArg {
      * @param {?} type
      */
     constructor(value /** TODO #9100 */, type) {
-        this.value = value;
+        this.value = value; /** TODO #9100 */
         this.type = type;
     }
 }

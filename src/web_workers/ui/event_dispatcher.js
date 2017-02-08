@@ -31,7 +31,7 @@ export class EventDispatcher {
      * @return {?}
      */
     dispatchRenderEvent(element, eventTarget, eventName, event) {
-        let /** @type {?} */ serializedEvent;
+        let /** @type {?} */ serializedEvent /** TODO #9100 */;
         // TODO (jteplitz602): support custom events #3350
         switch (event.type) {
             case 'click':

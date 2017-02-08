@@ -21,6 +21,6 @@ export declare class Serializer {
     private _serializeRenderComponentType(obj);
     private _deserializeRenderComponentType(map);
 }
-export declare const ANIMATION_WORKER_PLAYER_PREFIX: string;
+export declare const ANIMATION_WORKER_PLAYER_PREFIX = "AnimationPlayer.";
 export declare class RenderStoreObject {
 }
