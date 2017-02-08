@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.0.0-beta.6-c33fda2
+ * @license Angular v4.0.0-beta.6-7a4c255
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -177,13 +177,13 @@
             }
             return this._lookupByObject.get(obj);
         };
-        RenderStore.decorators = [
-            { type: _angular_core.Injectable },
-        ];
-        /** @nocollapse */
-        RenderStore.ctorParameters = function () { return []; };
         return RenderStore;
     }());
+    RenderStore.decorators = [
+        { type: _angular_core.Injectable },
+    ];
+    /** @nocollapse */
+    RenderStore.ctorParameters = function () { return []; };
 
     var LocationType = (function () {
         /**
@@ -329,15 +329,15 @@
         Serializer.prototype._deserializeRenderComponentType = function (map) {
             return new _angular_core.RenderComponentType(map['id'], map['templateUrl'], map['slotCount'], this.deserialize(map['encapsulation'], _angular_core.ViewEncapsulation), this.deserialize(map['styles'], PRIMITIVE), {});
         };
-        Serializer.decorators = [
-            { type: _angular_core.Injectable },
-        ];
-        /** @nocollapse */
-        Serializer.ctorParameters = function () { return [
-            { type: RenderStore, },
-        ]; };
         return Serializer;
     }());
+    Serializer.decorators = [
+        { type: _angular_core.Injectable },
+    ];
+    /** @nocollapse */
+    Serializer.ctorParameters = function () { return [
+        { type: RenderStore, },
+    ]; };
     var /** @type {?} */ ANIMATION_WORKER_PLAYER_PREFIX = 'AnimationPlayer.';
     var RenderStoreObject = (function () {
         function RenderStoreObject() {
@@ -381,9 +381,10 @@
          * @param {?} _serializer
          */
         function ClientMessageBrokerFactory_(_messageBus, _serializer) {
-            _super.call(this);
-            this._messageBus = _messageBus;
-            this._serializer = _serializer;
+            var _this = _super.call(this) || this;
+            _this._messageBus = _messageBus;
+            _this._serializer = _serializer;
+            return _this;
         }
         /**
          * Initializes the given channel and attaches a new {\@link ClientMessageBroker} to it.
@@ -396,16 +397,16 @@
             this._messageBus.initChannel(channel, runInZone);
             return new ClientMessageBroker_(this._messageBus, this._serializer, channel);
         };
-        ClientMessageBrokerFactory_.decorators = [
-            { type: _angular_core.Injectable },
-        ];
-        /** @nocollapse */
-        ClientMessageBrokerFactory_.ctorParameters = function () { return [
-            { type: MessageBus, },
-            { type: Serializer, },
-        ]; };
         return ClientMessageBrokerFactory_;
     }(ClientMessageBrokerFactory));
+    ClientMessageBrokerFactory_.decorators = [
+        { type: _angular_core.Injectable },
+    ];
+    /** @nocollapse */
+    ClientMessageBrokerFactory_.ctorParameters = function () { return [
+        { type: MessageBus, },
+        { type: Serializer, },
+    ]; };
     /**
      * \@experimental WebWorker support in Angular is experimental.
      * @abstract
@@ -430,14 +431,14 @@
          * @param {?} channel
          */
         function ClientMessageBroker_(messageBus, _serializer, channel /** TODO #9100 */) {
-            var _this = this;
-            _super.call(this);
-            this.channel = channel;
-            this._pending = new Map();
-            this._sink = messageBus.to(channel);
-            this._serializer = _serializer;
+            var _this = _super.call(this) || this;
+            _this.channel = channel; /** TODO #9100 */
+            _this._pending = new Map();
+            _this._sink = messageBus.to(channel);
+            _this._serializer = _serializer;
             var source = messageBus.from(channel);
             source.subscribe({ next: function (message) { return _this._handleMessage(message); } });
+            return _this;
         }
         /**
          * @param {?} name
@@ -554,7 +555,7 @@
          * @param {?} type
          */
         function FnArg(value /** TODO #9100 */, type) {
-            this.value = value;
+            this.value = value; /** TODO #9100 */
             this.type = type;
         }
         return FnArg;
@@ -642,8 +643,9 @@
          */
         function EventEmitter(isAsync) {
             if (isAsync === void 0) { isAsync = false; }
-            _super.call(this);
-            this.__isAsync = isAsync;
+            var _this = _super.call(this) || this;
+            _this.__isAsync = isAsync;
+            return _this;
         }
         /**
          * @param {?=} value
@@ -876,16 +878,16 @@
          * @return {?}
          */
         PostMessageBus.prototype.to = function (channel) { return this.sink.to(channel); };
-        PostMessageBus.decorators = [
-            { type: _angular_core.Injectable },
-        ];
-        /** @nocollapse */
-        PostMessageBus.ctorParameters = function () { return [
-            { type: PostMessageBusSink, },
-            { type: PostMessageBusSource, },
-        ]; };
         return PostMessageBus;
     }());
+    PostMessageBus.decorators = [
+        { type: _angular_core.Injectable },
+    ];
+    /** @nocollapse */
+    PostMessageBus.ctorParameters = function () { return [
+        { type: PostMessageBusSink, },
+        { type: PostMessageBusSource, },
+    ]; };
     /**
      * Helper class that wraps a channel's {\@link EventEmitter} and
      * keeps track of if it should run in the zone.
@@ -938,9 +940,10 @@
          * @param {?} _serializer
          */
         function ServiceMessageBrokerFactory_(_messageBus, _serializer) {
-            _super.call(this);
-            this._messageBus = _messageBus;
-            this._serializer = _serializer;
+            var _this = _super.call(this) || this;
+            _this._messageBus = _messageBus;
+            _this._serializer = _serializer;
+            return _this;
         }
         /**
          * @param {?} channel
@@ -952,16 +955,16 @@
             this._messageBus.initChannel(channel, runInZone);
             return new ServiceMessageBroker_(this._messageBus, this._serializer, channel);
         };
-        ServiceMessageBrokerFactory_.decorators = [
-            { type: _angular_core.Injectable },
-        ];
-        /** @nocollapse */
-        ServiceMessageBrokerFactory_.ctorParameters = function () { return [
-            { type: MessageBus, },
-            { type: Serializer, },
-        ]; };
         return ServiceMessageBrokerFactory_;
     }(ServiceMessageBrokerFactory));
+    ServiceMessageBrokerFactory_.decorators = [
+        { type: _angular_core.Injectable },
+    ];
+    /** @nocollapse */
+    ServiceMessageBrokerFactory_.ctorParameters = function () { return [
+        { type: MessageBus, },
+        { type: Serializer, },
+    ]; };
     /**
      * Helper class for UIComponents that allows components to register methods.
      * If a registered method message is received from the broker on the worker,
@@ -993,14 +996,14 @@
          * @param {?} channel
          */
         function ServiceMessageBroker_(messageBus, _serializer, channel /** TODO #9100 */) {
-            var _this = this;
-            _super.call(this);
-            this._serializer = _serializer;
-            this.channel = channel;
-            this._methods = new Map();
-            this._sink = messageBus.to(channel);
+            var _this = _super.call(this) || this;
+            _this._serializer = _serializer;
+            _this.channel = channel; /** TODO #9100 */
+            _this._methods = new Map();
+            _this._sink = messageBus.to(channel);
             var source = messageBus.from(channel);
             source.subscribe({ next: function (message) { return _this._handleMessage(message); } });
+            return _this;
         }
         /**
          * @param {?} methodName
@@ -1076,7 +1079,13 @@
      * All channels used by angular's WebWorker components are listed here.
      * You should not use these channels in your application code.
      */
-    var /** @type {?} */ RENDERER_CHANNEL = 'ng-Renderer';
+    /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */ var /** @type {?} */ RENDERER_CHANNEL = 'ng-Renderer';
     var /** @type {?} */ EVENT_CHANNEL = 'ng-Events';
     var /** @type {?} */ ROUTER_CHANNEL = 'ng-Router';
 
@@ -1196,7 +1205,7 @@
          * @return {?}
          */
         EventDispatcher.prototype.dispatchRenderEvent = function (element, eventTarget, eventName, event) {
-            var /** @type {?} */ serializedEvent;
+            var /** @type {?} */ serializedEvent /** TODO #9100 */;
             // TODO (jteplitz602): support custom events #3350
             switch (event.type) {
                 case 'click':
@@ -1603,19 +1612,19 @@
                 player.onStart(function () { return onEventComplete(); });
             }
         };
-        MessageBasedRenderer.decorators = [
-            { type: _angular_core.Injectable },
-        ];
-        /** @nocollapse */
-        MessageBasedRenderer.ctorParameters = function () { return [
-            { type: ServiceMessageBrokerFactory, },
-            { type: MessageBus, },
-            { type: Serializer, },
-            { type: RenderStore, },
-            { type: _angular_core.RootRenderer, },
-        ]; };
         return MessageBasedRenderer;
     }());
+    MessageBasedRenderer.decorators = [
+        { type: _angular_core.Injectable },
+    ];
+    /** @nocollapse */
+    MessageBasedRenderer.ctorParameters = function () { return [
+        { type: ServiceMessageBrokerFactory, },
+        { type: MessageBus, },
+        { type: Serializer, },
+        { type: RenderStore, },
+        { type: _angular_core.RootRenderer, },
+    ]; };
 
     /**
      * Wrapper class that exposes the Worker
@@ -1636,13 +1645,13 @@
             this.worker = worker;
             this.bus = bus;
         };
-        WebWorkerInstance.decorators = [
-            { type: _angular_core.Injectable },
-        ];
-        /** @nocollapse */
-        WebWorkerInstance.ctorParameters = function () { return []; };
         return WebWorkerInstance;
     }());
+    WebWorkerInstance.decorators = [
+        { type: _angular_core.Injectable },
+    ];
+    /** @nocollapse */
+    WebWorkerInstance.ctorParameters = function () { return []; };
     /**
      * @experimental WebWorker support is currently experimental.
      */
@@ -1777,7 +1786,7 @@
     /**
      * @stable
      */
-    var /** @type {?} */ VERSION = new _angular_core.Version('4.0.0-beta.6-c33fda2');
+    var /** @type {?} */ VERSION = new _angular_core.Version('4.0.0-beta.6-7a4c255');
 
     var MessageBasedPlatformLocation = (function () {
         /**
@@ -1826,18 +1835,18 @@
          * @return {?}
          */
         MessageBasedPlatformLocation.prototype._setPathname = function (pathname) { this._platformLocation.pathname = pathname; };
-        MessageBasedPlatformLocation.decorators = [
-            { type: _angular_core.Injectable },
-        ];
-        /** @nocollapse */
-        MessageBasedPlatformLocation.ctorParameters = function () { return [
-            { type: ServiceMessageBrokerFactory, },
-            { type: BrowserPlatformLocation, },
-            { type: MessageBus, },
-            { type: Serializer, },
-        ]; };
         return MessageBasedPlatformLocation;
     }());
+    MessageBasedPlatformLocation.decorators = [
+        { type: _angular_core.Injectable },
+    ];
+    /** @nocollapse */
+    MessageBasedPlatformLocation.ctorParameters = function () { return [
+        { type: ServiceMessageBrokerFactory, },
+        { type: BrowserPlatformLocation, },
+        { type: MessageBus, },
+        { type: Serializer, },
+    ]; };
 
     /**
      * A list of {@link Provider}s. To use the router in a Worker enabled application you must
@@ -1887,15 +1896,14 @@
          * @param {?} _serializer
          */
         function WebWorkerPlatformLocation(brokerFactory, bus, _serializer) {
-            var _this = this;
-            _super.call(this);
-            this._serializer = _serializer;
-            this._popStateListeners = [];
-            this._hashChangeListeners = [];
-            this._location = null;
-            this._broker = brokerFactory.createMessageBroker(ROUTER_CHANNEL);
-            this._channelSource = bus.from(ROUTER_CHANNEL);
-            this._channelSource.subscribe({
+            var _this = _super.call(this) || this;
+            _this._serializer = _serializer;
+            _this._popStateListeners = [];
+            _this._hashChangeListeners = [];
+            _this._location = null;
+            _this._broker = brokerFactory.createMessageBroker(ROUTER_CHANNEL);
+            _this._channelSource = bus.from(ROUTER_CHANNEL);
+            _this._channelSource.subscribe({
                 next: function (msg) {
                     var listeners = null;
                     if (msg.hasOwnProperty('event')) {
@@ -1915,6 +1923,7 @@
                     }
                 }
             });
+            return _this;
         }
         /**
          * \@internal *
@@ -2033,17 +2042,17 @@
             var /** @type {?} */ args = new UiArguments('back');
             this._broker.runOnService(args, null);
         };
-        WebWorkerPlatformLocation.decorators = [
-            { type: _angular_core.Injectable },
-        ];
-        /** @nocollapse */
-        WebWorkerPlatformLocation.ctorParameters = function () { return [
-            { type: ClientMessageBrokerFactory, },
-            { type: MessageBus, },
-            { type: Serializer, },
-        ]; };
         return WebWorkerPlatformLocation;
     }(_angular_common.PlatformLocation));
+    WebWorkerPlatformLocation.decorators = [
+        { type: _angular_core.Injectable },
+    ];
+    /** @nocollapse */
+    WebWorkerPlatformLocation.ctorParameters = function () { return [
+        { type: ClientMessageBrokerFactory, },
+        { type: MessageBus, },
+        { type: Serializer, },
+    ]; };
 
     /**
      * Those providers should be added when the router is used in a worker context in addition to the
@@ -2227,18 +2236,18 @@
                 this.renderStore.remove(nodes[i]);
             }
         };
-        WebWorkerRootRenderer.decorators = [
-            { type: _angular_core.Injectable },
-        ];
-        /** @nocollapse */
-        WebWorkerRootRenderer.ctorParameters = function () { return [
-            { type: ClientMessageBrokerFactory, },
-            { type: MessageBus, },
-            { type: Serializer, },
-            { type: RenderStore, },
-        ]; };
         return WebWorkerRootRenderer;
     }());
+    WebWorkerRootRenderer.decorators = [
+        { type: _angular_core.Injectable },
+    ];
+    /** @nocollapse */
+    WebWorkerRootRenderer.ctorParameters = function () { return [
+        { type: ClientMessageBrokerFactory, },
+        { type: MessageBus, },
+        { type: Serializer, },
+        { type: RenderStore, },
+    ]; };
     var WebWorkerRenderer = (function () {
         /**
          * @param {?} _rootRenderer
@@ -2713,7 +2722,7 @@
     var WorkerDomAdapter = (function (_super) {
         __extends$4(WorkerDomAdapter, _super);
         function WorkerDomAdapter() {
-            _super.apply(this, arguments);
+            return _super !== null && _super.apply(this, arguments) || this;
         }
         /**
          * @return {?}
@@ -3466,25 +3475,25 @@
     var WorkerAppModule = (function () {
         function WorkerAppModule() {
         }
-        WorkerAppModule.decorators = [
-            { type: _angular_core.NgModule, args: [{
-                        providers: [
-                            BROWSER_SANITIZATION_PROVIDERS, Serializer,
-                            { provide: ClientMessageBrokerFactory, useClass: ClientMessageBrokerFactory_ },
-                            { provide: ServiceMessageBrokerFactory, useClass: ServiceMessageBrokerFactory_ },
-                            WebWorkerRootRenderer, { provide: _angular_core.RootRenderer, useExisting: WebWorkerRootRenderer },
-                            { provide: ON_WEB_WORKER, useValue: true }, RenderStore,
-                            { provide: _angular_core.ErrorHandler, useFactory: errorHandler, deps: [] },
-                            { provide: MessageBus, useFactory: createMessageBus, deps: [_angular_core.NgZone] },
-                            { provide: _angular_core.APP_INITIALIZER, useValue: setupWebWorker, multi: true }
-                        ],
-                        exports: [_angular_common.CommonModule, _angular_core.ApplicationModule]
-                    },] },
-        ];
-        /** @nocollapse */
-        WorkerAppModule.ctorParameters = function () { return []; };
         return WorkerAppModule;
     }());
+    WorkerAppModule.decorators = [
+        { type: _angular_core.NgModule, args: [{
+                    providers: [
+                        BROWSER_SANITIZATION_PROVIDERS, Serializer,
+                        { provide: ClientMessageBrokerFactory, useClass: ClientMessageBrokerFactory_ },
+                        { provide: ServiceMessageBrokerFactory, useClass: ServiceMessageBrokerFactory_ },
+                        WebWorkerRootRenderer, { provide: _angular_core.RootRenderer, useExisting: WebWorkerRootRenderer },
+                        { provide: ON_WEB_WORKER, useValue: true }, RenderStore,
+                        { provide: _angular_core.ErrorHandler, useFactory: errorHandler, deps: [] },
+                        { provide: MessageBus, useFactory: createMessageBus, deps: [_angular_core.NgZone] },
+                        { provide: _angular_core.APP_INITIALIZER, useValue: setupWebWorker, multi: true }
+                    ],
+                    exports: [_angular_common.CommonModule, _angular_core.ApplicationModule]
+                },] },
+    ];
+    /** @nocollapse */
+    WorkerAppModule.ctorParameters = function () { return []; };
 
     /**
      * Bootstraps the worker ui.

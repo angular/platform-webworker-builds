@@ -12,7 +12,7 @@ import { RenderStore } from '../shared/render_store';
 import { ANIMATION_WORKER_PLAYER_PREFIX, PRIMITIVE, RenderStoreObject, Serializer } from '../shared/serializer';
 import { ServiceMessageBrokerFactory } from '../shared/service_message_broker';
 import { EventDispatcher } from '../ui/event_dispatcher';
-export var MessageBasedRenderer = (function () {
+var MessageBasedRenderer = (function () {
     /**
      * @param {?} _brokerFactory
      * @param {?} _bus
@@ -324,19 +324,20 @@ export var MessageBasedRenderer = (function () {
             player.onStart(function () { return onEventComplete(); });
         }
     };
-    MessageBasedRenderer.decorators = [
-        { type: Injectable },
-    ];
-    /** @nocollapse */
-    MessageBasedRenderer.ctorParameters = function () { return [
-        { type: ServiceMessageBrokerFactory, },
-        { type: MessageBus, },
-        { type: Serializer, },
-        { type: RenderStore, },
-        { type: RootRenderer, },
-    ]; };
     return MessageBasedRenderer;
 }());
+export { MessageBasedRenderer };
+MessageBasedRenderer.decorators = [
+    { type: Injectable },
+];
+/** @nocollapse */
+MessageBasedRenderer.ctorParameters = function () { return [
+    { type: ServiceMessageBrokerFactory, },
+    { type: MessageBus, },
+    { type: Serializer, },
+    { type: RenderStore, },
+    { type: RootRenderer, },
+]; };
 function MessageBasedRenderer_tsickle_Closure_declarations() {
     /** @type {?} */
     MessageBasedRenderer.decorators;

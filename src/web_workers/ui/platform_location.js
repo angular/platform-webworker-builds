@@ -12,7 +12,7 @@ import { ROUTER_CHANNEL } from '../shared/messaging_api';
 import { LocationType } from '../shared/serialized_types';
 import { PRIMITIVE, Serializer } from '../shared/serializer';
 import { ServiceMessageBrokerFactory } from '../shared/service_message_broker';
-export var MessageBasedPlatformLocation = (function () {
+var MessageBasedPlatformLocation = (function () {
     /**
      * @param {?} _brokerFactory
      * @param {?} _platformLocation
@@ -59,18 +59,19 @@ export var MessageBasedPlatformLocation = (function () {
      * @return {?}
      */
     MessageBasedPlatformLocation.prototype._setPathname = function (pathname) { this._platformLocation.pathname = pathname; };
-    MessageBasedPlatformLocation.decorators = [
-        { type: Injectable },
-    ];
-    /** @nocollapse */
-    MessageBasedPlatformLocation.ctorParameters = function () { return [
-        { type: ServiceMessageBrokerFactory, },
-        { type: BrowserPlatformLocation, },
-        { type: MessageBus, },
-        { type: Serializer, },
-    ]; };
     return MessageBasedPlatformLocation;
 }());
+export { MessageBasedPlatformLocation };
+MessageBasedPlatformLocation.decorators = [
+    { type: Injectable },
+];
+/** @nocollapse */
+MessageBasedPlatformLocation.ctorParameters = function () { return [
+    { type: ServiceMessageBrokerFactory, },
+    { type: BrowserPlatformLocation, },
+    { type: MessageBus, },
+    { type: Serializer, },
+]; };
 function MessageBasedPlatformLocation_tsickle_Closure_declarations() {
     /** @type {?} */
     MessageBasedPlatformLocation.decorators;

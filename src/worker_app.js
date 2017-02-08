@@ -55,28 +55,29 @@ export function setupWebWorker() {
  *
  * \@experimental
  */
-export var WorkerAppModule = (function () {
+var WorkerAppModule = (function () {
     function WorkerAppModule() {
     }
-    WorkerAppModule.decorators = [
-        { type: NgModule, args: [{
-                    providers: [
-                        BROWSER_SANITIZATION_PROVIDERS, Serializer,
-                        { provide: ClientMessageBrokerFactory, useClass: ClientMessageBrokerFactory_ },
-                        { provide: ServiceMessageBrokerFactory, useClass: ServiceMessageBrokerFactory_ },
-                        WebWorkerRootRenderer, { provide: RootRenderer, useExisting: WebWorkerRootRenderer },
-                        { provide: ON_WEB_WORKER, useValue: true }, RenderStore,
-                        { provide: ErrorHandler, useFactory: errorHandler, deps: [] },
-                        { provide: MessageBus, useFactory: createMessageBus, deps: [NgZone] },
-                        { provide: APP_INITIALIZER, useValue: setupWebWorker, multi: true }
-                    ],
-                    exports: [CommonModule, ApplicationModule]
-                },] },
-    ];
-    /** @nocollapse */
-    WorkerAppModule.ctorParameters = function () { return []; };
     return WorkerAppModule;
 }());
+export { WorkerAppModule };
+WorkerAppModule.decorators = [
+    { type: NgModule, args: [{
+                providers: [
+                    BROWSER_SANITIZATION_PROVIDERS, Serializer,
+                    { provide: ClientMessageBrokerFactory, useClass: ClientMessageBrokerFactory_ },
+                    { provide: ServiceMessageBrokerFactory, useClass: ServiceMessageBrokerFactory_ },
+                    WebWorkerRootRenderer, { provide: RootRenderer, useExisting: WebWorkerRootRenderer },
+                    { provide: ON_WEB_WORKER, useValue: true }, RenderStore,
+                    { provide: ErrorHandler, useFactory: errorHandler, deps: [] },
+                    { provide: MessageBus, useFactory: createMessageBus, deps: [NgZone] },
+                    { provide: APP_INITIALIZER, useValue: setupWebWorker, multi: true }
+                ],
+                exports: [CommonModule, ApplicationModule]
+            },] },
+];
+/** @nocollapse */
+WorkerAppModule.ctorParameters = function () { return []; };
 function WorkerAppModule_tsickle_Closure_declarations() {
     /** @type {?} */
     WorkerAppModule.decorators;

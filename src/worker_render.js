@@ -23,7 +23,7 @@ import { MessageBasedRenderer } from './web_workers/ui/renderer';
  *
  * \@experimental WebWorker support is currently experimental.
  */
-export var WebWorkerInstance = (function () {
+var WebWorkerInstance = (function () {
     function WebWorkerInstance() {
     }
     /**
@@ -36,13 +36,14 @@ export var WebWorkerInstance = (function () {
         this.worker = worker;
         this.bus = bus;
     };
-    WebWorkerInstance.decorators = [
-        { type: Injectable },
-    ];
-    /** @nocollapse */
-    WebWorkerInstance.ctorParameters = function () { return []; };
     return WebWorkerInstance;
 }());
+export { WebWorkerInstance };
+WebWorkerInstance.decorators = [
+    { type: Injectable },
+];
+/** @nocollapse */
+WebWorkerInstance.ctorParameters = function () { return []; };
 function WebWorkerInstance_tsickle_Closure_declarations() {
     /** @type {?} */
     WebWorkerInstance.decorators;

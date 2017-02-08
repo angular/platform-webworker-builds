@@ -6,7 +6,7 @@
  * found in the LICENSE file at https://angular.io/license
  */
 import { Injectable } from '@angular/core';
-export var RenderStore = (function () {
+var RenderStore = (function () {
     function RenderStore() {
         this._nextIndex = 0;
         this._lookupById = new Map();
@@ -57,13 +57,14 @@ export var RenderStore = (function () {
         }
         return this._lookupByObject.get(obj);
     };
-    RenderStore.decorators = [
-        { type: Injectable },
-    ];
-    /** @nocollapse */
-    RenderStore.ctorParameters = function () { return []; };
     return RenderStore;
 }());
+export { RenderStore };
+RenderStore.decorators = [
+    { type: Injectable },
+];
+/** @nocollapse */
+RenderStore.ctorParameters = function () { return []; };
 function RenderStore_tsickle_Closure_declarations() {
     /** @type {?} */
     RenderStore.decorators;

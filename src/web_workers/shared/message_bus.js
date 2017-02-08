@@ -14,7 +14,7 @@
  * \@experimental WebWorker support in Angular is currenlty experimental.
  * @abstract
  */
-export var MessageBus = (function () {
+var MessageBus = (function () {
     function MessageBus() {
     }
     /**
@@ -57,4 +57,5 @@ export var MessageBus = (function () {
     MessageBus.prototype.to = function (channel) { };
     return MessageBus;
 }());
+export { MessageBus };
 //# sourceMappingURL=message_bus.js.map

@@ -7,7 +7,7 @@
  */
 import { Injectable } from '@angular/core';
 import { EventEmitter } from '../../facade/async';
-export var PostMessageBusSink = (function () {
+var PostMessageBusSink = (function () {
     /**
      * @param {?} _postMessageTarget
      */
@@ -77,6 +77,7 @@ export var PostMessageBusSink = (function () {
     PostMessageBusSink.prototype._sendMessages = function (messages) { this._postMessageTarget.postMessage(messages); };
     return PostMessageBusSink;
 }());
+export { PostMessageBusSink };
 function PostMessageBusSink_tsickle_Closure_declarations() {
     /** @type {?} */
     PostMessageBusSink.prototype._zone;
@@ -87,7 +88,7 @@ function PostMessageBusSink_tsickle_Closure_declarations() {
     /** @type {?} */
     PostMessageBusSink.prototype._postMessageTarget;
 }
-export var PostMessageBusSource = (function () {
+var PostMessageBusSource = (function () {
     /**
      * @param {?=} eventTarget
      */
@@ -162,6 +163,7 @@ export var PostMessageBusSource = (function () {
     };
     return PostMessageBusSource;
 }());
+export { PostMessageBusSource };
 function PostMessageBusSource_tsickle_Closure_declarations() {
     /** @type {?} */
     PostMessageBusSource.prototype._zone;
@@ -172,7 +174,7 @@ function PostMessageBusSource_tsickle_Closure_declarations() {
  * A TypeScript implementation of {\@link MessageBus} for communicating via JavaScript's
  * postMessage API.
  */
-export var PostMessageBus = (function () {
+var PostMessageBus = (function () {
     /**
      * @param {?} sink
      * @param {?} source
@@ -209,16 +211,17 @@ export var PostMessageBus = (function () {
      * @return {?}
      */
     PostMessageBus.prototype.to = function (channel) { return this.sink.to(channel); };
-    PostMessageBus.decorators = [
-        { type: Injectable },
-    ];
-    /** @nocollapse */
-    PostMessageBus.ctorParameters = function () { return [
-        { type: PostMessageBusSink, },
-        { type: PostMessageBusSource, },
-    ]; };
     return PostMessageBus;
 }());
+export { PostMessageBus };
+PostMessageBus.decorators = [
+    { type: Injectable },
+];
+/** @nocollapse */
+PostMessageBus.ctorParameters = function () { return [
+    { type: PostMessageBusSink, },
+    { type: PostMessageBusSource, },
+]; };
 function PostMessageBus_tsickle_Closure_declarations() {
     /** @type {?} */
     PostMessageBus.decorators;

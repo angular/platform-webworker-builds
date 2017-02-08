@@ -1,6 +1,6 @@
 import { RenderStoreObject } from '../shared/serializer';
 import { serializeEventWithTarget, serializeGenericEvent, serializeKeyboardEvent, serializeMouseEvent, serializeTransitionEvent } from './event_serializer';
-export var EventDispatcher = (function () {
+var EventDispatcher = (function () {
     /**
      * @param {?} _sink
      * @param {?} _serializer
@@ -31,7 +31,7 @@ export var EventDispatcher = (function () {
      * @return {?}
      */
     EventDispatcher.prototype.dispatchRenderEvent = function (element, eventTarget, eventName, event) {
-        var /** @type {?} */ serializedEvent;
+        var /** @type {?} */ serializedEvent /** TODO #9100 */;
         // TODO (jteplitz602): support custom events #3350
         switch (event.type) {
             case 'click':
@@ -125,6 +125,7 @@ export var EventDispatcher = (function () {
     };
     return EventDispatcher;
 }());
+export { EventDispatcher };
 function EventDispatcher_tsickle_Closure_declarations() {
     /** @type {?} */
     EventDispatcher.prototype._sink;

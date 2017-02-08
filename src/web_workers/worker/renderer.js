@@ -14,7 +14,7 @@ import { EVENT_CHANNEL, RENDERER_CHANNEL } from '../shared/messaging_api';
 import { RenderStore } from '../shared/render_store';
 import { ANIMATION_WORKER_PLAYER_PREFIX, RenderStoreObject, Serializer } from '../shared/serializer';
 import { deserializeGenericEvent } from './event_deserializer';
-export var WebWorkerRootRenderer = (function () {
+var WebWorkerRootRenderer = (function () {
     /**
      * @param {?} messageBrokerFactory
      * @param {?} bus
@@ -105,18 +105,19 @@ export var WebWorkerRootRenderer = (function () {
             this.renderStore.remove(nodes[i]);
         }
     };
-    WebWorkerRootRenderer.decorators = [
-        { type: Injectable },
-    ];
-    /** @nocollapse */
-    WebWorkerRootRenderer.ctorParameters = function () { return [
-        { type: ClientMessageBrokerFactory, },
-        { type: MessageBus, },
-        { type: Serializer, },
-        { type: RenderStore, },
-    ]; };
     return WebWorkerRootRenderer;
 }());
+export { WebWorkerRootRenderer };
+WebWorkerRootRenderer.decorators = [
+    { type: Injectable },
+];
+/** @nocollapse */
+WebWorkerRootRenderer.ctorParameters = function () { return [
+    { type: ClientMessageBrokerFactory, },
+    { type: MessageBus, },
+    { type: Serializer, },
+    { type: RenderStore, },
+]; };
 function WebWorkerRootRenderer_tsickle_Closure_declarations() {
     /** @type {?} */
     WebWorkerRootRenderer.decorators;
@@ -136,7 +137,7 @@ function WebWorkerRootRenderer_tsickle_Closure_declarations() {
     /** @type {?} */
     WebWorkerRootRenderer.prototype.renderStore;
 }
-export var WebWorkerRenderer = (function () {
+var WebWorkerRenderer = (function () {
     /**
      * @param {?} _rootRenderer
      * @param {?} _componentType
@@ -386,13 +387,14 @@ export var WebWorkerRenderer = (function () {
     };
     return WebWorkerRenderer;
 }());
+export { WebWorkerRenderer };
 function WebWorkerRenderer_tsickle_Closure_declarations() {
     /** @type {?} */
     WebWorkerRenderer.prototype._rootRenderer;
     /** @type {?} */
     WebWorkerRenderer.prototype._componentType;
 }
-export var NamedEventEmitter = (function () {
+var NamedEventEmitter = (function () {
     function NamedEventEmitter() {
     }
     /**
@@ -437,11 +439,12 @@ export var NamedEventEmitter = (function () {
     };
     return NamedEventEmitter;
 }());
+export { NamedEventEmitter };
 function NamedEventEmitter_tsickle_Closure_declarations() {
     /** @type {?} */
     NamedEventEmitter.prototype._listeners;
 }
-export var AnimationPlayerEmitter = (function () {
+var AnimationPlayerEmitter = (function () {
     function AnimationPlayerEmitter() {
     }
     /**
@@ -490,6 +493,7 @@ export var AnimationPlayerEmitter = (function () {
     };
     return AnimationPlayerEmitter;
 }());
+export { AnimationPlayerEmitter };
 function AnimationPlayerEmitter_tsickle_Closure_declarations() {
     /** @type {?} */
     AnimationPlayerEmitter.prototype._listeners;
@@ -502,13 +506,14 @@ function AnimationPlayerEmitter_tsickle_Closure_declarations() {
 function eventNameWithTarget(target, eventName) {
     return target + ":" + eventName;
 }
-export var WebWorkerRenderNode = (function () {
+var WebWorkerRenderNode = (function () {
     function WebWorkerRenderNode() {
         this.events = new NamedEventEmitter();
         this.animationPlayerEvents = new AnimationPlayerEmitter();
     }
     return WebWorkerRenderNode;
 }());
+export { WebWorkerRenderNode };
 function WebWorkerRenderNode_tsickle_Closure_declarations() {
     /** @type {?} */
     WebWorkerRenderNode.prototype.events;

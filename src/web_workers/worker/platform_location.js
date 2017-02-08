@@ -18,7 +18,7 @@ import { ROUTER_CHANNEL } from '../shared/messaging_api';
 import { LocationType } from '../shared/serialized_types';
 import { PRIMITIVE, Serializer } from '../shared/serializer';
 import { deserializeGenericEvent } from './event_deserializer';
-export var WebWorkerPlatformLocation = (function (_super) {
+var WebWorkerPlatformLocation = (function (_super) {
     __extends(WebWorkerPlatformLocation, _super);
     /**
      * @param {?} brokerFactory
@@ -26,15 +26,14 @@ export var WebWorkerPlatformLocation = (function (_super) {
      * @param {?} _serializer
      */
     function WebWorkerPlatformLocation(brokerFactory, bus, _serializer) {
-        var _this = this;
-        _super.call(this);
-        this._serializer = _serializer;
-        this._popStateListeners = [];
-        this._hashChangeListeners = [];
-        this._location = null;
-        this._broker = brokerFactory.createMessageBroker(ROUTER_CHANNEL);
-        this._channelSource = bus.from(ROUTER_CHANNEL);
-        this._channelSource.subscribe({
+        var _this = _super.call(this) || this;
+        _this._serializer = _serializer;
+        _this._popStateListeners = [];
+        _this._hashChangeListeners = [];
+        _this._location = null;
+        _this._broker = brokerFactory.createMessageBroker(ROUTER_CHANNEL);
+        _this._channelSource = bus.from(ROUTER_CHANNEL);
+        _this._channelSource.subscribe({
             next: function (msg) {
                 var listeners = null;
                 if (msg.hasOwnProperty('event')) {
@@ -54,6 +53,7 @@ export var WebWorkerPlatformLocation = (function (_super) {
                 }
             }
         });
+        return _this;
     }
     /**
      * \@internal *
@@ -172,17 +172,18 @@ export var WebWorkerPlatformLocation = (function (_super) {
         var /** @type {?} */ args = new UiArguments('back');
         this._broker.runOnService(args, null);
     };
-    WebWorkerPlatformLocation.decorators = [
-        { type: Injectable },
-    ];
-    /** @nocollapse */
-    WebWorkerPlatformLocation.ctorParameters = function () { return [
-        { type: ClientMessageBrokerFactory, },
-        { type: MessageBus, },
-        { type: Serializer, },
-    ]; };
     return WebWorkerPlatformLocation;
 }(PlatformLocation));
+export { WebWorkerPlatformLocation };
+WebWorkerPlatformLocation.decorators = [
+    { type: Injectable },
+];
+/** @nocollapse */
+WebWorkerPlatformLocation.ctorParameters = function () { return [
+    { type: ClientMessageBrokerFactory, },
+    { type: MessageBus, },
+    { type: Serializer, },
+]; };
 function WebWorkerPlatformLocation_tsickle_Closure_declarations() {
     /** @type {?} */
     WebWorkerPlatformLocation.decorators;

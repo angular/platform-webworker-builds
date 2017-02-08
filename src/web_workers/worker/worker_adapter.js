@@ -16,10 +16,10 @@ import { DomAdapter, setRootDomAdapter } from '../../private_import_platform-bro
  *
  * Note: other methods all throw as the DOM is not accessible directly in web worker context.
  */
-export var WorkerDomAdapter = (function (_super) {
+var WorkerDomAdapter = (function (_super) {
     __extends(WorkerDomAdapter, _super);
     function WorkerDomAdapter() {
-        _super.apply(this, arguments);
+        return _super !== null && _super.apply(this, arguments) || this;
     }
     /**
      * @return {?}
@@ -730,4 +730,5 @@ export var WorkerDomAdapter = (function (_super) {
     WorkerDomAdapter.prototype.setCookie = function (name, value) { throw 'not implemented'; };
     return WorkerDomAdapter;
 }(DomAdapter));
+export { WorkerDomAdapter };
 //# sourceMappingURL=worker_adapter.js.map

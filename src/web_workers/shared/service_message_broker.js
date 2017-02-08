@@ -18,7 +18,7 @@ import { Serializer } from '../shared/serializer';
  * \@experimental WebWorker support in Angular is currently experimental.
  * @abstract
  */
-export var ServiceMessageBrokerFactory = (function () {
+var ServiceMessageBrokerFactory = (function () {
     function ServiceMessageBrokerFactory() {
     }
     /**
@@ -31,16 +31,18 @@ export var ServiceMessageBrokerFactory = (function () {
     ServiceMessageBrokerFactory.prototype.createMessageBroker = function (channel, runInZone) { };
     return ServiceMessageBrokerFactory;
 }());
-export var ServiceMessageBrokerFactory_ = (function (_super) {
+export { ServiceMessageBrokerFactory };
+var ServiceMessageBrokerFactory_ = (function (_super) {
     __extends(ServiceMessageBrokerFactory_, _super);
     /**
      * @param {?} _messageBus
      * @param {?} _serializer
      */
     function ServiceMessageBrokerFactory_(_messageBus, _serializer) {
-        _super.call(this);
-        this._messageBus = _messageBus;
-        this._serializer = _serializer;
+        var _this = _super.call(this) || this;
+        _this._messageBus = _messageBus;
+        _this._serializer = _serializer;
+        return _this;
     }
     /**
      * @param {?} channel
@@ -52,16 +54,17 @@ export var ServiceMessageBrokerFactory_ = (function (_super) {
         this._messageBus.initChannel(channel, runInZone);
         return new ServiceMessageBroker_(this._messageBus, this._serializer, channel);
     };
-    ServiceMessageBrokerFactory_.decorators = [
-        { type: Injectable },
-    ];
-    /** @nocollapse */
-    ServiceMessageBrokerFactory_.ctorParameters = function () { return [
-        { type: MessageBus, },
-        { type: Serializer, },
-    ]; };
     return ServiceMessageBrokerFactory_;
 }(ServiceMessageBrokerFactory));
+export { ServiceMessageBrokerFactory_ };
+ServiceMessageBrokerFactory_.decorators = [
+    { type: Injectable },
+];
+/** @nocollapse */
+ServiceMessageBrokerFactory_.ctorParameters = function () { return [
+    { type: MessageBus, },
+    { type: Serializer, },
+]; };
 function ServiceMessageBrokerFactory__tsickle_Closure_declarations() {
     /** @type {?} */
     ServiceMessageBrokerFactory_.decorators;
@@ -87,7 +90,7 @@ function ServiceMessageBrokerFactory__tsickle_Closure_declarations() {
  * \@experimental WebWorker support in Angular is currently experimental.
  * @abstract
  */
-export var ServiceMessageBroker = (function () {
+var ServiceMessageBroker = (function () {
     function ServiceMessageBroker() {
     }
     /**
@@ -101,7 +104,8 @@ export var ServiceMessageBroker = (function () {
     ServiceMessageBroker.prototype.registerMethod = function (methodName, signature, method, returnType) { };
     return ServiceMessageBroker;
 }());
-export var ServiceMessageBroker_ = (function (_super) {
+export { ServiceMessageBroker };
+var ServiceMessageBroker_ = (function (_super) {
     __extends(ServiceMessageBroker_, _super);
     /**
      * @param {?} messageBus
@@ -109,14 +113,14 @@ export var ServiceMessageBroker_ = (function (_super) {
      * @param {?} channel
      */
     function ServiceMessageBroker_(messageBus, _serializer, channel /** TODO #9100 */) {
-        var _this = this;
-        _super.call(this);
-        this._serializer = _serializer;
-        this.channel = channel;
-        this._methods = new Map();
-        this._sink = messageBus.to(channel);
+        var _this = _super.call(this) || this;
+        _this._serializer = _serializer;
+        _this.channel = channel; /** TODO #9100 */
+        _this._methods = new Map();
+        _this._sink = messageBus.to(channel);
         var source = messageBus.from(channel);
         source.subscribe({ next: function (message) { return _this._handleMessage(message); } });
+        return _this;
     }
     /**
      * @param {?} methodName
@@ -165,6 +169,7 @@ export var ServiceMessageBroker_ = (function (_super) {
     };
     return ServiceMessageBroker_;
 }(ServiceMessageBroker));
+export { ServiceMessageBroker_ };
 function ServiceMessageBroker__tsickle_Closure_declarations() {
     /** @type {?} */
     ServiceMessageBroker_.prototype._sink;
@@ -178,7 +183,7 @@ function ServiceMessageBroker__tsickle_Closure_declarations() {
 /**
  * \@experimental WebWorker support in Angular is currently experimental.
  */
-export var ReceivedMessage = (function () {
+var ReceivedMessage = (function () {
     /**
      * @param {?} data
      */
@@ -190,6 +195,7 @@ export var ReceivedMessage = (function () {
     }
     return ReceivedMessage;
 }());
+export { ReceivedMessage };
 function ReceivedMessage_tsickle_Closure_declarations() {
     /** @type {?} */
     ReceivedMessage.prototype.method;

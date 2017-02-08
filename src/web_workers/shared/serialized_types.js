@@ -1,4 +1,4 @@
-export var LocationType = (function () {
+var LocationType = (function () {
     /**
      * @param {?} href
      * @param {?} protocol
@@ -23,6 +23,7 @@ export var LocationType = (function () {
     }
     return LocationType;
 }());
+export { LocationType };
 function LocationType_tsickle_Closure_declarations() {
     /** @type {?} */
     LocationType.prototype.href;

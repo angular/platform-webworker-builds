@@ -18,7 +18,7 @@ import { Serializer } from './serializer';
  * \@experimental WebWorker support in Angular is experimental.
  * @abstract
  */
-export var ClientMessageBrokerFactory = (function () {
+var ClientMessageBrokerFactory = (function () {
     function ClientMessageBrokerFactory() {
     }
     /**
@@ -31,16 +31,18 @@ export var ClientMessageBrokerFactory = (function () {
     ClientMessageBrokerFactory.prototype.createMessageBroker = function (channel, runInZone) { };
     return ClientMessageBrokerFactory;
 }());
-export var ClientMessageBrokerFactory_ = (function (_super) {
+export { ClientMessageBrokerFactory };
+var ClientMessageBrokerFactory_ = (function (_super) {
     __extends(ClientMessageBrokerFactory_, _super);
     /**
      * @param {?} _messageBus
      * @param {?} _serializer
      */
     function ClientMessageBrokerFactory_(_messageBus, _serializer) {
-        _super.call(this);
-        this._messageBus = _messageBus;
-        this._serializer = _serializer;
+        var _this = _super.call(this) || this;
+        _this._messageBus = _messageBus;
+        _this._serializer = _serializer;
+        return _this;
     }
     /**
      * Initializes the given channel and attaches a new {\@link ClientMessageBroker} to it.
@@ -53,16 +55,17 @@ export var ClientMessageBrokerFactory_ = (function (_super) {
         this._messageBus.initChannel(channel, runInZone);
         return new ClientMessageBroker_(this._messageBus, this._serializer, channel);
     };
-    ClientMessageBrokerFactory_.decorators = [
-        { type: Injectable },
-    ];
-    /** @nocollapse */
-    ClientMessageBrokerFactory_.ctorParameters = function () { return [
-        { type: MessageBus, },
-        { type: Serializer, },
-    ]; };
     return ClientMessageBrokerFactory_;
 }(ClientMessageBrokerFactory));
+export { ClientMessageBrokerFactory_ };
+ClientMessageBrokerFactory_.decorators = [
+    { type: Injectable },
+];
+/** @nocollapse */
+ClientMessageBrokerFactory_.ctorParameters = function () { return [
+    { type: MessageBus, },
+    { type: Serializer, },
+]; };
 function ClientMessageBrokerFactory__tsickle_Closure_declarations() {
     /** @type {?} */
     ClientMessageBrokerFactory_.decorators;
@@ -83,7 +86,7 @@ function ClientMessageBrokerFactory__tsickle_Closure_declarations() {
  * \@experimental WebWorker support in Angular is experimental.
  * @abstract
  */
-export var ClientMessageBroker = (function () {
+var ClientMessageBroker = (function () {
     function ClientMessageBroker() {
     }
     /**
@@ -95,7 +98,8 @@ export var ClientMessageBroker = (function () {
     ClientMessageBroker.prototype.runOnService = function (args, returnType) { };
     return ClientMessageBroker;
 }());
-export var ClientMessageBroker_ = (function (_super) {
+export { ClientMessageBroker };
+var ClientMessageBroker_ = (function (_super) {
     __extends(ClientMessageBroker_, _super);
     /**
      * @param {?} messageBus
@@ -103,14 +107,14 @@ export var ClientMessageBroker_ = (function (_super) {
      * @param {?} channel
      */
     function ClientMessageBroker_(messageBus, _serializer, channel /** TODO #9100 */) {
-        var _this = this;
-        _super.call(this);
-        this.channel = channel;
-        this._pending = new Map();
-        this._sink = messageBus.to(channel);
-        this._serializer = _serializer;
+        var _this = _super.call(this) || this;
+        _this.channel = channel; /** TODO #9100 */
+        _this._pending = new Map();
+        _this._sink = messageBus.to(channel);
+        _this._serializer = _serializer;
         var source = messageBus.from(channel);
         source.subscribe({ next: function (message) { return _this._handleMessage(message); } });
+        return _this;
     }
     /**
      * @param {?} name
@@ -197,6 +201,7 @@ export var ClientMessageBroker_ = (function (_super) {
     };
     return ClientMessageBroker_;
 }(ClientMessageBroker));
+export { ClientMessageBroker_ };
 function ClientMessageBroker__tsickle_Closure_declarations() {
     /** @type {?} */
     ClientMessageBroker_.prototype._pending;
@@ -242,17 +247,18 @@ function MessageData_tsickle_Closure_declarations() {
 /**
  * \@experimental WebWorker support in Angular is experimental.
  */
-export var FnArg = (function () {
+var FnArg = (function () {
     /**
      * @param {?} value
      * @param {?} type
      */
     function FnArg(value /** TODO #9100 */, type) {
-        this.value = value;
+        this.value = value; /** TODO #9100 */
         this.type = type;
     }
     return FnArg;
 }());
+export { FnArg };
 function FnArg_tsickle_Closure_declarations() {
     /** @type {?} */
     FnArg.prototype.value;
@@ -262,7 +268,7 @@ function FnArg_tsickle_Closure_declarations() {
 /**
  * \@experimental WebWorker support in Angular is experimental.
  */
-export var UiArguments = (function () {
+var UiArguments = (function () {
     /**
      * @param {?} method
      * @param {?=} args
@@ -273,6 +279,7 @@ export var UiArguments = (function () {
     }
     return UiArguments;
 }());
+export { UiArguments };
 function UiArguments_tsickle_Closure_declarations() {
     /** @type {?} */
     UiArguments.prototype.method;

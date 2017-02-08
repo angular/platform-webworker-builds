@@ -15,7 +15,7 @@ import { LocationType } from './serialized_types';
  * @experimental WebWorker support in Angular is currently experimental.
  */
 export var /** @type {?} */ PRIMITIVE = String;
-export var Serializer = (function () {
+var Serializer = (function () {
     /**
      * @param {?} _renderStore
      */
@@ -127,15 +127,16 @@ export var Serializer = (function () {
     Serializer.prototype._deserializeRenderComponentType = function (map) {
         return new RenderComponentType(map['id'], map['templateUrl'], map['slotCount'], this.deserialize(map['encapsulation'], ViewEncapsulation), this.deserialize(map['styles'], PRIMITIVE), {});
     };
-    Serializer.decorators = [
-        { type: Injectable },
-    ];
-    /** @nocollapse */
-    Serializer.ctorParameters = function () { return [
-        { type: RenderStore, },
-    ]; };
     return Serializer;
 }());
+export { Serializer };
+Serializer.decorators = [
+    { type: Injectable },
+];
+/** @nocollapse */
+Serializer.ctorParameters = function () { return [
+    { type: RenderStore, },
+]; };
 function Serializer_tsickle_Closure_declarations() {
     /** @type {?} */
     Serializer.decorators;
@@ -148,9 +149,10 @@ function Serializer_tsickle_Closure_declarations() {
     Serializer.prototype._renderStore;
 }
 export var /** @type {?} */ ANIMATION_WORKER_PLAYER_PREFIX = 'AnimationPlayer.';
-export var RenderStoreObject = (function () {
+var RenderStoreObject = (function () {
     function RenderStoreObject() {
     }
     return RenderStoreObject;
 }());
+export { RenderStoreObject };
 //# sourceMappingURL=serializer.js.map
