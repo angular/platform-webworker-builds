@@ -6,7 +6,7 @@
  * found in the LICENSE file at https://angular.io/license
  */
 import { PlatformLocation } from '@angular/common';
-import { NgZone } from '@angular/core';
+import { NgZone, OpaqueToken } from '@angular/core';
 import { WebWorkerPlatformLocation } from './platform_location';
 /**
  * Those providers should be added when the router is used in a worker context in addition to the
@@ -21,4 +21,10 @@ export declare const WORKER_APP_LOCATION_PROVIDERS: ({
     useFactory: (platformLocation: WebWorkerPlatformLocation, zone: NgZone) => () => Promise<boolean>;
     multi: boolean;
     deps: (typeof NgZone | typeof PlatformLocation)[];
+} | {
+    provide: OpaqueToken;
+    useFactory: (platformLocation: WebWorkerPlatformLocation) => Promise<any>;
+    deps: typeof PlatformLocation[];
 })[];
+export declare function locationInitialized(platformLocation: WebWorkerPlatformLocation): Promise<any>;
+export declare function appInitFnFactory(platformLocation: WebWorkerPlatformLocation, zone: NgZone): () => Promise<boolean>;
