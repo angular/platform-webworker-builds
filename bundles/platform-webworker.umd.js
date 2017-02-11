@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.0.0-beta.7-b988733
+ * @license Angular v4.0.0-beta.7-5279d06
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1786,7 +1786,7 @@
     /**
      * @stable
      */
-    var /** @type {?} */ VERSION = new _angular_core.Version('4.0.0-beta.7-b988733');
+    var /** @type {?} */ VERSION = new _angular_core.Version('4.0.0-beta.7-5279d06');
 
     var MessageBasedPlatformLocation = (function () {
         /**
@@ -2647,6 +2647,14 @@
         _AnimationWorkerRendererPlayer.prototype.onDone = function (fn) {
             this._renderElement.animationPlayerEvents.listen(this, 'onDone', fn);
             this._runOnService('onDone', []);
+        };
+        /**
+         * @param {?} fn
+         * @return {?}
+         */
+        _AnimationWorkerRendererPlayer.prototype.onDestroy = function (fn) {
+            this._renderElement.animationPlayerEvents.listen(this, 'onDestroy', fn);
+            this._runOnService('onDestroy', []);
         };
         /**
          * @return {?}
