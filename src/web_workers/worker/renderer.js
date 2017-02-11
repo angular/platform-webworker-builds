@@ -543,6 +543,14 @@ class _AnimationWorkerRendererPlayer {
         this._runOnService('onDone', []);
     }
     /**
+     * @param {?} fn
+     * @return {?}
+     */
+    onDestroy(fn) {
+        this._renderElement.animationPlayerEvents.listen(this, 'onDestroy', fn);
+        this._runOnService('onDestroy', []);
+    }
+    /**
      * @return {?}
      */
     hasStarted() { return this._started; }

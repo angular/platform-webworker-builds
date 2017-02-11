@@ -2649,6 +2649,14 @@
             this._runOnService('onDone', []);
         };
         /**
+         * @param {?} fn
+         * @return {?}
+         */
+        _AnimationWorkerRendererPlayer.prototype.onDestroy = function (fn) {
+            this._renderElement.animationPlayerEvents.listen(this, 'onDestroy', fn);
+            this._runOnService('onDestroy', []);
+        };
+        /**
          * @return {?}
          */
         _AnimationWorkerRendererPlayer.prototype.hasStarted = function () { return this._started; };
