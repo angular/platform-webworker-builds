@@ -20,7 +20,7 @@ export class WorkerDomAdapter extends DomAdapter {
      * @param {?} error
      * @return {?}
      */
-    logError(error /** TODO #9100 */) {
+    logError(error) {
         if (console.error) {
             console.error(error);
         }
@@ -33,12 +33,12 @@ export class WorkerDomAdapter extends DomAdapter {
      * @param {?} error
      * @return {?}
      */
-    log(error /** TODO #9100 */) { console.log(error); }
+    log(error) { console.log(error); }
     /**
      * @param {?} error
      * @return {?}
      */
-    logGroup(error /** TODO #9100 */) {
+    logGroup(error) {
         if (console.group) {
             console.group(error);
             this.logError(error);
@@ -61,7 +61,7 @@ export class WorkerDomAdapter extends DomAdapter {
      * @param {?} name
      * @return {?}
      */
-    hasProperty(element /** TODO #9100 */, name) { throw 'not implemented'; }
+    hasProperty(element, name) { throw 'not implemented'; }
     /**
      * @param {?} el
      * @param {?} name
@@ -101,44 +101,38 @@ export class WorkerDomAdapter extends DomAdapter {
      * @param {?} selector
      * @return {?}
      */
-    querySelector(el /** TODO #9100 */, selector) {
-        throw 'not implemented';
-    }
+    querySelector(el, selector) { throw 'not implemented'; }
     /**
      * @param {?} el
      * @param {?} selector
      * @return {?}
      */
-    querySelectorAll(el /** TODO #9100 */, selector) { throw 'not implemented'; }
+    querySelectorAll(el, selector) { throw 'not implemented'; }
     /**
      * @param {?} el
      * @param {?} evt
      * @param {?} listener
      * @return {?}
      */
-    on(el /** TODO #9100 */, evt /** TODO #9100 */, listener /** TODO #9100 */) {
-        throw 'not implemented';
-    }
+    on(el, evt, listener) { throw 'not implemented'; }
     /**
      * @param {?} el
      * @param {?} evt
      * @param {?} listener
      * @return {?}
      */
-    onAndCancel(el /** TODO #9100 */, evt /** TODO #9100 */, listener /** TODO #9100 */) {
-        throw 'not implemented';
-    }
+    onAndCancel(el, evt, listener) { throw 'not implemented'; }
     /**
      * @param {?} el
      * @param {?} evt
      * @return {?}
      */
-    dispatchEvent(el /** TODO #9100 */, evt /** TODO #9100 */) { throw 'not implemented'; }
+    dispatchEvent(el, evt) { throw 'not implemented'; }
     /**
      * @param {?} eventType
      * @return {?}
      */
-    createMouseEvent(eventType /** TODO #9100 */) { throw 'not implemented'; }
+    createMouseEvent(eventType) { throw 'not implemented'; }
     /**
      * @param {?} eventType
      * @return {?}
@@ -148,162 +142,161 @@ export class WorkerDomAdapter extends DomAdapter {
      * @param {?} evt
      * @return {?}
      */
-    preventDefault(evt /** TODO #9100 */) { throw 'not implemented'; }
+    preventDefault(evt) { throw 'not implemented'; }
     /**
      * @param {?} evt
      * @return {?}
      */
-    isPrevented(evt /** TODO #9100 */) { throw 'not implemented'; }
+    isPrevented(evt) { throw 'not implemented'; }
     /**
      * @param {?} el
      * @return {?}
      */
-    getInnerHTML(el /** TODO #9100 */) { throw 'not implemented'; }
+    getInnerHTML(el) { throw 'not implemented'; }
     /**
      * @param {?} el
      * @return {?}
      */
-    getTemplateContent(el /** TODO #9100 */) { throw 'not implemented'; }
+    getTemplateContent(el) { throw 'not implemented'; }
     /**
      * @param {?} el
      * @return {?}
      */
-    getOuterHTML(el /** TODO #9100 */) { throw 'not implemented'; }
+    getOuterHTML(el) { throw 'not implemented'; }
     /**
      * @param {?} node
      * @return {?}
      */
-    nodeName(node /** TODO #9100 */) { throw 'not implemented'; }
+    nodeName(node) { throw 'not implemented'; }
     /**
      * @param {?} node
      * @return {?}
      */
-    nodeValue(node /** TODO #9100 */) { throw 'not implemented'; }
+    nodeValue(node) { throw 'not implemented'; }
     /**
      * @param {?} node
      * @return {?}
      */
-    type(node /** TODO #9100 */) { throw 'not implemented'; }
+    type(node) { throw 'not implemented'; }
     /**
      * @param {?} node
      * @return {?}
      */
-    content(node /** TODO #9100 */) { throw 'not implemented'; }
+    content(node) { throw 'not implemented'; }
     /**
      * @param {?} el
      * @return {?}
      */
-    firstChild(el /** TODO #9100 */) { throw 'not implemented'; }
+    firstChild(el) { throw 'not implemented'; }
     /**
      * @param {?} el
      * @return {?}
      */
-    nextSibling(el /** TODO #9100 */) { throw 'not implemented'; }
+    nextSibling(el) { throw 'not implemented'; }
     /**
      * @param {?} el
      * @return {?}
      */
-    parentElement(el /** TODO #9100 */) { throw 'not implemented'; }
+    parentElement(el) { throw 'not implemented'; }
     /**
      * @param {?} el
      * @return {?}
      */
-    childNodes(el /** TODO #9100 */) { throw 'not implemented'; }
+    childNodes(el) { throw 'not implemented'; }
     /**
      * @param {?} el
      * @return {?}
      */
-    childNodesAsList(el /** TODO #9100 */) { throw 'not implemented'; }
+    childNodesAsList(el) { throw 'not implemented'; }
     /**
      * @param {?} el
      * @return {?}
      */
-    clearNodes(el /** TODO #9100 */) { throw 'not implemented'; }
-    /**
-     * @param {?} el
-     * @param {?} node
-     * @return {?}
-     */
-    appendChild(el /** TODO #9100 */, node /** TODO #9100 */) { throw 'not implemented'; }
+    clearNodes(el) { throw 'not implemented'; }
     /**
      * @param {?} el
      * @param {?} node
      * @return {?}
      */
-    removeChild(el /** TODO #9100 */, node /** TODO #9100 */) { throw 'not implemented'; }
+    appendChild(el, node) { throw 'not implemented'; }
+    /**
+     * @param {?} el
+     * @param {?} node
+     * @return {?}
+     */
+    removeChild(el, node) { throw 'not implemented'; }
     /**
      * @param {?} el
      * @param {?} newNode
      * @param {?} oldNode
      * @return {?}
      */
-    replaceChild(el /** TODO #9100 */, newNode /** TODO #9100 */, oldNode /** TODO #9100 */) {
-        throw 'not implemented';
-    }
+    replaceChild(el, newNode, oldNode) { throw 'not implemented'; }
     /**
      * @param {?} el
      * @return {?}
      */
-    remove(el /** TODO #9100 */) { throw 'not implemented'; }
+    remove(el) { throw 'not implemented'; }
     /**
+     * @param {?} parent
      * @param {?} el
      * @param {?} node
      * @return {?}
      */
-    insertBefore(el /** TODO #9100 */, node /** TODO #9100 */) { throw 'not implemented'; }
+    insertBefore(parent, el, node) { throw 'not implemented'; }
     /**
+     * @param {?} parent
      * @param {?} el
      * @param {?} nodes
      * @return {?}
      */
-    insertAllBefore(el /** TODO #9100 */, nodes /** TODO #9100 */) {
-        throw 'not implemented';
-    }
+    insertAllBefore(parent, el, nodes) { throw 'not implemented'; }
     /**
+     * @param {?} parent
      * @param {?} el
      * @param {?} node
      * @return {?}
      */
-    insertAfter(el /** TODO #9100 */, node /** TODO #9100 */) { throw 'not implemented'; }
+    insertAfter(parent, el, node) { throw 'not implemented'; }
     /**
      * @param {?} el
      * @param {?} value
      * @return {?}
      */
-    setInnerHTML(el /** TODO #9100 */, value /** TODO #9100 */) { throw 'not implemented'; }
+    setInnerHTML(el, value) { throw 'not implemented'; }
     /**
      * @param {?} el
      * @return {?}
      */
-    getText(el /** TODO #9100 */) { throw 'not implemented'; }
-    /**
-     * @param {?} el
-     * @param {?} value
-     * @return {?}
-     */
-    setText(el /** TODO #9100 */, value) { throw 'not implemented'; }
-    /**
-     * @param {?} el
-     * @return {?}
-     */
-    getValue(el /** TODO #9100 */) { throw 'not implemented'; }
+    getText(el) { throw 'not implemented'; }
     /**
      * @param {?} el
      * @param {?} value
      * @return {?}
      */
-    setValue(el /** TODO #9100 */, value) { throw 'not implemented'; }
+    setText(el, value) { throw 'not implemented'; }
     /**
      * @param {?} el
      * @return {?}
      */
-    getChecked(el /** TODO #9100 */) { throw 'not implemented'; }
+    getValue(el) { throw 'not implemented'; }
     /**
      * @param {?} el
      * @param {?} value
      * @return {?}
      */
-    setChecked(el /** TODO #9100 */, value) { throw 'not implemented'; }
+    setValue(el, value) { throw 'not implemented'; }
+    /**
+     * @param {?} el
+     * @return {?}
+     */
+    getChecked(el) { throw 'not implemented'; }
+    /**
+     * @param {?} el
+     * @param {?} value
+     * @return {?}
+     */
+    setChecked(el, value) { throw 'not implemented'; }
     /**
      * @param {?} text
      * @return {?}
@@ -313,37 +306,33 @@ export class WorkerDomAdapter extends DomAdapter {
      * @param {?} html
      * @return {?}
      */
-    createTemplate(html /** TODO #9100 */) { throw 'not implemented'; }
+    createTemplate(html) { throw 'not implemented'; }
     /**
      * @param {?} tagName
      * @param {?=} doc
      * @return {?}
      */
-    createElement(tagName /** TODO #9100 */, doc /** TODO #9100 */) {
-        throw 'not implemented';
-    }
+    createElement(tagName, doc) { throw 'not implemented'; }
     /**
      * @param {?} ns
      * @param {?} tagName
      * @param {?=} doc
      * @return {?}
      */
-    createElementNS(ns, tagName, doc /** TODO #9100 */) {
-        throw 'not implemented';
-    }
+    createElementNS(ns, tagName, doc) { throw 'not implemented'; }
     /**
      * @param {?} text
      * @param {?=} doc
      * @return {?}
      */
-    createTextNode(text, doc /** TODO #9100 */) { throw 'not implemented'; }
+    createTextNode(text, doc) { throw 'not implemented'; }
     /**
      * @param {?} attrName
      * @param {?} attrValue
      * @param {?=} doc
      * @return {?}
      */
-    createScriptTag(attrName, attrValue, doc /** TODO #9100 */) {
+    createScriptTag(attrName, attrValue, doc) {
         throw 'not implemented';
     }
     /**
@@ -351,29 +340,27 @@ export class WorkerDomAdapter extends DomAdapter {
      * @param {?=} doc
      * @return {?}
      */
-    createStyleElement(css, doc /** TODO #9100 */) {
-        throw 'not implemented';
-    }
+    createStyleElement(css, doc) { throw 'not implemented'; }
     /**
      * @param {?} el
      * @return {?}
      */
-    createShadowRoot(el /** TODO #9100 */) { throw 'not implemented'; }
+    createShadowRoot(el) { throw 'not implemented'; }
     /**
      * @param {?} el
      * @return {?}
      */
-    getShadowRoot(el /** TODO #9100 */) { throw 'not implemented'; }
+    getShadowRoot(el) { throw 'not implemented'; }
     /**
      * @param {?} el
      * @return {?}
      */
-    getHost(el /** TODO #9100 */) { throw 'not implemented'; }
+    getHost(el) { throw 'not implemented'; }
     /**
      * @param {?} el
      * @return {?}
      */
-    getDistributedNodes(el /** TODO #9100 */) { throw 'not implemented'; }
+    getDistributedNodes(el) { throw 'not implemented'; }
     /**
      * @param {?} node
      * @return {?}
@@ -384,123 +371,107 @@ export class WorkerDomAdapter extends DomAdapter {
      * @param {?} name
      * @return {?}
      */
-    getElementsByClassName(element /** TODO #9100 */, name) {
-        throw 'not implemented';
-    }
+    getElementsByClassName(element, name) { throw 'not implemented'; }
     /**
      * @param {?} element
      * @param {?} name
      * @return {?}
      */
-    getElementsByTagName(element /** TODO #9100 */, name) {
-        throw 'not implemented';
-    }
+    getElementsByTagName(element, name) { throw 'not implemented'; }
     /**
      * @param {?} element
      * @return {?}
      */
-    classList(element /** TODO #9100 */) { throw 'not implemented'; }
-    /**
-     * @param {?} element
-     * @param {?} className
-     * @return {?}
-     */
-    addClass(element /** TODO #9100 */, className) { throw 'not implemented'; }
+    classList(element) { throw 'not implemented'; }
     /**
      * @param {?} element
      * @param {?} className
      * @return {?}
      */
-    removeClass(element /** TODO #9100 */, className) { throw 'not implemented'; }
+    addClass(element, className) { throw 'not implemented'; }
     /**
      * @param {?} element
      * @param {?} className
      * @return {?}
      */
-    hasClass(element /** TODO #9100 */, className) { throw 'not implemented'; }
+    removeClass(element, className) { throw 'not implemented'; }
+    /**
+     * @param {?} element
+     * @param {?} className
+     * @return {?}
+     */
+    hasClass(element, className) { throw 'not implemented'; }
     /**
      * @param {?} element
      * @param {?} styleName
      * @param {?} styleValue
      * @return {?}
      */
-    setStyle(element /** TODO #9100 */, styleName, styleValue) {
-        throw 'not implemented';
-    }
+    setStyle(element, styleName, styleValue) { throw 'not implemented'; }
     /**
      * @param {?} element
      * @param {?} styleName
      * @return {?}
      */
-    removeStyle(element /** TODO #9100 */, styleName) { throw 'not implemented'; }
+    removeStyle(element, styleName) { throw 'not implemented'; }
     /**
      * @param {?} element
      * @param {?} styleName
      * @return {?}
      */
-    getStyle(element /** TODO #9100 */, styleName) { throw 'not implemented'; }
+    getStyle(element, styleName) { throw 'not implemented'; }
     /**
      * @param {?} element
      * @param {?} styleName
      * @param {?=} styleValue
      * @return {?}
      */
-    hasStyle(element /** TODO #9100 */, styleName, styleValue) {
+    hasStyle(element, styleName, styleValue) {
         throw 'not implemented';
     }
     /**
      * @param {?} element
      * @return {?}
      */
-    tagName(element /** TODO #9100 */) { throw 'not implemented'; }
+    tagName(element) { throw 'not implemented'; }
     /**
      * @param {?} element
      * @return {?}
      */
-    attributeMap(element /** TODO #9100 */) { throw 'not implemented'; }
+    attributeMap(element) { throw 'not implemented'; }
     /**
      * @param {?} element
      * @param {?} attribute
      * @return {?}
      */
-    hasAttribute(element /** TODO #9100 */, attribute) {
-        throw 'not implemented';
-    }
+    hasAttribute(element, attribute) { throw 'not implemented'; }
     /**
      * @param {?} element
      * @param {?} ns
      * @param {?} attribute
      * @return {?}
      */
-    hasAttributeNS(element /** TODO #9100 */, ns, attribute) {
-        throw 'not implemented';
-    }
+    hasAttributeNS(element, ns, attribute) { throw 'not implemented'; }
     /**
      * @param {?} element
      * @param {?} attribute
      * @return {?}
      */
-    getAttribute(element /** TODO #9100 */, attribute) {
-        throw 'not implemented';
-    }
+    getAttribute(element, attribute) { throw 'not implemented'; }
     /**
      * @param {?} element
      * @param {?} ns
      * @param {?} attribute
      * @return {?}
      */
-    getAttributeNS(element /** TODO #9100 */, ns, attribute) {
-        throw 'not implemented';
-    }
+    getAttributeNS(element, ns, attribute) { throw 'not implemented'; }
     /**
      * @param {?} element
      * @param {?} name
      * @param {?} value
      * @return {?}
      */
-    setAttribute(element /** TODO #9100 */, name, value) {
-        throw 'not implemented';
-    }
+    setAttribute(element, name, value) { throw 'not implemented'; }
     /**
      * @param {?} element
      * @param {?} ns
@@ -508,29 +479,25 @@ export class WorkerDomAdapter extends DomAdapter {
      * @param {?} value
      * @return {?}
      */
-    setAttributeNS(element /** TODO #9100 */, ns, name, value) {
-        throw 'not implemented';
-    }
+    setAttributeNS(element, ns, name, value) { throw 'not implemented'; }
     /**
      * @param {?} element
      * @param {?} attribute
      * @return {?}
      */
-    removeAttribute(element /** TODO #9100 */, attribute) { throw 'not implemented'; }
+    removeAttribute(element, attribute) { throw 'not implemented'; }
     /**
      * @param {?} element
      * @param {?} ns
      * @param {?} attribute
      * @return {?}
      */
-    removeAttributeNS(element /** TODO #9100 */, ns, attribute) {
-        throw 'not implemented';
-    }
+    removeAttributeNS(element, ns, attribute) { throw 'not implemented'; }
     /**
      * @param {?} el
      * @return {?}
      */
-    templateAwareRoot(el /** TODO #9100 */) { throw 'not implemented'; }
+    templateAwareRoot(el) { throw 'not implemented'; }
     /**
      * @return {?}
      */
@@ -539,7 +506,7 @@ export class WorkerDomAdapter extends DomAdapter {
      * @param {?} el
      * @return {?}
      */
-    getBoundingClientRect(el /** TODO #9100 */) { throw 'not implemented'; }
+    getBoundingClientRect(el) { throw 'not implemented'; }
     /**
      * @param {?} doc
      * @return {?}
@@ -556,7 +523,7 @@ export class WorkerDomAdapter extends DomAdapter {
      * @param {?} selector
      * @return {?}
      */
-    elementMatches(n /** TODO #9100 */, selector) { throw 'not implemented'; }
+    elementMatches(n, selector) { throw 'not implemented'; }
     /**
      * @param {?} el
      * @return {?}
@@ -566,27 +533,27 @@ export class WorkerDomAdapter extends DomAdapter {
      * @param {?} node
      * @return {?}
      */
-    isTextNode(node /** TODO #9100 */) { throw 'not implemented'; }
+    isTextNode(node) { throw 'not implemented'; }
     /**
      * @param {?} node
      * @return {?}
      */
-    isCommentNode(node /** TODO #9100 */) { throw 'not implemented'; }
+    isCommentNode(node) { throw 'not implemented'; }
     /**
      * @param {?} node
      * @return {?}
      */
-    isElementNode(node /** TODO #9100 */) { throw 'not implemented'; }
+    isElementNode(node) { throw 'not implemented'; }
     /**
      * @param {?} node
      * @return {?}
      */
-    hasShadowRoot(node /** TODO #9100 */) { throw 'not implemented'; }
+    hasShadowRoot(node) { throw 'not implemented'; }
     /**
      * @param {?} node
      * @return {?}
      */
-    isShadowRoot(node /** TODO #9100 */) { throw 'not implemented'; }
+    isShadowRoot(node) { throw 'not implemented'; }
     /**
      * @param {?} node
      * @return {?}
@@ -601,21 +568,19 @@ export class WorkerDomAdapter extends DomAdapter {
      * @param {?} element
      * @return {?}
      */
-    getHref(element /** TODO #9100 */) { throw 'not implemented'; }
+    getHref(element) { throw 'not implemented'; }
     /**
      * @param {?} event
      * @return {?}
      */
-    getEventKey(event /** TODO #9100 */) { throw 'not implemented'; }
+    getEventKey(event) { throw 'not implemented'; }
     /**
      * @param {?} element
      * @param {?} baseUrl
      * @param {?} href
      * @return {?}
      */
-    resolveAndSetHref(element /** TODO #9100 */, baseUrl, href) {
-        throw 'not implemented';
-    }
+    resolveAndSetHref(element, baseUrl, href) { throw 'not implemented'; }
     /**
      * @return {?}
      */
@@ -657,18 +622,18 @@ export class WorkerDomAdapter extends DomAdapter {
      * @param {?} value
      * @return {?}
      */
-    setData(element /** TODO #9100 */, name, value) { throw 'not implemented'; }
+    setData(element, name, value) { throw 'not implemented'; }
     /**
      * @param {?} element
      * @return {?}
      */
-    getComputedStyle(element /** TODO #9100 */) { throw 'not implemented'; }
+    getComputedStyle(element) { throw 'not implemented'; }
     /**
      * @param {?} element
      * @param {?} name
      * @return {?}
      */
-    getData(element /** TODO #9100 */, name) { throw 'not implemented'; }
+    getData(element, name) { throw 'not implemented'; }
     /**
      * @param {?} name
      * @param {?} value
