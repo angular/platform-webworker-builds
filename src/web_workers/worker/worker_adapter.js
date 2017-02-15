@@ -97,11 +97,6 @@ export class WorkerDomAdapter extends DomAdapter {
      */
     parse(templateHtml) { throw 'not implemented'; }
     /**
-     * @param {?} selector
-     * @return {?}
-     */
-    query(selector) { throw 'not implemented'; }
-    /**
      * @param {?} el
      * @param {?} selector
      * @return {?}
@@ -541,23 +536,21 @@ export class WorkerDomAdapter extends DomAdapter {
      */
     createHtmlDocument() { throw 'not implemented'; }
     /**
-     * @return {?}
-     */
-    defaultDoc() { throw 'not implemented'; }
-    /**
      * @param {?} el
      * @return {?}
      */
     getBoundingClientRect(el /** TODO #9100 */) { throw 'not implemented'; }
     /**
+     * @param {?} doc
      * @return {?}
      */
-    getTitle() { throw 'not implemented'; }
+    getTitle(doc) { throw 'not implemented'; }
     /**
+     * @param {?} doc
      * @param {?} newTitle
      * @return {?}
      */
-    setTitle(newTitle) { throw 'not implemented'; }
+    setTitle(doc, newTitle) { throw 'not implemented'; }
     /**
      * @param {?} n
      * @param {?} selector
@@ -632,10 +625,11 @@ export class WorkerDomAdapter extends DomAdapter {
      */
     supportsNativeShadowDOM() { throw 'not implemented'; }
     /**
+     * @param {?} doc
      * @param {?} target
      * @return {?}
      */
-    getGlobalEventTarget(target) { throw 'not implemented'; }
+    getGlobalEventTarget(doc, target) { throw 'not implemented'; }
     /**
      * @return {?}
      */
@@ -645,9 +639,10 @@ export class WorkerDomAdapter extends DomAdapter {
      */
     getLocation() { throw 'not implemented'; }
     /**
+     * @param {?} doc
      * @return {?}
      */
-    getBaseHref() { throw 'not implemented'; }
+    getBaseHref(doc) { throw 'not implemented'; }
     /**
      * @return {?}
      */

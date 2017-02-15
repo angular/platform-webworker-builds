@@ -1752,7 +1752,7 @@
      * @return {?}
      */
     function _document() {
-        return getDOM().defaultDoc();
+        return document;
     }
     /**
      * @return {?}
@@ -2821,11 +2821,6 @@
          */
         WorkerDomAdapter.prototype.parse = function (templateHtml) { throw 'not implemented'; };
         /**
-         * @param {?} selector
-         * @return {?}
-         */
-        WorkerDomAdapter.prototype.query = function (selector) { throw 'not implemented'; };
-        /**
          * @param {?} el
          * @param {?} selector
          * @return {?}
@@ -3265,23 +3260,21 @@
          */
         WorkerDomAdapter.prototype.createHtmlDocument = function () { throw 'not implemented'; };
         /**
-         * @return {?}
-         */
-        WorkerDomAdapter.prototype.defaultDoc = function () { throw 'not implemented'; };
-        /**
          * @param {?} el
          * @return {?}
          */
         WorkerDomAdapter.prototype.getBoundingClientRect = function (el /** TODO #9100 */) { throw 'not implemented'; };
         /**
+         * @param {?} doc
          * @return {?}
          */
-        WorkerDomAdapter.prototype.getTitle = function () { throw 'not implemented'; };
+        WorkerDomAdapter.prototype.getTitle = function (doc) { throw 'not implemented'; };
         /**
+         * @param {?} doc
          * @param {?} newTitle
          * @return {?}
          */
-        WorkerDomAdapter.prototype.setTitle = function (newTitle) { throw 'not implemented'; };
+        WorkerDomAdapter.prototype.setTitle = function (doc, newTitle) { throw 'not implemented'; };
         /**
          * @param {?} n
          * @param {?} selector
@@ -3356,10 +3349,11 @@
          */
         WorkerDomAdapter.prototype.supportsNativeShadowDOM = function () { throw 'not implemented'; };
         /**
+         * @param {?} doc
          * @param {?} target
          * @return {?}
          */
-        WorkerDomAdapter.prototype.getGlobalEventTarget = function (target) { throw 'not implemented'; };
+        WorkerDomAdapter.prototype.getGlobalEventTarget = function (doc, target) { throw 'not implemented'; };
         /**
          * @return {?}
          */
@@ -3369,9 +3363,10 @@
          */
         WorkerDomAdapter.prototype.getLocation = function () { throw 'not implemented'; };
         /**
+         * @param {?} doc
          * @return {?}
          */
-        WorkerDomAdapter.prototype.getBaseHref = function () { throw 'not implemented'; };
+        WorkerDomAdapter.prototype.getBaseHref = function (doc) { throw 'not implemented'; };
         /**
          * @return {?}
          */
@@ -3488,7 +3483,7 @@
     WorkerAppModule.decorators = [
         { type: _angular_core.NgModule, args: [{
                     providers: [
-                        BROWSER_SANITIZATION_PROVIDERS, Serializer,
+                        BROWSER_SANITIZATION_PROVIDERS, Serializer, { provide: _angular_platformBrowser.DOCUMENT, useValue: null },
                         { provide: ClientMessageBrokerFactory, useClass: ClientMessageBrokerFactory_ },
                         { provide: ServiceMessageBrokerFactory, useClass: ServiceMessageBrokerFactory_ },
                         WebWorkerRootRenderer, { provide: _angular_core.RootRenderer, useExisting: WebWorkerRootRenderer },
