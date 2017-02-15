@@ -51,9 +51,9 @@ export declare class WorkerDomAdapter extends DomAdapter {
     removeChild(el: any, node: any): void;
     replaceChild(el: any, newNode: any, oldNode: any): void;
     remove(el: any): Node;
-    insertBefore(el: any, node: any): void;
-    insertAllBefore(el: any, nodes: any): void;
-    insertAfter(el: any, node: any): void;
+    insertBefore(parent: any, el: any, node: any): void;
+    insertAllBefore(parent: any, el: any, nodes: any): void;
+    insertAfter(parent: any, el: any, node: any): void;
     setInnerHTML(el: any, value: any): void;
     getText(el: any): string;
     setText(el: any, value: string): void;
