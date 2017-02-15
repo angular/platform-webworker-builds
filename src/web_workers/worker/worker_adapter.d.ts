@@ -25,7 +25,6 @@ export declare class WorkerDomAdapter extends DomAdapter {
         [key: string]: string;
     };
     parse(templateHtml: string): void;
-    query(selector: string): any;
     querySelector(el: any, selector: string): HTMLElement;
     querySelectorAll(el: any, selector: string): any[];
     on(el: any, evt: any, listener: any): void;
@@ -96,10 +95,9 @@ export declare class WorkerDomAdapter extends DomAdapter {
     removeAttributeNS(element: any, ns: string, attribute: string): void;
     templateAwareRoot(el: any): void;
     createHtmlDocument(): HTMLDocument;
-    defaultDoc(): HTMLDocument;
     getBoundingClientRect(el: any): void;
-    getTitle(): string;
-    setTitle(newTitle: string): void;
+    getTitle(doc: Document): string;
+    setTitle(doc: Document, newTitle: string): void;
     elementMatches(n: any, selector: string): boolean;
     isTemplateElement(el: any): boolean;
     isTextNode(node: any): boolean;
@@ -114,10 +112,10 @@ export declare class WorkerDomAdapter extends DomAdapter {
     resolveAndSetHref(element: any, baseUrl: string, href: string): void;
     supportsDOMEvents(): boolean;
     supportsNativeShadowDOM(): boolean;
-    getGlobalEventTarget(target: string): any;
+    getGlobalEventTarget(doc: Document, target: string): any;
     getHistory(): History;
     getLocation(): Location;
-    getBaseHref(): string;
+    getBaseHref(doc: Document): string;
     resetBaseElement(): void;
     getUserAgent(): string;
     setData(element: any, name: string, value: string): void;

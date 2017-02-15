@@ -157,7 +157,7 @@ function _exceptionHandler() {
  * @return {?}
  */
 function _document() {
-    return getDOM().defaultDoc();
+    return document;
 }
 /**
  * @return {?}
