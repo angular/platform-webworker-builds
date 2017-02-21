@@ -16,8 +16,6 @@ export declare class WebWorkerPlatformLocation extends PlatformLocation {
     private _hashChangeListeners;
     private _location;
     private _channelSource;
-    initialized: Promise<any>;
-    private initializedResolve;
     constructor(brokerFactory: ClientMessageBrokerFactory, bus: MessageBus, _serializer: Serializer);
     getBaseHrefFromDOM(): string;
     onPopState(fn: LocationChangeListener): void;

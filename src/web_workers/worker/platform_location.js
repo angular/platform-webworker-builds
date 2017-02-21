@@ -44,7 +44,6 @@ export class WebWorkerPlatformLocation extends PlatformLocation {
                 }
             }
         });
-        this.initialized = new Promise(res => this.initializedResolve = res);
     }
     /**
      * \@internal *
@@ -55,7 +54,6 @@ export class WebWorkerPlatformLocation extends PlatformLocation {
         return this._broker.runOnService(args, LocationType)
             .then((val) => {
             this._location = val;
-            this.initializedResolve();
             return true;
         }, err => { throw new Error(err); });
     }
@@ -172,10 +170,6 @@ function WebWorkerPlatformLocation_tsickle_Closure_declarations() {
     WebWorkerPlatformLocation.prototype._location;
     /** @type {?} */
     WebWorkerPlatformLocation.prototype._channelSource;
-    /** @type {?} */
-    WebWorkerPlatformLocation.prototype.initialized;
-    /** @type {?} */
-    WebWorkerPlatformLocation.prototype.initializedResolve;
     /** @type {?} */
     WebWorkerPlatformLocation.prototype._serializer;
 }
