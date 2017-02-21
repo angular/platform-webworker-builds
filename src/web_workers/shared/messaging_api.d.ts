@@ -11,4 +11,6 @@
  */
 export declare const RENDERER_CHANNEL = "ng-Renderer";
 export declare const EVENT_CHANNEL = "ng-Events";
+export declare const RENDERER_V2_CHANNEL = "v2.ng-Renderer";
+export declare const EVENT_V2_CHANNEL = "v2.ng-Events";
 export declare const ROUTER_CHANNEL = "ng-Router";

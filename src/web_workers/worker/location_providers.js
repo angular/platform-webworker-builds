@@ -14,12 +14,13 @@ import { WebWorkerPlatformLocation } from './platform_location';
  * @experimental
  */
 export var /** @type {?} */ WORKER_APP_LOCATION_PROVIDERS = [
-    { provide: PlatformLocation, useClass: WebWorkerPlatformLocation }, {
+    { provide: PlatformLocation, useClass: WebWorkerPlatformLocation },
+    {
         provide: APP_INITIALIZER,
         useFactory: appInitFnFactory,
         multi: true,
-        deps: [PlatformLocation, NgZone]
-    }
+        deps: [PlatformLocation, NgZone],
+    },
 ];
 /**
  * @param {?} platformLocation

@@ -17,5 +17,7 @@
  * found in the LICENSE file at https://angular.io/license
  */ export var /** @type {?} */ RENDERER_CHANNEL = 'ng-Renderer';
 export var /** @type {?} */ EVENT_CHANNEL = 'ng-Events';
+export var /** @type {?} */ RENDERER_V2_CHANNEL = 'v2.ng-Renderer';
+export var /** @type {?} */ EVENT_V2_CHANNEL = 'v2.ng-Events';
 export var /** @type {?} */ ROUTER_CHANNEL = 'ng-Router';
 //# sourceMappingURL=messaging_api.js.map

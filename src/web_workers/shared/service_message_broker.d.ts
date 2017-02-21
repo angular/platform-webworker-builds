@@ -7,7 +7,7 @@
  */
 import { Type } from '@angular/core';
 import { MessageBus } from '../shared/message_bus';
-import { Serializer } from '../shared/serializer';
+import { Serializer, SerializerTypes } from '../shared/serializer';
 /**
  * @experimental WebWorker support in Angular is currently experimental.
  */
@@ -31,27 +31,24 @@ export declare class ServiceMessageBrokerFactory_ extends ServiceMessageBrokerFa
  * @experimental WebWorker support in Angular is currently experimental.
  */
 export declare abstract class ServiceMessageBroker {
-    abstract registerMethod(methodName: string, signature: Type<any>[], method: Function, returnType?: Type<any>): void;
+    abstract registerMethod(methodName: string, signature: Array<Type<any> | SerializerTypes>, method: Function, returnType?: Type<any> | SerializerTypes): void;
 }
 export declare class ServiceMessageBroker_ extends ServiceMessageBroker {
     private _serializer;
-    channel: any;
+    channel: string;
     private _sink;
     private _methods;
-    constructor(messageBus: MessageBus, _serializer: Serializer, channel: any);
-    registerMethod(methodName: string, signature: Type<any>[], method: (..._: any[]) => Promise<any> | void, returnType?: Type<any>): void;
-    private _handleMessage(map);
+    constructor(messageBus: MessageBus, _serializer: Serializer, channel: string);
+    registerMethod(methodName: string, signature: Array<Type<any> | SerializerTypes>, method: (..._: any[]) => Promise<any> | void, returnType?: Type<any> | SerializerTypes): void;
+    private _handleMessage(message);
     private _wrapWebWorkerPromise(id, promise, type);
 }
 /**
  * @experimental WebWorker support in Angular is currently experimental.
  */
-export declare class ReceivedMessage {
+export interface ReceivedMessage {
     method: string;
     args: any[];
     id: string;
     type: string;
-    constructor(data: {
-        [key: string]: any;
-    });
 }

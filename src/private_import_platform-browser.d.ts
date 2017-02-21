@@ -14,6 +14,7 @@ export declare const BrowserDomAdapter: typeof _.BrowserDomAdapter;
 export declare const BrowserGetTestability: typeof _.BrowserGetTestability;
 export declare const DomRootRenderer: typeof _.DomRootRenderer;
 export declare const DomRootRenderer_: typeof _.DomRootRenderer_;
+export declare const DomRendererFactoryV2: typeof _.DomRendererFactoryV2;
 export declare const DomEventsPlugin: typeof _.DomEventsPlugin;
 export declare const DomSharedStylesHost: typeof _.DomSharedStylesHost;
 export declare const SharedStylesHost: typeof _.SharedStylesHost;

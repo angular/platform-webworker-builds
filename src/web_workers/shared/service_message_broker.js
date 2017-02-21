@@ -11,7 +11,6 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 import { Injectable } from '@angular/core';
-import { isPresent } from '../../facade/lang';
 import { MessageBus } from '../shared/message_bus';
 import { Serializer } from '../shared/serializer';
 /**
@@ -112,10 +111,10 @@ var ServiceMessageBroker_ = (function (_super) {
      * @param {?} _serializer
      * @param {?} channel
      */
-    function ServiceMessageBroker_(messageBus, _serializer, channel /** TODO #9100 */) {
+    function ServiceMessageBroker_(messageBus, _serializer, channel) {
         var _this = _super.call(this) || this;
         _this._serializer = _serializer;
-        _this.channel = channel; /** TODO #9100 */
+        _this.channel = channel;
         _this._methods = new Map();
         _this._sink = messageBus.to(channel);
         var source = messageBus.from(channel);
@@ -133,24 +132,23 @@ var ServiceMessageBroker_ = (function (_super) {
         var _this = this;
         this._methods.set(methodName, function (message) {
             var /** @type {?} */ serializedArgs = message.args;
-            var /** @type {?} */ numArgs = signature === null ? 0 : signature.length;
+            var /** @type {?} */ numArgs = signature ? signature.length : 0;
             var /** @type {?} */ deserializedArgs = new Array(numArgs);
             for (var /** @type {?} */ i = 0; i < numArgs; i++) {
                 var /** @type {?} */ serializedArg = serializedArgs[i];
                 deserializedArgs[i] = _this._serializer.deserialize(serializedArg, signature[i]);
             }
             var /** @type {?} */ promise = method.apply(void 0, deserializedArgs);
-            if (isPresent(returnType) && promise) {
+            if (returnType && promise) {
                 _this._wrapWebWorkerPromise(message.id, promise, returnType);
             }
         });
     };
     /**
-     * @param {?} map
+     * @param {?} message
      * @return {?}
      */
-    ServiceMessageBroker_.prototype._handleMessage = function (map) {
-        var /** @type {?} */ message = new ReceivedMessage(map);
+    ServiceMessageBroker_.prototype._handleMessage = function (message) {
         if (this._methods.has(message.method)) {
             this._methods.get(message.method)(message);
         }
@@ -164,7 +162,11 @@ var ServiceMessageBroker_ = (function (_super) {
     ServiceMessageBroker_.prototype._wrapWebWorkerPromise = function (id, promise, type) {
         var _this = this;
         promise.then(function (result) {
-            _this._sink.emit({ 'type': 'result', 'value': _this._serializer.serialize(result, type), 'id': id });
+            _this._sink.emit({
+                'type': 'result',
+                'value': _this._serializer.serialize(result, type),
+                'id': id,
+            });
         });
     };
     return ServiceMessageBroker_;
@@ -179,31 +181,5 @@ function ServiceMessageBroker__tsickle_Closure_declarations() {
     ServiceMessageBroker_.prototype._serializer;
     /** @type {?} */
     ServiceMessageBroker_.prototype.channel;
-}
-/**
- * \@experimental WebWorker support in Angular is currently experimental.
- */
-var ReceivedMessage = (function () {
-    /**
-     * @param {?} data
-     */
-    function ReceivedMessage(data) {
-        this.method = data['method'];
-        this.args = data['args'];
-        this.id = data['id'];
-        this.type = data['type'];
-    }
-    return ReceivedMessage;
-}());
-export { ReceivedMessage };
-function ReceivedMessage_tsickle_Closure_declarations() {
-    /** @type {?} */
-    ReceivedMessage.prototype.method;
-    /** @type {?} */
-    ReceivedMessage.prototype.args;
-    /** @type {?} */
-    ReceivedMessage.prototype.id;
-    /** @type {?} */
-    ReceivedMessage.prototype.type;
 }
 //# sourceMappingURL=service_message_broker.js.map

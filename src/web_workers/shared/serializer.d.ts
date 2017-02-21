@@ -8,19 +8,42 @@
 import { Type } from '@angular/core';
 import { RenderStore } from './render_store';
 /**
+ * Any type that does not need to be serialized (string, number, boolean)
+ *
+ * @experimental WebWorker support in Angular is currently experimental.
+ * @deprecated in v4. Use SerializerTypes.PRIMITIVE instead
+ */
+export declare const PRIMITIVE: SerializerTypes;
+export declare class LocationType {
+    href: string;
+    protocol: string;
+    host: string;
+    hostname: string;
+    port: string;
+    pathname: string;
+    search: string;
+    hash: string;
+    origin: string;
+    constructor(href: string, protocol: string, host: string, hostname: string, port: string, pathname: string, search: string, hash: string, origin: string);
+}
+/**
  * @experimental WebWorker support in Angular is currently experimental.
  */
-export declare const PRIMITIVE: Type<any>;
+export declare const enum SerializerTypes {
+    RENDERER_TYPE_V2 = 0,
+    PRIMITIVE = 1,
+    RENDER_STORE_OBJECT = 2,
+}
 export declare class Serializer {
     private _renderStore;
     constructor(_renderStore: RenderStore);
-    serialize(obj: any, type: any): Object;
-    deserialize(map: any, type: any, data?: any): any;
+    serialize(obj: any, type?: Type<any> | SerializerTypes): Object;
+    deserialize(map: any, type?: Type<any> | SerializerTypes, data?: any): any;
     private _serializeLocation(loc);
     private _deserializeLocation(loc);
-    private _serializeRenderComponentType(obj);
-    private _deserializeRenderComponentType(map);
+    private _serializeRenderComponentType(type);
+    private _deserializeRenderComponentType(props);
+    private _serializeRendererTypeV2(type);
+    private _deserializeRendererTypeV2(props);
 }
 export declare const ANIMATION_WORKER_PLAYER_PREFIX = "AnimationPlayer.";
-export declare class RenderStoreObject {
-}

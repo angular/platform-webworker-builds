@@ -5,17 +5,24 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import { RenderComponentType, Renderer, RootRenderer } from '@angular/core';
+import { RenderComponentType, Renderer, RendererFactoryV2, RendererTypeV2, RendererV2, RootRenderer } from '@angular/core';
 import { AnimationKeyframe, AnimationPlayer, AnimationStyles, RenderDebugInfo } from '../../private_import_core';
 import { ClientMessageBrokerFactory, FnArg } from '../shared/client_message_broker';
 import { MessageBus } from '../shared/message_bus';
 import { RenderStore } from '../shared/render_store';
-import { RenderStoreObject, Serializer } from '../shared/serializer';
+import { Serializer } from '../shared/serializer';
+export declare class NamedEventEmitter {
+    private _listeners;
+    listen(eventName: string, callback: Function): void;
+    unlisten(eventName: string, listener: Function): void;
+    dispatchEvent(eventName: string, event: any): void;
+    private _getListeners(eventName);
+}
 export declare class WebWorkerRootRenderer implements RootRenderer {
     private _serializer;
     renderStore: RenderStore;
-    private _messageBroker;
     globalEvents: NamedEventEmitter;
+    private _messageBroker;
     private _componentRenderers;
     constructor(messageBrokerFactory: ClientMessageBrokerFactory, bus: MessageBus, _serializer: Serializer, renderStore: RenderStore);
     private _dispatchEvent(message);
@@ -25,7 +32,7 @@ export declare class WebWorkerRootRenderer implements RootRenderer {
     allocateId(): number;
     destroyNodes(nodes: any[]): void;
 }
-export declare class WebWorkerRenderer implements Renderer, RenderStoreObject {
+export declare class WebWorkerRenderer implements Renderer {
     private _rootRenderer;
     private _componentType;
     constructor(_rootRenderer: WebWorkerRootRenderer, _componentType: RenderComponentType);
@@ -50,12 +57,44 @@ export declare class WebWorkerRenderer implements Renderer, RenderStoreObject {
     listenGlobal(target: string, name: string, callback: Function): Function;
     animate(renderElement: any, startingStyles: AnimationStyles, keyframes: AnimationKeyframe[], duration: number, delay: number, easing: string, previousPlayers?: AnimationPlayer[]): AnimationPlayer;
 }
-export declare class NamedEventEmitter {
-    private _listeners;
-    private _getListeners(eventName);
-    listen(eventName: string, callback: Function): void;
-    unlisten(eventName: string, callback: Function): void;
-    dispatchEvent(eventName: string, event: any): void;
+export declare class WebWorkerRendererFactoryV2 implements RendererFactoryV2 {
+    private _serializer;
+    renderStore: RenderStore;
+    globalEvents: NamedEventEmitter;
+    private _messageBroker;
+    constructor(messageBrokerFactory: ClientMessageBrokerFactory, bus: MessageBus, _serializer: Serializer, renderStore: RenderStore);
+    createRenderer(element: any, type: RendererTypeV2): RendererV2;
+    callUI(fnName: string, fnArgs: FnArg[]): void;
+    allocateNode(): WebWorkerRenderNode;
+    freeNode(node: any): void;
+    allocateId(): number;
+    private _dispatchEvent(message);
+}
+export declare class WebWorkerRendererV2 implements RendererV2 {
+    private _rendererFactory;
+    constructor(_rendererFactory: WebWorkerRendererFactoryV2);
+    private asFnArg;
+    destroy(): void;
+    destroyNode(node: any): void;
+    createElement(name: string, namespace?: string): any;
+    createComment(value: string): any;
+    createText(value: string): any;
+    appendChild(parent: any, newChild: any): void;
+    insertBefore(parent: any, newChild: any, refChild: any): void;
+    removeChild(parent: any, oldChild: any): void;
+    selectRootElement(selectorOrNode: string | any): any;
+    parentNode(node: any): any;
+    nextSibling(node: any): any;
+    setAttribute(el: any, name: string, value: string, namespace?: string): void;
+    removeAttribute(el: any, name: string, namespace?: string): void;
+    addClass(el: any, name: string): void;
+    removeClass(el: any, name: string): void;
+    setStyle(el: any, style: string, value: any, hasVendorPrefix: boolean, hasImportant: boolean): void;
+    removeStyle(el: any, style: string, hasVendorPrefix: boolean): void;
+    setProperty(el: any, name: string, value: any): void;
+    setValue(node: any, value: string): void;
+    listen(target: 'window' | 'document' | 'body' | any, eventName: string, listener: (event: any) => boolean): () => void;
+    private callUIWithRenderer(fnName, fnArgs?);
 }
 export declare class AnimationPlayerEmitter {
     private _listeners;

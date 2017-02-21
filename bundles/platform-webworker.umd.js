@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.0.0-beta.8-1bdf706
+ * @license Angular v4.0.0-beta.8-601fd3e
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -18,6 +18,7 @@
     var /** @type {?} */ BrowserGetTestability = _angular_platformBrowser.__platform_browser_private__.BrowserGetTestability;
     var /** @type {?} */ DomRootRenderer = _angular_platformBrowser.__platform_browser_private__.DomRootRenderer;
     var /** @type {?} */ DomRootRenderer_ = _angular_platformBrowser.__platform_browser_private__.DomRootRenderer_;
+    var /** @type {?} */ DomRendererFactoryV2 = _angular_platformBrowser.__platform_browser_private__.DomRendererFactoryV2;
     var /** @type {?} */ DomEventsPlugin = _angular_platformBrowser.__platform_browser_private__.DomEventsPlugin;
     var /** @type {?} */ DomSharedStylesHost = _angular_platformBrowser.__platform_browser_private__.DomSharedStylesHost;
     var /** @type {?} */ SharedStylesHost = _angular_platformBrowser.__platform_browser_private__.SharedStylesHost;
@@ -29,13 +30,6 @@
 
     var /** @type {?} */ ON_WEB_WORKER = new _angular_core.InjectionToken('WebWorker.onWebWorker');
 
-    /**
-     * @param {?} obj
-     * @return {?}
-     */
-    function isPresent(obj) {
-        return obj != null;
-    }
     /**
      * @param {?} token
      * @return {?}
@@ -56,14 +50,6 @@
         var /** @type {?} */ res = token.toString();
         var /** @type {?} */ newLineIndex = res.indexOf('\n');
         return newLineIndex === -1 ? res : res.substring(0, newLineIndex);
-    }
-    /**
-     * @param {?} obj
-     * @return {?}
-     */
-    function print(obj) {
-        // tslint:disable-next-line:no-console
-        console.log(obj);
     }
 
     /**
@@ -142,6 +128,8 @@
          * @return {?}
          */
         RenderStore.prototype.store = function (obj, id) {
+            if (id == null)
+                return;
             this._lookupById.set(id, obj);
             this._lookupByObject.set(obj, id);
         };
@@ -151,32 +139,23 @@
          */
         RenderStore.prototype.remove = function (obj) {
             var /** @type {?} */ index = this._lookupByObject.get(obj);
-            this._lookupByObject.delete(obj);
-            this._lookupById.delete(index);
+            if (index != null) {
+                this._lookupByObject.delete(obj);
+                this._lookupById.delete(index);
+            }
         };
         /**
          * @param {?} id
          * @return {?}
          */
         RenderStore.prototype.deserialize = function (id) {
-            if (id == null) {
-                return null;
-            }
-            if (!this._lookupById.has(id)) {
-                return null;
-            }
-            return this._lookupById.get(id);
+            return this._lookupById.has(id) ? this._lookupById.get(id) : null;
         };
         /**
          * @param {?} obj
          * @return {?}
          */
-        RenderStore.prototype.serialize = function (obj) {
-            if (obj == null) {
-                return null;
-            }
-            return this._lookupByObject.get(obj);
-        };
+        RenderStore.prototype.serialize = function (obj) { return obj == null ? null : this._lookupByObject.get(obj); };
         return RenderStore;
     }());
     RenderStore.decorators = [
@@ -185,6 +164,13 @@
     /** @nocollapse */
     RenderStore.ctorParameters = function () { return []; };
 
+    /**
+     * Any type that does not need to be serialized (string, number, boolean)
+     *
+     * @experimental WebWorker support in Angular is currently experimental.
+     * @deprecated in v4. Use SerializerTypes.PRIMITIVE instead
+     */
+    var /** @type {?} */ PRIMITIVE = 1 /* PRIMITIVE */;
     var LocationType = (function () {
         /**
          * @param {?} href
@@ -210,13 +196,6 @@
         }
         return LocationType;
     }());
-
-    // PRIMITIVE is any type that does not need to be serialized (string, number, boolean)
-    // We set it to String so that it is considered a Type.
-    /**
-     * @experimental WebWorker support in Angular is currently experimental.
-     */
-    var /** @type {?} */ PRIMITIVE = String;
     var Serializer = (function () {
         /**
          * @param {?} _renderStore
@@ -226,64 +205,60 @@
         }
         /**
          * @param {?} obj
-         * @param {?} type
+         * @param {?=} type
          * @return {?}
          */
         Serializer.prototype.serialize = function (obj, type) {
             var _this = this;
-            if (!isPresent(obj)) {
-                return null;
-            }
-            if (Array.isArray(obj)) {
-                return ((obj)).map(function (v) { return _this.serialize(v, type); });
-            }
-            if (type == PRIMITIVE) {
+            if (type === void 0) { type = 1 /* PRIMITIVE */; }
+            if (obj == null || type === 1 /* PRIMITIVE */) {
                 return obj;
             }
-            if (type == RenderStoreObject) {
+            if (Array.isArray(obj)) {
+                return obj.map(function (v) { return _this.serialize(v, type); });
+            }
+            if (type === 2 /* RENDER_STORE_OBJECT */) {
                 return this._renderStore.serialize(obj);
             }
             if (type === _angular_core.RenderComponentType) {
                 return this._serializeRenderComponentType(obj);
             }
-            if (type === _angular_core.ViewEncapsulation) {
-                return obj;
+            if (type === 0 /* RENDERER_TYPE_V2 */) {
+                return this._serializeRendererTypeV2(obj);
             }
             if (type === LocationType) {
                 return this._serializeLocation(obj);
             }
-            throw new Error('No serializer for ' + type.toString());
+            throw new Error("No serializer for type " + stringify(type));
         };
         /**
          * @param {?} map
-         * @param {?} type
+         * @param {?=} type
          * @param {?=} data
          * @return {?}
          */
         Serializer.prototype.deserialize = function (map, type, data) {
             var _this = this;
-            if (!isPresent(map)) {
-                return null;
-            }
-            if (Array.isArray(map)) {
-                return ((map)).map(function (val) { return _this.deserialize(val, type, data); });
-            }
-            if (type === PRIMITIVE) {
+            if (type === void 0) { type = 1 /* PRIMITIVE */; }
+            if (map == null || type === 1 /* PRIMITIVE */) {
                 return map;
             }
-            if (type === RenderStoreObject) {
+            if (Array.isArray(map)) {
+                return map.map(function (val) { return _this.deserialize(val, type, data); });
+            }
+            if (type === 2 /* RENDER_STORE_OBJECT */) {
                 return this._renderStore.deserialize(map);
             }
             if (type === _angular_core.RenderComponentType) {
                 return this._deserializeRenderComponentType(map);
             }
-            if (type === _angular_core.ViewEncapsulation) {
-                return (map);
+            if (type === 0 /* RENDERER_TYPE_V2 */) {
+                return this._deserializeRendererTypeV2(map);
             }
             if (type === LocationType) {
                 return this._deserializeLocation(map);
             }
-            throw new Error('No deserializer for ' + type.toString());
+            throw new Error("No deserializer for type " + stringify(type));
         };
         /**
          * @param {?} loc
@@ -299,7 +274,7 @@
                 'pathname': loc.pathname,
                 'search': loc.search,
                 'hash': loc.hash,
-                'origin': loc.origin
+                'origin': loc.origin,
             };
         };
         /**
@@ -310,24 +285,48 @@
             return new LocationType(loc['href'], loc['protocol'], loc['host'], loc['hostname'], loc['port'], loc['pathname'], loc['search'], loc['hash'], loc['origin']);
         };
         /**
-         * @param {?} obj
+         * @param {?} type
          * @return {?}
          */
-        Serializer.prototype._serializeRenderComponentType = function (obj) {
+        Serializer.prototype._serializeRenderComponentType = function (type) {
             return {
-                'id': obj.id,
-                'templateUrl': obj.templateUrl,
-                'slotCount': obj.slotCount,
-                'encapsulation': this.serialize(obj.encapsulation, _angular_core.ViewEncapsulation),
-                'styles': this.serialize(obj.styles, PRIMITIVE)
+                'id': type.id,
+                'templateUrl': type.templateUrl,
+                'slotCount': type.slotCount,
+                'encapsulation': this.serialize(type.encapsulation),
+                'styles': this.serialize(type.styles),
             };
         };
         /**
-         * @param {?} map
+         * @param {?} props
          * @return {?}
          */
-        Serializer.prototype._deserializeRenderComponentType = function (map) {
-            return new _angular_core.RenderComponentType(map['id'], map['templateUrl'], map['slotCount'], this.deserialize(map['encapsulation'], _angular_core.ViewEncapsulation), this.deserialize(map['styles'], PRIMITIVE), {});
+        Serializer.prototype._deserializeRenderComponentType = function (props) {
+            return new _angular_core.RenderComponentType(props['id'], props['templateUrl'], props['slotCount'], this.deserialize(props['encapsulation']), this.deserialize(props['styles']), {});
+        };
+        /**
+         * @param {?} type
+         * @return {?}
+         */
+        Serializer.prototype._serializeRendererTypeV2 = function (type) {
+            return {
+                'id': type.id,
+                'encapsulation': this.serialize(type.encapsulation),
+                'styles': this.serialize(type.styles),
+                'data': this.serialize(type.data),
+            };
+        };
+        /**
+         * @param {?} props
+         * @return {?}
+         */
+        Serializer.prototype._deserializeRendererTypeV2 = function (props) {
+            return {
+                id: props['id'],
+                encapsulation: props['encapsulation'],
+                styles: this.deserialize(props['styles']),
+                data: this.deserialize(props['data'])
+            };
         };
         return Serializer;
     }());
@@ -339,11 +338,6 @@
         { type: RenderStore, },
     ]; };
     var /** @type {?} */ ANIMATION_WORKER_PLAYER_PREFIX = 'AnimationPlayer.';
-    var RenderStoreObject = (function () {
-        function RenderStoreObject() {
-        }
-        return RenderStoreObject;
-    }());
 
     /**
      * @license
@@ -430,9 +424,9 @@
          * @param {?} _serializer
          * @param {?} channel
          */
-        function ClientMessageBroker_(messageBus, _serializer, channel /** TODO #9100 */) {
+        function ClientMessageBroker_(messageBus, _serializer, channel) {
             var _this = _super.call(this) || this;
-            _this.channel = channel; /** TODO #9100 */
+            _this.channel = channel;
             _this._pending = new Map();
             _this._sink = messageBus.to(channel);
             _this._serializer = _serializer;
@@ -448,7 +442,7 @@
             var /** @type {?} */ time = stringify(new Date().getTime());
             var /** @type {?} */ iteration = 0;
             var /** @type {?} */ id = name + time + stringify(iteration);
-            while (isPresent(((this) /** TODO #9100 */)._pending[id])) {
+            while (this._pending.has(id)) {
                 id = "" + name + time + iteration;
                 iteration++;
             }
@@ -462,7 +456,7 @@
         ClientMessageBroker_.prototype.runOnService = function (args, returnType) {
             var _this = this;
             var /** @type {?} */ fnArgs = [];
-            if (isPresent(args.args)) {
+            if (args.args) {
                 args.args.forEach(function (argument) {
                     if (argument.type != null) {
                         fnArgs.push(_this._serializer.serialize(argument.value, argument.type));
@@ -480,25 +474,23 @@
                 id = this._generateMessageId(args.method);
                 this._pending.set(id, completer_1);
                 promise.catch(function (err) {
-                    print(err);
+                    if (console && console.error) {
+                        // tslint:disable-next-line:no-console
+                        console.error(err);
+                    }
                     completer_1.reject(err);
                 });
-                promise = promise.then(function (value) {
-                    if (_this._serializer == null) {
-                        return value;
-                    }
-                    else {
-                        return _this._serializer.deserialize(value, returnType);
-                    }
-                });
+                promise = promise.then(function (v) { return _this._serializer ? _this._serializer.deserialize(v, returnType) : v; });
             }
             else {
                 promise = null;
             }
-            // TODO(jteplitz602): Create a class for these messages so we don't keep using StringMap #3685
-            var /** @type {?} */ message = { 'method': args.method, 'args': fnArgs };
+            var /** @type {?} */ message = {
+                'method': args.method,
+                'args': fnArgs,
+            };
             if (id != null) {
-                ((message) /** TODO #9100 */)['id'] = id;
+                message['id'] = id;
             }
             this._sink.emit(message);
             return promise;
@@ -508,16 +500,14 @@
          * @return {?}
          */
         ClientMessageBroker_.prototype._handleMessage = function (message) {
-            var /** @type {?} */ data = new MessageData(message);
-            // TODO(jteplitz602): replace these strings with messaging constants #3685
-            if (data.type === 'result' || data.type === 'error') {
-                var /** @type {?} */ id = data.id;
+            if (message.type === 'result' || message.type === 'error') {
+                var /** @type {?} */ id = message.id;
                 if (this._pending.has(id)) {
-                    if (data.type === 'result') {
-                        this._pending.get(id).resolve(data.value);
+                    if (message.type === 'result') {
+                        this._pending.get(id).resolve(message.value);
                     }
                     else {
-                        this._pending.get(id).reject(data.value);
+                        this._pending.get(id).reject(message.value);
                     }
                     this._pending.delete(id);
                 }
@@ -525,37 +515,17 @@
         };
         return ClientMessageBroker_;
     }(ClientMessageBroker));
-    var MessageData = (function () {
-        /**
-         * @param {?} data
-         */
-        function MessageData(data) {
-            this.type = data['type'];
-            this.id = this._getValueIfPresent(data, 'id');
-            this.value = this._getValueIfPresent(data, 'value');
-        }
-        /**
-         * Returns the value if present, otherwise returns null
-         * \@internal
-         * @param {?} data
-         * @param {?} key
-         * @return {?}
-         */
-        MessageData.prototype._getValueIfPresent = function (data, key) {
-            return data.hasOwnProperty(key) ? data[key] : null;
-        };
-        return MessageData;
-    }());
     /**
      * \@experimental WebWorker support in Angular is experimental.
      */
     var FnArg = (function () {
         /**
          * @param {?} value
-         * @param {?} type
+         * @param {?=} type
          */
-        function FnArg(value /** TODO #9100 */, type) {
-            this.value = value; /** TODO #9100 */
+        function FnArg(value, type) {
+            if (type === void 0) { type = 1 /* PRIMITIVE */; }
+            this.value = value;
             this.type = type;
         }
         return FnArg;
@@ -995,10 +965,10 @@
          * @param {?} _serializer
          * @param {?} channel
          */
-        function ServiceMessageBroker_(messageBus, _serializer, channel /** TODO #9100 */) {
+        function ServiceMessageBroker_(messageBus, _serializer, channel) {
             var _this = _super.call(this) || this;
             _this._serializer = _serializer;
-            _this.channel = channel; /** TODO #9100 */
+            _this.channel = channel;
             _this._methods = new Map();
             _this._sink = messageBus.to(channel);
             var source = messageBus.from(channel);
@@ -1016,24 +986,23 @@
             var _this = this;
             this._methods.set(methodName, function (message) {
                 var /** @type {?} */ serializedArgs = message.args;
-                var /** @type {?} */ numArgs = signature === null ? 0 : signature.length;
+                var /** @type {?} */ numArgs = signature ? signature.length : 0;
                 var /** @type {?} */ deserializedArgs = new Array(numArgs);
                 for (var /** @type {?} */ i = 0; i < numArgs; i++) {
                     var /** @type {?} */ serializedArg = serializedArgs[i];
                     deserializedArgs[i] = _this._serializer.deserialize(serializedArg, signature[i]);
                 }
                 var /** @type {?} */ promise = method.apply(void 0, deserializedArgs);
-                if (isPresent(returnType) && promise) {
+                if (returnType && promise) {
                     _this._wrapWebWorkerPromise(message.id, promise, returnType);
                 }
             });
         };
         /**
-         * @param {?} map
+         * @param {?} message
          * @return {?}
          */
-        ServiceMessageBroker_.prototype._handleMessage = function (map) {
-            var /** @type {?} */ message = new ReceivedMessage(map);
+        ServiceMessageBroker_.prototype._handleMessage = function (message) {
             if (this._methods.has(message.method)) {
                 this._methods.get(message.method)(message);
             }
@@ -1047,26 +1016,15 @@
         ServiceMessageBroker_.prototype._wrapWebWorkerPromise = function (id, promise, type) {
             var _this = this;
             promise.then(function (result) {
-                _this._sink.emit({ 'type': 'result', 'value': _this._serializer.serialize(result, type), 'id': id });
+                _this._sink.emit({
+                    'type': 'result',
+                    'value': _this._serializer.serialize(result, type),
+                    'id': id,
+                });
             });
         };
         return ServiceMessageBroker_;
     }(ServiceMessageBroker));
-    /**
-     * \@experimental WebWorker support in Angular is currently experimental.
-     */
-    var ReceivedMessage = (function () {
-        /**
-         * @param {?} data
-         */
-        function ReceivedMessage(data) {
-            this.method = data['method'];
-            this.args = data['args'];
-            this.id = data['id'];
-            this.type = data['type'];
-        }
-        return ReceivedMessage;
-    }());
 
     /**
      * @license
@@ -1087,6 +1045,8 @@
      * found in the LICENSE file at https://angular.io/license
      */ var /** @type {?} */ RENDERER_CHANNEL = 'ng-Renderer';
     var /** @type {?} */ EVENT_CHANNEL = 'ng-Events';
+    var /** @type {?} */ RENDERER_V2_CHANNEL = 'v2.ng-Renderer';
+    var /** @type {?} */ EVENT_V2_CHANNEL = 'v2.ng-Events';
     var /** @type {?} */ ROUTER_CHANNEL = 'ng-Router';
 
     /**
@@ -1169,7 +1129,7 @@
         var /** @type {?} */ serialized = {};
         for (var /** @type {?} */ i = 0; i < properties.length; i++) {
             var /** @type {?} */ prop = properties[i];
-            ((serialized) /** TODO #9100 */)[prop] = e[prop];
+            serialized[prop] = e[prop];
         }
         return serialized;
     }
@@ -1191,9 +1151,9 @@
          */
         EventDispatcher.prototype.dispatchAnimationEvent = function (player, phaseName, element) {
             this._sink.emit({
-                'element': this._serializer.serialize(element, RenderStoreObject),
-                'animationPlayer': this._serializer.serialize(player, RenderStoreObject),
-                'phaseName': phaseName
+                'element': this._serializer.serialize(element, 2 /* RENDER_STORE_OBJECT */),
+                'animationPlayer': this._serializer.serialize(player, 2 /* RENDER_STORE_OBJECT */),
+                'phaseName': phaseName,
             });
             return true;
         };
@@ -1205,7 +1165,7 @@
          * @return {?}
          */
         EventDispatcher.prototype.dispatchRenderEvent = function (element, eventTarget, eventName, event) {
-            var /** @type {?} */ serializedEvent /** TODO #9100 */;
+            var /** @type {?} */ serializedEvent;
             // TODO (jteplitz602): support custom events #3350
             switch (event.type) {
                 case 'click':
@@ -1288,10 +1248,10 @@
                     throw new Error(eventName + ' not supported on WebWorkers');
             }
             this._sink.emit({
-                'element': this._serializer.serialize(element, RenderStoreObject),
+                'element': this._serializer.serialize(element, 2 /* RENDER_STORE_OBJECT */),
                 'eventName': eventName,
                 'eventTarget': eventTarget,
-                'event': serializedEvent
+                'event': serializedEvent,
             });
             // TODO(kegluneq): Eventually, we want the user to indicate from the UI side whether the event
             // should be canceled, but for now just call `preventDefault` on the original DOM event.
@@ -1319,33 +1279,42 @@
          * @return {?}
          */
         MessageBasedRenderer.prototype.start = function () {
+            var _this = this;
             var /** @type {?} */ broker = this._brokerFactory.createMessageBroker(RENDERER_CHANNEL);
             this._bus.initChannel(EVENT_CHANNEL);
             this._eventDispatcher = new EventDispatcher(this._bus.to(EVENT_CHANNEL), this._serializer);
-            broker.registerMethod('renderComponent', [_angular_core.RenderComponentType, PRIMITIVE], this._renderComponent.bind(this));
-            broker.registerMethod('selectRootElement', [RenderStoreObject, PRIMITIVE, PRIMITIVE], this._selectRootElement.bind(this));
-            broker.registerMethod('createElement', [RenderStoreObject, RenderStoreObject, PRIMITIVE, PRIMITIVE], this._createElement.bind(this));
-            broker.registerMethod('createViewRoot', [RenderStoreObject, RenderStoreObject, PRIMITIVE], this._createViewRoot.bind(this));
-            broker.registerMethod('createTemplateAnchor', [RenderStoreObject, RenderStoreObject, PRIMITIVE], this._createTemplateAnchor.bind(this));
-            broker.registerMethod('createText', [RenderStoreObject, RenderStoreObject, PRIMITIVE, PRIMITIVE], this._createText.bind(this));
-            broker.registerMethod('projectNodes', [RenderStoreObject, RenderStoreObject, RenderStoreObject], this._projectNodes.bind(this));
-            broker.registerMethod('attachViewAfter', [RenderStoreObject, RenderStoreObject, RenderStoreObject], this._attachViewAfter.bind(this));
-            broker.registerMethod('detachView', [RenderStoreObject, RenderStoreObject], this._detachView.bind(this));
-            broker.registerMethod('destroyView', [RenderStoreObject, RenderStoreObject, RenderStoreObject], this._destroyView.bind(this));
-            broker.registerMethod('setElementProperty', [RenderStoreObject, RenderStoreObject, PRIMITIVE, PRIMITIVE], this._setElementProperty.bind(this));
-            broker.registerMethod('setElementAttribute', [RenderStoreObject, RenderStoreObject, PRIMITIVE, PRIMITIVE], this._setElementAttribute.bind(this));
-            broker.registerMethod('setBindingDebugInfo', [RenderStoreObject, RenderStoreObject, PRIMITIVE, PRIMITIVE], this._setBindingDebugInfo.bind(this));
-            broker.registerMethod('setElementClass', [RenderStoreObject, RenderStoreObject, PRIMITIVE, PRIMITIVE], this._setElementClass.bind(this));
-            broker.registerMethod('setElementStyle', [RenderStoreObject, RenderStoreObject, PRIMITIVE, PRIMITIVE], this._setElementStyle.bind(this));
-            broker.registerMethod('invokeElementMethod', [RenderStoreObject, RenderStoreObject, PRIMITIVE, PRIMITIVE], this._invokeElementMethod.bind(this));
-            broker.registerMethod('setText', [RenderStoreObject, RenderStoreObject, PRIMITIVE], this._setText.bind(this));
-            broker.registerMethod('listen', [RenderStoreObject, RenderStoreObject, PRIMITIVE, PRIMITIVE], this._listen.bind(this));
-            broker.registerMethod('listenGlobal', [RenderStoreObject, PRIMITIVE, PRIMITIVE, PRIMITIVE], this._listenGlobal.bind(this));
-            broker.registerMethod('listenDone', [RenderStoreObject, RenderStoreObject], this._listenDone.bind(this));
-            broker.registerMethod('animate', [
-                RenderStoreObject, RenderStoreObject, PRIMITIVE, PRIMITIVE, PRIMITIVE, PRIMITIVE,
-                PRIMITIVE, PRIMITIVE, PRIMITIVE
-            ], this._animate.bind(this));
+            var _a = [
+                _angular_core.RenderComponentType,
+                2 /* RENDER_STORE_OBJECT */,
+                1 /* PRIMITIVE */,
+            ], RCT = _a[0], RSO = _a[1], P = _a[2];
+            var /** @type {?} */ methods = [
+                ['renderComponent', this._renderComponent, RCT, P],
+                ['selectRootElement', this._selectRootElement, RSO, P, P],
+                ['createElement', this._createElement, RSO, RSO, P, P],
+                ['createViewRoot', this._createViewRoot, RSO, RSO, P],
+                ['createTemplateAnchor', this._createTemplateAnchor, RSO, RSO, P],
+                ['createText', this._createText, RSO, RSO, P, P],
+                ['projectNodes', this._projectNodes, RSO, RSO, RSO],
+                ['attachViewAfter', this._attachViewAfter, RSO, RSO, RSO],
+                ['detachView', this._detachView, RSO, RSO],
+                ['destroyView', this._destroyView, RSO, RSO, RSO],
+                ['setElementProperty', this._setElementProperty, RSO, RSO, P, P],
+                ['setElementAttribute', this._setElementAttribute, RSO, RSO, P, P],
+                ['setBindingDebugInfo', this._setBindingDebugInfo, RSO, RSO, P, P],
+                ['setElementClass', this._setElementClass, RSO, RSO, P, P],
+                ['setElementStyle', this._setElementStyle, RSO, RSO, P, P],
+                ['invokeElementMethod', this._invokeElementMethod, RSO, RSO, P, P],
+                ['setText', this._setText, RSO, RSO, P],
+                ['listen', this._listen, RSO, RSO, P, P],
+                ['listenGlobal', this._listenGlobal, RSO, P, P, P],
+                ['listenDone', this._listenDone, RSO, RSO],
+                ['animate', this._animate, RSO, RSO, P, P, P, P, P, P, P],
+            ];
+            methods.forEach(function (_a) {
+                var name = _a[0], method = _a[1], argTypes = _a.slice(2);
+                broker.registerMethod(name, argTypes, method.bind(_this));
+            });
             this._bindAnimationPlayerMethods(broker);
         };
         /**
@@ -1354,23 +1323,24 @@
          */
         MessageBasedRenderer.prototype._bindAnimationPlayerMethods = function (broker) {
             var _this = this;
-            broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX + 'play', [RenderStoreObject, RenderStoreObject], function (player, element) { return player.play(); });
-            broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX + 'pause', [RenderStoreObject, RenderStoreObject], function (player, element) { return player.pause(); });
-            broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX + 'init', [RenderStoreObject, RenderStoreObject], function (player, element) { return player.init(); });
-            broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX + 'restart', [RenderStoreObject, RenderStoreObject], function (player, element) { return player.restart(); });
-            broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX + 'destroy', [RenderStoreObject, RenderStoreObject], function (player, element) {
+            var _a = [1 /* PRIMITIVE */, 2 /* RENDER_STORE_OBJECT */], P = _a[0], RSO = _a[1];
+            broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX + 'play', [RSO, RSO], function (player, element) { return player.play(); });
+            broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX + 'pause', [RSO, RSO], function (player, element) { return player.pause(); });
+            broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX + 'init', [RSO, RSO], function (player, element) { return player.init(); });
+            broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX + 'restart', [RSO, RSO], function (player, element) { return player.restart(); });
+            broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX + 'destroy', [RSO, RSO], function (player, element) {
                 player.destroy();
                 _this._renderStore.remove(player);
             });
-            broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX + 'finish', [RenderStoreObject, RenderStoreObject], function (player, element) { return player.finish(); });
-            broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX + 'getPosition', [RenderStoreObject, RenderStoreObject], function (player, element) { return player.getPosition(); });
-            broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX + 'onStart', [RenderStoreObject, RenderStoreObject, PRIMITIVE], function (player, element) {
+            broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX + 'finish', [RSO, RSO], function (player, element) { return player.finish(); });
+            broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX + 'getPosition', [RSO, RSO], function (player, element) { return player.getPosition(); });
+            broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX + 'onStart', [RSO, RSO, P], function (player, element) {
                 return _this._listenOnAnimationPlayer(player, element, 'onStart');
             });
-            broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX + 'onDone', [RenderStoreObject, RenderStoreObject, PRIMITIVE], function (player, element) {
+            broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX + 'onDone', [RSO, RSO, P], function (player, element) {
                 return _this._listenOnAnimationPlayer(player, element, 'onDone');
             });
-            broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX + 'setPosition', [RenderStoreObject, RenderStoreObject, PRIMITIVE], function (player, element, position) { return player.setPosition(position); });
+            broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX + 'setPosition', [RSO, RSO, P], function (player, element, position) { return player.setPosition(position); });
         };
         /**
          * @param {?} renderComponentType
@@ -1547,9 +1517,7 @@
          */
         MessageBasedRenderer.prototype._listen = function (renderer, renderElement, eventName, unlistenId) {
             var _this = this;
-            var /** @type {?} */ unregisterCallback = renderer.listen(renderElement, eventName, function (event /** TODO #9100 */) {
-                return _this._eventDispatcher.dispatchRenderEvent(renderElement, null, eventName, event);
-            });
+            var /** @type {?} */ unregisterCallback = renderer.listen(renderElement, eventName, function (event) { return _this._eventDispatcher.dispatchRenderEvent(renderElement, null, eventName, event); });
             this._renderStore.store(unregisterCallback, unlistenId);
         };
         /**
@@ -1561,9 +1529,7 @@
          */
         MessageBasedRenderer.prototype._listenGlobal = function (renderer, eventTarget, eventName, unlistenId) {
             var _this = this;
-            var /** @type {?} */ unregisterCallback = renderer.listenGlobal(eventTarget, eventName, function (event /** TODO #9100 */) {
-                return _this._eventDispatcher.dispatchRenderEvent(null, eventTarget, eventName, event);
-            });
+            var /** @type {?} */ unregisterCallback = renderer.listenGlobal(eventTarget, eventName, function (event) { return _this._eventDispatcher.dispatchRenderEvent(null, eventTarget, eventName, event); });
             this._renderStore.store(unregisterCallback, unlistenId);
         };
         /**
@@ -1625,6 +1591,270 @@
         { type: RenderStore, },
         { type: _angular_core.RootRenderer, },
     ]; };
+    var MessageBasedRendererV2 = (function () {
+        /**
+         * @param {?} _brokerFactory
+         * @param {?} _bus
+         * @param {?} _serializer
+         * @param {?} _renderStore
+         * @param {?} _rendererFactory
+         */
+        function MessageBasedRendererV2(_brokerFactory, _bus, _serializer, _renderStore, _rendererFactory) {
+            this._brokerFactory = _brokerFactory;
+            this._bus = _bus;
+            this._serializer = _serializer;
+            this._renderStore = _renderStore;
+            this._rendererFactory = _rendererFactory;
+        }
+        /**
+         * @return {?}
+         */
+        MessageBasedRendererV2.prototype.start = function () {
+            var _this = this;
+            var /** @type {?} */ broker = this._brokerFactory.createMessageBroker(RENDERER_V2_CHANNEL);
+            this._bus.initChannel(EVENT_V2_CHANNEL);
+            this._eventDispatcher = new EventDispatcher(this._bus.to(EVENT_V2_CHANNEL), this._serializer);
+            var _a = [
+                2 /* RENDER_STORE_OBJECT */,
+                1 /* PRIMITIVE */,
+                0 /* RENDERER_TYPE_V2 */,
+            ], RSO = _a[0], P = _a[1], CRT = _a[2];
+            var /** @type {?} */ methods = [
+                ['createRenderer', this.createRenderer, RSO, CRT, P],
+                ['createElement', this.createElement, RSO, P, P, P],
+                ['createComment', this.createComment, RSO, P, P], ['createText', this.createText, RSO, P, P],
+                ['appendChild', this.appendChild, RSO, RSO, RSO],
+                ['insertBefore', this.insertBefore, RSO, RSO, RSO, RSO],
+                ['removeChild', this.removeChild, RSO, RSO, RSO],
+                ['selectRootElement', this.selectRootElement, RSO, P, P],
+                ['parentNode', this.parentNode, RSO, RSO, P], ['nextSibling', this.nextSibling, RSO, RSO, P],
+                ['setAttribute', this.setAttribute, RSO, RSO, P, P, P],
+                ['removeAttribute', this.removeAttribute, RSO, RSO, P, P],
+                ['addClass', this.addClass, RSO, RSO, P], ['removeClass', this.removeClass, RSO, RSO, P],
+                ['setStyle', this.setStyle, RSO, RSO, P, P, P, P],
+                ['removeStyle', this.removeStyle, RSO, RSO, P, P],
+                ['setProperty', this.setProperty, RSO, RSO, P, P], ['setValue', this.setValue, RSO, RSO, P],
+                ['listen', this.listen, RSO, RSO, P, P, P], ['unlisten', this.unlisten, RSO, RSO],
+                ['destroy', this.destroy, RSO], ['destroyNode', this.destroyNode, RSO, P]
+            ];
+            methods.forEach(function (_a) {
+                var name = _a[0], method = _a[1], argTypes = _a.slice(2);
+                broker.registerMethod(name, argTypes, method.bind(_this));
+            });
+        };
+        /**
+         * @param {?} r
+         * @return {?}
+         */
+        MessageBasedRendererV2.prototype.destroy = function (r) { r.destroy(); };
+        /**
+         * @param {?} r
+         * @param {?} node
+         * @return {?}
+         */
+        MessageBasedRendererV2.prototype.destroyNode = function (r, node) {
+            if (r.destroyNode) {
+                r.destroyNode(node);
+            }
+            this._renderStore.remove(node);
+        };
+        /**
+         * @param {?} el
+         * @param {?} type
+         * @param {?} id
+         * @return {?}
+         */
+        MessageBasedRendererV2.prototype.createRenderer = function (el, type, id) {
+            this._renderStore.store(this._rendererFactory.createRenderer(el, type), id);
+        };
+        /**
+         * @param {?} r
+         * @param {?} name
+         * @param {?} namespace
+         * @param {?} id
+         * @return {?}
+         */
+        MessageBasedRendererV2.prototype.createElement = function (r, name, namespace, id) {
+            this._renderStore.store(r.createElement(name, namespace), id);
+        };
+        /**
+         * @param {?} r
+         * @param {?} value
+         * @param {?} id
+         * @return {?}
+         */
+        MessageBasedRendererV2.prototype.createComment = function (r, value, id) {
+            this._renderStore.store(r.createComment(value), id);
+        };
+        /**
+         * @param {?} r
+         * @param {?} value
+         * @param {?} id
+         * @return {?}
+         */
+        MessageBasedRendererV2.prototype.createText = function (r, value, id) {
+            this._renderStore.store(r.createText(value), id);
+        };
+        /**
+         * @param {?} r
+         * @param {?} parent
+         * @param {?} child
+         * @return {?}
+         */
+        MessageBasedRendererV2.prototype.appendChild = function (r, parent, child) { r.appendChild(parent, child); };
+        /**
+         * @param {?} r
+         * @param {?} parent
+         * @param {?} child
+         * @param {?} ref
+         * @return {?}
+         */
+        MessageBasedRendererV2.prototype.insertBefore = function (r, parent, child, ref) {
+            r.insertBefore(parent, child, ref);
+        };
+        /**
+         * @param {?} r
+         * @param {?} parent
+         * @param {?} child
+         * @return {?}
+         */
+        MessageBasedRendererV2.prototype.removeChild = function (r, parent, child) { r.removeChild(parent, child); };
+        /**
+         * @param {?} r
+         * @param {?} selector
+         * @param {?} id
+         * @return {?}
+         */
+        MessageBasedRendererV2.prototype.selectRootElement = function (r, selector, id) {
+            this._renderStore.store(r.selectRootElement(selector), id);
+        };
+        /**
+         * @param {?} r
+         * @param {?} node
+         * @param {?} id
+         * @return {?}
+         */
+        MessageBasedRendererV2.prototype.parentNode = function (r, node, id) {
+            this._renderStore.store(r.parentNode(node), id);
+        };
+        /**
+         * @param {?} r
+         * @param {?} node
+         * @param {?} id
+         * @return {?}
+         */
+        MessageBasedRendererV2.prototype.nextSibling = function (r, node, id) {
+            this._renderStore.store(r.nextSibling(node), id);
+        };
+        /**
+         * @param {?} r
+         * @param {?} el
+         * @param {?} name
+         * @param {?} value
+         * @param {?} namespace
+         * @return {?}
+         */
+        MessageBasedRendererV2.prototype.setAttribute = function (r, el, name, value, namespace) {
+            r.setAttribute(el, name, value, namespace);
+        };
+        /**
+         * @param {?} r
+         * @param {?} el
+         * @param {?} name
+         * @param {?} namespace
+         * @return {?}
+         */
+        MessageBasedRendererV2.prototype.removeAttribute = function (r, el, name, namespace) {
+            r.removeAttribute(el, name, namespace);
+        };
+        /**
+         * @param {?} r
+         * @param {?} el
+         * @param {?} name
+         * @return {?}
+         */
+        MessageBasedRendererV2.prototype.addClass = function (r, el, name) { r.addClass(el, name); };
+        /**
+         * @param {?} r
+         * @param {?} el
+         * @param {?} name
+         * @return {?}
+         */
+        MessageBasedRendererV2.prototype.removeClass = function (r, el, name) { r.removeClass(el, name); };
+        /**
+         * @param {?} r
+         * @param {?} el
+         * @param {?} style
+         * @param {?} value
+         * @param {?} hasVendorPrefix
+         * @param {?} hasImportant
+         * @return {?}
+         */
+        MessageBasedRendererV2.prototype.setStyle = function (r, el, style, value, hasVendorPrefix, hasImportant) {
+            r.setStyle(el, style, value, hasVendorPrefix, hasImportant);
+        };
+        /**
+         * @param {?} r
+         * @param {?} el
+         * @param {?} style
+         * @param {?} hasVendorPrefix
+         * @return {?}
+         */
+        MessageBasedRendererV2.prototype.removeStyle = function (r, el, style, hasVendorPrefix) {
+            r.removeStyle(el, style, hasVendorPrefix);
+        };
+        /**
+         * @param {?} r
+         * @param {?} el
+         * @param {?} name
+         * @param {?} value
+         * @return {?}
+         */
+        MessageBasedRendererV2.prototype.setProperty = function (r, el, name, value) {
+            r.setProperty(el, name, value);
+        };
+        /**
+         * @param {?} r
+         * @param {?} node
+         * @param {?} value
+         * @return {?}
+         */
+        MessageBasedRendererV2.prototype.setValue = function (r, node, value) { r.setValue(node, value); };
+        /**
+         * @param {?} r
+         * @param {?} el
+         * @param {?} elName
+         * @param {?} eventName
+         * @param {?} unlistenId
+         * @return {?}
+         */
+        MessageBasedRendererV2.prototype.listen = function (r, el, elName, eventName, unlistenId) {
+            var _this = this;
+            var /** @type {?} */ listener = function (event) {
+                return _this._eventDispatcher.dispatchRenderEvent(el, elName, eventName, event);
+            };
+            var /** @type {?} */ unlisten = r.listen(el || elName, eventName, listener);
+            this._renderStore.store(unlisten, unlistenId);
+        };
+        /**
+         * @param {?} r
+         * @param {?} unlisten
+         * @return {?}
+         */
+        MessageBasedRendererV2.prototype.unlisten = function (r, unlisten) { unlisten(); };
+        return MessageBasedRendererV2;
+    }());
+    MessageBasedRendererV2.decorators = [
+        { type: _angular_core.Injectable },
+    ];
+    /** @nocollapse */
+    MessageBasedRendererV2.ctorParameters = function () { return [
+        { type: ServiceMessageBrokerFactory, },
+        { type: MessageBus, },
+        { type: Serializer, },
+        { type: RenderStore, },
+        { type: _angular_core.RendererFactoryV2, },
+    ]; };
 
     /**
      * Wrapper class that exposes the Worker
@@ -1680,6 +1910,8 @@
         APP_ID_RANDOM_PROVIDER,
         { provide: DomRootRenderer, useClass: DomRootRenderer_ },
         { provide: _angular_core.RootRenderer, useExisting: DomRootRenderer },
+        DomRendererFactoryV2,
+        { provide: _angular_core.RendererFactoryV2, useExisting: DomRendererFactoryV2 },
         { provide: SharedStylesHost, useExisting: DomSharedStylesHost },
         { provide: ServiceMessageBrokerFactory, useClass: ServiceMessageBrokerFactory_ },
         { provide: ClientMessageBrokerFactory, useClass: ClientMessageBrokerFactory_ },
@@ -1697,7 +1929,7 @@
             multi: true,
             deps: [_angular_core.Injector]
         },
-        { provide: MessageBus, useFactory: messageBusFactory, deps: [WebWorkerInstance] }
+        { provide: MessageBus, useFactory: messageBusFactory, deps: [WebWorkerInstance] },
     ];
     /**
      * @param {?} injector
@@ -1777,16 +2009,13 @@
      * @return {?}
      */
     function _resolveDefaultAnimationDriver() {
-        if (getDOM().supportsWebAnimation()) {
-            return new WebAnimationsDriver();
-        }
-        return _angular_platformBrowser.AnimationDriver.NOOP;
+        return getDOM().supportsWebAnimation() ? new WebAnimationsDriver() : _angular_platformBrowser.AnimationDriver.NOOP;
     }
 
     /**
      * @stable
      */
-    var /** @type {?} */ VERSION = new _angular_core.Version('4.0.0-beta.8-1bdf706');
+    var /** @type {?} */ VERSION = new _angular_core.Version('4.0.0-beta.8-601fd3e');
 
     var MessageBasedPlatformLocation = (function () {
         /**
@@ -1808,10 +2037,11 @@
          * @return {?}
          */
         MessageBasedPlatformLocation.prototype.start = function () {
+            var /** @type {?} */ P = 1 /* PRIMITIVE */;
             this._broker.registerMethod('getLocation', null, this._getLocation.bind(this), LocationType);
-            this._broker.registerMethod('setPathname', [PRIMITIVE], this._setPathname.bind(this));
-            this._broker.registerMethod('pushState', [PRIMITIVE, PRIMITIVE, PRIMITIVE], this._platformLocation.pushState.bind(this._platformLocation));
-            this._broker.registerMethod('replaceState', [PRIMITIVE, PRIMITIVE, PRIMITIVE], this._platformLocation.replaceState.bind(this._platformLocation));
+            this._broker.registerMethod('setPathname', [P], this._setPathname.bind(this));
+            this._broker.registerMethod('pushState', [P, P, P], this._platformLocation.pushState.bind(this._platformLocation));
+            this._broker.registerMethod('replaceState', [P, P, P], this._platformLocation.replaceState.bind(this._platformLocation));
             this._broker.registerMethod('forward', null, this._platformLocation.forward.bind(this._platformLocation));
             this._broker.registerMethod('back', null, this._platformLocation.back.bind(this._platformLocation));
         };
@@ -1826,9 +2056,10 @@
          * @return {?}
          */
         MessageBasedPlatformLocation.prototype._sendUrlChangeEvent = function (e) {
-            var /** @type {?} */ loc = this._serializer.serialize(this._platformLocation.location, LocationType);
-            var /** @type {?} */ serializedEvent = { 'type': e.type };
-            this._channelSink.emit({ 'event': serializedEvent, 'location': loc });
+            this._channelSink.emit({
+                'event': { 'type': e.type },
+                'location': this._serializer.serialize(this._platformLocation.location, LocationType),
+            });
         };
         /**
          * @param {?} pathname
@@ -1869,14 +2100,6 @@
     }
 
     /**
-     * @param {?} serializedEvent
-     * @return {?}
-     */
-    function deserializeGenericEvent(serializedEvent) {
-        return serializedEvent;
-    }
-
-    /**
      * @license
      * Copyright Google Inc. All Rights Reserved.
      *
@@ -1914,11 +2137,10 @@
                         else if (type === 'hashchange') {
                             listeners = _this._hashChangeListeners;
                         }
-                        if (listeners !== null) {
-                            var e_1 = deserializeGenericEvent(msg['event']);
+                        if (listeners) {
                             // There was a popState or hashChange event, so the location object thas been updated
                             _this._location = _this._serializer.deserialize(msg['location'], LocationType);
-                            listeners.forEach(function (fn) { return fn(e_1); });
+                            listeners.forEach(function (fn) { return fn(msg['event']); });
                         }
                     }
                 }
@@ -1932,8 +2154,8 @@
         WebWorkerPlatformLocation.prototype.init = function () {
             var _this = this;
             var /** @type {?} */ args = new UiArguments('getLocation');
-            var /** @type {?} */ locationPromise = this._broker.runOnService(args, LocationType);
-            return locationPromise.then(function (val) {
+            return this._broker.runOnService(args, LocationType)
+                .then(function (val) {
                 _this._location = val;
                 return true;
             }, function (err) { throw new Error(err); });
@@ -1958,12 +2180,7 @@
             /**
              * @return {?}
              */
-            get: function () {
-                if (this._location === null) {
-                    return null;
-                }
-                return this._location.pathname;
-            },
+            get: function () { return this._location ? this._location.pathname : null; },
             /**
              * @param {?} newPath
              * @return {?}
@@ -1973,7 +2190,7 @@
                     throw new Error('Attempt to set pathname before value is obtained from UI');
                 }
                 this._location.pathname = newPath;
-                var /** @type {?} */ fnArgs = [new FnArg(newPath, PRIMITIVE)];
+                var /** @type {?} */ fnArgs = [new FnArg(newPath, 1 /* PRIMITIVE */)];
                 var /** @type {?} */ args = new UiArguments('setPathname', fnArgs);
                 this._broker.runOnService(args, null);
             },
@@ -1984,12 +2201,7 @@
             /**
              * @return {?}
              */
-            get: function () {
-                if (this._location === null) {
-                    return null;
-                }
-                return this._location.search;
-            },
+            get: function () { return this._location ? this._location.search : null; },
             enumerable: true,
             configurable: true
         });
@@ -1997,12 +2209,7 @@
             /**
              * @return {?}
              */
-            get: function () {
-                if (this._location === null) {
-                    return null;
-                }
-                return this._location.hash;
-            },
+            get: function () { return this._location ? this._location.hash : null; },
             enumerable: true,
             configurable: true
         });
@@ -2013,7 +2220,11 @@
          * @return {?}
          */
         WebWorkerPlatformLocation.prototype.pushState = function (state, title, url) {
-            var /** @type {?} */ fnArgs = [new FnArg(state, PRIMITIVE), new FnArg(title, PRIMITIVE), new FnArg(url, PRIMITIVE)];
+            var /** @type {?} */ fnArgs = [
+                new FnArg(state, 1 /* PRIMITIVE */),
+                new FnArg(title, 1 /* PRIMITIVE */),
+                new FnArg(url, 1 /* PRIMITIVE */),
+            ];
             var /** @type {?} */ args = new UiArguments('pushState', fnArgs);
             this._broker.runOnService(args, null);
         };
@@ -2024,7 +2235,11 @@
          * @return {?}
          */
         WebWorkerPlatformLocation.prototype.replaceState = function (state, title, url) {
-            var /** @type {?} */ fnArgs = [new FnArg(state, PRIMITIVE), new FnArg(title, PRIMITIVE), new FnArg(url, PRIMITIVE)];
+            var /** @type {?} */ fnArgs = [
+                new FnArg(state, 1 /* PRIMITIVE */),
+                new FnArg(title, 1 /* PRIMITIVE */),
+                new FnArg(url, 1 /* PRIMITIVE */),
+            ];
             var /** @type {?} */ args = new UiArguments('replaceState', fnArgs);
             this._broker.runOnService(args, null);
         };
@@ -2060,12 +2275,13 @@
      * @experimental
      */
     var /** @type {?} */ WORKER_APP_LOCATION_PROVIDERS = [
-        { provide: _angular_common.PlatformLocation, useClass: WebWorkerPlatformLocation }, {
+        { provide: _angular_common.PlatformLocation, useClass: WebWorkerPlatformLocation },
+        {
             provide: _angular_core.APP_INITIALIZER,
             useFactory: appInitFnFactory,
             multi: true,
-            deps: [_angular_common.PlatformLocation, _angular_core.NgZone]
-        }
+            deps: [_angular_common.PlatformLocation, _angular_core.NgZone],
+        },
     ];
     /**
      * @param {?} platformLocation
@@ -2076,75 +2292,55 @@
         return function () { return zone.runGuarded(function () { return platformLocation.init(); }); };
     }
 
-    var ListWrapper = (function () {
-        function ListWrapper() {
+    var NamedEventEmitter = (function () {
+        function NamedEventEmitter() {
         }
         /**
-         * @param {?} arr
-         * @param {?} condition
+         * @param {?} eventName
+         * @param {?} callback
          * @return {?}
          */
-        ListWrapper.findLast = function (arr, condition) {
-            for (var /** @type {?} */ i = arr.length - 1; i >= 0; i--) {
-                if (condition(arr[i])) {
-                    return arr[i];
-                }
-            }
-            return null;
-        };
+        NamedEventEmitter.prototype.listen = function (eventName, callback) { this._getListeners(eventName).push(callback); };
         /**
-         * @param {?} list
-         * @param {?} items
+         * @param {?} eventName
+         * @param {?} listener
          * @return {?}
          */
-        ListWrapper.removeAll = function (list, items) {
-            for (var /** @type {?} */ i = 0; i < items.length; ++i) {
-                var /** @type {?} */ index = list.indexOf(items[i]);
-                if (index > -1) {
-                    list.splice(index, 1);
-                }
-            }
-        };
-        /**
-         * @param {?} list
-         * @param {?} el
-         * @return {?}
-         */
-        ListWrapper.remove = function (list, el) {
-            var /** @type {?} */ index = list.indexOf(el);
+        NamedEventEmitter.prototype.unlisten = function (eventName, listener) {
+            var /** @type {?} */ listeners = this._getListeners(eventName);
+            var /** @type {?} */ index = listeners.indexOf(listener);
             if (index > -1) {
-                list.splice(index, 1);
-                return true;
+                listeners.splice(index, 1);
             }
-            return false;
         };
         /**
-         * @param {?} a
-         * @param {?} b
+         * @param {?} eventName
+         * @param {?} event
          * @return {?}
          */
-        ListWrapper.equals = function (a, b) {
-            if (a.length != b.length)
-                return false;
-            for (var /** @type {?} */ i = 0; i < a.length; ++i) {
-                if (a[i] !== b[i])
-                    return false;
+        NamedEventEmitter.prototype.dispatchEvent = function (eventName, event) {
+            var /** @type {?} */ listeners = this._getListeners(eventName);
+            for (var /** @type {?} */ i = 0; i < listeners.length; i++) {
+                listeners[i](event);
             }
-            return true;
         };
         /**
-         * @param {?} list
+         * @param {?} eventName
          * @return {?}
          */
-        ListWrapper.flatten = function (list) {
-            return list.reduce(function (flat, item) {
-                var /** @type {?} */ flatItem = Array.isArray(item) ? ListWrapper.flatten(item) : item;
-                return ((flat)).concat(flatItem);
-            }, []);
+        NamedEventEmitter.prototype._getListeners = function (eventName) {
+            if (!this._listeners) {
+                this._listeners = new Map();
+            }
+            var /** @type {?} */ listeners = this._listeners.get(eventName);
+            if (!listeners) {
+                listeners = [];
+                this._listeners.set(eventName, listeners);
+            }
+            return listeners;
         };
-        return ListWrapper;
+        return NamedEventEmitter;
     }());
-
     var WebWorkerRootRenderer = (function () {
         /**
          * @param {?} messageBrokerFactory
@@ -2168,18 +2364,18 @@
          * @return {?}
          */
         WebWorkerRootRenderer.prototype._dispatchEvent = function (message) {
-            var /** @type {?} */ element = (this._serializer.deserialize(message['element'], RenderStoreObject));
+            var /** @type {?} */ element = this._serializer.deserialize(message['element'], 2 /* RENDER_STORE_OBJECT */);
             var /** @type {?} */ playerData = message['animationPlayer'];
             if (playerData) {
                 var /** @type {?} */ phaseName = message['phaseName'];
-                var /** @type {?} */ player = (this._serializer.deserialize(playerData, RenderStoreObject));
+                var /** @type {?} */ player = this._serializer.deserialize(playerData, 2 /* RENDER_STORE_OBJECT */);
                 element.animationPlayerEvents.dispatchEvent(player, phaseName);
             }
             else {
                 var /** @type {?} */ eventName = message['eventName'];
                 var /** @type {?} */ target = message['eventTarget'];
-                var /** @type {?} */ event_1 = deserializeGenericEvent(message['event']);
-                if (isPresent(target)) {
+                var /** @type {?} */ event_1 = message['event'];
+                if (target) {
                     this.globalEvents.dispatchEvent(eventNameWithTarget(target, eventName), event_1);
                 }
                 else {
@@ -2200,7 +2396,7 @@
                 this.renderStore.store(result, id);
                 this.runOnService('renderComponent', [
                     new FnArg(componentType, _angular_core.RenderComponentType),
-                    new FnArg(result, RenderStoreObject),
+                    new FnArg(result, 2 /* RENDER_STORE_OBJECT */),
                 ]);
             }
             return result;
@@ -2263,7 +2459,7 @@
          * @return {?}
          */
         WebWorkerRenderer.prototype._runOnService = function (fnName, fnArgs) {
-            var /** @type {?} */ fnArgsWithRenderer = [new FnArg(this, RenderStoreObject)].concat(fnArgs);
+            var /** @type {?} */ fnArgsWithRenderer = [new FnArg(this, 2 /* RENDER_STORE_OBJECT */)].concat(fnArgs);
             this._rootRenderer.runOnService(fnName, fnArgsWithRenderer);
         };
         /**
@@ -2273,7 +2469,10 @@
          */
         WebWorkerRenderer.prototype.selectRootElement = function (selectorOrNode, debugInfo) {
             var /** @type {?} */ node = this._rootRenderer.allocateNode();
-            this._runOnService('selectRootElement', [new FnArg(selectorOrNode, null), new FnArg(node, RenderStoreObject)]);
+            this._runOnService('selectRootElement', [
+                new FnArg(selectorOrNode),
+                new FnArg(node, 2 /* RENDER_STORE_OBJECT */),
+            ]);
             return node;
         };
         /**
@@ -2285,8 +2484,9 @@
         WebWorkerRenderer.prototype.createElement = function (parentElement, name, debugInfo) {
             var /** @type {?} */ node = this._rootRenderer.allocateNode();
             this._runOnService('createElement', [
-                new FnArg(parentElement, RenderStoreObject), new FnArg(name, null),
-                new FnArg(node, RenderStoreObject)
+                new FnArg(parentElement, 2 /* RENDER_STORE_OBJECT */),
+                new FnArg(name),
+                new FnArg(node, 2 /* RENDER_STORE_OBJECT */),
             ]);
             return node;
         };
@@ -2298,7 +2498,10 @@
             var /** @type {?} */ viewRoot = this._componentType.encapsulation === _angular_core.ViewEncapsulation.Native ?
                 this._rootRenderer.allocateNode() :
                 hostElement;
-            this._runOnService('createViewRoot', [new FnArg(hostElement, RenderStoreObject), new FnArg(viewRoot, RenderStoreObject)]);
+            this._runOnService('createViewRoot', [
+                new FnArg(hostElement, 2 /* RENDER_STORE_OBJECT */),
+                new FnArg(viewRoot, 2 /* RENDER_STORE_OBJECT */),
+            ]);
             return viewRoot;
         };
         /**
@@ -2308,7 +2511,10 @@
          */
         WebWorkerRenderer.prototype.createTemplateAnchor = function (parentElement, debugInfo) {
             var /** @type {?} */ node = this._rootRenderer.allocateNode();
-            this._runOnService('createTemplateAnchor', [new FnArg(parentElement, RenderStoreObject), new FnArg(node, RenderStoreObject)]);
+            this._runOnService('createTemplateAnchor', [
+                new FnArg(parentElement, 2 /* RENDER_STORE_OBJECT */),
+                new FnArg(node, 2 /* RENDER_STORE_OBJECT */),
+            ]);
             return node;
         };
         /**
@@ -2320,8 +2526,9 @@
         WebWorkerRenderer.prototype.createText = function (parentElement, value, debugInfo) {
             var /** @type {?} */ node = this._rootRenderer.allocateNode();
             this._runOnService('createText', [
-                new FnArg(parentElement, RenderStoreObject), new FnArg(value, null),
-                new FnArg(node, RenderStoreObject)
+                new FnArg(parentElement, 2 /* RENDER_STORE_OBJECT */),
+                new FnArg(value),
+                new FnArg(node, 2 /* RENDER_STORE_OBJECT */),
             ]);
             return node;
         };
@@ -2331,7 +2538,10 @@
          * @return {?}
          */
         WebWorkerRenderer.prototype.projectNodes = function (parentElement, nodes) {
-            this._runOnService('projectNodes', [new FnArg(parentElement, RenderStoreObject), new FnArg(nodes, RenderStoreObject)]);
+            this._runOnService('projectNodes', [
+                new FnArg(parentElement, 2 /* RENDER_STORE_OBJECT */),
+                new FnArg(nodes, 2 /* RENDER_STORE_OBJECT */),
+            ]);
         };
         /**
          * @param {?} node
@@ -2339,14 +2549,17 @@
          * @return {?}
          */
         WebWorkerRenderer.prototype.attachViewAfter = function (node, viewRootNodes) {
-            this._runOnService('attachViewAfter', [new FnArg(node, RenderStoreObject), new FnArg(viewRootNodes, RenderStoreObject)]);
+            this._runOnService('attachViewAfter', [
+                new FnArg(node, 2 /* RENDER_STORE_OBJECT */),
+                new FnArg(viewRootNodes, 2 /* RENDER_STORE_OBJECT */),
+            ]);
         };
         /**
          * @param {?} viewRootNodes
          * @return {?}
          */
         WebWorkerRenderer.prototype.detachView = function (viewRootNodes) {
-            this._runOnService('detachView', [new FnArg(viewRootNodes, RenderStoreObject)]);
+            this._runOnService('detachView', [new FnArg(viewRootNodes, 2 /* RENDER_STORE_OBJECT */)]);
         };
         /**
          * @param {?} hostElement
@@ -2354,7 +2567,10 @@
          * @return {?}
          */
         WebWorkerRenderer.prototype.destroyView = function (hostElement, viewAllNodes) {
-            this._runOnService('destroyView', [new FnArg(hostElement, RenderStoreObject), new FnArg(viewAllNodes, RenderStoreObject)]);
+            this._runOnService('destroyView', [
+                new FnArg(hostElement, 2 /* RENDER_STORE_OBJECT */),
+                new FnArg(viewAllNodes, 2 /* RENDER_STORE_OBJECT */),
+            ]);
             this._rootRenderer.destroyNodes(viewAllNodes);
         };
         /**
@@ -2365,8 +2581,9 @@
          */
         WebWorkerRenderer.prototype.setElementProperty = function (renderElement, propertyName, propertyValue) {
             this._runOnService('setElementProperty', [
-                new FnArg(renderElement, RenderStoreObject), new FnArg(propertyName, null),
-                new FnArg(propertyValue, null)
+                new FnArg(renderElement, 2 /* RENDER_STORE_OBJECT */),
+                new FnArg(propertyName),
+                new FnArg(propertyValue),
             ]);
         };
         /**
@@ -2377,8 +2594,9 @@
          */
         WebWorkerRenderer.prototype.setElementAttribute = function (renderElement, attributeName, attributeValue) {
             this._runOnService('setElementAttribute', [
-                new FnArg(renderElement, RenderStoreObject), new FnArg(attributeName, null),
-                new FnArg(attributeValue, null)
+                new FnArg(renderElement, 2 /* RENDER_STORE_OBJECT */),
+                new FnArg(attributeName),
+                new FnArg(attributeValue),
             ]);
         };
         /**
@@ -2389,8 +2607,9 @@
          */
         WebWorkerRenderer.prototype.setBindingDebugInfo = function (renderElement, propertyName, propertyValue) {
             this._runOnService('setBindingDebugInfo', [
-                new FnArg(renderElement, RenderStoreObject), new FnArg(propertyName, null),
-                new FnArg(propertyValue, null)
+                new FnArg(renderElement, 2 /* RENDER_STORE_OBJECT */),
+                new FnArg(propertyName),
+                new FnArg(propertyValue),
             ]);
         };
         /**
@@ -2401,8 +2620,9 @@
          */
         WebWorkerRenderer.prototype.setElementClass = function (renderElement, className, isAdd) {
             this._runOnService('setElementClass', [
-                new FnArg(renderElement, RenderStoreObject), new FnArg(className, null),
-                new FnArg(isAdd, null)
+                new FnArg(renderElement, 2 /* RENDER_STORE_OBJECT */),
+                new FnArg(className),
+                new FnArg(isAdd),
             ]);
         };
         /**
@@ -2413,8 +2633,9 @@
          */
         WebWorkerRenderer.prototype.setElementStyle = function (renderElement, styleName, styleValue) {
             this._runOnService('setElementStyle', [
-                new FnArg(renderElement, RenderStoreObject), new FnArg(styleName, null),
-                new FnArg(styleValue, null)
+                new FnArg(renderElement, 2 /* RENDER_STORE_OBJECT */),
+                new FnArg(styleName),
+                new FnArg(styleValue),
             ]);
         };
         /**
@@ -2425,8 +2646,9 @@
          */
         WebWorkerRenderer.prototype.invokeElementMethod = function (renderElement, methodName, args) {
             this._runOnService('invokeElementMethod', [
-                new FnArg(renderElement, RenderStoreObject), new FnArg(methodName, null),
-                new FnArg(args, null)
+                new FnArg(renderElement, 2 /* RENDER_STORE_OBJECT */),
+                new FnArg(methodName),
+                new FnArg(args),
             ]);
         };
         /**
@@ -2435,7 +2657,10 @@
          * @return {?}
          */
         WebWorkerRenderer.prototype.setText = function (renderNode, text) {
-            this._runOnService('setText', [new FnArg(renderNode, RenderStoreObject), new FnArg(text, null)]);
+            this._runOnService('setText', [
+                new FnArg(renderNode, 2 /* RENDER_STORE_OBJECT */),
+                new FnArg(text),
+            ]);
         };
         /**
          * @param {?} renderElement
@@ -2448,12 +2673,13 @@
             renderElement.events.listen(name, callback);
             var /** @type {?} */ unlistenCallbackId = this._rootRenderer.allocateId();
             this._runOnService('listen', [
-                new FnArg(renderElement, RenderStoreObject), new FnArg(name, null),
-                new FnArg(unlistenCallbackId, null)
+                new FnArg(renderElement, 2 /* RENDER_STORE_OBJECT */),
+                new FnArg(name),
+                new FnArg(unlistenCallbackId),
             ]);
             return function () {
                 renderElement.events.unlisten(name, callback);
-                _this._runOnService('listenDone', [new FnArg(unlistenCallbackId, null)]);
+                _this._runOnService('listenDone', [new FnArg(unlistenCallbackId)]);
             };
         };
         /**
@@ -2466,10 +2692,14 @@
             var _this = this;
             this._rootRenderer.globalEvents.listen(eventNameWithTarget(target, name), callback);
             var /** @type {?} */ unlistenCallbackId = this._rootRenderer.allocateId();
-            this._runOnService('listenGlobal', [new FnArg(target, null), new FnArg(name, null), new FnArg(unlistenCallbackId, null)]);
+            this._runOnService('listenGlobal', [
+                new FnArg(target),
+                new FnArg(name, null),
+                new FnArg(unlistenCallbackId),
+            ]);
             return function () {
                 _this._rootRenderer.globalEvents.unlisten(eventNameWithTarget(target, name), callback);
-                _this._runOnService('listenDone', [new FnArg(unlistenCallbackId, null)]);
+                _this._runOnService('listenDone', [new FnArg(unlistenCallbackId)]);
             };
         };
         /**
@@ -2488,9 +2718,14 @@
             var /** @type {?} */ playerId = this._rootRenderer.allocateId();
             var /** @type {?} */ previousPlayerIds = previousPlayers.map(function (player) { return _this._rootRenderer.renderStore.serialize(player); });
             this._runOnService('animate', [
-                new FnArg(renderElement, RenderStoreObject), new FnArg(startingStyles, null),
-                new FnArg(keyframes, null), new FnArg(duration, null), new FnArg(delay, null),
-                new FnArg(easing, null), new FnArg(previousPlayerIds, null), new FnArg(playerId, null)
+                new FnArg(renderElement, 2 /* RENDER_STORE_OBJECT */),
+                new FnArg(startingStyles),
+                new FnArg(keyframes),
+                new FnArg(duration),
+                new FnArg(delay),
+                new FnArg(easing),
+                new FnArg(previousPlayerIds),
+                new FnArg(playerId),
             ]);
             var /** @type {?} */ player = new _AnimationWorkerRendererPlayer(this._rootRenderer, renderElement);
             this._rootRenderer.renderStore.store(player, playerId);
@@ -2498,50 +2733,383 @@
         };
         return WebWorkerRenderer;
     }());
-    var NamedEventEmitter = (function () {
-        function NamedEventEmitter() {
+    /**
+     * @param {?} target
+     * @param {?} eventName
+     * @return {?}
+     */
+    function eventNameWithTarget(target, eventName) {
+        return target + ":" + eventName;
+    }
+    var WebWorkerRendererFactoryV2 = (function () {
+        /**
+         * @param {?} messageBrokerFactory
+         * @param {?} bus
+         * @param {?} _serializer
+         * @param {?} renderStore
+         */
+        function WebWorkerRendererFactoryV2(messageBrokerFactory, bus, _serializer, renderStore) {
+            var _this = this;
+            this._serializer = _serializer;
+            this.renderStore = renderStore;
+            this.globalEvents = new NamedEventEmitter();
+            this._messageBroker = messageBrokerFactory.createMessageBroker(RENDERER_V2_CHANNEL);
+            bus.initChannel(EVENT_V2_CHANNEL);
+            var source = bus.from(EVENT_V2_CHANNEL);
+            source.subscribe({ next: function (message) { return _this._dispatchEvent(message); } });
         }
         /**
-         * @param {?} eventName
+         * @param {?} element
+         * @param {?} type
          * @return {?}
          */
-        NamedEventEmitter.prototype._getListeners = function (eventName) {
-            if (!this._listeners) {
-                this._listeners = new Map();
-            }
-            var /** @type {?} */ listeners = this._listeners.get(eventName);
-            if (!listeners) {
-                listeners = [];
-                this._listeners.set(eventName, listeners);
-            }
-            return listeners;
+        WebWorkerRendererFactoryV2.prototype.createRenderer = function (element, type) {
+            var /** @type {?} */ renderer = new WebWorkerRendererV2(this);
+            var /** @type {?} */ id = this.renderStore.allocateId();
+            this.renderStore.store(renderer, id);
+            this.callUI('createRenderer', [
+                new FnArg(element, 2 /* RENDER_STORE_OBJECT */),
+                new FnArg(type, 0 /* RENDERER_TYPE_V2 */),
+                new FnArg(renderer, 2 /* RENDER_STORE_OBJECT */),
+            ]);
+            return renderer;
         };
         /**
-         * @param {?} eventName
-         * @param {?} callback
+         * @param {?} fnName
+         * @param {?} fnArgs
          * @return {?}
          */
-        NamedEventEmitter.prototype.listen = function (eventName, callback) { this._getListeners(eventName).push(callback); };
-        /**
-         * @param {?} eventName
-         * @param {?} callback
-         * @return {?}
-         */
-        NamedEventEmitter.prototype.unlisten = function (eventName, callback) {
-            ListWrapper.remove(this._getListeners(eventName), callback);
+        WebWorkerRendererFactoryV2.prototype.callUI = function (fnName, fnArgs) {
+            var /** @type {?} */ args = new UiArguments(fnName, fnArgs);
+            this._messageBroker.runOnService(args, null);
         };
         /**
-         * @param {?} eventName
-         * @param {?} event
          * @return {?}
          */
-        NamedEventEmitter.prototype.dispatchEvent = function (eventName, event) {
-            var /** @type {?} */ listeners = this._getListeners(eventName);
-            for (var /** @type {?} */ i = 0; i < listeners.length; i++) {
-                listeners[i](event);
+        WebWorkerRendererFactoryV2.prototype.allocateNode = function () {
+            var /** @type {?} */ result = new WebWorkerRenderNode();
+            var /** @type {?} */ id = this.renderStore.allocateId();
+            this.renderStore.store(result, id);
+            return result;
+        };
+        /**
+         * @param {?} node
+         * @return {?}
+         */
+        WebWorkerRendererFactoryV2.prototype.freeNode = function (node) { this.renderStore.remove(node); };
+        /**
+         * @return {?}
+         */
+        WebWorkerRendererFactoryV2.prototype.allocateId = function () { return this.renderStore.allocateId(); };
+        /**
+         * @param {?} message
+         * @return {?}
+         */
+        WebWorkerRendererFactoryV2.prototype._dispatchEvent = function (message) {
+            var /** @type {?} */ element = this._serializer.deserialize(message['element'], 2 /* RENDER_STORE_OBJECT */);
+            var /** @type {?} */ eventName = message['eventName'];
+            var /** @type {?} */ target = message['eventTarget'];
+            var /** @type {?} */ event = message['event'];
+            if (target) {
+                this.globalEvents.dispatchEvent(eventNameWithTarget(target, eventName), event);
+            }
+            else {
+                element.events.dispatchEvent(eventName, event);
             }
         };
-        return NamedEventEmitter;
+        return WebWorkerRendererFactoryV2;
+    }());
+    WebWorkerRendererFactoryV2.decorators = [
+        { type: _angular_core.Injectable },
+    ];
+    /** @nocollapse */
+    WebWorkerRendererFactoryV2.ctorParameters = function () { return [
+        { type: ClientMessageBrokerFactory, },
+        { type: MessageBus, },
+        { type: Serializer, },
+        { type: RenderStore, },
+    ]; };
+    var WebWorkerRendererV2 = (function () {
+        /**
+         * @param {?} _rendererFactory
+         */
+        function WebWorkerRendererV2(_rendererFactory) {
+            this._rendererFactory = _rendererFactory;
+            this.asFnArg = new FnArg(this, 2 /* RENDER_STORE_OBJECT */);
+        }
+        /**
+         * @return {?}
+         */
+        WebWorkerRendererV2.prototype.destroy = function () { this.callUIWithRenderer('destroy'); };
+        /**
+         * @param {?} node
+         * @return {?}
+         */
+        WebWorkerRendererV2.prototype.destroyNode = function (node) {
+            this.callUIWithRenderer('destroyNode', [new FnArg(node, 2 /* RENDER_STORE_OBJECT */)]);
+            this._rendererFactory.freeNode(node);
+        };
+        /**
+         * @param {?} name
+         * @param {?=} namespace
+         * @return {?}
+         */
+        WebWorkerRendererV2.prototype.createElement = function (name, namespace) {
+            var /** @type {?} */ node = this._rendererFactory.allocateNode();
+            this.callUIWithRenderer('createElement', [
+                new FnArg(name),
+                new FnArg(namespace),
+                new FnArg(node, 2 /* RENDER_STORE_OBJECT */),
+            ]);
+            return node;
+        };
+        /**
+         * @param {?} value
+         * @return {?}
+         */
+        WebWorkerRendererV2.prototype.createComment = function (value) {
+            var /** @type {?} */ node = this._rendererFactory.allocateNode();
+            this.callUIWithRenderer('createComment', [
+                new FnArg(value),
+                new FnArg(node, 2 /* RENDER_STORE_OBJECT */),
+            ]);
+            return node;
+        };
+        /**
+         * @param {?} value
+         * @return {?}
+         */
+        WebWorkerRendererV2.prototype.createText = function (value) {
+            var /** @type {?} */ node = this._rendererFactory.allocateNode();
+            this.callUIWithRenderer('createText', [
+                new FnArg(value),
+                new FnArg(node, 2 /* RENDER_STORE_OBJECT */),
+            ]);
+            return node;
+        };
+        /**
+         * @param {?} parent
+         * @param {?} newChild
+         * @return {?}
+         */
+        WebWorkerRendererV2.prototype.appendChild = function (parent, newChild) {
+            this.callUIWithRenderer('appendChild', [
+                new FnArg(parent, 2 /* RENDER_STORE_OBJECT */),
+                new FnArg(newChild, 2 /* RENDER_STORE_OBJECT */),
+            ]);
+        };
+        /**
+         * @param {?} parent
+         * @param {?} newChild
+         * @param {?} refChild
+         * @return {?}
+         */
+        WebWorkerRendererV2.prototype.insertBefore = function (parent, newChild, refChild) {
+            if (!parent) {
+                return;
+            }
+            this.callUIWithRenderer('insertBefore', [
+                new FnArg(parent, 2 /* RENDER_STORE_OBJECT */),
+                new FnArg(newChild, 2 /* RENDER_STORE_OBJECT */),
+                new FnArg(refChild, 2 /* RENDER_STORE_OBJECT */),
+            ]);
+        };
+        /**
+         * @param {?} parent
+         * @param {?} oldChild
+         * @return {?}
+         */
+        WebWorkerRendererV2.prototype.removeChild = function (parent, oldChild) {
+            this.callUIWithRenderer('removeChild', [
+                new FnArg(parent, 2 /* RENDER_STORE_OBJECT */),
+                new FnArg(oldChild, 2 /* RENDER_STORE_OBJECT */),
+            ]);
+        };
+        /**
+         * @param {?} selectorOrNode
+         * @return {?}
+         */
+        WebWorkerRendererV2.prototype.selectRootElement = function (selectorOrNode) {
+            var /** @type {?} */ node = this._rendererFactory.allocateNode();
+            this.callUIWithRenderer('selectRootElement', [
+                new FnArg(selectorOrNode),
+                new FnArg(node, 2 /* RENDER_STORE_OBJECT */),
+            ]);
+            return node;
+        };
+        /**
+         * @param {?} node
+         * @return {?}
+         */
+        WebWorkerRendererV2.prototype.parentNode = function (node) {
+            var /** @type {?} */ res = this._rendererFactory.allocateNode();
+            this.callUIWithRenderer('parentNode', [
+                new FnArg(node, 2 /* RENDER_STORE_OBJECT */),
+                new FnArg(res, 2 /* RENDER_STORE_OBJECT */),
+            ]);
+            return res;
+        };
+        /**
+         * @param {?} node
+         * @return {?}
+         */
+        WebWorkerRendererV2.prototype.nextSibling = function (node) {
+            var /** @type {?} */ res = this._rendererFactory.allocateNode();
+            this.callUIWithRenderer('nextSibling', [
+                new FnArg(node, 2 /* RENDER_STORE_OBJECT */),
+                new FnArg(res, 2 /* RENDER_STORE_OBJECT */),
+            ]);
+            return res;
+        };
+        /**
+         * @param {?} el
+         * @param {?} name
+         * @param {?} value
+         * @param {?=} namespace
+         * @return {?}
+         */
+        WebWorkerRendererV2.prototype.setAttribute = function (el, name, value, namespace) {
+            this.callUIWithRenderer('setAttribute', [
+                new FnArg(el, 2 /* RENDER_STORE_OBJECT */),
+                new FnArg(name),
+                new FnArg(value),
+                new FnArg(namespace),
+            ]);
+        };
+        /**
+         * @param {?} el
+         * @param {?} name
+         * @param {?=} namespace
+         * @return {?}
+         */
+        WebWorkerRendererV2.prototype.removeAttribute = function (el, name, namespace) {
+            this.callUIWithRenderer('removeAttribute', [
+                new FnArg(el, 2 /* RENDER_STORE_OBJECT */),
+                new FnArg(name),
+                new FnArg(namespace),
+            ]);
+        };
+        /**
+         * @param {?} el
+         * @param {?} name
+         * @return {?}
+         */
+        WebWorkerRendererV2.prototype.addClass = function (el, name) {
+            this.callUIWithRenderer('addClass', [
+                new FnArg(el, 2 /* RENDER_STORE_OBJECT */),
+                new FnArg(name),
+            ]);
+        };
+        /**
+         * @param {?} el
+         * @param {?} name
+         * @return {?}
+         */
+        WebWorkerRendererV2.prototype.removeClass = function (el, name) {
+            this.callUIWithRenderer('removeClass', [
+                new FnArg(el, 2 /* RENDER_STORE_OBJECT */),
+                new FnArg(name),
+            ]);
+        };
+        /**
+         * @param {?} el
+         * @param {?} style
+         * @param {?} value
+         * @param {?} hasVendorPrefix
+         * @param {?} hasImportant
+         * @return {?}
+         */
+        WebWorkerRendererV2.prototype.setStyle = function (el, style, value, hasVendorPrefix, hasImportant) {
+            this.callUIWithRenderer('setStyle', [
+                new FnArg(el, 2 /* RENDER_STORE_OBJECT */),
+                new FnArg(style),
+                new FnArg(value),
+                new FnArg(hasVendorPrefix),
+                new FnArg(hasImportant),
+            ]);
+        };
+        /**
+         * @param {?} el
+         * @param {?} style
+         * @param {?} hasVendorPrefix
+         * @return {?}
+         */
+        WebWorkerRendererV2.prototype.removeStyle = function (el, style, hasVendorPrefix) {
+            this.callUIWithRenderer('removeStyle', [
+                new FnArg(el, 2 /* RENDER_STORE_OBJECT */),
+                new FnArg(style),
+                new FnArg(hasVendorPrefix),
+            ]);
+        };
+        /**
+         * @param {?} el
+         * @param {?} name
+         * @param {?} value
+         * @return {?}
+         */
+        WebWorkerRendererV2.prototype.setProperty = function (el, name, value) {
+            this.callUIWithRenderer('setProperty', [
+                new FnArg(el, 2 /* RENDER_STORE_OBJECT */),
+                new FnArg(name),
+                new FnArg(value),
+            ]);
+        };
+        /**
+         * @param {?} node
+         * @param {?} value
+         * @return {?}
+         */
+        WebWorkerRendererV2.prototype.setValue = function (node, value) {
+            this.callUIWithRenderer('setValue', [
+                new FnArg(node, 2 /* RENDER_STORE_OBJECT */),
+                new FnArg(value),
+            ]);
+        };
+        /**
+         * @param {?} target
+         * @param {?} eventName
+         * @param {?} listener
+         * @return {?}
+         */
+        WebWorkerRendererV2.prototype.listen = function (target, eventName, listener) {
+            var _this = this;
+            var /** @type {?} */ unlistenId = this._rendererFactory.allocateId();
+            var _a = typeof target === 'string' ?
+                [null, target, target + ":" + eventName] :
+                [target, null, null], targetEl = _a[0], targetName = _a[1], fullName = _a[2];
+            if (fullName) {
+                this._rendererFactory.globalEvents.listen(fullName, listener);
+            }
+            else {
+                targetEl.events.listen(eventName, listener);
+            }
+            this.callUIWithRenderer('listen', [
+                new FnArg(targetEl, 2 /* RENDER_STORE_OBJECT */),
+                new FnArg(targetName),
+                new FnArg(eventName),
+                new FnArg(unlistenId),
+            ]);
+            return function () {
+                if (fullName) {
+                    _this._rendererFactory.globalEvents.unlisten(fullName, listener);
+                }
+                else {
+                    targetEl.events.unlisten(eventName, listener);
+                }
+                _this.callUIWithRenderer('unlisten', [new FnArg(unlistenId)]);
+            };
+        };
+        /**
+         * @param {?} fnName
+         * @param {?=} fnArgs
+         * @return {?}
+         */
+        WebWorkerRendererV2.prototype.callUIWithRenderer = function (fnName, fnArgs) {
+            if (fnArgs === void 0) { fnArgs = []; }
+            // always pass the renderer as the first arg
+            this._rendererFactory.callUI(fnName, [this.asFnArg].concat(fnArgs));
+        };
+        return WebWorkerRendererV2;
     }());
     var AnimationPlayerEmitter = (function () {
         function AnimationPlayerEmitter() {
@@ -2592,14 +3160,6 @@
         };
         return AnimationPlayerEmitter;
     }());
-    /**
-     * @param {?} target
-     * @param {?} eventName
-     * @return {?}
-     */
-    function eventNameWithTarget(target, eventName) {
-        return target + ":" + eventName;
-    }
     var WebWorkerRenderNode = (function () {
         function WebWorkerRenderNode() {
             this.events = new NamedEventEmitter();
@@ -2627,7 +3187,8 @@
         _AnimationWorkerRendererPlayer.prototype._runOnService = function (fnName, fnArgs) {
             if (!this._destroyed) {
                 var /** @type {?} */ fnArgsWithRenderer = [
-                    new FnArg(this, RenderStoreObject), new FnArg(this._renderElement, RenderStoreObject)
+                    new FnArg(this, 2 /* RENDER_STORE_OBJECT */),
+                    new FnArg(this._renderElement, 2 /* RENDER_STORE_OBJECT */)
                 ].concat(fnArgs);
                 this._rootRenderer.runOnService(ANIMATION_WORKER_PLAYER_PREFIX + fnName, fnArgsWithRenderer);
             }
@@ -2702,7 +3263,7 @@
          * @param {?} p
          * @return {?}
          */
-        _AnimationWorkerRendererPlayer.prototype.setPosition = function (p) { this._runOnService('setPosition', [new FnArg(p, null)]); };
+        _AnimationWorkerRendererPlayer.prototype.setPosition = function (p) { this._runOnService('setPosition', [new FnArg(p)]); };
         /**
          * @return {?}
          */
@@ -3448,16 +4009,25 @@
     WorkerAppModule.decorators = [
         { type: _angular_core.NgModule, args: [{
                     providers: [
-                        BROWSER_SANITIZATION_PROVIDERS, Serializer, { provide: _angular_platformBrowser.DOCUMENT, useValue: null },
+                        BROWSER_SANITIZATION_PROVIDERS,
+                        Serializer,
+                        { provide: _angular_platformBrowser.DOCUMENT, useValue: null },
                         { provide: ClientMessageBrokerFactory, useClass: ClientMessageBrokerFactory_ },
                         { provide: ServiceMessageBrokerFactory, useClass: ServiceMessageBrokerFactory_ },
-                        WebWorkerRootRenderer, { provide: _angular_core.RootRenderer, useExisting: WebWorkerRootRenderer },
-                        { provide: ON_WEB_WORKER, useValue: true }, RenderStore,
+                        WebWorkerRootRenderer,
+                        { provide: _angular_core.RootRenderer, useExisting: WebWorkerRootRenderer },
+                        WebWorkerRendererFactoryV2,
+                        { provide: _angular_core.RendererFactoryV2, useExisting: WebWorkerRendererFactoryV2 },
+                        { provide: ON_WEB_WORKER, useValue: true },
+                        RenderStore,
                         { provide: _angular_core.ErrorHandler, useFactory: errorHandler, deps: [] },
                         { provide: MessageBus, useFactory: createMessageBus, deps: [_angular_core.NgZone] },
-                        { provide: _angular_core.APP_INITIALIZER, useValue: setupWebWorker, multi: true }
+                        { provide: _angular_core.APP_INITIALIZER, useValue: setupWebWorker, multi: true },
                     ],
-                    exports: [_angular_common.CommonModule, _angular_core.ApplicationModule]
+                    exports: [
+                        _angular_common.CommonModule,
+                        _angular_core.ApplicationModule,
+                    ]
                 },] },
     ];
     /** @nocollapse */
@@ -3474,11 +4044,10 @@
     function bootstrapWorkerUi(workerScriptUri, customProviders) {
         if (customProviders === void 0) { customProviders = []; }
         // For now, just creates the worker ui platform...
-        return Promise.resolve(platformWorkerUi((([{
-                provide: WORKER_SCRIPT,
-                useValue: workerScriptUri,
-            }]))
-            .concat(customProviders)));
+        var /** @type {?} */ platform = platformWorkerUi([
+            { provide: WORKER_SCRIPT, useValue: workerScriptUri }
+        ].concat(customProviders));
+        return Promise.resolve(platform);
     }
 
     exports.VERSION = VERSION;
@@ -3488,7 +4057,6 @@
     exports.UiArguments = UiArguments;
     exports.MessageBus = MessageBus;
     exports.PRIMITIVE = PRIMITIVE;
-    exports.ReceivedMessage = ReceivedMessage;
     exports.ServiceMessageBroker = ServiceMessageBroker;
     exports.ServiceMessageBrokerFactory = ServiceMessageBrokerFactory;
     exports.WORKER_UI_LOCATION_PROVIDERS = WORKER_UI_LOCATION_PROVIDERS;

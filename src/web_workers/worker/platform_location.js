@@ -15,9 +15,7 @@ import { Injectable } from '@angular/core';
 import { ClientMessageBrokerFactory, FnArg, UiArguments } from '../shared/client_message_broker';
 import { MessageBus } from '../shared/message_bus';
 import { ROUTER_CHANNEL } from '../shared/messaging_api';
-import { LocationType } from '../shared/serialized_types';
-import { PRIMITIVE, Serializer } from '../shared/serializer';
-import { deserializeGenericEvent } from './event_deserializer';
+import { LocationType, Serializer } from '../shared/serializer';
 var WebWorkerPlatformLocation = (function (_super) {
     __extends(WebWorkerPlatformLocation, _super);
     /**
@@ -44,11 +42,10 @@ var WebWorkerPlatformLocation = (function (_super) {
                     else if (type === 'hashchange') {
                         listeners = _this._hashChangeListeners;
                     }
-                    if (listeners !== null) {
-                        var e_1 = deserializeGenericEvent(msg['event']);
+                    if (listeners) {
                         // There was a popState or hashChange event, so the location object thas been updated
                         _this._location = _this._serializer.deserialize(msg['location'], LocationType);
-                        listeners.forEach(function (fn) { return fn(e_1); });
+                        listeners.forEach(function (fn) { return fn(msg['event']); });
                     }
                 }
             }
@@ -62,8 +59,8 @@ var WebWorkerPlatformLocation = (function (_super) {
     WebWorkerPlatformLocation.prototype.init = function () {
         var _this = this;
         var /** @type {?} */ args = new UiArguments('getLocation');
-        var /** @type {?} */ locationPromise = this._broker.runOnService(args, LocationType);
-        return locationPromise.then(function (val) {
+        return this._broker.runOnService(args, LocationType)
+            .then(function (val) {
             _this._location = val;
             return true;
         }, function (err) { throw new Error(err); });
@@ -88,12 +85,7 @@ var WebWorkerPlatformLocation = (function (_super) {
         /**
          * @return {?}
          */
-        get: function () {
-            if (this._location === null) {
-                return null;
-            }
-            return this._location.pathname;
-        },
+        get: function () { return this._location ? this._location.pathname : null; },
         /**
          * @param {?} newPath
          * @return {?}
@@ -103,7 +95,7 @@ var WebWorkerPlatformLocation = (function (_super) {
                 throw new Error('Attempt to set pathname before value is obtained from UI');
             }
             this._location.pathname = newPath;
-            var /** @type {?} */ fnArgs = [new FnArg(newPath, PRIMITIVE)];
+            var /** @type {?} */ fnArgs = [new FnArg(newPath, 1 /* PRIMITIVE */)];
             var /** @type {?} */ args = new UiArguments('setPathname', fnArgs);
             this._broker.runOnService(args, null);
         },
@@ -114,12 +106,7 @@ var WebWorkerPlatformLocation = (function (_super) {
         /**
          * @return {?}
          */
-        get: function () {
-            if (this._location === null) {
-                return null;
-            }
-            return this._location.search;
-        },
+        get: function () { return this._location ? this._location.search : null; },
         enumerable: true,
         configurable: true
     });
@@ -127,12 +114,7 @@ var WebWorkerPlatformLocation = (function (_super) {
         /**
          * @return {?}
          */
-        get: function () {
-            if (this._location === null) {
-                return null;
-            }
-            return this._location.hash;
-        },
+        get: function () { return this._location ? this._location.hash : null; },
         enumerable: true,
         configurable: true
     });
@@ -143,7 +125,11 @@ var WebWorkerPlatformLocation = (function (_super) {
      * @return {?}
      */
     WebWorkerPlatformLocation.prototype.pushState = function (state, title, url) {
-        var /** @type {?} */ fnArgs = [new FnArg(state, PRIMITIVE), new FnArg(title, PRIMITIVE), new FnArg(url, PRIMITIVE)];
+        var /** @type {?} */ fnArgs = [
+            new FnArg(state, 1 /* PRIMITIVE */),
+            new FnArg(title, 1 /* PRIMITIVE */),
+            new FnArg(url, 1 /* PRIMITIVE */),
+        ];
         var /** @type {?} */ args = new UiArguments('pushState', fnArgs);
         this._broker.runOnService(args, null);
     };
@@ -154,7 +140,11 @@ var WebWorkerPlatformLocation = (function (_super) {
      * @return {?}
      */
     WebWorkerPlatformLocation.prototype.replaceState = function (state, title, url) {
-        var /** @type {?} */ fnArgs = [new FnArg(state, PRIMITIVE), new FnArg(title, PRIMITIVE), new FnArg(url, PRIMITIVE)];
+        var /** @type {?} */ fnArgs = [
+            new FnArg(state, 1 /* PRIMITIVE */),
+            new FnArg(title, 1 /* PRIMITIVE */),
+            new FnArg(url, 1 /* PRIMITIVE */),
+        ];
         var /** @type {?} */ args = new UiArguments('replaceState', fnArgs);
         this._broker.runOnService(args, null);
     };
