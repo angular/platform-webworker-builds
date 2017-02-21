@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.0.0-beta.8-c2e0f71
+ * @license Angular v4.0.0-beta.8-2a191ca
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -2015,7 +2015,7 @@
     /**
      * @stable
      */
-    var /** @type {?} */ VERSION = new _angular_core.Version('4.0.0-beta.8-c2e0f71');
+    var /** @type {?} */ VERSION = new _angular_core.Version('4.0.0-beta.8-2a191ca');
 
     var MessageBasedPlatformLocation = (function () {
         /**
@@ -2145,6 +2145,7 @@
                     }
                 }
             });
+            _this.initialized = new Promise(function (res) { return _this.initializedResolve = res; });
             return _this;
         }
         /**
@@ -2157,6 +2158,7 @@
             return this._broker.runOnService(args, LocationType)
                 .then(function (val) {
                 _this._location = val;
+                _this.initializedResolve();
                 return true;
             }, function (err) { throw new Error(err); });
         };
@@ -2282,7 +2284,19 @@
             multi: true,
             deps: [_angular_common.PlatformLocation, _angular_core.NgZone],
         },
+        {
+            provide: _angular_common.LOCATION_INITIALIZED,
+            useFactory: locationInitialized,
+            deps: [_angular_common.PlatformLocation],
+        },
     ];
+    /**
+     * @param {?} platformLocation
+     * @return {?}
+     */
+    function locationInitialized(platformLocation) {
+        return platformLocation.initialized;
+    }
     /**
      * @param {?} platformLocation
      * @param {?} zone

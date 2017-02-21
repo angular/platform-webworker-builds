@@ -5,7 +5,7 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import { PlatformLocation } from '@angular/common';
+import { LOCATION_INITIALIZED, PlatformLocation } from '@angular/common';
 import { APP_INITIALIZER, NgZone } from '@angular/core';
 import { WebWorkerPlatformLocation } from './platform_location';
 /**
@@ -21,13 +21,25 @@ export var /** @type {?} */ WORKER_APP_LOCATION_PROVIDERS = [
         multi: true,
         deps: [PlatformLocation, NgZone],
     },
+    {
+        provide: LOCATION_INITIALIZED,
+        useFactory: locationInitialized,
+        deps: [PlatformLocation],
+    },
 ];
+/**
+ * @param {?} platformLocation
+ * @return {?}
+ */
+export function locationInitialized(platformLocation) {
+    return platformLocation.initialized;
+}
 /**
  * @param {?} platformLocation
  * @param {?} zone
  * @return {?}
  */
-function appInitFnFactory(platformLocation, zone) {
+export function appInitFnFactory(platformLocation, zone) {
     return function () { return zone.runGuarded(function () { return platformLocation.init(); }); };
 }
 //# sourceMappingURL=location_providers.js.map
