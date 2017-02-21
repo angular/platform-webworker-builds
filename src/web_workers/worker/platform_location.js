@@ -50,7 +50,6 @@ var WebWorkerPlatformLocation = (function (_super) {
                 }
             }
         });
-        _this.initialized = new Promise(function (res) { return _this.initializedResolve = res; });
         return _this;
     }
     /**
@@ -63,7 +62,6 @@ var WebWorkerPlatformLocation = (function (_super) {
         return this._broker.runOnService(args, LocationType)
             .then(function (val) {
             _this._location = val;
-            _this.initializedResolve();
             return true;
         }, function (err) { throw new Error(err); });
     };
@@ -194,10 +192,6 @@ function WebWorkerPlatformLocation_tsickle_Closure_declarations() {
     WebWorkerPlatformLocation.prototype._location;
     /** @type {?} */
     WebWorkerPlatformLocation.prototype._channelSource;
-    /** @type {?} */
-    WebWorkerPlatformLocation.prototype.initialized;
-    /** @type {?} */
-    WebWorkerPlatformLocation.prototype.initializedResolve;
     /** @type {?} */
     WebWorkerPlatformLocation.prototype._serializer;
 }
