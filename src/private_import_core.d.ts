@@ -9,8 +9,6 @@ import { __core_private__ as r } from '@angular/core';
 export declare type RenderDebugInfo = typeof r._RenderDebugInfo;
 export declare const RenderDebugInfo: typeof r.RenderDebugInfo;
 export declare const ReflectionCapabilities: typeof r.ReflectionCapabilities;
-export declare type DebugDomRootRenderer = typeof r._DebugDomRootRenderer;
-export declare const DebugDomRootRenderer: typeof r.DebugDomRootRenderer;
 export declare const reflector: typeof r.reflector;
 export declare type NoOpAnimationPlayer = typeof r._NoOpAnimationPlayer;
 export declare const NoOpAnimationPlayer: typeof r.NoOpAnimationPlayer;

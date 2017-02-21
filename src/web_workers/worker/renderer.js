@@ -6,14 +6,61 @@
  * found in the LICENSE file at https://angular.io/license
  */
 import { Injectable, RenderComponentType, ViewEncapsulation } from '@angular/core/index';
-import { ListWrapper } from '../../facade/collection';
-import { isPresent } from '../../facade/lang';
 import { ClientMessageBrokerFactory, FnArg, UiArguments } from '../shared/client_message_broker';
 import { MessageBus } from '../shared/message_bus';
-import { EVENT_CHANNEL, RENDERER_CHANNEL } from '../shared/messaging_api';
+import { EVENT_CHANNEL, EVENT_V2_CHANNEL, RENDERER_CHANNEL, RENDERER_V2_CHANNEL } from '../shared/messaging_api';
 import { RenderStore } from '../shared/render_store';
-import { ANIMATION_WORKER_PLAYER_PREFIX, RenderStoreObject, Serializer } from '../shared/serializer';
-import { deserializeGenericEvent } from './event_deserializer';
+import { ANIMATION_WORKER_PLAYER_PREFIX, Serializer } from '../shared/serializer';
+export class NamedEventEmitter {
+    /**
+     * @param {?} eventName
+     * @param {?} callback
+     * @return {?}
+     */
+    listen(eventName, callback) { this._getListeners(eventName).push(callback); }
+    /**
+     * @param {?} eventName
+     * @param {?} listener
+     * @return {?}
+     */
+    unlisten(eventName, listener) {
+        const /** @type {?} */ listeners = this._getListeners(eventName);
+        const /** @type {?} */ index = listeners.indexOf(listener);
+        if (index > -1) {
+            listeners.splice(index, 1);
+        }
+    }
+    /**
+     * @param {?} eventName
+     * @param {?} event
+     * @return {?}
+     */
+    dispatchEvent(eventName, event) {
+        const /** @type {?} */ listeners = this._getListeners(eventName);
+        for (let /** @type {?} */ i = 0; i < listeners.length; i++) {
+            listeners[i](event);
+        }
+    }
+    /**
+     * @param {?} eventName
+     * @return {?}
+     */
+    _getListeners(eventName) {
+        if (!this._listeners) {
+            this._listeners = new Map();
+        }
+        let /** @type {?} */ listeners = this._listeners.get(eventName);
+        if (!listeners) {
+            listeners = [];
+            this._listeners.set(eventName, listeners);
+        }
+        return listeners;
+    }
+}
+function NamedEventEmitter_tsickle_Closure_declarations() {
+    /** @type {?} */
+    NamedEventEmitter.prototype._listeners;
+}
 export class WebWorkerRootRenderer {
     /**
      * @param {?} messageBrokerFactory
@@ -36,18 +83,18 @@ export class WebWorkerRootRenderer {
      * @return {?}
      */
     _dispatchEvent(message) {
-        const /** @type {?} */ element = (this._serializer.deserialize(message['element'], RenderStoreObject));
+        const /** @type {?} */ element = this._serializer.deserialize(message['element'], 2 /* RENDER_STORE_OBJECT */);
         const /** @type {?} */ playerData = message['animationPlayer'];
         if (playerData) {
             const /** @type {?} */ phaseName = message['phaseName'];
-            const /** @type {?} */ player = (this._serializer.deserialize(playerData, RenderStoreObject));
+            const /** @type {?} */ player = this._serializer.deserialize(playerData, 2 /* RENDER_STORE_OBJECT */);
             element.animationPlayerEvents.dispatchEvent(player, phaseName);
         }
         else {
             const /** @type {?} */ eventName = message['eventName'];
             const /** @type {?} */ target = message['eventTarget'];
-            const /** @type {?} */ event = deserializeGenericEvent(message['event']);
-            if (isPresent(target)) {
+            const /** @type {?} */ event = message['event'];
+            if (target) {
                 this.globalEvents.dispatchEvent(eventNameWithTarget(target, eventName), event);
             }
             else {
@@ -68,7 +115,7 @@ export class WebWorkerRootRenderer {
             this.renderStore.store(result, id);
             this.runOnService('renderComponent', [
                 new FnArg(componentType, RenderComponentType),
-                new FnArg(result, RenderStoreObject),
+                new FnArg(result, 2 /* RENDER_STORE_OBJECT */),
             ]);
         }
         return result;
@@ -124,9 +171,9 @@ function WebWorkerRootRenderer_tsickle_Closure_declarations() {
      */
     WebWorkerRootRenderer.ctorParameters;
     /** @type {?} */
-    WebWorkerRootRenderer.prototype._messageBroker;
-    /** @type {?} */
     WebWorkerRootRenderer.prototype.globalEvents;
+    /** @type {?} */
+    WebWorkerRootRenderer.prototype._messageBroker;
     /** @type {?} */
     WebWorkerRootRenderer.prototype._componentRenderers;
     /** @type {?} */
@@ -149,7 +196,7 @@ export class WebWorkerRenderer {
      * @return {?}
      */
     _runOnService(fnName, fnArgs) {
-        const /** @type {?} */ fnArgsWithRenderer = [new FnArg(this, RenderStoreObject)].concat(fnArgs);
+        const /** @type {?} */ fnArgsWithRenderer = [new FnArg(this, 2 /* RENDER_STORE_OBJECT */), ...fnArgs];
         this._rootRenderer.runOnService(fnName, fnArgsWithRenderer);
     }
     /**
@@ -159,7 +206,10 @@ export class WebWorkerRenderer {
      */
     selectRootElement(selectorOrNode, debugInfo) {
         const /** @type {?} */ node = this._rootRenderer.allocateNode();
-        this._runOnService('selectRootElement', [new FnArg(selectorOrNode, null), new FnArg(node, RenderStoreObject)]);
+        this._runOnService('selectRootElement', [
+            new FnArg(selectorOrNode),
+            new FnArg(node, 2 /* RENDER_STORE_OBJECT */),
+        ]);
         return node;
     }
     /**
@@ -171,8 +221,9 @@ export class WebWorkerRenderer {
     createElement(parentElement, name, debugInfo) {
         const /** @type {?} */ node = this._rootRenderer.allocateNode();
         this._runOnService('createElement', [
-            new FnArg(parentElement, RenderStoreObject), new FnArg(name, null),
-            new FnArg(node, RenderStoreObject)
+            new FnArg(parentElement, 2 /* RENDER_STORE_OBJECT */),
+            new FnArg(name),
+            new FnArg(node, 2 /* RENDER_STORE_OBJECT */),
         ]);
         return node;
     }
@@ -184,7 +235,10 @@ export class WebWorkerRenderer {
         const /** @type {?} */ viewRoot = this._componentType.encapsulation === ViewEncapsulation.Native ?
             this._rootRenderer.allocateNode() :
             hostElement;
-        this._runOnService('createViewRoot', [new FnArg(hostElement, RenderStoreObject), new FnArg(viewRoot, RenderStoreObject)]);
+        this._runOnService('createViewRoot', [
+            new FnArg(hostElement, 2 /* RENDER_STORE_OBJECT */),
+            new FnArg(viewRoot, 2 /* RENDER_STORE_OBJECT */),
+        ]);
         return viewRoot;
     }
     /**
@@ -194,7 +248,10 @@ export class WebWorkerRenderer {
      */
     createTemplateAnchor(parentElement, debugInfo) {
         const /** @type {?} */ node = this._rootRenderer.allocateNode();
-        this._runOnService('createTemplateAnchor', [new FnArg(parentElement, RenderStoreObject), new FnArg(node, RenderStoreObject)]);
+        this._runOnService('createTemplateAnchor', [
+            new FnArg(parentElement, 2 /* RENDER_STORE_OBJECT */),
+            new FnArg(node, 2 /* RENDER_STORE_OBJECT */),
+        ]);
         return node;
     }
     /**
@@ -206,8 +263,9 @@ export class WebWorkerRenderer {
     createText(parentElement, value, debugInfo) {
         const /** @type {?} */ node = this._rootRenderer.allocateNode();
         this._runOnService('createText', [
-            new FnArg(parentElement, RenderStoreObject), new FnArg(value, null),
-            new FnArg(node, RenderStoreObject)
+            new FnArg(parentElement, 2 /* RENDER_STORE_OBJECT */),
+            new FnArg(value),
+            new FnArg(node, 2 /* RENDER_STORE_OBJECT */),
         ]);
         return node;
     }
@@ -217,7 +275,10 @@ export class WebWorkerRenderer {
      * @return {?}
      */
     projectNodes(parentElement, nodes) {
-        this._runOnService('projectNodes', [new FnArg(parentElement, RenderStoreObject), new FnArg(nodes, RenderStoreObject)]);
+        this._runOnService('projectNodes', [
+            new FnArg(parentElement, 2 /* RENDER_STORE_OBJECT */),
+            new FnArg(nodes, 2 /* RENDER_STORE_OBJECT */),
+        ]);
     }
     /**
      * @param {?} node
@@ -225,14 +286,17 @@ export class WebWorkerRenderer {
      * @return {?}
      */
     attachViewAfter(node, viewRootNodes) {
-        this._runOnService('attachViewAfter', [new FnArg(node, RenderStoreObject), new FnArg(viewRootNodes, RenderStoreObject)]);
+        this._runOnService('attachViewAfter', [
+            new FnArg(node, 2 /* RENDER_STORE_OBJECT */),
+            new FnArg(viewRootNodes, 2 /* RENDER_STORE_OBJECT */),
+        ]);
     }
     /**
      * @param {?} viewRootNodes
      * @return {?}
      */
     detachView(viewRootNodes) {
-        this._runOnService('detachView', [new FnArg(viewRootNodes, RenderStoreObject)]);
+        this._runOnService('detachView', [new FnArg(viewRootNodes, 2 /* RENDER_STORE_OBJECT */)]);
     }
     /**
      * @param {?} hostElement
@@ -240,7 +304,10 @@ export class WebWorkerRenderer {
      * @return {?}
      */
     destroyView(hostElement, viewAllNodes) {
-        this._runOnService('destroyView', [new FnArg(hostElement, RenderStoreObject), new FnArg(viewAllNodes, RenderStoreObject)]);
+        this._runOnService('destroyView', [
+            new FnArg(hostElement, 2 /* RENDER_STORE_OBJECT */),
+            new FnArg(viewAllNodes, 2 /* RENDER_STORE_OBJECT */),
+        ]);
         this._rootRenderer.destroyNodes(viewAllNodes);
     }
     /**
@@ -251,8 +318,9 @@ export class WebWorkerRenderer {
      */
     setElementProperty(renderElement, propertyName, propertyValue) {
         this._runOnService('setElementProperty', [
-            new FnArg(renderElement, RenderStoreObject), new FnArg(propertyName, null),
-            new FnArg(propertyValue, null)
+            new FnArg(renderElement, 2 /* RENDER_STORE_OBJECT */),
+            new FnArg(propertyName),
+            new FnArg(propertyValue),
         ]);
     }
     /**
@@ -263,8 +331,9 @@ export class WebWorkerRenderer {
      */
     setElementAttribute(renderElement, attributeName, attributeValue) {
         this._runOnService('setElementAttribute', [
-            new FnArg(renderElement, RenderStoreObject), new FnArg(attributeName, null),
-            new FnArg(attributeValue, null)
+            new FnArg(renderElement, 2 /* RENDER_STORE_OBJECT */),
+            new FnArg(attributeName),
+            new FnArg(attributeValue),
         ]);
     }
     /**
@@ -275,8 +344,9 @@ export class WebWorkerRenderer {
      */
     setBindingDebugInfo(renderElement, propertyName, propertyValue) {
         this._runOnService('setBindingDebugInfo', [
-            new FnArg(renderElement, RenderStoreObject), new FnArg(propertyName, null),
-            new FnArg(propertyValue, null)
+            new FnArg(renderElement, 2 /* RENDER_STORE_OBJECT */),
+            new FnArg(propertyName),
+            new FnArg(propertyValue),
         ]);
     }
     /**
@@ -287,8 +357,9 @@ export class WebWorkerRenderer {
      */
     setElementClass(renderElement, className, isAdd) {
         this._runOnService('setElementClass', [
-            new FnArg(renderElement, RenderStoreObject), new FnArg(className, null),
-            new FnArg(isAdd, null)
+            new FnArg(renderElement, 2 /* RENDER_STORE_OBJECT */),
+            new FnArg(className),
+            new FnArg(isAdd),
         ]);
     }
     /**
@@ -299,8 +370,9 @@ export class WebWorkerRenderer {
      */
     setElementStyle(renderElement, styleName, styleValue) {
         this._runOnService('setElementStyle', [
-            new FnArg(renderElement, RenderStoreObject), new FnArg(styleName, null),
-            new FnArg(styleValue, null)
+            new FnArg(renderElement, 2 /* RENDER_STORE_OBJECT */),
+            new FnArg(styleName),
+            new FnArg(styleValue),
         ]);
     }
     /**
@@ -311,8 +383,9 @@ export class WebWorkerRenderer {
      */
     invokeElementMethod(renderElement, methodName, args) {
         this._runOnService('invokeElementMethod', [
-            new FnArg(renderElement, RenderStoreObject), new FnArg(methodName, null),
-            new FnArg(args, null)
+            new FnArg(renderElement, 2 /* RENDER_STORE_OBJECT */),
+            new FnArg(methodName),
+            new FnArg(args),
         ]);
     }
     /**
@@ -321,7 +394,10 @@ export class WebWorkerRenderer {
      * @return {?}
      */
     setText(renderNode, text) {
-        this._runOnService('setText', [new FnArg(renderNode, RenderStoreObject), new FnArg(text, null)]);
+        this._runOnService('setText', [
+            new FnArg(renderNode, 2 /* RENDER_STORE_OBJECT */),
+            new FnArg(text),
+        ]);
     }
     /**
      * @param {?} renderElement
@@ -333,12 +409,13 @@ export class WebWorkerRenderer {
         renderElement.events.listen(name, callback);
         const /** @type {?} */ unlistenCallbackId = this._rootRenderer.allocateId();
         this._runOnService('listen', [
-            new FnArg(renderElement, RenderStoreObject), new FnArg(name, null),
-            new FnArg(unlistenCallbackId, null)
+            new FnArg(renderElement, 2 /* RENDER_STORE_OBJECT */),
+            new FnArg(name),
+            new FnArg(unlistenCallbackId),
         ]);
         return () => {
             renderElement.events.unlisten(name, callback);
-            this._runOnService('listenDone', [new FnArg(unlistenCallbackId, null)]);
+            this._runOnService('listenDone', [new FnArg(unlistenCallbackId)]);
         };
     }
     /**
@@ -350,10 +427,14 @@ export class WebWorkerRenderer {
     listenGlobal(target, name, callback) {
         this._rootRenderer.globalEvents.listen(eventNameWithTarget(target, name), callback);
         const /** @type {?} */ unlistenCallbackId = this._rootRenderer.allocateId();
-        this._runOnService('listenGlobal', [new FnArg(target, null), new FnArg(name, null), new FnArg(unlistenCallbackId, null)]);
+        this._runOnService('listenGlobal', [
+            new FnArg(target),
+            new FnArg(name, null),
+            new FnArg(unlistenCallbackId),
+        ]);
         return () => {
             this._rootRenderer.globalEvents.unlisten(eventNameWithTarget(target, name), callback);
-            this._runOnService('listenDone', [new FnArg(unlistenCallbackId, null)]);
+            this._runOnService('listenDone', [new FnArg(unlistenCallbackId)]);
         };
     }
     /**
@@ -370,9 +451,14 @@ export class WebWorkerRenderer {
         const /** @type {?} */ playerId = this._rootRenderer.allocateId();
         const /** @type {?} */ previousPlayerIds = previousPlayers.map(player => this._rootRenderer.renderStore.serialize(player));
         this._runOnService('animate', [
-            new FnArg(renderElement, RenderStoreObject), new FnArg(startingStyles, null),
-            new FnArg(keyframes, null), new FnArg(duration, null), new FnArg(delay, null),
-            new FnArg(easing, null), new FnArg(previousPlayerIds, null), new FnArg(playerId, null)
+            new FnArg(renderElement, 2 /* RENDER_STORE_OBJECT */),
+            new FnArg(startingStyles),
+            new FnArg(keyframes),
+            new FnArg(duration),
+            new FnArg(delay),
+            new FnArg(easing),
+            new FnArg(previousPlayerIds),
+            new FnArg(playerId),
         ]);
         const /** @type {?} */ player = new _AnimationWorkerRendererPlayer(this._rootRenderer, renderElement);
         this._rootRenderer.renderStore.store(player, playerId);
@@ -385,51 +471,401 @@ function WebWorkerRenderer_tsickle_Closure_declarations() {
     /** @type {?} */
     WebWorkerRenderer.prototype._componentType;
 }
-export class NamedEventEmitter {
+/**
+ * @param {?} target
+ * @param {?} eventName
+ * @return {?}
+ */
+function eventNameWithTarget(target, eventName) {
+    return `${target}:${eventName}`;
+}
+export class WebWorkerRendererFactoryV2 {
     /**
-     * @param {?} eventName
-     * @return {?}
+     * @param {?} messageBrokerFactory
+     * @param {?} bus
+     * @param {?} _serializer
+     * @param {?} renderStore
      */
-    _getListeners(eventName) {
-        if (!this._listeners) {
-            this._listeners = new Map();
-        }
-        let /** @type {?} */ listeners = this._listeners.get(eventName);
-        if (!listeners) {
-            listeners = [];
-            this._listeners.set(eventName, listeners);
-        }
-        return listeners;
+    constructor(messageBrokerFactory, bus, _serializer, renderStore) {
+        this._serializer = _serializer;
+        this.renderStore = renderStore;
+        this.globalEvents = new NamedEventEmitter();
+        this._messageBroker = messageBrokerFactory.createMessageBroker(RENDERER_V2_CHANNEL);
+        bus.initChannel(EVENT_V2_CHANNEL);
+        const source = bus.from(EVENT_V2_CHANNEL);
+        source.subscribe({ next: (message) => this._dispatchEvent(message) });
     }
     /**
-     * @param {?} eventName
-     * @param {?} callback
+     * @param {?} element
+     * @param {?} type
      * @return {?}
      */
-    listen(eventName, callback) { this._getListeners(eventName).push(callback); }
-    /**
-     * @param {?} eventName
-     * @param {?} callback
-     * @return {?}
-     */
-    unlisten(eventName, callback) {
-        ListWrapper.remove(this._getListeners(eventName), callback);
+    createRenderer(element, type) {
+        const /** @type {?} */ renderer = new WebWorkerRendererV2(this);
+        const /** @type {?} */ id = this.renderStore.allocateId();
+        this.renderStore.store(renderer, id);
+        this.callUI('createRenderer', [
+            new FnArg(element, 2 /* RENDER_STORE_OBJECT */),
+            new FnArg(type, 0 /* RENDERER_TYPE_V2 */),
+            new FnArg(renderer, 2 /* RENDER_STORE_OBJECT */),
+        ]);
+        return renderer;
     }
     /**
-     * @param {?} eventName
-     * @param {?} event
+     * @param {?} fnName
+     * @param {?} fnArgs
      * @return {?}
      */
-    dispatchEvent(eventName, event) {
-        const /** @type {?} */ listeners = this._getListeners(eventName);
-        for (let /** @type {?} */ i = 0; i < listeners.length; i++) {
-            listeners[i](event);
+    callUI(fnName, fnArgs) {
+        const /** @type {?} */ args = new UiArguments(fnName, fnArgs);
+        this._messageBroker.runOnService(args, null);
+    }
+    /**
+     * @return {?}
+     */
+    allocateNode() {
+        const /** @type {?} */ result = new WebWorkerRenderNode();
+        const /** @type {?} */ id = this.renderStore.allocateId();
+        this.renderStore.store(result, id);
+        return result;
+    }
+    /**
+     * @param {?} node
+     * @return {?}
+     */
+    freeNode(node) { this.renderStore.remove(node); }
+    /**
+     * @return {?}
+     */
+    allocateId() { return this.renderStore.allocateId(); }
+    /**
+     * @param {?} message
+     * @return {?}
+     */
+    _dispatchEvent(message) {
+        const /** @type {?} */ element = this._serializer.deserialize(message['element'], 2 /* RENDER_STORE_OBJECT */);
+        const /** @type {?} */ eventName = message['eventName'];
+        const /** @type {?} */ target = message['eventTarget'];
+        const /** @type {?} */ event = message['event'];
+        if (target) {
+            this.globalEvents.dispatchEvent(eventNameWithTarget(target, eventName), event);
+        }
+        else {
+            element.events.dispatchEvent(eventName, event);
         }
     }
 }
-function NamedEventEmitter_tsickle_Closure_declarations() {
+WebWorkerRendererFactoryV2.decorators = [
+    { type: Injectable },
+];
+/** @nocollapse */
+WebWorkerRendererFactoryV2.ctorParameters = () => [
+    { type: ClientMessageBrokerFactory, },
+    { type: MessageBus, },
+    { type: Serializer, },
+    { type: RenderStore, },
+];
+function WebWorkerRendererFactoryV2_tsickle_Closure_declarations() {
     /** @type {?} */
-    NamedEventEmitter.prototype._listeners;
+    WebWorkerRendererFactoryV2.decorators;
+    /**
+     * @nocollapse
+     * @type {?}
+     */
+    WebWorkerRendererFactoryV2.ctorParameters;
+    /** @type {?} */
+    WebWorkerRendererFactoryV2.prototype.globalEvents;
+    /** @type {?} */
+    WebWorkerRendererFactoryV2.prototype._messageBroker;
+    /** @type {?} */
+    WebWorkerRendererFactoryV2.prototype._serializer;
+    /** @type {?} */
+    WebWorkerRendererFactoryV2.prototype.renderStore;
+}
+export class WebWorkerRendererV2 {
+    /**
+     * @param {?} _rendererFactory
+     */
+    constructor(_rendererFactory) {
+        this._rendererFactory = _rendererFactory;
+        this.asFnArg = new FnArg(this, 2 /* RENDER_STORE_OBJECT */);
+    }
+    /**
+     * @return {?}
+     */
+    destroy() { this.callUIWithRenderer('destroy'); }
+    /**
+     * @param {?} node
+     * @return {?}
+     */
+    destroyNode(node) {
+        this.callUIWithRenderer('destroyNode', [new FnArg(node, 2 /* RENDER_STORE_OBJECT */)]);
+        this._rendererFactory.freeNode(node);
+    }
+    /**
+     * @param {?} name
+     * @param {?=} namespace
+     * @return {?}
+     */
+    createElement(name, namespace) {
+        const /** @type {?} */ node = this._rendererFactory.allocateNode();
+        this.callUIWithRenderer('createElement', [
+            new FnArg(name),
+            new FnArg(namespace),
+            new FnArg(node, 2 /* RENDER_STORE_OBJECT */),
+        ]);
+        return node;
+    }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    createComment(value) {
+        const /** @type {?} */ node = this._rendererFactory.allocateNode();
+        this.callUIWithRenderer('createComment', [
+            new FnArg(value),
+            new FnArg(node, 2 /* RENDER_STORE_OBJECT */),
+        ]);
+        return node;
+    }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    createText(value) {
+        const /** @type {?} */ node = this._rendererFactory.allocateNode();
+        this.callUIWithRenderer('createText', [
+            new FnArg(value),
+            new FnArg(node, 2 /* RENDER_STORE_OBJECT */),
+        ]);
+        return node;
+    }
+    /**
+     * @param {?} parent
+     * @param {?} newChild
+     * @return {?}
+     */
+    appendChild(parent, newChild) {
+        this.callUIWithRenderer('appendChild', [
+            new FnArg(parent, 2 /* RENDER_STORE_OBJECT */),
+            new FnArg(newChild, 2 /* RENDER_STORE_OBJECT */),
+        ]);
+    }
+    /**
+     * @param {?} parent
+     * @param {?} newChild
+     * @param {?} refChild
+     * @return {?}
+     */
+    insertBefore(parent, newChild, refChild) {
+        if (!parent) {
+            return;
+        }
+        this.callUIWithRenderer('insertBefore', [
+            new FnArg(parent, 2 /* RENDER_STORE_OBJECT */),
+            new FnArg(newChild, 2 /* RENDER_STORE_OBJECT */),
+            new FnArg(refChild, 2 /* RENDER_STORE_OBJECT */),
+        ]);
+    }
+    /**
+     * @param {?} parent
+     * @param {?} oldChild
+     * @return {?}
+     */
+    removeChild(parent, oldChild) {
+        this.callUIWithRenderer('removeChild', [
+            new FnArg(parent, 2 /* RENDER_STORE_OBJECT */),
+            new FnArg(oldChild, 2 /* RENDER_STORE_OBJECT */),
+        ]);
+    }
+    /**
+     * @param {?} selectorOrNode
+     * @return {?}
+     */
+    selectRootElement(selectorOrNode) {
+        const /** @type {?} */ node = this._rendererFactory.allocateNode();
+        this.callUIWithRenderer('selectRootElement', [
+            new FnArg(selectorOrNode),
+            new FnArg(node, 2 /* RENDER_STORE_OBJECT */),
+        ]);
+        return node;
+    }
+    /**
+     * @param {?} node
+     * @return {?}
+     */
+    parentNode(node) {
+        const /** @type {?} */ res = this._rendererFactory.allocateNode();
+        this.callUIWithRenderer('parentNode', [
+            new FnArg(node, 2 /* RENDER_STORE_OBJECT */),
+            new FnArg(res, 2 /* RENDER_STORE_OBJECT */),
+        ]);
+        return res;
+    }
+    /**
+     * @param {?} node
+     * @return {?}
+     */
+    nextSibling(node) {
+        const /** @type {?} */ res = this._rendererFactory.allocateNode();
+        this.callUIWithRenderer('nextSibling', [
+            new FnArg(node, 2 /* RENDER_STORE_OBJECT */),
+            new FnArg(res, 2 /* RENDER_STORE_OBJECT */),
+        ]);
+        return res;
+    }
+    /**
+     * @param {?} el
+     * @param {?} name
+     * @param {?} value
+     * @param {?=} namespace
+     * @return {?}
+     */
+    setAttribute(el, name, value, namespace) {
+        this.callUIWithRenderer('setAttribute', [
+            new FnArg(el, 2 /* RENDER_STORE_OBJECT */),
+            new FnArg(name),
+            new FnArg(value),
+            new FnArg(namespace),
+        ]);
+    }
+    /**
+     * @param {?} el
+     * @param {?} name
+     * @param {?=} namespace
+     * @return {?}
+     */
+    removeAttribute(el, name, namespace) {
+        this.callUIWithRenderer('removeAttribute', [
+            new FnArg(el, 2 /* RENDER_STORE_OBJECT */),
+            new FnArg(name),
+            new FnArg(namespace),
+        ]);
+    }
+    /**
+     * @param {?} el
+     * @param {?} name
+     * @return {?}
+     */
+    addClass(el, name) {
+        this.callUIWithRenderer('addClass', [
+            new FnArg(el, 2 /* RENDER_STORE_OBJECT */),
+            new FnArg(name),
+        ]);
+    }
+    /**
+     * @param {?} el
+     * @param {?} name
+     * @return {?}
+     */
+    removeClass(el, name) {
+        this.callUIWithRenderer('removeClass', [
+            new FnArg(el, 2 /* RENDER_STORE_OBJECT */),
+            new FnArg(name),
+        ]);
+    }
+    /**
+     * @param {?} el
+     * @param {?} style
+     * @param {?} value
+     * @param {?} hasVendorPrefix
+     * @param {?} hasImportant
+     * @return {?}
+     */
+    setStyle(el, style, value, hasVendorPrefix, hasImportant) {
+        this.callUIWithRenderer('setStyle', [
+            new FnArg(el, 2 /* RENDER_STORE_OBJECT */),
+            new FnArg(style),
+            new FnArg(value),
+            new FnArg(hasVendorPrefix),
+            new FnArg(hasImportant),
+        ]);
+    }
+    /**
+     * @param {?} el
+     * @param {?} style
+     * @param {?} hasVendorPrefix
+     * @return {?}
+     */
+    removeStyle(el, style, hasVendorPrefix) {
+        this.callUIWithRenderer('removeStyle', [
+            new FnArg(el, 2 /* RENDER_STORE_OBJECT */),
+            new FnArg(style),
+            new FnArg(hasVendorPrefix),
+        ]);
+    }
+    /**
+     * @param {?} el
+     * @param {?} name
+     * @param {?} value
+     * @return {?}
+     */
+    setProperty(el, name, value) {
+        this.callUIWithRenderer('setProperty', [
+            new FnArg(el, 2 /* RENDER_STORE_OBJECT */),
+            new FnArg(name),
+            new FnArg(value),
+        ]);
+    }
+    /**
+     * @param {?} node
+     * @param {?} value
+     * @return {?}
+     */
+    setValue(node, value) {
+        this.callUIWithRenderer('setValue', [
+            new FnArg(node, 2 /* RENDER_STORE_OBJECT */),
+            new FnArg(value),
+        ]);
+    }
+    /**
+     * @param {?} target
+     * @param {?} eventName
+     * @param {?} listener
+     * @return {?}
+     */
+    listen(target, eventName, listener) {
+        const /** @type {?} */ unlistenId = this._rendererFactory.allocateId();
+        const [targetEl, targetName, fullName] = typeof target === 'string' ?
+            [null, target, `${target}:${eventName}`] :
+            [target, null, null];
+        if (fullName) {
+            this._rendererFactory.globalEvents.listen(fullName, listener);
+        }
+        else {
+            targetEl.events.listen(eventName, listener);
+        }
+        this.callUIWithRenderer('listen', [
+            new FnArg(targetEl, 2 /* RENDER_STORE_OBJECT */),
+            new FnArg(targetName),
+            new FnArg(eventName),
+            new FnArg(unlistenId),
+        ]);
+        return () => {
+            if (fullName) {
+                this._rendererFactory.globalEvents.unlisten(fullName, listener);
+            }
+            else {
+                targetEl.events.unlisten(eventName, listener);
+            }
+            this.callUIWithRenderer('unlisten', [new FnArg(unlistenId)]);
+        };
+    }
+    /**
+     * @param {?} fnName
+     * @param {?=} fnArgs
+     * @return {?}
+     */
+    callUIWithRenderer(fnName, fnArgs = []) {
+        // always pass the renderer as the first arg
+        this._rendererFactory.callUI(fnName, [this.asFnArg, ...fnArgs]);
+    }
+}
+function WebWorkerRendererV2_tsickle_Closure_declarations() {
+    /** @type {?} */
+    WebWorkerRendererV2.prototype.asFnArg;
+    /** @type {?} */
+    WebWorkerRendererV2.prototype._rendererFactory;
 }
 export class AnimationPlayerEmitter {
     /**
@@ -481,14 +917,6 @@ function AnimationPlayerEmitter_tsickle_Closure_declarations() {
     /** @type {?} */
     AnimationPlayerEmitter.prototype._listeners;
 }
-/**
- * @param {?} target
- * @param {?} eventName
- * @return {?}
- */
-function eventNameWithTarget(target, eventName) {
-    return `${target}:${eventName}`;
-}
 export class WebWorkerRenderNode {
     constructor() {
         this.events = new NamedEventEmitter();
@@ -521,8 +949,9 @@ class _AnimationWorkerRendererPlayer {
     _runOnService(fnName, fnArgs) {
         if (!this._destroyed) {
             const /** @type {?} */ fnArgsWithRenderer = [
-                new FnArg(this, RenderStoreObject), new FnArg(this._renderElement, RenderStoreObject)
-            ].concat(fnArgs);
+                new FnArg(this, 2 /* RENDER_STORE_OBJECT */),
+                new FnArg(this._renderElement, 2 /* RENDER_STORE_OBJECT */), ...fnArgs
+            ];
             this._rootRenderer.runOnService(ANIMATION_WORKER_PLAYER_PREFIX + fnName, fnArgsWithRenderer);
         }
     }
@@ -596,7 +1025,7 @@ class _AnimationWorkerRendererPlayer {
      * @param {?} p
      * @return {?}
      */
-    setPosition(p) { this._runOnService('setPosition', [new FnArg(p, null)]); }
+    setPosition(p) { this._runOnService('setPosition', [new FnArg(p)]); }
     /**
      * @return {?}
      */

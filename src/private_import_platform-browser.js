@@ -13,6 +13,7 @@ export const /** @type {?} */ BrowserDomAdapter = _.BrowserDomAdapter;
 export const /** @type {?} */ BrowserGetTestability = _.BrowserGetTestability;
 export const /** @type {?} */ DomRootRenderer = _.DomRootRenderer;
 export const /** @type {?} */ DomRootRenderer_ = _.DomRootRenderer_;
+export const /** @type {?} */ DomRendererFactoryV2 = _.DomRendererFactoryV2;
 export const /** @type {?} */ DomEventsPlugin = _.DomEventsPlugin;
 export const /** @type {?} */ DomSharedStylesHost = _.DomSharedStylesHost;
 export const /** @type {?} */ SharedStylesHost = _.SharedStylesHost;

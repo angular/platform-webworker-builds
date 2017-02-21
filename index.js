@@ -10,6 +10,6 @@
  * @description
  * Entry point for all public APIs of the platform-webworker package.
  */
-export { VERSION, ClientMessageBroker, ClientMessageBrokerFactory, FnArg, UiArguments, MessageBus, PRIMITIVE, ReceivedMessage, ServiceMessageBroker, ServiceMessageBrokerFactory, WORKER_UI_LOCATION_PROVIDERS, WORKER_APP_LOCATION_PROVIDERS, WorkerAppModule, platformWorkerApp, platformWorkerUi, bootstrapWorkerUi } from './src/platform-webworker';
+export { VERSION, ClientMessageBroker, ClientMessageBrokerFactory, FnArg, UiArguments, MessageBus, PRIMITIVE, ServiceMessageBroker, ServiceMessageBrokerFactory, WORKER_UI_LOCATION_PROVIDERS, WORKER_APP_LOCATION_PROVIDERS, WorkerAppModule, platformWorkerApp, platformWorkerUi, bootstrapWorkerUi } from './src/platform-webworker';
 // This file only reexports content of the `src` folder. Keep it that way.
 //# sourceMappingURL=index.js.map

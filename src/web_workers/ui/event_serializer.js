@@ -78,7 +78,7 @@ function serializeEvent(e, properties) {
     const /** @type {?} */ serialized = {};
     for (let /** @type {?} */ i = 0; i < properties.length; i++) {
         const /** @type {?} */ prop = properties[i];
-        ((serialized) /** TODO #9100 */)[prop] = e[prop];
+        serialized[prop] = e[prop];
     }
     return serialized;
 }

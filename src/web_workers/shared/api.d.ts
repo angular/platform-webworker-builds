@@ -6,4 +6,4 @@
  * found in the LICENSE file at https://angular.io/license
  */
 import { InjectionToken } from '@angular/core';
-export declare const ON_WEB_WORKER: InjectionToken<{}>;
+export declare const ON_WEB_WORKER: InjectionToken<boolean>;

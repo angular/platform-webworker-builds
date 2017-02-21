@@ -1,4 +1,3 @@
-import { RenderStoreObject } from '../shared/serializer';
 import { serializeEventWithTarget, serializeGenericEvent, serializeKeyboardEvent, serializeMouseEvent, serializeTransitionEvent } from './event_serializer';
 export class EventDispatcher {
     /**
@@ -17,9 +16,9 @@ export class EventDispatcher {
      */
     dispatchAnimationEvent(player, phaseName, element) {
         this._sink.emit({
-            'element': this._serializer.serialize(element, RenderStoreObject),
-            'animationPlayer': this._serializer.serialize(player, RenderStoreObject),
-            'phaseName': phaseName
+            'element': this._serializer.serialize(element, 2 /* RENDER_STORE_OBJECT */),
+            'animationPlayer': this._serializer.serialize(player, 2 /* RENDER_STORE_OBJECT */),
+            'phaseName': phaseName,
         });
         return true;
     }
@@ -31,7 +30,7 @@ export class EventDispatcher {
      * @return {?}
      */
     dispatchRenderEvent(element, eventTarget, eventName, event) {
-        let /** @type {?} */ serializedEvent /** TODO #9100 */;
+        let /** @type {?} */ serializedEvent;
         // TODO (jteplitz602): support custom events #3350
         switch (event.type) {
             case 'click':
@@ -114,10 +113,10 @@ export class EventDispatcher {
                 throw new Error(eventName + ' not supported on WebWorkers');
         }
         this._sink.emit({
-            'element': this._serializer.serialize(element, RenderStoreObject),
+            'element': this._serializer.serialize(element, 2 /* RENDER_STORE_OBJECT */),
             'eventName': eventName,
             'eventTarget': eventTarget,
-            'event': serializedEvent
+            'event': serializedEvent,
         });
         // TODO(kegluneq): Eventually, we want the user to indicate from the UI side whether the event
         // should be canceled, but for now just call `preventDefault` on the original DOM event.

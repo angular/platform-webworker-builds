@@ -10,9 +10,7 @@ import { Injectable } from '@angular/core/index';
 import { ClientMessageBrokerFactory, FnArg, UiArguments } from '../shared/client_message_broker';
 import { MessageBus } from '../shared/message_bus';
 import { ROUTER_CHANNEL } from '../shared/messaging_api';
-import { LocationType } from '../shared/serialized_types';
-import { PRIMITIVE, Serializer } from '../shared/serializer';
-import { deserializeGenericEvent } from './event_deserializer';
+import { LocationType, Serializer } from '../shared/serializer';
 export class WebWorkerPlatformLocation extends PlatformLocation {
     /**
      * @param {?} brokerFactory
@@ -38,11 +36,10 @@ export class WebWorkerPlatformLocation extends PlatformLocation {
                     else if (type === 'hashchange') {
                         listeners = this._hashChangeListeners;
                     }
-                    if (listeners !== null) {
-                        const e = deserializeGenericEvent(msg['event']);
+                    if (listeners) {
                         // There was a popState or hashChange event, so the location object thas been updated
                         this._location = this._serializer.deserialize(msg['location'], LocationType);
-                        listeners.forEach((fn) => fn(e));
+                        listeners.forEach((fn) => fn(msg['event']));
                     }
                 }
             }
@@ -54,11 +51,11 @@ export class WebWorkerPlatformLocation extends PlatformLocation {
      */
     init() {
         const /** @type {?} */ args = new UiArguments('getLocation');
-        const /** @type {?} */ locationPromise = this._broker.runOnService(args, LocationType);
-        return locationPromise.then((val) => {
+        return this._broker.runOnService(args, LocationType)
+            .then((val) => {
             this._location = val;
             return true;
-        }, (err) => { throw new Error(err); });
+        }, err => { throw new Error(err); });
     }
     /**
      * @return {?}
@@ -79,30 +76,15 @@ export class WebWorkerPlatformLocation extends PlatformLocation {
     /**
      * @return {?}
      */
-    get pathname() {
-        if (this._location === null) {
-            return null;
-        }
-        return this._location.pathname;
-    }
+    get pathname() { return this._location ? this._location.pathname : null; }
     /**
      * @return {?}
      */
-    get search() {
-        if (this._location === null) {
-            return null;
-        }
-        return this._location.search;
-    }
+    get search() { return this._location ? this._location.search : null; }
     /**
      * @return {?}
      */
-    get hash() {
-        if (this._location === null) {
-            return null;
-        }
-        return this._location.hash;
-    }
+    get hash() { return this._location ? this._location.hash : null; }
     /**
      * @param {?} newPath
      * @return {?}
@@ -112,7 +94,7 @@ export class WebWorkerPlatformLocation extends PlatformLocation {
             throw new Error('Attempt to set pathname before value is obtained from UI');
         }
         this._location.pathname = newPath;
-        const /** @type {?} */ fnArgs = [new FnArg(newPath, PRIMITIVE)];
+        const /** @type {?} */ fnArgs = [new FnArg(newPath, 1 /* PRIMITIVE */)];
         const /** @type {?} */ args = new UiArguments('setPathname', fnArgs);
         this._broker.runOnService(args, null);
     }
@@ -123,7 +105,11 @@ export class WebWorkerPlatformLocation extends PlatformLocation {
      * @return {?}
      */
     pushState(state, title, url) {
-        const /** @type {?} */ fnArgs = [new FnArg(state, PRIMITIVE), new FnArg(title, PRIMITIVE), new FnArg(url, PRIMITIVE)];
+        const /** @type {?} */ fnArgs = [
+            new FnArg(state, 1 /* PRIMITIVE */),
+            new FnArg(title, 1 /* PRIMITIVE */),
+            new FnArg(url, 1 /* PRIMITIVE */),
+        ];
         const /** @type {?} */ args = new UiArguments('pushState', fnArgs);
         this._broker.runOnService(args, null);
     }
@@ -134,7 +120,11 @@ export class WebWorkerPlatformLocation extends PlatformLocation {
      * @return {?}
      */
     replaceState(state, title, url) {
-        const /** @type {?} */ fnArgs = [new FnArg(state, PRIMITIVE), new FnArg(title, PRIMITIVE), new FnArg(url, PRIMITIVE)];
+        const /** @type {?} */ fnArgs = [
+            new FnArg(state, 1 /* PRIMITIVE */),
+            new FnArg(title, 1 /* PRIMITIVE */),
+            new FnArg(url, 1 /* PRIMITIVE */),
+        ];
         const /** @type {?} */ args = new UiArguments('replaceState', fnArgs);
         this._broker.runOnService(args, null);
     }

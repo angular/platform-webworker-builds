@@ -6,7 +6,7 @@
  * found in the LICENSE file at https://angular.io/license
  */
 import { CommonModule } from '@angular/common/index';
-import { APP_INITIALIZER, ApplicationModule, ErrorHandler, NgModule, NgZone, RootRenderer, createPlatformFactory, platformCore } from '@angular/core/index';
+import { APP_INITIALIZER, ApplicationModule, ErrorHandler, NgModule, NgZone, RendererFactoryV2, RootRenderer, createPlatformFactory, platformCore } from '@angular/core/index';
 import { DOCUMENT } from '@angular/platform-browser/index';
 import { BROWSER_SANITIZATION_PROVIDERS } from './private_import_platform-browser';
 import { ON_WEB_WORKER } from './web_workers/shared/api';
@@ -16,7 +16,7 @@ import { PostMessageBus, PostMessageBusSink, PostMessageBusSource } from './web_
 import { RenderStore } from './web_workers/shared/render_store';
 import { Serializer } from './web_workers/shared/serializer';
 import { ServiceMessageBrokerFactory, ServiceMessageBrokerFactory_ } from './web_workers/shared/service_message_broker';
-import { WebWorkerRootRenderer } from './web_workers/worker/renderer';
+import { WebWorkerRendererFactoryV2, WebWorkerRootRenderer } from './web_workers/worker/renderer';
 import { WorkerDomAdapter } from './web_workers/worker/worker_adapter';
 /**
  * @experimental
@@ -61,16 +61,25 @@ export class WorkerAppModule {
 WorkerAppModule.decorators = [
     { type: NgModule, args: [{
                 providers: [
-                    BROWSER_SANITIZATION_PROVIDERS, Serializer, { provide: DOCUMENT, useValue: null },
+                    BROWSER_SANITIZATION_PROVIDERS,
+                    Serializer,
+                    { provide: DOCUMENT, useValue: null },
                     { provide: ClientMessageBrokerFactory, useClass: ClientMessageBrokerFactory_ },
                     { provide: ServiceMessageBrokerFactory, useClass: ServiceMessageBrokerFactory_ },
-                    WebWorkerRootRenderer, { provide: RootRenderer, useExisting: WebWorkerRootRenderer },
-                    { provide: ON_WEB_WORKER, useValue: true }, RenderStore,
+                    WebWorkerRootRenderer,
+                    { provide: RootRenderer, useExisting: WebWorkerRootRenderer },
+                    WebWorkerRendererFactoryV2,
+                    { provide: RendererFactoryV2, useExisting: WebWorkerRendererFactoryV2 },
+                    { provide: ON_WEB_WORKER, useValue: true },
+                    RenderStore,
                     { provide: ErrorHandler, useFactory: errorHandler, deps: [] },
                     { provide: MessageBus, useFactory: createMessageBus, deps: [NgZone] },
-                    { provide: APP_INITIALIZER, useValue: setupWebWorker, multi: true }
+                    { provide: APP_INITIALIZER, useValue: setupWebWorker, multi: true },
                 ],
-                exports: [CommonModule, ApplicationModule]
+                exports: [
+                    CommonModule,
+                    ApplicationModule,
+                ]
             },] },
 ];
 /** @nocollapse */

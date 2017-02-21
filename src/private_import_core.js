@@ -8,7 +8,6 @@
 import { __core_private__ as r } from '@angular/core/index';
 export const /** @type {?} */ RenderDebugInfo = r.RenderDebugInfo;
 export const /** @type {?} */ ReflectionCapabilities = r.ReflectionCapabilities;
-export const /** @type {?} */ DebugDomRootRenderer = r.DebugDomRootRenderer;
 export const /** @type {?} */ reflector = r.reflector;
 export const /** @type {?} */ NoOpAnimationPlayer = r.NoOpAnimationPlayer;
 export const /** @type {?} */ AnimationPlayer = r.AnimationPlayer;

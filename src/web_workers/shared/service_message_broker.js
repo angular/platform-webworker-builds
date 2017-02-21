@@ -6,7 +6,6 @@
  * found in the LICENSE file at https://angular.io/license
  */
 import { Injectable } from '@angular/core/index';
-import { isPresent } from '../../facade/lang';
 import { MessageBus } from '../shared/message_bus';
 import { Serializer } from '../shared/serializer';
 /**
@@ -93,10 +92,10 @@ export class ServiceMessageBroker_ extends ServiceMessageBroker {
      * @param {?} _serializer
      * @param {?} channel
      */
-    constructor(messageBus, _serializer, channel /** TODO #9100 */) {
+    constructor(messageBus, _serializer, channel) {
         super();
         this._serializer = _serializer;
-        this.channel = channel; /** TODO #9100 */
+        this.channel = channel;
         this._methods = new Map();
         this._sink = messageBus.to(channel);
         const source = messageBus.from(channel);
@@ -112,24 +111,23 @@ export class ServiceMessageBroker_ extends ServiceMessageBroker {
     registerMethod(methodName, signature, method, returnType) {
         this._methods.set(methodName, (message) => {
             const /** @type {?} */ serializedArgs = message.args;
-            const /** @type {?} */ numArgs = signature === null ? 0 : signature.length;
+            const /** @type {?} */ numArgs = signature ? signature.length : 0;
             const /** @type {?} */ deserializedArgs = new Array(numArgs);
             for (let /** @type {?} */ i = 0; i < numArgs; i++) {
                 const /** @type {?} */ serializedArg = serializedArgs[i];
                 deserializedArgs[i] = this._serializer.deserialize(serializedArg, signature[i]);
             }
             const /** @type {?} */ promise = method(...deserializedArgs);
-            if (isPresent(returnType) && promise) {
+            if (returnType && promise) {
                 this._wrapWebWorkerPromise(message.id, promise, returnType);
             }
         });
     }
     /**
-     * @param {?} map
+     * @param {?} message
      * @return {?}
      */
-    _handleMessage(map) {
-        const /** @type {?} */ message = new ReceivedMessage(map);
+    _handleMessage(message) {
         if (this._methods.has(message.method)) {
             this._methods.get(message.method)(message);
         }
@@ -142,7 +140,11 @@ export class ServiceMessageBroker_ extends ServiceMessageBroker {
      */
     _wrapWebWorkerPromise(id, promise, type) {
         promise.then((result) => {
-            this._sink.emit({ 'type': 'result', 'value': this._serializer.serialize(result, type), 'id': id });
+            this._sink.emit({
+                'type': 'result',
+                'value': this._serializer.serialize(result, type),
+                'id': id,
+            });
         });
     }
 }
@@ -155,29 +157,5 @@ function ServiceMessageBroker__tsickle_Closure_declarations() {
     ServiceMessageBroker_.prototype._serializer;
     /** @type {?} */
     ServiceMessageBroker_.prototype.channel;
-}
-/**
- * \@experimental WebWorker support in Angular is currently experimental.
- */
-export class ReceivedMessage {
-    /**
-     * @param {?} data
-     */
-    constructor(data) {
-        this.method = data['method'];
-        this.args = data['args'];
-        this.id = data['id'];
-        this.type = data['type'];
-    }
-}
-function ReceivedMessage_tsickle_Closure_declarations() {
-    /** @type {?} */
-    ReceivedMessage.prototype.method;
-    /** @type {?} */
-    ReceivedMessage.prototype.args;
-    /** @type {?} */
-    ReceivedMessage.prototype.id;
-    /** @type {?} */
-    ReceivedMessage.prototype.type;
 }
 //# sourceMappingURL=service_message_broker.js.map

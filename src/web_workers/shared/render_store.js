@@ -22,6 +22,8 @@ export class RenderStore {
      * @return {?}
      */
     store(obj, id) {
+        if (id == null)
+            return;
         this._lookupById.set(id, obj);
         this._lookupByObject.set(obj, id);
     }
@@ -31,32 +33,23 @@ export class RenderStore {
      */
     remove(obj) {
         const /** @type {?} */ index = this._lookupByObject.get(obj);
-        this._lookupByObject.delete(obj);
-        this._lookupById.delete(index);
+        if (index != null) {
+            this._lookupByObject.delete(obj);
+            this._lookupById.delete(index);
+        }
     }
     /**
      * @param {?} id
      * @return {?}
      */
     deserialize(id) {
-        if (id == null) {
-            return null;
-        }
-        if (!this._lookupById.has(id)) {
-            return null;
-        }
-        return this._lookupById.get(id);
+        return this._lookupById.has(id) ? this._lookupById.get(id) : null;
     }
     /**
      * @param {?} obj
      * @return {?}
      */
-    serialize(obj) {
-        if (obj == null) {
-            return null;
-        }
-        return this._lookupByObject.get(obj);
-    }
+    serialize(obj) { return obj == null ? null : this._lookupByObject.get(obj); }
 }
 RenderStore.decorators = [
     { type: Injectable },
