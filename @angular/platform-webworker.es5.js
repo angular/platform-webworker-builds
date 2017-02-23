@@ -17,7 +17,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /**
- * @license Angular v4.0.0-beta.8-e8d2743
+ * @license Angular v4.0.0-beta.8-4301dce
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -2102,7 +2102,7 @@ function _resolveDefaultAnimationDriver() {
 /**
  * @stable
  */
-var /** @type {?} */VERSION = new Version('4.0.0-beta.8-e8d2743');
+var /** @type {?} */VERSION = new Version('4.0.0-beta.8-4301dce');
 
 var MessageBasedPlatformLocation = function () {
     /**
