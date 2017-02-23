@@ -1619,6 +1619,183 @@
         return [{ type: ServiceMessageBrokerFactory }, { type: MessageBus }, { type: Serializer }, { type: RenderStore }, { type: _core.RootRenderer }];
     };
 
+    var MessageBasedRendererV2 = function () {
+        /**
+         * @param {?} _brokerFactory
+         * @param {?} _bus
+         * @param {?} _serializer
+         * @param {?} _renderStore
+         * @param {?} _rendererFactory
+         */
+        function MessageBasedRendererV2(_brokerFactory, _bus, _serializer, _renderStore, _rendererFactory) {
+            _classCallCheck(this, MessageBasedRendererV2);
+
+            this._brokerFactory = _brokerFactory;
+            this._bus = _bus;
+            this._serializer = _serializer;
+            this._renderStore = _renderStore;
+            this._rendererFactory = _rendererFactory;
+        }
+        /**
+         * @return {?}
+         */
+
+
+        _createClass(MessageBasedRendererV2, [{
+            key: 'start',
+            value: function start() {
+                var _this20 = this;
+
+                var /** @type {?} */broker = this._brokerFactory.createMessageBroker(RENDERER_V2_CHANNEL);
+                this._bus.initChannel(EVENT_V2_CHANNEL);
+                this._eventDispatcher = new EventDispatcher(this._bus.to(EVENT_V2_CHANNEL), this._serializer);
+                var RSO = 2 /* RENDER_STORE_OBJECT */
+                ,
+                    P = 1 /* PRIMITIVE */
+                ,
+                    CRT = 0 /* RENDERER_TYPE_V2 */
+                ;
+
+                var /** @type {?} */methods = [['createRenderer', this.createRenderer, RSO, CRT, P], ['createElement', this.createElement, RSO, P, P, P], ['createComment', this.createComment, RSO, P, P], ['createText', this.createText, RSO, P, P], ['appendChild', this.appendChild, RSO, RSO, RSO], ['insertBefore', this.insertBefore, RSO, RSO, RSO, RSO], ['removeChild', this.removeChild, RSO, RSO, RSO], ['selectRootElement', this.selectRootElement, RSO, P, P], ['parentNode', this.parentNode, RSO, RSO, P], ['nextSibling', this.nextSibling, RSO, RSO, P], ['setAttribute', this.setAttribute, RSO, RSO, P, P, P], ['removeAttribute', this.removeAttribute, RSO, RSO, P, P], ['addClass', this.addClass, RSO, RSO, P], ['removeClass', this.removeClass, RSO, RSO, P], ['setStyle', this.setStyle, RSO, RSO, P, P, P, P], ['removeStyle', this.removeStyle, RSO, RSO, P, P], ['setProperty', this.setProperty, RSO, RSO, P, P], ['setValue', this.setValue, RSO, RSO, P], ['listen', this.listen, RSO, RSO, P, P, P], ['unlisten', this.unlisten, RSO, RSO], ['destroy', this.destroy, RSO], ['destroyNode', this.destroyNode, RSO, P]];
+                methods.forEach(function (_ref3) {
+                    var _ref4 = _toArray(_ref3),
+                        name = _ref4[0],
+                        method = _ref4[1],
+                        argTypes = _ref4.slice(2);
+
+                    broker.registerMethod(name, argTypes, method.bind(_this20));
+                });
+            }
+        }, {
+            key: 'destroy',
+            value: function destroy(r) {
+                r.destroy();
+            }
+        }, {
+            key: 'destroyNode',
+            value: function destroyNode(r, node) {
+                if (r.destroyNode) {
+                    r.destroyNode(node);
+                }
+                this._renderStore.remove(node);
+            }
+        }, {
+            key: 'createRenderer',
+            value: function createRenderer(el, type, id) {
+                this._renderStore.store(this._rendererFactory.createRenderer(el, type), id);
+            }
+        }, {
+            key: 'createElement',
+            value: function createElement(r, name, namespace, id) {
+                this._renderStore.store(r.createElement(name, namespace), id);
+            }
+        }, {
+            key: 'createComment',
+            value: function createComment(r, value, id) {
+                this._renderStore.store(r.createComment(value), id);
+            }
+        }, {
+            key: 'createText',
+            value: function createText(r, value, id) {
+                this._renderStore.store(r.createText(value), id);
+            }
+        }, {
+            key: 'appendChild',
+            value: function appendChild(r, parent, child) {
+                r.appendChild(parent, child);
+            }
+        }, {
+            key: 'insertBefore',
+            value: function insertBefore(r, parent, child, ref) {
+                r.insertBefore(parent, child, ref);
+            }
+        }, {
+            key: 'removeChild',
+            value: function removeChild(r, parent, child) {
+                r.removeChild(parent, child);
+            }
+        }, {
+            key: 'selectRootElement',
+            value: function selectRootElement(r, selector, id) {
+                this._renderStore.store(r.selectRootElement(selector), id);
+            }
+        }, {
+            key: 'parentNode',
+            value: function parentNode(r, node, id) {
+                this._renderStore.store(r.parentNode(node), id);
+            }
+        }, {
+            key: 'nextSibling',
+            value: function nextSibling(r, node, id) {
+                this._renderStore.store(r.nextSibling(node), id);
+            }
+        }, {
+            key: 'setAttribute',
+            value: function setAttribute(r, el, name, value, namespace) {
+                r.setAttribute(el, name, value, namespace);
+            }
+        }, {
+            key: 'removeAttribute',
+            value: function removeAttribute(r, el, name, namespace) {
+                r.removeAttribute(el, name, namespace);
+            }
+        }, {
+            key: 'addClass',
+            value: function addClass(r, el, name) {
+                r.addClass(el, name);
+            }
+        }, {
+            key: 'removeClass',
+            value: function removeClass(r, el, name) {
+                r.removeClass(el, name);
+            }
+        }, {
+            key: 'setStyle',
+            value: function setStyle(r, el, style, value, hasVendorPrefix, hasImportant) {
+                r.setStyle(el, style, value, hasVendorPrefix, hasImportant);
+            }
+        }, {
+            key: 'removeStyle',
+            value: function removeStyle(r, el, style, hasVendorPrefix) {
+                r.removeStyle(el, style, hasVendorPrefix);
+            }
+        }, {
+            key: 'setProperty',
+            value: function setProperty(r, el, name, value) {
+                r.setProperty(el, name, value);
+            }
+        }, {
+            key: 'setValue',
+            value: function setValue(r, node, value) {
+                r.setValue(node, value);
+            }
+        }, {
+            key: 'listen',
+            value: function listen(r, el, elName, eventName, unlistenId) {
+                var _this21 = this;
+
+                var /** @type {?} */listener = function listener(event) {
+                    return _this21._eventDispatcher.dispatchRenderEvent(el, elName, eventName, event);
+                };
+                var /** @type {?} */unlisten = r.listen(el || elName, eventName, listener);
+                this._renderStore.store(unlisten, unlistenId);
+            }
+        }, {
+            key: 'unlisten',
+            value: function unlisten(r, _unlisten) {
+                _unlisten();
+            }
+        }]);
+
+        return MessageBasedRendererV2;
+    }();
+
+    MessageBasedRendererV2.decorators = [{ type: _core.Injectable }];
+    /** @nocollapse */
+    MessageBasedRendererV2.ctorParameters = function () {
+        return [{ type: ServiceMessageBrokerFactory }, { type: MessageBus }, { type: Serializer }, { type: RenderStore }, { type: _core.RendererFactoryV2 }];
+    };
+
     /**
      * Wrapper class that exposes the Worker
      * and underlying {\@link MessageBus} for lower level message passing.
@@ -1655,11 +1832,14 @@
      * A multi-provider used to automatically call the `start()` method after the service is
      * created.
      *
-     * TODO(vicb): create an interface for startable services to implement
      * @experimental WebWorker support is currently experimental.
      */
     var /** @type {?} */WORKER_UI_STARTABLE_MESSAGING_SERVICE = new _core.InjectionToken('WorkerRenderStartableMsgService');
-    var /** @type {?} */_WORKER_UI_PLATFORM_PROVIDERS = [{ provide: _core.NgZone, useFactory: createNgZone, deps: [] }, MessageBasedRenderer, { provide: WORKER_UI_STARTABLE_MESSAGING_SERVICE, useExisting: MessageBasedRenderer, multi: true }, _platformBrowser.ɵBROWSER_SANITIZATION_PROVIDERS, { provide: _core.ErrorHandler, useFactory: _exceptionHandler, deps: [] }, { provide: _platformBrowser.DOCUMENT, useFactory: _document, deps: [] },
+    var /** @type {?} */_WORKER_UI_PLATFORM_PROVIDERS = [{ provide: _core.NgZone, useFactory: createNgZone, deps: [] }, MessageBasedRenderer, MessageBasedRendererV2, {
+        provide: WORKER_UI_STARTABLE_MESSAGING_SERVICE,
+        useExisting: MessageBasedRendererV2,
+        multi: true
+    }, _platformBrowser.ɵBROWSER_SANITIZATION_PROVIDERS, { provide: _core.ErrorHandler, useFactory: _exceptionHandler, deps: [] }, { provide: _platformBrowser.DOCUMENT, useFactory: _document, deps: [] },
     // TODO(jteplitz602): Investigate if we definitely need EVENT_MANAGER on the render thread
     // #5298
     { provide: _platformBrowser.EVENT_MANAGER_PLUGINS, useClass: _platformBrowser.ɵDomEventsPlugin, multi: true }, { provide: _platformBrowser.EVENT_MANAGER_PLUGINS, useClass: _platformBrowser.ɵKeyEventsPlugin, multi: true }, { provide: _platformBrowser.EVENT_MANAGER_PLUGINS, useClass: _platformBrowser.ɵHammerGesturesPlugin, multi: true }, { provide: _platformBrowser.HAMMER_GESTURE_CONFIG, useClass: _platformBrowser.HammerGestureConfig }, _core.ɵAPP_ID_RANDOM_PROVIDER, { provide: _platformBrowser.ɵDomRootRenderer, useClass: _platformBrowser.ɵDomRootRenderer_ }, { provide: _core.RootRenderer, useExisting: _platformBrowser.ɵDomRootRenderer }, _platformBrowser.ɵDomRendererFactoryV2, { provide: _core.RendererFactoryV2, useExisting: _platformBrowser.ɵDomRendererFactoryV2 }, { provide: _platformBrowser.ɵSharedStylesHost, useExisting: _platformBrowser.ɵDomSharedStylesHost }, { provide: ServiceMessageBrokerFactory, useClass: ServiceMessageBrokerFactory_ }, { provide: ClientMessageBrokerFactory, useClass: ClientMessageBrokerFactory_ }, { provide: _platformBrowser.AnimationDriver, useFactory: _resolveDefaultAnimationDriver, deps: [] }, Serializer, { provide: ON_WEB_WORKER, useValue: false }, RenderStore, _platformBrowser.ɵDomSharedStylesHost, _core.Testability, _platformBrowser.EventManager, WebWorkerInstance, {
@@ -1850,27 +2030,27 @@
         function WebWorkerPlatformLocation(brokerFactory, bus, _serializer) {
             _classCallCheck(this, WebWorkerPlatformLocation);
 
-            var _this20 = _possibleConstructorReturn(this, (WebWorkerPlatformLocation.__proto__ || Object.getPrototypeOf(WebWorkerPlatformLocation)).call(this));
+            var _this22 = _possibleConstructorReturn(this, (WebWorkerPlatformLocation.__proto__ || Object.getPrototypeOf(WebWorkerPlatformLocation)).call(this));
 
-            _this20._serializer = _serializer;
-            _this20._popStateListeners = [];
-            _this20._hashChangeListeners = [];
-            _this20._location = null;
-            _this20._broker = brokerFactory.createMessageBroker(ROUTER_CHANNEL);
-            _this20._channelSource = bus.from(ROUTER_CHANNEL);
-            _this20._channelSource.subscribe({
+            _this22._serializer = _serializer;
+            _this22._popStateListeners = [];
+            _this22._hashChangeListeners = [];
+            _this22._location = null;
+            _this22._broker = brokerFactory.createMessageBroker(ROUTER_CHANNEL);
+            _this22._channelSource = bus.from(ROUTER_CHANNEL);
+            _this22._channelSource.subscribe({
                 next: function next(msg) {
                     var listeners = null;
                     if (msg.hasOwnProperty('event')) {
                         var type = msg['event']['type'];
                         if (type === 'popstate') {
-                            listeners = _this20._popStateListeners;
+                            listeners = _this22._popStateListeners;
                         } else if (type === 'hashchange') {
-                            listeners = _this20._hashChangeListeners;
+                            listeners = _this22._hashChangeListeners;
                         }
                         if (listeners) {
                             // There was a popState or hashChange event, so the location object thas been updated
-                            _this20._location = _this20._serializer.deserialize(msg['location'], LocationType);
+                            _this22._location = _this22._serializer.deserialize(msg['location'], LocationType);
                             listeners.forEach(function (fn) {
                                 return fn(msg['event']);
                             });
@@ -1878,7 +2058,7 @@
                     }
                 }
             });
-            return _this20;
+            return _this22;
         }
         /**
          * \@internal *
@@ -1889,11 +2069,11 @@
         _createClass(WebWorkerPlatformLocation, [{
             key: 'init',
             value: function init() {
-                var _this21 = this;
+                var _this23 = this;
 
                 var /** @type {?} */args = new UiArguments('getLocation');
                 return this._broker.runOnService(args, LocationType).then(function (val) {
-                    _this21._location = val;
+                    _this23._location = val;
                     return true;
                 }, function (err) {
                     throw new Error(err);
@@ -2052,7 +2232,7 @@
          * @param {?} renderStore
          */
         function WebWorkerRootRenderer(messageBrokerFactory, bus, _serializer, renderStore) {
-            var _this22 = this;
+            var _this24 = this;
 
             _classCallCheck(this, WebWorkerRootRenderer);
 
@@ -2064,8 +2244,9 @@
             bus.initChannel(EVENT_CHANNEL);
             var source = bus.from(EVENT_CHANNEL);
             source.subscribe({ next: function next(message) {
-                    return _this22._dispatchEvent(message);
+                    return _this24._dispatchEvent(message);
                 } });
+            throw new Error('RootRenderer is no longer supported. Please use the `RendererFactoryV2` instead!');
         }
         /**
          * @param {?} message
@@ -2261,39 +2442,39 @@
         }, {
             key: 'listen',
             value: function listen(renderElement, name, callback) {
-                var _this23 = this;
+                var _this25 = this;
 
                 renderElement.events.listen(name, callback);
                 var /** @type {?} */unlistenCallbackId = this._rootRenderer.allocateId();
                 this._runOnService('listen', [new FnArg(renderElement, 2 /* RENDER_STORE_OBJECT */), new FnArg(name), new FnArg(unlistenCallbackId)]);
                 return function () {
                     renderElement.events.unlisten(name, callback);
-                    _this23._runOnService('listenDone', [new FnArg(unlistenCallbackId)]);
+                    _this25._runOnService('listenDone', [new FnArg(unlistenCallbackId)]);
                 };
             }
         }, {
             key: 'listenGlobal',
             value: function listenGlobal(target, name, callback) {
-                var _this24 = this;
+                var _this26 = this;
 
                 this._rootRenderer.globalEvents.listen(eventNameWithTarget(target, name), callback);
                 var /** @type {?} */unlistenCallbackId = this._rootRenderer.allocateId();
                 this._runOnService('listenGlobal', [new FnArg(target), new FnArg(name, null), new FnArg(unlistenCallbackId)]);
                 return function () {
-                    _this24._rootRenderer.globalEvents.unlisten(eventNameWithTarget(target, name), callback);
-                    _this24._runOnService('listenDone', [new FnArg(unlistenCallbackId)]);
+                    _this26._rootRenderer.globalEvents.unlisten(eventNameWithTarget(target, name), callback);
+                    _this26._runOnService('listenDone', [new FnArg(unlistenCallbackId)]);
                 };
             }
         }, {
             key: 'animate',
             value: function animate(renderElement, startingStyles, keyframes, duration, delay, easing) {
-                var _this25 = this;
+                var _this27 = this;
 
                 var previousPlayers = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : [];
 
                 var /** @type {?} */playerId = this._rootRenderer.allocateId();
                 var /** @type {?} */previousPlayerIds = previousPlayers.map(function (player) {
-                    return _this25._rootRenderer.renderStore.serialize(player);
+                    return _this27._rootRenderer.renderStore.serialize(player);
                 });
                 this._runOnService('animate', [new FnArg(renderElement, 2 /* RENDER_STORE_OBJECT */), new FnArg(startingStyles), new FnArg(keyframes), new FnArg(duration), new FnArg(delay), new FnArg(easing), new FnArg(previousPlayerIds), new FnArg(playerId)]);
                 var /** @type {?} */player = new _AnimationWorkerRendererPlayer(this._rootRenderer, renderElement);
@@ -2322,7 +2503,7 @@
          * @param {?} renderStore
          */
         function WebWorkerRendererFactoryV2(messageBrokerFactory, bus, _serializer, renderStore) {
-            var _this26 = this;
+            var _this28 = this;
 
             _classCallCheck(this, WebWorkerRendererFactoryV2);
 
@@ -2333,7 +2514,7 @@
             bus.initChannel(EVENT_V2_CHANNEL);
             var source = bus.from(EVENT_V2_CHANNEL);
             source.subscribe({ next: function next(message) {
-                    return _this26._dispatchEvent(message);
+                    return _this28._dispatchEvent(message);
                 } });
         }
         /**
@@ -2529,15 +2710,15 @@
         }, {
             key: 'listen',
             value: function listen(target, eventName, listener) {
-                var _this27 = this;
+                var _this29 = this;
 
                 var /** @type {?} */unlistenId = this._rendererFactory.allocateId();
 
-                var _ref3 = typeof target === 'string' ? [null, target, target + ':' + eventName] : [target, null, null],
-                    _ref4 = _slicedToArray(_ref3, 3),
-                    targetEl = _ref4[0],
-                    targetName = _ref4[1],
-                    fullName = _ref4[2];
+                var _ref5 = typeof target === 'string' ? [null, target, target + ':' + eventName] : [target, null, null],
+                    _ref6 = _slicedToArray(_ref5, 3),
+                    targetEl = _ref6[0],
+                    targetName = _ref6[1],
+                    fullName = _ref6[2];
 
                 if (fullName) {
                     this._rendererFactory.globalEvents.listen(fullName, listener);
@@ -2547,11 +2728,11 @@
                 this.callUIWithRenderer('listen', [new FnArg(targetEl, 2 /* RENDER_STORE_OBJECT */), new FnArg(targetName), new FnArg(eventName), new FnArg(unlistenId)]);
                 return function () {
                     if (fullName) {
-                        _this27._rendererFactory.globalEvents.unlisten(fullName, listener);
+                        _this29._rendererFactory.globalEvents.unlisten(fullName, listener);
                     } else {
                         targetEl.events.unlisten(eventName, listener);
                     }
-                    _this27.callUIWithRenderer('unlisten', [new FnArg(unlistenId)]);
+                    _this29.callUIWithRenderer('unlisten', [new FnArg(unlistenId)]);
                 };
             }
         }, {

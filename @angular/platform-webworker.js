@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.0.0-beta.8-187f7b6
+ * @license Angular v4.0.0-beta.8-4b54c0e
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1467,6 +1467,266 @@ MessageBasedRenderer.ctorParameters = () => [
     { type: RenderStore, },
     { type: RootRenderer, },
 ];
+class MessageBasedRendererV2 {
+    /**
+     * @param {?} _brokerFactory
+     * @param {?} _bus
+     * @param {?} _serializer
+     * @param {?} _renderStore
+     * @param {?} _rendererFactory
+     */
+    constructor(_brokerFactory, _bus, _serializer, _renderStore, _rendererFactory) {
+        this._brokerFactory = _brokerFactory;
+        this._bus = _bus;
+        this._serializer = _serializer;
+        this._renderStore = _renderStore;
+        this._rendererFactory = _rendererFactory;
+    }
+    /**
+     * @return {?}
+     */
+    start() {
+        const /** @type {?} */ broker = this._brokerFactory.createMessageBroker(RENDERER_V2_CHANNEL);
+        this._bus.initChannel(EVENT_V2_CHANNEL);
+        this._eventDispatcher = new EventDispatcher(this._bus.to(EVENT_V2_CHANNEL), this._serializer);
+        const [RSO, P, CRT] = [
+            2 /* RENDER_STORE_OBJECT */,
+            1 /* PRIMITIVE */,
+            0 /* RENDERER_TYPE_V2 */,
+        ];
+        const /** @type {?} */ methods = [
+            ['createRenderer', this.createRenderer, RSO, CRT, P],
+            ['createElement', this.createElement, RSO, P, P, P],
+            ['createComment', this.createComment, RSO, P, P], ['createText', this.createText, RSO, P, P],
+            ['appendChild', this.appendChild, RSO, RSO, RSO],
+            ['insertBefore', this.insertBefore, RSO, RSO, RSO, RSO],
+            ['removeChild', this.removeChild, RSO, RSO, RSO],
+            ['selectRootElement', this.selectRootElement, RSO, P, P],
+            ['parentNode', this.parentNode, RSO, RSO, P], ['nextSibling', this.nextSibling, RSO, RSO, P],
+            ['setAttribute', this.setAttribute, RSO, RSO, P, P, P],
+            ['removeAttribute', this.removeAttribute, RSO, RSO, P, P],
+            ['addClass', this.addClass, RSO, RSO, P], ['removeClass', this.removeClass, RSO, RSO, P],
+            ['setStyle', this.setStyle, RSO, RSO, P, P, P, P],
+            ['removeStyle', this.removeStyle, RSO, RSO, P, P],
+            ['setProperty', this.setProperty, RSO, RSO, P, P], ['setValue', this.setValue, RSO, RSO, P],
+            ['listen', this.listen, RSO, RSO, P, P, P], ['unlisten', this.unlisten, RSO, RSO],
+            ['destroy', this.destroy, RSO], ['destroyNode', this.destroyNode, RSO, P]
+        ];
+        methods.forEach(([name, method, ...argTypes]) => {
+            broker.registerMethod(name, argTypes, method.bind(this));
+        });
+    }
+    /**
+     * @param {?} r
+     * @return {?}
+     */
+    destroy(r) { r.destroy(); }
+    /**
+     * @param {?} r
+     * @param {?} node
+     * @return {?}
+     */
+    destroyNode(r, node) {
+        if (r.destroyNode) {
+            r.destroyNode(node);
+        }
+        this._renderStore.remove(node);
+    }
+    /**
+     * @param {?} el
+     * @param {?} type
+     * @param {?} id
+     * @return {?}
+     */
+    createRenderer(el, type, id) {
+        this._renderStore.store(this._rendererFactory.createRenderer(el, type), id);
+    }
+    /**
+     * @param {?} r
+     * @param {?} name
+     * @param {?} namespace
+     * @param {?} id
+     * @return {?}
+     */
+    createElement(r, name, namespace, id) {
+        this._renderStore.store(r.createElement(name, namespace), id);
+    }
+    /**
+     * @param {?} r
+     * @param {?} value
+     * @param {?} id
+     * @return {?}
+     */
+    createComment(r, value, id) {
+        this._renderStore.store(r.createComment(value), id);
+    }
+    /**
+     * @param {?} r
+     * @param {?} value
+     * @param {?} id
+     * @return {?}
+     */
+    createText(r, value, id) {
+        this._renderStore.store(r.createText(value), id);
+    }
+    /**
+     * @param {?} r
+     * @param {?} parent
+     * @param {?} child
+     * @return {?}
+     */
+    appendChild(r, parent, child) { r.appendChild(parent, child); }
+    /**
+     * @param {?} r
+     * @param {?} parent
+     * @param {?} child
+     * @param {?} ref
+     * @return {?}
+     */
+    insertBefore(r, parent, child, ref) {
+        r.insertBefore(parent, child, ref);
+    }
+    /**
+     * @param {?} r
+     * @param {?} parent
+     * @param {?} child
+     * @return {?}
+     */
+    removeChild(r, parent, child) { r.removeChild(parent, child); }
+    /**
+     * @param {?} r
+     * @param {?} selector
+     * @param {?} id
+     * @return {?}
+     */
+    selectRootElement(r, selector, id) {
+        this._renderStore.store(r.selectRootElement(selector), id);
+    }
+    /**
+     * @param {?} r
+     * @param {?} node
+     * @param {?} id
+     * @return {?}
+     */
+    parentNode(r, node, id) {
+        this._renderStore.store(r.parentNode(node), id);
+    }
+    /**
+     * @param {?} r
+     * @param {?} node
+     * @param {?} id
+     * @return {?}
+     */
+    nextSibling(r, node, id) {
+        this._renderStore.store(r.nextSibling(node), id);
+    }
+    /**
+     * @param {?} r
+     * @param {?} el
+     * @param {?} name
+     * @param {?} value
+     * @param {?} namespace
+     * @return {?}
+     */
+    setAttribute(r, el, name, value, namespace) {
+        r.setAttribute(el, name, value, namespace);
+    }
+    /**
+     * @param {?} r
+     * @param {?} el
+     * @param {?} name
+     * @param {?} namespace
+     * @return {?}
+     */
+    removeAttribute(r, el, name, namespace) {
+        r.removeAttribute(el, name, namespace);
+    }
+    /**
+     * @param {?} r
+     * @param {?} el
+     * @param {?} name
+     * @return {?}
+     */
+    addClass(r, el, name) { r.addClass(el, name); }
+    /**
+     * @param {?} r
+     * @param {?} el
+     * @param {?} name
+     * @return {?}
+     */
+    removeClass(r, el, name) { r.removeClass(el, name); }
+    /**
+     * @param {?} r
+     * @param {?} el
+     * @param {?} style
+     * @param {?} value
+     * @param {?} hasVendorPrefix
+     * @param {?} hasImportant
+     * @return {?}
+     */
+    setStyle(r, el, style, value, hasVendorPrefix, hasImportant) {
+        r.setStyle(el, style, value, hasVendorPrefix, hasImportant);
+    }
+    /**
+     * @param {?} r
+     * @param {?} el
+     * @param {?} style
+     * @param {?} hasVendorPrefix
+     * @return {?}
+     */
+    removeStyle(r, el, style, hasVendorPrefix) {
+        r.removeStyle(el, style, hasVendorPrefix);
+    }
+    /**
+     * @param {?} r
+     * @param {?} el
+     * @param {?} name
+     * @param {?} value
+     * @return {?}
+     */
+    setProperty(r, el, name, value) {
+        r.setProperty(el, name, value);
+    }
+    /**
+     * @param {?} r
+     * @param {?} node
+     * @param {?} value
+     * @return {?}
+     */
+    setValue(r, node, value) { r.setValue(node, value); }
+    /**
+     * @param {?} r
+     * @param {?} el
+     * @param {?} elName
+     * @param {?} eventName
+     * @param {?} unlistenId
+     * @return {?}
+     */
+    listen(r, el, elName, eventName, unlistenId) {
+        const /** @type {?} */ listener = (event) => {
+            return this._eventDispatcher.dispatchRenderEvent(el, elName, eventName, event);
+        };
+        const /** @type {?} */ unlisten = r.listen(el || elName, eventName, listener);
+        this._renderStore.store(unlisten, unlistenId);
+    }
+    /**
+     * @param {?} r
+     * @param {?} unlisten
+     * @return {?}
+     */
+    unlisten(r, unlisten) { unlisten(); }
+}
+MessageBasedRendererV2.decorators = [
+    { type: Injectable },
+];
+/** @nocollapse */
+MessageBasedRendererV2.ctorParameters = () => [
+    { type: ServiceMessageBrokerFactory, },
+    { type: MessageBus, },
+    { type: Serializer, },
+    { type: RenderStore, },
+    { type: RendererFactoryV2, },
+];
 
 /**
  * Wrapper class that exposes the Worker
@@ -1499,14 +1759,18 @@ const /** @type {?} */ WORKER_SCRIPT = new InjectionToken('WebWorkerScript');
  * A multi-provider used to automatically call the `start()` method after the service is
  * created.
  *
- * TODO(vicb): create an interface for startable services to implement
  * @experimental WebWorker support is currently experimental.
  */
 const /** @type {?} */ WORKER_UI_STARTABLE_MESSAGING_SERVICE = new InjectionToken('WorkerRenderStartableMsgService');
 const /** @type {?} */ _WORKER_UI_PLATFORM_PROVIDERS = [
     { provide: NgZone, useFactory: createNgZone, deps: [] },
     MessageBasedRenderer,
-    { provide: WORKER_UI_STARTABLE_MESSAGING_SERVICE, useExisting: MessageBasedRenderer, multi: true },
+    MessageBasedRendererV2,
+    {
+        provide: WORKER_UI_STARTABLE_MESSAGING_SERVICE,
+        useExisting: MessageBasedRendererV2,
+        multi: true
+    },
     ɵBROWSER_SANITIZATION_PROVIDERS,
     { provide: ErrorHandler, useFactory: _exceptionHandler, deps: [] },
     { provide: DOCUMENT, useFactory: _document, deps: [] },
@@ -1625,7 +1889,7 @@ function _resolveDefaultAnimationDriver() {
 /**
  * @stable
  */
-const /** @type {?} */ VERSION = new Version('4.0.0-beta.8-187f7b6');
+const /** @type {?} */ VERSION = new Version('4.0.0-beta.8-4b54c0e');
 
 class MessageBasedPlatformLocation {
     /**
@@ -1935,6 +2199,7 @@ class WebWorkerRootRenderer {
         bus.initChannel(EVENT_CHANNEL);
         const source = bus.from(EVENT_CHANNEL);
         source.subscribe({ next: (message) => this._dispatchEvent(message) });
+        throw new Error('RootRenderer is no longer supported. Please use the `RendererFactoryV2` instead!');
     }
     /**
      * @param {?} message
