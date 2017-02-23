@@ -17,15 +17,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /**
- * @license Angular v4.0.0-beta.8-88bc143
+ * @license Angular v4.0.0-beta.8-a1d4769
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
-import { Injectable, InjectionToken, Injector, PLATFORM_INITIALIZER, Testability, RendererFactoryV2, RootRenderer, ɵAPP_ID_RANDOM_PROVIDER, ErrorHandler, NgZone, platformCore, createPlatformFactory, isDevMode, RenderComponentType, Version, APP_INITIALIZER, ApplicationModule, NgModule, ViewEncapsulation } from '@angular/core';
+import { ɵPLATFORM_WORKER_UI_ID, PlatformLocation, ɵPLATFORM_WORKER_APP_ID, CommonModule } from '@angular/common';
+import { Injectable, InjectionToken, PLATFORM_ID, Injector, PLATFORM_INITIALIZER, Testability, RendererFactoryV2, RootRenderer, ɵAPP_ID_RANDOM_PROVIDER, ErrorHandler, NgZone, platformCore, createPlatformFactory, isDevMode, RenderComponentType, Version, APP_INITIALIZER, ApplicationModule, NgModule, ViewEncapsulation } from '@angular/core';
 import { EventManager, ɵDomSharedStylesHost, AnimationDriver, ɵSharedStylesHost, ɵDomRendererFactoryV2, ɵDomRootRenderer, ɵDomRootRenderer_, HammerGestureConfig, HAMMER_GESTURE_CONFIG, ɵHammerGesturesPlugin, EVENT_MANAGER_PLUGINS, ɵKeyEventsPlugin, ɵDomEventsPlugin, DOCUMENT, ɵBROWSER_SANITIZATION_PROVIDERS, ɵBrowserGetTestability, ɵBrowserDomAdapter, ɵWebAnimationsDriver, ɵgetDOM, ɵBrowserPlatformLocation, ɵsetRootDomAdapter, ɵDomAdapter } from '@angular/platform-browser';
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/Observable';
-import { PlatformLocation, CommonModule } from '@angular/common';
 
 var /** @type {?} */ON_WEB_WORKER = new InjectionToken('WebWorker.onWebWorker');
 
@@ -2014,7 +2014,7 @@ var /** @type {?} */_WORKER_UI_PLATFORM_PROVIDERS = [{ provide: NgZone, useFacto
     useFactory: initWebWorkerRenderPlatform,
     multi: true,
     deps: [Injector]
-}, { provide: MessageBus, useFactory: messageBusFactory, deps: [WebWorkerInstance] }];
+}, { provide: PLATFORM_ID, useValue: ɵPLATFORM_WORKER_UI_ID }, { provide: MessageBus, useFactory: messageBusFactory, deps: [WebWorkerInstance] }];
 /**
  * @param {?} injector
  * @return {?}
@@ -2102,7 +2102,7 @@ function _resolveDefaultAnimationDriver() {
 /**
  * @stable
  */
-var /** @type {?} */VERSION = new Version('4.0.0-beta.8-88bc143');
+var /** @type {?} */VERSION = new Version('4.0.0-beta.8-a1d4769');
 
 var MessageBasedPlatformLocation = function () {
     /**
@@ -4803,7 +4803,7 @@ var WorkerDomAdapter = function (_DomAdapter) {
  */
 
 
-var /** @type {?} */platformWorkerApp = createPlatformFactory(platformCore, 'workerApp');
+var /** @type {?} */platformWorkerApp = createPlatformFactory(platformCore, 'workerApp', [{ provide: PLATFORM_ID, useValue: ɵPLATFORM_WORKER_APP_ID }]);
 /**
  * @return {?}
  */

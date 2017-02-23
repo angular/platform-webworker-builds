@@ -1,17 +1,17 @@
 (function (global, factory) {
     if (typeof define === "function" && define.amd) {
-        define('@angular/platform-webworker', ['exports', '@angular/core', '@angular/platform-browser', 'rxjs/Subject', '@angular/common', 'rxjs/Observable'], factory);
+        define('@angular/platform-webworker', ['exports', '@angular/common', '@angular/core', '@angular/platform-browser', 'rxjs/Subject', 'rxjs/Observable'], factory);
     } else if (typeof exports !== "undefined") {
-        factory(exports, require('@angular/core'), require('@angular/platform-browser'), require('rxjs/Subject'), require('@angular/common'), require('rxjs/Observable'));
+        factory(exports, require('@angular/common'), require('@angular/core'), require('@angular/platform-browser'), require('rxjs/Subject'), require('rxjs/Observable'));
     } else {
         var mod = {
             exports: {}
         };
-        factory(mod.exports, global.ng.core, global.ng.platformBrowser, global.Rx, global.ng.common, global.Rx);
+        factory(mod.exports, global.ng.common, global.ng.core, global.ng.platformBrowser, global.Rx, global.Rx);
         global.ng = global.ng || {};
         global.ng.platformWebworker = mod.exports;
     }
-})(this, function (exports, _core, _platformBrowser, _Subject2, _common) {
+})(this, function (exports, _common, _core, _platformBrowser, _Subject2) {
     'use strict';
 
     Object.defineProperty(exports, "__esModule", {
@@ -1667,7 +1667,7 @@
         useFactory: initWebWorkerRenderPlatform,
         multi: true,
         deps: [_core.Injector]
-    }, { provide: MessageBus, useFactory: messageBusFactory, deps: [WebWorkerInstance] }];
+    }, { provide: _core.PLATFORM_ID, useValue: _common.ɵPLATFORM_WORKER_UI_ID }, { provide: MessageBus, useFactory: messageBusFactory, deps: [WebWorkerInstance] }];
     /**
      * @param {?} injector
      * @return {?}
@@ -3339,7 +3339,7 @@
     /**
      * @experimental
      */
-    var /** @type {?} */platformWorkerApp = (0, _core.createPlatformFactory)(_core.platformCore, 'workerApp');
+    var /** @type {?} */platformWorkerApp = (0, _core.createPlatformFactory)(_core.platformCore, 'workerApp', [{ provide: _core.PLATFORM_ID, useValue: _common.ɵPLATFORM_WORKER_APP_ID }]);
     /**
      * @return {?}
      */
