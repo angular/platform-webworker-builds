@@ -71,6 +71,9 @@ export declare class WebWorkerRendererFactoryV2 implements RendererFactoryV2 {
 }
 export declare class WebWorkerRendererV2 implements RendererV2 {
     private _rendererFactory;
+    data: {
+        [key: string]: any;
+    };
     constructor(_rendererFactory: WebWorkerRendererFactoryV2);
     private asFnArg;
     destroy(): void;

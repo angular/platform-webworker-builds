@@ -1935,7 +1935,7 @@
     /**
      * @stable
      */
-    var /** @type {?} */VERSION = new _core.Version('4.0.0-beta.8-5094aef');
+    var /** @type {?} */VERSION = new _core.Version('4.0.0-beta.8-436a179');
 
     var MessageBasedPlatformLocation = function () {
         /**
@@ -2589,6 +2589,7 @@
             _classCallCheck(this, WebWorkerRendererV2);
 
             this._rendererFactory = _rendererFactory;
+            this.data = Object.create(null);
             this.asFnArg = new FnArg(this, 2 /* RENDER_STORE_OBJECT */);
         }
         /**
