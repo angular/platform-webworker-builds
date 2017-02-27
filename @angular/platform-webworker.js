@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.0.0-rc.1-f356041
+ * @license Angular v4.0.0-rc.1-5caab71
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1889,7 +1889,7 @@ function _resolveDefaultAnimationDriver() {
 /**
  * @stable
  */
-const /** @type {?} */ VERSION = new Version('4.0.0-rc.1-f356041');
+const /** @type {?} */ VERSION = new Version('4.0.0-rc.1-5caab71');
 
 class MessageBasedPlatformLocation {
     /**
