@@ -1,8 +1,8 @@
 var _slicedToArray=function(){function sliceIterator(arr,i){var _arr=[];var _n=true;var _d=false;var _e=undefined;try{for(var _i=arr[Symbol.iterator](),_s;!(_n=(_s=_i.next()).done);_n=true){_arr.push(_s.value);if(i&&_arr.length===i)break;}}catch(err){_d=true;_e=err;}finally{try{if(!_n&&_i["return"])_i["return"]();}finally{if(_d)throw _e;}}return _arr;}return function(arr,i){if(Array.isArray(arr)){return arr;}else if(Symbol.iterator in Object(arr)){return sliceIterator(arr,i);}else{throw new TypeError("Invalid attempt to destructure non-iterable instance");}};}();var _typeof=typeof Symbol==="function"&&typeof Symbol.iterator==="symbol"?function(obj){return typeof obj;}:function(obj){return obj&&typeof Symbol==="function"&&obj.constructor===Symbol&&obj!==Symbol.prototype?"symbol":typeof obj;};var _get=function get(object,property,receiver){if(object===null)object=Function.prototype;var desc=Object.getOwnPropertyDescriptor(object,property);if(desc===undefined){var parent=Object.getPrototypeOf(object);if(parent===null){return undefined;}else{return get(parent,property,receiver);}}else if("value"in desc){return desc.value;}else{var getter=desc.get;if(getter===undefined){return undefined;}return getter.call(receiver);}};var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||false;descriptor.configurable=true;if("value"in descriptor)descriptor.writable=true;Object.defineProperty(target,descriptor.key,descriptor);}}return function(Constructor,protoProps,staticProps){if(protoProps)defineProperties(Constructor.prototype,protoProps);if(staticProps)defineProperties(Constructor,staticProps);return Constructor;};}();function _toConsumableArray(arr){if(Array.isArray(arr)){for(var i=0,arr2=Array(arr.length);i<arr.length;i++){arr2[i]=arr[i];}return arr2;}else{return Array.from(arr);}}function _toArray(arr){return Array.isArray(arr)?arr:Array.from(arr);}function _possibleConstructorReturn(self,call){if(!self){throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call&&(typeof call==="object"||typeof call==="function")?call:self;}function _inherits(subClass,superClass){if(typeof superClass!=="function"&&superClass!==null){throw new TypeError("Super expression must either be null or a function, not "+typeof superClass);}subClass.prototype=Object.create(superClass&&superClass.prototype,{constructor:{value:subClass,enumerable:false,writable:true,configurable:true}});if(superClass)Object.setPrototypeOf?Object.setPrototypeOf(subClass,superClass):subClass.__proto__=superClass;}function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError("Cannot call a class as a function");}}/**
- * @license Angular v4.0.0-rc.1-e58cb7b
+ * @license Angular v4.0.0-rc.1-126fda2
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
- */import{ɵPLATFORM_WORKER_UI_ID,PlatformLocation,ɵPLATFORM_WORKER_APP_ID,CommonModule}from'@angular/common';import{Injectable,InjectionToken,PLATFORM_ID,Injector,PLATFORM_INITIALIZER,Testability,RendererFactoryV2,RootRenderer,ɵAPP_ID_RANDOM_PROVIDER,ErrorHandler,NgZone,platformCore,createPlatformFactory,isDevMode,RenderComponentType,Version,APP_INITIALIZER,ApplicationModule,NgModule,ViewEncapsulation}from'@angular/core';import{EventManager,ɵDomSharedStylesHost,AnimationDriver,ɵSharedStylesHost,ɵDomRendererFactoryV2,ɵDomRootRenderer,ɵDomRootRenderer_,HammerGestureConfig,HAMMER_GESTURE_CONFIG,ɵHammerGesturesPlugin,EVENT_MANAGER_PLUGINS,ɵKeyEventsPlugin,ɵDomEventsPlugin,DOCUMENT,ɵBROWSER_SANITIZATION_PROVIDERS,ɵBrowserGetTestability,ɵBrowserDomAdapter,ɵWebAnimationsDriver,ɵgetDOM,ɵBrowserPlatformLocation,ɵsetRootDomAdapter,ɵDomAdapter}from'@angular/platform-browser';import{Subject}from'rxjs/Subject';import'rxjs/Observable';var/** @type {?} */ON_WEB_WORKER=new InjectionToken('WebWorker.onWebWorker');/**
+ */import{ɵPLATFORM_WORKER_UI_ID,PlatformLocation,ɵPLATFORM_WORKER_APP_ID,CommonModule}from'@angular/common';import{Injectable,InjectionToken,PLATFORM_ID,Injector,PLATFORM_INITIALIZER,Testability,RendererFactoryV2,ɵAPP_ID_RANDOM_PROVIDER,ErrorHandler,NgZone,platformCore,createPlatformFactory,isDevMode,RenderComponentType,Version,APP_INITIALIZER,ApplicationModule,NgModule}from'@angular/core';import{EventManager,ɵDomSharedStylesHost,ɵSharedStylesHost,ɵDomRendererFactoryV2,HammerGestureConfig,HAMMER_GESTURE_CONFIG,ɵHammerGesturesPlugin,EVENT_MANAGER_PLUGINS,ɵKeyEventsPlugin,ɵDomEventsPlugin,DOCUMENT,ɵBROWSER_SANITIZATION_PROVIDERS,ɵBrowserGetTestability,ɵBrowserDomAdapter,ɵBrowserPlatformLocation,ɵsetRootDomAdapter,ɵDomAdapter}from'@angular/platform-browser';import{Subject}from'rxjs/Subject';import'rxjs/Observable';var/** @type {?} */ON_WEB_WORKER=new InjectionToken('WebWorker.onWebWorker');/**
  * @param {?} token
  * @return {?}
  */function stringify(token){if(typeof token==='string'){return token;}if(token==null){return''+token;}if(token.overriddenName){return''+token.overriddenName;}if(token.name){return''+token.name;}var/** @type {?} */res=token.toString();var/** @type {?} */newLineIndex=res.indexOf('\n');return newLineIndex===-1?res:res.substring(0,newLineIndex);}/**
@@ -108,7 +108,7 @@ var _slicedToArray=function(){function sliceIterator(arr,i){var _arr=[];var _n=t
      */},{key:'_serializeRendererTypeV2',value:function _serializeRendererTypeV2(type){return{'id':type.id,'encapsulation':this.serialize(type.encapsulation),'styles':this.serialize(type.styles),'data':this.serialize(type.data)};}/**
      * @param {?} props
      * @return {?}
-     */},{key:'_deserializeRendererTypeV2',value:function _deserializeRendererTypeV2(props){return{id:props['id'],encapsulation:props['encapsulation'],styles:this.deserialize(props['styles']),data:this.deserialize(props['data'])};}}]);return Serializer;}();Serializer.decorators=[{type:Injectable}];/** @nocollapse */Serializer.ctorParameters=function(){return[{type:RenderStore}];};var/** @type {?} */ANIMATION_WORKER_PLAYER_PREFIX='AnimationPlayer.';/**
+     */},{key:'_deserializeRendererTypeV2',value:function _deserializeRendererTypeV2(props){return{id:props['id'],encapsulation:props['encapsulation'],styles:this.deserialize(props['styles']),data:this.deserialize(props['data'])};}}]);return Serializer;}();Serializer.decorators=[{type:Injectable}];/** @nocollapse */Serializer.ctorParameters=function(){return[{type:RenderStore}];};/**
  * \@experimental WebWorker support in Angular is experimental.
  * @abstract
  */var ClientMessageBrokerFactory=function(){function ClientMessageBrokerFactory(){_classCallCheck(this,ClientMessageBrokerFactory);}_createClass(ClientMessageBrokerFactory,[{key:'createMessageBroker',/**
@@ -341,7 +341,7 @@ var workerScope=self;workerScope.addEventListener('message',function(ev){return 
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
- */var/** @type {?} */RENDERER_CHANNEL='ng-Renderer';var/** @type {?} */EVENT_CHANNEL='ng-Events';var/** @type {?} */RENDERER_V2_CHANNEL='v2.ng-Renderer';var/** @type {?} */EVENT_V2_CHANNEL='v2.ng-Events';var/** @type {?} */ROUTER_CHANNEL='ng-Router';/**
+ */var/** @type {?} */RENDERER_V2_CHANNEL='v2.ng-Renderer';var/** @type {?} */EVENT_V2_CHANNEL='v2.ng-Events';var/** @type {?} */ROUTER_CHANNEL='ng-Router';/**
  * @license
  * Copyright Google Inc. All Rights Reserved.
  *
@@ -387,143 +387,7 @@ var workerScope=self;workerScope.addEventListener('message',function(ev){return 
      */},{key:'dispatchRenderEvent',value:function dispatchRenderEvent(element,eventTarget,eventName,event){var/** @type {?} */serializedEvent=void 0;// TODO (jteplitz602): support custom events #3350
 switch(event.type){case'click':case'mouseup':case'mousedown':case'dblclick':case'contextmenu':case'mouseenter':case'mouseleave':case'mousemove':case'mouseout':case'mouseover':case'show':serializedEvent=serializeMouseEvent(event);break;case'keydown':case'keypress':case'keyup':serializedEvent=serializeKeyboardEvent(event);break;case'input':case'change':case'blur':serializedEvent=serializeEventWithTarget(event);break;case'abort':case'afterprint':case'beforeprint':case'cached':case'canplay':case'canplaythrough':case'chargingchange':case'chargingtimechange':case'close':case'dischargingtimechange':case'DOMContentLoaded':case'downloading':case'durationchange':case'emptied':case'ended':case'error':case'fullscreenchange':case'fullscreenerror':case'invalid':case'languagechange':case'levelfchange':case'loadeddata':case'loadedmetadata':case'obsolete':case'offline':case'online':case'open':case'orientatoinchange':case'pause':case'pointerlockchange':case'pointerlockerror':case'play':case'playing':case'ratechange':case'readystatechange':case'reset':case'scroll':case'seeked':case'seeking':case'stalled':case'submit':case'success':case'suspend':case'timeupdate':case'updateready':case'visibilitychange':case'volumechange':case'waiting':serializedEvent=serializeGenericEvent(event);break;case'transitionend':serializedEvent=serializeTransitionEvent(event);break;default:throw new Error(eventName+' not supported on WebWorkers');}this._sink.emit({'element':this._serializer.serialize(element,2/* RENDER_STORE_OBJECT */),'eventName':eventName,'eventTarget':eventTarget,'event':serializedEvent});// TODO(kegluneq): Eventually, we want the user to indicate from the UI side whether the event
 // should be canceled, but for now just call `preventDefault` on the original DOM event.
-return false;}}]);return EventDispatcher;}();var MessageBasedRenderer=function(){/**
-     * @param {?} _brokerFactory
-     * @param {?} _bus
-     * @param {?} _serializer
-     * @param {?} _renderStore
-     * @param {?} _rootRenderer
-     */function MessageBasedRenderer(_brokerFactory,_bus,_serializer,_renderStore,_rootRenderer){_classCallCheck(this,MessageBasedRenderer);this._brokerFactory=_brokerFactory;this._bus=_bus;this._serializer=_serializer;this._renderStore=_renderStore;this._rootRenderer=_rootRenderer;}/**
-     * @return {?}
-     */_createClass(MessageBasedRenderer,[{key:'start',value:function start(){var _this14=this;var/** @type {?} */broker=this._brokerFactory.createMessageBroker(RENDERER_CHANNEL);this._bus.initChannel(EVENT_CHANNEL);this._eventDispatcher=new EventDispatcher(this._bus.to(EVENT_CHANNEL),this._serializer);var RCT=RenderComponentType,RSO=2/* RENDER_STORE_OBJECT */,P=1/* PRIMITIVE */;var/** @type {?} */methods=[['renderComponent',this._renderComponent,RCT,P],['selectRootElement',this._selectRootElement,RSO,P,P],['createElement',this._createElement,RSO,RSO,P,P],['createViewRoot',this._createViewRoot,RSO,RSO,P],['createTemplateAnchor',this._createTemplateAnchor,RSO,RSO,P],['createText',this._createText,RSO,RSO,P,P],['projectNodes',this._projectNodes,RSO,RSO,RSO],['attachViewAfter',this._attachViewAfter,RSO,RSO,RSO],['detachView',this._detachView,RSO,RSO],['destroyView',this._destroyView,RSO,RSO,RSO],['setElementProperty',this._setElementProperty,RSO,RSO,P,P],['setElementAttribute',this._setElementAttribute,RSO,RSO,P,P],['setBindingDebugInfo',this._setBindingDebugInfo,RSO,RSO,P,P],['setElementClass',this._setElementClass,RSO,RSO,P,P],['setElementStyle',this._setElementStyle,RSO,RSO,P,P],['invokeElementMethod',this._invokeElementMethod,RSO,RSO,P,P],['setText',this._setText,RSO,RSO,P],['listen',this._listen,RSO,RSO,P,P],['listenGlobal',this._listenGlobal,RSO,P,P,P],['listenDone',this._listenDone,RSO,RSO],['animate',this._animate,RSO,RSO,P,P,P,P,P,P,P]];methods.forEach(function(_ref){var _ref2=_toArray(_ref),name=_ref2[0],method=_ref2[1],argTypes=_ref2.slice(2);broker.registerMethod(name,argTypes,method.bind(_this14));});this._bindAnimationPlayerMethods(broker);}/**
-     * @param {?} broker
-     * @return {?}
-     */},{key:'_bindAnimationPlayerMethods',value:function _bindAnimationPlayerMethods(broker){var _this15=this;var P=1/* PRIMITIVE */,RSO=2/* RENDER_STORE_OBJECT */;broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX+'play',[RSO,RSO],function(player,element){return player.play();});broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX+'pause',[RSO,RSO],function(player,element){return player.pause();});broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX+'init',[RSO,RSO],function(player,element){return player.init();});broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX+'restart',[RSO,RSO],function(player,element){return player.restart();});broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX+'destroy',[RSO,RSO],function(player,element){player.destroy();_this15._renderStore.remove(player);});broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX+'finish',[RSO,RSO],function(player,element){return player.finish();});broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX+'getPosition',[RSO,RSO],function(player,element){return player.getPosition();});broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX+'onStart',[RSO,RSO,P],function(player,element){return _this15._listenOnAnimationPlayer(player,element,'onStart');});broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX+'onDone',[RSO,RSO,P],function(player,element){return _this15._listenOnAnimationPlayer(player,element,'onDone');});broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX+'setPosition',[RSO,RSO,P],function(player,element,position){return player.setPosition(position);});}/**
-     * @param {?} renderComponentType
-     * @param {?} rendererId
-     * @return {?}
-     */},{key:'_renderComponent',value:function _renderComponent(renderComponentType,rendererId){var/** @type {?} */renderer=this._rootRenderer.renderComponent(renderComponentType);this._renderStore.store(renderer,rendererId);}/**
-     * @param {?} renderer
-     * @param {?} selector
-     * @param {?} elId
-     * @return {?}
-     */},{key:'_selectRootElement',value:function _selectRootElement(renderer,selector,elId){this._renderStore.store(renderer.selectRootElement(selector,null),elId);}/**
-     * @param {?} renderer
-     * @param {?} parentElement
-     * @param {?} name
-     * @param {?} elId
-     * @return {?}
-     */},{key:'_createElement',value:function _createElement(renderer,parentElement,name,elId){this._renderStore.store(renderer.createElement(parentElement,name,null),elId);}/**
-     * @param {?} renderer
-     * @param {?} hostElement
-     * @param {?} elId
-     * @return {?}
-     */},{key:'_createViewRoot',value:function _createViewRoot(renderer,hostElement,elId){var/** @type {?} */viewRoot=renderer.createViewRoot(hostElement);if(this._renderStore.serialize(hostElement)!==elId){this._renderStore.store(viewRoot,elId);}}/**
-     * @param {?} renderer
-     * @param {?} parentElement
-     * @param {?} elId
-     * @return {?}
-     */},{key:'_createTemplateAnchor',value:function _createTemplateAnchor(renderer,parentElement,elId){this._renderStore.store(renderer.createTemplateAnchor(parentElement,null),elId);}/**
-     * @param {?} renderer
-     * @param {?} parentElement
-     * @param {?} value
-     * @param {?} elId
-     * @return {?}
-     */},{key:'_createText',value:function _createText(renderer,parentElement,value,elId){this._renderStore.store(renderer.createText(parentElement,value,null),elId);}/**
-     * @param {?} renderer
-     * @param {?} parentElement
-     * @param {?} nodes
-     * @return {?}
-     */},{key:'_projectNodes',value:function _projectNodes(renderer,parentElement,nodes){renderer.projectNodes(parentElement,nodes);}/**
-     * @param {?} renderer
-     * @param {?} node
-     * @param {?} viewRootNodes
-     * @return {?}
-     */},{key:'_attachViewAfter',value:function _attachViewAfter(renderer,node,viewRootNodes){renderer.attachViewAfter(node,viewRootNodes);}/**
-     * @param {?} renderer
-     * @param {?} viewRootNodes
-     * @return {?}
-     */},{key:'_detachView',value:function _detachView(renderer,viewRootNodes){renderer.detachView(viewRootNodes);}/**
-     * @param {?} renderer
-     * @param {?} hostElement
-     * @param {?} viewAllNodes
-     * @return {?}
-     */},{key:'_destroyView',value:function _destroyView(renderer,hostElement,viewAllNodes){renderer.destroyView(hostElement,viewAllNodes);for(var/** @type {?} */i=0;i<viewAllNodes.length;i++){this._renderStore.remove(viewAllNodes[i]);}}/**
-     * @param {?} renderer
-     * @param {?} renderElement
-     * @param {?} propertyName
-     * @param {?} propertyValue
-     * @return {?}
-     */},{key:'_setElementProperty',value:function _setElementProperty(renderer,renderElement,propertyName,propertyValue){renderer.setElementProperty(renderElement,propertyName,propertyValue);}/**
-     * @param {?} renderer
-     * @param {?} renderElement
-     * @param {?} attributeName
-     * @param {?} attributeValue
-     * @return {?}
-     */},{key:'_setElementAttribute',value:function _setElementAttribute(renderer,renderElement,attributeName,attributeValue){renderer.setElementAttribute(renderElement,attributeName,attributeValue);}/**
-     * @param {?} renderer
-     * @param {?} renderElement
-     * @param {?} propertyName
-     * @param {?} propertyValue
-     * @return {?}
-     */},{key:'_setBindingDebugInfo',value:function _setBindingDebugInfo(renderer,renderElement,propertyName,propertyValue){renderer.setBindingDebugInfo(renderElement,propertyName,propertyValue);}/**
-     * @param {?} renderer
-     * @param {?} renderElement
-     * @param {?} className
-     * @param {?} isAdd
-     * @return {?}
-     */},{key:'_setElementClass',value:function _setElementClass(renderer,renderElement,className,isAdd){renderer.setElementClass(renderElement,className,isAdd);}/**
-     * @param {?} renderer
-     * @param {?} renderElement
-     * @param {?} styleName
-     * @param {?} styleValue
-     * @return {?}
-     */},{key:'_setElementStyle',value:function _setElementStyle(renderer,renderElement,styleName,styleValue){renderer.setElementStyle(renderElement,styleName,styleValue);}/**
-     * @param {?} renderer
-     * @param {?} renderElement
-     * @param {?} methodName
-     * @param {?} args
-     * @return {?}
-     */},{key:'_invokeElementMethod',value:function _invokeElementMethod(renderer,renderElement,methodName,args){renderer.invokeElementMethod(renderElement,methodName,args);}/**
-     * @param {?} renderer
-     * @param {?} renderNode
-     * @param {?} text
-     * @return {?}
-     */},{key:'_setText',value:function _setText(renderer,renderNode,text){renderer.setText(renderNode,text);}/**
-     * @param {?} renderer
-     * @param {?} renderElement
-     * @param {?} eventName
-     * @param {?} unlistenId
-     * @return {?}
-     */},{key:'_listen',value:function _listen(renderer,renderElement,eventName,unlistenId){var _this16=this;var/** @type {?} */unregisterCallback=renderer.listen(renderElement,eventName,function(event){return _this16._eventDispatcher.dispatchRenderEvent(renderElement,null,eventName,event);});this._renderStore.store(unregisterCallback,unlistenId);}/**
-     * @param {?} renderer
-     * @param {?} eventTarget
-     * @param {?} eventName
-     * @param {?} unlistenId
-     * @return {?}
-     */},{key:'_listenGlobal',value:function _listenGlobal(renderer,eventTarget,eventName,unlistenId){var _this17=this;var/** @type {?} */unregisterCallback=renderer.listenGlobal(eventTarget,eventName,function(event){return _this17._eventDispatcher.dispatchRenderEvent(null,eventTarget,eventName,event);});this._renderStore.store(unregisterCallback,unlistenId);}/**
-     * @param {?} renderer
-     * @param {?} unlistenCallback
-     * @return {?}
-     */},{key:'_listenDone',value:function _listenDone(renderer,unlistenCallback){unlistenCallback();}/**
-     * @param {?} renderer
-     * @param {?} element
-     * @param {?} startingStyles
-     * @param {?} keyframes
-     * @param {?} duration
-     * @param {?} delay
-     * @param {?} easing
-     * @param {?} previousPlayers
-     * @param {?} playerId
-     * @return {?}
-     */},{key:'_animate',value:function _animate(renderer,element,startingStyles,keyframes,duration,delay,easing,previousPlayers,playerId){var _this18=this;var/** @type {?} */normalizedPreviousPlayers=void 0;if(previousPlayers&&previousPlayers.length){normalizedPreviousPlayers=previousPlayers.map(function(playerId){return _this18._renderStore.deserialize(playerId);});}var/** @type {?} */player=renderer.animate(element,startingStyles,keyframes,duration,delay,easing,normalizedPreviousPlayers);this._renderStore.store(player,playerId);}/**
-     * @param {?} player
-     * @param {?} element
-     * @param {?} phaseName
-     * @return {?}
-     */},{key:'_listenOnAnimationPlayer',value:function _listenOnAnimationPlayer(player,element,phaseName){var _this19=this;var/** @type {?} */onEventComplete=function onEventComplete(){_this19._eventDispatcher.dispatchAnimationEvent(player,phaseName,element);};// there is no need to register a unlistener value here since the
-// internal player callbacks are removed when the player is destroyed
-if(phaseName=='onDone'){player.onDone(function(){return onEventComplete();});}else{player.onStart(function(){return onEventComplete();});}}}]);return MessageBasedRenderer;}();MessageBasedRenderer.decorators=[{type:Injectable}];/** @nocollapse */MessageBasedRenderer.ctorParameters=function(){return[{type:ServiceMessageBrokerFactory},{type:MessageBus},{type:Serializer},{type:RenderStore},{type:RootRenderer}];};var MessageBasedRendererV2=function(){/**
+return false;}}]);return EventDispatcher;}();var MessageBasedRendererV2=function(){/**
      * @param {?} _brokerFactory
      * @param {?} _bus
      * @param {?} _serializer
@@ -531,7 +395,7 @@ if(phaseName=='onDone'){player.onDone(function(){return onEventComplete();});}el
      * @param {?} _rendererFactory
      */function MessageBasedRendererV2(_brokerFactory,_bus,_serializer,_renderStore,_rendererFactory){_classCallCheck(this,MessageBasedRendererV2);this._brokerFactory=_brokerFactory;this._bus=_bus;this._serializer=_serializer;this._renderStore=_renderStore;this._rendererFactory=_rendererFactory;}/**
      * @return {?}
-     */_createClass(MessageBasedRendererV2,[{key:'start',value:function start(){var _this20=this;var/** @type {?} */broker=this._brokerFactory.createMessageBroker(RENDERER_V2_CHANNEL);this._bus.initChannel(EVENT_V2_CHANNEL);this._eventDispatcher=new EventDispatcher(this._bus.to(EVENT_V2_CHANNEL),this._serializer);var RSO=2/* RENDER_STORE_OBJECT */,P=1/* PRIMITIVE */,CRT=0/* RENDERER_TYPE_V2 */;var/** @type {?} */methods=[['createRenderer',this.createRenderer,RSO,CRT,P],['createElement',this.createElement,RSO,P,P,P],['createComment',this.createComment,RSO,P,P],['createText',this.createText,RSO,P,P],['appendChild',this.appendChild,RSO,RSO,RSO],['insertBefore',this.insertBefore,RSO,RSO,RSO,RSO],['removeChild',this.removeChild,RSO,RSO,RSO],['selectRootElement',this.selectRootElement,RSO,P,P],['parentNode',this.parentNode,RSO,RSO,P],['nextSibling',this.nextSibling,RSO,RSO,P],['setAttribute',this.setAttribute,RSO,RSO,P,P,P],['removeAttribute',this.removeAttribute,RSO,RSO,P,P],['addClass',this.addClass,RSO,RSO,P],['removeClass',this.removeClass,RSO,RSO,P],['setStyle',this.setStyle,RSO,RSO,P,P,P,P],['removeStyle',this.removeStyle,RSO,RSO,P,P],['setProperty',this.setProperty,RSO,RSO,P,P],['setValue',this.setValue,RSO,RSO,P],['listen',this.listen,RSO,RSO,P,P,P],['unlisten',this.unlisten,RSO,RSO],['destroy',this.destroy,RSO],['destroyNode',this.destroyNode,RSO,P]];methods.forEach(function(_ref3){var _ref4=_toArray(_ref3),name=_ref4[0],method=_ref4[1],argTypes=_ref4.slice(2);broker.registerMethod(name,argTypes,method.bind(_this20));});}/**
+     */_createClass(MessageBasedRendererV2,[{key:'start',value:function start(){var _this14=this;var/** @type {?} */broker=this._brokerFactory.createMessageBroker(RENDERER_V2_CHANNEL);this._bus.initChannel(EVENT_V2_CHANNEL);this._eventDispatcher=new EventDispatcher(this._bus.to(EVENT_V2_CHANNEL),this._serializer);var RSO=2/* RENDER_STORE_OBJECT */,P=1/* PRIMITIVE */,CRT=0/* RENDERER_TYPE_V2 */;var/** @type {?} */methods=[['createRenderer',this.createRenderer,RSO,CRT,P],['createElement',this.createElement,RSO,P,P,P],['createComment',this.createComment,RSO,P,P],['createText',this.createText,RSO,P,P],['appendChild',this.appendChild,RSO,RSO,RSO],['insertBefore',this.insertBefore,RSO,RSO,RSO,RSO],['removeChild',this.removeChild,RSO,RSO,RSO],['selectRootElement',this.selectRootElement,RSO,P,P],['parentNode',this.parentNode,RSO,RSO,P],['nextSibling',this.nextSibling,RSO,RSO,P],['setAttribute',this.setAttribute,RSO,RSO,P,P,P],['removeAttribute',this.removeAttribute,RSO,RSO,P,P],['addClass',this.addClass,RSO,RSO,P],['removeClass',this.removeClass,RSO,RSO,P],['setStyle',this.setStyle,RSO,RSO,P,P,P,P],['removeStyle',this.removeStyle,RSO,RSO,P,P],['setProperty',this.setProperty,RSO,RSO,P,P],['setValue',this.setValue,RSO,RSO,P],['listen',this.listen,RSO,RSO,P,P,P],['unlisten',this.unlisten,RSO,RSO],['destroy',this.destroy,RSO],['destroyNode',this.destroyNode,RSO,P]];methods.forEach(function(_ref){var _ref2=_toArray(_ref),name=_ref2[0],method=_ref2[1],argTypes=_ref2.slice(2);broker.registerMethod(name,argTypes,method.bind(_this14));});}/**
      * @param {?} r
      * @return {?}
      */},{key:'destroy',value:function destroy(r){r.destroy();}/**
@@ -645,7 +509,7 @@ if(phaseName=='onDone'){player.onDone(function(){return onEventComplete();});}el
      * @param {?} eventName
      * @param {?} unlistenId
      * @return {?}
-     */},{key:'listen',value:function listen(r,el,elName,eventName,unlistenId){var _this21=this;var/** @type {?} */listener=function listener(event){return _this21._eventDispatcher.dispatchRenderEvent(el,elName,eventName,event);};var/** @type {?} */unlisten=r.listen(el||elName,eventName,listener);this._renderStore.store(unlisten,unlistenId);}/**
+     */},{key:'listen',value:function listen(r,el,elName,eventName,unlistenId){var _this15=this;var/** @type {?} */listener=function listener(event){return _this15._eventDispatcher.dispatchRenderEvent(el,elName,eventName,event);};var/** @type {?} */unlisten=r.listen(el||elName,eventName,listener);this._renderStore.store(unlisten,unlistenId);}/**
      * @param {?} r
      * @param {?} unlisten
      * @return {?}
@@ -666,9 +530,9 @@ if(phaseName=='onDone'){player.onDone(function(){return onEventComplete();});}el
  * created.
  *
  * @experimental WebWorker support is currently experimental.
- */var/** @type {?} */WORKER_UI_STARTABLE_MESSAGING_SERVICE=new InjectionToken('WorkerRenderStartableMsgService');var/** @type {?} */_WORKER_UI_PLATFORM_PROVIDERS=[{provide:NgZone,useFactory:createNgZone,deps:[]},MessageBasedRenderer,MessageBasedRendererV2,{provide:WORKER_UI_STARTABLE_MESSAGING_SERVICE,useExisting:MessageBasedRendererV2,multi:true},ɵBROWSER_SANITIZATION_PROVIDERS,{provide:ErrorHandler,useFactory:_exceptionHandler,deps:[]},{provide:DOCUMENT,useFactory:_document,deps:[]},// TODO(jteplitz602): Investigate if we definitely need EVENT_MANAGER on the render thread
+ */var/** @type {?} */WORKER_UI_STARTABLE_MESSAGING_SERVICE=new InjectionToken('WorkerRenderStartableMsgService');var/** @type {?} */_WORKER_UI_PLATFORM_PROVIDERS=[{provide:NgZone,useFactory:createNgZone,deps:[]},MessageBasedRendererV2,{provide:WORKER_UI_STARTABLE_MESSAGING_SERVICE,useExisting:MessageBasedRendererV2,multi:true},ɵBROWSER_SANITIZATION_PROVIDERS,{provide:ErrorHandler,useFactory:_exceptionHandler,deps:[]},{provide:DOCUMENT,useFactory:_document,deps:[]},// TODO(jteplitz602): Investigate if we definitely need EVENT_MANAGER on the render thread
 // #5298
-{provide:EVENT_MANAGER_PLUGINS,useClass:ɵDomEventsPlugin,multi:true},{provide:EVENT_MANAGER_PLUGINS,useClass:ɵKeyEventsPlugin,multi:true},{provide:EVENT_MANAGER_PLUGINS,useClass:ɵHammerGesturesPlugin,multi:true},{provide:HAMMER_GESTURE_CONFIG,useClass:HammerGestureConfig},ɵAPP_ID_RANDOM_PROVIDER,{provide:ɵDomRootRenderer,useClass:ɵDomRootRenderer_},{provide:RootRenderer,useExisting:ɵDomRootRenderer},ɵDomRendererFactoryV2,{provide:RendererFactoryV2,useExisting:ɵDomRendererFactoryV2},{provide:ɵSharedStylesHost,useExisting:ɵDomSharedStylesHost},{provide:ServiceMessageBrokerFactory,useClass:ServiceMessageBrokerFactory_},{provide:ClientMessageBrokerFactory,useClass:ClientMessageBrokerFactory_},{provide:AnimationDriver,useFactory:_resolveDefaultAnimationDriver,deps:[]},Serializer,{provide:ON_WEB_WORKER,useValue:false},RenderStore,ɵDomSharedStylesHost,Testability,EventManager,WebWorkerInstance,{provide:PLATFORM_INITIALIZER,useFactory:initWebWorkerRenderPlatform,multi:true,deps:[Injector]},{provide:PLATFORM_ID,useValue:ɵPLATFORM_WORKER_UI_ID},{provide:MessageBus,useFactory:messageBusFactory,deps:[WebWorkerInstance]}];/**
+{provide:EVENT_MANAGER_PLUGINS,useClass:ɵDomEventsPlugin,multi:true},{provide:EVENT_MANAGER_PLUGINS,useClass:ɵKeyEventsPlugin,multi:true},{provide:EVENT_MANAGER_PLUGINS,useClass:ɵHammerGesturesPlugin,multi:true},{provide:HAMMER_GESTURE_CONFIG,useClass:HammerGestureConfig},ɵAPP_ID_RANDOM_PROVIDER,ɵDomRendererFactoryV2,{provide:RendererFactoryV2,useExisting:ɵDomRendererFactoryV2},{provide:ɵSharedStylesHost,useExisting:ɵDomSharedStylesHost},{provide:ServiceMessageBrokerFactory,useClass:ServiceMessageBrokerFactory_},{provide:ClientMessageBrokerFactory,useClass:ClientMessageBrokerFactory_},Serializer,{provide:ON_WEB_WORKER,useValue:false},RenderStore,ɵDomSharedStylesHost,Testability,EventManager,WebWorkerInstance,{provide:PLATFORM_INITIALIZER,useFactory:initWebWorkerRenderPlatform,multi:true,deps:[Injector]},{provide:PLATFORM_ID,useValue:ɵPLATFORM_WORKER_UI_ID},{provide:MessageBus,useFactory:messageBusFactory,deps:[WebWorkerInstance]}];/**
  * @param {?} injector
  * @return {?}
  */function initializeGenericWorkerRenderer(injector){var/** @type {?} */bus=injector.get(MessageBus);var/** @type {?} */zone=injector.get(NgZone);bus.attachToZone(zone);// initialize message services after the bus has been created
@@ -692,10 +556,8 @@ var/** @type {?} */services=injector.get(WORKER_UI_STARTABLE_MESSAGING_SERVICE);
  * @param {?} instance
  * @return {?}
  */function spawnWebWorker(uri,instance){var/** @type {?} */webWorker=new Worker(uri);var/** @type {?} */sink=new PostMessageBusSink(webWorker);var/** @type {?} */source=new PostMessageBusSource(webWorker);var/** @type {?} */bus=new PostMessageBus(sink,source);instance.init(webWorker,bus);}/**
- * @return {?}
- */function _resolveDefaultAnimationDriver(){return ɵgetDOM().supportsWebAnimation()?new ɵWebAnimationsDriver():AnimationDriver.NOOP;}/**
  * @stable
- */var/** @type {?} */VERSION=new Version('4.0.0-rc.1-e58cb7b');var MessageBasedPlatformLocation=function(){/**
+ */var/** @type {?} */VERSION=new Version('4.0.0-rc.1-126fda2');var MessageBasedPlatformLocation=function(){/**
      * @param {?} _brokerFactory
      * @param {?} _platformLocation
      * @param {?} bus
@@ -721,11 +583,11 @@ var/** @type {?} */services=injector.get(WORKER_UI_STARTABLE_MESSAGING_SERVICE);
      * @param {?} brokerFactory
      * @param {?} bus
      * @param {?} _serializer
-     */function WebWorkerPlatformLocation(brokerFactory,bus,_serializer){_classCallCheck(this,WebWorkerPlatformLocation);var _this22=_possibleConstructorReturn(this,(WebWorkerPlatformLocation.__proto__||Object.getPrototypeOf(WebWorkerPlatformLocation)).call(this));_this22._serializer=_serializer;_this22._popStateListeners=[];_this22._hashChangeListeners=[];_this22._location=null;_this22._broker=brokerFactory.createMessageBroker(ROUTER_CHANNEL);_this22._channelSource=bus.from(ROUTER_CHANNEL);_this22._channelSource.subscribe({next:function next(msg){var listeners=null;if(msg.hasOwnProperty('event')){var type=msg['event']['type'];if(type==='popstate'){listeners=_this22._popStateListeners;}else if(type==='hashchange'){listeners=_this22._hashChangeListeners;}if(listeners){// There was a popState or hashChange event, so the location object thas been updated
-_this22._location=_this22._serializer.deserialize(msg['location'],LocationType);listeners.forEach(function(fn){return fn(msg['event']);});}}}});return _this22;}/**
+     */function WebWorkerPlatformLocation(brokerFactory,bus,_serializer){_classCallCheck(this,WebWorkerPlatformLocation);var _this16=_possibleConstructorReturn(this,(WebWorkerPlatformLocation.__proto__||Object.getPrototypeOf(WebWorkerPlatformLocation)).call(this));_this16._serializer=_serializer;_this16._popStateListeners=[];_this16._hashChangeListeners=[];_this16._location=null;_this16._broker=brokerFactory.createMessageBroker(ROUTER_CHANNEL);_this16._channelSource=bus.from(ROUTER_CHANNEL);_this16._channelSource.subscribe({next:function next(msg){var listeners=null;if(msg.hasOwnProperty('event')){var type=msg['event']['type'];if(type==='popstate'){listeners=_this16._popStateListeners;}else if(type==='hashchange'){listeners=_this16._hashChangeListeners;}if(listeners){// There was a popState or hashChange event, so the location object thas been updated
+_this16._location=_this16._serializer.deserialize(msg['location'],LocationType);listeners.forEach(function(fn){return fn(msg['event']);});}}}});return _this16;}/**
      * \@internal *
      * @return {?}
-     */_createClass(WebWorkerPlatformLocation,[{key:'init',value:function init(){var _this23=this;var/** @type {?} */args=new UiArguments('getLocation');return this._broker.runOnService(args,LocationType).then(function(val){_this23._location=val;return true;},function(err){throw new Error(err);});}/**
+     */_createClass(WebWorkerPlatformLocation,[{key:'init',value:function init(){var _this17=this;var/** @type {?} */args=new UiArguments('getLocation');return this._broker.runOnService(args,LocationType).then(function(val){_this17._location=val;return true;},function(err){throw new Error(err);});}/**
      * @return {?}
      */},{key:'getBaseHrefFromDOM',value:function getBaseHrefFromDOM(){throw new Error('Attempt to get base href from DOM from WebWorker. You must either provide a value for the APP_BASE_HREF token through DI or use the hash location strategy.');}/**
      * @param {?} fn
@@ -779,125 +641,7 @@ _this22._location=_this22._serializer.deserialize(msg['location'],LocationType);
      */},{key:'dispatchEvent',value:function dispatchEvent(eventName,event){var/** @type {?} */listeners=this._getListeners(eventName);for(var/** @type {?} */i=0;i<listeners.length;i++){listeners[i](event);}}/**
      * @param {?} eventName
      * @return {?}
-     */},{key:'_getListeners',value:function _getListeners(eventName){if(!this._listeners){this._listeners=new Map();}var/** @type {?} */listeners=this._listeners.get(eventName);if(!listeners){listeners=[];this._listeners.set(eventName,listeners);}return listeners;}}]);return NamedEventEmitter;}();var WebWorkerRootRenderer=function(){/**
-     * @param {?} messageBrokerFactory
-     * @param {?} bus
-     * @param {?} _serializer
-     * @param {?} renderStore
-     */function WebWorkerRootRenderer(messageBrokerFactory,bus,_serializer,renderStore){var _this24=this;_classCallCheck(this,WebWorkerRootRenderer);this._serializer=_serializer;this.renderStore=renderStore;this.globalEvents=new NamedEventEmitter();this._componentRenderers=new Map();this._messageBroker=messageBrokerFactory.createMessageBroker(RENDERER_CHANNEL);bus.initChannel(EVENT_CHANNEL);var source=bus.from(EVENT_CHANNEL);source.subscribe({next:function next(message){return _this24._dispatchEvent(message);}});throw new Error('RootRenderer is no longer supported. Please use the `RendererFactoryV2` instead!');}/**
-     * @param {?} message
-     * @return {?}
-     */_createClass(WebWorkerRootRenderer,[{key:'_dispatchEvent',value:function _dispatchEvent(message){var/** @type {?} */element=this._serializer.deserialize(message['element'],2/* RENDER_STORE_OBJECT */);var/** @type {?} */playerData=message['animationPlayer'];if(playerData){var/** @type {?} */phaseName=message['phaseName'];var/** @type {?} */player=this._serializer.deserialize(playerData,2/* RENDER_STORE_OBJECT */);element.animationPlayerEvents.dispatchEvent(player,phaseName);}else{var/** @type {?} */eventName=message['eventName'];var/** @type {?} */target=message['eventTarget'];var/** @type {?} */event=message['event'];if(target){this.globalEvents.dispatchEvent(eventNameWithTarget(target,eventName),event);}else{element.events.dispatchEvent(eventName,event);}}}/**
-     * @param {?} componentType
-     * @return {?}
-     */},{key:'renderComponent',value:function renderComponent(componentType){var/** @type {?} */result=this._componentRenderers.get(componentType.id);if(!result){result=new WebWorkerRenderer(this,componentType);this._componentRenderers.set(componentType.id,result);var/** @type {?} */id=this.renderStore.allocateId();this.renderStore.store(result,id);this.runOnService('renderComponent',[new FnArg(componentType,RenderComponentType),new FnArg(result,2/* RENDER_STORE_OBJECT */)]);}return result;}/**
-     * @param {?} fnName
-     * @param {?} fnArgs
-     * @return {?}
-     */},{key:'runOnService',value:function runOnService(fnName,fnArgs){var/** @type {?} */args=new UiArguments(fnName,fnArgs);this._messageBroker.runOnService(args,null);}/**
-     * @return {?}
-     */},{key:'allocateNode',value:function allocateNode(){var/** @type {?} */result=new WebWorkerRenderNode();var/** @type {?} */id=this.renderStore.allocateId();this.renderStore.store(result,id);return result;}/**
-     * @return {?}
-     */},{key:'allocateId',value:function allocateId(){return this.renderStore.allocateId();}/**
-     * @param {?} nodes
-     * @return {?}
-     */},{key:'destroyNodes',value:function destroyNodes(nodes){for(var/** @type {?} */i=0;i<nodes.length;i++){this.renderStore.remove(nodes[i]);}}}]);return WebWorkerRootRenderer;}();WebWorkerRootRenderer.decorators=[{type:Injectable}];/** @nocollapse */WebWorkerRootRenderer.ctorParameters=function(){return[{type:ClientMessageBrokerFactory},{type:MessageBus},{type:Serializer},{type:RenderStore}];};var WebWorkerRenderer=function(){/**
-     * @param {?} _rootRenderer
-     * @param {?} _componentType
-     */function WebWorkerRenderer(_rootRenderer,_componentType){_classCallCheck(this,WebWorkerRenderer);this._rootRenderer=_rootRenderer;this._componentType=_componentType;}/**
-     * @param {?} fnName
-     * @param {?} fnArgs
-     * @return {?}
-     */_createClass(WebWorkerRenderer,[{key:'_runOnService',value:function _runOnService(fnName,fnArgs){var/** @type {?} */fnArgsWithRenderer=[new FnArg(this,2/* RENDER_STORE_OBJECT */)].concat(_toConsumableArray(fnArgs));this._rootRenderer.runOnService(fnName,fnArgsWithRenderer);}/**
-     * @param {?} selectorOrNode
-     * @param {?=} debugInfo
-     * @return {?}
-     */},{key:'selectRootElement',value:function selectRootElement(selectorOrNode,debugInfo){var/** @type {?} */node=this._rootRenderer.allocateNode();this._runOnService('selectRootElement',[new FnArg(selectorOrNode),new FnArg(node,2/* RENDER_STORE_OBJECT */)]);return node;}/**
-     * @param {?} parentElement
-     * @param {?} name
-     * @param {?=} debugInfo
-     * @return {?}
-     */},{key:'createElement',value:function createElement(parentElement,name,debugInfo){var/** @type {?} */node=this._rootRenderer.allocateNode();this._runOnService('createElement',[new FnArg(parentElement,2/* RENDER_STORE_OBJECT */),new FnArg(name),new FnArg(node,2/* RENDER_STORE_OBJECT */)]);return node;}/**
-     * @param {?} hostElement
-     * @return {?}
-     */},{key:'createViewRoot',value:function createViewRoot(hostElement){var/** @type {?} */viewRoot=this._componentType.encapsulation===ViewEncapsulation.Native?this._rootRenderer.allocateNode():hostElement;this._runOnService('createViewRoot',[new FnArg(hostElement,2/* RENDER_STORE_OBJECT */),new FnArg(viewRoot,2/* RENDER_STORE_OBJECT */)]);return viewRoot;}/**
-     * @param {?} parentElement
-     * @param {?=} debugInfo
-     * @return {?}
-     */},{key:'createTemplateAnchor',value:function createTemplateAnchor(parentElement,debugInfo){var/** @type {?} */node=this._rootRenderer.allocateNode();this._runOnService('createTemplateAnchor',[new FnArg(parentElement,2/* RENDER_STORE_OBJECT */),new FnArg(node,2/* RENDER_STORE_OBJECT */)]);return node;}/**
-     * @param {?} parentElement
-     * @param {?} value
-     * @param {?=} debugInfo
-     * @return {?}
-     */},{key:'createText',value:function createText(parentElement,value,debugInfo){var/** @type {?} */node=this._rootRenderer.allocateNode();this._runOnService('createText',[new FnArg(parentElement,2/* RENDER_STORE_OBJECT */),new FnArg(value),new FnArg(node,2/* RENDER_STORE_OBJECT */)]);return node;}/**
-     * @param {?} parentElement
-     * @param {?} nodes
-     * @return {?}
-     */},{key:'projectNodes',value:function projectNodes(parentElement,nodes){this._runOnService('projectNodes',[new FnArg(parentElement,2/* RENDER_STORE_OBJECT */),new FnArg(nodes,2/* RENDER_STORE_OBJECT */)]);}/**
-     * @param {?} node
-     * @param {?} viewRootNodes
-     * @return {?}
-     */},{key:'attachViewAfter',value:function attachViewAfter(node,viewRootNodes){this._runOnService('attachViewAfter',[new FnArg(node,2/* RENDER_STORE_OBJECT */),new FnArg(viewRootNodes,2/* RENDER_STORE_OBJECT */)]);}/**
-     * @param {?} viewRootNodes
-     * @return {?}
-     */},{key:'detachView',value:function detachView(viewRootNodes){this._runOnService('detachView',[new FnArg(viewRootNodes,2/* RENDER_STORE_OBJECT */)]);}/**
-     * @param {?} hostElement
-     * @param {?} viewAllNodes
-     * @return {?}
-     */},{key:'destroyView',value:function destroyView(hostElement,viewAllNodes){this._runOnService('destroyView',[new FnArg(hostElement,2/* RENDER_STORE_OBJECT */),new FnArg(viewAllNodes,2/* RENDER_STORE_OBJECT */)]);this._rootRenderer.destroyNodes(viewAllNodes);}/**
-     * @param {?} renderElement
-     * @param {?} propertyName
-     * @param {?} propertyValue
-     * @return {?}
-     */},{key:'setElementProperty',value:function setElementProperty(renderElement,propertyName,propertyValue){this._runOnService('setElementProperty',[new FnArg(renderElement,2/* RENDER_STORE_OBJECT */),new FnArg(propertyName),new FnArg(propertyValue)]);}/**
-     * @param {?} renderElement
-     * @param {?} attributeName
-     * @param {?} attributeValue
-     * @return {?}
-     */},{key:'setElementAttribute',value:function setElementAttribute(renderElement,attributeName,attributeValue){this._runOnService('setElementAttribute',[new FnArg(renderElement,2/* RENDER_STORE_OBJECT */),new FnArg(attributeName),new FnArg(attributeValue)]);}/**
-     * @param {?} renderElement
-     * @param {?} propertyName
-     * @param {?} propertyValue
-     * @return {?}
-     */},{key:'setBindingDebugInfo',value:function setBindingDebugInfo(renderElement,propertyName,propertyValue){this._runOnService('setBindingDebugInfo',[new FnArg(renderElement,2/* RENDER_STORE_OBJECT */),new FnArg(propertyName),new FnArg(propertyValue)]);}/**
-     * @param {?} renderElement
-     * @param {?} className
-     * @param {?} isAdd
-     * @return {?}
-     */},{key:'setElementClass',value:function setElementClass(renderElement,className,isAdd){this._runOnService('setElementClass',[new FnArg(renderElement,2/* RENDER_STORE_OBJECT */),new FnArg(className),new FnArg(isAdd)]);}/**
-     * @param {?} renderElement
-     * @param {?} styleName
-     * @param {?} styleValue
-     * @return {?}
-     */},{key:'setElementStyle',value:function setElementStyle(renderElement,styleName,styleValue){this._runOnService('setElementStyle',[new FnArg(renderElement,2/* RENDER_STORE_OBJECT */),new FnArg(styleName),new FnArg(styleValue)]);}/**
-     * @param {?} renderElement
-     * @param {?} methodName
-     * @param {?=} args
-     * @return {?}
-     */},{key:'invokeElementMethod',value:function invokeElementMethod(renderElement,methodName,args){this._runOnService('invokeElementMethod',[new FnArg(renderElement,2/* RENDER_STORE_OBJECT */),new FnArg(methodName),new FnArg(args)]);}/**
-     * @param {?} renderNode
-     * @param {?} text
-     * @return {?}
-     */},{key:'setText',value:function setText(renderNode,text){this._runOnService('setText',[new FnArg(renderNode,2/* RENDER_STORE_OBJECT */),new FnArg(text)]);}/**
-     * @param {?} renderElement
-     * @param {?} name
-     * @param {?} callback
-     * @return {?}
-     */},{key:'listen',value:function listen(renderElement,name,callback){var _this25=this;renderElement.events.listen(name,callback);var/** @type {?} */unlistenCallbackId=this._rootRenderer.allocateId();this._runOnService('listen',[new FnArg(renderElement,2/* RENDER_STORE_OBJECT */),new FnArg(name),new FnArg(unlistenCallbackId)]);return function(){renderElement.events.unlisten(name,callback);_this25._runOnService('listenDone',[new FnArg(unlistenCallbackId)]);};}/**
-     * @param {?} target
-     * @param {?} name
-     * @param {?} callback
-     * @return {?}
-     */},{key:'listenGlobal',value:function listenGlobal(target,name,callback){var _this26=this;this._rootRenderer.globalEvents.listen(eventNameWithTarget(target,name),callback);var/** @type {?} */unlistenCallbackId=this._rootRenderer.allocateId();this._runOnService('listenGlobal',[new FnArg(target),new FnArg(name,null),new FnArg(unlistenCallbackId)]);return function(){_this26._rootRenderer.globalEvents.unlisten(eventNameWithTarget(target,name),callback);_this26._runOnService('listenDone',[new FnArg(unlistenCallbackId)]);};}/**
-     * @param {?} renderElement
-     * @param {?} startingStyles
-     * @param {?} keyframes
-     * @param {?} duration
-     * @param {?} delay
-     * @param {?} easing
-     * @param {?=} previousPlayers
-     * @return {?}
-     */},{key:'animate',value:function animate(renderElement,startingStyles,keyframes,duration,delay,easing){var _this27=this;var previousPlayers=arguments.length>6&&arguments[6]!==undefined?arguments[6]:[];var/** @type {?} */playerId=this._rootRenderer.allocateId();var/** @type {?} */previousPlayerIds=previousPlayers.map(function(player){return _this27._rootRenderer.renderStore.serialize(player);});this._runOnService('animate',[new FnArg(renderElement,2/* RENDER_STORE_OBJECT */),new FnArg(startingStyles),new FnArg(keyframes),new FnArg(duration),new FnArg(delay),new FnArg(easing),new FnArg(previousPlayerIds),new FnArg(playerId)]);var/** @type {?} */player=new _AnimationWorkerRendererPlayer(this._rootRenderer,renderElement);this._rootRenderer.renderStore.store(player,playerId);return player;}}]);return WebWorkerRenderer;}();/**
+     */},{key:'_getListeners',value:function _getListeners(eventName){if(!this._listeners){this._listeners=new Map();}var/** @type {?} */listeners=this._listeners.get(eventName);if(!listeners){listeners=[];this._listeners.set(eventName,listeners);}return listeners;}}]);return NamedEventEmitter;}();/**
  * @param {?} target
  * @param {?} eventName
  * @return {?}
@@ -906,7 +650,7 @@ _this22._location=_this22._serializer.deserialize(msg['location'],LocationType);
      * @param {?} bus
      * @param {?} _serializer
      * @param {?} renderStore
-     */function WebWorkerRendererFactoryV2(messageBrokerFactory,bus,_serializer,renderStore){var _this28=this;_classCallCheck(this,WebWorkerRendererFactoryV2);this._serializer=_serializer;this.renderStore=renderStore;this.globalEvents=new NamedEventEmitter();this._messageBroker=messageBrokerFactory.createMessageBroker(RENDERER_V2_CHANNEL);bus.initChannel(EVENT_V2_CHANNEL);var source=bus.from(EVENT_V2_CHANNEL);source.subscribe({next:function next(message){return _this28._dispatchEvent(message);}});}/**
+     */function WebWorkerRendererFactoryV2(messageBrokerFactory,bus,_serializer,renderStore){var _this18=this;_classCallCheck(this,WebWorkerRendererFactoryV2);this._serializer=_serializer;this.renderStore=renderStore;this.globalEvents=new NamedEventEmitter();this._messageBroker=messageBrokerFactory.createMessageBroker(RENDERER_V2_CHANNEL);bus.initChannel(EVENT_V2_CHANNEL);var source=bus.from(EVENT_V2_CHANNEL);source.subscribe({next:function next(message){return _this18._dispatchEvent(message);}});}/**
      * @param {?} element
      * @param {?} type
      * @return {?}
@@ -1008,65 +752,12 @@ _this22._location=_this22._serializer.deserialize(msg['location'],LocationType);
      * @param {?} eventName
      * @param {?} listener
      * @return {?}
-     */},{key:'listen',value:function listen(target,eventName,listener){var _this29=this;var/** @type {?} */unlistenId=this._rendererFactory.allocateId();var _ref5=typeof target==='string'?[null,target,target+':'+eventName]:[target,null,null],_ref6=_slicedToArray(_ref5,3),targetEl=_ref6[0],targetName=_ref6[1],fullName=_ref6[2];if(fullName){this._rendererFactory.globalEvents.listen(fullName,listener);}else{targetEl.events.listen(eventName,listener);}this.callUIWithRenderer('listen',[new FnArg(targetEl,2/* RENDER_STORE_OBJECT */),new FnArg(targetName),new FnArg(eventName),new FnArg(unlistenId)]);return function(){if(fullName){_this29._rendererFactory.globalEvents.unlisten(fullName,listener);}else{targetEl.events.unlisten(eventName,listener);}_this29.callUIWithRenderer('unlisten',[new FnArg(unlistenId)]);};}/**
+     */},{key:'listen',value:function listen(target,eventName,listener){var _this19=this;var/** @type {?} */unlistenId=this._rendererFactory.allocateId();var _ref3=typeof target==='string'?[null,target,target+':'+eventName]:[target,null,null],_ref4=_slicedToArray(_ref3,3),targetEl=_ref4[0],targetName=_ref4[1],fullName=_ref4[2];if(fullName){this._rendererFactory.globalEvents.listen(fullName,listener);}else{targetEl.events.listen(eventName,listener);}this.callUIWithRenderer('listen',[new FnArg(targetEl,2/* RENDER_STORE_OBJECT */),new FnArg(targetName),new FnArg(eventName),new FnArg(unlistenId)]);return function(){if(fullName){_this19._rendererFactory.globalEvents.unlisten(fullName,listener);}else{targetEl.events.unlisten(eventName,listener);}_this19.callUIWithRenderer('unlisten',[new FnArg(unlistenId)]);};}/**
      * @param {?} fnName
      * @param {?=} fnArgs
      * @return {?}
      */},{key:'callUIWithRenderer',value:function callUIWithRenderer(fnName){var fnArgs=arguments.length>1&&arguments[1]!==undefined?arguments[1]:[];// always pass the renderer as the first arg
-this._rendererFactory.callUI(fnName,[this.asFnArg].concat(_toConsumableArray(fnArgs)));}}]);return WebWorkerRendererV2;}();var AnimationPlayerEmitter=function(){function AnimationPlayerEmitter(){_classCallCheck(this,AnimationPlayerEmitter);}_createClass(AnimationPlayerEmitter,[{key:'_getListeners',/**
-     * @param {?} player
-     * @param {?} phaseName
-     * @return {?}
-     */value:function _getListeners(player,phaseName){if(!this._listeners){this._listeners=new Map();}var/** @type {?} */phaseMap=this._listeners.get(player);if(!phaseMap){this._listeners.set(player,phaseMap={});}var/** @type {?} */phaseFns=phaseMap[phaseName];if(!phaseFns){phaseFns=phaseMap[phaseName]=[];}return phaseFns;}/**
-     * @param {?} player
-     * @param {?} phaseName
-     * @param {?} callback
-     * @return {?}
-     */},{key:'listen',value:function listen(player,phaseName,callback){this._getListeners(player,phaseName).push(callback);}/**
-     * @param {?} player
-     * @return {?}
-     */},{key:'unlisten',value:function unlisten(player){this._listeners.delete(player);}/**
-     * @param {?} player
-     * @param {?} phaseName
-     * @return {?}
-     */},{key:'dispatchEvent',value:function dispatchEvent(player,phaseName){var/** @type {?} */listeners=this._getListeners(player,phaseName);for(var/** @type {?} */i=0;i<listeners.length;i++){listeners[i]();}}}]);return AnimationPlayerEmitter;}();var WebWorkerRenderNode=function WebWorkerRenderNode(){_classCallCheck(this,WebWorkerRenderNode);this.events=new NamedEventEmitter();this.animationPlayerEvents=new AnimationPlayerEmitter();};var _AnimationWorkerRendererPlayer=function(){/**
-     * @param {?} _rootRenderer
-     * @param {?} _renderElement
-     */function _AnimationWorkerRendererPlayer(_rootRenderer,_renderElement){_classCallCheck(this,_AnimationWorkerRendererPlayer);this._rootRenderer=_rootRenderer;this._renderElement=_renderElement;this.parentPlayer=null;this._destroyed=false;this._started=false;}/**
-     * @param {?} fnName
-     * @param {?} fnArgs
-     * @return {?}
-     */_createClass(_AnimationWorkerRendererPlayer,[{key:'_runOnService',value:function _runOnService(fnName,fnArgs){if(!this._destroyed){var/** @type {?} */fnArgsWithRenderer=[new FnArg(this,2/* RENDER_STORE_OBJECT */),new FnArg(this._renderElement,2/* RENDER_STORE_OBJECT */)].concat(_toConsumableArray(fnArgs));this._rootRenderer.runOnService(ANIMATION_WORKER_PLAYER_PREFIX+fnName,fnArgsWithRenderer);}}/**
-     * @param {?} fn
-     * @return {?}
-     */},{key:'onStart',value:function onStart(fn){this._renderElement.animationPlayerEvents.listen(this,'onStart',fn);this._runOnService('onStart',[]);}/**
-     * @param {?} fn
-     * @return {?}
-     */},{key:'onDone',value:function onDone(fn){this._renderElement.animationPlayerEvents.listen(this,'onDone',fn);this._runOnService('onDone',[]);}/**
-     * @param {?} fn
-     * @return {?}
-     */},{key:'onDestroy',value:function onDestroy(fn){this._renderElement.animationPlayerEvents.listen(this,'onDestroy',fn);this._runOnService('onDestroy',[]);}/**
-     * @return {?}
-     */},{key:'hasStarted',value:function hasStarted(){return this._started;}/**
-     * @return {?}
-     */},{key:'init',value:function init(){this._runOnService('init',[]);}/**
-     * @return {?}
-     */},{key:'play',value:function play(){this._started=true;this._runOnService('play',[]);}/**
-     * @return {?}
-     */},{key:'pause',value:function pause(){this._runOnService('pause',[]);}/**
-     * @return {?}
-     */},{key:'restart',value:function restart(){this._runOnService('restart',[]);}/**
-     * @return {?}
-     */},{key:'finish',value:function finish(){this._runOnService('finish',[]);}/**
-     * @return {?}
-     */},{key:'destroy',value:function destroy(){if(!this._destroyed){this._renderElement.animationPlayerEvents.unlisten(this);this._runOnService('destroy',[]);this._rootRenderer.renderStore.remove(this);this._destroyed=true;}}/**
-     * @return {?}
-     */},{key:'reset',value:function reset(){this._runOnService('reset',[]);}/**
-     * @param {?} p
-     * @return {?}
-     */},{key:'setPosition',value:function setPosition(p){this._runOnService('setPosition',[new FnArg(p)]);}/**
-     * @return {?}
-     */},{key:'getPosition',value:function getPosition(){return 0;}}]);return _AnimationWorkerRendererPlayer;}();/**
+this._rendererFactory.callUI(fnName,[this.asFnArg].concat(_toConsumableArray(fnArgs)));}}]);return WebWorkerRendererV2;}();var WebWorkerRenderNode=function WebWorkerRenderNode(){_classCallCheck(this,WebWorkerRenderNode);this.events=new NamedEventEmitter();};/**
  * This adapter is required to log error messages.
  *
  * Note: other methods all throw as the DOM is not accessible directly in web worker context.
@@ -1481,7 +1172,7 @@ console.log(error);}}/**
  */var/** @type {?} */platformWorkerApp=createPlatformFactory(platformCore,'workerApp',[{provide:PLATFORM_ID,useValue:ɵPLATFORM_WORKER_APP_ID}]);/**
  * @return {?}
  */function errorHandler(){return new ErrorHandler();}// TODO(jteplitz602) remove this and compile with lib.webworker.d.ts (#3492)
-var/** @type {?} */_postMessage={postMessage:function(_postMessage2){function postMessage(_x12,_x13){return _postMessage2.apply(this,arguments);}postMessage.toString=function(){return _postMessage2.toString();};return postMessage;}(function(message,transferrables){postMessage(message,transferrables);})};/**
+var/** @type {?} */_postMessage={postMessage:function(_postMessage2){function postMessage(_x11,_x12){return _postMessage2.apply(this,arguments);}postMessage.toString=function(){return _postMessage2.toString();};return postMessage;}(function(message,transferrables){postMessage(message,transferrables);})};/**
  * @param {?} zone
  * @return {?}
  */function createMessageBus(zone){var/** @type {?} */sink=new PostMessageBusSink(_postMessage);var/** @type {?} */source=new PostMessageBusSource();var/** @type {?} */bus=new PostMessageBus(sink,source);bus.attachToZone(zone);return bus;}/**
@@ -1490,7 +1181,7 @@ var/** @type {?} */_postMessage={postMessage:function(_postMessage2){function po
  * The ng module for the worker app side.
  *
  * \@experimental
- */var WorkerAppModule=function WorkerAppModule(){_classCallCheck(this,WorkerAppModule);};WorkerAppModule.decorators=[{type:NgModule,args:[{providers:[ɵBROWSER_SANITIZATION_PROVIDERS,Serializer,{provide:DOCUMENT,useValue:null},{provide:ClientMessageBrokerFactory,useClass:ClientMessageBrokerFactory_},{provide:ServiceMessageBrokerFactory,useClass:ServiceMessageBrokerFactory_},WebWorkerRootRenderer,{provide:RootRenderer,useExisting:WebWorkerRootRenderer},WebWorkerRendererFactoryV2,{provide:RendererFactoryV2,useExisting:WebWorkerRendererFactoryV2},{provide:ON_WEB_WORKER,useValue:true},RenderStore,{provide:ErrorHandler,useFactory:errorHandler,deps:[]},{provide:MessageBus,useFactory:createMessageBus,deps:[NgZone]},{provide:APP_INITIALIZER,useValue:setupWebWorker,multi:true}],exports:[CommonModule,ApplicationModule]}]}];/** @nocollapse */WorkerAppModule.ctorParameters=function(){return[];};/**
+ */var WorkerAppModule=function WorkerAppModule(){_classCallCheck(this,WorkerAppModule);};WorkerAppModule.decorators=[{type:NgModule,args:[{providers:[ɵBROWSER_SANITIZATION_PROVIDERS,Serializer,{provide:DOCUMENT,useValue:null},{provide:ClientMessageBrokerFactory,useClass:ClientMessageBrokerFactory_},{provide:ServiceMessageBrokerFactory,useClass:ServiceMessageBrokerFactory_},WebWorkerRendererFactoryV2,{provide:RendererFactoryV2,useExisting:WebWorkerRendererFactoryV2},{provide:ON_WEB_WORKER,useValue:true},RenderStore,{provide:ErrorHandler,useFactory:errorHandler,deps:[]},{provide:MessageBus,useFactory:createMessageBus,deps:[NgZone]},{provide:APP_INITIALIZER,useValue:setupWebWorker,multi:true}],exports:[CommonModule,ApplicationModule]}]}];/** @nocollapse */WorkerAppModule.ctorParameters=function(){return[];};/**
  * Bootstraps the worker ui.
  *
  * \@experimental
@@ -1498,4 +1189,4 @@ var/** @type {?} */_postMessage={postMessage:function(_postMessage2){function po
  * @param {?=} customProviders
  * @return {?}
  */function bootstrapWorkerUi(workerScriptUri){var customProviders=arguments.length>1&&arguments[1]!==undefined?arguments[1]:[];// For now, just creates the worker ui platform...
-var/** @type {?} */platform=platformWorkerUi([{provide:WORKER_SCRIPT,useValue:workerScriptUri}].concat(_toConsumableArray(customProviders)));return Promise.resolve(platform);}export{VERSION,ClientMessageBroker,ClientMessageBrokerFactory,FnArg,UiArguments,MessageBus,PRIMITIVE,ServiceMessageBroker,ServiceMessageBrokerFactory,WORKER_UI_LOCATION_PROVIDERS,WORKER_APP_LOCATION_PROVIDERS,WorkerAppModule,platformWorkerApp,platformWorkerUi,bootstrapWorkerUi,ON_WEB_WORKER as ɵk,ClientMessageBrokerFactory_ as ɵa,RenderStore as ɵh,Serializer as ɵb,ServiceMessageBrokerFactory_ as ɵc,WebWorkerRendererFactoryV2 as ɵj,WebWorkerRootRenderer as ɵi,createMessageBus as ɵe,errorHandler as ɵd,setupWebWorker as ɵf,_WORKER_UI_PLATFORM_PROVIDERS as ɵg};
+var/** @type {?} */platform=platformWorkerUi([{provide:WORKER_SCRIPT,useValue:workerScriptUri}].concat(_toConsumableArray(customProviders)));return Promise.resolve(platform);}export{VERSION,ClientMessageBroker,ClientMessageBrokerFactory,FnArg,UiArguments,MessageBus,PRIMITIVE,ServiceMessageBroker,ServiceMessageBrokerFactory,WORKER_UI_LOCATION_PROVIDERS,WORKER_APP_LOCATION_PROVIDERS,WorkerAppModule,platformWorkerApp,platformWorkerUi,bootstrapWorkerUi,ON_WEB_WORKER as ɵj,ClientMessageBrokerFactory_ as ɵa,RenderStore as ɵh,Serializer as ɵb,ServiceMessageBrokerFactory_ as ɵc,WebWorkerRendererFactoryV2 as ɵi,createMessageBus as ɵe,errorHandler as ɵd,setupWebWorker as ɵf,_WORKER_UI_PLATFORM_PROVIDERS as ɵg};

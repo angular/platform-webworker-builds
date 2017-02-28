@@ -17,7 +17,19 @@
     Object.defineProperty(exports, "__esModule", {
         value: true
     });
-    exports.ɵg = exports.ɵf = exports.ɵd = exports.ɵe = exports.ɵi = exports.ɵj = exports.ɵc = exports.ɵb = exports.ɵh = exports.ɵa = exports.ɵk = exports.bootstrapWorkerUi = exports.platformWorkerUi = exports.platformWorkerApp = exports.WorkerAppModule = exports.WORKER_APP_LOCATION_PROVIDERS = exports.WORKER_UI_LOCATION_PROVIDERS = exports.ServiceMessageBrokerFactory = exports.ServiceMessageBroker = exports.PRIMITIVE = exports.MessageBus = exports.UiArguments = exports.FnArg = exports.ClientMessageBrokerFactory = exports.ClientMessageBroker = exports.VERSION = undefined;
+    exports.ɵg = exports.ɵf = exports.ɵd = exports.ɵe = exports.ɵi = exports.ɵc = exports.ɵb = exports.ɵh = exports.ɵa = exports.ɵj = exports.bootstrapWorkerUi = exports.platformWorkerUi = exports.platformWorkerApp = exports.WorkerAppModule = exports.WORKER_APP_LOCATION_PROVIDERS = exports.WORKER_UI_LOCATION_PROVIDERS = exports.ServiceMessageBrokerFactory = exports.ServiceMessageBroker = exports.PRIMITIVE = exports.MessageBus = exports.UiArguments = exports.FnArg = exports.ClientMessageBrokerFactory = exports.ClientMessageBroker = exports.VERSION = undefined;
+
+    function _toConsumableArray(arr) {
+        if (Array.isArray(arr)) {
+            for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) {
+                arr2[i] = arr[i];
+            }
+
+            return arr2;
+        } else {
+            return Array.from(arr);
+        }
+    }
 
     var _slicedToArray = function () {
         function sliceIterator(arr, i) {
@@ -56,18 +68,6 @@
             }
         };
     }();
-
-    function _toConsumableArray(arr) {
-        if (Array.isArray(arr)) {
-            for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) {
-                arr2[i] = arr[i];
-            }
-
-            return arr2;
-        } else {
-            return Array.from(arr);
-        }
-    }
 
     function _toArray(arr) {
         return Array.isArray(arr) ? arr : Array.from(arr);
@@ -445,7 +445,6 @@
     Serializer.ctorParameters = function () {
         return [{ type: RenderStore }];
     };
-    var /** @type {?} */ANIMATION_WORKER_PLAYER_PREFIX = 'AnimationPlayer.';
 
     /**
      * \@experimental WebWorker support in Angular is experimental.
@@ -1156,9 +1155,7 @@
      *
      * Use of this source code is governed by an MIT-style license that can be
      * found in the LICENSE file at https://angular.io/license
-     */var /** @type {?} */RENDERER_CHANNEL = 'ng-Renderer';
-    var /** @type {?} */EVENT_CHANNEL = 'ng-Events';
-    var /** @type {?} */RENDERER_V2_CHANNEL = 'v2.ng-Renderer';
+     */var /** @type {?} */RENDERER_V2_CHANNEL = 'v2.ng-Renderer';
     var /** @type {?} */EVENT_V2_CHANNEL = 'v2.ng-Events';
     var /** @type {?} */ROUTER_CHANNEL = 'ng-Router';
 
@@ -1370,255 +1367,6 @@
         return EventDispatcher;
     }();
 
-    var MessageBasedRenderer = function () {
-        /**
-         * @param {?} _brokerFactory
-         * @param {?} _bus
-         * @param {?} _serializer
-         * @param {?} _renderStore
-         * @param {?} _rootRenderer
-         */
-        function MessageBasedRenderer(_brokerFactory, _bus, _serializer, _renderStore, _rootRenderer) {
-            _classCallCheck(this, MessageBasedRenderer);
-
-            this._brokerFactory = _brokerFactory;
-            this._bus = _bus;
-            this._serializer = _serializer;
-            this._renderStore = _renderStore;
-            this._rootRenderer = _rootRenderer;
-        }
-        /**
-         * @return {?}
-         */
-
-
-        _createClass(MessageBasedRenderer, [{
-            key: 'start',
-            value: function start() {
-                var _this14 = this;
-
-                var /** @type {?} */broker = this._brokerFactory.createMessageBroker(RENDERER_CHANNEL);
-                this._bus.initChannel(EVENT_CHANNEL);
-                this._eventDispatcher = new EventDispatcher(this._bus.to(EVENT_CHANNEL), this._serializer);
-                var RCT = _core.RenderComponentType,
-                    RSO = 2 /* RENDER_STORE_OBJECT */
-                ,
-                    P = 1 /* PRIMITIVE */
-                ;
-
-                var /** @type {?} */methods = [['renderComponent', this._renderComponent, RCT, P], ['selectRootElement', this._selectRootElement, RSO, P, P], ['createElement', this._createElement, RSO, RSO, P, P], ['createViewRoot', this._createViewRoot, RSO, RSO, P], ['createTemplateAnchor', this._createTemplateAnchor, RSO, RSO, P], ['createText', this._createText, RSO, RSO, P, P], ['projectNodes', this._projectNodes, RSO, RSO, RSO], ['attachViewAfter', this._attachViewAfter, RSO, RSO, RSO], ['detachView', this._detachView, RSO, RSO], ['destroyView', this._destroyView, RSO, RSO, RSO], ['setElementProperty', this._setElementProperty, RSO, RSO, P, P], ['setElementAttribute', this._setElementAttribute, RSO, RSO, P, P], ['setBindingDebugInfo', this._setBindingDebugInfo, RSO, RSO, P, P], ['setElementClass', this._setElementClass, RSO, RSO, P, P], ['setElementStyle', this._setElementStyle, RSO, RSO, P, P], ['invokeElementMethod', this._invokeElementMethod, RSO, RSO, P, P], ['setText', this._setText, RSO, RSO, P], ['listen', this._listen, RSO, RSO, P, P], ['listenGlobal', this._listenGlobal, RSO, P, P, P], ['listenDone', this._listenDone, RSO, RSO], ['animate', this._animate, RSO, RSO, P, P, P, P, P, P, P]];
-                methods.forEach(function (_ref) {
-                    var _ref2 = _toArray(_ref),
-                        name = _ref2[0],
-                        method = _ref2[1],
-                        argTypes = _ref2.slice(2);
-
-                    broker.registerMethod(name, argTypes, method.bind(_this14));
-                });
-                this._bindAnimationPlayerMethods(broker);
-            }
-        }, {
-            key: '_bindAnimationPlayerMethods',
-            value: function _bindAnimationPlayerMethods(broker) {
-                var _this15 = this;
-
-                var P = 1 /* PRIMITIVE */,
-                    RSO = 2 /* RENDER_STORE_OBJECT */;
-
-                broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX + 'play', [RSO, RSO], function (player, element) {
-                    return player.play();
-                });
-                broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX + 'pause', [RSO, RSO], function (player, element) {
-                    return player.pause();
-                });
-                broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX + 'init', [RSO, RSO], function (player, element) {
-                    return player.init();
-                });
-                broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX + 'restart', [RSO, RSO], function (player, element) {
-                    return player.restart();
-                });
-                broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX + 'destroy', [RSO, RSO], function (player, element) {
-                    player.destroy();
-                    _this15._renderStore.remove(player);
-                });
-                broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX + 'finish', [RSO, RSO], function (player, element) {
-                    return player.finish();
-                });
-                broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX + 'getPosition', [RSO, RSO], function (player, element) {
-                    return player.getPosition();
-                });
-                broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX + 'onStart', [RSO, RSO, P], function (player, element) {
-                    return _this15._listenOnAnimationPlayer(player, element, 'onStart');
-                });
-                broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX + 'onDone', [RSO, RSO, P], function (player, element) {
-                    return _this15._listenOnAnimationPlayer(player, element, 'onDone');
-                });
-                broker.registerMethod(ANIMATION_WORKER_PLAYER_PREFIX + 'setPosition', [RSO, RSO, P], function (player, element, position) {
-                    return player.setPosition(position);
-                });
-            }
-        }, {
-            key: '_renderComponent',
-            value: function _renderComponent(renderComponentType, rendererId) {
-                var /** @type {?} */renderer = this._rootRenderer.renderComponent(renderComponentType);
-                this._renderStore.store(renderer, rendererId);
-            }
-        }, {
-            key: '_selectRootElement',
-            value: function _selectRootElement(renderer, selector, elId) {
-                this._renderStore.store(renderer.selectRootElement(selector, null), elId);
-            }
-        }, {
-            key: '_createElement',
-            value: function _createElement(renderer, parentElement, name, elId) {
-                this._renderStore.store(renderer.createElement(parentElement, name, null), elId);
-            }
-        }, {
-            key: '_createViewRoot',
-            value: function _createViewRoot(renderer, hostElement, elId) {
-                var /** @type {?} */viewRoot = renderer.createViewRoot(hostElement);
-                if (this._renderStore.serialize(hostElement) !== elId) {
-                    this._renderStore.store(viewRoot, elId);
-                }
-            }
-        }, {
-            key: '_createTemplateAnchor',
-            value: function _createTemplateAnchor(renderer, parentElement, elId) {
-                this._renderStore.store(renderer.createTemplateAnchor(parentElement, null), elId);
-            }
-        }, {
-            key: '_createText',
-            value: function _createText(renderer, parentElement, value, elId) {
-                this._renderStore.store(renderer.createText(parentElement, value, null), elId);
-            }
-        }, {
-            key: '_projectNodes',
-            value: function _projectNodes(renderer, parentElement, nodes) {
-                renderer.projectNodes(parentElement, nodes);
-            }
-        }, {
-            key: '_attachViewAfter',
-            value: function _attachViewAfter(renderer, node, viewRootNodes) {
-                renderer.attachViewAfter(node, viewRootNodes);
-            }
-        }, {
-            key: '_detachView',
-            value: function _detachView(renderer, viewRootNodes) {
-                renderer.detachView(viewRootNodes);
-            }
-        }, {
-            key: '_destroyView',
-            value: function _destroyView(renderer, hostElement, viewAllNodes) {
-                renderer.destroyView(hostElement, viewAllNodes);
-                for (var /** @type {?} */i = 0; i < viewAllNodes.length; i++) {
-                    this._renderStore.remove(viewAllNodes[i]);
-                }
-            }
-        }, {
-            key: '_setElementProperty',
-            value: function _setElementProperty(renderer, renderElement, propertyName, propertyValue) {
-                renderer.setElementProperty(renderElement, propertyName, propertyValue);
-            }
-        }, {
-            key: '_setElementAttribute',
-            value: function _setElementAttribute(renderer, renderElement, attributeName, attributeValue) {
-                renderer.setElementAttribute(renderElement, attributeName, attributeValue);
-            }
-        }, {
-            key: '_setBindingDebugInfo',
-            value: function _setBindingDebugInfo(renderer, renderElement, propertyName, propertyValue) {
-                renderer.setBindingDebugInfo(renderElement, propertyName, propertyValue);
-            }
-        }, {
-            key: '_setElementClass',
-            value: function _setElementClass(renderer, renderElement, className, isAdd) {
-                renderer.setElementClass(renderElement, className, isAdd);
-            }
-        }, {
-            key: '_setElementStyle',
-            value: function _setElementStyle(renderer, renderElement, styleName, styleValue) {
-                renderer.setElementStyle(renderElement, styleName, styleValue);
-            }
-        }, {
-            key: '_invokeElementMethod',
-            value: function _invokeElementMethod(renderer, renderElement, methodName, args) {
-                renderer.invokeElementMethod(renderElement, methodName, args);
-            }
-        }, {
-            key: '_setText',
-            value: function _setText(renderer, renderNode, text) {
-                renderer.setText(renderNode, text);
-            }
-        }, {
-            key: '_listen',
-            value: function _listen(renderer, renderElement, eventName, unlistenId) {
-                var _this16 = this;
-
-                var /** @type {?} */unregisterCallback = renderer.listen(renderElement, eventName, function (event) {
-                    return _this16._eventDispatcher.dispatchRenderEvent(renderElement, null, eventName, event);
-                });
-                this._renderStore.store(unregisterCallback, unlistenId);
-            }
-        }, {
-            key: '_listenGlobal',
-            value: function _listenGlobal(renderer, eventTarget, eventName, unlistenId) {
-                var _this17 = this;
-
-                var /** @type {?} */unregisterCallback = renderer.listenGlobal(eventTarget, eventName, function (event) {
-                    return _this17._eventDispatcher.dispatchRenderEvent(null, eventTarget, eventName, event);
-                });
-                this._renderStore.store(unregisterCallback, unlistenId);
-            }
-        }, {
-            key: '_listenDone',
-            value: function _listenDone(renderer, unlistenCallback) {
-                unlistenCallback();
-            }
-        }, {
-            key: '_animate',
-            value: function _animate(renderer, element, startingStyles, keyframes, duration, delay, easing, previousPlayers, playerId) {
-                var _this18 = this;
-
-                var /** @type {?} */normalizedPreviousPlayers = void 0;
-                if (previousPlayers && previousPlayers.length) {
-                    normalizedPreviousPlayers = previousPlayers.map(function (playerId) {
-                        return _this18._renderStore.deserialize(playerId);
-                    });
-                }
-                var /** @type {?} */player = renderer.animate(element, startingStyles, keyframes, duration, delay, easing, normalizedPreviousPlayers);
-                this._renderStore.store(player, playerId);
-            }
-        }, {
-            key: '_listenOnAnimationPlayer',
-            value: function _listenOnAnimationPlayer(player, element, phaseName) {
-                var _this19 = this;
-
-                var /** @type {?} */onEventComplete = function onEventComplete() {
-                    _this19._eventDispatcher.dispatchAnimationEvent(player, phaseName, element);
-                };
-                // there is no need to register a unlistener value here since the
-                // internal player callbacks are removed when the player is destroyed
-                if (phaseName == 'onDone') {
-                    player.onDone(function () {
-                        return onEventComplete();
-                    });
-                } else {
-                    player.onStart(function () {
-                        return onEventComplete();
-                    });
-                }
-            }
-        }]);
-
-        return MessageBasedRenderer;
-    }();
-
-    MessageBasedRenderer.decorators = [{ type: _core.Injectable }];
-    /** @nocollapse */
-    MessageBasedRenderer.ctorParameters = function () {
-        return [{ type: ServiceMessageBrokerFactory }, { type: MessageBus }, { type: Serializer }, { type: RenderStore }, { type: _core.RootRenderer }];
-    };
-
     var MessageBasedRendererV2 = function () {
         /**
          * @param {?} _brokerFactory
@@ -1644,7 +1392,7 @@
         _createClass(MessageBasedRendererV2, [{
             key: 'start',
             value: function start() {
-                var _this20 = this;
+                var _this14 = this;
 
                 var /** @type {?} */broker = this._brokerFactory.createMessageBroker(RENDERER_V2_CHANNEL);
                 this._bus.initChannel(EVENT_V2_CHANNEL);
@@ -1657,13 +1405,13 @@
                 ;
 
                 var /** @type {?} */methods = [['createRenderer', this.createRenderer, RSO, CRT, P], ['createElement', this.createElement, RSO, P, P, P], ['createComment', this.createComment, RSO, P, P], ['createText', this.createText, RSO, P, P], ['appendChild', this.appendChild, RSO, RSO, RSO], ['insertBefore', this.insertBefore, RSO, RSO, RSO, RSO], ['removeChild', this.removeChild, RSO, RSO, RSO], ['selectRootElement', this.selectRootElement, RSO, P, P], ['parentNode', this.parentNode, RSO, RSO, P], ['nextSibling', this.nextSibling, RSO, RSO, P], ['setAttribute', this.setAttribute, RSO, RSO, P, P, P], ['removeAttribute', this.removeAttribute, RSO, RSO, P, P], ['addClass', this.addClass, RSO, RSO, P], ['removeClass', this.removeClass, RSO, RSO, P], ['setStyle', this.setStyle, RSO, RSO, P, P, P, P], ['removeStyle', this.removeStyle, RSO, RSO, P, P], ['setProperty', this.setProperty, RSO, RSO, P, P], ['setValue', this.setValue, RSO, RSO, P], ['listen', this.listen, RSO, RSO, P, P, P], ['unlisten', this.unlisten, RSO, RSO], ['destroy', this.destroy, RSO], ['destroyNode', this.destroyNode, RSO, P]];
-                methods.forEach(function (_ref3) {
-                    var _ref4 = _toArray(_ref3),
-                        name = _ref4[0],
-                        method = _ref4[1],
-                        argTypes = _ref4.slice(2);
+                methods.forEach(function (_ref) {
+                    var _ref2 = _toArray(_ref),
+                        name = _ref2[0],
+                        method = _ref2[1],
+                        argTypes = _ref2.slice(2);
 
-                    broker.registerMethod(name, argTypes, method.bind(_this20));
+                    broker.registerMethod(name, argTypes, method.bind(_this14));
                 });
             }
         }, {
@@ -1772,10 +1520,10 @@
         }, {
             key: 'listen',
             value: function listen(r, el, elName, eventName, unlistenId) {
-                var _this21 = this;
+                var _this15 = this;
 
                 var /** @type {?} */listener = function listener(event) {
-                    return _this21._eventDispatcher.dispatchRenderEvent(el, elName, eventName, event);
+                    return _this15._eventDispatcher.dispatchRenderEvent(el, elName, eventName, event);
                 };
                 var /** @type {?} */unlisten = r.listen(el || elName, eventName, listener);
                 this._renderStore.store(unlisten, unlistenId);
@@ -1835,14 +1583,14 @@
      * @experimental WebWorker support is currently experimental.
      */
     var /** @type {?} */WORKER_UI_STARTABLE_MESSAGING_SERVICE = new _core.InjectionToken('WorkerRenderStartableMsgService');
-    var /** @type {?} */_WORKER_UI_PLATFORM_PROVIDERS = [{ provide: _core.NgZone, useFactory: createNgZone, deps: [] }, MessageBasedRenderer, MessageBasedRendererV2, {
+    var /** @type {?} */_WORKER_UI_PLATFORM_PROVIDERS = [{ provide: _core.NgZone, useFactory: createNgZone, deps: [] }, MessageBasedRendererV2, {
         provide: WORKER_UI_STARTABLE_MESSAGING_SERVICE,
         useExisting: MessageBasedRendererV2,
         multi: true
     }, _platformBrowser.ɵBROWSER_SANITIZATION_PROVIDERS, { provide: _core.ErrorHandler, useFactory: _exceptionHandler, deps: [] }, { provide: _platformBrowser.DOCUMENT, useFactory: _document, deps: [] },
     // TODO(jteplitz602): Investigate if we definitely need EVENT_MANAGER on the render thread
     // #5298
-    { provide: _platformBrowser.EVENT_MANAGER_PLUGINS, useClass: _platformBrowser.ɵDomEventsPlugin, multi: true }, { provide: _platformBrowser.EVENT_MANAGER_PLUGINS, useClass: _platformBrowser.ɵKeyEventsPlugin, multi: true }, { provide: _platformBrowser.EVENT_MANAGER_PLUGINS, useClass: _platformBrowser.ɵHammerGesturesPlugin, multi: true }, { provide: _platformBrowser.HAMMER_GESTURE_CONFIG, useClass: _platformBrowser.HammerGestureConfig }, _core.ɵAPP_ID_RANDOM_PROVIDER, { provide: _platformBrowser.ɵDomRootRenderer, useClass: _platformBrowser.ɵDomRootRenderer_ }, { provide: _core.RootRenderer, useExisting: _platformBrowser.ɵDomRootRenderer }, _platformBrowser.ɵDomRendererFactoryV2, { provide: _core.RendererFactoryV2, useExisting: _platformBrowser.ɵDomRendererFactoryV2 }, { provide: _platformBrowser.ɵSharedStylesHost, useExisting: _platformBrowser.ɵDomSharedStylesHost }, { provide: ServiceMessageBrokerFactory, useClass: ServiceMessageBrokerFactory_ }, { provide: ClientMessageBrokerFactory, useClass: ClientMessageBrokerFactory_ }, { provide: _platformBrowser.AnimationDriver, useFactory: _resolveDefaultAnimationDriver, deps: [] }, Serializer, { provide: ON_WEB_WORKER, useValue: false }, RenderStore, _platformBrowser.ɵDomSharedStylesHost, _core.Testability, _platformBrowser.EventManager, WebWorkerInstance, {
+    { provide: _platformBrowser.EVENT_MANAGER_PLUGINS, useClass: _platformBrowser.ɵDomEventsPlugin, multi: true }, { provide: _platformBrowser.EVENT_MANAGER_PLUGINS, useClass: _platformBrowser.ɵKeyEventsPlugin, multi: true }, { provide: _platformBrowser.EVENT_MANAGER_PLUGINS, useClass: _platformBrowser.ɵHammerGesturesPlugin, multi: true }, { provide: _platformBrowser.HAMMER_GESTURE_CONFIG, useClass: _platformBrowser.HammerGestureConfig }, _core.ɵAPP_ID_RANDOM_PROVIDER, _platformBrowser.ɵDomRendererFactoryV2, { provide: _core.RendererFactoryV2, useExisting: _platformBrowser.ɵDomRendererFactoryV2 }, { provide: _platformBrowser.ɵSharedStylesHost, useExisting: _platformBrowser.ɵDomSharedStylesHost }, { provide: ServiceMessageBrokerFactory, useClass: ServiceMessageBrokerFactory_ }, { provide: ClientMessageBrokerFactory, useClass: ClientMessageBrokerFactory_ }, Serializer, { provide: ON_WEB_WORKER, useValue: false }, RenderStore, _platformBrowser.ɵDomSharedStylesHost, _core.Testability, _platformBrowser.EventManager, WebWorkerInstance, {
         provide: _core.PLATFORM_INITIALIZER,
         useFactory: initWebWorkerRenderPlatform,
         multi: true,
@@ -1925,17 +1673,11 @@
         var /** @type {?} */bus = new PostMessageBus(sink, source);
         instance.init(webWorker, bus);
     }
-    /**
-     * @return {?}
-     */
-    function _resolveDefaultAnimationDriver() {
-        return (0, _platformBrowser.ɵgetDOM)().supportsWebAnimation() ? new _platformBrowser.ɵWebAnimationsDriver() : _platformBrowser.AnimationDriver.NOOP;
-    }
 
     /**
      * @stable
      */
-    var /** @type {?} */VERSION = new _core.Version('4.0.0-rc.1-e58cb7b');
+    var /** @type {?} */VERSION = new _core.Version('4.0.0-rc.1-126fda2');
 
     var MessageBasedPlatformLocation = function () {
         /**
@@ -2030,27 +1772,27 @@
         function WebWorkerPlatformLocation(brokerFactory, bus, _serializer) {
             _classCallCheck(this, WebWorkerPlatformLocation);
 
-            var _this22 = _possibleConstructorReturn(this, (WebWorkerPlatformLocation.__proto__ || Object.getPrototypeOf(WebWorkerPlatformLocation)).call(this));
+            var _this16 = _possibleConstructorReturn(this, (WebWorkerPlatformLocation.__proto__ || Object.getPrototypeOf(WebWorkerPlatformLocation)).call(this));
 
-            _this22._serializer = _serializer;
-            _this22._popStateListeners = [];
-            _this22._hashChangeListeners = [];
-            _this22._location = null;
-            _this22._broker = brokerFactory.createMessageBroker(ROUTER_CHANNEL);
-            _this22._channelSource = bus.from(ROUTER_CHANNEL);
-            _this22._channelSource.subscribe({
+            _this16._serializer = _serializer;
+            _this16._popStateListeners = [];
+            _this16._hashChangeListeners = [];
+            _this16._location = null;
+            _this16._broker = brokerFactory.createMessageBroker(ROUTER_CHANNEL);
+            _this16._channelSource = bus.from(ROUTER_CHANNEL);
+            _this16._channelSource.subscribe({
                 next: function next(msg) {
                     var listeners = null;
                     if (msg.hasOwnProperty('event')) {
                         var type = msg['event']['type'];
                         if (type === 'popstate') {
-                            listeners = _this22._popStateListeners;
+                            listeners = _this16._popStateListeners;
                         } else if (type === 'hashchange') {
-                            listeners = _this22._hashChangeListeners;
+                            listeners = _this16._hashChangeListeners;
                         }
                         if (listeners) {
                             // There was a popState or hashChange event, so the location object thas been updated
-                            _this22._location = _this22._serializer.deserialize(msg['location'], LocationType);
+                            _this16._location = _this16._serializer.deserialize(msg['location'], LocationType);
                             listeners.forEach(function (fn) {
                                 return fn(msg['event']);
                             });
@@ -2058,7 +1800,7 @@
                     }
                 }
             });
-            return _this22;
+            return _this16;
         }
         /**
          * \@internal *
@@ -2069,11 +1811,11 @@
         _createClass(WebWorkerPlatformLocation, [{
             key: 'init',
             value: function init() {
-                var _this23 = this;
+                var _this17 = this;
 
                 var /** @type {?} */args = new UiArguments('getLocation');
                 return this._broker.runOnService(args, LocationType).then(function (val) {
-                    _this23._location = val;
+                    _this17._location = val;
                     return true;
                 }, function (err) {
                     throw new Error(err);
@@ -2224,268 +1966,6 @@
         return NamedEventEmitter;
     }();
 
-    var WebWorkerRootRenderer = function () {
-        /**
-         * @param {?} messageBrokerFactory
-         * @param {?} bus
-         * @param {?} _serializer
-         * @param {?} renderStore
-         */
-        function WebWorkerRootRenderer(messageBrokerFactory, bus, _serializer, renderStore) {
-            var _this24 = this;
-
-            _classCallCheck(this, WebWorkerRootRenderer);
-
-            this._serializer = _serializer;
-            this.renderStore = renderStore;
-            this.globalEvents = new NamedEventEmitter();
-            this._componentRenderers = new Map();
-            this._messageBroker = messageBrokerFactory.createMessageBroker(RENDERER_CHANNEL);
-            bus.initChannel(EVENT_CHANNEL);
-            var source = bus.from(EVENT_CHANNEL);
-            source.subscribe({ next: function next(message) {
-                    return _this24._dispatchEvent(message);
-                } });
-            throw new Error('RootRenderer is no longer supported. Please use the `RendererFactoryV2` instead!');
-        }
-        /**
-         * @param {?} message
-         * @return {?}
-         */
-
-
-        _createClass(WebWorkerRootRenderer, [{
-            key: '_dispatchEvent',
-            value: function _dispatchEvent(message) {
-                var /** @type {?} */element = this._serializer.deserialize(message['element'], 2 /* RENDER_STORE_OBJECT */);
-                var /** @type {?} */playerData = message['animationPlayer'];
-                if (playerData) {
-                    var /** @type {?} */phaseName = message['phaseName'];
-                    var /** @type {?} */player = this._serializer.deserialize(playerData, 2 /* RENDER_STORE_OBJECT */);
-                    element.animationPlayerEvents.dispatchEvent(player, phaseName);
-                } else {
-                    var /** @type {?} */eventName = message['eventName'];
-                    var /** @type {?} */target = message['eventTarget'];
-                    var /** @type {?} */event = message['event'];
-                    if (target) {
-                        this.globalEvents.dispatchEvent(eventNameWithTarget(target, eventName), event);
-                    } else {
-                        element.events.dispatchEvent(eventName, event);
-                    }
-                }
-            }
-        }, {
-            key: 'renderComponent',
-            value: function renderComponent(componentType) {
-                var /** @type {?} */result = this._componentRenderers.get(componentType.id);
-                if (!result) {
-                    result = new WebWorkerRenderer(this, componentType);
-                    this._componentRenderers.set(componentType.id, result);
-                    var /** @type {?} */id = this.renderStore.allocateId();
-                    this.renderStore.store(result, id);
-                    this.runOnService('renderComponent', [new FnArg(componentType, _core.RenderComponentType), new FnArg(result, 2 /* RENDER_STORE_OBJECT */)]);
-                }
-                return result;
-            }
-        }, {
-            key: 'runOnService',
-            value: function runOnService(fnName, fnArgs) {
-                var /** @type {?} */args = new UiArguments(fnName, fnArgs);
-                this._messageBroker.runOnService(args, null);
-            }
-        }, {
-            key: 'allocateNode',
-            value: function allocateNode() {
-                var /** @type {?} */result = new WebWorkerRenderNode();
-                var /** @type {?} */id = this.renderStore.allocateId();
-                this.renderStore.store(result, id);
-                return result;
-            }
-        }, {
-            key: 'allocateId',
-            value: function allocateId() {
-                return this.renderStore.allocateId();
-            }
-        }, {
-            key: 'destroyNodes',
-            value: function destroyNodes(nodes) {
-                for (var /** @type {?} */i = 0; i < nodes.length; i++) {
-                    this.renderStore.remove(nodes[i]);
-                }
-            }
-        }]);
-
-        return WebWorkerRootRenderer;
-    }();
-
-    WebWorkerRootRenderer.decorators = [{ type: _core.Injectable }];
-    /** @nocollapse */
-    WebWorkerRootRenderer.ctorParameters = function () {
-        return [{ type: ClientMessageBrokerFactory }, { type: MessageBus }, { type: Serializer }, { type: RenderStore }];
-    };
-
-    var WebWorkerRenderer = function () {
-        /**
-         * @param {?} _rootRenderer
-         * @param {?} _componentType
-         */
-        function WebWorkerRenderer(_rootRenderer, _componentType) {
-            _classCallCheck(this, WebWorkerRenderer);
-
-            this._rootRenderer = _rootRenderer;
-            this._componentType = _componentType;
-        }
-        /**
-         * @param {?} fnName
-         * @param {?} fnArgs
-         * @return {?}
-         */
-
-
-        _createClass(WebWorkerRenderer, [{
-            key: '_runOnService',
-            value: function _runOnService(fnName, fnArgs) {
-                var /** @type {?} */fnArgsWithRenderer = [new FnArg(this, 2 /* RENDER_STORE_OBJECT */)].concat(_toConsumableArray(fnArgs));
-                this._rootRenderer.runOnService(fnName, fnArgsWithRenderer);
-            }
-        }, {
-            key: 'selectRootElement',
-            value: function selectRootElement(selectorOrNode, debugInfo) {
-                var /** @type {?} */node = this._rootRenderer.allocateNode();
-                this._runOnService('selectRootElement', [new FnArg(selectorOrNode), new FnArg(node, 2 /* RENDER_STORE_OBJECT */)]);
-                return node;
-            }
-        }, {
-            key: 'createElement',
-            value: function createElement(parentElement, name, debugInfo) {
-                var /** @type {?} */node = this._rootRenderer.allocateNode();
-                this._runOnService('createElement', [new FnArg(parentElement, 2 /* RENDER_STORE_OBJECT */), new FnArg(name), new FnArg(node, 2 /* RENDER_STORE_OBJECT */)]);
-                return node;
-            }
-        }, {
-            key: 'createViewRoot',
-            value: function createViewRoot(hostElement) {
-                var /** @type {?} */viewRoot = this._componentType.encapsulation === _core.ViewEncapsulation.Native ? this._rootRenderer.allocateNode() : hostElement;
-                this._runOnService('createViewRoot', [new FnArg(hostElement, 2 /* RENDER_STORE_OBJECT */), new FnArg(viewRoot, 2 /* RENDER_STORE_OBJECT */)]);
-                return viewRoot;
-            }
-        }, {
-            key: 'createTemplateAnchor',
-            value: function createTemplateAnchor(parentElement, debugInfo) {
-                var /** @type {?} */node = this._rootRenderer.allocateNode();
-                this._runOnService('createTemplateAnchor', [new FnArg(parentElement, 2 /* RENDER_STORE_OBJECT */), new FnArg(node, 2 /* RENDER_STORE_OBJECT */)]);
-                return node;
-            }
-        }, {
-            key: 'createText',
-            value: function createText(parentElement, value, debugInfo) {
-                var /** @type {?} */node = this._rootRenderer.allocateNode();
-                this._runOnService('createText', [new FnArg(parentElement, 2 /* RENDER_STORE_OBJECT */), new FnArg(value), new FnArg(node, 2 /* RENDER_STORE_OBJECT */)]);
-                return node;
-            }
-        }, {
-            key: 'projectNodes',
-            value: function projectNodes(parentElement, nodes) {
-                this._runOnService('projectNodes', [new FnArg(parentElement, 2 /* RENDER_STORE_OBJECT */), new FnArg(nodes, 2 /* RENDER_STORE_OBJECT */)]);
-            }
-        }, {
-            key: 'attachViewAfter',
-            value: function attachViewAfter(node, viewRootNodes) {
-                this._runOnService('attachViewAfter', [new FnArg(node, 2 /* RENDER_STORE_OBJECT */), new FnArg(viewRootNodes, 2 /* RENDER_STORE_OBJECT */)]);
-            }
-        }, {
-            key: 'detachView',
-            value: function detachView(viewRootNodes) {
-                this._runOnService('detachView', [new FnArg(viewRootNodes, 2 /* RENDER_STORE_OBJECT */)]);
-            }
-        }, {
-            key: 'destroyView',
-            value: function destroyView(hostElement, viewAllNodes) {
-                this._runOnService('destroyView', [new FnArg(hostElement, 2 /* RENDER_STORE_OBJECT */), new FnArg(viewAllNodes, 2 /* RENDER_STORE_OBJECT */)]);
-                this._rootRenderer.destroyNodes(viewAllNodes);
-            }
-        }, {
-            key: 'setElementProperty',
-            value: function setElementProperty(renderElement, propertyName, propertyValue) {
-                this._runOnService('setElementProperty', [new FnArg(renderElement, 2 /* RENDER_STORE_OBJECT */), new FnArg(propertyName), new FnArg(propertyValue)]);
-            }
-        }, {
-            key: 'setElementAttribute',
-            value: function setElementAttribute(renderElement, attributeName, attributeValue) {
-                this._runOnService('setElementAttribute', [new FnArg(renderElement, 2 /* RENDER_STORE_OBJECT */), new FnArg(attributeName), new FnArg(attributeValue)]);
-            }
-        }, {
-            key: 'setBindingDebugInfo',
-            value: function setBindingDebugInfo(renderElement, propertyName, propertyValue) {
-                this._runOnService('setBindingDebugInfo', [new FnArg(renderElement, 2 /* RENDER_STORE_OBJECT */), new FnArg(propertyName), new FnArg(propertyValue)]);
-            }
-        }, {
-            key: 'setElementClass',
-            value: function setElementClass(renderElement, className, isAdd) {
-                this._runOnService('setElementClass', [new FnArg(renderElement, 2 /* RENDER_STORE_OBJECT */), new FnArg(className), new FnArg(isAdd)]);
-            }
-        }, {
-            key: 'setElementStyle',
-            value: function setElementStyle(renderElement, styleName, styleValue) {
-                this._runOnService('setElementStyle', [new FnArg(renderElement, 2 /* RENDER_STORE_OBJECT */), new FnArg(styleName), new FnArg(styleValue)]);
-            }
-        }, {
-            key: 'invokeElementMethod',
-            value: function invokeElementMethod(renderElement, methodName, args) {
-                this._runOnService('invokeElementMethod', [new FnArg(renderElement, 2 /* RENDER_STORE_OBJECT */), new FnArg(methodName), new FnArg(args)]);
-            }
-        }, {
-            key: 'setText',
-            value: function setText(renderNode, text) {
-                this._runOnService('setText', [new FnArg(renderNode, 2 /* RENDER_STORE_OBJECT */), new FnArg(text)]);
-            }
-        }, {
-            key: 'listen',
-            value: function listen(renderElement, name, callback) {
-                var _this25 = this;
-
-                renderElement.events.listen(name, callback);
-                var /** @type {?} */unlistenCallbackId = this._rootRenderer.allocateId();
-                this._runOnService('listen', [new FnArg(renderElement, 2 /* RENDER_STORE_OBJECT */), new FnArg(name), new FnArg(unlistenCallbackId)]);
-                return function () {
-                    renderElement.events.unlisten(name, callback);
-                    _this25._runOnService('listenDone', [new FnArg(unlistenCallbackId)]);
-                };
-            }
-        }, {
-            key: 'listenGlobal',
-            value: function listenGlobal(target, name, callback) {
-                var _this26 = this;
-
-                this._rootRenderer.globalEvents.listen(eventNameWithTarget(target, name), callback);
-                var /** @type {?} */unlistenCallbackId = this._rootRenderer.allocateId();
-                this._runOnService('listenGlobal', [new FnArg(target), new FnArg(name, null), new FnArg(unlistenCallbackId)]);
-                return function () {
-                    _this26._rootRenderer.globalEvents.unlisten(eventNameWithTarget(target, name), callback);
-                    _this26._runOnService('listenDone', [new FnArg(unlistenCallbackId)]);
-                };
-            }
-        }, {
-            key: 'animate',
-            value: function animate(renderElement, startingStyles, keyframes, duration, delay, easing) {
-                var _this27 = this;
-
-                var previousPlayers = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : [];
-
-                var /** @type {?} */playerId = this._rootRenderer.allocateId();
-                var /** @type {?} */previousPlayerIds = previousPlayers.map(function (player) {
-                    return _this27._rootRenderer.renderStore.serialize(player);
-                });
-                this._runOnService('animate', [new FnArg(renderElement, 2 /* RENDER_STORE_OBJECT */), new FnArg(startingStyles), new FnArg(keyframes), new FnArg(duration), new FnArg(delay), new FnArg(easing), new FnArg(previousPlayerIds), new FnArg(playerId)]);
-                var /** @type {?} */player = new _AnimationWorkerRendererPlayer(this._rootRenderer, renderElement);
-                this._rootRenderer.renderStore.store(player, playerId);
-                return player;
-            }
-        }]);
-
-        return WebWorkerRenderer;
-    }();
-
     /**
      * @param {?} target
      * @param {?} eventName
@@ -2503,7 +1983,7 @@
          * @param {?} renderStore
          */
         function WebWorkerRendererFactoryV2(messageBrokerFactory, bus, _serializer, renderStore) {
-            var _this28 = this;
+            var _this18 = this;
 
             _classCallCheck(this, WebWorkerRendererFactoryV2);
 
@@ -2514,7 +1994,7 @@
             bus.initChannel(EVENT_V2_CHANNEL);
             var source = bus.from(EVENT_V2_CHANNEL);
             source.subscribe({ next: function next(message) {
-                    return _this28._dispatchEvent(message);
+                    return _this18._dispatchEvent(message);
                 } });
         }
         /**
@@ -2711,15 +2191,15 @@
         }, {
             key: 'listen',
             value: function listen(target, eventName, listener) {
-                var _this29 = this;
+                var _this19 = this;
 
                 var /** @type {?} */unlistenId = this._rendererFactory.allocateId();
 
-                var _ref5 = typeof target === 'string' ? [null, target, target + ':' + eventName] : [target, null, null],
-                    _ref6 = _slicedToArray(_ref5, 3),
-                    targetEl = _ref6[0],
-                    targetName = _ref6[1],
-                    fullName = _ref6[2];
+                var _ref3 = typeof target === 'string' ? [null, target, target + ':' + eventName] : [target, null, null],
+                    _ref4 = _slicedToArray(_ref3, 3),
+                    targetEl = _ref4[0],
+                    targetName = _ref4[1],
+                    fullName = _ref4[2];
 
                 if (fullName) {
                     this._rendererFactory.globalEvents.listen(fullName, listener);
@@ -2729,11 +2209,11 @@
                 this.callUIWithRenderer('listen', [new FnArg(targetEl, 2 /* RENDER_STORE_OBJECT */), new FnArg(targetName), new FnArg(eventName), new FnArg(unlistenId)]);
                 return function () {
                     if (fullName) {
-                        _this29._rendererFactory.globalEvents.unlisten(fullName, listener);
+                        _this19._rendererFactory.globalEvents.unlisten(fullName, listener);
                     } else {
                         targetEl.events.unlisten(eventName, listener);
                     }
-                    _this29.callUIWithRenderer('unlisten', [new FnArg(unlistenId)]);
+                    _this19.callUIWithRenderer('unlisten', [new FnArg(unlistenId)]);
                 };
             }
         }, {
@@ -2749,164 +2229,11 @@
         return WebWorkerRendererV2;
     }();
 
-    var AnimationPlayerEmitter = function () {
-        function AnimationPlayerEmitter() {
-            _classCallCheck(this, AnimationPlayerEmitter);
-        }
-
-        _createClass(AnimationPlayerEmitter, [{
-            key: '_getListeners',
-            value: function _getListeners(player, phaseName) {
-                if (!this._listeners) {
-                    this._listeners = new Map();
-                }
-                var /** @type {?} */phaseMap = this._listeners.get(player);
-                if (!phaseMap) {
-                    this._listeners.set(player, phaseMap = {});
-                }
-                var /** @type {?} */phaseFns = phaseMap[phaseName];
-                if (!phaseFns) {
-                    phaseFns = phaseMap[phaseName] = [];
-                }
-                return phaseFns;
-            }
-        }, {
-            key: 'listen',
-            value: function listen(player, phaseName, callback) {
-                this._getListeners(player, phaseName).push(callback);
-            }
-        }, {
-            key: 'unlisten',
-            value: function unlisten(player) {
-                this._listeners.delete(player);
-            }
-        }, {
-            key: 'dispatchEvent',
-            value: function dispatchEvent(player, phaseName) {
-                var /** @type {?} */listeners = this._getListeners(player, phaseName);
-                for (var /** @type {?} */i = 0; i < listeners.length; i++) {
-                    listeners[i]();
-                }
-            }
-        }]);
-
-        return AnimationPlayerEmitter;
-    }();
-
     var WebWorkerRenderNode = function WebWorkerRenderNode() {
         _classCallCheck(this, WebWorkerRenderNode);
 
         this.events = new NamedEventEmitter();
-        this.animationPlayerEvents = new AnimationPlayerEmitter();
     };
-
-    var _AnimationWorkerRendererPlayer = function () {
-        /**
-         * @param {?} _rootRenderer
-         * @param {?} _renderElement
-         */
-        function _AnimationWorkerRendererPlayer(_rootRenderer, _renderElement) {
-            _classCallCheck(this, _AnimationWorkerRendererPlayer);
-
-            this._rootRenderer = _rootRenderer;
-            this._renderElement = _renderElement;
-            this.parentPlayer = null;
-            this._destroyed = false;
-            this._started = false;
-        }
-        /**
-         * @param {?} fnName
-         * @param {?} fnArgs
-         * @return {?}
-         */
-
-
-        _createClass(_AnimationWorkerRendererPlayer, [{
-            key: '_runOnService',
-            value: function _runOnService(fnName, fnArgs) {
-                if (!this._destroyed) {
-                    var /** @type {?} */fnArgsWithRenderer = [new FnArg(this, 2 /* RENDER_STORE_OBJECT */), new FnArg(this._renderElement, 2 /* RENDER_STORE_OBJECT */)].concat(_toConsumableArray(fnArgs));
-                    this._rootRenderer.runOnService(ANIMATION_WORKER_PLAYER_PREFIX + fnName, fnArgsWithRenderer);
-                }
-            }
-        }, {
-            key: 'onStart',
-            value: function onStart(fn) {
-                this._renderElement.animationPlayerEvents.listen(this, 'onStart', fn);
-                this._runOnService('onStart', []);
-            }
-        }, {
-            key: 'onDone',
-            value: function onDone(fn) {
-                this._renderElement.animationPlayerEvents.listen(this, 'onDone', fn);
-                this._runOnService('onDone', []);
-            }
-        }, {
-            key: 'onDestroy',
-            value: function onDestroy(fn) {
-                this._renderElement.animationPlayerEvents.listen(this, 'onDestroy', fn);
-                this._runOnService('onDestroy', []);
-            }
-        }, {
-            key: 'hasStarted',
-            value: function hasStarted() {
-                return this._started;
-            }
-        }, {
-            key: 'init',
-            value: function init() {
-                this._runOnService('init', []);
-            }
-        }, {
-            key: 'play',
-            value: function play() {
-                this._started = true;
-                this._runOnService('play', []);
-            }
-        }, {
-            key: 'pause',
-            value: function pause() {
-                this._runOnService('pause', []);
-            }
-        }, {
-            key: 'restart',
-            value: function restart() {
-                this._runOnService('restart', []);
-            }
-        }, {
-            key: 'finish',
-            value: function finish() {
-                this._runOnService('finish', []);
-            }
-        }, {
-            key: 'destroy',
-            value: function destroy() {
-                if (!this._destroyed) {
-                    this._renderElement.animationPlayerEvents.unlisten(this);
-                    this._runOnService('destroy', []);
-                    this._rootRenderer.renderStore.remove(this);
-                    this._destroyed = true;
-                }
-            }
-        }, {
-            key: 'reset',
-            value: function reset() {
-                this._runOnService('reset', []);
-            }
-        }, {
-            key: 'setPosition',
-            value: function setPosition(p) {
-                this._runOnService('setPosition', [new FnArg(p)]);
-            }
-        }, {
-            key: 'getPosition',
-            value: function getPosition() {
-                return 0;
-            }
-        }]);
-
-        return _AnimationWorkerRendererPlayer;
-    }();
 
     var WorkerDomAdapter = function (_DomAdapter) {
         _inherits(WorkerDomAdapter, _DomAdapter);
@@ -3531,7 +2858,7 @@
     // TODO(jteplitz602) remove this and compile with lib.webworker.d.ts (#3492)
     var /** @type {?} */_postMessage = {
         postMessage: function (_postMessage2) {
-            function postMessage(_x12, _x13) {
+            function postMessage(_x11, _x12) {
                 return _postMessage2.apply(this, arguments);
             }
 
@@ -3572,7 +2899,7 @@
     };
 
     WorkerAppModule.decorators = [{ type: _core.NgModule, args: [{
-            providers: [_platformBrowser.ɵBROWSER_SANITIZATION_PROVIDERS, Serializer, { provide: _platformBrowser.DOCUMENT, useValue: null }, { provide: ClientMessageBrokerFactory, useClass: ClientMessageBrokerFactory_ }, { provide: ServiceMessageBrokerFactory, useClass: ServiceMessageBrokerFactory_ }, WebWorkerRootRenderer, { provide: _core.RootRenderer, useExisting: WebWorkerRootRenderer }, WebWorkerRendererFactoryV2, { provide: _core.RendererFactoryV2, useExisting: WebWorkerRendererFactoryV2 }, { provide: ON_WEB_WORKER, useValue: true }, RenderStore, { provide: _core.ErrorHandler, useFactory: errorHandler, deps: [] }, { provide: MessageBus, useFactory: createMessageBus, deps: [_core.NgZone] }, { provide: _core.APP_INITIALIZER, useValue: setupWebWorker, multi: true }],
+            providers: [_platformBrowser.ɵBROWSER_SANITIZATION_PROVIDERS, Serializer, { provide: _platformBrowser.DOCUMENT, useValue: null }, { provide: ClientMessageBrokerFactory, useClass: ClientMessageBrokerFactory_ }, { provide: ServiceMessageBrokerFactory, useClass: ServiceMessageBrokerFactory_ }, WebWorkerRendererFactoryV2, { provide: _core.RendererFactoryV2, useExisting: WebWorkerRendererFactoryV2 }, { provide: ON_WEB_WORKER, useValue: true }, RenderStore, { provide: _core.ErrorHandler, useFactory: errorHandler, deps: [] }, { provide: MessageBus, useFactory: createMessageBus, deps: [_core.NgZone] }, { provide: _core.APP_INITIALIZER, useValue: setupWebWorker, multi: true }],
             exports: [_common.CommonModule, _core.ApplicationModule]
         }] }];
     /** @nocollapse */
@@ -3611,13 +2938,12 @@
     exports.platformWorkerApp = platformWorkerApp;
     exports.platformWorkerUi = platformWorkerUi;
     exports.bootstrapWorkerUi = bootstrapWorkerUi;
-    exports.ɵk = ON_WEB_WORKER;
+    exports.ɵj = ON_WEB_WORKER;
     exports.ɵa = ClientMessageBrokerFactory_;
     exports.ɵh = RenderStore;
     exports.ɵb = Serializer;
     exports.ɵc = ServiceMessageBrokerFactory_;
-    exports.ɵj = WebWorkerRendererFactoryV2;
-    exports.ɵi = WebWorkerRootRenderer;
+    exports.ɵi = WebWorkerRendererFactoryV2;
     exports.ɵe = createMessageBus;
     exports.ɵd = errorHandler;
     exports.ɵf = setupWebWorker;

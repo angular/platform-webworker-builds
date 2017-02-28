@@ -46,4 +46,3 @@ export declare class Serializer {
     private _serializeRendererTypeV2(type);
     private _deserializeRendererTypeV2(props);
 }
-export declare const ANIMATION_WORKER_PLAYER_PREFIX = "AnimationPlayer.";
