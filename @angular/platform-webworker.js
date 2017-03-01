@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.0.0-rc.1-fc9e6b2
+ * @license Angular v4.0.0-rc.1-bc9e1de
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1557,7 +1557,7 @@ function spawnWebWorker(uri, instance) {
 /**
  * @stable
  */
-const /** @type {?} */ VERSION = new Version('4.0.0-rc.1-fc9e6b2');
+const /** @type {?} */ VERSION = new Version('4.0.0-rc.1-bc9e1de');
 
 class MessageBasedPlatformLocation {
     /**
