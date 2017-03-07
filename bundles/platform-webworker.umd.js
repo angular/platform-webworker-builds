@@ -1525,7 +1525,7 @@
     /**
      * @stable
      */
-    var /** @type {?} */VERSION = new _core.Version('4.0.0-rc.2-ebd4463');
+    var /** @type {?} */VERSION = new _core.Version('4.0.0-rc.2-07122f0');
 
     var MessageBasedPlatformLocation = function () {
         /**
