@@ -13,11 +13,11 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /**
- * @license Angular v4.0.0-rc.2-1cff125
+ * @license Angular v4.0.0-rc.2-5df998d
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
-import { ɵPLATFORM_WORKER_UI_ID, PlatformLocation, ɵPLATFORM_WORKER_APP_ID, CommonModule } from '@angular/common';
+import { ɵPLATFORM_WORKER_UI_ID, PlatformLocation, LOCATION_INITIALIZED, ɵPLATFORM_WORKER_APP_ID, CommonModule } from '@angular/common';
 import { Injectable, InjectionToken, PLATFORM_ID, Injector, PLATFORM_INITIALIZER, Testability, RendererFactoryV2, ɵAPP_ID_RANDOM_PROVIDER, ErrorHandler, NgZone, platformCore, createPlatformFactory, isDevMode, ɵstringify, RenderComponentType, EventEmitter, Version, APP_INITIALIZER, ApplicationModule, NgModule } from '@angular/core';
 import { EventManager, ɵDomSharedStylesHost, ɵSharedStylesHost, ɵDomRendererFactoryV2, HammerGestureConfig, HAMMER_GESTURE_CONFIG, ɵHammerGesturesPlugin, EVENT_MANAGER_PLUGINS, ɵKeyEventsPlugin, ɵDomEventsPlugin, DOCUMENT, ɵBROWSER_SANITIZATION_PROVIDERS, ɵBrowserGetTestability, ɵBrowserDomAdapter, ɵBrowserPlatformLocation, ɵsetRootDomAdapter, ɵDomAdapter } from '@angular/platform-browser';
 
@@ -1831,7 +1831,7 @@ function spawnWebWorker(uri, instance) {
 /**
  * @stable
  */
-var /** @type {?} */VERSION = new Version('4.0.0-rc.2-1cff125');
+var /** @type {?} */VERSION = new Version('4.0.0-rc.2-5df998d');
 
 var MessageBasedPlatformLocation = function () {
     /**
@@ -1968,6 +1968,9 @@ var WebWorkerPlatformLocation = function (_PlatformLocation) {
                 }
             }
         });
+        _this15.initialized = new Promise(function (res) {
+            return _this15.initializedResolve = res;
+        });
         return _this15;
     }
     /**
@@ -1984,6 +1987,7 @@ var WebWorkerPlatformLocation = function (_PlatformLocation) {
             var /** @type {?} */args = new UiArguments('getLocation');
             return this._broker.runOnService(args, LocationType).then(function (val) {
                 _this16._location = val;
+                _this16.initializedResolve();
                 return true;
             }, function (err) {
                 throw new Error(err);
@@ -2128,7 +2132,14 @@ var /** @type {?} */WORKER_APP_LOCATION_PROVIDERS = [{ provide: PlatformLocation
     useFactory: appInitFnFactory,
     multi: true,
     deps: [PlatformLocation, NgZone]
-}];
+}, { provide: LOCATION_INITIALIZED, useFactory: locationInitialized, deps: [PlatformLocation] }];
+/**
+ * @param {?} platformLocation
+ * @return {?}
+ */
+function locationInitialized(platformLocation) {
+    return platformLocation.initialized;
+}
 /**
  * @param {?} platformLocation
  * @param {?} zone
@@ -3963,4 +3974,4 @@ function bootstrapWorkerUi(workerScriptUri) {
     return Promise.resolve(platform);
 }
 
-export { VERSION, ClientMessageBroker, ClientMessageBrokerFactory, FnArg, UiArguments, MessageBus, PRIMITIVE, ServiceMessageBroker, ServiceMessageBrokerFactory, WORKER_UI_LOCATION_PROVIDERS, WORKER_APP_LOCATION_PROVIDERS, WorkerAppModule, platformWorkerApp, platformWorkerUi, bootstrapWorkerUi, ON_WEB_WORKER as ɵj, ClientMessageBrokerFactory_ as ɵa, RenderStore as ɵh, Serializer as ɵb, ServiceMessageBrokerFactory_ as ɵc, WebWorkerRendererFactoryV2 as ɵi, createMessageBus as ɵe, errorHandler as ɵd, setupWebWorker as ɵf, _WORKER_UI_PLATFORM_PROVIDERS as ɵg };
+export { VERSION, ClientMessageBroker, ClientMessageBrokerFactory, FnArg, UiArguments, MessageBus, PRIMITIVE, ServiceMessageBroker, ServiceMessageBrokerFactory, WORKER_UI_LOCATION_PROVIDERS, WORKER_APP_LOCATION_PROVIDERS, WorkerAppModule, platformWorkerApp, platformWorkerUi, bootstrapWorkerUi, ON_WEB_WORKER as ɵm, ClientMessageBrokerFactory_ as ɵa, RenderStore as ɵk, Serializer as ɵb, ServiceMessageBrokerFactory_ as ɵc, appInitFnFactory as ɵe, locationInitialized as ɵd, WebWorkerPlatformLocation as ɵj, WebWorkerRendererFactoryV2 as ɵl, createMessageBus as ɵg, errorHandler as ɵf, setupWebWorker as ɵh, _WORKER_UI_PLATFORM_PROVIDERS as ɵi };

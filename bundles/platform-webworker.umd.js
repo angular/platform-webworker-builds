@@ -17,7 +17,7 @@
     Object.defineProperty(exports, "__esModule", {
         value: true
     });
-    exports.ɵg = exports.ɵf = exports.ɵd = exports.ɵe = exports.ɵi = exports.ɵc = exports.ɵb = exports.ɵh = exports.ɵa = exports.ɵj = exports.bootstrapWorkerUi = exports.platformWorkerUi = exports.platformWorkerApp = exports.WorkerAppModule = exports.WORKER_APP_LOCATION_PROVIDERS = exports.WORKER_UI_LOCATION_PROVIDERS = exports.ServiceMessageBrokerFactory = exports.ServiceMessageBroker = exports.PRIMITIVE = exports.MessageBus = exports.UiArguments = exports.FnArg = exports.ClientMessageBrokerFactory = exports.ClientMessageBroker = exports.VERSION = undefined;
+    exports.ɵi = exports.ɵh = exports.ɵf = exports.ɵg = exports.ɵl = exports.ɵj = exports.ɵd = exports.ɵe = exports.ɵc = exports.ɵb = exports.ɵk = exports.ɵa = exports.ɵm = exports.bootstrapWorkerUi = exports.platformWorkerUi = exports.platformWorkerApp = exports.WorkerAppModule = exports.WORKER_APP_LOCATION_PROVIDERS = exports.WORKER_UI_LOCATION_PROVIDERS = exports.ServiceMessageBrokerFactory = exports.ServiceMessageBroker = exports.PRIMITIVE = exports.MessageBus = exports.UiArguments = exports.FnArg = exports.ClientMessageBrokerFactory = exports.ClientMessageBroker = exports.VERSION = undefined;
 
     function _toConsumableArray(arr) {
         if (Array.isArray(arr)) {
@@ -1525,7 +1525,7 @@
     /**
      * @stable
      */
-    var /** @type {?} */VERSION = new _core.Version('4.0.0-rc.2-1cff125');
+    var /** @type {?} */VERSION = new _core.Version('4.0.0-rc.2-5df998d');
 
     var MessageBasedPlatformLocation = function () {
         /**
@@ -1648,6 +1648,9 @@
                     }
                 }
             });
+            _this15.initialized = new Promise(function (res) {
+                return _this15.initializedResolve = res;
+            });
             return _this15;
         }
         /**
@@ -1664,6 +1667,7 @@
                 var /** @type {?} */args = new UiArguments('getLocation');
                 return this._broker.runOnService(args, LocationType).then(function (val) {
                     _this16._location = val;
+                    _this16.initializedResolve();
                     return true;
                 }, function (err) {
                     throw new Error(err);
@@ -1755,7 +1759,14 @@
         useFactory: appInitFnFactory,
         multi: true,
         deps: [_common.PlatformLocation, _core.NgZone]
-    }];
+    }, { provide: _common.LOCATION_INITIALIZED, useFactory: locationInitialized, deps: [_common.PlatformLocation] }];
+    /**
+     * @param {?} platformLocation
+     * @return {?}
+     */
+    function locationInitialized(platformLocation) {
+        return platformLocation.initialized;
+    }
     /**
      * @param {?} platformLocation
      * @param {?} zone
@@ -2786,14 +2797,17 @@
     exports.platformWorkerApp = platformWorkerApp;
     exports.platformWorkerUi = platformWorkerUi;
     exports.bootstrapWorkerUi = bootstrapWorkerUi;
-    exports.ɵj = ON_WEB_WORKER;
+    exports.ɵm = ON_WEB_WORKER;
     exports.ɵa = ClientMessageBrokerFactory_;
-    exports.ɵh = RenderStore;
+    exports.ɵk = RenderStore;
     exports.ɵb = Serializer;
     exports.ɵc = ServiceMessageBrokerFactory_;
-    exports.ɵi = WebWorkerRendererFactoryV2;
-    exports.ɵe = createMessageBus;
-    exports.ɵd = errorHandler;
-    exports.ɵf = setupWebWorker;
-    exports.ɵg = _WORKER_UI_PLATFORM_PROVIDERS;
+    exports.ɵe = appInitFnFactory;
+    exports.ɵd = locationInitialized;
+    exports.ɵj = WebWorkerPlatformLocation;
+    exports.ɵl = WebWorkerRendererFactoryV2;
+    exports.ɵg = createMessageBus;
+    exports.ɵf = errorHandler;
+    exports.ɵh = setupWebWorker;
+    exports.ɵi = _WORKER_UI_PLATFORM_PROVIDERS;
 });
