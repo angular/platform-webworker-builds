@@ -1,17 +1,17 @@
 (function (global, factory) {
     if (typeof define === "function" && define.amd) {
-        define('@angular/platform-webworker', ['exports', '@angular/common', '@angular/core', '@angular/platform-browser', 'rxjs/Subject', 'rxjs/Observable'], factory);
+        define('@angular/platform-webworker', ['exports', '@angular/common', '@angular/core', '@angular/platform-browser'], factory);
     } else if (typeof exports !== "undefined") {
-        factory(exports, require('@angular/common'), require('@angular/core'), require('@angular/platform-browser'), require('rxjs/Subject'), require('rxjs/Observable'));
+        factory(exports, require('@angular/common'), require('@angular/core'), require('@angular/platform-browser'));
     } else {
         var mod = {
             exports: {}
         };
-        factory(mod.exports, global.ng.common, global.ng.core, global.ng.platformBrowser, global.Rx, global.Rx);
+        factory(mod.exports, global.ng.common, global.ng.core, global.ng.platformBrowser);
         global.ng = global.ng || {};
         global.ng.platformWebworker = mod.exports;
     }
-})(this, function (exports, _common, _core, _platformBrowser, _Subject2) {
+})(this, function (exports, _common, _core, _platformBrowser) {
     'use strict';
 
     Object.defineProperty(exports, "__esModule", {
@@ -73,37 +73,6 @@
         return Array.isArray(arr) ? arr : Array.from(arr);
     }
 
-    var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
-        return typeof obj;
-    } : function (obj) {
-        return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-    };
-
-    var _get = function get(object, property, receiver) {
-        if (object === null) object = Function.prototype;
-        var desc = Object.getOwnPropertyDescriptor(object, property);
-
-        if (desc === undefined) {
-            var parent = Object.getPrototypeOf(object);
-
-            if (parent === null) {
-                return undefined;
-            } else {
-                return get(parent, property, receiver);
-            }
-        } else if ("value" in desc) {
-            return desc.value;
-        } else {
-            var getter = desc.get;
-
-            if (getter === undefined) {
-                return undefined;
-            }
-
-            return getter.call(receiver);
-        }
-    };
-
     function _possibleConstructorReturn(self, call) {
         if (!self) {
             throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
@@ -153,28 +122,6 @@
     }();
 
     var /** @type {?} */ON_WEB_WORKER = new _core.InjectionToken('WebWorker.onWebWorker');
-
-    /**
-     * @param {?} token
-     * @return {?}
-     */
-    function stringify(token) {
-        if (typeof token === 'string') {
-            return token;
-        }
-        if (token == null) {
-            return '' + token;
-        }
-        if (token.overriddenName) {
-            return '' + token.overriddenName;
-        }
-        if (token.name) {
-            return '' + token.name;
-        }
-        var /** @type {?} */res = token.toString();
-        var /** @type {?} */newLineIndex = res.indexOf('\n');
-        return newLineIndex === -1 ? res : res.substring(0, newLineIndex);
-    }
 
     /**
      * @license
@@ -347,7 +294,7 @@
                 if (type === LocationType) {
                     return this._serializeLocation(obj);
                 }
-                throw new Error('No serializer for type ' + stringify(type));
+                throw new Error('No serializer for type ' + (0, _core.ɵstringify)(type));
             }
         }, {
             key: 'deserialize',
@@ -377,7 +324,7 @@
                 if (type === LocationType) {
                     return this._deserializeLocation(map);
                 }
-                throw new Error('No deserializer for type ' + stringify(type));
+                throw new Error('No deserializer for type ' + (0, _core.ɵstringify)(type));
             }
         }, {
             key: '_serializeLocation',
@@ -556,9 +503,9 @@
         _createClass(ClientMessageBroker_, [{
             key: '_generateMessageId',
             value: function _generateMessageId(name) {
-                var /** @type {?} */time = stringify(new Date().getTime());
+                var /** @type {?} */time = (0, _core.ɵstringify)(new Date().getTime());
                 var /** @type {?} */iteration = 0;
-                var /** @type {?} */id = name + time + stringify(iteration);
+                var /** @type {?} */id = name + time + (0, _core.ɵstringify)(iteration);
                 while (this._pending.has(id)) {
                     id = '' + name + time + iteration;
                     iteration++;
@@ -658,105 +605,6 @@
         this.args = args;
     };
 
-    var EventEmitter = function (_Subject) {
-        _inherits(EventEmitter, _Subject);
-
-        /**
-         * Creates an instance of [EventEmitter], which depending on [isAsync],
-         * delivers events synchronously or asynchronously.
-         * @param {?=} isAsync
-         */
-        function EventEmitter() {
-            var isAsync = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-
-            _classCallCheck(this, EventEmitter);
-
-            var _this6 = _possibleConstructorReturn(this, (EventEmitter.__proto__ || Object.getPrototypeOf(EventEmitter)).call(this));
-
-            _this6.__isAsync = isAsync;
-            return _this6;
-        }
-        /**
-         * @param {?=} value
-         * @return {?}
-         */
-
-
-        _createClass(EventEmitter, [{
-            key: 'emit',
-            value: function emit(value) {
-                _get(EventEmitter.prototype.__proto__ || Object.getPrototypeOf(EventEmitter.prototype), 'next', this).call(this, value);
-            }
-        }, {
-            key: 'subscribe',
-            value: function subscribe(generatorOrNext, error, complete) {
-                var /** @type {?} */schedulerFn = void 0;
-                var /** @type {?} */errorFn = function errorFn(err) {
-                    return null;
-                };
-                var /** @type {?} */completeFn = function completeFn() {
-                    return null;
-                };
-                if (generatorOrNext && (typeof generatorOrNext === 'undefined' ? 'undefined' : _typeof(generatorOrNext)) === 'object') {
-                    schedulerFn = this.__isAsync ? function (value) {
-                        setTimeout(function () {
-                            return generatorOrNext.next(value);
-                        });
-                    } : function (value) {
-                        generatorOrNext.next(value);
-                    };
-                    if (generatorOrNext.error) {
-                        errorFn = this.__isAsync ? function (err) {
-                            setTimeout(function () {
-                                return generatorOrNext.error(err);
-                            });
-                        } : function (err) {
-                            generatorOrNext.error(err);
-                        };
-                    }
-                    if (generatorOrNext.complete) {
-                        completeFn = this.__isAsync ? function () {
-                            setTimeout(function () {
-                                return generatorOrNext.complete();
-                            });
-                        } : function () {
-                            generatorOrNext.complete();
-                        };
-                    }
-                } else {
-                    schedulerFn = this.__isAsync ? function (value) {
-                        setTimeout(function () {
-                            return generatorOrNext(value);
-                        });
-                    } : function (value) {
-                        generatorOrNext(value);
-                    };
-                    if (error) {
-                        errorFn = this.__isAsync ? function (err) {
-                            setTimeout(function () {
-                                return error(err);
-                            });
-                        } : function (err) {
-                            error(err);
-                        };
-                    }
-                    if (complete) {
-                        completeFn = this.__isAsync ? function () {
-                            setTimeout(function () {
-                                return complete();
-                            });
-                        } : function () {
-                            complete();
-                        };
-                    }
-                }
-                return _get(EventEmitter.prototype.__proto__ || Object.getPrototypeOf(EventEmitter.prototype), 'subscribe', this).call(this, schedulerFn, errorFn, completeFn);
-            }
-        }]);
-
-        return EventEmitter;
-    }(_Subject2.Subject);
-
     var PostMessageBusSink = function () {
         /**
          * @param {?} _postMessageTarget
@@ -777,34 +625,34 @@
         _createClass(PostMessageBusSink, [{
             key: 'attachToZone',
             value: function attachToZone(zone) {
-                var _this7 = this;
+                var _this6 = this;
 
                 this._zone = zone;
                 this._zone.runOutsideAngular(function () {
-                    _this7._zone.onStable.subscribe({ next: function next() {
-                            _this7._handleOnEventDone();
+                    _this6._zone.onStable.subscribe({ next: function next() {
+                            _this6._handleOnEventDone();
                         } });
                 });
             }
         }, {
             key: 'initChannel',
             value: function initChannel(channel) {
-                var _this8 = this;
+                var _this7 = this;
 
                 var runInZone = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
 
                 if (this._channels.hasOwnProperty(channel)) {
                     throw new Error(channel + ' has already been initialized');
                 }
-                var /** @type {?} */emitter = new EventEmitter(false);
+                var /** @type {?} */emitter = new _core.EventEmitter(false);
                 var /** @type {?} */channelInfo = new _Channel(emitter, runInZone);
                 this._channels[channel] = channelInfo;
                 emitter.subscribe(function (data) {
                     var /** @type {?} */message = { channel: channel, message: data };
                     if (runInZone) {
-                        _this8._messageBuffer.push(message);
+                        _this7._messageBuffer.push(message);
                     } else {
-                        _this8._sendMessages([message]);
+                        _this7._sendMessages([message]);
                     }
                 });
             }
@@ -840,20 +688,20 @@
          * @param {?=} eventTarget
          */
         function PostMessageBusSource(eventTarget) {
-            var _this9 = this;
+            var _this8 = this;
 
             _classCallCheck(this, PostMessageBusSource);
 
             this._channels = {};
             if (eventTarget) {
                 eventTarget.addEventListener('message', function (ev) {
-                    return _this9._handleMessages(ev);
+                    return _this8._handleMessages(ev);
                 });
             } else {
                 // if no eventTarget is given we assume we're in a WebWorker and listen on the global scope
                 var workerScope = self;
                 workerScope.addEventListener('message', function (ev) {
-                    return _this9._handleMessages(ev);
+                    return _this8._handleMessages(ev);
                 });
             }
         }
@@ -876,7 +724,7 @@
                 if (this._channels.hasOwnProperty(channel)) {
                     throw new Error(channel + ' has already been initialized');
                 }
-                var /** @type {?} */emitter = new EventEmitter(false);
+                var /** @type {?} */emitter = new _core.EventEmitter(false);
                 var /** @type {?} */channelInfo = new _Channel(emitter, runInZone);
                 this._channels[channel] = channelInfo;
             }
@@ -1008,11 +856,11 @@
         function ServiceMessageBrokerFactory_(_messageBus, _serializer) {
             _classCallCheck(this, ServiceMessageBrokerFactory_);
 
-            var _this10 = _possibleConstructorReturn(this, (ServiceMessageBrokerFactory_.__proto__ || Object.getPrototypeOf(ServiceMessageBrokerFactory_)).call(this));
+            var _this9 = _possibleConstructorReturn(this, (ServiceMessageBrokerFactory_.__proto__ || Object.getPrototypeOf(ServiceMessageBrokerFactory_)).call(this));
 
-            _this10._messageBus = _messageBus;
-            _this10._serializer = _serializer;
-            return _this10;
+            _this9._messageBus = _messageBus;
+            _this9._serializer = _serializer;
+            return _this9;
         }
         /**
          * @param {?} channel
@@ -1073,17 +921,17 @@
         function ServiceMessageBroker_(messageBus, _serializer, channel) {
             _classCallCheck(this, ServiceMessageBroker_);
 
-            var _this11 = _possibleConstructorReturn(this, (ServiceMessageBroker_.__proto__ || Object.getPrototypeOf(ServiceMessageBroker_)).call(this));
+            var _this10 = _possibleConstructorReturn(this, (ServiceMessageBroker_.__proto__ || Object.getPrototypeOf(ServiceMessageBroker_)).call(this));
 
-            _this11._serializer = _serializer;
-            _this11.channel = channel;
-            _this11._methods = new Map();
-            _this11._sink = messageBus.to(channel);
+            _this10._serializer = _serializer;
+            _this10.channel = channel;
+            _this10._methods = new Map();
+            _this10._sink = messageBus.to(channel);
             var source = messageBus.from(channel);
             source.subscribe({ next: function next(message) {
-                    return _this11._handleMessage(message);
+                    return _this10._handleMessage(message);
                 } });
-            return _this11;
+            return _this10;
         }
         /**
          * @param {?} methodName
@@ -1097,7 +945,7 @@
         _createClass(ServiceMessageBroker_, [{
             key: 'registerMethod',
             value: function registerMethod(methodName, signature, method, returnType) {
-                var _this12 = this;
+                var _this11 = this;
 
                 this._methods.set(methodName, function (message) {
                     var /** @type {?} */serializedArgs = message.args;
@@ -1105,11 +953,11 @@
                     var /** @type {?} */deserializedArgs = new Array(numArgs);
                     for (var /** @type {?} */i = 0; i < numArgs; i++) {
                         var /** @type {?} */serializedArg = serializedArgs[i];
-                        deserializedArgs[i] = _this12._serializer.deserialize(serializedArg, signature[i]);
+                        deserializedArgs[i] = _this11._serializer.deserialize(serializedArg, signature[i]);
                     }
                     var /** @type {?} */promise = method.apply(undefined, deserializedArgs);
                     if (returnType && promise) {
-                        _this12._wrapWebWorkerPromise(message.id, promise, returnType);
+                        _this11._wrapWebWorkerPromise(message.id, promise, returnType);
                     }
                 });
             }
@@ -1123,12 +971,12 @@
         }, {
             key: '_wrapWebWorkerPromise',
             value: function _wrapWebWorkerPromise(id, promise, type) {
-                var _this13 = this;
+                var _this12 = this;
 
                 promise.then(function (result) {
-                    _this13._sink.emit({
+                    _this12._sink.emit({
                         'type': 'result',
-                        'value': _this13._serializer.serialize(result, type),
+                        'value': _this12._serializer.serialize(result, type),
                         'id': id
                     });
                 });
@@ -1392,7 +1240,7 @@
         _createClass(MessageBasedRendererV2, [{
             key: 'start',
             value: function start() {
-                var _this14 = this;
+                var _this13 = this;
 
                 var /** @type {?} */broker = this._brokerFactory.createMessageBroker(RENDERER_V2_CHANNEL);
                 this._bus.initChannel(EVENT_V2_CHANNEL);
@@ -1411,7 +1259,7 @@
                         method = _ref2[1],
                         argTypes = _ref2.slice(2);
 
-                    broker.registerMethod(name, argTypes, method.bind(_this14));
+                    broker.registerMethod(name, argTypes, method.bind(_this13));
                 });
             }
         }, {
@@ -1520,10 +1368,10 @@
         }, {
             key: 'listen',
             value: function listen(r, el, elName, eventName, unlistenId) {
-                var _this15 = this;
+                var _this14 = this;
 
                 var /** @type {?} */listener = function listener(event) {
-                    return _this15._eventDispatcher.dispatchRenderEvent(el, elName, eventName, event);
+                    return _this14._eventDispatcher.dispatchRenderEvent(el, elName, eventName, event);
                 };
                 var /** @type {?} */unlisten = r.listen(el || elName, eventName, listener);
                 this._renderStore.store(unlisten, unlistenId);
@@ -1677,7 +1525,7 @@
     /**
      * @stable
      */
-    var /** @type {?} */VERSION = new _core.Version('4.0.0-rc.2-207298c');
+    var /** @type {?} */VERSION = new _core.Version('4.0.0-rc.2-b7e76cc');
 
     var MessageBasedPlatformLocation = function () {
         /**
@@ -1772,27 +1620,27 @@
         function WebWorkerPlatformLocation(brokerFactory, bus, _serializer) {
             _classCallCheck(this, WebWorkerPlatformLocation);
 
-            var _this16 = _possibleConstructorReturn(this, (WebWorkerPlatformLocation.__proto__ || Object.getPrototypeOf(WebWorkerPlatformLocation)).call(this));
+            var _this15 = _possibleConstructorReturn(this, (WebWorkerPlatformLocation.__proto__ || Object.getPrototypeOf(WebWorkerPlatformLocation)).call(this));
 
-            _this16._serializer = _serializer;
-            _this16._popStateListeners = [];
-            _this16._hashChangeListeners = [];
-            _this16._location = null;
-            _this16._broker = brokerFactory.createMessageBroker(ROUTER_CHANNEL);
-            _this16._channelSource = bus.from(ROUTER_CHANNEL);
-            _this16._channelSource.subscribe({
+            _this15._serializer = _serializer;
+            _this15._popStateListeners = [];
+            _this15._hashChangeListeners = [];
+            _this15._location = null;
+            _this15._broker = brokerFactory.createMessageBroker(ROUTER_CHANNEL);
+            _this15._channelSource = bus.from(ROUTER_CHANNEL);
+            _this15._channelSource.subscribe({
                 next: function next(msg) {
                     var listeners = null;
                     if (msg.hasOwnProperty('event')) {
                         var type = msg['event']['type'];
                         if (type === 'popstate') {
-                            listeners = _this16._popStateListeners;
+                            listeners = _this15._popStateListeners;
                         } else if (type === 'hashchange') {
-                            listeners = _this16._hashChangeListeners;
+                            listeners = _this15._hashChangeListeners;
                         }
                         if (listeners) {
                             // There was a popState or hashChange event, so the location object thas been updated
-                            _this16._location = _this16._serializer.deserialize(msg['location'], LocationType);
+                            _this15._location = _this15._serializer.deserialize(msg['location'], LocationType);
                             listeners.forEach(function (fn) {
                                 return fn(msg['event']);
                             });
@@ -1800,7 +1648,7 @@
                     }
                 }
             });
-            return _this16;
+            return _this15;
         }
         /**
          * \@internal *
@@ -1811,11 +1659,11 @@
         _createClass(WebWorkerPlatformLocation, [{
             key: 'init',
             value: function init() {
-                var _this17 = this;
+                var _this16 = this;
 
                 var /** @type {?} */args = new UiArguments('getLocation');
                 return this._broker.runOnService(args, LocationType).then(function (val) {
-                    _this17._location = val;
+                    _this16._location = val;
                     return true;
                 }, function (err) {
                     throw new Error(err);
@@ -1983,7 +1831,7 @@
          * @param {?} renderStore
          */
         function WebWorkerRendererFactoryV2(messageBrokerFactory, bus, _serializer, renderStore) {
-            var _this18 = this;
+            var _this17 = this;
 
             _classCallCheck(this, WebWorkerRendererFactoryV2);
 
@@ -1994,7 +1842,7 @@
             bus.initChannel(EVENT_V2_CHANNEL);
             var source = bus.from(EVENT_V2_CHANNEL);
             source.subscribe({ next: function next(message) {
-                    return _this18._dispatchEvent(message);
+                    return _this17._dispatchEvent(message);
                 } });
         }
         /**
@@ -2191,7 +2039,7 @@
         }, {
             key: 'listen',
             value: function listen(target, eventName, listener) {
-                var _this19 = this;
+                var _this18 = this;
 
                 var /** @type {?} */unlistenId = this._rendererFactory.allocateId();
 
@@ -2209,11 +2057,11 @@
                 this.callUIWithRenderer('listen', [new FnArg(targetEl, 2 /* RENDER_STORE_OBJECT */), new FnArg(targetName), new FnArg(eventName), new FnArg(unlistenId)]);
                 return function () {
                     if (fullName) {
-                        _this19._rendererFactory.globalEvents.unlisten(fullName, listener);
+                        _this18._rendererFactory.globalEvents.unlisten(fullName, listener);
                     } else {
                         targetEl.events.unlisten(eventName, listener);
                     }
-                    _this19.callUIWithRenderer('unlisten', [new FnArg(unlistenId)]);
+                    _this18.callUIWithRenderer('unlisten', [new FnArg(unlistenId)]);
                 };
             }
         }, {
@@ -2858,7 +2706,7 @@
     // TODO(jteplitz602) remove this and compile with lib.webworker.d.ts (#3492)
     var /** @type {?} */_postMessage = {
         postMessage: function (_postMessage2) {
-            function postMessage(_x11, _x12) {
+            function postMessage(_x10, _x11) {
                 return _postMessage2.apply(this, arguments);
             }
 

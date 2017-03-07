@@ -5,8 +5,7 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import { NgZone } from '@angular/core';
-import { EventEmitter } from '../../facade/async';
+import { EventEmitter, NgZone } from '@angular/core';
 import { MessageBus, MessageBusSink, MessageBusSource } from './message_bus';
 export interface PostMessageTarget {
     postMessage: (message: any, transfer?: [ArrayBuffer]) => void;

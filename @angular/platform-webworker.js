@@ -1,37 +1,13 @@
 /**
- * @license Angular v4.0.0-rc.2-207298c
+ * @license Angular v4.0.0-rc.2-b7e76cc
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
 import { ɵPLATFORM_WORKER_UI_ID, PlatformLocation, ɵPLATFORM_WORKER_APP_ID, CommonModule } from '@angular/common';
-import { Injectable, InjectionToken, PLATFORM_ID, Injector, PLATFORM_INITIALIZER, Testability, RendererFactoryV2, ɵAPP_ID_RANDOM_PROVIDER, ErrorHandler, NgZone, platformCore, createPlatformFactory, isDevMode, RenderComponentType, Version, APP_INITIALIZER, ApplicationModule, NgModule } from '@angular/core';
+import { Injectable, InjectionToken, PLATFORM_ID, Injector, PLATFORM_INITIALIZER, Testability, RendererFactoryV2, ɵAPP_ID_RANDOM_PROVIDER, ErrorHandler, NgZone, platformCore, createPlatformFactory, isDevMode, ɵstringify, RenderComponentType, EventEmitter, Version, APP_INITIALIZER, ApplicationModule, NgModule } from '@angular/core';
 import { EventManager, ɵDomSharedStylesHost, ɵSharedStylesHost, ɵDomRendererFactoryV2, HammerGestureConfig, HAMMER_GESTURE_CONFIG, ɵHammerGesturesPlugin, EVENT_MANAGER_PLUGINS, ɵKeyEventsPlugin, ɵDomEventsPlugin, DOCUMENT, ɵBROWSER_SANITIZATION_PROVIDERS, ɵBrowserGetTestability, ɵBrowserDomAdapter, ɵBrowserPlatformLocation, ɵsetRootDomAdapter, ɵDomAdapter } from '@angular/platform-browser';
-import { Subject } from 'rxjs/Subject';
-import 'rxjs/Observable';
 
 const /** @type {?} */ ON_WEB_WORKER = new InjectionToken('WebWorker.onWebWorker');
-
-/**
- * @param {?} token
- * @return {?}
- */
-function stringify(token) {
-    if (typeof token === 'string') {
-        return token;
-    }
-    if (token == null) {
-        return '' + token;
-    }
-    if (token.overriddenName) {
-        return `${token.overriddenName}`;
-    }
-    if (token.name) {
-        return `${token.name}`;
-    }
-    const /** @type {?} */ res = token.toString();
-    const /** @type {?} */ newLineIndex = res.indexOf('\n');
-    return newLineIndex === -1 ? res : res.substring(0, newLineIndex);
-}
 
 /**
  * @license
@@ -203,7 +179,7 @@ class Serializer {
         if (type === LocationType) {
             return this._serializeLocation(obj);
         }
-        throw new Error(`No serializer for type ${stringify(type)}`);
+        throw new Error(`No serializer for type ${ɵstringify(type)}`);
     }
     /**
      * @param {?} map
@@ -230,7 +206,7 @@ class Serializer {
         if (type === LocationType) {
             return this._deserializeLocation(map);
         }
-        throw new Error(`No deserializer for type ${stringify(type)}`);
+        throw new Error(`No deserializer for type ${ɵstringify(type)}`);
     }
     /**
      * @param {?} loc
@@ -385,9 +361,9 @@ class ClientMessageBroker_ extends ClientMessageBroker {
      * @return {?}
      */
     _generateMessageId(name) {
-        const /** @type {?} */ time = stringify(new Date().getTime());
+        const /** @type {?} */ time = ɵstringify(new Date().getTime());
         let /** @type {?} */ iteration = 0;
-        let /** @type {?} */ id = name + time + stringify(iteration);
+        let /** @type {?} */ id = name + time + ɵstringify(iteration);
         while (this._pending.has(id)) {
             id = `${name}${time}${iteration}`;
             iteration++;
@@ -483,107 +459,6 @@ class UiArguments {
     constructor(method, args) {
         this.method = method;
         this.args = args;
-    }
-}
-
-/**
- * Use by directives and components to emit custom Events.
- *
- * ### Examples
- *
- * In the following example, `Zippy` alternatively emits `open` and `close` events when its
- * title gets clicked:
- *
- * ```
- * \@Component({
- *   selector: 'zippy',
- *   template: `
- *   <div class="zippy">
- *     <div (click)="toggle()">Toggle</div>
- *     <div [hidden]="!visible">
- *       <ng-content></ng-content>
- *     </div>
- *  </div>`})
- * export class Zippy {
- *   visible: boolean = true;
- *   \@Output() open: EventEmitter<any> = new EventEmitter();
- *   \@Output() close: EventEmitter<any> = new EventEmitter();
- *
- *   toggle() {
- *     this.visible = !this.visible;
- *     if (this.visible) {
- *       this.open.emit(null);
- *     } else {
- *       this.close.emit(null);
- *     }
- *   }
- * }
- * ```
- *
- * The events payload can be accessed by the parameter `$event` on the components output event
- * handler:
- *
- * ```
- * <zippy (open)="onOpen($event)" (close)="onClose($event)"></zippy>
- * ```
- *
- * Uses Rx.Observable but provides an adapter to make it work as specified here:
- * https://github.com/jhusain/observable-spec
- *
- * Once a reference implementation of the spec is available, switch to it.
- * \@stable
- */
-class EventEmitter extends Subject {
-    /**
-     * Creates an instance of [EventEmitter], which depending on [isAsync],
-     * delivers events synchronously or asynchronously.
-     * @param {?=} isAsync
-     */
-    constructor(isAsync = false) {
-        super();
-        this.__isAsync = isAsync;
-    }
-    /**
-     * @param {?=} value
-     * @return {?}
-     */
-    emit(value) { super.next(value); }
-    /**
-     * @param {?=} generatorOrNext
-     * @param {?=} error
-     * @param {?=} complete
-     * @return {?}
-     */
-    subscribe(generatorOrNext, error, complete) {
-        let /** @type {?} */ schedulerFn;
-        let /** @type {?} */ errorFn = (err) => null;
-        let /** @type {?} */ completeFn = () => null;
-        if (generatorOrNext && typeof generatorOrNext === 'object') {
-            schedulerFn = this.__isAsync ? (value) => {
-                setTimeout(() => generatorOrNext.next(value));
-            } : (value) => { generatorOrNext.next(value); };
-            if (generatorOrNext.error) {
-                errorFn = this.__isAsync ? (err) => { setTimeout(() => generatorOrNext.error(err)); } :
-                    (err) => { generatorOrNext.error(err); };
-            }
-            if (generatorOrNext.complete) {
-                completeFn = this.__isAsync ? () => { setTimeout(() => generatorOrNext.complete()); } :
-                    () => { generatorOrNext.complete(); };
-            }
-        }
-        else {
-            schedulerFn = this.__isAsync ? (value) => { setTimeout(() => generatorOrNext(value)); } :
-                (value) => { generatorOrNext(value); };
-            if (error) {
-                errorFn =
-                    this.__isAsync ? (err) => { setTimeout(() => error(err)); } : (err) => { error(err); };
-            }
-            if (complete) {
-                completeFn =
-                    this.__isAsync ? () => { setTimeout(() => complete()); } : () => { complete(); };
-            }
-        }
-        return super.subscribe(schedulerFn, errorFn, completeFn);
     }
 }
 
@@ -1557,7 +1432,7 @@ function spawnWebWorker(uri, instance) {
 /**
  * @stable
  */
-const /** @type {?} */ VERSION = new Version('4.0.0-rc.2-207298c');
+const /** @type {?} */ VERSION = new Version('4.0.0-rc.2-b7e76cc');
 
 class MessageBasedPlatformLocation {
     /**

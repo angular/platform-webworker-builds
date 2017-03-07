@@ -1,9 +1,5 @@
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
@@ -17,39 +13,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /**
- * @license Angular v4.0.0-rc.2-207298c
+ * @license Angular v4.0.0-rc.2-b7e76cc
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
 import { ɵPLATFORM_WORKER_UI_ID, PlatformLocation, ɵPLATFORM_WORKER_APP_ID, CommonModule } from '@angular/common';
-import { Injectable, InjectionToken, PLATFORM_ID, Injector, PLATFORM_INITIALIZER, Testability, RendererFactoryV2, ɵAPP_ID_RANDOM_PROVIDER, ErrorHandler, NgZone, platformCore, createPlatformFactory, isDevMode, RenderComponentType, Version, APP_INITIALIZER, ApplicationModule, NgModule } from '@angular/core';
+import { Injectable, InjectionToken, PLATFORM_ID, Injector, PLATFORM_INITIALIZER, Testability, RendererFactoryV2, ɵAPP_ID_RANDOM_PROVIDER, ErrorHandler, NgZone, platformCore, createPlatformFactory, isDevMode, ɵstringify, RenderComponentType, EventEmitter, Version, APP_INITIALIZER, ApplicationModule, NgModule } from '@angular/core';
 import { EventManager, ɵDomSharedStylesHost, ɵSharedStylesHost, ɵDomRendererFactoryV2, HammerGestureConfig, HAMMER_GESTURE_CONFIG, ɵHammerGesturesPlugin, EVENT_MANAGER_PLUGINS, ɵKeyEventsPlugin, ɵDomEventsPlugin, DOCUMENT, ɵBROWSER_SANITIZATION_PROVIDERS, ɵBrowserGetTestability, ɵBrowserDomAdapter, ɵBrowserPlatformLocation, ɵsetRootDomAdapter, ɵDomAdapter } from '@angular/platform-browser';
-import { Subject } from 'rxjs/Subject';
-import 'rxjs/Observable';
 
 var /** @type {?} */ON_WEB_WORKER = new InjectionToken('WebWorker.onWebWorker');
-
-/**
- * @param {?} token
- * @return {?}
- */
-function stringify(token) {
-    if (typeof token === 'string') {
-        return token;
-    }
-    if (token == null) {
-        return '' + token;
-    }
-    if (token.overriddenName) {
-        return '' + token.overriddenName;
-    }
-    if (token.name) {
-        return '' + token.name;
-    }
-    var /** @type {?} */res = token.toString();
-    var /** @type {?} */newLineIndex = res.indexOf('\n');
-    return newLineIndex === -1 ? res : res.substring(0, newLineIndex);
-}
 
 /**
  * @license
@@ -281,7 +253,7 @@ var Serializer = function () {
             if (type === LocationType) {
                 return this._serializeLocation(obj);
             }
-            throw new Error('No serializer for type ' + stringify(type));
+            throw new Error('No serializer for type ' + ɵstringify(type));
         }
         /**
          * @param {?} map
@@ -318,7 +290,7 @@ var Serializer = function () {
             if (type === LocationType) {
                 return this._deserializeLocation(map);
             }
-            throw new Error('No deserializer for type ' + stringify(type));
+            throw new Error('No deserializer for type ' + ɵstringify(type));
         }
         /**
          * @param {?} loc
@@ -542,9 +514,9 @@ var ClientMessageBroker_ = function (_ClientMessageBroker) {
     _createClass(ClientMessageBroker_, [{
         key: '_generateMessageId',
         value: function _generateMessageId(name) {
-            var /** @type {?} */time = stringify(new Date().getTime());
+            var /** @type {?} */time = ɵstringify(new Date().getTime());
             var /** @type {?} */iteration = 0;
-            var /** @type {?} */id = name + time + stringify(iteration);
+            var /** @type {?} */id = name + time + ɵstringify(iteration);
             while (this._pending.has(id)) {
                 id = '' + name + time + iteration;
                 iteration++;
@@ -663,161 +635,6 @@ function UiArguments(method, args) {
     this.args = args;
 };
 
-/**
- * Use by directives and components to emit custom Events.
- *
- * ### Examples
- *
- * In the following example, `Zippy` alternatively emits `open` and `close` events when its
- * title gets clicked:
- *
- * ```
- * \@Component({
- *   selector: 'zippy',
- *   template: `
- *   <div class="zippy">
- *     <div (click)="toggle()">Toggle</div>
- *     <div [hidden]="!visible">
- *       <ng-content></ng-content>
- *     </div>
- *  </div>`})
- * export class Zippy {
- *   visible: boolean = true;
- *   \@Output() open: EventEmitter<any> = new EventEmitter();
- *   \@Output() close: EventEmitter<any> = new EventEmitter();
- *
- *   toggle() {
- *     this.visible = !this.visible;
- *     if (this.visible) {
- *       this.open.emit(null);
- *     } else {
- *       this.close.emit(null);
- *     }
- *   }
- * }
- * ```
- *
- * The events payload can be accessed by the parameter `$event` on the components output event
- * handler:
- *
- * ```
- * <zippy (open)="onOpen($event)" (close)="onClose($event)"></zippy>
- * ```
- *
- * Uses Rx.Observable but provides an adapter to make it work as specified here:
- * https://github.com/jhusain/observable-spec
- *
- * Once a reference implementation of the spec is available, switch to it.
- * \@stable
- */
-
-
-var EventEmitter = function (_Subject) {
-    _inherits(EventEmitter, _Subject);
-
-    /**
-     * Creates an instance of [EventEmitter], which depending on [isAsync],
-     * delivers events synchronously or asynchronously.
-     * @param {?=} isAsync
-     */
-    function EventEmitter() {
-        var isAsync = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-
-        _classCallCheck(this, EventEmitter);
-
-        var _this6 = _possibleConstructorReturn(this, (EventEmitter.__proto__ || Object.getPrototypeOf(EventEmitter)).call(this));
-
-        _this6.__isAsync = isAsync;
-        return _this6;
-    }
-    /**
-     * @param {?=} value
-     * @return {?}
-     */
-
-
-    _createClass(EventEmitter, [{
-        key: 'emit',
-        value: function emit(value) {
-            _get(EventEmitter.prototype.__proto__ || Object.getPrototypeOf(EventEmitter.prototype), 'next', this).call(this, value);
-        }
-        /**
-         * @param {?=} generatorOrNext
-         * @param {?=} error
-         * @param {?=} complete
-         * @return {?}
-         */
-
-    }, {
-        key: 'subscribe',
-        value: function subscribe(generatorOrNext, error, complete) {
-            var /** @type {?} */schedulerFn = void 0;
-            var /** @type {?} */errorFn = function errorFn(err) {
-                return null;
-            };
-            var /** @type {?} */completeFn = function completeFn() {
-                return null;
-            };
-            if (generatorOrNext && (typeof generatorOrNext === 'undefined' ? 'undefined' : _typeof(generatorOrNext)) === 'object') {
-                schedulerFn = this.__isAsync ? function (value) {
-                    setTimeout(function () {
-                        return generatorOrNext.next(value);
-                    });
-                } : function (value) {
-                    generatorOrNext.next(value);
-                };
-                if (generatorOrNext.error) {
-                    errorFn = this.__isAsync ? function (err) {
-                        setTimeout(function () {
-                            return generatorOrNext.error(err);
-                        });
-                    } : function (err) {
-                        generatorOrNext.error(err);
-                    };
-                }
-                if (generatorOrNext.complete) {
-                    completeFn = this.__isAsync ? function () {
-                        setTimeout(function () {
-                            return generatorOrNext.complete();
-                        });
-                    } : function () {
-                        generatorOrNext.complete();
-                    };
-                }
-            } else {
-                schedulerFn = this.__isAsync ? function (value) {
-                    setTimeout(function () {
-                        return generatorOrNext(value);
-                    });
-                } : function (value) {
-                    generatorOrNext(value);
-                };
-                if (error) {
-                    errorFn = this.__isAsync ? function (err) {
-                        setTimeout(function () {
-                            return error(err);
-                        });
-                    } : function (err) {
-                        error(err);
-                    };
-                }
-                if (complete) {
-                    completeFn = this.__isAsync ? function () {
-                        setTimeout(function () {
-                            return complete();
-                        });
-                    } : function () {
-                        complete();
-                    };
-                }
-            }
-            return _get(EventEmitter.prototype.__proto__ || Object.getPrototypeOf(EventEmitter.prototype), 'subscribe', this).call(this, schedulerFn, errorFn, completeFn);
-        }
-    }]);
-
-    return EventEmitter;
-}(Subject);
-
 var PostMessageBusSink = function () {
     /**
      * @param {?} _postMessageTarget
@@ -838,12 +655,12 @@ var PostMessageBusSink = function () {
     _createClass(PostMessageBusSink, [{
         key: 'attachToZone',
         value: function attachToZone(zone) {
-            var _this7 = this;
+            var _this6 = this;
 
             this._zone = zone;
             this._zone.runOutsideAngular(function () {
-                _this7._zone.onStable.subscribe({ next: function next() {
-                        _this7._handleOnEventDone();
+                _this6._zone.onStable.subscribe({ next: function next() {
+                        _this6._handleOnEventDone();
                     } });
             });
         }
@@ -856,7 +673,7 @@ var PostMessageBusSink = function () {
     }, {
         key: 'initChannel',
         value: function initChannel(channel) {
-            var _this8 = this;
+            var _this7 = this;
 
             var runInZone = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
 
@@ -869,9 +686,9 @@ var PostMessageBusSink = function () {
             emitter.subscribe(function (data) {
                 var /** @type {?} */message = { channel: channel, message: data };
                 if (runInZone) {
-                    _this8._messageBuffer.push(message);
+                    _this7._messageBuffer.push(message);
                 } else {
-                    _this8._sendMessages([message]);
+                    _this7._sendMessages([message]);
                 }
             });
         }
@@ -921,20 +738,20 @@ var PostMessageBusSource = function () {
      * @param {?=} eventTarget
      */
     function PostMessageBusSource(eventTarget) {
-        var _this9 = this;
+        var _this8 = this;
 
         _classCallCheck(this, PostMessageBusSource);
 
         this._channels = {};
         if (eventTarget) {
             eventTarget.addEventListener('message', function (ev) {
-                return _this9._handleMessages(ev);
+                return _this8._handleMessages(ev);
             });
         } else {
             // if no eventTarget is given we assume we're in a WebWorker and listen on the global scope
             var workerScope = self;
             workerScope.addEventListener('message', function (ev) {
-                return _this9._handleMessages(ev);
+                return _this8._handleMessages(ev);
             });
         }
     }
@@ -1145,11 +962,11 @@ var ServiceMessageBrokerFactory_ = function (_ServiceMessageBroker) {
     function ServiceMessageBrokerFactory_(_messageBus, _serializer) {
         _classCallCheck(this, ServiceMessageBrokerFactory_);
 
-        var _this10 = _possibleConstructorReturn(this, (ServiceMessageBrokerFactory_.__proto__ || Object.getPrototypeOf(ServiceMessageBrokerFactory_)).call(this));
+        var _this9 = _possibleConstructorReturn(this, (ServiceMessageBrokerFactory_.__proto__ || Object.getPrototypeOf(ServiceMessageBrokerFactory_)).call(this));
 
-        _this10._messageBus = _messageBus;
-        _this10._serializer = _serializer;
-        return _this10;
+        _this9._messageBus = _messageBus;
+        _this9._serializer = _serializer;
+        return _this9;
     }
     /**
      * @param {?} channel
@@ -1219,17 +1036,17 @@ var ServiceMessageBroker_ = function (_ServiceMessageBroker2) {
     function ServiceMessageBroker_(messageBus, _serializer, channel) {
         _classCallCheck(this, ServiceMessageBroker_);
 
-        var _this11 = _possibleConstructorReturn(this, (ServiceMessageBroker_.__proto__ || Object.getPrototypeOf(ServiceMessageBroker_)).call(this));
+        var _this10 = _possibleConstructorReturn(this, (ServiceMessageBroker_.__proto__ || Object.getPrototypeOf(ServiceMessageBroker_)).call(this));
 
-        _this11._serializer = _serializer;
-        _this11.channel = channel;
-        _this11._methods = new Map();
-        _this11._sink = messageBus.to(channel);
+        _this10._serializer = _serializer;
+        _this10.channel = channel;
+        _this10._methods = new Map();
+        _this10._sink = messageBus.to(channel);
         var source = messageBus.from(channel);
         source.subscribe({ next: function next(message) {
-                return _this11._handleMessage(message);
+                return _this10._handleMessage(message);
             } });
-        return _this11;
+        return _this10;
     }
     /**
      * @param {?} methodName
@@ -1243,7 +1060,7 @@ var ServiceMessageBroker_ = function (_ServiceMessageBroker2) {
     _createClass(ServiceMessageBroker_, [{
         key: 'registerMethod',
         value: function registerMethod(methodName, signature, method, returnType) {
-            var _this12 = this;
+            var _this11 = this;
 
             this._methods.set(methodName, function (message) {
                 var /** @type {?} */serializedArgs = message.args;
@@ -1251,11 +1068,11 @@ var ServiceMessageBroker_ = function (_ServiceMessageBroker2) {
                 var /** @type {?} */deserializedArgs = new Array(numArgs);
                 for (var /** @type {?} */i = 0; i < numArgs; i++) {
                     var /** @type {?} */serializedArg = serializedArgs[i];
-                    deserializedArgs[i] = _this12._serializer.deserialize(serializedArg, signature[i]);
+                    deserializedArgs[i] = _this11._serializer.deserialize(serializedArg, signature[i]);
                 }
                 var /** @type {?} */promise = method.apply(undefined, deserializedArgs);
                 if (returnType && promise) {
-                    _this12._wrapWebWorkerPromise(message.id, promise, returnType);
+                    _this11._wrapWebWorkerPromise(message.id, promise, returnType);
                 }
             });
         }
@@ -1281,12 +1098,12 @@ var ServiceMessageBroker_ = function (_ServiceMessageBroker2) {
     }, {
         key: '_wrapWebWorkerPromise',
         value: function _wrapWebWorkerPromise(id, promise, type) {
-            var _this13 = this;
+            var _this12 = this;
 
             promise.then(function (result) {
-                _this13._sink.emit({
+                _this12._sink.emit({
                     'type': 'result',
-                    'value': _this13._serializer.serialize(result, type),
+                    'value': _this12._serializer.serialize(result, type),
                     'id': id
                 });
             });
@@ -1560,7 +1377,7 @@ var MessageBasedRendererV2 = function () {
     _createClass(MessageBasedRendererV2, [{
         key: 'start',
         value: function start() {
-            var _this14 = this;
+            var _this13 = this;
 
             var /** @type {?} */broker = this._brokerFactory.createMessageBroker(RENDERER_V2_CHANNEL);
             this._bus.initChannel(EVENT_V2_CHANNEL);
@@ -1579,7 +1396,7 @@ var MessageBasedRendererV2 = function () {
                     method = _ref2[1],
                     argTypes = _ref2.slice(2);
 
-                broker.registerMethod(name, argTypes, method.bind(_this14));
+                broker.registerMethod(name, argTypes, method.bind(_this13));
             });
         }
         /**
@@ -1844,10 +1661,10 @@ var MessageBasedRendererV2 = function () {
     }, {
         key: 'listen',
         value: function listen(r, el, elName, eventName, unlistenId) {
-            var _this15 = this;
+            var _this14 = this;
 
             var /** @type {?} */listener = function listener(event) {
-                return _this15._eventDispatcher.dispatchRenderEvent(el, elName, eventName, event);
+                return _this14._eventDispatcher.dispatchRenderEvent(el, elName, eventName, event);
             };
             var /** @type {?} */unlisten = r.listen(el || elName, eventName, listener);
             this._renderStore.store(unlisten, unlistenId);
@@ -2014,7 +1831,7 @@ function spawnWebWorker(uri, instance) {
 /**
  * @stable
  */
-var /** @type {?} */VERSION = new Version('4.0.0-rc.2-207298c');
+var /** @type {?} */VERSION = new Version('4.0.0-rc.2-b7e76cc');
 
 var MessageBasedPlatformLocation = function () {
     /**
@@ -2123,27 +1940,27 @@ var WebWorkerPlatformLocation = function (_PlatformLocation) {
     function WebWorkerPlatformLocation(brokerFactory, bus, _serializer) {
         _classCallCheck(this, WebWorkerPlatformLocation);
 
-        var _this16 = _possibleConstructorReturn(this, (WebWorkerPlatformLocation.__proto__ || Object.getPrototypeOf(WebWorkerPlatformLocation)).call(this));
+        var _this15 = _possibleConstructorReturn(this, (WebWorkerPlatformLocation.__proto__ || Object.getPrototypeOf(WebWorkerPlatformLocation)).call(this));
 
-        _this16._serializer = _serializer;
-        _this16._popStateListeners = [];
-        _this16._hashChangeListeners = [];
-        _this16._location = null;
-        _this16._broker = brokerFactory.createMessageBroker(ROUTER_CHANNEL);
-        _this16._channelSource = bus.from(ROUTER_CHANNEL);
-        _this16._channelSource.subscribe({
+        _this15._serializer = _serializer;
+        _this15._popStateListeners = [];
+        _this15._hashChangeListeners = [];
+        _this15._location = null;
+        _this15._broker = brokerFactory.createMessageBroker(ROUTER_CHANNEL);
+        _this15._channelSource = bus.from(ROUTER_CHANNEL);
+        _this15._channelSource.subscribe({
             next: function next(msg) {
                 var listeners = null;
                 if (msg.hasOwnProperty('event')) {
                     var type = msg['event']['type'];
                     if (type === 'popstate') {
-                        listeners = _this16._popStateListeners;
+                        listeners = _this15._popStateListeners;
                     } else if (type === 'hashchange') {
-                        listeners = _this16._hashChangeListeners;
+                        listeners = _this15._hashChangeListeners;
                     }
                     if (listeners) {
                         // There was a popState or hashChange event, so the location object thas been updated
-                        _this16._location = _this16._serializer.deserialize(msg['location'], LocationType);
+                        _this15._location = _this15._serializer.deserialize(msg['location'], LocationType);
                         listeners.forEach(function (fn) {
                             return fn(msg['event']);
                         });
@@ -2151,7 +1968,7 @@ var WebWorkerPlatformLocation = function (_PlatformLocation) {
                 }
             }
         });
-        return _this16;
+        return _this15;
     }
     /**
      * \@internal *
@@ -2162,11 +1979,11 @@ var WebWorkerPlatformLocation = function (_PlatformLocation) {
     _createClass(WebWorkerPlatformLocation, [{
         key: 'init',
         value: function init() {
-            var _this17 = this;
+            var _this16 = this;
 
             var /** @type {?} */args = new UiArguments('getLocation');
             return this._broker.runOnService(args, LocationType).then(function (val) {
-                _this17._location = val;
+                _this16._location = val;
                 return true;
             }, function (err) {
                 throw new Error(err);
@@ -2411,7 +2228,7 @@ var WebWorkerRendererFactoryV2 = function () {
      * @param {?} renderStore
      */
     function WebWorkerRendererFactoryV2(messageBrokerFactory, bus, _serializer, renderStore) {
-        var _this18 = this;
+        var _this17 = this;
 
         _classCallCheck(this, WebWorkerRendererFactoryV2);
 
@@ -2422,7 +2239,7 @@ var WebWorkerRendererFactoryV2 = function () {
         bus.initChannel(EVENT_V2_CHANNEL);
         var source = bus.from(EVENT_V2_CHANNEL);
         source.subscribe({ next: function next(message) {
-                return _this18._dispatchEvent(message);
+                return _this17._dispatchEvent(message);
             } });
     }
     /**
@@ -2761,7 +2578,7 @@ var WebWorkerRendererV2 = function () {
     }, {
         key: 'listen',
         value: function listen(target, eventName, listener) {
-            var _this19 = this;
+            var _this18 = this;
 
             var /** @type {?} */unlistenId = this._rendererFactory.allocateId();
 
@@ -2779,11 +2596,11 @@ var WebWorkerRendererV2 = function () {
             this.callUIWithRenderer('listen', [new FnArg(targetEl, 2 /* RENDER_STORE_OBJECT */), new FnArg(targetName), new FnArg(eventName), new FnArg(unlistenId)]);
             return function () {
                 if (fullName) {
-                    _this19._rendererFactory.globalEvents.unlisten(fullName, listener);
+                    _this18._rendererFactory.globalEvents.unlisten(fullName, listener);
                 } else {
                     targetEl.events.unlisten(eventName, listener);
                 }
-                _this19.callUIWithRenderer('unlisten', [new FnArg(unlistenId)]);
+                _this18.callUIWithRenderer('unlisten', [new FnArg(unlistenId)]);
             };
         }
         /**
@@ -4081,7 +3898,7 @@ function errorHandler() {
 // TODO(jteplitz602) remove this and compile with lib.webworker.d.ts (#3492)
 var /** @type {?} */_postMessage = {
     postMessage: function (_postMessage2) {
-        function postMessage(_x11, _x12) {
+        function postMessage(_x10, _x11) {
             return _postMessage2.apply(this, arguments);
         }
 

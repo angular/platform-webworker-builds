@@ -5,8 +5,7 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import { NgZone } from '@angular/core';
-import { EventEmitter } from '../../facade/async';
+import { EventEmitter, NgZone } from '@angular/core';
 /**
  * Message Bus is a low level API used to communicate between the UI and the background.
  * Communication is based on a channel abstraction. Messages published in a
