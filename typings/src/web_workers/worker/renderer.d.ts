@@ -5,7 +5,7 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import { RendererFactoryV2, RendererTypeV2, RendererV2 } from '@angular/core';
+import { Renderer2, RendererFactory2, RendererType2 } from '@angular/core';
 import { ClientMessageBrokerFactory, FnArg } from '../shared/client_message_broker';
 import { MessageBus } from '../shared/message_bus';
 import { RenderStore } from '../shared/render_store';
@@ -17,25 +17,25 @@ export declare class NamedEventEmitter {
     dispatchEvent(eventName: string, event: any): void;
     private _getListeners(eventName);
 }
-export declare class WebWorkerRendererFactoryV2 implements RendererFactoryV2 {
+export declare class WebWorkerRendererFactory2 implements RendererFactory2 {
     private _serializer;
     renderStore: RenderStore;
     globalEvents: NamedEventEmitter;
     private _messageBroker;
     constructor(messageBrokerFactory: ClientMessageBrokerFactory, bus: MessageBus, _serializer: Serializer, renderStore: RenderStore);
-    createRenderer(element: any, type: RendererTypeV2): RendererV2;
+    createRenderer(element: any, type: RendererType2): Renderer2;
     callUI(fnName: string, fnArgs: FnArg[]): void;
     allocateNode(): WebWorkerRenderNode;
     freeNode(node: any): void;
     allocateId(): number;
     private _dispatchEvent(message);
 }
-export declare class WebWorkerRendererV2 implements RendererV2 {
+export declare class WebWorkerRenderer2 implements Renderer2 {
     private _rendererFactory;
     data: {
         [key: string]: any;
     };
-    constructor(_rendererFactory: WebWorkerRendererFactoryV2);
+    constructor(_rendererFactory: WebWorkerRendererFactory2);
     private asFnArg;
     destroy(): void;
     destroyNode(node: any): void;

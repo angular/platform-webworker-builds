@@ -30,7 +30,7 @@ export declare class LocationType {
  * @experimental WebWorker support in Angular is currently experimental.
  */
 export declare const enum SerializerTypes {
-    RENDERER_TYPE_V2 = 0,
+    RENDERER_TYPE_2 = 0,
     PRIMITIVE = 1,
     RENDER_STORE_OBJECT = 2,
 }
@@ -43,6 +43,6 @@ export declare class Serializer {
     private _deserializeLocation(loc);
     private _serializeRenderComponentType(type);
     private _deserializeRenderComponentType(props);
-    private _serializeRendererTypeV2(type);
-    private _deserializeRendererTypeV2(props);
+    private _serializeRendererType2(type);
+    private _deserializeRendererType2(props);
 }

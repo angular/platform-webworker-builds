@@ -9,6 +9,6 @@ export { Serializer as ɵb } from './src/web_workers/shared/serializer';
 export { ServiceMessageBrokerFactory_ as ɵc } from './src/web_workers/shared/service_message_broker';
 export { appInitFnFactory as ɵe, locationInitialized as ɵd } from './src/web_workers/worker/location_providers';
 export { WebWorkerPlatformLocation as ɵj } from './src/web_workers/worker/platform_location';
-export { WebWorkerRendererFactoryV2 as ɵl } from './src/web_workers/worker/renderer';
+export { WebWorkerRendererFactory2 as ɵl } from './src/web_workers/worker/renderer';
 export { createMessageBus as ɵg, errorHandler as ɵf, setupWebWorker as ɵh } from './src/worker_app';
 export { _WORKER_UI_PLATFORM_PROVIDERS as ɵi } from './src/worker_render';

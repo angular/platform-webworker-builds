@@ -9,6 +9,6 @@
  * All channels used by angular's WebWorker components are listed here.
  * You should not use these channels in your application code.
  */
-export declare const RENDERER_V2_CHANNEL = "v2.ng-Renderer";
-export declare const EVENT_V2_CHANNEL = "v2.ng-Events";
+export declare const RENDERER_2_CHANNEL = "v2.ng-Renderer";
+export declare const EVENT_2_CHANNEL = "v2.ng-Events";
 export declare const ROUTER_CHANNEL = "ng-Router";

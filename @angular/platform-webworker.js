@@ -1,11 +1,11 @@
 /**
- * @license Angular v4.0.0-rc.2-5df998d
+ * @license Angular v4.0.0-rc.2-ad3b44a
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
 import { ɵPLATFORM_WORKER_UI_ID, PlatformLocation, LOCATION_INITIALIZED, ɵPLATFORM_WORKER_APP_ID, CommonModule } from '@angular/common';
-import { Injectable, InjectionToken, PLATFORM_ID, Injector, PLATFORM_INITIALIZER, Testability, RendererFactoryV2, ɵAPP_ID_RANDOM_PROVIDER, ErrorHandler, NgZone, platformCore, createPlatformFactory, isDevMode, ɵstringify, RenderComponentType, EventEmitter, Version, APP_INITIALIZER, ApplicationModule, NgModule } from '@angular/core';
-import { EventManager, ɵDomSharedStylesHost, ɵSharedStylesHost, ɵDomRendererFactoryV2, HammerGestureConfig, HAMMER_GESTURE_CONFIG, ɵHammerGesturesPlugin, EVENT_MANAGER_PLUGINS, ɵKeyEventsPlugin, ɵDomEventsPlugin, DOCUMENT, ɵBROWSER_SANITIZATION_PROVIDERS, ɵBrowserGetTestability, ɵBrowserDomAdapter, ɵBrowserPlatformLocation, ɵsetRootDomAdapter, ɵDomAdapter } from '@angular/platform-browser';
+import { Injectable, InjectionToken, PLATFORM_ID, Injector, PLATFORM_INITIALIZER, Testability, RendererFactory2, ɵAPP_ID_RANDOM_PROVIDER, ErrorHandler, NgZone, platformCore, createPlatformFactory, isDevMode, ɵstringify, RenderComponentType, EventEmitter, Version, APP_INITIALIZER, ApplicationModule, NgModule } from '@angular/core';
+import { EventManager, ɵDomSharedStylesHost, ɵSharedStylesHost, ɵDomRendererFactory2, HammerGestureConfig, HAMMER_GESTURE_CONFIG, ɵHammerGesturesPlugin, EVENT_MANAGER_PLUGINS, ɵKeyEventsPlugin, ɵDomEventsPlugin, DOCUMENT, ɵBROWSER_SANITIZATION_PROVIDERS, ɵBrowserGetTestability, ɵBrowserDomAdapter, ɵBrowserPlatformLocation, ɵsetRootDomAdapter, ɵDomAdapter } from '@angular/platform-browser';
 
 const /** @type {?} */ ON_WEB_WORKER = new InjectionToken('WebWorker.onWebWorker');
 
@@ -173,8 +173,8 @@ class Serializer {
         if (type === RenderComponentType) {
             return this._serializeRenderComponentType(obj);
         }
-        if (type === 0 /* RENDERER_TYPE_V2 */) {
-            return this._serializeRendererTypeV2(obj);
+        if (type === 0 /* RENDERER_TYPE_2 */) {
+            return this._serializeRendererType2(obj);
         }
         if (type === LocationType) {
             return this._serializeLocation(obj);
@@ -200,8 +200,8 @@ class Serializer {
         if (type === RenderComponentType) {
             return this._deserializeRenderComponentType(map);
         }
-        if (type === 0 /* RENDERER_TYPE_V2 */) {
-            return this._deserializeRendererTypeV2(map);
+        if (type === 0 /* RENDERER_TYPE_2 */) {
+            return this._deserializeRendererType2(map);
         }
         if (type === LocationType) {
             return this._deserializeLocation(map);
@@ -256,7 +256,7 @@ class Serializer {
      * @param {?} type
      * @return {?}
      */
-    _serializeRendererTypeV2(type) {
+    _serializeRendererType2(type) {
         return {
             'id': type.id,
             'encapsulation': this.serialize(type.encapsulation),
@@ -268,7 +268,7 @@ class Serializer {
      * @param {?} props
      * @return {?}
      */
-    _deserializeRendererTypeV2(props) {
+    _deserializeRendererType2(props) {
         return {
             id: props['id'],
             encapsulation: props['encapsulation'],
@@ -806,8 +806,8 @@ class ServiceMessageBroker_ extends ServiceMessageBroker {
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
- */ const /** @type {?} */ RENDERER_V2_CHANNEL = 'v2.ng-Renderer';
-const /** @type {?} */ EVENT_V2_CHANNEL = 'v2.ng-Events';
+ */ const /** @type {?} */ RENDERER_2_CHANNEL = 'v2.ng-Renderer';
+const /** @type {?} */ EVENT_2_CHANNEL = 'v2.ng-Events';
 const /** @type {?} */ ROUTER_CHANNEL = 'ng-Router';
 
 /**
@@ -1020,7 +1020,7 @@ class EventDispatcher {
     }
 }
 
-class MessageBasedRendererV2 {
+class MessageBasedRenderer2 {
     /**
      * @param {?} _brokerFactory
      * @param {?} _bus
@@ -1039,13 +1039,13 @@ class MessageBasedRendererV2 {
      * @return {?}
      */
     start() {
-        const /** @type {?} */ broker = this._brokerFactory.createMessageBroker(RENDERER_V2_CHANNEL);
-        this._bus.initChannel(EVENT_V2_CHANNEL);
-        this._eventDispatcher = new EventDispatcher(this._bus.to(EVENT_V2_CHANNEL), this._serializer);
+        const /** @type {?} */ broker = this._brokerFactory.createMessageBroker(RENDERER_2_CHANNEL);
+        this._bus.initChannel(EVENT_2_CHANNEL);
+        this._eventDispatcher = new EventDispatcher(this._bus.to(EVENT_2_CHANNEL), this._serializer);
         const [RSO, P, CRT] = [
             2 /* RENDER_STORE_OBJECT */,
             1 /* PRIMITIVE */,
-            0 /* RENDERER_TYPE_V2 */,
+            0 /* RENDERER_TYPE_2 */,
         ];
         const /** @type {?} */ methods = [
             ['createRenderer', this.createRenderer, RSO, CRT, P],
@@ -1269,16 +1269,16 @@ class MessageBasedRendererV2 {
      */
     unlisten(r, unlisten) { unlisten(); }
 }
-MessageBasedRendererV2.decorators = [
+MessageBasedRenderer2.decorators = [
     { type: Injectable },
 ];
 /** @nocollapse */
-MessageBasedRendererV2.ctorParameters = () => [
+MessageBasedRenderer2.ctorParameters = () => [
     { type: ServiceMessageBrokerFactory, },
     { type: MessageBus, },
     { type: Serializer, },
     { type: RenderStore, },
-    { type: RendererFactoryV2, },
+    { type: RendererFactory2, },
 ];
 
 /**
@@ -1317,12 +1317,8 @@ const /** @type {?} */ WORKER_SCRIPT = new InjectionToken('WebWorkerScript');
 const /** @type {?} */ WORKER_UI_STARTABLE_MESSAGING_SERVICE = new InjectionToken('WorkerRenderStartableMsgService');
 const /** @type {?} */ _WORKER_UI_PLATFORM_PROVIDERS = [
     { provide: NgZone, useFactory: createNgZone, deps: [] },
-    MessageBasedRendererV2,
-    {
-        provide: WORKER_UI_STARTABLE_MESSAGING_SERVICE,
-        useExisting: MessageBasedRendererV2,
-        multi: true
-    },
+    MessageBasedRenderer2,
+    { provide: WORKER_UI_STARTABLE_MESSAGING_SERVICE, useExisting: MessageBasedRenderer2, multi: true },
     ɵBROWSER_SANITIZATION_PROVIDERS,
     { provide: ErrorHandler, useFactory: _exceptionHandler, deps: [] },
     { provide: DOCUMENT, useFactory: _document, deps: [] },
@@ -1333,8 +1329,8 @@ const /** @type {?} */ _WORKER_UI_PLATFORM_PROVIDERS = [
     { provide: EVENT_MANAGER_PLUGINS, useClass: ɵHammerGesturesPlugin, multi: true },
     { provide: HAMMER_GESTURE_CONFIG, useClass: HammerGestureConfig },
     ɵAPP_ID_RANDOM_PROVIDER,
-    ɵDomRendererFactoryV2,
-    { provide: RendererFactoryV2, useExisting: ɵDomRendererFactoryV2 },
+    ɵDomRendererFactory2,
+    { provide: RendererFactory2, useExisting: ɵDomRendererFactory2 },
     { provide: ɵSharedStylesHost, useExisting: ɵDomSharedStylesHost },
     { provide: ServiceMessageBrokerFactory, useClass: ServiceMessageBrokerFactory_ },
     { provide: ClientMessageBrokerFactory, useClass: ClientMessageBrokerFactory_ },
@@ -1432,7 +1428,7 @@ function spawnWebWorker(uri, instance) {
 /**
  * @stable
  */
-const /** @type {?} */ VERSION = new Version('4.0.0-rc.2-5df998d');
+const /** @type {?} */ VERSION = new Version('4.0.0-rc.2-ad3b44a');
 
 class MessageBasedPlatformLocation {
     /**
@@ -1743,7 +1739,7 @@ class NamedEventEmitter {
 function eventNameWithTarget(target, eventName) {
     return `${target}:${eventName}`;
 }
-class WebWorkerRendererFactoryV2 {
+class WebWorkerRendererFactory2 {
     /**
      * @param {?} messageBrokerFactory
      * @param {?} bus
@@ -1754,9 +1750,9 @@ class WebWorkerRendererFactoryV2 {
         this._serializer = _serializer;
         this.renderStore = renderStore;
         this.globalEvents = new NamedEventEmitter();
-        this._messageBroker = messageBrokerFactory.createMessageBroker(RENDERER_V2_CHANNEL);
-        bus.initChannel(EVENT_V2_CHANNEL);
-        const source = bus.from(EVENT_V2_CHANNEL);
+        this._messageBroker = messageBrokerFactory.createMessageBroker(RENDERER_2_CHANNEL);
+        bus.initChannel(EVENT_2_CHANNEL);
+        const source = bus.from(EVENT_2_CHANNEL);
         source.subscribe({ next: (message) => this._dispatchEvent(message) });
     }
     /**
@@ -1765,12 +1761,12 @@ class WebWorkerRendererFactoryV2 {
      * @return {?}
      */
     createRenderer(element, type) {
-        const /** @type {?} */ renderer = new WebWorkerRendererV2(this);
+        const /** @type {?} */ renderer = new WebWorkerRenderer2(this);
         const /** @type {?} */ id = this.renderStore.allocateId();
         this.renderStore.store(renderer, id);
         this.callUI('createRenderer', [
             new FnArg(element, 2 /* RENDER_STORE_OBJECT */),
-            new FnArg(type, 0 /* RENDERER_TYPE_V2 */),
+            new FnArg(type, 0 /* RENDERER_TYPE_2 */),
             new FnArg(renderer, 2 /* RENDER_STORE_OBJECT */),
         ]);
         return renderer;
@@ -1819,17 +1815,17 @@ class WebWorkerRendererFactoryV2 {
         }
     }
 }
-WebWorkerRendererFactoryV2.decorators = [
+WebWorkerRendererFactory2.decorators = [
     { type: Injectable },
 ];
 /** @nocollapse */
-WebWorkerRendererFactoryV2.ctorParameters = () => [
+WebWorkerRendererFactory2.ctorParameters = () => [
     { type: ClientMessageBrokerFactory, },
     { type: MessageBus, },
     { type: Serializer, },
     { type: RenderStore, },
 ];
-class WebWorkerRendererV2 {
+class WebWorkerRenderer2 {
     /**
      * @param {?} _rendererFactory
      */
@@ -2834,8 +2830,8 @@ WorkerAppModule.decorators = [
                     { provide: DOCUMENT, useValue: null },
                     { provide: ClientMessageBrokerFactory, useClass: ClientMessageBrokerFactory_ },
                     { provide: ServiceMessageBrokerFactory, useClass: ServiceMessageBrokerFactory_ },
-                    WebWorkerRendererFactoryV2,
-                    { provide: RendererFactoryV2, useExisting: WebWorkerRendererFactoryV2 },
+                    WebWorkerRendererFactory2,
+                    { provide: RendererFactory2, useExisting: WebWorkerRendererFactory2 },
                     { provide: ON_WEB_WORKER, useValue: true },
                     RenderStore,
                     { provide: ErrorHandler, useFactory: errorHandler, deps: [] },
@@ -2868,4 +2864,4 @@ function bootstrapWorkerUi(workerScriptUri, customProviders = []) {
     return Promise.resolve(platform);
 }
 
-export { VERSION, ClientMessageBroker, ClientMessageBrokerFactory, FnArg, UiArguments, MessageBus, PRIMITIVE, ServiceMessageBroker, ServiceMessageBrokerFactory, WORKER_UI_LOCATION_PROVIDERS, WORKER_APP_LOCATION_PROVIDERS, WorkerAppModule, platformWorkerApp, platformWorkerUi, bootstrapWorkerUi, ON_WEB_WORKER as ɵm, ClientMessageBrokerFactory_ as ɵa, RenderStore as ɵk, Serializer as ɵb, ServiceMessageBrokerFactory_ as ɵc, appInitFnFactory as ɵe, locationInitialized as ɵd, WebWorkerPlatformLocation as ɵj, WebWorkerRendererFactoryV2 as ɵl, createMessageBus as ɵg, errorHandler as ɵf, setupWebWorker as ɵh, _WORKER_UI_PLATFORM_PROVIDERS as ɵi };
+export { VERSION, ClientMessageBroker, ClientMessageBrokerFactory, FnArg, UiArguments, MessageBus, PRIMITIVE, ServiceMessageBroker, ServiceMessageBrokerFactory, WORKER_UI_LOCATION_PROVIDERS, WORKER_APP_LOCATION_PROVIDERS, WorkerAppModule, platformWorkerApp, platformWorkerUi, bootstrapWorkerUi, ON_WEB_WORKER as ɵm, ClientMessageBrokerFactory_ as ɵa, RenderStore as ɵk, Serializer as ɵb, ServiceMessageBrokerFactory_ as ɵc, appInitFnFactory as ɵe, locationInitialized as ɵd, WebWorkerPlatformLocation as ɵj, WebWorkerRendererFactory2 as ɵl, createMessageBus as ɵg, errorHandler as ɵf, setupWebWorker as ɵh, _WORKER_UI_PLATFORM_PROVIDERS as ɵi };
