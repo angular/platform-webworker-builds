@@ -35,8 +35,8 @@ export declare class MessageBasedRenderer2 {
     private removeAttribute(r, el, name, namespace);
     private addClass(r, el, name);
     private removeClass(r, el, name);
-    private setStyle(r, el, style, value, hasVendorPrefix, hasImportant);
-    private removeStyle(r, el, style, hasVendorPrefix);
+    private setStyle(r, el, style, value, flags);
+    private removeStyle(r, el, style, flags);
     private setProperty(r, el, name, value);
     private setValue(r, node, value);
     private listen(r, el, elName, eventName, unlistenId);

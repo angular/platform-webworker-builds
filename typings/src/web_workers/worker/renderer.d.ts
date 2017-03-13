@@ -5,7 +5,7 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import { Renderer2, RendererFactory2, RendererType2 } from '@angular/core';
+import { Renderer2, RendererFactory2, RendererStyleFlags2, RendererType2 } from '@angular/core';
 import { ClientMessageBrokerFactory, FnArg } from '../shared/client_message_broker';
 import { MessageBus } from '../shared/message_bus';
 import { RenderStore } from '../shared/render_store';
@@ -52,8 +52,8 @@ export declare class WebWorkerRenderer2 implements Renderer2 {
     removeAttribute(el: any, name: string, namespace?: string): void;
     addClass(el: any, name: string): void;
     removeClass(el: any, name: string): void;
-    setStyle(el: any, style: string, value: any, hasVendorPrefix: boolean, hasImportant: boolean): void;
-    removeStyle(el: any, style: string, hasVendorPrefix: boolean): void;
+    setStyle(el: any, style: string, value: any, flags: RendererStyleFlags2): void;
+    removeStyle(el: any, style: string, flags: RendererStyleFlags2): void;
     setProperty(el: any, name: string, value: any): void;
     setValue(node: any, value: string): void;
     listen(target: 'window' | 'document' | 'body' | any, eventName: string, listener: (event: any) => boolean): () => void;

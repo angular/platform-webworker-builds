@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.0.0-rc.3-fa1920a
+ * @license Angular v4.0.0-rc.3-ff71eff
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1059,7 +1059,7 @@ class MessageBasedRenderer2 {
             ['setAttribute', this.setAttribute, RSO, RSO, P, P, P],
             ['removeAttribute', this.removeAttribute, RSO, RSO, P, P],
             ['addClass', this.addClass, RSO, RSO, P], ['removeClass', this.removeClass, RSO, RSO, P],
-            ['setStyle', this.setStyle, RSO, RSO, P, P, P, P],
+            ['setStyle', this.setStyle, RSO, RSO, P, P, P],
             ['removeStyle', this.removeStyle, RSO, RSO, P, P],
             ['setProperty', this.setProperty, RSO, RSO, P, P], ['setValue', this.setValue, RSO, RSO, P],
             ['listen', this.listen, RSO, RSO, P, P, P], ['unlisten', this.unlisten, RSO, RSO],
@@ -1213,22 +1213,21 @@ class MessageBasedRenderer2 {
      * @param {?} el
      * @param {?} style
      * @param {?} value
-     * @param {?} hasVendorPrefix
-     * @param {?} hasImportant
+     * @param {?} flags
      * @return {?}
      */
-    setStyle(r, el, style, value, hasVendorPrefix, hasImportant) {
-        r.setStyle(el, style, value, hasVendorPrefix, hasImportant);
+    setStyle(r, el, style, value, flags) {
+        r.setStyle(el, style, value, flags);
     }
     /**
      * @param {?} r
      * @param {?} el
      * @param {?} style
-     * @param {?} hasVendorPrefix
+     * @param {?} flags
      * @return {?}
      */
-    removeStyle(r, el, style, hasVendorPrefix) {
-        r.removeStyle(el, style, hasVendorPrefix);
+    removeStyle(r, el, style, flags) {
+        r.removeStyle(el, style, flags);
     }
     /**
      * @param {?} r
@@ -1428,7 +1427,7 @@ function spawnWebWorker(uri, instance) {
 /**
  * @stable
  */
-const /** @type {?} */ VERSION = new Version('4.0.0-rc.3-fa1920a');
+const /** @type {?} */ VERSION = new Version('4.0.0-rc.3-ff71eff');
 
 class MessageBasedPlatformLocation {
     /**
@@ -2012,30 +2011,28 @@ class WebWorkerRenderer2 {
      * @param {?} el
      * @param {?} style
      * @param {?} value
-     * @param {?} hasVendorPrefix
-     * @param {?} hasImportant
+     * @param {?} flags
      * @return {?}
      */
-    setStyle(el, style, value, hasVendorPrefix, hasImportant) {
+    setStyle(el, style, value, flags) {
         this.callUIWithRenderer('setStyle', [
             new FnArg(el, 2 /* RENDER_STORE_OBJECT */),
             new FnArg(style),
             new FnArg(value),
-            new FnArg(hasVendorPrefix),
-            new FnArg(hasImportant),
+            new FnArg(flags),
         ]);
     }
     /**
      * @param {?} el
      * @param {?} style
-     * @param {?} hasVendorPrefix
+     * @param {?} flags
      * @return {?}
      */
-    removeStyle(el, style, hasVendorPrefix) {
+    removeStyle(el, style, flags) {
         this.callUIWithRenderer('removeStyle', [
             new FnArg(el, 2 /* RENDER_STORE_OBJECT */),
             new FnArg(style),
-            new FnArg(hasVendorPrefix),
+            new FnArg(flags),
         ]);
     }
     /**
