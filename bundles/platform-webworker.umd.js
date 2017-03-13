@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.0.0-rc.3-018e5c9
+ * @license Angular v4.0.0-rc.3-75147ff
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1482,7 +1482,7 @@
     /**
      * @stable
      */
-    var /** @type {?} */ VERSION = new _angular_core.Version('4.0.0-rc.3-018e5c9');
+    var /** @type {?} */ VERSION = new _angular_core.Version('4.0.0-rc.3-75147ff');
     var MessageBasedPlatformLocation = (function () {
         /**
          * @param {?} _brokerFactory
