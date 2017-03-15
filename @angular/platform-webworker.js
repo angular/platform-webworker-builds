@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.0.0-rc.3-4f7d62a
+ * @license Angular v4.0.0-rc.3-5c0ea20
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -114,7 +114,9 @@ class RenderStore {
 RenderStore.decorators = [
     { type: Injectable },
 ];
-/** @nocollapse */
+/**
+ * @nocollapse
+ */
 RenderStore.ctorParameters = () => [];
 
 /**
@@ -280,7 +282,9 @@ class Serializer {
 Serializer.decorators = [
     { type: Injectable },
 ];
-/** @nocollapse */
+/**
+ * @nocollapse
+ */
 Serializer.ctorParameters = () => [
     { type: RenderStore, },
 ];
@@ -323,7 +327,9 @@ class ClientMessageBrokerFactory_ extends ClientMessageBrokerFactory {
 ClientMessageBrokerFactory_.decorators = [
     { type: Injectable },
 ];
-/** @nocollapse */
+/**
+ * @nocollapse
+ */
 ClientMessageBrokerFactory_.ctorParameters = () => [
     { type: MessageBus, },
     { type: Serializer, },
@@ -644,7 +650,9 @@ class PostMessageBus {
 PostMessageBus.decorators = [
     { type: Injectable },
 ];
-/** @nocollapse */
+/**
+ * @nocollapse
+ */
 PostMessageBus.ctorParameters = () => [
     { type: PostMessageBusSink, },
     { type: PostMessageBusSource, },
@@ -701,7 +709,9 @@ class ServiceMessageBrokerFactory_ extends ServiceMessageBrokerFactory {
 ServiceMessageBrokerFactory_.decorators = [
     { type: Injectable },
 ];
-/** @nocollapse */
+/**
+ * @nocollapse
+ */
 ServiceMessageBrokerFactory_.ctorParameters = () => [
     { type: MessageBus, },
     { type: Serializer, },
@@ -1271,7 +1281,9 @@ class MessageBasedRenderer2 {
 MessageBasedRenderer2.decorators = [
     { type: Injectable },
 ];
-/** @nocollapse */
+/**
+ * @nocollapse
+ */
 MessageBasedRenderer2.ctorParameters = () => [
     { type: ServiceMessageBrokerFactory, },
     { type: MessageBus, },
@@ -1301,7 +1313,9 @@ class WebWorkerInstance {
 WebWorkerInstance.decorators = [
     { type: Injectable },
 ];
-/** @nocollapse */
+/**
+ * @nocollapse
+ */
 WebWorkerInstance.ctorParameters = () => [];
 /**
  * @experimental WebWorker support is currently experimental.
@@ -1427,7 +1441,7 @@ function spawnWebWorker(uri, instance) {
 /**
  * @stable
  */
-const /** @type {?} */ VERSION = new Version('4.0.0-rc.3-4f7d62a');
+const /** @type {?} */ VERSION = new Version('4.0.0-rc.3-5c0ea20');
 
 class MessageBasedPlatformLocation {
     /**
@@ -1482,7 +1496,9 @@ class MessageBasedPlatformLocation {
 MessageBasedPlatformLocation.decorators = [
     { type: Injectable },
 ];
-/** @nocollapse */
+/**
+ * @nocollapse
+ */
 MessageBasedPlatformLocation.ctorParameters = () => [
     { type: ServiceMessageBrokerFactory, },
     { type: ɵBrowserPlatformLocation, },
@@ -1647,7 +1663,9 @@ class WebWorkerPlatformLocation extends PlatformLocation {
 WebWorkerPlatformLocation.decorators = [
     { type: Injectable },
 ];
-/** @nocollapse */
+/**
+ * @nocollapse
+ */
 WebWorkerPlatformLocation.ctorParameters = () => [
     { type: ClientMessageBrokerFactory, },
     { type: MessageBus, },
@@ -1817,7 +1835,9 @@ class WebWorkerRendererFactory2 {
 WebWorkerRendererFactory2.decorators = [
     { type: Injectable },
 ];
-/** @nocollapse */
+/**
+ * @nocollapse
+ */
 WebWorkerRendererFactory2.ctorParameters = () => [
     { type: ClientMessageBrokerFactory, },
     { type: MessageBus, },
@@ -2841,7 +2861,9 @@ WorkerAppModule.decorators = [
                 ]
             },] },
 ];
-/** @nocollapse */
+/**
+ * @nocollapse
+ */
 WorkerAppModule.ctorParameters = () => [];
 
 /**
