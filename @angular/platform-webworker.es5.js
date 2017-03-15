@@ -4,7 +4,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 /**
- * @license Angular v4.0.0-rc.3-bf98d9d
+ * @license Angular v4.0.0-rc.3-6772c91
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -120,7 +120,9 @@ var RenderStore = (function () {
 RenderStore.decorators = [
     { type: Injectable },
 ];
-/** @nocollapse */
+/**
+ * @nocollapse
+ */
 RenderStore.ctorParameters = function () { return []; };
 /**
  * Any type that does not need to be serialized (string, number, boolean)
@@ -291,7 +293,9 @@ var Serializer = (function () {
 Serializer.decorators = [
     { type: Injectable },
 ];
-/** @nocollapse */
+/**
+ * @nocollapse
+ */
 Serializer.ctorParameters = function () { return [
     { type: RenderStore, },
 ]; };
@@ -340,7 +344,9 @@ var ClientMessageBrokerFactory_ = (function (_super) {
 ClientMessageBrokerFactory_.decorators = [
     { type: Injectable },
 ];
-/** @nocollapse */
+/**
+ * @nocollapse
+ */
 ClientMessageBrokerFactory_.ctorParameters = function () { return [
     { type: MessageBus, },
     { type: Serializer, },
@@ -679,7 +685,9 @@ var PostMessageBus = (function () {
 PostMessageBus.decorators = [
     { type: Injectable },
 ];
-/** @nocollapse */
+/**
+ * @nocollapse
+ */
 PostMessageBus.ctorParameters = function () { return [
     { type: PostMessageBusSink, },
     { type: PostMessageBusSource, },
@@ -743,7 +751,9 @@ var ServiceMessageBrokerFactory_ = (function (_super) {
 ServiceMessageBrokerFactory_.decorators = [
     { type: Injectable },
 ];
-/** @nocollapse */
+/**
+ * @nocollapse
+ */
 ServiceMessageBrokerFactory_.ctorParameters = function () { return [
     { type: MessageBus, },
     { type: Serializer, },
@@ -1322,7 +1332,9 @@ var MessageBasedRenderer2 = (function () {
 MessageBasedRenderer2.decorators = [
     { type: Injectable },
 ];
-/** @nocollapse */
+/**
+ * @nocollapse
+ */
 MessageBasedRenderer2.ctorParameters = function () { return [
     { type: ServiceMessageBrokerFactory, },
     { type: MessageBus, },
@@ -1354,7 +1366,9 @@ var WebWorkerInstance = (function () {
 WebWorkerInstance.decorators = [
     { type: Injectable },
 ];
-/** @nocollapse */
+/**
+ * @nocollapse
+ */
 WebWorkerInstance.ctorParameters = function () { return []; };
 /**
  * @experimental WebWorker support is currently experimental.
@@ -1479,7 +1493,7 @@ function spawnWebWorker(uri, instance) {
 /**
  * @stable
  */
-var /** @type {?} */ VERSION = new Version('4.0.0-rc.3-bf98d9d');
+var /** @type {?} */ VERSION = new Version('4.0.0-rc.3-6772c91');
 var MessageBasedPlatformLocation = (function () {
     /**
      * @param {?} _brokerFactory
@@ -1534,7 +1548,9 @@ var MessageBasedPlatformLocation = (function () {
 MessageBasedPlatformLocation.decorators = [
     { type: Injectable },
 ];
-/** @nocollapse */
+/**
+ * @nocollapse
+ */
 MessageBasedPlatformLocation.ctorParameters = function () { return [
     { type: ServiceMessageBrokerFactory, },
     { type: ɵBrowserPlatformLocation, },
@@ -1713,7 +1729,9 @@ var WebWorkerPlatformLocation = (function (_super) {
 WebWorkerPlatformLocation.decorators = [
     { type: Injectable },
 ];
-/** @nocollapse */
+/**
+ * @nocollapse
+ */
 WebWorkerPlatformLocation.ctorParameters = function () { return [
     { type: ClientMessageBrokerFactory, },
     { type: MessageBus, },
@@ -1886,7 +1904,9 @@ var WebWorkerRendererFactory2 = (function () {
 WebWorkerRendererFactory2.decorators = [
     { type: Injectable },
 ];
-/** @nocollapse */
+/**
+ * @nocollapse
+ */
 WebWorkerRendererFactory2.ctorParameters = function () { return [
     { type: ClientMessageBrokerFactory, },
     { type: MessageBus, },
@@ -2924,7 +2944,9 @@ WorkerAppModule.decorators = [
                 ]
             },] },
 ];
-/** @nocollapse */
+/**
+ * @nocollapse
+ */
 WorkerAppModule.ctorParameters = function () { return []; };
 /**
  * Bootstraps the worker ui.
