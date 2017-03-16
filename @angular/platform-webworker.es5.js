@@ -4,7 +4,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 /**
- * @license Angular v4.0.0-rc.3-992aa17
+ * @license Angular v4.0.0-rc.3-492153a
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -127,10 +127,10 @@ RenderStore.ctorParameters = function () { return []; };
 /**
  * Any type that does not need to be serialized (string, number, boolean)
  *
- * @experimental WebWorker support in Angular is currently experimental.
+ * \@experimental WebWorker support in Angular is currently experimental.
  * @deprecated in v4. Use SerializerTypes.PRIMITIVE instead
  */
-var /** @type {?} */ PRIMITIVE = 1 /* PRIMITIVE */;
+var PRIMITIVE = 1 /* PRIMITIVE */;
 var LocationType = (function () {
     /**
      * @param {?} href
@@ -849,23 +849,10 @@ var ServiceMessageBroker_ = (function (_super) {
     return ServiceMessageBroker_;
 }(ServiceMessageBroker));
 /**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
  * All channels used by angular's WebWorker components are listed here.
  * You should not use these channels in your application code.
  */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */ var /** @type {?} */ RENDERER_2_CHANNEL = 'v2.ng-Renderer';
+var RENDERER_2_CHANNEL = 'v2.ng-Renderer';
 var /** @type {?} */ EVENT_2_CHANNEL = 'v2.ng-Events';
 var /** @type {?} */ ROUTER_CHANNEL = 'ng-Router';
 /**
@@ -875,7 +862,7 @@ var /** @type {?} */ ROUTER_CHANNEL = 'ng-Router';
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var /** @type {?} */ MOUSE_EVENT_PROPERTIES = [
+var MOUSE_EVENT_PROPERTIES = [
     'altKey', 'button', 'clientX', 'clientY', 'metaKey', 'movementX', 'movementY', 'offsetX',
     'offsetY', 'region', 'screenX', 'screenY', 'shiftKey'
 ];
@@ -1371,16 +1358,16 @@ WebWorkerInstance.decorators = [
  */
 WebWorkerInstance.ctorParameters = function () { return []; };
 /**
- * @experimental WebWorker support is currently experimental.
+ * \@experimental WebWorker support is currently experimental.
  */
-var /** @type {?} */ WORKER_SCRIPT = new InjectionToken('WebWorkerScript');
+var WORKER_SCRIPT = new InjectionToken('WebWorkerScript');
 /**
  * A multi-provider used to automatically call the `start()` method after the service is
  * created.
  *
- * @experimental WebWorker support is currently experimental.
+ * \@experimental WebWorker support is currently experimental.
  */
-var /** @type {?} */ WORKER_UI_STARTABLE_MESSAGING_SERVICE = new InjectionToken('WorkerRenderStartableMsgService');
+var WORKER_UI_STARTABLE_MESSAGING_SERVICE = new InjectionToken('WorkerRenderStartableMsgService');
 var /** @type {?} */ _WORKER_UI_PLATFORM_PROVIDERS = [
     { provide: NgZone, useFactory: createNgZone, deps: [] },
     MessageBasedRenderer2,
@@ -1456,9 +1443,9 @@ function initWebWorkerRenderPlatform(injector) {
     };
 }
 /**
- * @experimental WebWorker support is currently experimental.
+ * \@experimental WebWorker support is currently experimental.
  */
-var /** @type {?} */ platformWorkerUi = createPlatformFactory(platformCore, 'workerUi', _WORKER_UI_PLATFORM_PROVIDERS);
+var platformWorkerUi = createPlatformFactory(platformCore, 'workerUi', _WORKER_UI_PLATFORM_PROVIDERS);
 /**
  * @return {?}
  */
@@ -1491,9 +1478,9 @@ function spawnWebWorker(uri, instance) {
     instance.init(webWorker, bus);
 }
 /**
- * @stable
+ * \@stable
  */
-var /** @type {?} */ VERSION = new Version('4.0.0-rc.3-992aa17');
+var VERSION = new Version('4.0.0-rc.3-492153a');
 var MessageBasedPlatformLocation = (function () {
     /**
      * @param {?} _brokerFactory
@@ -1558,11 +1545,11 @@ MessageBasedPlatformLocation.ctorParameters = function () { return [
     { type: Serializer, },
 ]; };
 /**
- * A list of {@link Provider}s. To use the router in a Worker enabled application you must
+ * A list of {\@link Provider}s. To use the router in a Worker enabled application you must
  * include these providers when setting up the render thread.
- * @experimental
+ * \@experimental
  */
-var /** @type {?} */ WORKER_UI_LOCATION_PROVIDERS = [
+var WORKER_UI_LOCATION_PROVIDERS = [
     MessageBasedPlatformLocation, ɵBrowserPlatformLocation,
     { provide: PLATFORM_INITIALIZER, useFactory: initUiLocation, multi: true, deps: [Injector] }
 ];
@@ -1739,10 +1726,10 @@ WebWorkerPlatformLocation.ctorParameters = function () { return [
 ]; };
 /**
  * Those providers should be added when the router is used in a worker context in addition to the
- * {@link ROUTER_PROVIDERS} and after them.
- * @experimental
+ * {\@link ROUTER_PROVIDERS} and after them.
+ * \@experimental
  */
-var /** @type {?} */ WORKER_APP_LOCATION_PROVIDERS = [
+var WORKER_APP_LOCATION_PROVIDERS = [
     { provide: PlatformLocation, useClass: WebWorkerPlatformLocation }, {
         provide: APP_INITIALIZER,
         useFactory: appInitFnFactory,
@@ -2886,9 +2873,9 @@ var WorkerDomAdapter = (function (_super) {
     return WorkerDomAdapter;
 }(ɵDomAdapter));
 /**
- * @experimental
+ * \@experimental
  */
-var /** @type {?} */ platformWorkerApp = createPlatformFactory(platformCore, 'workerApp', [{ provide: PLATFORM_ID, useValue: ɵPLATFORM_WORKER_APP_ID }]);
+var platformWorkerApp = createPlatformFactory(platformCore, 'workerApp', [{ provide: PLATFORM_ID, useValue: ɵPLATFORM_WORKER_APP_ID }]);
 /**
  * @return {?}
  */
