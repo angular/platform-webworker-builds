@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.0.0-rc.3-26d4ce2
+ * @license Angular v4.0.0-rc.3-a4076c7
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1496,7 +1496,7 @@
     /**
      * @stable
      */
-    var /** @type {?} */ VERSION = new _angular_core.Version('4.0.0-rc.3-26d4ce2');
+    var /** @type {?} */ VERSION = new _angular_core.Version('4.0.0-rc.3-a4076c7');
     var MessageBasedPlatformLocation = (function () {
         /**
          * @param {?} _brokerFactory
@@ -2257,6 +2257,12 @@
                 console.groupEnd();
             }
         };
+        /**
+         * @param {?} nodeA
+         * @param {?} nodeB
+         * @return {?}
+         */
+        WorkerDomAdapter.prototype.contains = function (nodeA, nodeB) { throw 'not implemented'; };
         /**
          * @param {?} element
          * @param {?} name
