@@ -4,7 +4,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 /**
- * @license Angular v4.0.0-rc.3-a4076c7
+ * @license Angular v4.0.0-rc.3-992aa17
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1493,7 +1493,7 @@ function spawnWebWorker(uri, instance) {
 /**
  * @stable
  */
-var /** @type {?} */ VERSION = new Version('4.0.0-rc.3-a4076c7');
+var /** @type {?} */ VERSION = new Version('4.0.0-rc.3-992aa17');
 var MessageBasedPlatformLocation = (function () {
     /**
      * @param {?} _brokerFactory
@@ -2971,3 +2971,4 @@ function bootstrapWorkerUi(workerScriptUri, customProviders) {
     return Promise.resolve(platform);
 }
 export { VERSION, ClientMessageBroker, ClientMessageBrokerFactory, FnArg, UiArguments, MessageBus, PRIMITIVE, ServiceMessageBroker, ServiceMessageBrokerFactory, WORKER_UI_LOCATION_PROVIDERS, WORKER_APP_LOCATION_PROVIDERS, WorkerAppModule, platformWorkerApp, platformWorkerUi, bootstrapWorkerUi, ON_WEB_WORKER as ɵm, ClientMessageBrokerFactory_ as ɵa, RenderStore as ɵk, Serializer as ɵb, ServiceMessageBrokerFactory_ as ɵc, appInitFnFactory as ɵe, locationInitialized as ɵd, WebWorkerPlatformLocation as ɵj, WebWorkerRendererFactory2 as ɵl, createMessageBus as ɵg, errorHandler as ɵf, setupWebWorker as ɵh, _WORKER_UI_PLATFORM_PROVIDERS as ɵi };
+//# sourceMappingURL=platform-webworker.es5.js.map

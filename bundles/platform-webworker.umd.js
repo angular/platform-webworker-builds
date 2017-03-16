@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.0.0-rc.3-a4076c7
+ * @license Angular v4.0.0-rc.3-992aa17
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1496,7 +1496,7 @@
     /**
      * @stable
      */
-    var /** @type {?} */ VERSION = new _angular_core.Version('4.0.0-rc.3-a4076c7');
+    var /** @type {?} */ VERSION = new _angular_core.Version('4.0.0-rc.3-992aa17');
     var MessageBasedPlatformLocation = (function () {
         /**
          * @param {?} _brokerFactory
@@ -3004,3 +3004,4 @@
     exports.ɵi = _WORKER_UI_PLATFORM_PROVIDERS;
 
 }));
+//# sourceMappingURL=platform-webworker.umd.js.map
