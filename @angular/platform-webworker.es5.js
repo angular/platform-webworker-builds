@@ -4,14 +4,21 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 /**
- * @license Angular v4.0.0-rc.5-5c5c2ae
+ * @license Angular v4.0.0-rc.5-bcc29ff
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
-import { ɵPLATFORM_WORKER_UI_ID, PlatformLocation, LOCATION_INITIALIZED, ɵPLATFORM_WORKER_APP_ID, CommonModule } from '@angular/common';
-import { Injectable, InjectionToken, PLATFORM_ID, Injector, PLATFORM_INITIALIZER, Testability, RendererFactory2, ɵAPP_ID_RANDOM_PROVIDER, ErrorHandler, NgZone, platformCore, createPlatformFactory, isDevMode, ɵstringify, RenderComponentType, EventEmitter, Version, APP_INITIALIZER, ApplicationModule, NgModule } from '@angular/core';
-import { EventManager, ɵDomSharedStylesHost, ɵSharedStylesHost, ɵDomRendererFactory2, HammerGestureConfig, HAMMER_GESTURE_CONFIG, ɵHammerGesturesPlugin, EVENT_MANAGER_PLUGINS, ɵKeyEventsPlugin, ɵDomEventsPlugin, DOCUMENT, ɵBROWSER_SANITIZATION_PROVIDERS, ɵBrowserGetTestability, ɵBrowserDomAdapter, ɵBrowserPlatformLocation, ɵsetRootDomAdapter, ɵDomAdapter } from '@angular/platform-browser';
-var /** @type {?} */ ON_WEB_WORKER = new InjectionToken('WebWorker.onWebWorker');
+import { CommonModule, LOCATION_INITIALIZED, PlatformLocation, ɵPLATFORM_WORKER_APP_ID, ɵPLATFORM_WORKER_UI_ID } from '@angular/common';
+import { APP_INITIALIZER, ApplicationModule, ErrorHandler, EventEmitter, Injectable, InjectionToken, Injector, NgModule, NgZone, PLATFORM_ID, PLATFORM_INITIALIZER, RenderComponentType, RendererFactory2, Testability, Version, createPlatformFactory, isDevMode, platformCore, ɵAPP_ID_RANDOM_PROVIDER, ɵstringify } from '@angular/core';
+import { DOCUMENT, EVENT_MANAGER_PLUGINS, EventManager, HAMMER_GESTURE_CONFIG, HammerGestureConfig, ɵBROWSER_SANITIZATION_PROVIDERS, ɵBrowserDomAdapter, ɵBrowserGetTestability, ɵBrowserPlatformLocation, ɵDomAdapter, ɵDomEventsPlugin, ɵDomRendererFactory2, ɵDomSharedStylesHost, ɵHammerGesturesPlugin, ɵKeyEventsPlugin, ɵSharedStylesHost, ɵsetRootDomAdapter } from '@angular/platform-browser';
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+var ON_WEB_WORKER = new InjectionToken('WebWorker.onWebWorker');
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -71,6 +78,13 @@ var MessageBus = (function () {
     MessageBus.prototype.to = function (channel) { };
     return MessageBus;
 }());
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
 var RenderStore = (function () {
     function RenderStore() {
         this._nextIndex = 0;
@@ -125,12 +139,19 @@ RenderStore.decorators = [
  */
 RenderStore.ctorParameters = function () { return []; };
 /**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
  * Any type that does not need to be serialized (string, number, boolean)
  *
  * \@experimental WebWorker support in Angular is currently experimental.
  * @deprecated in v4. Use SerializerTypes.PRIMITIVE instead
  */
-var PRIMITIVE = 1 /* PRIMITIVE */;
+var PRIMITIVE = 1;
 var LocationType = (function () {
     /**
      * @param {?} href
@@ -299,6 +320,13 @@ Serializer.decorators = [
 Serializer.ctorParameters = function () { return [
     { type: RenderStore, },
 ]; };
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
 /**
  * \@experimental WebWorker support in Angular is experimental.
  * @abstract
@@ -494,6 +522,13 @@ var UiArguments = (function () {
     }
     return UiArguments;
 }());
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
 var PostMessageBusSink = (function () {
     /**
      * @param {?} _postMessageTarget
@@ -708,6 +743,13 @@ var _Channel = (function () {
     return _Channel;
 }());
 /**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
  * \@experimental WebWorker support in Angular is currently experimental.
  * @abstract
  */
@@ -853,8 +895,8 @@ var ServiceMessageBroker_ = (function (_super) {
  * You should not use these channels in your application code.
  */
 var RENDERER_2_CHANNEL = 'v2.ng-Renderer';
-var /** @type {?} */ EVENT_2_CHANNEL = 'v2.ng-Events';
-var /** @type {?} */ ROUTER_CHANNEL = 'ng-Router';
+var EVENT_2_CHANNEL = 'v2.ng-Events';
+var ROUTER_CHANNEL = 'ng-Router';
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -866,13 +908,13 @@ var MOUSE_EVENT_PROPERTIES = [
     'altKey', 'button', 'clientX', 'clientY', 'metaKey', 'movementX', 'movementY', 'offsetX',
     'offsetY', 'region', 'screenX', 'screenY', 'shiftKey'
 ];
-var /** @type {?} */ KEYBOARD_EVENT_PROPERTIES = [
+var KEYBOARD_EVENT_PROPERTIES = [
     'altkey', 'charCode', 'code', 'ctrlKey', 'isComposing', 'key', 'keyCode', 'location', 'metaKey',
     'repeat', 'shiftKey', 'which'
 ];
-var /** @type {?} */ TRANSITION_EVENT_PROPERTIES = ['propertyName', 'elapsedTime', 'pseudoElement'];
-var /** @type {?} */ EVENT_PROPERTIES = ['type', 'bubbles', 'cancelable'];
-var /** @type {?} */ NODES_WITH_VALUE = new Set(['input', 'select', 'option', 'button', 'li', 'meter', 'progress', 'param', 'textarea']);
+var TRANSITION_EVENT_PROPERTIES = ['propertyName', 'elapsedTime', 'pseudoElement'];
+var EVENT_PROPERTIES = ['type', 'bubbles', 'cancelable'];
+var NODES_WITH_VALUE = new Set(['input', 'select', 'option', 'button', 'li', 'meter', 'progress', 'param', 'textarea']);
 /**
  * @param {?} e
  * @return {?}
@@ -939,6 +981,13 @@ function serializeEvent(e, properties) {
     }
     return serialized;
 }
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
 var EventDispatcher = (function () {
     /**
      * @param {?} _sink
@@ -1064,6 +1113,13 @@ var EventDispatcher = (function () {
     };
     return EventDispatcher;
 }());
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
 var MessageBasedRenderer2 = (function () {
     /**
      * @param {?} _brokerFactory
@@ -1330,6 +1386,13 @@ MessageBasedRenderer2.ctorParameters = function () { return [
     { type: RendererFactory2, },
 ]; };
 /**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
  * Wrapper class that exposes the Worker
  * and underlying {\@link MessageBus} for lower level message passing.
  *
@@ -1368,7 +1431,7 @@ var WORKER_SCRIPT = new InjectionToken('WebWorkerScript');
  * \@experimental WebWorker support is currently experimental.
  */
 var WORKER_UI_STARTABLE_MESSAGING_SERVICE = new InjectionToken('WorkerRenderStartableMsgService');
-var /** @type {?} */ _WORKER_UI_PLATFORM_PROVIDERS = [
+var _WORKER_UI_PLATFORM_PROVIDERS = [
     { provide: NgZone, useFactory: createNgZone, deps: [] },
     MessageBasedRenderer2,
     { provide: WORKER_UI_STARTABLE_MESSAGING_SERVICE, useExisting: MessageBasedRenderer2, multi: true },
@@ -1478,9 +1541,28 @@ function spawnWebWorker(uri, instance) {
     instance.init(webWorker, bus);
 }
 /**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
+ * @module
+ * @description
+ * Entry point for all public APIs of the common package.
+ */
+/**
  * \@stable
  */
-var VERSION = new Version('4.0.0-rc.5-5c5c2ae');
+var VERSION = new Version('4.0.0-rc.5-bcc29ff');
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
 var MessageBasedPlatformLocation = (function () {
     /**
      * @param {?} _brokerFactory
@@ -1501,7 +1583,7 @@ var MessageBasedPlatformLocation = (function () {
      * @return {?}
      */
     MessageBasedPlatformLocation.prototype.start = function () {
-        var /** @type {?} */ P = 1 /* PRIMITIVE */;
+        var /** @type {?} */ P = 1;
         this._broker.registerMethod('getLocation', null, this._getLocation.bind(this), LocationType);
         this._broker.registerMethod('setPathname', [P], this._setPathname.bind(this));
         this._broker.registerMethod('pushState', [P, P, P], this._platformLocation.pushState.bind(this._platformLocation));
@@ -1545,6 +1627,13 @@ MessageBasedPlatformLocation.ctorParameters = function () { return [
     { type: Serializer, },
 ]; };
 /**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
  * A list of {\@link Provider}s. To use the router in a Worker enabled application you must
  * include these providers when setting up the render thread.
  * \@experimental
@@ -1563,6 +1652,13 @@ function initUiLocation(injector) {
         zone.runGuarded(function () { return injector.get(MessageBasedPlatformLocation).start(); });
     };
 }
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
 var WebWorkerPlatformLocation = (function (_super) {
     __extends(WebWorkerPlatformLocation, _super);
     /**
@@ -1725,6 +1821,13 @@ WebWorkerPlatformLocation.ctorParameters = function () { return [
     { type: Serializer, },
 ]; };
 /**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
  * Those providers should be added when the router is used in a worker context in addition to the
  * {\@link ROUTER_PROVIDERS} and after them.
  * \@experimental
@@ -1753,6 +1856,13 @@ function locationInitialized(platformLocation) {
 function appInitFnFactory(platformLocation, zone) {
     return function () { return zone.runGuarded(function () { return platformLocation.init(); }); };
 }
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
 var NamedEventEmitter = (function () {
     function NamedEventEmitter() {
     }
@@ -2187,6 +2297,13 @@ var WebWorkerRenderNode = (function () {
     }
     return WebWorkerRenderNode;
 }());
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
 /**
  * This adapter is required to log error messages.
  *
@@ -2873,6 +2990,13 @@ var WorkerDomAdapter = (function (_super) {
     return WorkerDomAdapter;
 }(ɵDomAdapter));
 /**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
  * \@experimental
  */
 var platformWorkerApp = createPlatformFactory(platformCore, 'workerApp', [{ provide: PLATFORM_ID, useValue: ɵPLATFORM_WORKER_APP_ID }]);
@@ -2883,7 +3007,7 @@ function errorHandler() {
     return new ErrorHandler();
 }
 // TODO(jteplitz602) remove this and compile with lib.webworker.d.ts (#3492)
-var /** @type {?} */ _postMessage = {
+var _postMessage = {
     postMessage: function (message, transferrables) {
         ((postMessage))(message, transferrables);
     }
@@ -2942,6 +3066,13 @@ WorkerAppModule.decorators = [
  */
 WorkerAppModule.ctorParameters = function () { return []; };
 /**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
  * Bootstraps the worker ui.
  *
  * \@experimental
@@ -2957,5 +3088,21 @@ function bootstrapWorkerUi(workerScriptUri, customProviders) {
     ].concat(customProviders));
     return Promise.resolve(platform);
 }
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
+ * @module
+ * @description
+ * Entry point for all public APIs of the platform-browser package.
+ */
+// This file only reexports content of the `src` folder. Keep it that way.
+/**
+ * Generated bundle index. Do not edit.
+ */
 export { VERSION, ClientMessageBroker, ClientMessageBrokerFactory, FnArg, UiArguments, MessageBus, PRIMITIVE, ServiceMessageBroker, ServiceMessageBrokerFactory, WORKER_UI_LOCATION_PROVIDERS, WORKER_APP_LOCATION_PROVIDERS, WorkerAppModule, platformWorkerApp, platformWorkerUi, bootstrapWorkerUi, ON_WEB_WORKER as ɵm, ClientMessageBrokerFactory_ as ɵa, RenderStore as ɵk, Serializer as ɵb, ServiceMessageBrokerFactory_ as ɵc, appInitFnFactory as ɵe, locationInitialized as ɵd, WebWorkerPlatformLocation as ɵj, WebWorkerRendererFactory2 as ɵl, createMessageBus as ɵg, errorHandler as ɵf, setupWebWorker as ɵh, _WORKER_UI_PLATFORM_PROVIDERS as ɵi };
 //# sourceMappingURL=platform-webworker.es5.js.map
