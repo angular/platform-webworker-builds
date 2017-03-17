@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.0.0-rc.3-480a407
+ * @license Angular v4.0.0-rc.4-fcaca45
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -122,10 +122,10 @@ RenderStore.ctorParameters = () => [];
 /**
  * Any type that does not need to be serialized (string, number, boolean)
  *
- * @experimental WebWorker support in Angular is currently experimental.
+ * \@experimental WebWorker support in Angular is currently experimental.
  * @deprecated in v4. Use SerializerTypes.PRIMITIVE instead
  */
-const /** @type {?} */ PRIMITIVE = 1 /* PRIMITIVE */;
+const PRIMITIVE = 1 /* PRIMITIVE */;
 class LocationType {
     /**
      * @param {?} href
@@ -800,23 +800,10 @@ class ServiceMessageBroker_ extends ServiceMessageBroker {
 }
 
 /**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
  * All channels used by angular's WebWorker components are listed here.
  * You should not use these channels in your application code.
  */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */ const /** @type {?} */ RENDERER_2_CHANNEL = 'v2.ng-Renderer';
+const RENDERER_2_CHANNEL = 'v2.ng-Renderer';
 const /** @type {?} */ EVENT_2_CHANNEL = 'v2.ng-Events';
 const /** @type {?} */ ROUTER_CHANNEL = 'ng-Router';
 
@@ -827,7 +814,7 @@ const /** @type {?} */ ROUTER_CHANNEL = 'ng-Router';
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-const /** @type {?} */ MOUSE_EVENT_PROPERTIES = [
+const MOUSE_EVENT_PROPERTIES = [
     'altKey', 'button', 'clientX', 'clientY', 'metaKey', 'movementX', 'movementY', 'offsetX',
     'offsetY', 'region', 'screenX', 'screenY', 'shiftKey'
 ];
@@ -1318,16 +1305,16 @@ WebWorkerInstance.decorators = [
  */
 WebWorkerInstance.ctorParameters = () => [];
 /**
- * @experimental WebWorker support is currently experimental.
+ * \@experimental WebWorker support is currently experimental.
  */
-const /** @type {?} */ WORKER_SCRIPT = new InjectionToken('WebWorkerScript');
+const WORKER_SCRIPT = new InjectionToken('WebWorkerScript');
 /**
  * A multi-provider used to automatically call the `start()` method after the service is
  * created.
  *
- * @experimental WebWorker support is currently experimental.
+ * \@experimental WebWorker support is currently experimental.
  */
-const /** @type {?} */ WORKER_UI_STARTABLE_MESSAGING_SERVICE = new InjectionToken('WorkerRenderStartableMsgService');
+const WORKER_UI_STARTABLE_MESSAGING_SERVICE = new InjectionToken('WorkerRenderStartableMsgService');
 const /** @type {?} */ _WORKER_UI_PLATFORM_PROVIDERS = [
     { provide: NgZone, useFactory: createNgZone, deps: [] },
     MessageBasedRenderer2,
@@ -1403,9 +1390,9 @@ function initWebWorkerRenderPlatform(injector) {
     };
 }
 /**
- * @experimental WebWorker support is currently experimental.
+ * \@experimental WebWorker support is currently experimental.
  */
-const /** @type {?} */ platformWorkerUi = createPlatformFactory(platformCore, 'workerUi', _WORKER_UI_PLATFORM_PROVIDERS);
+const platformWorkerUi = createPlatformFactory(platformCore, 'workerUi', _WORKER_UI_PLATFORM_PROVIDERS);
 /**
  * @return {?}
  */
@@ -1439,9 +1426,9 @@ function spawnWebWorker(uri, instance) {
 }
 
 /**
- * @stable
+ * \@stable
  */
-const /** @type {?} */ VERSION = new Version('4.0.0-rc.3-480a407');
+const VERSION = new Version('4.0.0-rc.4-fcaca45');
 
 class MessageBasedPlatformLocation {
     /**
@@ -1507,11 +1494,11 @@ MessageBasedPlatformLocation.ctorParameters = () => [
 ];
 
 /**
- * A list of {@link Provider}s. To use the router in a Worker enabled application you must
+ * A list of {\@link Provider}s. To use the router in a Worker enabled application you must
  * include these providers when setting up the render thread.
- * @experimental
+ * \@experimental
  */
-const /** @type {?} */ WORKER_UI_LOCATION_PROVIDERS = [
+const WORKER_UI_LOCATION_PROVIDERS = [
     MessageBasedPlatformLocation, ɵBrowserPlatformLocation,
     { provide: PLATFORM_INITIALIZER, useFactory: initUiLocation, multi: true, deps: [Injector] }
 ];
@@ -1674,10 +1661,10 @@ WebWorkerPlatformLocation.ctorParameters = () => [
 
 /**
  * Those providers should be added when the router is used in a worker context in addition to the
- * {@link ROUTER_PROVIDERS} and after them.
- * @experimental
+ * {\@link ROUTER_PROVIDERS} and after them.
+ * \@experimental
  */
-const /** @type {?} */ WORKER_APP_LOCATION_PROVIDERS = [
+const WORKER_APP_LOCATION_PROVIDERS = [
     { provide: PlatformLocation, useClass: WebWorkerPlatformLocation }, {
         provide: APP_INITIALIZER,
         useFactory: appInitFnFactory,
@@ -2178,6 +2165,12 @@ class WorkerDomAdapter extends ɵDomAdapter {
             console.groupEnd();
         }
     }
+    /**
+     * @param {?} nodeA
+     * @param {?} nodeB
+     * @return {?}
+     */
+    contains(nodeA, nodeB) { throw 'not implemented'; }
     /**
      * @param {?} element
      * @param {?} name
@@ -2800,9 +2793,9 @@ class WorkerDomAdapter extends ɵDomAdapter {
 }
 
 /**
- * @experimental
+ * \@experimental
  */
-const /** @type {?} */ platformWorkerApp = createPlatformFactory(platformCore, 'workerApp', [{ provide: PLATFORM_ID, useValue: ɵPLATFORM_WORKER_APP_ID }]);
+const platformWorkerApp = createPlatformFactory(platformCore, 'workerApp', [{ provide: PLATFORM_ID, useValue: ɵPLATFORM_WORKER_APP_ID }]);
 /**
  * @return {?}
  */
@@ -2884,3 +2877,4 @@ function bootstrapWorkerUi(workerScriptUri, customProviders = []) {
 }
 
 export { VERSION, ClientMessageBroker, ClientMessageBrokerFactory, FnArg, UiArguments, MessageBus, PRIMITIVE, ServiceMessageBroker, ServiceMessageBrokerFactory, WORKER_UI_LOCATION_PROVIDERS, WORKER_APP_LOCATION_PROVIDERS, WorkerAppModule, platformWorkerApp, platformWorkerUi, bootstrapWorkerUi, ON_WEB_WORKER as ɵm, ClientMessageBrokerFactory_ as ɵa, RenderStore as ɵk, Serializer as ɵb, ServiceMessageBrokerFactory_ as ɵc, appInitFnFactory as ɵe, locationInitialized as ɵd, WebWorkerPlatformLocation as ɵj, WebWorkerRendererFactory2 as ɵl, createMessageBus as ɵg, errorHandler as ɵf, setupWebWorker as ɵh, _WORKER_UI_PLATFORM_PROVIDERS as ɵi };
+//# sourceMappingURL=platform-webworker.js.map

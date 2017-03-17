@@ -17,6 +17,7 @@ export declare class WorkerDomAdapter extends DomAdapter {
     log(error: any): void;
     logGroup(error: any): void;
     logGroupEnd(): void;
+    contains(nodeA: any, nodeB: any): boolean;
     hasProperty(element: any, name: string): boolean;
     setProperty(el: Element, name: string, value: any): void;
     getProperty(el: Element, name: string): any;
