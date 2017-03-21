@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.0.0-rc.5-e59e5e2
+ * @license Angular v4.0.0-rc.5-5efc860
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1503,7 +1503,7 @@ function spawnWebWorker(uri, instance) {
 /**
  * \@stable
  */
-const VERSION = new Version('4.0.0-rc.5-e59e5e2');
+const VERSION = new Version('4.0.0-rc.5-5efc860');
 
 /**
  * @license
@@ -2847,7 +2847,7 @@ class WorkerDomAdapter extends ɵDomAdapter {
     /**
      * @return {?}
      */
-    getUserAgent() { throw 'not implemented'; }
+    getUserAgent() { return 'Fake user agent'; }
     /**
      * @param {?} element
      * @param {?} name
