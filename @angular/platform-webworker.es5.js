@@ -4,7 +4,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 /**
- * @license Angular v4.1.0-beta.1-bccfaa4
+ * @license Angular v4.1.0-beta.1-5293794
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -128,7 +128,9 @@ var RenderStore = (function () {
      * @param {?} obj
      * @return {?}
      */
-    RenderStore.prototype.serialize = function (obj) { return obj == null ? null : this._lookupByObject.get(obj); };
+    RenderStore.prototype.serialize = function (obj) {
+        return obj == null ? null : this._lookupByObject.get(obj);
+    };
     return RenderStore;
 }());
 RenderStore.decorators = [
@@ -199,7 +201,7 @@ var Serializer = (function () {
             return obj.map(function (v) { return _this.serialize(v, type); });
         }
         if (type === 2 /* RENDER_STORE_OBJECT */) {
-            return this._renderStore.serialize(obj);
+            return ((this._renderStore.serialize(obj)));
         }
         if (type === RenderComponentType) {
             return this._serializeRenderComponentType(obj);
@@ -447,7 +449,7 @@ var ClientMessageBroker_ = (function (_super) {
         var /** @type {?} */ promise;
         var /** @type {?} */ id = null;
         if (returnType != null) {
-            var /** @type {?} */ completer_1;
+            var /** @type {?} */ completer_1 = ((undefined));
             promise = new Promise(function (resolve, reject) { completer_1 = { resolve: resolve, reject: reject }; });
             id = this._generateMessageId(args.method);
             this._pending.set(id, completer_1);
@@ -479,13 +481,13 @@ var ClientMessageBroker_ = (function (_super) {
      */
     ClientMessageBroker_.prototype._handleMessage = function (message) {
         if (message.type === 'result' || message.type === 'error') {
-            var /** @type {?} */ id = message.id;
+            var /** @type {?} */ id = ((message.id));
             if (this._pending.has(id)) {
                 if (message.type === 'result') {
-                    this._pending.get(id).resolve(message.value);
+                    ((this._pending.get(id))).resolve(message.value);
                 }
                 else {
-                    this._pending.get(id).reject(message.value);
+                    ((this._pending.get(id))).reject(message.value);
                 }
                 this._pending.delete(id);
             }
@@ -869,7 +871,7 @@ var ServiceMessageBroker_ = (function (_super) {
      */
     ServiceMessageBroker_.prototype._handleMessage = function (message) {
         if (this._methods.has(message.method)) {
-            this._methods.get(message.method)(message);
+            ((this._methods.get(message.method)))(message);
         }
     };
     /**
@@ -1555,7 +1557,7 @@ function spawnWebWorker(uri, instance) {
 /**
  * \@stable
  */
-var VERSION = new Version('4.1.0-beta.1-bccfaa4');
+var VERSION = new Version('4.1.0-beta.1-5293794');
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -1671,7 +1673,7 @@ var WebWorkerPlatformLocation = (function (_super) {
         _this._serializer = _serializer;
         _this._popStateListeners = [];
         _this._hashChangeListeners = [];
-        _this._location = null;
+        _this._location = ((null));
         _this._broker = brokerFactory.createMessageBroker(ROUTER_CHANNEL);
         _this._channelSource = bus.from(ROUTER_CHANNEL);
         _this._channelSource.subscribe({
@@ -1703,8 +1705,7 @@ var WebWorkerPlatformLocation = (function (_super) {
     WebWorkerPlatformLocation.prototype.init = function () {
         var _this = this;
         var /** @type {?} */ args = new UiArguments('getLocation');
-        return this._broker.runOnService(args, LocationType)
-            .then(function (val) {
+        return ((this._broker.runOnService(args, LocationType))).then(function (val) {
             _this._location = val;
             _this.initializedResolve();
             return true;
@@ -1730,7 +1731,7 @@ var WebWorkerPlatformLocation = (function (_super) {
         /**
          * @return {?}
          */
-        get: function () { return this._location ? this._location.pathname : null; },
+        get: function () { return this._location ? ((this._location.pathname)) : '<unknown>'; },
         /**
          * @param {?} newPath
          * @return {?}
@@ -1751,7 +1752,7 @@ var WebWorkerPlatformLocation = (function (_super) {
         /**
          * @return {?}
          */
-        get: function () { return this._location ? this._location.search : null; },
+        get: function () { return this._location ? this._location.search : '<unknown>'; },
         enumerable: true,
         configurable: true
     });
@@ -1759,7 +1760,7 @@ var WebWorkerPlatformLocation = (function (_super) {
         /**
          * @return {?}
          */
-        get: function () { return this._location ? this._location.hash : null; },
+        get: function () { return this._location ? this._location.hash : '<unknown>'; },
         enumerable: true,
         configurable: true
     });
@@ -2254,8 +2255,7 @@ var WebWorkerRenderer2 = (function () {
     WebWorkerRenderer2.prototype.listen = function (target, eventName, listener) {
         var _this = this;
         var /** @type {?} */ unlistenId = this._rendererFactory.allocateId();
-        var _a = typeof target === 'string' ?
-            [null, target, target + ":" + eventName] :
+        var _a = typeof target === 'string' ? [null, target, target + ":" + eventName] :
             [target, null, null], targetEl = _a[0], targetName = _a[1], fullName = _a[2];
         if (fullName) {
             this._rendererFactory.globalEvents.listen(fullName, listener);

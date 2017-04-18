@@ -29,7 +29,7 @@ export declare class ClientMessageBrokerFactory_ extends ClientMessageBrokerFact
  * @experimental WebWorker support in Angular is experimental.
  */
 export declare abstract class ClientMessageBroker {
-    abstract runOnService(args: UiArguments, returnType: Type<any> | SerializerTypes): Promise<any>;
+    abstract runOnService(args: UiArguments, returnType: Type<any> | SerializerTypes | null): Promise<any> | null;
 }
 export declare class ClientMessageBroker_ extends ClientMessageBroker {
     channel: any;
@@ -37,7 +37,7 @@ export declare class ClientMessageBroker_ extends ClientMessageBroker {
     private _sink;
     constructor(messageBus: MessageBus, _serializer: Serializer, channel: any);
     private _generateMessageId(name);
-    runOnService(args: UiArguments, returnType: Type<any> | SerializerTypes): Promise<any>;
+    runOnService(args: UiArguments, returnType: Type<any> | SerializerTypes): Promise<any> | null;
     private _handleMessage(message);
 }
 /**

@@ -6,5 +6,5 @@ export declare class RenderStore {
     store(obj: any, id: number): void;
     remove(obj: any): void;
     deserialize(id: number): any;
-    serialize(obj: any): number;
+    serialize(obj: any): number | null | undefined;
 }

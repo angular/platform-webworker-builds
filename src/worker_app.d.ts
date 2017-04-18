@@ -3,7 +3,7 @@ import { MessageBus } from './web_workers/shared/message_bus';
 /**
  * @experimental
  */
-export declare const platformWorkerApp: (extraProviders?: Provider[]) => PlatformRef;
+export declare const platformWorkerApp: (extraProviders?: Provider[] | undefined) => PlatformRef;
 export declare function errorHandler(): ErrorHandler;
 export declare function createMessageBus(zone: NgZone): MessageBus;
 export declare function setupWebWorker(): void;
