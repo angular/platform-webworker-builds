@@ -23,7 +23,7 @@ export declare class WebWorkerRendererFactory2 implements RendererFactory2 {
     globalEvents: NamedEventEmitter;
     private _messageBroker;
     constructor(messageBrokerFactory: ClientMessageBrokerFactory, bus: MessageBus, _serializer: Serializer, renderStore: RenderStore);
-    createRenderer(element: any, type: RendererType2): Renderer2;
+    createRenderer(element: any, type: RendererType2 | null): Renderer2;
     callUI(fnName: string, fnArgs: FnArg[]): void;
     allocateNode(): WebWorkerRenderNode;
     freeNode(node: any): void;

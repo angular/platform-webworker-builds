@@ -27,4 +27,4 @@ export declare const _WORKER_UI_PLATFORM_PROVIDERS: Provider[];
 /**
  * @experimental WebWorker support is currently experimental.
  */
-export declare const platformWorkerUi: (extraProviders?: Provider[]) => PlatformRef;
+export declare const platformWorkerUi: (extraProviders?: Provider[] | undefined) => PlatformRef;

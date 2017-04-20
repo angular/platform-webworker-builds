@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.1.0-beta.1-b46aba9
+ * @license Angular v4.1.0-beta.1-47acf3d
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -123,7 +123,9 @@ class RenderStore {
      * @param {?} obj
      * @return {?}
      */
-    serialize(obj) { return obj == null ? null : this._lookupByObject.get(obj); }
+    serialize(obj) {
+        return obj == null ? null : this._lookupByObject.get(obj);
+    }
 }
 RenderStore.decorators = [
     { type: Injectable },
@@ -191,7 +193,7 @@ class Serializer {
             return obj.map(v => this.serialize(v, type));
         }
         if (type === 2 /* RENDER_STORE_OBJECT */) {
-            return this._renderStore.serialize(obj);
+            return ((this._renderStore.serialize(obj)));
         }
         if (type === RenderComponentType) {
             return this._serializeRenderComponentType(obj);
@@ -424,7 +426,7 @@ class ClientMessageBroker_ extends ClientMessageBroker {
         let /** @type {?} */ promise;
         let /** @type {?} */ id = null;
         if (returnType != null) {
-            let /** @type {?} */ completer;
+            let /** @type {?} */ completer = ((undefined));
             promise = new Promise((resolve, reject) => { completer = { resolve, reject }; });
             id = this._generateMessageId(args.method);
             this._pending.set(id, completer);
@@ -456,13 +458,13 @@ class ClientMessageBroker_ extends ClientMessageBroker {
      */
     _handleMessage(message) {
         if (message.type === 'result' || message.type === 'error') {
-            const /** @type {?} */ id = message.id;
+            const /** @type {?} */ id = ((message.id));
             if (this._pending.has(id)) {
                 if (message.type === 'result') {
-                    this._pending.get(id).resolve(message.value);
+                    ((this._pending.get(id))).resolve(message.value);
                 }
                 else {
-                    this._pending.get(id).reject(message.value);
+                    ((this._pending.get(id))).reject(message.value);
                 }
                 this._pending.delete(id);
             }
@@ -821,7 +823,7 @@ class ServiceMessageBroker_ extends ServiceMessageBroker {
      */
     _handleMessage(message) {
         if (this._methods.has(message.method)) {
-            this._methods.get(message.method)(message);
+            ((this._methods.get(message.method)))(message);
         }
     }
     /**
@@ -1503,7 +1505,7 @@ function spawnWebWorker(uri, instance) {
 /**
  * \@stable
  */
-const VERSION = new Version('4.1.0-beta.1-b46aba9');
+const VERSION = new Version('4.1.0-beta.1-47acf3d');
 
 /**
  * @license
@@ -1620,7 +1622,7 @@ class WebWorkerPlatformLocation extends PlatformLocation {
         this._serializer = _serializer;
         this._popStateListeners = [];
         this._hashChangeListeners = [];
-        this._location = null;
+        this._location = ((null));
         this._broker = brokerFactory.createMessageBroker(ROUTER_CHANNEL);
         this._channelSource = bus.from(ROUTER_CHANNEL);
         this._channelSource.subscribe({
@@ -1650,8 +1652,7 @@ class WebWorkerPlatformLocation extends PlatformLocation {
      */
     init() {
         const /** @type {?} */ args = new UiArguments('getLocation');
-        return this._broker.runOnService(args, LocationType)
-            .then((val) => {
+        return ((this._broker.runOnService(args, LocationType))).then((val) => {
             this._location = val;
             this.initializedResolve();
             return true;
@@ -1676,15 +1677,15 @@ class WebWorkerPlatformLocation extends PlatformLocation {
     /**
      * @return {?}
      */
-    get pathname() { return this._location ? this._location.pathname : null; }
+    get pathname() { return this._location ? ((this._location.pathname)) : '<unknown>'; }
     /**
      * @return {?}
      */
-    get search() { return this._location ? this._location.search : null; }
+    get search() { return this._location ? this._location.search : '<unknown>'; }
     /**
      * @return {?}
      */
-    get hash() { return this._location ? this._location.hash : null; }
+    get hash() { return this._location ? this._location.hash : '<unknown>'; }
     /**
      * @param {?} newPath
      * @return {?}
@@ -2184,8 +2185,7 @@ class WebWorkerRenderer2 {
      */
     listen(target, eventName, listener) {
         const /** @type {?} */ unlistenId = this._rendererFactory.allocateId();
-        const [targetEl, targetName, fullName] = typeof target === 'string' ?
-            [null, target, `${target}:${eventName}`] :
+        const [targetEl, targetName, fullName] = typeof target === 'string' ? [null, target, `${target}:${eventName}`] :
             [target, null, null];
         if (fullName) {
             this._rendererFactory.globalEvents.listen(fullName, listener);
