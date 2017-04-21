@@ -8,6 +8,14 @@
 import { Type } from '@angular/core';
 import { RenderStore } from './render_store';
 /**
+ * @experimental WebWorker support in Angular is currently experimental.
+ */
+export declare const enum SerializerTypes {
+    RENDERER_TYPE_2 = 0,
+    PRIMITIVE = 1,
+    RENDER_STORE_OBJECT = 2,
+}
+/**
  * Any type that does not need to be serialized (string, number, boolean)
  *
  * @experimental WebWorker support in Angular is currently experimental.
@@ -25,14 +33,6 @@ export declare class LocationType {
     hash: string;
     origin: string;
     constructor(href: string, protocol: string, host: string, hostname: string, port: string, pathname: string, search: string, hash: string, origin: string);
-}
-/**
- * @experimental WebWorker support in Angular is currently experimental.
- */
-export declare const enum SerializerTypes {
-    RENDERER_TYPE_2 = 0,
-    PRIMITIVE = 1,
-    RENDER_STORE_OBJECT = 2,
 }
 export declare class Serializer {
     private _renderStore;
