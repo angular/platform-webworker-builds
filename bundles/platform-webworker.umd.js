@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.1.0-rc.0-46b20be
+ * @license Angular v4.1.0-ed4eaf3
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -15,7 +15,7 @@ var __extends = (undefined && undefined.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 /**
- * @license Angular v4.1.0-rc.0-46b20be
+ * @license Angular v4.1.0-ed4eaf3
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1565,7 +1565,7 @@ function spawnWebWorker(uri, instance) {
 /**
  * \@stable
  */
-var VERSION = new _angular_core.Version('4.1.0-rc.0-46b20be');
+var VERSION = new _angular_core.Version('4.1.0-ed4eaf3');
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -1962,6 +1962,14 @@ var WebWorkerRendererFactory2 = (function () {
         ]);
         return renderer;
     };
+    /**
+     * @return {?}
+     */
+    WebWorkerRendererFactory2.prototype.begin = function () { };
+    /**
+     * @return {?}
+     */
+    WebWorkerRendererFactory2.prototype.end = function () { };
     /**
      * @param {?} fnName
      * @param {?} fnArgs
