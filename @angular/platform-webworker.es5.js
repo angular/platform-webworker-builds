@@ -4,7 +4,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 /**
- * @license Angular v4.1.0-5ba8c14
+ * @license Angular v4.1.0-71f5b73
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1557,7 +1557,7 @@ function spawnWebWorker(uri, instance) {
 /**
  * \@stable
  */
-var VERSION = new Version('4.1.0-5ba8c14');
+var VERSION = new Version('4.1.0-71f5b73');
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -1829,8 +1829,9 @@ WebWorkerPlatformLocation.ctorParameters = function () { return [
  * found in the LICENSE file at https://angular.io/license
  */
 /**
- * Those providers should be added when the router is used in a worker context in addition to the
- * {\@link ROUTER_PROVIDERS} and after them.
+ * The {\@link PlatformLocation} providers that should be added when the {\@link Location} is used in
+ * a worker context.
+ *
  * \@experimental
  */
 var WORKER_APP_LOCATION_PROVIDERS = [
