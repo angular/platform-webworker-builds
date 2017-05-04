@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.1.0-8931e71
+ * @license Angular v4.1.0-1092292
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1505,7 +1505,7 @@ function spawnWebWorker(uri, instance) {
 /**
  * \@stable
  */
-const VERSION = new Version('4.1.0-8931e71');
+const VERSION = new Version('4.1.0-1092292');
 
 /**
  * @license
@@ -1887,6 +1887,14 @@ class WebWorkerRendererFactory2 {
         ]);
         return renderer;
     }
+    /**
+     * @return {?}
+     */
+    begin() { }
+    /**
+     * @return {?}
+     */
+    end() { }
     /**
      * @param {?} fnName
      * @param {?} fnArgs
