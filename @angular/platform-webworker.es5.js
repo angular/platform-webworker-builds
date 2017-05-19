@@ -9,7 +9,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 /**
- * @license Angular v4.2.0-beta.1-7d9f96a
+ * @license Angular v4.2.0-beta.1-b836aca
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1562,7 +1562,7 @@ function spawnWebWorker(uri, instance) {
 /**
  * \@stable
  */
-var VERSION = new Version('4.2.0-beta.1-7d9f96a');
+var VERSION = new Version('4.2.0-beta.1-b836aca');
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
