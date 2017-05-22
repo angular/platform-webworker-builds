@@ -1,6 +1,6 @@
 {
   "name": "@angular/platform-webworker",
-  "version": "4.2.0-rc.0-98849de",
+  "version": "4.2.0-rc.0-11c10b2",
   "description": "Angular - library for using Angular in a web browser with web workers",
   "main": "./bundles/platform-webworker.umd.js",
   "module": "./@angular/platform-webworker.es5.js",
@@ -9,9 +9,9 @@
   "author": "angular",
   "license": "MIT",
   "peerDependencies": {
-    "@angular/common": "4.2.0-rc.0-98849de",
-    "@angular/core": "4.2.0-rc.0-98849de",
-    "@angular/platform-browser": "4.2.0-rc.0-98849de"
+    "@angular/common": "4.2.0-rc.0-11c10b2",
+    "@angular/core": "4.2.0-rc.0-11c10b2",
+    "@angular/platform-browser": "4.2.0-rc.0-11c10b2"
   },
   "repository": {
     "type": "git",
