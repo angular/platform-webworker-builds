@@ -1,15 +1,6 @@
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
+import * as tslib_1 from "tslib";
 /**
- * @license Angular v4.2.0-rc.0-1651a8f
+ * @license Angular v4.2.0-rc.0-fa809ec
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -352,7 +343,7 @@ var ClientMessageBrokerFactory = (function () {
     return ClientMessageBrokerFactory;
 }());
 var ClientMessageBrokerFactory_ = (function (_super) {
-    __extends(ClientMessageBrokerFactory_, _super);
+    tslib_1.__extends(ClientMessageBrokerFactory_, _super);
     /**
      * @param {?} _messageBus
      * @param {?} _serializer
@@ -403,7 +394,7 @@ var ClientMessageBroker = (function () {
     return ClientMessageBroker;
 }());
 var ClientMessageBroker_ = (function (_super) {
-    __extends(ClientMessageBroker_, _super);
+    tslib_1.__extends(ClientMessageBroker_, _super);
     /**
      * @param {?} messageBus
      * @param {?} _serializer
@@ -774,7 +765,7 @@ var ServiceMessageBrokerFactory = (function () {
     return ServiceMessageBrokerFactory;
 }());
 var ServiceMessageBrokerFactory_ = (function (_super) {
-    __extends(ServiceMessageBrokerFactory_, _super);
+    tslib_1.__extends(ServiceMessageBrokerFactory_, _super);
     /**
      * @param {?} _messageBus
      * @param {?} _serializer
@@ -831,7 +822,7 @@ var ServiceMessageBroker = (function () {
     return ServiceMessageBroker;
 }());
 var ServiceMessageBroker_ = (function (_super) {
-    __extends(ServiceMessageBroker_, _super);
+    tslib_1.__extends(ServiceMessageBroker_, _super);
     /**
      * @param {?} messageBus
      * @param {?} _serializer
@@ -1562,7 +1553,7 @@ function spawnWebWorker(uri, instance) {
 /**
  * \@stable
  */
-var VERSION = new Version('4.2.0-rc.0-1651a8f');
+var VERSION = new Version('4.2.0-rc.0-fa809ec');
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -1667,7 +1658,7 @@ function initUiLocation(injector) {
  * found in the LICENSE file at https://angular.io/license
  */
 var WebWorkerPlatformLocation = (function (_super) {
-    __extends(WebWorkerPlatformLocation, _super);
+    tslib_1.__extends(WebWorkerPlatformLocation, _super);
     /**
      * @param {?} brokerFactory
      * @param {?} bus
@@ -2324,7 +2315,7 @@ var WebWorkerRenderNode = (function () {
  * Note: other methods all throw as the DOM is not accessible directly in web worker context.
  */
 var WorkerDomAdapter = (function (_super) {
-    __extends(WorkerDomAdapter, _super);
+    tslib_1.__extends(WorkerDomAdapter, _super);
     function WorkerDomAdapter() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
