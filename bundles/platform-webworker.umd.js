@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.2.0-33df13a
+ * @license Angular v4.2.0-65d49d5
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -36,7 +36,7 @@ function __extends(d, b) {
 }
 
 /**
- * @license Angular v4.2.0-33df13a
+ * @license Angular v4.2.0-65d49d5
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1586,7 +1586,7 @@ function spawnWebWorker(uri, instance) {
 /**
  * \@stable
  */
-var VERSION = new _angular_core.Version('4.2.0-33df13a');
+var VERSION = new _angular_core.Version('4.2.0-65d49d5');
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
