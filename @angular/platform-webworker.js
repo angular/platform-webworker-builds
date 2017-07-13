@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.3.0-rc.0-45ffe54
+ * @license Angular v4.3.0-rc.0-72143e8
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1505,7 +1505,7 @@ function spawnWebWorker(uri, instance) {
 /**
  * \@stable
  */
-const VERSION = new Version('4.3.0-rc.0-45ffe54');
+const VERSION = new Version('4.3.0-rc.0-72143e8');
 
 /**
  * @license
