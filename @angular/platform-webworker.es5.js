@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 /**
- * @license Angular v5.0.0-beta.0-086f4aa
+ * @license Angular v5.0.0-beta.0-fae47d8
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1528,7 +1528,7 @@ function spawnWebWorker(uri, instance) {
 /**
  * \@stable
  */
-var VERSION = new Version('5.0.0-beta.0-086f4aa');
+var VERSION = new Version('5.0.0-beta.0-fae47d8');
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
