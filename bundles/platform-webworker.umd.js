@@ -1,5 +1,5 @@
 /**
- * @license Angular v5.0.0-beta.2-685cc26
+ * @license Angular v5.0.0-beta.2-fcadbf4
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -36,7 +36,7 @@ function __extends(d, b) {
 }
 
 /**
- * @license Angular v5.0.0-beta.2-685cc26
+ * @license Angular v5.0.0-beta.2-fcadbf4
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1435,30 +1435,51 @@ var WORKER_SCRIPT = new _angular_core.InjectionToken('WebWorkerScript');
 var WORKER_UI_STARTABLE_MESSAGING_SERVICE = new _angular_core.InjectionToken('WorkerRenderStartableMsgService');
 var _WORKER_UI_PLATFORM_PROVIDERS = [
     { provide: _angular_core.NgZone, useFactory: createNgZone, deps: [] },
-    MessageBasedRenderer2,
+    {
+        provide: MessageBasedRenderer2,
+        deps: [ServiceMessageBrokerFactory, MessageBus, Serializer, RenderStore, _angular_core.RendererFactory2]
+    },
     { provide: WORKER_UI_STARTABLE_MESSAGING_SERVICE, useExisting: MessageBasedRenderer2, multi: true },
     _angular_platformBrowser.ɵBROWSER_SANITIZATION_PROVIDERS,
     { provide: _angular_core.ErrorHandler, useFactory: _exceptionHandler, deps: [] },
     { provide: _angular_platformBrowser.DOCUMENT, useFactory: _document, deps: [] },
     // TODO(jteplitz602): Investigate if we definitely need EVENT_MANAGER on the render thread
     // #5298
-    { provide: _angular_platformBrowser.EVENT_MANAGER_PLUGINS, useClass: _angular_platformBrowser.ɵDomEventsPlugin, multi: true },
-    { provide: _angular_platformBrowser.EVENT_MANAGER_PLUGINS, useClass: _angular_platformBrowser.ɵKeyEventsPlugin, multi: true },
-    { provide: _angular_platformBrowser.EVENT_MANAGER_PLUGINS, useClass: _angular_platformBrowser.ɵHammerGesturesPlugin, multi: true },
-    { provide: _angular_platformBrowser.HAMMER_GESTURE_CONFIG, useClass: _angular_platformBrowser.HammerGestureConfig },
+    {
+        provide: _angular_platformBrowser.EVENT_MANAGER_PLUGINS,
+        useClass: _angular_platformBrowser.ɵDomEventsPlugin,
+        deps: [_angular_platformBrowser.DOCUMENT, _angular_core.NgZone],
+        multi: true
+    },
+    { provide: _angular_platformBrowser.EVENT_MANAGER_PLUGINS, useClass: _angular_platformBrowser.ɵKeyEventsPlugin, deps: [_angular_platformBrowser.DOCUMENT], multi: true },
+    {
+        provide: _angular_platformBrowser.EVENT_MANAGER_PLUGINS,
+        useClass: _angular_platformBrowser.ɵHammerGesturesPlugin,
+        deps: [_angular_platformBrowser.DOCUMENT, _angular_platformBrowser.HAMMER_GESTURE_CONFIG],
+        multi: true
+    },
+    { provide: _angular_platformBrowser.HAMMER_GESTURE_CONFIG, useClass: _angular_platformBrowser.HammerGestureConfig, deps: [] },
     _angular_core.ɵAPP_ID_RANDOM_PROVIDER,
-    _angular_platformBrowser.ɵDomRendererFactory2,
+    { provide: _angular_platformBrowser.ɵDomRendererFactory2, deps: [_angular_platformBrowser.EventManager, _angular_platformBrowser.ɵDomSharedStylesHost] },
     { provide: _angular_core.RendererFactory2, useExisting: _angular_platformBrowser.ɵDomRendererFactory2 },
     { provide: _angular_platformBrowser.ɵSharedStylesHost, useExisting: _angular_platformBrowser.ɵDomSharedStylesHost },
-    { provide: ServiceMessageBrokerFactory, useClass: ServiceMessageBrokerFactory_ },
-    { provide: ClientMessageBrokerFactory, useClass: ClientMessageBrokerFactory_ },
-    Serializer,
+    {
+        provide: ServiceMessageBrokerFactory,
+        useClass: ServiceMessageBrokerFactory_,
+        deps: [MessageBus, Serializer]
+    },
+    {
+        provide: ClientMessageBrokerFactory,
+        useClass: ClientMessageBrokerFactory_,
+        deps: [MessageBus, Serializer]
+    },
+    { provide: Serializer, deps: [RenderStore] },
     { provide: ON_WEB_WORKER, useValue: false },
-    RenderStore,
-    _angular_platformBrowser.ɵDomSharedStylesHost,
-    _angular_core.Testability,
-    _angular_platformBrowser.EventManager,
-    WebWorkerInstance,
+    { provide: RenderStore, deps: [] },
+    { provide: _angular_platformBrowser.ɵDomSharedStylesHost, deps: [_angular_platformBrowser.DOCUMENT] },
+    { provide: _angular_core.Testability, deps: [_angular_core.NgZone] },
+    { provide: _angular_platformBrowser.EventManager, deps: [_angular_platformBrowser.EVENT_MANAGER_PLUGINS, _angular_core.NgZone] },
+    { provide: WebWorkerInstance, deps: [] },
     {
         provide: _angular_core.PLATFORM_INITIALIZER,
         useFactory: initWebWorkerRenderPlatform,
@@ -1561,7 +1582,7 @@ function spawnWebWorker(uri, instance) {
 /**
  * \@stable
  */
-var VERSION = new _angular_core.Version('5.0.0-beta.2-685cc26');
+var VERSION = new _angular_core.Version('5.0.0-beta.2-fcadbf4');
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -1643,10 +1664,12 @@ MessageBasedPlatformLocation.ctorParameters = function () { return [
  * include these providers when setting up the render thread.
  * \@experimental
  */
-var WORKER_UI_LOCATION_PROVIDERS = [
-    MessageBasedPlatformLocation, _angular_platformBrowser.ɵBrowserPlatformLocation,
+var WORKER_UI_LOCATION_PROVIDERS = ([
+    { provide: MessageBasedPlatformLocation, deps: [ServiceMessageBrokerFactory,
+            _angular_platformBrowser.ɵBrowserPlatformLocation, MessageBus, Serializer] },
+    { provide: _angular_platformBrowser.ɵBrowserPlatformLocation, deps: [_angular_common.DOCUMENT] },
     { provide: _angular_core.PLATFORM_INITIALIZER, useFactory: initUiLocation, multi: true, deps: [_angular_core.Injector] }
-];
+]);
 /**
  * @param {?} injector
  * @return {?}
