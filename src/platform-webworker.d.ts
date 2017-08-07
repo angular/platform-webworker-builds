@@ -5,7 +5,7 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import { PlatformRef, StaticProvider } from '@angular/core';
+import { PlatformRef, Provider } from '@angular/core';
 export { VERSION } from './version';
 export { ClientMessageBroker, ClientMessageBrokerFactory, FnArg, UiArguments } from './web_workers/shared/client_message_broker';
 export { MessageBus, MessageBusSink, MessageBusSource } from './web_workers/shared/message_bus';
@@ -20,4 +20,4 @@ export { platformWorkerUi } from './worker_render';
  *
  * @experimental
  */
-export declare function bootstrapWorkerUi(workerScriptUri: string, customProviders?: StaticProvider[]): Promise<PlatformRef>;
+export declare function bootstrapWorkerUi(workerScriptUri: string, customProviders?: Provider[]): Promise<PlatformRef>;
