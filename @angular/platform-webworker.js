@@ -1,11 +1,11 @@
 /**
- * @license Angular v5.0.0-beta.2-f69561b
+ * @license Angular v5.0.0-beta.2-f0a5501
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
-import { CommonModule, LOCATION_INITIALIZED, PlatformLocation, ɵPLATFORM_WORKER_APP_ID, ɵPLATFORM_WORKER_UI_ID } from '@angular/common';
+import { CommonModule, DOCUMENT, LOCATION_INITIALIZED, PlatformLocation, ɵPLATFORM_WORKER_APP_ID, ɵPLATFORM_WORKER_UI_ID } from '@angular/common';
 import { APP_INITIALIZER, ApplicationModule, ErrorHandler, EventEmitter, Injectable, InjectionToken, Injector, NgModule, NgZone, PLATFORM_ID, PLATFORM_INITIALIZER, RenderComponentType, RendererFactory2, Testability, Version, createPlatformFactory, isDevMode, platformCore, ɵAPP_ID_RANDOM_PROVIDER, ɵstringify } from '@angular/core';
-import { DOCUMENT, EVENT_MANAGER_PLUGINS, EventManager, HAMMER_GESTURE_CONFIG, HammerGestureConfig, ɵBROWSER_SANITIZATION_PROVIDERS, ɵBrowserDomAdapter, ɵBrowserGetTestability, ɵBrowserPlatformLocation, ɵDomAdapter, ɵDomEventsPlugin, ɵDomRendererFactory2, ɵDomSharedStylesHost, ɵHammerGesturesPlugin, ɵKeyEventsPlugin, ɵSharedStylesHost, ɵsetRootDomAdapter } from '@angular/platform-browser';
+import { DOCUMENT as DOCUMENT$1, EVENT_MANAGER_PLUGINS, EventManager, HAMMER_GESTURE_CONFIG, HammerGestureConfig, ɵBROWSER_SANITIZATION_PROVIDERS, ɵBrowserDomAdapter, ɵBrowserGetTestability, ɵBrowserPlatformLocation, ɵDomAdapter, ɵDomEventsPlugin, ɵDomRendererFactory2, ɵDomSharedStylesHost, ɵHammerGesturesPlugin, ɵKeyEventsPlugin, ɵSharedStylesHost, ɵsetRootDomAdapter } from '@angular/platform-browser';
 
 /**
  * @fileoverview added by tsickle
@@ -1354,30 +1354,51 @@ const WORKER_SCRIPT = new InjectionToken('WebWorkerScript');
 const WORKER_UI_STARTABLE_MESSAGING_SERVICE = new InjectionToken('WorkerRenderStartableMsgService');
 const _WORKER_UI_PLATFORM_PROVIDERS = [
     { provide: NgZone, useFactory: createNgZone, deps: [] },
-    MessageBasedRenderer2,
+    {
+        provide: MessageBasedRenderer2,
+        deps: [ServiceMessageBrokerFactory, MessageBus, Serializer, RenderStore, RendererFactory2]
+    },
     { provide: WORKER_UI_STARTABLE_MESSAGING_SERVICE, useExisting: MessageBasedRenderer2, multi: true },
     ɵBROWSER_SANITIZATION_PROVIDERS,
     { provide: ErrorHandler, useFactory: _exceptionHandler, deps: [] },
-    { provide: DOCUMENT, useFactory: _document, deps: [] },
+    { provide: DOCUMENT$1, useFactory: _document, deps: [] },
     // TODO(jteplitz602): Investigate if we definitely need EVENT_MANAGER on the render thread
     // #5298
-    { provide: EVENT_MANAGER_PLUGINS, useClass: ɵDomEventsPlugin, multi: true },
-    { provide: EVENT_MANAGER_PLUGINS, useClass: ɵKeyEventsPlugin, multi: true },
-    { provide: EVENT_MANAGER_PLUGINS, useClass: ɵHammerGesturesPlugin, multi: true },
-    { provide: HAMMER_GESTURE_CONFIG, useClass: HammerGestureConfig },
+    {
+        provide: EVENT_MANAGER_PLUGINS,
+        useClass: ɵDomEventsPlugin,
+        deps: [DOCUMENT$1, NgZone],
+        multi: true
+    },
+    { provide: EVENT_MANAGER_PLUGINS, useClass: ɵKeyEventsPlugin, deps: [DOCUMENT$1], multi: true },
+    {
+        provide: EVENT_MANAGER_PLUGINS,
+        useClass: ɵHammerGesturesPlugin,
+        deps: [DOCUMENT$1, HAMMER_GESTURE_CONFIG],
+        multi: true
+    },
+    { provide: HAMMER_GESTURE_CONFIG, useClass: HammerGestureConfig, deps: [] },
     ɵAPP_ID_RANDOM_PROVIDER,
-    ɵDomRendererFactory2,
+    { provide: ɵDomRendererFactory2, deps: [EventManager, ɵDomSharedStylesHost] },
     { provide: RendererFactory2, useExisting: ɵDomRendererFactory2 },
     { provide: ɵSharedStylesHost, useExisting: ɵDomSharedStylesHost },
-    { provide: ServiceMessageBrokerFactory, useClass: ServiceMessageBrokerFactory_ },
-    { provide: ClientMessageBrokerFactory, useClass: ClientMessageBrokerFactory_ },
-    Serializer,
+    {
+        provide: ServiceMessageBrokerFactory,
+        useClass: ServiceMessageBrokerFactory_,
+        deps: [MessageBus, Serializer]
+    },
+    {
+        provide: ClientMessageBrokerFactory,
+        useClass: ClientMessageBrokerFactory_,
+        deps: [MessageBus, Serializer]
+    },
+    { provide: Serializer, deps: [RenderStore] },
     { provide: ON_WEB_WORKER, useValue: false },
-    RenderStore,
-    ɵDomSharedStylesHost,
-    Testability,
-    EventManager,
-    WebWorkerInstance,
+    { provide: RenderStore, deps: [] },
+    { provide: ɵDomSharedStylesHost, deps: [DOCUMENT$1] },
+    { provide: Testability, deps: [NgZone] },
+    { provide: EventManager, deps: [EVENT_MANAGER_PLUGINS, NgZone] },
+    { provide: WebWorkerInstance, deps: [] },
     {
         provide: PLATFORM_INITIALIZER,
         useFactory: initWebWorkerRenderPlatform,
@@ -1481,7 +1502,7 @@ function spawnWebWorker(uri, instance) {
 /**
  * \@stable
  */
-const VERSION = new Version('5.0.0-beta.2-f69561b');
+const VERSION = new Version('5.0.0-beta.2-f0a5501');
 
 /**
  * @fileoverview added by tsickle
@@ -1564,10 +1585,12 @@ MessageBasedPlatformLocation.ctorParameters = () => [
  * include these providers when setting up the render thread.
  * \@experimental
  */
-const WORKER_UI_LOCATION_PROVIDERS = [
-    MessageBasedPlatformLocation, ɵBrowserPlatformLocation,
+const WORKER_UI_LOCATION_PROVIDERS = ([
+    { provide: MessageBasedPlatformLocation, deps: [ServiceMessageBrokerFactory,
+            ɵBrowserPlatformLocation, MessageBus, Serializer] },
+    { provide: ɵBrowserPlatformLocation, deps: [DOCUMENT] },
     { provide: PLATFORM_INITIALIZER, useFactory: initUiLocation, multi: true, deps: [Injector] }
-];
+]);
 /**
  * @param {?} injector
  * @return {?}
@@ -2955,7 +2978,7 @@ WorkerAppModule.decorators = [
                 providers: [
                     ɵBROWSER_SANITIZATION_PROVIDERS,
                     Serializer,
-                    { provide: DOCUMENT, useValue: null },
+                    { provide: DOCUMENT$1, useValue: null },
                     { provide: ClientMessageBrokerFactory, useClass: ClientMessageBrokerFactory_ },
                     { provide: ServiceMessageBrokerFactory, useClass: ServiceMessageBrokerFactory_ },
                     WebWorkerRendererFactory2,
