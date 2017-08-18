@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 /**
- * @license Angular v5.0.0-beta.4-56a5b02
+ * @license Angular v5.0.0-beta.4-a56468c
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -122,13 +122,6 @@ RenderStore.ctorParameters = function () { return []; };
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-/**
- * Any type that does not need to be serialized (string, number, boolean)
- *
- * \@experimental WebWorker support in Angular is currently experimental.
- * @deprecated in v4. Use SerializerTypes.PRIMITIVE instead
- */
-var PRIMITIVE = 1;
 var LocationType = (function () {
     /**
      * @param {?} href
@@ -1549,7 +1542,7 @@ function spawnWebWorker(uri, instance) {
 /**
  * \@stable
  */
-var VERSION = new Version('5.0.0-beta.4-56a5b02');
+var VERSION = new Version('5.0.0-beta.4-a56468c');
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -3119,5 +3112,5 @@ function bootstrapWorkerUi(workerScriptUri, customProviders) {
 /**
  * Generated bundle index. Do not edit.
  */
-export { VERSION, ClientMessageBroker, ClientMessageBrokerFactory, FnArg, UiArguments, MessageBus, MessageBusSink, MessageBusSource, PRIMITIVE, ReceivedMessage, ServiceMessageBroker, ServiceMessageBrokerFactory, WORKER_UI_LOCATION_PROVIDERS, WORKER_APP_LOCATION_PROVIDERS, WorkerAppModule, platformWorkerApp, platformWorkerUi, bootstrapWorkerUi, ON_WEB_WORKER as ɵm, ClientMessageBrokerFactory_ as ɵa, RenderStore as ɵk, Serializer as ɵb, ServiceMessageBrokerFactory_ as ɵc, appInitFnFactory as ɵe, locationInitialized as ɵd, WebWorkerPlatformLocation as ɵj, WebWorkerRendererFactory2 as ɵl, createMessageBus as ɵg, errorHandler as ɵf, setupWebWorker as ɵh, _WORKER_UI_PLATFORM_PROVIDERS as ɵi };
+export { VERSION, ClientMessageBroker, ClientMessageBrokerFactory, FnArg, UiArguments, MessageBus, MessageBusSink, MessageBusSource, ReceivedMessage, ServiceMessageBroker, ServiceMessageBrokerFactory, WORKER_UI_LOCATION_PROVIDERS, WORKER_APP_LOCATION_PROVIDERS, WorkerAppModule, platformWorkerApp, platformWorkerUi, bootstrapWorkerUi, ON_WEB_WORKER as ɵm, ClientMessageBrokerFactory_ as ɵa, RenderStore as ɵk, Serializer as ɵb, ServiceMessageBrokerFactory_ as ɵc, appInitFnFactory as ɵe, locationInitialized as ɵd, WebWorkerPlatformLocation as ɵj, WebWorkerRendererFactory2 as ɵl, createMessageBus as ɵg, errorHandler as ɵf, setupWebWorker as ɵh, _WORKER_UI_PLATFORM_PROVIDERS as ɵi };
 //# sourceMappingURL=platform-webworker.es5.js.map

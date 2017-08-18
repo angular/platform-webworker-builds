@@ -1,5 +1,5 @@
 /**
- * @license Angular v5.0.0-beta.4-56a5b02
+ * @license Angular v5.0.0-beta.4-a56468c
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -36,7 +36,7 @@ function __extends(d, b) {
 }
 
 /**
- * @license Angular v5.0.0-beta.4-56a5b02
+ * @license Angular v5.0.0-beta.4-a56468c
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -155,13 +155,6 @@ RenderStore.ctorParameters = function () { return []; };
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-/**
- * Any type that does not need to be serialized (string, number, boolean)
- *
- * \@experimental WebWorker support in Angular is currently experimental.
- * @deprecated in v4. Use SerializerTypes.PRIMITIVE instead
- */
-var PRIMITIVE = 1;
 var LocationType = (function () {
     /**
      * @param {?} href
@@ -1582,7 +1575,7 @@ function spawnWebWorker(uri, instance) {
 /**
  * \@stable
  */
-var VERSION = new _angular_core.Version('5.0.0-beta.4-56a5b02');
+var VERSION = new _angular_core.Version('5.0.0-beta.4-a56468c');
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -3137,7 +3130,6 @@ exports.UiArguments = UiArguments;
 exports.MessageBus = MessageBus;
 exports.MessageBusSink = MessageBusSink;
 exports.MessageBusSource = MessageBusSource;
-exports.PRIMITIVE = PRIMITIVE;
 exports.ReceivedMessage = ReceivedMessage;
 exports.ServiceMessageBroker = ServiceMessageBroker;
 exports.ServiceMessageBrokerFactory = ServiceMessageBrokerFactory;
