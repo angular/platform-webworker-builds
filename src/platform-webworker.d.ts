@@ -9,7 +9,7 @@ import { PlatformRef, StaticProvider } from '@angular/core';
 export { VERSION } from './version';
 export { ClientMessageBroker, ClientMessageBrokerFactory, FnArg, UiArguments } from './web_workers/shared/client_message_broker';
 export { MessageBus, MessageBusSink, MessageBusSource } from './web_workers/shared/message_bus';
-export { PRIMITIVE, SerializerTypes } from './web_workers/shared/serializer';
+export { SerializerTypes } from './web_workers/shared/serializer';
 export { ReceivedMessage, ServiceMessageBroker, ServiceMessageBrokerFactory } from './web_workers/shared/service_message_broker';
 export { WORKER_UI_LOCATION_PROVIDERS } from './web_workers/ui/location_providers';
 export { WORKER_APP_LOCATION_PROVIDERS } from './web_workers/worker/location_providers';
