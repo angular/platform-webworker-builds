@@ -15,13 +15,6 @@ export declare const enum SerializerTypes {
     PRIMITIVE = 1,
     RENDER_STORE_OBJECT = 2,
 }
-/**
- * Any type that does not need to be serialized (string, number, boolean)
- *
- * @experimental WebWorker support in Angular is currently experimental.
- * @deprecated in v4. Use SerializerTypes.PRIMITIVE instead
- */
-export declare const PRIMITIVE: SerializerTypes;
 export declare class LocationType {
     href: string;
     protocol: string;

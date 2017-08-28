@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.2.0-beta.0-4874765
+ * @license Angular v5.0.0-beta.4-d64c935
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -9,15 +9,40 @@
 	(factory((global.ng = global.ng || {}, global.ng.platformWebworker = global.ng.platformWebworker || {}),global.ng.common,global.ng.core,global.ng.platformBrowser));
 }(this, (function (exports,_angular_common,_angular_core,_angular_platformBrowser) { 'use strict';
 
-var __extends = (undefined && undefined.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+/*! *****************************************************************************
+Copyright (c) Microsoft Corporation. All rights reserved.
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+this file except in compliance with the License. You may obtain a copy of the
+License at http://www.apache.org/licenses/LICENSE-2.0
+
+THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
+WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
+MERCHANTABLITY OR NON-INFRINGEMENT.
+
+See the Apache Version 2.0 License for specific language governing permissions
+and limitations under the License.
+***************************************************************************** */
+/* global Reflect, Promise */
+
+var extendStatics = Object.setPrototypeOf ||
+    ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+    function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+
+function __extends(d, b) {
+    extendStatics(d, b);
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+}
+
 /**
- * @license Angular v4.2.0-beta.0-4874765
+ * @license Angular v5.0.0-beta.4-d64c935
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
+ */
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
  */
 /**
  * @license
@@ -28,11 +53,8 @@ var __extends = (undefined && undefined.__extends) || function (d, b) {
  */
 var ON_WEB_WORKER = new _angular_core.InjectionToken('WebWorker.onWebWorker');
 /**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
  */
 /**
  * Message Bus is a low level API used to communicate between the UI and the background.
@@ -46,46 +68,22 @@ var ON_WEB_WORKER = new _angular_core.InjectionToken('WebWorker.onWebWorker');
 var MessageBus = (function () {
     function MessageBus() {
     }
-    /**
-     * Sets up a new channel on the MessageBus.
-     * MUST be called before calling from or to on the channel.
-     * If runInZone is true then the source will emit events inside the angular zone
-     * and the sink will buffer messages and send only once the zone exits.
-     * if runInZone is false then the source will emit events inside the global zone
-     * and the sink will send messages immediately.
-     * @abstract
-     * @param {?} channel
-     * @param {?=} runInZone
-     * @return {?}
-     */
-    MessageBus.prototype.initChannel = function (channel, runInZone) { };
-    /**
-     * Assigns this bus to the given zone.
-     * Any callbacks attached to channels where runInZone was set to true on initialization
-     * will be executed in the given zone.
-     * @abstract
-     * @param {?} zone
-     * @return {?}
-     */
-    MessageBus.prototype.attachToZone = function (zone) { };
-    /**
-     * Returns an {\@link EventEmitter} that emits every time a message
-     * is received on the given channel.
-     * @abstract
-     * @param {?} channel
-     * @return {?}
-     */
-    MessageBus.prototype.from = function (channel) { };
-    /**
-     * Returns an {\@link EventEmitter} for the given channel
-     * To publish methods to that channel just call next on the returned emitter
-     * @abstract
-     * @param {?} channel
-     * @return {?}
-     */
-    MessageBus.prototype.to = function (channel) { };
     return MessageBus;
 }());
+/**
+ * \@experimental WebWorker support in Angular is currenlty experimental.
+ * @record
+ */
+function MessageBusSource() { }
+/**
+ * \@experimental WebWorker support in Angular is currenlty experimental.
+ * @record
+ */
+function MessageBusSink() { }
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -144,10 +142,12 @@ var RenderStore = (function () {
 RenderStore.decorators = [
     { type: _angular_core.Injectable },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 RenderStore.ctorParameters = function () { return []; };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -155,13 +155,6 @@ RenderStore.ctorParameters = function () { return []; };
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-/**
- * Any type that does not need to be serialized (string, number, boolean)
- *
- * \@experimental WebWorker support in Angular is currently experimental.
- * @deprecated in v4. Use SerializerTypes.PRIMITIVE instead
- */
-var PRIMITIVE = 1;
 var LocationType = (function () {
     /**
      * @param {?} href
@@ -324,12 +317,14 @@ var Serializer = (function () {
 Serializer.decorators = [
     { type: _angular_core.Injectable },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 Serializer.ctorParameters = function () { return [
     { type: RenderStore, },
 ]; };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -344,14 +339,6 @@ Serializer.ctorParameters = function () { return [
 var ClientMessageBrokerFactory = (function () {
     function ClientMessageBrokerFactory() {
     }
-    /**
-     * Initializes the given channel and attaches a new {\@link ClientMessageBroker} to it.
-     * @abstract
-     * @param {?} channel
-     * @param {?=} runInZone
-     * @return {?}
-     */
-    ClientMessageBrokerFactory.prototype.createMessageBroker = function (channel, runInZone) { };
     return ClientMessageBrokerFactory;
 }());
 var ClientMessageBrokerFactory_ = (function (_super) {
@@ -382,9 +369,7 @@ var ClientMessageBrokerFactory_ = (function (_super) {
 ClientMessageBrokerFactory_.decorators = [
     { type: _angular_core.Injectable },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 ClientMessageBrokerFactory_.ctorParameters = function () { return [
     { type: MessageBus, },
     { type: Serializer, },
@@ -396,13 +381,6 @@ ClientMessageBrokerFactory_.ctorParameters = function () { return [
 var ClientMessageBroker = (function () {
     function ClientMessageBroker() {
     }
-    /**
-     * @abstract
-     * @param {?} args
-     * @param {?} returnType
-     * @return {?}
-     */
-    ClientMessageBroker.prototype.runOnService = function (args, returnType) { };
     return ClientMessageBroker;
 }());
 var ClientMessageBroker_ = (function (_super) {
@@ -418,7 +396,7 @@ var ClientMessageBroker_ = (function (_super) {
         _this._pending = new Map();
         _this._sink = messageBus.to(channel);
         _this._serializer = _serializer;
-        var source = messageBus.from(channel);
+        var /** @type {?} */ source = messageBus.from(channel);
         source.subscribe({ next: function (message) { return _this._handleMessage(message); } });
         return _this;
     }
@@ -533,11 +511,18 @@ var UiArguments = (function () {
     return UiArguments;
 }());
 /**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/**
  * @license
  * Copyright Google Inc. All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
+ */
+/**
+ * @record
  */
 var PostMessageBusSink = (function () {
     /**
@@ -621,7 +606,7 @@ var PostMessageBusSource = (function () {
         }
         else {
             // if no eventTarget is given we assume we're in a WebWorker and listen on the global scope
-            var workerScope = self;
+            var /** @type {?} */ workerScope = (self);
             workerScope.addEventListener('message', function (ev) { return _this._handleMessages(ev); });
         }
     }
@@ -730,9 +715,7 @@ var PostMessageBus = (function () {
 PostMessageBus.decorators = [
     { type: _angular_core.Injectable },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 PostMessageBus.ctorParameters = function () { return [
     { type: PostMessageBusSink, },
     { type: PostMessageBusSource, },
@@ -753,6 +736,10 @@ var _Channel = (function () {
     return _Channel;
 }());
 /**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/**
  * @license
  * Copyright Google Inc. All Rights Reserved.
  *
@@ -766,14 +753,6 @@ var _Channel = (function () {
 var ServiceMessageBrokerFactory = (function () {
     function ServiceMessageBrokerFactory() {
     }
-    /**
-     * Initializes the given channel and attaches a new {\@link ServiceMessageBroker} to it.
-     * @abstract
-     * @param {?} channel
-     * @param {?=} runInZone
-     * @return {?}
-     */
-    ServiceMessageBrokerFactory.prototype.createMessageBroker = function (channel, runInZone) { };
     return ServiceMessageBrokerFactory;
 }());
 var ServiceMessageBrokerFactory_ = (function (_super) {
@@ -803,9 +782,7 @@ var ServiceMessageBrokerFactory_ = (function (_super) {
 ServiceMessageBrokerFactory_.decorators = [
     { type: _angular_core.Injectable },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 ServiceMessageBrokerFactory_.ctorParameters = function () { return [
     { type: MessageBus, },
     { type: Serializer, },
@@ -822,15 +799,6 @@ ServiceMessageBrokerFactory_.ctorParameters = function () { return [
 var ServiceMessageBroker = (function () {
     function ServiceMessageBroker() {
     }
-    /**
-     * @abstract
-     * @param {?} methodName
-     * @param {?} signature
-     * @param {?} method
-     * @param {?=} returnType
-     * @return {?}
-     */
-    ServiceMessageBroker.prototype.registerMethod = function (methodName, signature, method, returnType) { };
     return ServiceMessageBroker;
 }());
 var ServiceMessageBroker_ = (function (_super) {
@@ -846,7 +814,7 @@ var ServiceMessageBroker_ = (function (_super) {
         _this.channel = channel;
         _this._methods = new Map();
         _this._sink = messageBus.to(channel);
-        var source = messageBus.from(channel);
+        var /** @type {?} */ source = messageBus.from(channel);
         source.subscribe({ next: function (message) { return _this._handleMessage(message); } });
         return _this;
     }
@@ -901,12 +869,28 @@ var ServiceMessageBroker_ = (function (_super) {
     return ServiceMessageBroker_;
 }(ServiceMessageBroker));
 /**
+ * \@experimental WebWorker support in Angular is currently experimental.
+ * @record
+ */
+function ReceivedMessage() { }
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/**
  * All channels used by angular's WebWorker components are listed here.
  * You should not use these channels in your application code.
  */
-var RENDERER_2_CHANNEL = 'v2.ng-Renderer';
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */ var RENDERER_2_CHANNEL = 'v2.ng-Renderer';
 var EVENT_2_CHANNEL = 'v2.ng-Events';
 var ROUTER_CHANNEL = 'ng-Router';
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -992,11 +976,8 @@ function serializeEvent(e, properties) {
     return serialized;
 }
 /**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
  */
 var EventDispatcher = (function () {
     /**
@@ -1123,6 +1104,10 @@ var EventDispatcher = (function () {
     };
     return EventDispatcher;
 }());
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -1385,9 +1370,7 @@ var MessageBasedRenderer2 = (function () {
 MessageBasedRenderer2.decorators = [
     { type: _angular_core.Injectable },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 MessageBasedRenderer2.ctorParameters = function () { return [
     { type: ServiceMessageBrokerFactory, },
     { type: MessageBus, },
@@ -1395,6 +1378,10 @@ MessageBasedRenderer2.ctorParameters = function () { return [
     { type: RenderStore, },
     { type: _angular_core.RendererFactory2, },
 ]; };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -1426,9 +1413,7 @@ var WebWorkerInstance = (function () {
 WebWorkerInstance.decorators = [
     { type: _angular_core.Injectable },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 WebWorkerInstance.ctorParameters = function () { return []; };
 /**
  * \@experimental WebWorker support is currently experimental.
@@ -1443,30 +1428,51 @@ var WORKER_SCRIPT = new _angular_core.InjectionToken('WebWorkerScript');
 var WORKER_UI_STARTABLE_MESSAGING_SERVICE = new _angular_core.InjectionToken('WorkerRenderStartableMsgService');
 var _WORKER_UI_PLATFORM_PROVIDERS = [
     { provide: _angular_core.NgZone, useFactory: createNgZone, deps: [] },
-    MessageBasedRenderer2,
+    {
+        provide: MessageBasedRenderer2,
+        deps: [ServiceMessageBrokerFactory, MessageBus, Serializer, RenderStore, _angular_core.RendererFactory2]
+    },
     { provide: WORKER_UI_STARTABLE_MESSAGING_SERVICE, useExisting: MessageBasedRenderer2, multi: true },
     _angular_platformBrowser.ɵBROWSER_SANITIZATION_PROVIDERS,
     { provide: _angular_core.ErrorHandler, useFactory: _exceptionHandler, deps: [] },
     { provide: _angular_platformBrowser.DOCUMENT, useFactory: _document, deps: [] },
     // TODO(jteplitz602): Investigate if we definitely need EVENT_MANAGER on the render thread
     // #5298
-    { provide: _angular_platformBrowser.EVENT_MANAGER_PLUGINS, useClass: _angular_platformBrowser.ɵDomEventsPlugin, multi: true },
-    { provide: _angular_platformBrowser.EVENT_MANAGER_PLUGINS, useClass: _angular_platformBrowser.ɵKeyEventsPlugin, multi: true },
-    { provide: _angular_platformBrowser.EVENT_MANAGER_PLUGINS, useClass: _angular_platformBrowser.ɵHammerGesturesPlugin, multi: true },
-    { provide: _angular_platformBrowser.HAMMER_GESTURE_CONFIG, useClass: _angular_platformBrowser.HammerGestureConfig },
+    {
+        provide: _angular_platformBrowser.EVENT_MANAGER_PLUGINS,
+        useClass: _angular_platformBrowser.ɵDomEventsPlugin,
+        deps: [_angular_platformBrowser.DOCUMENT, _angular_core.NgZone],
+        multi: true
+    },
+    { provide: _angular_platformBrowser.EVENT_MANAGER_PLUGINS, useClass: _angular_platformBrowser.ɵKeyEventsPlugin, deps: [_angular_platformBrowser.DOCUMENT], multi: true },
+    {
+        provide: _angular_platformBrowser.EVENT_MANAGER_PLUGINS,
+        useClass: _angular_platformBrowser.ɵHammerGesturesPlugin,
+        deps: [_angular_platformBrowser.DOCUMENT, _angular_platformBrowser.HAMMER_GESTURE_CONFIG],
+        multi: true
+    },
+    { provide: _angular_platformBrowser.HAMMER_GESTURE_CONFIG, useClass: _angular_platformBrowser.HammerGestureConfig, deps: [] },
     _angular_core.ɵAPP_ID_RANDOM_PROVIDER,
-    _angular_platformBrowser.ɵDomRendererFactory2,
+    { provide: _angular_platformBrowser.ɵDomRendererFactory2, deps: [_angular_platformBrowser.EventManager, _angular_platformBrowser.ɵDomSharedStylesHost] },
     { provide: _angular_core.RendererFactory2, useExisting: _angular_platformBrowser.ɵDomRendererFactory2 },
     { provide: _angular_platformBrowser.ɵSharedStylesHost, useExisting: _angular_platformBrowser.ɵDomSharedStylesHost },
-    { provide: ServiceMessageBrokerFactory, useClass: ServiceMessageBrokerFactory_ },
-    { provide: ClientMessageBrokerFactory, useClass: ClientMessageBrokerFactory_ },
-    Serializer,
+    {
+        provide: ServiceMessageBrokerFactory,
+        useClass: ServiceMessageBrokerFactory_,
+        deps: [MessageBus, Serializer]
+    },
+    {
+        provide: ClientMessageBrokerFactory,
+        useClass: ClientMessageBrokerFactory_,
+        deps: [MessageBus, Serializer]
+    },
+    { provide: Serializer, deps: [RenderStore] },
     { provide: ON_WEB_WORKER, useValue: false },
-    RenderStore,
-    _angular_platformBrowser.ɵDomSharedStylesHost,
-    _angular_core.Testability,
-    _angular_platformBrowser.EventManager,
-    WebWorkerInstance,
+    { provide: RenderStore, deps: [] },
+    { provide: _angular_platformBrowser.ɵDomSharedStylesHost, deps: [_angular_platformBrowser.DOCUMENT] },
+    { provide: _angular_core.Testability, deps: [_angular_core.NgZone] },
+    { provide: _angular_platformBrowser.EventManager, deps: [_angular_platformBrowser.EVENT_MANAGER_PLUGINS, _angular_core.NgZone] },
+    { provide: WebWorkerInstance, deps: [] },
     {
         provide: _angular_core.PLATFORM_INITIALIZER,
         useFactory: initWebWorkerRenderPlatform,
@@ -1551,6 +1557,10 @@ function spawnWebWorker(uri, instance) {
     instance.init(webWorker, bus);
 }
 /**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/**
  * @license
  * Copyright Google Inc. All Rights Reserved.
  *
@@ -1565,13 +1575,10 @@ function spawnWebWorker(uri, instance) {
 /**
  * \@stable
  */
-var VERSION = new _angular_core.Version('4.2.0-beta.0-4874765');
+var VERSION = new _angular_core.Version('5.0.0-beta.4-d64c935');
 /**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
  */
 var MessageBasedPlatformLocation = (function () {
     /**
@@ -1584,8 +1591,8 @@ var MessageBasedPlatformLocation = (function () {
         this._brokerFactory = _brokerFactory;
         this._platformLocation = _platformLocation;
         this._serializer = _serializer;
-        this._platformLocation.onPopState(this._sendUrlChangeEvent.bind(this));
-        this._platformLocation.onHashChange(this._sendUrlChangeEvent.bind(this));
+        this._platformLocation.onPopState(/** @type {?} */ (this._sendUrlChangeEvent.bind(this)));
+        this._platformLocation.onHashChange(/** @type {?} */ (this._sendUrlChangeEvent.bind(this)));
         this._broker = this._brokerFactory.createMessageBroker(ROUTER_CHANNEL);
         this._channelSink = bus.to(ROUTER_CHANNEL);
     }
@@ -1627,15 +1634,17 @@ var MessageBasedPlatformLocation = (function () {
 MessageBasedPlatformLocation.decorators = [
     { type: _angular_core.Injectable },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 MessageBasedPlatformLocation.ctorParameters = function () { return [
     { type: ServiceMessageBrokerFactory, },
     { type: _angular_platformBrowser.ɵBrowserPlatformLocation, },
     { type: MessageBus, },
     { type: Serializer, },
 ]; };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -1648,10 +1657,12 @@ MessageBasedPlatformLocation.ctorParameters = function () { return [
  * include these providers when setting up the render thread.
  * \@experimental
  */
-var WORKER_UI_LOCATION_PROVIDERS = [
-    MessageBasedPlatformLocation, _angular_platformBrowser.ɵBrowserPlatformLocation,
+var WORKER_UI_LOCATION_PROVIDERS = ([
+    { provide: MessageBasedPlatformLocation, deps: [ServiceMessageBrokerFactory,
+            _angular_platformBrowser.ɵBrowserPlatformLocation, MessageBus, Serializer] },
+    { provide: _angular_platformBrowser.ɵBrowserPlatformLocation, deps: [_angular_common.DOCUMENT] },
     { provide: _angular_core.PLATFORM_INITIALIZER, useFactory: initUiLocation, multi: true, deps: [_angular_core.Injector] }
-];
+]);
 /**
  * @param {?} injector
  * @return {?}
@@ -1662,6 +1673,10 @@ function initUiLocation(injector) {
         zone.runGuarded(function () { return injector.get(MessageBasedPlatformLocation).start(); });
     };
 }
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -1686,9 +1701,9 @@ var WebWorkerPlatformLocation = (function (_super) {
         _this._channelSource = bus.from(ROUTER_CHANNEL);
         _this._channelSource.subscribe({
             next: function (msg) {
-                var listeners = null;
+                var /** @type {?} */ listeners = null;
                 if (msg.hasOwnProperty('event')) {
-                    var type = msg['event']['type'];
+                    var /** @type {?} */ type = msg['event']['type'];
                     if (type === 'popstate') {
                         listeners = _this._popStateListeners;
                     }
@@ -1821,14 +1836,16 @@ var WebWorkerPlatformLocation = (function (_super) {
 WebWorkerPlatformLocation.decorators = [
     { type: _angular_core.Injectable },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 WebWorkerPlatformLocation.ctorParameters = function () { return [
     { type: ClientMessageBrokerFactory, },
     { type: MessageBus, },
     { type: Serializer, },
 ]; };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -1866,6 +1883,10 @@ function locationInitialized(platformLocation) {
 function appInitFnFactory(platformLocation, zone) {
     return function () { return zone.runGuarded(function () { return platformLocation.init(); }); };
 }
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -1944,7 +1965,7 @@ var WebWorkerRendererFactory2 = (function () {
         this.globalEvents = new NamedEventEmitter();
         this._messageBroker = messageBrokerFactory.createMessageBroker(RENDERER_2_CHANNEL);
         bus.initChannel(EVENT_2_CHANNEL);
-        var source = bus.from(EVENT_2_CHANNEL);
+        var /** @type {?} */ source = bus.from(EVENT_2_CHANNEL);
         source.subscribe({ next: function (message) { return _this._dispatchEvent(message); } });
     }
     /**
@@ -2019,9 +2040,7 @@ var WebWorkerRendererFactory2 = (function () {
 WebWorkerRendererFactory2.decorators = [
     { type: _angular_core.Injectable },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 WebWorkerRendererFactory2.ctorParameters = function () { return [
     { type: ClientMessageBrokerFactory, },
     { type: MessageBus, },
@@ -2314,6 +2333,10 @@ var WebWorkerRenderNode = (function () {
     }
     return WebWorkerRenderNode;
 }());
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -2964,12 +2987,6 @@ var WorkerDomAdapter = (function (_super) {
      */
     WorkerDomAdapter.prototype.getData = function (element, name) { throw 'not implemented'; };
     /**
-     * @param {?} name
-     * @param {?} value
-     * @return {?}
-     */
-    WorkerDomAdapter.prototype.setGlobalVar = function (name, value) { throw 'not implemented'; };
-    /**
      * @return {?}
      */
     WorkerDomAdapter.prototype.performanceNow = function () { throw 'not implemented'; };
@@ -3006,6 +3023,10 @@ var WorkerDomAdapter = (function (_super) {
     WorkerDomAdapter.prototype.setCookie = function (name, value) { throw 'not implemented'; };
     return WorkerDomAdapter;
 }(_angular_platformBrowser.ɵDomAdapter));
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -3078,16 +3099,11 @@ WorkerAppModule.decorators = [
                 ]
             },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 WorkerAppModule.ctorParameters = function () { return []; };
 /**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
  */
 /**
  * Bootstraps the worker ui.
@@ -3112,7 +3128,9 @@ exports.ClientMessageBrokerFactory = ClientMessageBrokerFactory;
 exports.FnArg = FnArg;
 exports.UiArguments = UiArguments;
 exports.MessageBus = MessageBus;
-exports.PRIMITIVE = PRIMITIVE;
+exports.MessageBusSink = MessageBusSink;
+exports.MessageBusSource = MessageBusSource;
+exports.ReceivedMessage = ReceivedMessage;
 exports.ServiceMessageBroker = ServiceMessageBroker;
 exports.ServiceMessageBrokerFactory = ServiceMessageBrokerFactory;
 exports.WORKER_UI_LOCATION_PROVIDERS = WORKER_UI_LOCATION_PROVIDERS;
