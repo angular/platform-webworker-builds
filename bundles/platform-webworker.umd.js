@@ -1,12 +1,12 @@
 /**
- * @license Angular v5.0.0-beta.5-ee04217
+ * @license Angular v5.0.0-beta.5-fd701b0
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/common'), require('@angular/core'), require('@angular/platform-browser')) :
 	typeof define === 'function' && define.amd ? define(['exports', '@angular/common', '@angular/core', '@angular/platform-browser'], factory) :
-	(factory((global.ng = global.ng || {}, global.ng.platformWebworker = global.ng.platformWebworker || {}),global.ng.common,global.ng.core,global.ng.platformBrowser));
+	(factory((global.ng = global.ng || {}, global.ng.platformWebworker = {}),global.ng.common,global.ng.core,global.ng.platformBrowser));
 }(this, (function (exports,_angular_common,_angular_core,_angular_platformBrowser) { 'use strict';
 
 /*! *****************************************************************************
@@ -36,7 +36,7 @@ function __extends(d, b) {
 }
 
 /**
- * @license Angular v5.0.0-beta.5-ee04217
+ * @license Angular v5.0.0-beta.5-fd701b0
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -52,6 +52,7 @@ function __extends(d, b) {
  * found in the LICENSE file at https://angular.io/license
  */
 var ON_WEB_WORKER = new _angular_core.InjectionToken('WebWorker.onWebWorker');
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -80,6 +81,7 @@ function MessageBusSource() { }
  * @record
  */
 function MessageBusSink() { }
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -144,6 +146,7 @@ RenderStore.decorators = [
 ];
 /** @nocollapse */
 RenderStore.ctorParameters = function () { return []; };
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -155,6 +158,15 @@ RenderStore.ctorParameters = function () { return []; };
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+/** @enum {number} */
+var SerializerTypes = {
+    // RendererType2
+    RENDERER_TYPE_2: 0,
+    // Primitive types
+    PRIMITIVE: 1,
+    // An object stored in a RenderStore
+    RENDER_STORE_OBJECT: 2,
+};
 var LocationType = (function () {
     /**
      * @param {?} href
@@ -192,22 +204,22 @@ var Serializer = (function () {
      * @param {?=} type
      * @return {?}
      */
-    Serializer.prototype.serialize = function (obj, type /* PRIMITIVE */) {
+    Serializer.prototype.serialize = function (obj, type) {
         var _this = this;
-        if (type === void 0) { type = 1; } /* PRIMITIVE */
-        if (obj == null || type === 1 /* PRIMITIVE */) {
+        if (type === void 0) { type = SerializerTypes.PRIMITIVE; }
+        if (obj == null || type === SerializerTypes.PRIMITIVE) {
             return obj;
         }
         if (Array.isArray(obj)) {
             return obj.map(function (v) { return _this.serialize(v, type); });
         }
-        if (type === 2 /* RENDER_STORE_OBJECT */) {
+        if (type === SerializerTypes.RENDER_STORE_OBJECT) {
             return ((this._renderStore.serialize(obj)));
         }
         if (type === _angular_core.RenderComponentType) {
             return this._serializeRenderComponentType(obj);
         }
-        if (type === 0 /* RENDERER_TYPE_2 */) {
+        if (type === SerializerTypes.RENDERER_TYPE_2) {
             return this._serializeRendererType2(obj);
         }
         if (type === LocationType) {
@@ -221,22 +233,22 @@ var Serializer = (function () {
      * @param {?=} data
      * @return {?}
      */
-    Serializer.prototype.deserialize = function (map, type /* PRIMITIVE */, data) {
+    Serializer.prototype.deserialize = function (map, type, data) {
         var _this = this;
-        if (type === void 0) { type = 1; } /* PRIMITIVE */
-        if (map == null || type === 1 /* PRIMITIVE */) {
+        if (type === void 0) { type = SerializerTypes.PRIMITIVE; }
+        if (map == null || type === SerializerTypes.PRIMITIVE) {
             return map;
         }
         if (Array.isArray(map)) {
             return map.map(function (val) { return _this.deserialize(val, type, data); });
         }
-        if (type === 2 /* RENDER_STORE_OBJECT */) {
+        if (type === SerializerTypes.RENDER_STORE_OBJECT) {
             return this._renderStore.deserialize(map);
         }
         if (type === _angular_core.RenderComponentType) {
             return this._deserializeRenderComponentType(map);
         }
-        if (type === 0 /* RENDERER_TYPE_2 */) {
+        if (type === SerializerTypes.RENDERER_TYPE_2) {
             return this._deserializeRendererType2(map);
         }
         if (type === LocationType) {
@@ -321,6 +333,7 @@ Serializer.decorators = [
 Serializer.ctorParameters = function () { return [
     { type: RenderStore, },
 ]; };
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -489,8 +502,8 @@ var FnArg = (function () {
      * @param {?} value
      * @param {?=} type
      */
-    function FnArg(value, type /* PRIMITIVE */) {
-        if (type === void 0) { type = 1; } /* PRIMITIVE */
+    function FnArg(value, type) {
+        if (type === void 0) { type = SerializerTypes.PRIMITIVE; }
         this.value = value;
         this.type = type;
     }
@@ -510,6 +523,7 @@ var UiArguments = (function () {
     }
     return UiArguments;
 }());
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -524,6 +538,7 @@ var UiArguments = (function () {
 /**
  * @record
  */
+
 var PostMessageBusSink = (function () {
     /**
      * @param {?} _postMessageTarget
@@ -735,6 +750,7 @@ var _Channel = (function () {
     }
     return _Channel;
 }());
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -873,6 +889,7 @@ var ServiceMessageBroker_ = (function (_super) {
  * @record
  */
 function ReceivedMessage() { }
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -887,6 +904,7 @@ function ReceivedMessage() { }
  */ var RENDERER_2_CHANNEL = 'v2.ng-Renderer';
 var EVENT_2_CHANNEL = 'v2.ng-Events';
 var ROUTER_CHANNEL = 'ng-Router';
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -975,6 +993,7 @@ function serializeEvent(e, properties) {
     }
     return serialized;
 }
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -996,8 +1015,8 @@ var EventDispatcher = (function () {
      */
     EventDispatcher.prototype.dispatchAnimationEvent = function (player, phaseName, element) {
         this._sink.emit({
-            'element': this._serializer.serialize(element, 2 /* RENDER_STORE_OBJECT */),
-            'animationPlayer': this._serializer.serialize(player, 2 /* RENDER_STORE_OBJECT */),
+            'element': this._serializer.serialize(element, SerializerTypes.RENDER_STORE_OBJECT),
+            'animationPlayer': this._serializer.serialize(player, SerializerTypes.RENDER_STORE_OBJECT),
             'phaseName': phaseName,
         });
         return true;
@@ -1093,7 +1112,7 @@ var EventDispatcher = (function () {
                 throw new Error(eventName + ' not supported on WebWorkers');
         }
         this._sink.emit({
-            'element': this._serializer.serialize(element, 2 /* RENDER_STORE_OBJECT */),
+            'element': this._serializer.serialize(element, SerializerTypes.RENDER_STORE_OBJECT),
             'eventName': eventName,
             'eventTarget': eventTarget,
             'event': serializedEvent,
@@ -1104,6 +1123,7 @@ var EventDispatcher = (function () {
     };
     return EventDispatcher;
 }());
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -1139,9 +1159,9 @@ var MessageBasedRenderer2 = (function () {
         this._bus.initChannel(EVENT_2_CHANNEL);
         this._eventDispatcher = new EventDispatcher(this._bus.to(EVENT_2_CHANNEL), this._serializer);
         var _a = [
-            2 /* RENDER_STORE_OBJECT */,
-            1 /* PRIMITIVE */,
-            0 /* RENDERER_TYPE_2 */,
+            SerializerTypes.RENDER_STORE_OBJECT,
+            SerializerTypes.PRIMITIVE,
+            SerializerTypes.RENDERER_TYPE_2,
         ], RSO = _a[0], P = _a[1], CRT = _a[2];
         var /** @type {?} */ methods = [
             ['createRenderer', this.createRenderer, RSO, CRT, P],
@@ -1378,6 +1398,7 @@ MessageBasedRenderer2.ctorParameters = function () { return [
     { type: RenderStore, },
     { type: _angular_core.RendererFactory2, },
 ]; };
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -1556,6 +1577,7 @@ function spawnWebWorker(uri, instance) {
     var /** @type {?} */ bus = new PostMessageBus(sink, source);
     instance.init(webWorker, bus);
 }
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -1575,7 +1597,8 @@ function spawnWebWorker(uri, instance) {
 /**
  * \@stable
  */
-var VERSION = new _angular_core.Version('5.0.0-beta.5-ee04217');
+var VERSION = new _angular_core.Version('5.0.0-beta.5-fd701b0');
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -1600,7 +1623,7 @@ var MessageBasedPlatformLocation = (function () {
      * @return {?}
      */
     MessageBasedPlatformLocation.prototype.start = function () {
-        var /** @type {?} */ P = 1;
+        var /** @type {?} */ P = SerializerTypes.PRIMITIVE;
         this._broker.registerMethod('getLocation', null, this._getLocation.bind(this), LocationType);
         this._broker.registerMethod('setPathname', [P], this._setPathname.bind(this));
         this._broker.registerMethod('pushState', [P, P, P], this._platformLocation.pushState.bind(this._platformLocation));
@@ -1641,6 +1664,7 @@ MessageBasedPlatformLocation.ctorParameters = function () { return [
     { type: MessageBus, },
     { type: Serializer, },
 ]; };
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -1673,6 +1697,7 @@ function initUiLocation(injector) {
         zone.runGuarded(function () { return injector.get(MessageBasedPlatformLocation).start(); });
     };
 }
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -1764,7 +1789,7 @@ var WebWorkerPlatformLocation = (function (_super) {
                 throw new Error('Attempt to set pathname before value is obtained from UI');
             }
             this._location.pathname = newPath;
-            var /** @type {?} */ fnArgs = [new FnArg(newPath, 1 /* PRIMITIVE */)];
+            var /** @type {?} */ fnArgs = [new FnArg(newPath, SerializerTypes.PRIMITIVE)];
             var /** @type {?} */ args = new UiArguments('setPathname', fnArgs);
             this._broker.runOnService(args, null);
         },
@@ -1795,9 +1820,9 @@ var WebWorkerPlatformLocation = (function (_super) {
      */
     WebWorkerPlatformLocation.prototype.pushState = function (state, title, url) {
         var /** @type {?} */ fnArgs = [
-            new FnArg(state, 1 /* PRIMITIVE */),
-            new FnArg(title, 1 /* PRIMITIVE */),
-            new FnArg(url, 1 /* PRIMITIVE */),
+            new FnArg(state, SerializerTypes.PRIMITIVE),
+            new FnArg(title, SerializerTypes.PRIMITIVE),
+            new FnArg(url, SerializerTypes.PRIMITIVE),
         ];
         var /** @type {?} */ args = new UiArguments('pushState', fnArgs);
         this._broker.runOnService(args, null);
@@ -1810,9 +1835,9 @@ var WebWorkerPlatformLocation = (function (_super) {
      */
     WebWorkerPlatformLocation.prototype.replaceState = function (state, title, url) {
         var /** @type {?} */ fnArgs = [
-            new FnArg(state, 1 /* PRIMITIVE */),
-            new FnArg(title, 1 /* PRIMITIVE */),
-            new FnArg(url, 1 /* PRIMITIVE */),
+            new FnArg(state, SerializerTypes.PRIMITIVE),
+            new FnArg(title, SerializerTypes.PRIMITIVE),
+            new FnArg(url, SerializerTypes.PRIMITIVE),
         ];
         var /** @type {?} */ args = new UiArguments('replaceState', fnArgs);
         this._broker.runOnService(args, null);
@@ -1842,6 +1867,7 @@ WebWorkerPlatformLocation.ctorParameters = function () { return [
     { type: MessageBus, },
     { type: Serializer, },
 ]; };
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -1883,6 +1909,7 @@ function locationInitialized(platformLocation) {
 function appInitFnFactory(platformLocation, zone) {
     return function () { return zone.runGuarded(function () { return platformLocation.init(); }); };
 }
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -1978,9 +2005,9 @@ var WebWorkerRendererFactory2 = (function () {
         var /** @type {?} */ id = this.renderStore.allocateId();
         this.renderStore.store(renderer, id);
         this.callUI('createRenderer', [
-            new FnArg(element, 2 /* RENDER_STORE_OBJECT */),
-            new FnArg(type, 0 /* RENDERER_TYPE_2 */),
-            new FnArg(renderer, 2 /* RENDER_STORE_OBJECT */),
+            new FnArg(element, SerializerTypes.RENDER_STORE_OBJECT),
+            new FnArg(type, SerializerTypes.RENDERER_TYPE_2),
+            new FnArg(renderer, SerializerTypes.RENDER_STORE_OBJECT),
         ]);
         return renderer;
     };
@@ -2024,7 +2051,7 @@ var WebWorkerRendererFactory2 = (function () {
      * @return {?}
      */
     WebWorkerRendererFactory2.prototype._dispatchEvent = function (message) {
-        var /** @type {?} */ element = this._serializer.deserialize(message['element'], 2 /* RENDER_STORE_OBJECT */);
+        var /** @type {?} */ element = this._serializer.deserialize(message['element'], SerializerTypes.RENDER_STORE_OBJECT);
         var /** @type {?} */ eventName = message['eventName'];
         var /** @type {?} */ target = message['eventTarget'];
         var /** @type {?} */ event = message['event'];
@@ -2054,7 +2081,7 @@ var WebWorkerRenderer2 = (function () {
     function WebWorkerRenderer2(_rendererFactory) {
         this._rendererFactory = _rendererFactory;
         this.data = Object.create(null);
-        this.asFnArg = new FnArg(this, 2 /* RENDER_STORE_OBJECT */);
+        this.asFnArg = new FnArg(this, SerializerTypes.RENDER_STORE_OBJECT);
     }
     /**
      * @return {?}
@@ -2065,7 +2092,7 @@ var WebWorkerRenderer2 = (function () {
      * @return {?}
      */
     WebWorkerRenderer2.prototype.destroyNode = function (node) {
-        this.callUIWithRenderer('destroyNode', [new FnArg(node, 2 /* RENDER_STORE_OBJECT */)]);
+        this.callUIWithRenderer('destroyNode', [new FnArg(node, SerializerTypes.RENDER_STORE_OBJECT)]);
         this._rendererFactory.freeNode(node);
     };
     /**
@@ -2078,7 +2105,7 @@ var WebWorkerRenderer2 = (function () {
         this.callUIWithRenderer('createElement', [
             new FnArg(name),
             new FnArg(namespace),
-            new FnArg(node, 2 /* RENDER_STORE_OBJECT */),
+            new FnArg(node, SerializerTypes.RENDER_STORE_OBJECT),
         ]);
         return node;
     };
@@ -2090,7 +2117,7 @@ var WebWorkerRenderer2 = (function () {
         var /** @type {?} */ node = this._rendererFactory.allocateNode();
         this.callUIWithRenderer('createComment', [
             new FnArg(value),
-            new FnArg(node, 2 /* RENDER_STORE_OBJECT */),
+            new FnArg(node, SerializerTypes.RENDER_STORE_OBJECT),
         ]);
         return node;
     };
@@ -2102,7 +2129,7 @@ var WebWorkerRenderer2 = (function () {
         var /** @type {?} */ node = this._rendererFactory.allocateNode();
         this.callUIWithRenderer('createText', [
             new FnArg(value),
-            new FnArg(node, 2 /* RENDER_STORE_OBJECT */),
+            new FnArg(node, SerializerTypes.RENDER_STORE_OBJECT),
         ]);
         return node;
     };
@@ -2113,8 +2140,8 @@ var WebWorkerRenderer2 = (function () {
      */
     WebWorkerRenderer2.prototype.appendChild = function (parent, newChild) {
         this.callUIWithRenderer('appendChild', [
-            new FnArg(parent, 2 /* RENDER_STORE_OBJECT */),
-            new FnArg(newChild, 2 /* RENDER_STORE_OBJECT */),
+            new FnArg(parent, SerializerTypes.RENDER_STORE_OBJECT),
+            new FnArg(newChild, SerializerTypes.RENDER_STORE_OBJECT),
         ]);
     };
     /**
@@ -2128,9 +2155,9 @@ var WebWorkerRenderer2 = (function () {
             return;
         }
         this.callUIWithRenderer('insertBefore', [
-            new FnArg(parent, 2 /* RENDER_STORE_OBJECT */),
-            new FnArg(newChild, 2 /* RENDER_STORE_OBJECT */),
-            new FnArg(refChild, 2 /* RENDER_STORE_OBJECT */),
+            new FnArg(parent, SerializerTypes.RENDER_STORE_OBJECT),
+            new FnArg(newChild, SerializerTypes.RENDER_STORE_OBJECT),
+            new FnArg(refChild, SerializerTypes.RENDER_STORE_OBJECT),
         ]);
     };
     /**
@@ -2140,8 +2167,8 @@ var WebWorkerRenderer2 = (function () {
      */
     WebWorkerRenderer2.prototype.removeChild = function (parent, oldChild) {
         this.callUIWithRenderer('removeChild', [
-            new FnArg(parent, 2 /* RENDER_STORE_OBJECT */),
-            new FnArg(oldChild, 2 /* RENDER_STORE_OBJECT */),
+            new FnArg(parent, SerializerTypes.RENDER_STORE_OBJECT),
+            new FnArg(oldChild, SerializerTypes.RENDER_STORE_OBJECT),
         ]);
     };
     /**
@@ -2152,7 +2179,7 @@ var WebWorkerRenderer2 = (function () {
         var /** @type {?} */ node = this._rendererFactory.allocateNode();
         this.callUIWithRenderer('selectRootElement', [
             new FnArg(selectorOrNode),
-            new FnArg(node, 2 /* RENDER_STORE_OBJECT */),
+            new FnArg(node, SerializerTypes.RENDER_STORE_OBJECT),
         ]);
         return node;
     };
@@ -2163,8 +2190,8 @@ var WebWorkerRenderer2 = (function () {
     WebWorkerRenderer2.prototype.parentNode = function (node) {
         var /** @type {?} */ res = this._rendererFactory.allocateNode();
         this.callUIWithRenderer('parentNode', [
-            new FnArg(node, 2 /* RENDER_STORE_OBJECT */),
-            new FnArg(res, 2 /* RENDER_STORE_OBJECT */),
+            new FnArg(node, SerializerTypes.RENDER_STORE_OBJECT),
+            new FnArg(res, SerializerTypes.RENDER_STORE_OBJECT),
         ]);
         return res;
     };
@@ -2175,8 +2202,8 @@ var WebWorkerRenderer2 = (function () {
     WebWorkerRenderer2.prototype.nextSibling = function (node) {
         var /** @type {?} */ res = this._rendererFactory.allocateNode();
         this.callUIWithRenderer('nextSibling', [
-            new FnArg(node, 2 /* RENDER_STORE_OBJECT */),
-            new FnArg(res, 2 /* RENDER_STORE_OBJECT */),
+            new FnArg(node, SerializerTypes.RENDER_STORE_OBJECT),
+            new FnArg(res, SerializerTypes.RENDER_STORE_OBJECT),
         ]);
         return res;
     };
@@ -2189,7 +2216,7 @@ var WebWorkerRenderer2 = (function () {
      */
     WebWorkerRenderer2.prototype.setAttribute = function (el, name, value, namespace) {
         this.callUIWithRenderer('setAttribute', [
-            new FnArg(el, 2 /* RENDER_STORE_OBJECT */),
+            new FnArg(el, SerializerTypes.RENDER_STORE_OBJECT),
             new FnArg(name),
             new FnArg(value),
             new FnArg(namespace),
@@ -2203,7 +2230,7 @@ var WebWorkerRenderer2 = (function () {
      */
     WebWorkerRenderer2.prototype.removeAttribute = function (el, name, namespace) {
         this.callUIWithRenderer('removeAttribute', [
-            new FnArg(el, 2 /* RENDER_STORE_OBJECT */),
+            new FnArg(el, SerializerTypes.RENDER_STORE_OBJECT),
             new FnArg(name),
             new FnArg(namespace),
         ]);
@@ -2215,7 +2242,7 @@ var WebWorkerRenderer2 = (function () {
      */
     WebWorkerRenderer2.prototype.addClass = function (el, name) {
         this.callUIWithRenderer('addClass', [
-            new FnArg(el, 2 /* RENDER_STORE_OBJECT */),
+            new FnArg(el, SerializerTypes.RENDER_STORE_OBJECT),
             new FnArg(name),
         ]);
     };
@@ -2226,7 +2253,7 @@ var WebWorkerRenderer2 = (function () {
      */
     WebWorkerRenderer2.prototype.removeClass = function (el, name) {
         this.callUIWithRenderer('removeClass', [
-            new FnArg(el, 2 /* RENDER_STORE_OBJECT */),
+            new FnArg(el, SerializerTypes.RENDER_STORE_OBJECT),
             new FnArg(name),
         ]);
     };
@@ -2239,7 +2266,7 @@ var WebWorkerRenderer2 = (function () {
      */
     WebWorkerRenderer2.prototype.setStyle = function (el, style, value, flags) {
         this.callUIWithRenderer('setStyle', [
-            new FnArg(el, 2 /* RENDER_STORE_OBJECT */),
+            new FnArg(el, SerializerTypes.RENDER_STORE_OBJECT),
             new FnArg(style),
             new FnArg(value),
             new FnArg(flags),
@@ -2253,7 +2280,7 @@ var WebWorkerRenderer2 = (function () {
      */
     WebWorkerRenderer2.prototype.removeStyle = function (el, style, flags) {
         this.callUIWithRenderer('removeStyle', [
-            new FnArg(el, 2 /* RENDER_STORE_OBJECT */),
+            new FnArg(el, SerializerTypes.RENDER_STORE_OBJECT),
             new FnArg(style),
             new FnArg(flags),
         ]);
@@ -2266,7 +2293,7 @@ var WebWorkerRenderer2 = (function () {
      */
     WebWorkerRenderer2.prototype.setProperty = function (el, name, value) {
         this.callUIWithRenderer('setProperty', [
-            new FnArg(el, 2 /* RENDER_STORE_OBJECT */),
+            new FnArg(el, SerializerTypes.RENDER_STORE_OBJECT),
             new FnArg(name),
             new FnArg(value),
         ]);
@@ -2278,7 +2305,7 @@ var WebWorkerRenderer2 = (function () {
      */
     WebWorkerRenderer2.prototype.setValue = function (node, value) {
         this.callUIWithRenderer('setValue', [
-            new FnArg(node, 2 /* RENDER_STORE_OBJECT */),
+            new FnArg(node, SerializerTypes.RENDER_STORE_OBJECT),
             new FnArg(value),
         ]);
     };
@@ -2300,7 +2327,7 @@ var WebWorkerRenderer2 = (function () {
             targetEl.events.listen(eventName, listener);
         }
         this.callUIWithRenderer('listen', [
-            new FnArg(targetEl, 2 /* RENDER_STORE_OBJECT */),
+            new FnArg(targetEl, SerializerTypes.RENDER_STORE_OBJECT),
             new FnArg(targetName),
             new FnArg(eventName),
             new FnArg(unlistenId),
@@ -2333,6 +2360,7 @@ var WebWorkerRenderNode = (function () {
     }
     return WebWorkerRenderNode;
 }());
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -3027,6 +3055,7 @@ var WorkerDomAdapter = (function (_super) {
     WorkerDomAdapter.prototype.setCookie = function (name, value) { throw 'not implemented'; };
     return WorkerDomAdapter;
 }(_angular_platformBrowser.ɵDomAdapter));
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -3105,6 +3134,7 @@ WorkerAppModule.decorators = [
 ];
 /** @nocollapse */
 WorkerAppModule.ctorParameters = function () { return []; };
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -3134,6 +3164,7 @@ exports.UiArguments = UiArguments;
 exports.MessageBus = MessageBus;
 exports.MessageBusSink = MessageBusSink;
 exports.MessageBusSource = MessageBusSource;
+exports.SerializerTypes = SerializerTypes;
 exports.ReceivedMessage = ReceivedMessage;
 exports.ServiceMessageBroker = ServiceMessageBroker;
 exports.ServiceMessageBrokerFactory = ServiceMessageBrokerFactory;
