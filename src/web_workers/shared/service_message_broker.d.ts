@@ -31,7 +31,7 @@ export declare class ServiceMessageBrokerFactory_ extends ServiceMessageBrokerFa
  * @experimental WebWorker support in Angular is currently experimental.
  */
 export declare abstract class ServiceMessageBroker {
-    abstract registerMethod(methodName: string, signature: Array<Type<any> | SerializerTypes>, method: Function, returnType?: Type<any> | SerializerTypes): void;
+    abstract registerMethod(methodName: string, signature: Array<Type<any> | SerializerTypes> | null, method: Function, returnType?: Type<any> | SerializerTypes): void;
 }
 export declare class ServiceMessageBroker_ extends ServiceMessageBroker {
     private _serializer;
