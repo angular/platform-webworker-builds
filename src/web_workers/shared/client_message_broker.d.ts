@@ -53,6 +53,6 @@ export declare class FnArg {
  */
 export declare class UiArguments {
     method: string;
-    args: FnArg[];
-    constructor(method: string, args?: FnArg[]);
+    args: FnArg[] | undefined;
+    constructor(method: string, args?: FnArg[] | undefined);
 }

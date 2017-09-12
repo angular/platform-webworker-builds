@@ -1,5 +1,5 @@
 /**
- * @license Angular v5.0.0-beta.6-112e777
+ * @license Angular v5.0.0-beta.6-ca5aeba
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -39,12 +39,11 @@ class MessageBus {
  * \@experimental WebWorker support in Angular is currenlty experimental.
  * @record
  */
-function MessageBusSource() { }
+
 /**
  * \@experimental WebWorker support in Angular is currenlty experimental.
  * @record
  */
-function MessageBusSink() { }
 
 /**
  * @fileoverview added by tsickle
@@ -121,15 +120,6 @@ RenderStore.ctorParameters = () => [];
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-/** @enum {number} */
-const SerializerTypes = {
-    // RendererType2
-    RENDERER_TYPE_2: 0,
-    // Primitive types
-    PRIMITIVE: 1,
-    // An object stored in a RenderStore
-    RENDER_STORE_OBJECT: 2,
-};
 class LocationType {
     /**
      * @param {?} href
@@ -166,20 +156,20 @@ class Serializer {
      * @param {?=} type
      * @return {?}
      */
-    serialize(obj, type = SerializerTypes.PRIMITIVE) {
-        if (obj == null || type === SerializerTypes.PRIMITIVE) {
+    serialize(obj, type = 1 /* PRIMITIVE */) {
+        if (obj == null || type === 1 /* PRIMITIVE */) {
             return obj;
         }
         if (Array.isArray(obj)) {
             return obj.map(v => this.serialize(v, type));
         }
-        if (type === SerializerTypes.RENDER_STORE_OBJECT) {
-            return ((this._renderStore.serialize(obj)));
+        if (type === 2 /* RENDER_STORE_OBJECT */) {
+            return /** @type {?} */ ((this._renderStore.serialize(obj)));
         }
         if (type === RenderComponentType) {
             return this._serializeRenderComponentType(obj);
         }
-        if (type === SerializerTypes.RENDERER_TYPE_2) {
+        if (type === 0 /* RENDERER_TYPE_2 */) {
             return this._serializeRendererType2(obj);
         }
         if (type === LocationType) {
@@ -193,20 +183,20 @@ class Serializer {
      * @param {?=} data
      * @return {?}
      */
-    deserialize(map, type = SerializerTypes.PRIMITIVE, data) {
-        if (map == null || type === SerializerTypes.PRIMITIVE) {
+    deserialize(map, type = 1 /* PRIMITIVE */, data) {
+        if (map == null || type === 1 /* PRIMITIVE */) {
             return map;
         }
         if (Array.isArray(map)) {
             return map.map(val => this.deserialize(val, type, data));
         }
-        if (type === SerializerTypes.RENDER_STORE_OBJECT) {
+        if (type === 2 /* RENDER_STORE_OBJECT */) {
             return this._renderStore.deserialize(map);
         }
         if (type === RenderComponentType) {
             return this._deserializeRenderComponentType(map);
         }
-        if (type === SerializerTypes.RENDERER_TYPE_2) {
+        if (type === 0 /* RENDERER_TYPE_2 */) {
             return this._deserializeRendererType2(map);
         }
         if (type === LocationType) {
@@ -392,7 +382,7 @@ class ClientMessageBroker_ extends ClientMessageBroker {
         let /** @type {?} */ promise;
         let /** @type {?} */ id = null;
         if (returnType != null) {
-            let /** @type {?} */ completer = ((undefined));
+            let /** @type {?} */ completer = /** @type {?} */ ((undefined));
             promise = new Promise((resolve, reject) => { completer = { resolve, reject }; });
             id = this._generateMessageId(args.method);
             this._pending.set(id, completer);
@@ -424,13 +414,13 @@ class ClientMessageBroker_ extends ClientMessageBroker {
      */
     _handleMessage(message) {
         if (message.type === 'result' || message.type === 'error') {
-            const /** @type {?} */ id = ((message.id));
+            const /** @type {?} */ id = /** @type {?} */ ((message.id));
             if (this._pending.has(id)) {
                 if (message.type === 'result') {
-                    ((this._pending.get(id))).resolve(message.value);
+                    /** @type {?} */ ((this._pending.get(id))).resolve(message.value);
                 }
                 else {
-                    ((this._pending.get(id))).reject(message.value);
+                    /** @type {?} */ ((this._pending.get(id))).reject(message.value);
                 }
                 this._pending.delete(id);
             }
@@ -445,7 +435,7 @@ class FnArg {
      * @param {?} value
      * @param {?=} type
      */
-    constructor(value, type = SerializerTypes.PRIMITIVE) {
+    constructor(value, type = 1 /* PRIMITIVE */) {
         this.value = value;
         this.type = type;
     }
@@ -556,7 +546,7 @@ class PostMessageBusSource {
         }
         else {
             // if no eventTarget is given we assume we're in a WebWorker and listen on the global scope
-            const /** @type {?} */ workerScope = (self);
+            const /** @type {?} */ workerScope = /** @type {?} */ (self);
             workerScope.addEventListener('message', (ev) => this._handleMessages(ev));
         }
     }
@@ -780,7 +770,7 @@ class ServiceMessageBroker_ extends ServiceMessageBroker {
      */
     _handleMessage(message) {
         if (this._methods.has(message.method)) {
-            ((this._methods.get(message.method)))(message);
+            /** @type {?} */ ((this._methods.get(message.method)))(message);
         }
     }
     /**
@@ -803,7 +793,6 @@ class ServiceMessageBroker_ extends ServiceMessageBroker {
  * \@experimental WebWorker support in Angular is currently experimental.
  * @record
  */
-function ReceivedMessage() { }
 
 /**
  * @fileoverview added by tsickle
@@ -813,10 +802,7 @@ function ReceivedMessage() { }
  * All channels used by angular's WebWorker components are listed here.
  * You should not use these channels in your application code.
  */
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */ const RENDERER_2_CHANNEL = 'v2.ng-Renderer';
+const RENDERER_2_CHANNEL = 'v2.ng-Renderer';
 const EVENT_2_CHANNEL = 'v2.ng-Events';
 const ROUTER_CHANNEL = 'ng-Router';
 
@@ -886,8 +872,8 @@ function serializeTransitionEvent(e) {
  * @return {?}
  */
 function addTarget(e, serializedEvent) {
-    if (NODES_WITH_VALUE.has(((e.target)).tagName.toLowerCase())) {
-        const /** @type {?} */ target = (e.target);
+    if (NODES_WITH_VALUE.has((/** @type {?} */ (e.target)).tagName.toLowerCase())) {
+        const /** @type {?} */ target = /** @type {?} */ (e.target);
         serializedEvent['target'] = { 'value': target.value };
         if (target.files) {
             serializedEvent['target']['files'] = target.files;
@@ -930,8 +916,8 @@ class EventDispatcher {
      */
     dispatchAnimationEvent(player, phaseName, element) {
         this._sink.emit({
-            'element': this._serializer.serialize(element, SerializerTypes.RENDER_STORE_OBJECT),
-            'animationPlayer': this._serializer.serialize(player, SerializerTypes.RENDER_STORE_OBJECT),
+            'element': this._serializer.serialize(element, 2 /* RENDER_STORE_OBJECT */),
+            'animationPlayer': this._serializer.serialize(player, 2 /* RENDER_STORE_OBJECT */),
             'phaseName': phaseName,
         });
         return true;
@@ -1027,7 +1013,7 @@ class EventDispatcher {
                 throw new Error(eventName + ' not supported on WebWorkers');
         }
         this._sink.emit({
-            'element': this._serializer.serialize(element, SerializerTypes.RENDER_STORE_OBJECT),
+            'element': this._serializer.serialize(element, 2 /* RENDER_STORE_OBJECT */),
             'eventName': eventName,
             'eventTarget': eventTarget,
             'event': serializedEvent,
@@ -1072,9 +1058,9 @@ class MessageBasedRenderer2 {
         this._bus.initChannel(EVENT_2_CHANNEL);
         this._eventDispatcher = new EventDispatcher(this._bus.to(EVENT_2_CHANNEL), this._serializer);
         const [RSO, P, CRT] = [
-            SerializerTypes.RENDER_STORE_OBJECT,
-            SerializerTypes.PRIMITIVE,
-            SerializerTypes.RENDERER_TYPE_2,
+            2 /* RENDER_STORE_OBJECT */,
+            1 /* PRIMITIVE */,
+            0 /* RENDERER_TYPE_2 */,
         ];
         const /** @type {?} */ methods = [
             ['createRenderer', this.createRenderer, RSO, CRT, P],
@@ -1441,7 +1427,7 @@ function initWebWorkerRenderPlatform(injector) {
         try {
             scriptUri = injector.get(WORKER_SCRIPT);
         }
-        catch (e) {
+        catch (/** @type {?} */ e) {
             throw new Error('You must provide your WebWorker\'s initialization script with the WORKER_SCRIPT token');
         }
         const /** @type {?} */ instance = injector.get(WebWorkerInstance);
@@ -1504,7 +1490,7 @@ function spawnWebWorker(uri, instance) {
 /**
  * \@stable
  */
-const VERSION = new Version('5.0.0-beta.6-112e777');
+const VERSION = new Version('5.0.0-beta.6-ca5aeba');
 
 /**
  * @fileoverview added by tsickle
@@ -1530,7 +1516,7 @@ class MessageBasedPlatformLocation {
      * @return {?}
      */
     start() {
-        const /** @type {?} */ P = SerializerTypes.PRIMITIVE;
+        const /** @type {?} */ P = 1;
         this._broker.registerMethod('getLocation', null, this._getLocation.bind(this), LocationType);
         this._broker.registerMethod('setPathname', [P], this._setPathname.bind(this));
         this._broker.registerMethod('pushState', [P, P, P], this._platformLocation.pushState.bind(this._platformLocation));
@@ -1587,7 +1573,7 @@ MessageBasedPlatformLocation.ctorParameters = () => [
  * include these providers when setting up the render thread.
  * \@experimental
  */
-const WORKER_UI_LOCATION_PROVIDERS = ([
+const WORKER_UI_LOCATION_PROVIDERS = /** @type {?} */ ([
     { provide: MessageBasedPlatformLocation, deps: [ServiceMessageBrokerFactory,
             ɵBrowserPlatformLocation, MessageBus, Serializer] },
     { provide: ɵBrowserPlatformLocation, deps: [DOCUMENT] },
@@ -1626,7 +1612,7 @@ class WebWorkerPlatformLocation extends PlatformLocation {
         this._serializer = _serializer;
         this._popStateListeners = [];
         this._hashChangeListeners = [];
-        this._location = ((null));
+        this._location = /** @type {?} */ ((null));
         this._broker = brokerFactory.createMessageBroker(ROUTER_CHANNEL);
         this._channelSource = bus.from(ROUTER_CHANNEL);
         this._channelSource.subscribe({
@@ -1656,7 +1642,7 @@ class WebWorkerPlatformLocation extends PlatformLocation {
      */
     init() {
         const /** @type {?} */ args = new UiArguments('getLocation');
-        return ((this._broker.runOnService(args, LocationType))).then((val) => {
+        return /** @type {?} */ ((this._broker.runOnService(args, LocationType))).then((val) => {
             this._location = val;
             this.initializedResolve();
             return true;
@@ -1681,7 +1667,7 @@ class WebWorkerPlatformLocation extends PlatformLocation {
     /**
      * @return {?}
      */
-    get pathname() { return this._location ? ((this._location.pathname)) : '<unknown>'; }
+    get pathname() { return this._location ? /** @type {?} */ ((this._location.pathname)) : '<unknown>'; }
     /**
      * @return {?}
      */
@@ -1699,7 +1685,7 @@ class WebWorkerPlatformLocation extends PlatformLocation {
             throw new Error('Attempt to set pathname before value is obtained from UI');
         }
         this._location.pathname = newPath;
-        const /** @type {?} */ fnArgs = [new FnArg(newPath, SerializerTypes.PRIMITIVE)];
+        const /** @type {?} */ fnArgs = [new FnArg(newPath, 1 /* PRIMITIVE */)];
         const /** @type {?} */ args = new UiArguments('setPathname', fnArgs);
         this._broker.runOnService(args, null);
     }
@@ -1711,9 +1697,9 @@ class WebWorkerPlatformLocation extends PlatformLocation {
      */
     pushState(state, title, url) {
         const /** @type {?} */ fnArgs = [
-            new FnArg(state, SerializerTypes.PRIMITIVE),
-            new FnArg(title, SerializerTypes.PRIMITIVE),
-            new FnArg(url, SerializerTypes.PRIMITIVE),
+            new FnArg(state, 1 /* PRIMITIVE */),
+            new FnArg(title, 1 /* PRIMITIVE */),
+            new FnArg(url, 1 /* PRIMITIVE */),
         ];
         const /** @type {?} */ args = new UiArguments('pushState', fnArgs);
         this._broker.runOnService(args, null);
@@ -1726,9 +1712,9 @@ class WebWorkerPlatformLocation extends PlatformLocation {
      */
     replaceState(state, title, url) {
         const /** @type {?} */ fnArgs = [
-            new FnArg(state, SerializerTypes.PRIMITIVE),
-            new FnArg(title, SerializerTypes.PRIMITIVE),
-            new FnArg(url, SerializerTypes.PRIMITIVE),
+            new FnArg(state, 1 /* PRIMITIVE */),
+            new FnArg(title, 1 /* PRIMITIVE */),
+            new FnArg(url, 1 /* PRIMITIVE */),
         ];
         const /** @type {?} */ args = new UiArguments('replaceState', fnArgs);
         this._broker.runOnService(args, null);
@@ -1891,9 +1877,9 @@ class WebWorkerRendererFactory2 {
         const /** @type {?} */ id = this.renderStore.allocateId();
         this.renderStore.store(renderer, id);
         this.callUI('createRenderer', [
-            new FnArg(element, SerializerTypes.RENDER_STORE_OBJECT),
-            new FnArg(type, SerializerTypes.RENDERER_TYPE_2),
-            new FnArg(renderer, SerializerTypes.RENDER_STORE_OBJECT),
+            new FnArg(element, 2 /* RENDER_STORE_OBJECT */),
+            new FnArg(type, 0 /* RENDERER_TYPE_2 */),
+            new FnArg(renderer, 2 /* RENDER_STORE_OBJECT */),
         ]);
         return renderer;
     }
@@ -1937,7 +1923,7 @@ class WebWorkerRendererFactory2 {
      * @return {?}
      */
     _dispatchEvent(message) {
-        const /** @type {?} */ element = this._serializer.deserialize(message['element'], SerializerTypes.RENDER_STORE_OBJECT);
+        const /** @type {?} */ element = this._serializer.deserialize(message['element'], 2 /* RENDER_STORE_OBJECT */);
         const /** @type {?} */ eventName = message['eventName'];
         const /** @type {?} */ target = message['eventTarget'];
         const /** @type {?} */ event = message['event'];
@@ -1966,7 +1952,7 @@ class WebWorkerRenderer2 {
     constructor(_rendererFactory) {
         this._rendererFactory = _rendererFactory;
         this.data = Object.create(null);
-        this.asFnArg = new FnArg(this, SerializerTypes.RENDER_STORE_OBJECT);
+        this.asFnArg = new FnArg(this, 2 /* RENDER_STORE_OBJECT */);
     }
     /**
      * @return {?}
@@ -1977,7 +1963,7 @@ class WebWorkerRenderer2 {
      * @return {?}
      */
     destroyNode(node) {
-        this.callUIWithRenderer('destroyNode', [new FnArg(node, SerializerTypes.RENDER_STORE_OBJECT)]);
+        this.callUIWithRenderer('destroyNode', [new FnArg(node, 2 /* RENDER_STORE_OBJECT */)]);
         this._rendererFactory.freeNode(node);
     }
     /**
@@ -1990,7 +1976,7 @@ class WebWorkerRenderer2 {
         this.callUIWithRenderer('createElement', [
             new FnArg(name),
             new FnArg(namespace),
-            new FnArg(node, SerializerTypes.RENDER_STORE_OBJECT),
+            new FnArg(node, 2 /* RENDER_STORE_OBJECT */),
         ]);
         return node;
     }
@@ -2002,7 +1988,7 @@ class WebWorkerRenderer2 {
         const /** @type {?} */ node = this._rendererFactory.allocateNode();
         this.callUIWithRenderer('createComment', [
             new FnArg(value),
-            new FnArg(node, SerializerTypes.RENDER_STORE_OBJECT),
+            new FnArg(node, 2 /* RENDER_STORE_OBJECT */),
         ]);
         return node;
     }
@@ -2014,7 +2000,7 @@ class WebWorkerRenderer2 {
         const /** @type {?} */ node = this._rendererFactory.allocateNode();
         this.callUIWithRenderer('createText', [
             new FnArg(value),
-            new FnArg(node, SerializerTypes.RENDER_STORE_OBJECT),
+            new FnArg(node, 2 /* RENDER_STORE_OBJECT */),
         ]);
         return node;
     }
@@ -2025,8 +2011,8 @@ class WebWorkerRenderer2 {
      */
     appendChild(parent, newChild) {
         this.callUIWithRenderer('appendChild', [
-            new FnArg(parent, SerializerTypes.RENDER_STORE_OBJECT),
-            new FnArg(newChild, SerializerTypes.RENDER_STORE_OBJECT),
+            new FnArg(parent, 2 /* RENDER_STORE_OBJECT */),
+            new FnArg(newChild, 2 /* RENDER_STORE_OBJECT */),
         ]);
     }
     /**
@@ -2040,9 +2026,9 @@ class WebWorkerRenderer2 {
             return;
         }
         this.callUIWithRenderer('insertBefore', [
-            new FnArg(parent, SerializerTypes.RENDER_STORE_OBJECT),
-            new FnArg(newChild, SerializerTypes.RENDER_STORE_OBJECT),
-            new FnArg(refChild, SerializerTypes.RENDER_STORE_OBJECT),
+            new FnArg(parent, 2 /* RENDER_STORE_OBJECT */),
+            new FnArg(newChild, 2 /* RENDER_STORE_OBJECT */),
+            new FnArg(refChild, 2 /* RENDER_STORE_OBJECT */),
         ]);
     }
     /**
@@ -2052,8 +2038,8 @@ class WebWorkerRenderer2 {
      */
     removeChild(parent, oldChild) {
         this.callUIWithRenderer('removeChild', [
-            new FnArg(parent, SerializerTypes.RENDER_STORE_OBJECT),
-            new FnArg(oldChild, SerializerTypes.RENDER_STORE_OBJECT),
+            new FnArg(parent, 2 /* RENDER_STORE_OBJECT */),
+            new FnArg(oldChild, 2 /* RENDER_STORE_OBJECT */),
         ]);
     }
     /**
@@ -2064,7 +2050,7 @@ class WebWorkerRenderer2 {
         const /** @type {?} */ node = this._rendererFactory.allocateNode();
         this.callUIWithRenderer('selectRootElement', [
             new FnArg(selectorOrNode),
-            new FnArg(node, SerializerTypes.RENDER_STORE_OBJECT),
+            new FnArg(node, 2 /* RENDER_STORE_OBJECT */),
         ]);
         return node;
     }
@@ -2075,8 +2061,8 @@ class WebWorkerRenderer2 {
     parentNode(node) {
         const /** @type {?} */ res = this._rendererFactory.allocateNode();
         this.callUIWithRenderer('parentNode', [
-            new FnArg(node, SerializerTypes.RENDER_STORE_OBJECT),
-            new FnArg(res, SerializerTypes.RENDER_STORE_OBJECT),
+            new FnArg(node, 2 /* RENDER_STORE_OBJECT */),
+            new FnArg(res, 2 /* RENDER_STORE_OBJECT */),
         ]);
         return res;
     }
@@ -2087,8 +2073,8 @@ class WebWorkerRenderer2 {
     nextSibling(node) {
         const /** @type {?} */ res = this._rendererFactory.allocateNode();
         this.callUIWithRenderer('nextSibling', [
-            new FnArg(node, SerializerTypes.RENDER_STORE_OBJECT),
-            new FnArg(res, SerializerTypes.RENDER_STORE_OBJECT),
+            new FnArg(node, 2 /* RENDER_STORE_OBJECT */),
+            new FnArg(res, 2 /* RENDER_STORE_OBJECT */),
         ]);
         return res;
     }
@@ -2101,7 +2087,7 @@ class WebWorkerRenderer2 {
      */
     setAttribute(el, name, value, namespace) {
         this.callUIWithRenderer('setAttribute', [
-            new FnArg(el, SerializerTypes.RENDER_STORE_OBJECT),
+            new FnArg(el, 2 /* RENDER_STORE_OBJECT */),
             new FnArg(name),
             new FnArg(value),
             new FnArg(namespace),
@@ -2115,7 +2101,7 @@ class WebWorkerRenderer2 {
      */
     removeAttribute(el, name, namespace) {
         this.callUIWithRenderer('removeAttribute', [
-            new FnArg(el, SerializerTypes.RENDER_STORE_OBJECT),
+            new FnArg(el, 2 /* RENDER_STORE_OBJECT */),
             new FnArg(name),
             new FnArg(namespace),
         ]);
@@ -2127,7 +2113,7 @@ class WebWorkerRenderer2 {
      */
     addClass(el, name) {
         this.callUIWithRenderer('addClass', [
-            new FnArg(el, SerializerTypes.RENDER_STORE_OBJECT),
+            new FnArg(el, 2 /* RENDER_STORE_OBJECT */),
             new FnArg(name),
         ]);
     }
@@ -2138,7 +2124,7 @@ class WebWorkerRenderer2 {
      */
     removeClass(el, name) {
         this.callUIWithRenderer('removeClass', [
-            new FnArg(el, SerializerTypes.RENDER_STORE_OBJECT),
+            new FnArg(el, 2 /* RENDER_STORE_OBJECT */),
             new FnArg(name),
         ]);
     }
@@ -2151,7 +2137,7 @@ class WebWorkerRenderer2 {
      */
     setStyle(el, style, value, flags) {
         this.callUIWithRenderer('setStyle', [
-            new FnArg(el, SerializerTypes.RENDER_STORE_OBJECT),
+            new FnArg(el, 2 /* RENDER_STORE_OBJECT */),
             new FnArg(style),
             new FnArg(value),
             new FnArg(flags),
@@ -2165,7 +2151,7 @@ class WebWorkerRenderer2 {
      */
     removeStyle(el, style, flags) {
         this.callUIWithRenderer('removeStyle', [
-            new FnArg(el, SerializerTypes.RENDER_STORE_OBJECT),
+            new FnArg(el, 2 /* RENDER_STORE_OBJECT */),
             new FnArg(style),
             new FnArg(flags),
         ]);
@@ -2178,7 +2164,7 @@ class WebWorkerRenderer2 {
      */
     setProperty(el, name, value) {
         this.callUIWithRenderer('setProperty', [
-            new FnArg(el, SerializerTypes.RENDER_STORE_OBJECT),
+            new FnArg(el, 2 /* RENDER_STORE_OBJECT */),
             new FnArg(name),
             new FnArg(value),
         ]);
@@ -2190,7 +2176,7 @@ class WebWorkerRenderer2 {
      */
     setValue(node, value) {
         this.callUIWithRenderer('setValue', [
-            new FnArg(node, SerializerTypes.RENDER_STORE_OBJECT),
+            new FnArg(node, 2 /* RENDER_STORE_OBJECT */),
             new FnArg(value),
         ]);
     }
@@ -2211,7 +2197,7 @@ class WebWorkerRenderer2 {
             targetEl.events.listen(eventName, listener);
         }
         this.callUIWithRenderer('listen', [
-            new FnArg(targetEl, SerializerTypes.RENDER_STORE_OBJECT),
+            new FnArg(targetEl, 2 /* RENDER_STORE_OBJECT */),
             new FnArg(targetName),
             new FnArg(eventName),
             new FnArg(unlistenId),
@@ -2952,7 +2938,7 @@ function errorHandler() {
 // TODO(jteplitz602) remove this and compile with lib.webworker.d.ts (#3492)
 const _postMessage = {
     postMessage: (message, transferrables) => {
-        ((postMessage))(message, transferrables);
+        (/** @type {?} */ (postMessage))(message, transferrables);
     }
 };
 /**
@@ -3052,5 +3038,5 @@ function bootstrapWorkerUi(workerScriptUri, customProviders = []) {
  * Generated bundle index. Do not edit.
  */
 
-export { VERSION, ClientMessageBroker, ClientMessageBrokerFactory, FnArg, UiArguments, MessageBus, MessageBusSink, MessageBusSource, SerializerTypes, ReceivedMessage, ServiceMessageBroker, ServiceMessageBrokerFactory, WORKER_UI_LOCATION_PROVIDERS, WORKER_APP_LOCATION_PROVIDERS, WorkerAppModule, platformWorkerApp, platformWorkerUi, bootstrapWorkerUi, ON_WEB_WORKER as ɵm, ClientMessageBrokerFactory_ as ɵa, RenderStore as ɵk, Serializer as ɵb, ServiceMessageBrokerFactory_ as ɵc, appInitFnFactory as ɵe, locationInitialized as ɵd, WebWorkerPlatformLocation as ɵj, WebWorkerRendererFactory2 as ɵl, createMessageBus as ɵg, errorHandler as ɵf, setupWebWorker as ɵh, _WORKER_UI_PLATFORM_PROVIDERS as ɵi };
+export { VERSION, ClientMessageBroker, ClientMessageBrokerFactory, FnArg, UiArguments, MessageBus, ServiceMessageBroker, ServiceMessageBrokerFactory, WORKER_UI_LOCATION_PROVIDERS, WORKER_APP_LOCATION_PROVIDERS, WorkerAppModule, platformWorkerApp, platformWorkerUi, bootstrapWorkerUi, ON_WEB_WORKER as ɵm, ClientMessageBrokerFactory_ as ɵa, RenderStore as ɵk, Serializer as ɵb, ServiceMessageBrokerFactory_ as ɵc, appInitFnFactory as ɵe, locationInitialized as ɵd, WebWorkerPlatformLocation as ɵj, WebWorkerRendererFactory2 as ɵl, createMessageBus as ɵg, errorHandler as ɵf, setupWebWorker as ɵh, _WORKER_UI_PLATFORM_PROVIDERS as ɵi };
 //# sourceMappingURL=index.js.map
