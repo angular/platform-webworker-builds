@@ -3,43 +3,11 @@
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
-(function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/common'), require('@angular/core'), require('@angular/platform-browser')) :
-	typeof define === 'function' && define.amd ? define(['exports', '@angular/common', '@angular/core', '@angular/platform-browser'], factory) :
-	(factory((global.ng = global.ng || {}, global.ng.platformWebworker = {}),global.ng.common,global.ng.core,global.ng.platformBrowser));
-}(this, (function (exports,_angular_common,_angular_core,_angular_platformBrowser) { 'use strict';
+import { CommonModule, DOCUMENT, LOCATION_INITIALIZED, PlatformLocation, ɵPLATFORM_WORKER_APP_ID, ɵPLATFORM_WORKER_UI_ID } from '@angular/common';
+import { APP_INITIALIZER, ApplicationModule, ErrorHandler, EventEmitter, Injectable, InjectionToken, Injector, NgModule, NgZone, PLATFORM_ID, PLATFORM_INITIALIZER, RenderComponentType, RendererFactory2, Testability, Version, createPlatformFactory, isDevMode, platformCore, ɵAPP_ID_RANDOM_PROVIDER, ɵstringify } from '@angular/core';
+import { DOCUMENT as DOCUMENT$1, EVENT_MANAGER_PLUGINS, EventManager, HAMMER_GESTURE_CONFIG, HammerGestureConfig, ɵBROWSER_SANITIZATION_PROVIDERS, ɵBrowserDomAdapter, ɵBrowserGetTestability, ɵBrowserPlatformLocation, ɵDomAdapter, ɵDomEventsPlugin, ɵDomRendererFactory2, ɵDomSharedStylesHost, ɵHammerGesturesPlugin, ɵKeyEventsPlugin, ɵSharedStylesHost, ɵsetRootDomAdapter } from '@angular/platform-browser';
+import { __extends } from 'tslib';
 
-/*! *****************************************************************************
-Copyright (c) Microsoft Corporation. All rights reserved.
-Licensed under the Apache License, Version 2.0 (the "License"); you may not use
-this file except in compliance with the License. You may obtain a copy of the
-License at http://www.apache.org/licenses/LICENSE-2.0
-
-THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
-WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
-MERCHANTABLITY OR NON-INFRINGEMENT.
-
-See the Apache Version 2.0 License for specific language governing permissions
-and limitations under the License.
-***************************************************************************** */
-/* global Reflect, Promise */
-
-var extendStatics = Object.setPrototypeOf ||
-    ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-    function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-
-function __extends(d, b) {
-    extendStatics(d, b);
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-}
-
-/**
- * @license Angular v5.0.0-beta.6-3f585ba
- * (c) 2010-2017 Google, Inc. https://angular.io/
- * License: MIT
- */
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -51,7 +19,7 @@ function __extends(d, b) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var ON_WEB_WORKER = new _angular_core.InjectionToken('WebWorker.onWebWorker');
+var ON_WEB_WORKER = new InjectionToken('WebWorker.onWebWorker');
 
 /**
  * @fileoverview added by tsickle
@@ -159,7 +127,7 @@ var RenderStore = (function () {
         return obj == null ? null : this._lookupByObject.get(obj);
     };
     RenderStore.decorators = [
-        { type: _angular_core.Injectable },
+        { type: Injectable },
     ];
     /** @nocollapse */
     RenderStore.ctorParameters = function () { return []; };
@@ -217,7 +185,7 @@ var Serializer = (function () {
         if (type === 2 /* RENDER_STORE_OBJECT */) {
             return /** @type {?} */ ((this._renderStore.serialize(obj)));
         }
-        if (type === _angular_core.RenderComponentType) {
+        if (type === RenderComponentType) {
             return this._serializeRenderComponentType(obj);
         }
         if (type === 0 /* RENDERER_TYPE_2 */) {
@@ -226,7 +194,7 @@ var Serializer = (function () {
         if (type === LocationType) {
             return this._serializeLocation(obj);
         }
-        throw new Error("No serializer for type " + _angular_core.ɵstringify(type));
+        throw new Error("No serializer for type " + ɵstringify(type));
     };
     /**
      * @param {?} map
@@ -252,7 +220,7 @@ var Serializer = (function () {
         if (type === 2 /* RENDER_STORE_OBJECT */) {
             return this._renderStore.deserialize(map);
         }
-        if (type === _angular_core.RenderComponentType) {
+        if (type === RenderComponentType) {
             return this._deserializeRenderComponentType(map);
         }
         if (type === 0 /* RENDERER_TYPE_2 */) {
@@ -261,7 +229,7 @@ var Serializer = (function () {
         if (type === LocationType) {
             return this._deserializeLocation(map);
         }
-        throw new Error("No deserializer for type " + _angular_core.ɵstringify(type));
+        throw new Error("No deserializer for type " + ɵstringify(type));
     };
     /**
      * @param {?} loc
@@ -321,7 +289,7 @@ var Serializer = (function () {
      * @return {?}
      */
     function (props) {
-        return new _angular_core.RenderComponentType(props['id'], props['templateUrl'], props['slotCount'], this.deserialize(props['encapsulation']), this.deserialize(props['styles']), {});
+        return new RenderComponentType(props['id'], props['templateUrl'], props['slotCount'], this.deserialize(props['encapsulation']), this.deserialize(props['styles']), {});
     };
     /**
      * @param {?} type
@@ -356,7 +324,7 @@ var Serializer = (function () {
         };
     };
     Serializer.decorators = [
-        { type: _angular_core.Injectable },
+        { type: Injectable },
     ];
     /** @nocollapse */
     Serializer.ctorParameters = function () { return [
@@ -414,7 +382,7 @@ var ClientMessageBrokerFactory_ = (function (_super) {
         return new ClientMessageBroker_(this._messageBus, this._serializer, channel);
     };
     ClientMessageBrokerFactory_.decorators = [
-        { type: _angular_core.Injectable },
+        { type: Injectable },
     ];
     /** @nocollapse */
     ClientMessageBrokerFactory_.ctorParameters = function () { return [
@@ -453,9 +421,9 @@ var ClientMessageBroker_ = (function (_super) {
      * @return {?}
      */
     function (name) {
-        var /** @type {?} */ time = _angular_core.ɵstringify(new Date().getTime());
+        var /** @type {?} */ time = ɵstringify(new Date().getTime());
         var /** @type {?} */ iteration = 0;
-        var /** @type {?} */ id = name + time + _angular_core.ɵstringify(iteration);
+        var /** @type {?} */ id = name + time + ɵstringify(iteration);
         while (this._pending.has(id)) {
             id = "" + name + time + iteration;
             iteration++;
@@ -610,7 +578,7 @@ var PostMessageBusSink = (function () {
         if (this._channels.hasOwnProperty(channel)) {
             throw new Error(channel + " has already been initialized");
         }
-        var /** @type {?} */ emitter = new _angular_core.EventEmitter(false);
+        var /** @type {?} */ emitter = new EventEmitter(false);
         var /** @type {?} */ channelInfo = new _Channel(emitter, runInZone);
         this._channels[channel] = channelInfo;
         emitter.subscribe(function (data) {
@@ -699,7 +667,7 @@ var PostMessageBusSource = (function () {
         if (this._channels.hasOwnProperty(channel)) {
             throw new Error(channel + " has already been initialized");
         }
-        var /** @type {?} */ emitter = new _angular_core.EventEmitter(false);
+        var /** @type {?} */ emitter = new EventEmitter(false);
         var /** @type {?} */ channelInfo = new _Channel(emitter, runInZone);
         this._channels[channel] = channelInfo;
     };
@@ -810,7 +778,7 @@ var PostMessageBus = (function () {
      */
     function (channel) { return this.sink.to(channel); };
     PostMessageBus.decorators = [
-        { type: _angular_core.Injectable },
+        { type: Injectable },
     ];
     /** @nocollapse */
     PostMessageBus.ctorParameters = function () { return [
@@ -875,7 +843,7 @@ var ServiceMessageBrokerFactory_ = (function (_super) {
         return new ServiceMessageBroker_(this._messageBus, this._serializer, channel);
     };
     ServiceMessageBrokerFactory_.decorators = [
-        { type: _angular_core.Injectable },
+        { type: Injectable },
     ];
     /** @nocollapse */
     ServiceMessageBrokerFactory_.ctorParameters = function () { return [
@@ -1619,7 +1587,7 @@ var MessageBasedRenderer2 = (function () {
      */
     function (r, unlisten) { unlisten(); };
     MessageBasedRenderer2.decorators = [
-        { type: _angular_core.Injectable },
+        { type: Injectable },
     ];
     /** @nocollapse */
     MessageBasedRenderer2.ctorParameters = function () { return [
@@ -1627,7 +1595,7 @@ var MessageBasedRenderer2 = (function () {
         { type: MessageBus, },
         { type: Serializer, },
         { type: RenderStore, },
-        { type: _angular_core.RendererFactory2, },
+        { type: RendererFactory2, },
     ]; };
     return MessageBasedRenderer2;
 }());
@@ -1669,7 +1637,7 @@ var WebWorkerInstance = (function () {
         this.bus = bus;
     };
     WebWorkerInstance.decorators = [
-        { type: _angular_core.Injectable },
+        { type: Injectable },
     ];
     /** @nocollapse */
     WebWorkerInstance.ctorParameters = function () { return []; };
@@ -1678,44 +1646,44 @@ var WebWorkerInstance = (function () {
 /**
  * \@experimental WebWorker support is currently experimental.
  */
-var WORKER_SCRIPT = new _angular_core.InjectionToken('WebWorkerScript');
+var WORKER_SCRIPT = new InjectionToken('WebWorkerScript');
 /**
  * A multi-provider used to automatically call the `start()` method after the service is
  * created.
  *
  * \@experimental WebWorker support is currently experimental.
  */
-var WORKER_UI_STARTABLE_MESSAGING_SERVICE = new _angular_core.InjectionToken('WorkerRenderStartableMsgService');
+var WORKER_UI_STARTABLE_MESSAGING_SERVICE = new InjectionToken('WorkerRenderStartableMsgService');
 var _WORKER_UI_PLATFORM_PROVIDERS = [
-    { provide: _angular_core.NgZone, useFactory: createNgZone, deps: [] },
+    { provide: NgZone, useFactory: createNgZone, deps: [] },
     {
         provide: MessageBasedRenderer2,
-        deps: [ServiceMessageBrokerFactory, MessageBus, Serializer, RenderStore, _angular_core.RendererFactory2]
+        deps: [ServiceMessageBrokerFactory, MessageBus, Serializer, RenderStore, RendererFactory2]
     },
     { provide: WORKER_UI_STARTABLE_MESSAGING_SERVICE, useExisting: MessageBasedRenderer2, multi: true },
-    _angular_platformBrowser.ɵBROWSER_SANITIZATION_PROVIDERS,
-    { provide: _angular_core.ErrorHandler, useFactory: _exceptionHandler, deps: [] },
-    { provide: _angular_platformBrowser.DOCUMENT, useFactory: _document, deps: [] },
+    ɵBROWSER_SANITIZATION_PROVIDERS,
+    { provide: ErrorHandler, useFactory: _exceptionHandler, deps: [] },
+    { provide: DOCUMENT$1, useFactory: _document, deps: [] },
     // TODO(jteplitz602): Investigate if we definitely need EVENT_MANAGER on the render thread
     // #5298
     {
-        provide: _angular_platformBrowser.EVENT_MANAGER_PLUGINS,
-        useClass: _angular_platformBrowser.ɵDomEventsPlugin,
-        deps: [_angular_platformBrowser.DOCUMENT, _angular_core.NgZone],
+        provide: EVENT_MANAGER_PLUGINS,
+        useClass: ɵDomEventsPlugin,
+        deps: [DOCUMENT$1, NgZone],
         multi: true
     },
-    { provide: _angular_platformBrowser.EVENT_MANAGER_PLUGINS, useClass: _angular_platformBrowser.ɵKeyEventsPlugin, deps: [_angular_platformBrowser.DOCUMENT], multi: true },
+    { provide: EVENT_MANAGER_PLUGINS, useClass: ɵKeyEventsPlugin, deps: [DOCUMENT$1], multi: true },
     {
-        provide: _angular_platformBrowser.EVENT_MANAGER_PLUGINS,
-        useClass: _angular_platformBrowser.ɵHammerGesturesPlugin,
-        deps: [_angular_platformBrowser.DOCUMENT, _angular_platformBrowser.HAMMER_GESTURE_CONFIG],
+        provide: EVENT_MANAGER_PLUGINS,
+        useClass: ɵHammerGesturesPlugin,
+        deps: [DOCUMENT$1, HAMMER_GESTURE_CONFIG],
         multi: true
     },
-    { provide: _angular_platformBrowser.HAMMER_GESTURE_CONFIG, useClass: _angular_platformBrowser.HammerGestureConfig, deps: [] },
-    _angular_core.ɵAPP_ID_RANDOM_PROVIDER,
-    { provide: _angular_platformBrowser.ɵDomRendererFactory2, deps: [_angular_platformBrowser.EventManager, _angular_platformBrowser.ɵDomSharedStylesHost] },
-    { provide: _angular_core.RendererFactory2, useExisting: _angular_platformBrowser.ɵDomRendererFactory2 },
-    { provide: _angular_platformBrowser.ɵSharedStylesHost, useExisting: _angular_platformBrowser.ɵDomSharedStylesHost },
+    { provide: HAMMER_GESTURE_CONFIG, useClass: HammerGestureConfig, deps: [] },
+    ɵAPP_ID_RANDOM_PROVIDER,
+    { provide: ɵDomRendererFactory2, deps: [EventManager, ɵDomSharedStylesHost] },
+    { provide: RendererFactory2, useExisting: ɵDomRendererFactory2 },
+    { provide: ɵSharedStylesHost, useExisting: ɵDomSharedStylesHost },
     {
         provide: ServiceMessageBrokerFactory,
         useClass: ServiceMessageBrokerFactory_,
@@ -1729,17 +1697,17 @@ var _WORKER_UI_PLATFORM_PROVIDERS = [
     { provide: Serializer, deps: [RenderStore] },
     { provide: ON_WEB_WORKER, useValue: false },
     { provide: RenderStore, deps: [] },
-    { provide: _angular_platformBrowser.ɵDomSharedStylesHost, deps: [_angular_platformBrowser.DOCUMENT] },
-    { provide: _angular_core.Testability, deps: [_angular_core.NgZone] },
-    { provide: _angular_platformBrowser.EventManager, deps: [_angular_platformBrowser.EVENT_MANAGER_PLUGINS, _angular_core.NgZone] },
+    { provide: ɵDomSharedStylesHost, deps: [DOCUMENT$1] },
+    { provide: Testability, deps: [NgZone] },
+    { provide: EventManager, deps: [EVENT_MANAGER_PLUGINS, NgZone] },
     { provide: WebWorkerInstance, deps: [] },
     {
-        provide: _angular_core.PLATFORM_INITIALIZER,
+        provide: PLATFORM_INITIALIZER,
         useFactory: initWebWorkerRenderPlatform,
         multi: true,
-        deps: [_angular_core.Injector]
+        deps: [Injector]
     },
-    { provide: _angular_core.PLATFORM_ID, useValue: _angular_common.ɵPLATFORM_WORKER_UI_ID },
+    { provide: PLATFORM_ID, useValue: ɵPLATFORM_WORKER_UI_ID },
     { provide: MessageBus, useFactory: messageBusFactory, deps: [WebWorkerInstance] },
 ];
 /**
@@ -1748,7 +1716,7 @@ var _WORKER_UI_PLATFORM_PROVIDERS = [
  */
 function initializeGenericWorkerRenderer(injector) {
     var /** @type {?} */ bus = injector.get(MessageBus);
-    var /** @type {?} */ zone = injector.get(_angular_core.NgZone);
+    var /** @type {?} */ zone = injector.get(NgZone);
     bus.attachToZone(zone);
     // initialize message services after the bus has been created
     var /** @type {?} */ services = injector.get(WORKER_UI_STARTABLE_MESSAGING_SERVICE);
@@ -1767,8 +1735,8 @@ function messageBusFactory(instance) {
  */
 function initWebWorkerRenderPlatform(injector) {
     return function () {
-        _angular_platformBrowser.ɵBrowserDomAdapter.makeCurrent();
-        _angular_platformBrowser.ɵBrowserGetTestability.init();
+        ɵBrowserDomAdapter.makeCurrent();
+        ɵBrowserGetTestability.init();
         var /** @type {?} */ scriptUri;
         try {
             scriptUri = injector.get(WORKER_SCRIPT);
@@ -1784,12 +1752,12 @@ function initWebWorkerRenderPlatform(injector) {
 /**
  * \@experimental WebWorker support is currently experimental.
  */
-var platformWorkerUi = _angular_core.createPlatformFactory(_angular_core.platformCore, 'workerUi', _WORKER_UI_PLATFORM_PROVIDERS);
+var platformWorkerUi = createPlatformFactory(platformCore, 'workerUi', _WORKER_UI_PLATFORM_PROVIDERS);
 /**
  * @return {?}
  */
 function _exceptionHandler() {
-    return new _angular_core.ErrorHandler();
+    return new ErrorHandler();
 }
 /**
  * @return {?}
@@ -1801,7 +1769,7 @@ function _document() {
  * @return {?}
  */
 function createNgZone() {
-    return new _angular_core.NgZone({ enableLongStackTrace: _angular_core.isDevMode() });
+    return new NgZone({ enableLongStackTrace: isDevMode() });
 }
 /**
  * Spawns a new class and initializes the WebWorkerInstance
@@ -1836,7 +1804,7 @@ function spawnWebWorker(uri, instance) {
 /**
  * \@stable
  */
-var VERSION = new _angular_core.Version('5.0.0-beta.6-3f585ba');
+var VERSION = new Version('5.0.0-beta.6-3f585ba');
 
 /**
  * @fileoverview added by tsickle
@@ -1900,12 +1868,12 @@ var MessageBasedPlatformLocation = (function () {
      */
     function (pathname) { this._platformLocation.pathname = pathname; };
     MessageBasedPlatformLocation.decorators = [
-        { type: _angular_core.Injectable },
+        { type: Injectable },
     ];
     /** @nocollapse */
     MessageBasedPlatformLocation.ctorParameters = function () { return [
         { type: ServiceMessageBrokerFactory, },
-        { type: _angular_platformBrowser.ɵBrowserPlatformLocation, },
+        { type: ɵBrowserPlatformLocation, },
         { type: MessageBus, },
         { type: Serializer, },
     ]; };
@@ -1930,9 +1898,9 @@ var MessageBasedPlatformLocation = (function () {
  */
 var WORKER_UI_LOCATION_PROVIDERS = /** @type {?} */ ([
     { provide: MessageBasedPlatformLocation, deps: [ServiceMessageBrokerFactory,
-            _angular_platformBrowser.ɵBrowserPlatformLocation, MessageBus, Serializer] },
-    { provide: _angular_platformBrowser.ɵBrowserPlatformLocation, deps: [_angular_common.DOCUMENT] },
-    { provide: _angular_core.PLATFORM_INITIALIZER, useFactory: initUiLocation, multi: true, deps: [_angular_core.Injector] }
+            ɵBrowserPlatformLocation, MessageBus, Serializer] },
+    { provide: ɵBrowserPlatformLocation, deps: [DOCUMENT] },
+    { provide: PLATFORM_INITIALIZER, useFactory: initUiLocation, multi: true, deps: [Injector] }
 ]);
 /**
  * @param {?} injector
@@ -1940,7 +1908,7 @@ var WORKER_UI_LOCATION_PROVIDERS = /** @type {?} */ ([
  */
 function initUiLocation(injector) {
     return function () {
-        var /** @type {?} */ zone = injector.get(_angular_core.NgZone);
+        var /** @type {?} */ zone = injector.get(NgZone);
         zone.runGuarded(function () { return injector.get(MessageBasedPlatformLocation).start(); });
     };
 }
@@ -2134,7 +2102,7 @@ var WebWorkerPlatformLocation = (function (_super) {
         this._broker.runOnService(args, null);
     };
     WebWorkerPlatformLocation.decorators = [
-        { type: _angular_core.Injectable },
+        { type: Injectable },
     ];
     /** @nocollapse */
     WebWorkerPlatformLocation.ctorParameters = function () { return [
@@ -2143,7 +2111,7 @@ var WebWorkerPlatformLocation = (function (_super) {
         { type: Serializer, },
     ]; };
     return WebWorkerPlatformLocation;
-}(_angular_common.PlatformLocation));
+}(PlatformLocation));
 
 /**
  * @fileoverview added by tsickle
@@ -2163,13 +2131,13 @@ var WebWorkerPlatformLocation = (function (_super) {
  * \@experimental
  */
 var WORKER_APP_LOCATION_PROVIDERS = [
-    { provide: _angular_common.PlatformLocation, useClass: WebWorkerPlatformLocation }, {
-        provide: _angular_core.APP_INITIALIZER,
+    { provide: PlatformLocation, useClass: WebWorkerPlatformLocation }, {
+        provide: APP_INITIALIZER,
         useFactory: appInitFnFactory,
         multi: true,
-        deps: [_angular_common.PlatformLocation, _angular_core.NgZone]
+        deps: [PlatformLocation, NgZone]
     },
-    { provide: _angular_common.LOCATION_INITIALIZED, useFactory: locationInitialized, deps: [_angular_common.PlatformLocation] }
+    { provide: LOCATION_INITIALIZED, useFactory: locationInitialized, deps: [PlatformLocation] }
 ];
 /**
  * @param {?} platformLocation
@@ -2383,7 +2351,7 @@ var WebWorkerRendererFactory2 = (function () {
         }
     };
     WebWorkerRendererFactory2.decorators = [
-        { type: _angular_core.Injectable },
+        { type: Injectable },
     ];
     /** @nocollapse */
     WebWorkerRendererFactory2.ctorParameters = function () { return [
@@ -2811,7 +2779,7 @@ var WorkerDomAdapter = (function (_super) {
     WorkerDomAdapter.makeCurrent = /**
      * @return {?}
      */
-    function () { _angular_platformBrowser.ɵsetRootDomAdapter(new WorkerDomAdapter()); };
+    function () { ɵsetRootDomAdapter(new WorkerDomAdapter()); };
     /**
      * @param {?} error
      * @return {?}
@@ -3995,7 +3963,7 @@ var WorkerDomAdapter = (function (_super) {
      */
     function (name, value) { throw 'not implemented'; };
     return WorkerDomAdapter;
-}(_angular_platformBrowser.ɵDomAdapter));
+}(ɵDomAdapter));
 
 /**
  * @fileoverview added by tsickle
@@ -4011,12 +3979,12 @@ var WorkerDomAdapter = (function (_super) {
 /**
  * \@experimental
  */
-var platformWorkerApp = _angular_core.createPlatformFactory(_angular_core.platformCore, 'workerApp', [{ provide: _angular_core.PLATFORM_ID, useValue: _angular_common.ɵPLATFORM_WORKER_APP_ID }]);
+var platformWorkerApp = createPlatformFactory(platformCore, 'workerApp', [{ provide: PLATFORM_ID, useValue: ɵPLATFORM_WORKER_APP_ID }]);
 /**
  * @return {?}
  */
 function errorHandler() {
-    return new _angular_core.ErrorHandler();
+    return new ErrorHandler();
 }
 // TODO(jteplitz602) remove this and compile with lib.webworker.d.ts (#3492)
 var _postMessage = {
@@ -4050,24 +4018,24 @@ var WorkerAppModule = (function () {
     function WorkerAppModule() {
     }
     WorkerAppModule.decorators = [
-        { type: _angular_core.NgModule, args: [{
+        { type: NgModule, args: [{
                     providers: [
-                        _angular_platformBrowser.ɵBROWSER_SANITIZATION_PROVIDERS,
+                        ɵBROWSER_SANITIZATION_PROVIDERS,
                         Serializer,
-                        { provide: _angular_platformBrowser.DOCUMENT, useValue: null },
+                        { provide: DOCUMENT$1, useValue: null },
                         { provide: ClientMessageBrokerFactory, useClass: ClientMessageBrokerFactory_ },
                         { provide: ServiceMessageBrokerFactory, useClass: ServiceMessageBrokerFactory_ },
                         WebWorkerRendererFactory2,
-                        { provide: _angular_core.RendererFactory2, useExisting: WebWorkerRendererFactory2 },
+                        { provide: RendererFactory2, useExisting: WebWorkerRendererFactory2 },
                         { provide: ON_WEB_WORKER, useValue: true },
                         RenderStore,
-                        { provide: _angular_core.ErrorHandler, useFactory: errorHandler, deps: [] },
-                        { provide: MessageBus, useFactory: createMessageBus, deps: [_angular_core.NgZone] },
-                        { provide: _angular_core.APP_INITIALIZER, useValue: setupWebWorker, multi: true },
+                        { provide: ErrorHandler, useFactory: errorHandler, deps: [] },
+                        { provide: MessageBus, useFactory: createMessageBus, deps: [NgZone] },
+                        { provide: APP_INITIALIZER, useValue: setupWebWorker, multi: true },
                     ],
                     exports: [
-                        _angular_common.CommonModule,
-                        _angular_core.ApplicationModule,
+                        CommonModule,
+                        ApplicationModule,
                     ]
                 },] },
     ];
@@ -4097,35 +4065,32 @@ function bootstrapWorkerUi(workerScriptUri, customProviders) {
     return Promise.resolve(platform);
 }
 
-exports.VERSION = VERSION;
-exports.ClientMessageBroker = ClientMessageBroker;
-exports.ClientMessageBrokerFactory = ClientMessageBrokerFactory;
-exports.FnArg = FnArg;
-exports.UiArguments = UiArguments;
-exports.MessageBus = MessageBus;
-exports.ServiceMessageBroker = ServiceMessageBroker;
-exports.ServiceMessageBrokerFactory = ServiceMessageBrokerFactory;
-exports.WORKER_UI_LOCATION_PROVIDERS = WORKER_UI_LOCATION_PROVIDERS;
-exports.WORKER_APP_LOCATION_PROVIDERS = WORKER_APP_LOCATION_PROVIDERS;
-exports.WorkerAppModule = WorkerAppModule;
-exports.platformWorkerApp = platformWorkerApp;
-exports.platformWorkerUi = platformWorkerUi;
-exports.bootstrapWorkerUi = bootstrapWorkerUi;
-exports.ɵm = ON_WEB_WORKER;
-exports.ɵa = ClientMessageBrokerFactory_;
-exports.ɵk = RenderStore;
-exports.ɵb = Serializer;
-exports.ɵc = ServiceMessageBrokerFactory_;
-exports.ɵe = appInitFnFactory;
-exports.ɵd = locationInitialized;
-exports.ɵj = WebWorkerPlatformLocation;
-exports.ɵl = WebWorkerRendererFactory2;
-exports.ɵg = createMessageBus;
-exports.ɵf = errorHandler;
-exports.ɵh = setupWebWorker;
-exports.ɵi = _WORKER_UI_PLATFORM_PROVIDERS;
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
+ * @module
+ * @description
+ * Entry point for all public APIs of this package.
+ */
 
-Object.defineProperty(exports, '__esModule', { value: true });
+// This file only reexports content of the `src` folder. Keep it that way.
 
-})));
-//# sourceMappingURL=platform-webworker.umd.js.map
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/**
+ * Generated bundle index. Do not edit.
+ */
+
+export { VERSION, ClientMessageBroker, ClientMessageBrokerFactory, FnArg, UiArguments, MessageBus, ServiceMessageBroker, ServiceMessageBrokerFactory, WORKER_UI_LOCATION_PROVIDERS, WORKER_APP_LOCATION_PROVIDERS, WorkerAppModule, platformWorkerApp, platformWorkerUi, bootstrapWorkerUi, ON_WEB_WORKER as ɵm, ClientMessageBrokerFactory_ as ɵa, RenderStore as ɵk, Serializer as ɵb, ServiceMessageBrokerFactory_ as ɵc, appInitFnFactory as ɵe, locationInitialized as ɵd, WebWorkerPlatformLocation as ɵj, WebWorkerRendererFactory2 as ɵl, createMessageBus as ɵg, errorHandler as ɵf, setupWebWorker as ɵh, _WORKER_UI_PLATFORM_PROVIDERS as ɵi };
+//# sourceMappingURL=index.js.map
