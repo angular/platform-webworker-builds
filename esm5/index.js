@@ -1,5 +1,5 @@
 /**
- * @license Angular v5.0.0-beta.7-4695c69
+ * @license Angular v5.0.0-beta.7-b6431c6
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -346,20 +346,12 @@ var Serializer = (function () {
  */
 /**
  * \@experimental WebWorker support in Angular is experimental.
- * @abstract
  */
 var ClientMessageBrokerFactory = (function () {
-    function ClientMessageBrokerFactory() {
-    }
-    return ClientMessageBrokerFactory;
-}());
-var ClientMessageBrokerFactory_ = (function (_super) {
-    __extends(ClientMessageBrokerFactory_, _super);
-    function ClientMessageBrokerFactory_(_messageBus, _serializer) {
-        var _this = _super.call(this) || this;
-        _this._messageBus = _messageBus;
-        _this._serializer = _serializer;
-        return _this;
+    /** @internal */
+    function ClientMessageBrokerFactory(_messageBus, _serializer) {
+        this._messageBus = _messageBus;
+        this._serializer = _serializer;
     }
     /**
      * Initializes the given channel and attaches a new {@link ClientMessageBroker} to it.
@@ -370,7 +362,7 @@ var ClientMessageBrokerFactory_ = (function (_super) {
      * @param {?=} runInZone
      * @return {?}
      */
-    ClientMessageBrokerFactory_.prototype.createMessageBroker = /**
+    ClientMessageBrokerFactory.prototype.createMessageBroker = /**
      * Initializes the given channel and attaches a new {\@link ClientMessageBroker} to it.
      * @param {?} channel
      * @param {?=} runInZone
@@ -379,44 +371,37 @@ var ClientMessageBrokerFactory_ = (function (_super) {
     function (channel, runInZone) {
         if (runInZone === void 0) { runInZone = true; }
         this._messageBus.initChannel(channel, runInZone);
-        return new ClientMessageBroker_(this._messageBus, this._serializer, channel);
+        return new ClientMessageBroker(this._messageBus, this._serializer, channel);
     };
-    ClientMessageBrokerFactory_.decorators = [
+    ClientMessageBrokerFactory.decorators = [
         { type: Injectable },
     ];
     /** @nocollapse */
-    ClientMessageBrokerFactory_.ctorParameters = function () { return [
+    ClientMessageBrokerFactory.ctorParameters = function () { return [
         { type: MessageBus, },
         { type: Serializer, },
     ]; };
-    return ClientMessageBrokerFactory_;
-}(ClientMessageBrokerFactory));
+    return ClientMessageBrokerFactory;
+}());
 /**
  * \@experimental WebWorker support in Angular is experimental.
- * @abstract
  */
 var ClientMessageBroker = (function () {
-    function ClientMessageBroker() {
-    }
-    return ClientMessageBroker;
-}());
-var ClientMessageBroker_ = (function (_super) {
-    __extends(ClientMessageBroker_, _super);
-    function ClientMessageBroker_(messageBus, _serializer, channel) {
-        var _this = _super.call(this) || this;
-        _this.channel = channel;
-        _this._pending = new Map();
-        _this._sink = messageBus.to(channel);
-        _this._serializer = _serializer;
+    /** @internal */
+    function ClientMessageBroker(messageBus, _serializer, channel) {
+        var _this = this;
+        this.channel = channel;
+        this._pending = new Map();
+        this._sink = messageBus.to(channel);
+        this._serializer = _serializer;
         var /** @type {?} */ source = messageBus.from(channel);
         source.subscribe({ next: function (message) { return _this._handleMessage(message); } });
-        return _this;
     }
     /**
      * @param {?} name
      * @return {?}
      */
-    ClientMessageBroker_.prototype._generateMessageId = /**
+    ClientMessageBroker.prototype._generateMessageId = /**
      * @param {?} name
      * @return {?}
      */
@@ -435,7 +420,7 @@ var ClientMessageBroker_ = (function (_super) {
      * @param {?} returnType
      * @return {?}
      */
-    ClientMessageBroker_.prototype.runOnService = /**
+    ClientMessageBroker.prototype.runOnService = /**
      * @param {?} args
      * @param {?} returnType
      * @return {?}
@@ -486,7 +471,7 @@ var ClientMessageBroker_ = (function (_super) {
      * @param {?} message
      * @return {?}
      */
-    ClientMessageBroker_.prototype._handleMessage = /**
+    ClientMessageBroker.prototype._handleMessage = /**
      * @param {?} message
      * @return {?}
      */
@@ -504,8 +489,8 @@ var ClientMessageBroker_ = (function (_super) {
             }
         }
     };
-    return ClientMessageBroker_;
-}(ClientMessageBroker));
+    return ClientMessageBroker;
+}());
 /**
  * \@experimental WebWorker support in Angular is experimental.
  */
@@ -812,27 +797,24 @@ var _Channel = (function () {
  */
 /**
  * \@experimental WebWorker support in Angular is currently experimental.
- * @abstract
  */
 var ServiceMessageBrokerFactory = (function () {
-    function ServiceMessageBrokerFactory() {
-    }
-    return ServiceMessageBrokerFactory;
-}());
-var ServiceMessageBrokerFactory_ = (function (_super) {
-    __extends(ServiceMessageBrokerFactory_, _super);
-    function ServiceMessageBrokerFactory_(_messageBus, _serializer) {
-        var _this = _super.call(this) || this;
-        _this._messageBus = _messageBus;
-        _this._serializer = _serializer;
-        return _this;
+    /** @internal */
+    function ServiceMessageBrokerFactory(_messageBus, _serializer) {
+        this._messageBus = _messageBus;
+        this._serializer = _serializer;
     }
     /**
+     * Initializes the given channel and attaches a new {@link ServiceMessageBroker} to it.
+     */
+    /**
+     * Initializes the given channel and attaches a new {\@link ServiceMessageBroker} to it.
      * @param {?} channel
      * @param {?=} runInZone
      * @return {?}
      */
-    ServiceMessageBrokerFactory_.prototype.createMessageBroker = /**
+    ServiceMessageBrokerFactory.prototype.createMessageBroker = /**
+     * Initializes the given channel and attaches a new {\@link ServiceMessageBroker} to it.
      * @param {?} channel
      * @param {?=} runInZone
      * @return {?}
@@ -840,18 +822,18 @@ var ServiceMessageBrokerFactory_ = (function (_super) {
     function (channel, runInZone) {
         if (runInZone === void 0) { runInZone = true; }
         this._messageBus.initChannel(channel, runInZone);
-        return new ServiceMessageBroker_(this._messageBus, this._serializer, channel);
+        return new ServiceMessageBroker(this._messageBus, this._serializer, channel);
     };
-    ServiceMessageBrokerFactory_.decorators = [
+    ServiceMessageBrokerFactory.decorators = [
         { type: Injectable },
     ];
     /** @nocollapse */
-    ServiceMessageBrokerFactory_.ctorParameters = function () { return [
+    ServiceMessageBrokerFactory.ctorParameters = function () { return [
         { type: MessageBus, },
         { type: Serializer, },
     ]; };
-    return ServiceMessageBrokerFactory_;
-}(ServiceMessageBrokerFactory));
+    return ServiceMessageBrokerFactory;
+}());
 /**
  * Helper class for UIComponents that allows components to register methods.
  * If a registered method message is received from the broker on the worker,
@@ -859,24 +841,17 @@ var ServiceMessageBrokerFactory_ = (function (_super) {
  * If that method returns a promise, the UIMessageBroker returns the result to the worker.
  *
  * \@experimental WebWorker support in Angular is currently experimental.
- * @abstract
  */
 var ServiceMessageBroker = (function () {
-    function ServiceMessageBroker() {
-    }
-    return ServiceMessageBroker;
-}());
-var ServiceMessageBroker_ = (function (_super) {
-    __extends(ServiceMessageBroker_, _super);
-    function ServiceMessageBroker_(messageBus, _serializer, channel) {
-        var _this = _super.call(this) || this;
-        _this._serializer = _serializer;
-        _this.channel = channel;
-        _this._methods = new Map();
-        _this._sink = messageBus.to(channel);
+    /** @internal */
+    function ServiceMessageBroker(messageBus, _serializer, channel) {
+        var _this = this;
+        this._serializer = _serializer;
+        this.channel = channel;
+        this._methods = new Map();
+        this._sink = messageBus.to(channel);
         var /** @type {?} */ source = messageBus.from(channel);
         source.subscribe({ next: function (message) { return _this._handleMessage(message); } });
-        return _this;
     }
     /**
      * @param {?} methodName
@@ -885,7 +860,7 @@ var ServiceMessageBroker_ = (function (_super) {
      * @param {?=} returnType
      * @return {?}
      */
-    ServiceMessageBroker_.prototype.registerMethod = /**
+    ServiceMessageBroker.prototype.registerMethod = /**
      * @param {?} methodName
      * @param {?} signature
      * @param {?} method
@@ -900,7 +875,7 @@ var ServiceMessageBroker_ = (function (_super) {
             var /** @type {?} */ deserializedArgs = new Array(numArgs);
             for (var /** @type {?} */ i = 0; i < numArgs; i++) {
                 var /** @type {?} */ serializedArg = serializedArgs[i];
-                deserializedArgs[i] = _this._serializer.deserialize(serializedArg, signature[i]);
+                deserializedArgs[i] = _this._serializer.deserialize(serializedArg, /** @type {?} */ ((signature))[i]);
             }
             var /** @type {?} */ promise = method.apply(void 0, deserializedArgs);
             if (returnType && promise) {
@@ -912,7 +887,7 @@ var ServiceMessageBroker_ = (function (_super) {
      * @param {?} message
      * @return {?}
      */
-    ServiceMessageBroker_.prototype._handleMessage = /**
+    ServiceMessageBroker.prototype._handleMessage = /**
      * @param {?} message
      * @return {?}
      */
@@ -927,7 +902,7 @@ var ServiceMessageBroker_ = (function (_super) {
      * @param {?} type
      * @return {?}
      */
-    ServiceMessageBroker_.prototype._wrapWebWorkerPromise = /**
+    ServiceMessageBroker.prototype._wrapWebWorkerPromise = /**
      * @param {?} id
      * @param {?} promise
      * @param {?} type
@@ -943,8 +918,8 @@ var ServiceMessageBroker_ = (function (_super) {
             });
         });
     };
-    return ServiceMessageBroker_;
-}(ServiceMessageBroker));
+    return ServiceMessageBroker;
+}());
 /**
  * \@experimental WebWorker support in Angular is currently experimental.
  * @record
@@ -1686,12 +1661,12 @@ var _WORKER_UI_PLATFORM_PROVIDERS = [
     { provide: ɵSharedStylesHost, useExisting: ɵDomSharedStylesHost },
     {
         provide: ServiceMessageBrokerFactory,
-        useClass: ServiceMessageBrokerFactory_,
+        useClass: ServiceMessageBrokerFactory,
         deps: [MessageBus, Serializer]
     },
     {
         provide: ClientMessageBrokerFactory,
-        useClass: ClientMessageBrokerFactory_,
+        useClass: ClientMessageBrokerFactory,
         deps: [MessageBus, Serializer]
     },
     { provide: Serializer, deps: [RenderStore] },
@@ -1804,7 +1779,7 @@ function spawnWebWorker(uri, instance) {
 /**
  * \@stable
  */
-var VERSION = new Version('5.0.0-beta.7-4695c69');
+var VERSION = new Version('5.0.0-beta.7-b6431c6');
 
 /**
  * @fileoverview added by tsickle
@@ -4023,8 +3998,8 @@ var WorkerAppModule = (function () {
                         ɵBROWSER_SANITIZATION_PROVIDERS,
                         Serializer,
                         { provide: DOCUMENT$1, useValue: null },
-                        { provide: ClientMessageBrokerFactory, useClass: ClientMessageBrokerFactory_ },
-                        { provide: ServiceMessageBrokerFactory, useClass: ServiceMessageBrokerFactory_ },
+                        ClientMessageBrokerFactory,
+                        ServiceMessageBrokerFactory,
                         WebWorkerRendererFactory2,
                         { provide: RendererFactory2, useExisting: WebWorkerRendererFactory2 },
                         { provide: ON_WEB_WORKER, useValue: true },
@@ -4092,5 +4067,5 @@ function bootstrapWorkerUi(workerScriptUri, customProviders) {
  * Generated bundle index. Do not edit.
  */
 
-export { VERSION, ClientMessageBroker, ClientMessageBrokerFactory, FnArg, UiArguments, MessageBus, ServiceMessageBroker, ServiceMessageBrokerFactory, WORKER_UI_LOCATION_PROVIDERS, WORKER_APP_LOCATION_PROVIDERS, WorkerAppModule, platformWorkerApp, platformWorkerUi, bootstrapWorkerUi, ON_WEB_WORKER as ɵm, ClientMessageBrokerFactory_ as ɵa, RenderStore as ɵk, Serializer as ɵb, ServiceMessageBrokerFactory_ as ɵc, appInitFnFactory as ɵe, locationInitialized as ɵd, WebWorkerPlatformLocation as ɵj, WebWorkerRendererFactory2 as ɵl, createMessageBus as ɵg, errorHandler as ɵf, setupWebWorker as ɵh, _WORKER_UI_PLATFORM_PROVIDERS as ɵi };
+export { VERSION, ClientMessageBroker, ClientMessageBrokerFactory, FnArg, UiArguments, MessageBus, ServiceMessageBroker, ServiceMessageBrokerFactory, WORKER_UI_LOCATION_PROVIDERS, WORKER_APP_LOCATION_PROVIDERS, WorkerAppModule, platformWorkerApp, platformWorkerUi, bootstrapWorkerUi, ON_WEB_WORKER as ɵk, RenderStore as ɵh, Serializer as ɵa, appInitFnFactory as ɵc, locationInitialized as ɵb, WebWorkerPlatformLocation as ɵi, WebWorkerRendererFactory2 as ɵj, createMessageBus as ɵe, errorHandler as ɵd, setupWebWorker as ɵf, _WORKER_UI_PLATFORM_PROVIDERS as ɵg };
 //# sourceMappingURL=index.js.map
