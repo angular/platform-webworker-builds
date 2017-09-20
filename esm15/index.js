@@ -1,16 +1,16 @@
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
 /**
- * @license Angular v4.1.0-beta.1-683e657
+ * @license Angular v5.0.0-beta.7-3215c4b
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
-import { CommonModule, LOCATION_INITIALIZED, PlatformLocation, ɵPLATFORM_WORKER_APP_ID, ɵPLATFORM_WORKER_UI_ID } from '@angular/common';
+import { CommonModule, DOCUMENT, LOCATION_INITIALIZED, PlatformLocation, ɵPLATFORM_WORKER_APP_ID, ɵPLATFORM_WORKER_UI_ID } from '@angular/common';
 import { APP_INITIALIZER, ApplicationModule, ErrorHandler, EventEmitter, Injectable, InjectionToken, Injector, NgModule, NgZone, PLATFORM_ID, PLATFORM_INITIALIZER, RenderComponentType, RendererFactory2, Testability, Version, createPlatformFactory, isDevMode, platformCore, ɵAPP_ID_RANDOM_PROVIDER, ɵstringify } from '@angular/core';
-import { DOCUMENT, EVENT_MANAGER_PLUGINS, EventManager, HAMMER_GESTURE_CONFIG, HammerGestureConfig, ɵBROWSER_SANITIZATION_PROVIDERS, ɵBrowserDomAdapter, ɵBrowserGetTestability, ɵBrowserPlatformLocation, ɵDomAdapter, ɵDomEventsPlugin, ɵDomRendererFactory2, ɵDomSharedStylesHost, ɵHammerGesturesPlugin, ɵKeyEventsPlugin, ɵSharedStylesHost, ɵsetRootDomAdapter } from '@angular/platform-browser';
+import { DOCUMENT as DOCUMENT$1, EVENT_MANAGER_PLUGINS, EventManager, HAMMER_GESTURE_CONFIG, HammerGestureConfig, ɵBROWSER_SANITIZATION_PROVIDERS, ɵBrowserDomAdapter, ɵBrowserGetTestability, ɵBrowserPlatformLocation, ɵDomAdapter, ɵDomEventsPlugin, ɵDomRendererFactory2, ɵDomSharedStylesHost, ɵHammerGesturesPlugin, ɵKeyEventsPlugin, ɵSharedStylesHost, ɵsetRootDomAdapter } from '@angular/platform-browser';
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -18,13 +18,11 @@ import { DOCUMENT, EVENT_MANAGER_PLUGINS, EventManager, HAMMER_GESTURE_CONFIG, H
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var ON_WEB_WORKER = new InjectionToken('WebWorker.onWebWorker');
+const ON_WEB_WORKER = new InjectionToken('WebWorker.onWebWorker');
+
 /**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
  */
 /**
  * Message Bus is a low level API used to communicate between the UI and the background.
@@ -35,49 +33,22 @@ var ON_WEB_WORKER = new InjectionToken('WebWorker.onWebWorker');
  * \@experimental WebWorker support in Angular is currenlty experimental.
  * @abstract
  */
-var MessageBus = (function () {
-    function MessageBus() {
-    }
-    /**
-     * Sets up a new channel on the MessageBus.
-     * MUST be called before calling from or to on the channel.
-     * If runInZone is true then the source will emit events inside the angular zone
-     * and the sink will buffer messages and send only once the zone exits.
-     * if runInZone is false then the source will emit events inside the global zone
-     * and the sink will send messages immediately.
-     * @abstract
-     * @param {?} channel
-     * @param {?=} runInZone
-     * @return {?}
-     */
-    MessageBus.prototype.initChannel = function (channel, runInZone) { };
-    /**
-     * Assigns this bus to the given zone.
-     * Any callbacks attached to channels where runInZone was set to true on initialization
-     * will be executed in the given zone.
-     * @abstract
-     * @param {?} zone
-     * @return {?}
-     */
-    MessageBus.prototype.attachToZone = function (zone) { };
-    /**
-     * Returns an {\@link EventEmitter} that emits every time a message
-     * is received on the given channel.
-     * @abstract
-     * @param {?} channel
-     * @return {?}
-     */
-    MessageBus.prototype.from = function (channel) { };
-    /**
-     * Returns an {\@link EventEmitter} for the given channel
-     * To publish methods to that channel just call next on the returned emitter
-     * @abstract
-     * @param {?} channel
-     * @return {?}
-     */
-    MessageBus.prototype.to = function (channel) { };
-    return MessageBus;
-}());
+class MessageBus {
+}
+/**
+ * \@experimental WebWorker support in Angular is currenlty experimental.
+ * @record
+ */
+
+/**
+ * \@experimental WebWorker support in Angular is currenlty experimental.
+ * @record
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -85,8 +56,8 @@ var MessageBus = (function () {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var RenderStore = (function () {
-    function RenderStore() {
+class RenderStore {
+    constructor() {
         this._nextIndex = 0;
         this._lookupById = new Map();
         this._lookupByObject = new Map();
@@ -94,52 +65,54 @@ var RenderStore = (function () {
     /**
      * @return {?}
      */
-    RenderStore.prototype.allocateId = function () { return this._nextIndex++; };
+    allocateId() { return this._nextIndex++; }
     /**
      * @param {?} obj
      * @param {?} id
      * @return {?}
      */
-    RenderStore.prototype.store = function (obj, id) {
+    store(obj, id) {
         if (id == null)
             return;
         this._lookupById.set(id, obj);
         this._lookupByObject.set(obj, id);
-    };
+    }
     /**
      * @param {?} obj
      * @return {?}
      */
-    RenderStore.prototype.remove = function (obj) {
-        var /** @type {?} */ index = this._lookupByObject.get(obj);
+    remove(obj) {
+        const /** @type {?} */ index = this._lookupByObject.get(obj);
         if (index != null) {
             this._lookupByObject.delete(obj);
             this._lookupById.delete(index);
         }
-    };
+    }
     /**
      * @param {?} id
      * @return {?}
      */
-    RenderStore.prototype.deserialize = function (id) {
+    deserialize(id) {
         return this._lookupById.has(id) ? this._lookupById.get(id) : null;
-    };
+    }
     /**
      * @param {?} obj
      * @return {?}
      */
-    RenderStore.prototype.serialize = function (obj) {
+    serialize(obj) {
         return obj == null ? null : this._lookupByObject.get(obj);
-    };
-    return RenderStore;
-}());
+    }
+}
 RenderStore.decorators = [
     { type: Injectable },
 ];
+/** @nocollapse */
+RenderStore.ctorParameters = () => [];
+
 /**
- * @nocollapse
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
  */
-RenderStore.ctorParameters = function () { return []; };
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -147,14 +120,7 @@ RenderStore.ctorParameters = function () { return []; };
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-/**
- * Any type that does not need to be serialized (string, number, boolean)
- *
- * \@experimental WebWorker support in Angular is currently experimental.
- * @deprecated in v4. Use SerializerTypes.PRIMITIVE instead
- */
-var PRIMITIVE = 1;
-var LocationType = (function () {
+class LocationType {
     /**
      * @param {?} href
      * @param {?} protocol
@@ -166,7 +132,7 @@ var LocationType = (function () {
      * @param {?} hash
      * @param {?} origin
      */
-    function LocationType(href, protocol, host, hostname, port, pathname, search, hash, origin) {
+    constructor(href, protocol, host, hostname, port, pathname, search, hash, origin) {
         this.href = href;
         this.protocol = protocol;
         this.host = host;
@@ -177,13 +143,12 @@ var LocationType = (function () {
         this.hash = hash;
         this.origin = origin;
     }
-    return LocationType;
-}());
-var Serializer = (function () {
+}
+class Serializer {
     /**
      * @param {?} _renderStore
      */
-    function Serializer(_renderStore) {
+    constructor(_renderStore) {
         this._renderStore = _renderStore;
     }
     /**
@@ -191,17 +156,15 @@ var Serializer = (function () {
      * @param {?=} type
      * @return {?}
      */
-    Serializer.prototype.serialize = function (obj, type /* PRIMITIVE */) {
-        var _this = this;
-        if (type === void 0) { type = 1; } /* PRIMITIVE */
+    serialize(obj, type = 1 /* PRIMITIVE */) {
         if (obj == null || type === 1 /* PRIMITIVE */) {
             return obj;
         }
         if (Array.isArray(obj)) {
-            return obj.map(function (v) { return _this.serialize(v, type); });
+            return obj.map(v => this.serialize(v, type));
         }
         if (type === 2 /* RENDER_STORE_OBJECT */) {
-            return ((this._renderStore.serialize(obj)));
+            return /** @type {?} */ ((this._renderStore.serialize(obj)));
         }
         if (type === RenderComponentType) {
             return this._serializeRenderComponentType(obj);
@@ -212,22 +175,20 @@ var Serializer = (function () {
         if (type === LocationType) {
             return this._serializeLocation(obj);
         }
-        throw new Error("No serializer for type " + ɵstringify(type));
-    };
+        throw new Error(`No serializer for type ${ɵstringify(type)}`);
+    }
     /**
      * @param {?} map
      * @param {?=} type
      * @param {?=} data
      * @return {?}
      */
-    Serializer.prototype.deserialize = function (map, type /* PRIMITIVE */, data) {
-        var _this = this;
-        if (type === void 0) { type = 1; } /* PRIMITIVE */
+    deserialize(map, type = 1 /* PRIMITIVE */, data) {
         if (map == null || type === 1 /* PRIMITIVE */) {
             return map;
         }
         if (Array.isArray(map)) {
-            return map.map(function (val) { return _this.deserialize(val, type, data); });
+            return map.map(val => this.deserialize(val, type, data));
         }
         if (type === 2 /* RENDER_STORE_OBJECT */) {
             return this._renderStore.deserialize(map);
@@ -241,13 +202,13 @@ var Serializer = (function () {
         if (type === LocationType) {
             return this._deserializeLocation(map);
         }
-        throw new Error("No deserializer for type " + ɵstringify(type));
-    };
+        throw new Error(`No deserializer for type ${ɵstringify(type)}`);
+    }
     /**
      * @param {?} loc
      * @return {?}
      */
-    Serializer.prototype._serializeLocation = function (loc) {
+    _serializeLocation(loc) {
         return {
             'href': loc.href,
             'protocol': loc.protocol,
@@ -259,19 +220,19 @@ var Serializer = (function () {
             'hash': loc.hash,
             'origin': loc.origin,
         };
-    };
+    }
     /**
      * @param {?} loc
      * @return {?}
      */
-    Serializer.prototype._deserializeLocation = function (loc) {
+    _deserializeLocation(loc) {
         return new LocationType(loc['href'], loc['protocol'], loc['host'], loc['hostname'], loc['port'], loc['pathname'], loc['search'], loc['hash'], loc['origin']);
-    };
+    }
     /**
      * @param {?} type
      * @return {?}
      */
-    Serializer.prototype._serializeRenderComponentType = function (type) {
+    _serializeRenderComponentType(type) {
         return {
             'id': type.id,
             'templateUrl': type.templateUrl,
@@ -279,49 +240,51 @@ var Serializer = (function () {
             'encapsulation': this.serialize(type.encapsulation),
             'styles': this.serialize(type.styles),
         };
-    };
+    }
     /**
      * @param {?} props
      * @return {?}
      */
-    Serializer.prototype._deserializeRenderComponentType = function (props) {
+    _deserializeRenderComponentType(props) {
         return new RenderComponentType(props['id'], props['templateUrl'], props['slotCount'], this.deserialize(props['encapsulation']), this.deserialize(props['styles']), {});
-    };
+    }
     /**
      * @param {?} type
      * @return {?}
      */
-    Serializer.prototype._serializeRendererType2 = function (type) {
+    _serializeRendererType2(type) {
         return {
             'id': type.id,
             'encapsulation': this.serialize(type.encapsulation),
             'styles': this.serialize(type.styles),
             'data': this.serialize(type.data),
         };
-    };
+    }
     /**
      * @param {?} props
      * @return {?}
      */
-    Serializer.prototype._deserializeRendererType2 = function (props) {
+    _deserializeRendererType2(props) {
         return {
             id: props['id'],
             encapsulation: props['encapsulation'],
             styles: this.deserialize(props['styles']),
             data: this.deserialize(props['data'])
         };
-    };
-    return Serializer;
-}());
+    }
+}
 Serializer.decorators = [
     { type: Injectable },
 ];
-/**
- * @nocollapse
- */
-Serializer.ctorParameters = function () { return [
+/** @nocollapse */
+Serializer.ctorParameters = () => [
     { type: RenderStore, },
-]; };
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -331,32 +294,16 @@ Serializer.ctorParameters = function () { return [
  */
 /**
  * \@experimental WebWorker support in Angular is experimental.
- * @abstract
  */
-var ClientMessageBrokerFactory = (function () {
-    function ClientMessageBrokerFactory() {
-    }
+class ClientMessageBrokerFactory {
     /**
-     * Initializes the given channel and attaches a new {\@link ClientMessageBroker} to it.
-     * @abstract
-     * @param {?} channel
-     * @param {?=} runInZone
-     * @return {?}
-     */
-    ClientMessageBrokerFactory.prototype.createMessageBroker = function (channel, runInZone) { };
-    return ClientMessageBrokerFactory;
-}());
-var ClientMessageBrokerFactory_ = (function (_super) {
-    __extends(ClientMessageBrokerFactory_, _super);
-    /**
+     * \@internal
      * @param {?} _messageBus
      * @param {?} _serializer
      */
-    function ClientMessageBrokerFactory_(_messageBus, _serializer) {
-        var _this = _super.call(this) || this;
-        _this._messageBus = _messageBus;
-        _this._serializer = _serializer;
-        return _this;
+    constructor(_messageBus, _serializer) {
+        this._messageBus = _messageBus;
+        this._serializer = _serializer;
     }
     /**
      * Initializes the given channel and attaches a new {\@link ClientMessageBroker} to it.
@@ -364,108 +311,88 @@ var ClientMessageBrokerFactory_ = (function (_super) {
      * @param {?=} runInZone
      * @return {?}
      */
-    ClientMessageBrokerFactory_.prototype.createMessageBroker = function (channel, runInZone) {
-        if (runInZone === void 0) { runInZone = true; }
+    createMessageBroker(channel, runInZone = true) {
         this._messageBus.initChannel(channel, runInZone);
-        return new ClientMessageBroker_(this._messageBus, this._serializer, channel);
-    };
-    return ClientMessageBrokerFactory_;
-}(ClientMessageBrokerFactory));
-ClientMessageBrokerFactory_.decorators = [
+        return new ClientMessageBroker(this._messageBus, this._serializer, channel);
+    }
+}
+ClientMessageBrokerFactory.decorators = [
     { type: Injectable },
 ];
-/**
- * @nocollapse
- */
-ClientMessageBrokerFactory_.ctorParameters = function () { return [
+/** @nocollapse */
+ClientMessageBrokerFactory.ctorParameters = () => [
     { type: MessageBus, },
     { type: Serializer, },
-]; };
+];
 /**
  * \@experimental WebWorker support in Angular is experimental.
- * @abstract
  */
-var ClientMessageBroker = (function () {
-    function ClientMessageBroker() {
-    }
+class ClientMessageBroker {
     /**
-     * @abstract
-     * @param {?} args
-     * @param {?} returnType
-     * @return {?}
-     */
-    ClientMessageBroker.prototype.runOnService = function (args, returnType) { };
-    return ClientMessageBroker;
-}());
-var ClientMessageBroker_ = (function (_super) {
-    __extends(ClientMessageBroker_, _super);
-    /**
+     * \@internal
      * @param {?} messageBus
      * @param {?} _serializer
      * @param {?} channel
      */
-    function ClientMessageBroker_(messageBus, _serializer, channel) {
-        var _this = _super.call(this) || this;
-        _this.channel = channel;
-        _this._pending = new Map();
-        _this._sink = messageBus.to(channel);
-        _this._serializer = _serializer;
-        var source = messageBus.from(channel);
-        source.subscribe({ next: function (message) { return _this._handleMessage(message); } });
-        return _this;
+    constructor(messageBus, _serializer, channel) {
+        this.channel = channel;
+        this._pending = new Map();
+        this._sink = messageBus.to(channel);
+        this._serializer = _serializer;
+        const /** @type {?} */ source = messageBus.from(channel);
+        source.subscribe({ next: (message) => this._handleMessage(message) });
     }
     /**
      * @param {?} name
      * @return {?}
      */
-    ClientMessageBroker_.prototype._generateMessageId = function (name) {
-        var /** @type {?} */ time = ɵstringify(new Date().getTime());
-        var /** @type {?} */ iteration = 0;
-        var /** @type {?} */ id = name + time + ɵstringify(iteration);
+    _generateMessageId(name) {
+        const /** @type {?} */ time = ɵstringify(new Date().getTime());
+        let /** @type {?} */ iteration = 0;
+        let /** @type {?} */ id = name + time + ɵstringify(iteration);
         while (this._pending.has(id)) {
-            id = "" + name + time + iteration;
+            id = `${name}${time}${iteration}`;
             iteration++;
         }
         return id;
-    };
+    }
     /**
      * @param {?} args
      * @param {?} returnType
      * @return {?}
      */
-    ClientMessageBroker_.prototype.runOnService = function (args, returnType) {
-        var _this = this;
-        var /** @type {?} */ fnArgs = [];
+    runOnService(args, returnType) {
+        const /** @type {?} */ fnArgs = [];
         if (args.args) {
-            args.args.forEach(function (argument) {
+            args.args.forEach(argument => {
                 if (argument.type != null) {
-                    fnArgs.push(_this._serializer.serialize(argument.value, argument.type));
+                    fnArgs.push(this._serializer.serialize(argument.value, argument.type));
                 }
                 else {
                     fnArgs.push(argument.value);
                 }
             });
         }
-        var /** @type {?} */ promise;
-        var /** @type {?} */ id = null;
+        let /** @type {?} */ promise;
+        let /** @type {?} */ id = null;
         if (returnType != null) {
-            var /** @type {?} */ completer_1 = ((undefined));
-            promise = new Promise(function (resolve, reject) { completer_1 = { resolve: resolve, reject: reject }; });
+            let /** @type {?} */ completer = /** @type {?} */ ((undefined));
+            promise = new Promise((resolve, reject) => { completer = { resolve, reject }; });
             id = this._generateMessageId(args.method);
-            this._pending.set(id, completer_1);
-            promise.catch(function (err) {
+            this._pending.set(id, completer);
+            promise.catch((err) => {
                 if (console && console.error) {
                     // tslint:disable-next-line:no-console
                     console.error(err);
                 }
-                completer_1.reject(err);
+                completer.reject(err);
             });
-            promise = promise.then(function (v) { return _this._serializer ? _this._serializer.deserialize(v, returnType) : v; });
+            promise = promise.then((v) => this._serializer ? this._serializer.deserialize(v, returnType) : v);
         }
         else {
             promise = null;
         }
-        var /** @type {?} */ message = {
+        const /** @type {?} */ message = {
             'method': args.method,
             'args': fnArgs,
         };
@@ -474,56 +401,57 @@ var ClientMessageBroker_ = (function (_super) {
         }
         this._sink.emit(message);
         return promise;
-    };
+    }
     /**
      * @param {?} message
      * @return {?}
      */
-    ClientMessageBroker_.prototype._handleMessage = function (message) {
+    _handleMessage(message) {
         if (message.type === 'result' || message.type === 'error') {
-            var /** @type {?} */ id = ((message.id));
+            const /** @type {?} */ id = /** @type {?} */ ((message.id));
             if (this._pending.has(id)) {
                 if (message.type === 'result') {
-                    ((this._pending.get(id))).resolve(message.value);
+                    /** @type {?} */ ((this._pending.get(id))).resolve(message.value);
                 }
                 else {
-                    ((this._pending.get(id))).reject(message.value);
+                    /** @type {?} */ ((this._pending.get(id))).reject(message.value);
                 }
                 this._pending.delete(id);
             }
         }
-    };
-    return ClientMessageBroker_;
-}(ClientMessageBroker));
+    }
+}
 /**
  * \@experimental WebWorker support in Angular is experimental.
  */
-var FnArg = (function () {
+class FnArg {
     /**
      * @param {?} value
      * @param {?=} type
      */
-    function FnArg(value, type /* PRIMITIVE */) {
-        if (type === void 0) { type = 1; } /* PRIMITIVE */
+    constructor(value, type = 1 /* PRIMITIVE */) {
         this.value = value;
         this.type = type;
     }
-    return FnArg;
-}());
+}
 /**
  * \@experimental WebWorker support in Angular is experimental.
  */
-var UiArguments = (function () {
+class UiArguments {
     /**
      * @param {?} method
      * @param {?=} args
      */
-    function UiArguments(method, args) {
+    constructor(method, args) {
         this.method = method;
         this.args = args;
     }
-    return UiArguments;
-}());
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -531,11 +459,15 @@ var UiArguments = (function () {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var PostMessageBusSink = (function () {
+/**
+ * @record
+ */
+
+class PostMessageBusSink {
     /**
      * @param {?} _postMessageTarget
      */
-    function PostMessageBusSink(_postMessageTarget) {
+    constructor(_postMessageTarget) {
         this._postMessageTarget = _postMessageTarget;
         this._channels = {};
         this._messageBuffer = [];
@@ -544,148 +476,141 @@ var PostMessageBusSink = (function () {
      * @param {?} zone
      * @return {?}
      */
-    PostMessageBusSink.prototype.attachToZone = function (zone) {
-        var _this = this;
+    attachToZone(zone) {
         this._zone = zone;
-        this._zone.runOutsideAngular(function () { _this._zone.onStable.subscribe({ next: function () { _this._handleOnEventDone(); } }); });
-    };
+        this._zone.runOutsideAngular(() => { this._zone.onStable.subscribe({ next: () => { this._handleOnEventDone(); } }); });
+    }
     /**
      * @param {?} channel
      * @param {?=} runInZone
      * @return {?}
      */
-    PostMessageBusSink.prototype.initChannel = function (channel, runInZone) {
-        var _this = this;
-        if (runInZone === void 0) { runInZone = true; }
+    initChannel(channel, runInZone = true) {
         if (this._channels.hasOwnProperty(channel)) {
-            throw new Error(channel + " has already been initialized");
+            throw new Error(`${channel} has already been initialized`);
         }
-        var /** @type {?} */ emitter = new EventEmitter(false);
-        var /** @type {?} */ channelInfo = new _Channel(emitter, runInZone);
+        const /** @type {?} */ emitter = new EventEmitter(false);
+        const /** @type {?} */ channelInfo = new _Channel(emitter, runInZone);
         this._channels[channel] = channelInfo;
-        emitter.subscribe(function (data) {
-            var /** @type {?} */ message = { channel: channel, message: data };
+        emitter.subscribe((data) => {
+            const /** @type {?} */ message = { channel: channel, message: data };
             if (runInZone) {
-                _this._messageBuffer.push(message);
+                this._messageBuffer.push(message);
             }
             else {
-                _this._sendMessages([message]);
+                this._sendMessages([message]);
             }
         });
-    };
+    }
     /**
      * @param {?} channel
      * @return {?}
      */
-    PostMessageBusSink.prototype.to = function (channel) {
+    to(channel) {
         if (this._channels.hasOwnProperty(channel)) {
             return this._channels[channel].emitter;
         }
         else {
-            throw new Error(channel + " is not set up. Did you forget to call initChannel?");
+            throw new Error(`${channel} is not set up. Did you forget to call initChannel?`);
         }
-    };
+    }
     /**
      * @return {?}
      */
-    PostMessageBusSink.prototype._handleOnEventDone = function () {
+    _handleOnEventDone() {
         if (this._messageBuffer.length > 0) {
             this._sendMessages(this._messageBuffer);
             this._messageBuffer = [];
         }
-    };
+    }
     /**
      * @param {?} messages
      * @return {?}
      */
-    PostMessageBusSink.prototype._sendMessages = function (messages) { this._postMessageTarget.postMessage(messages); };
-    return PostMessageBusSink;
-}());
-var PostMessageBusSource = (function () {
+    _sendMessages(messages) { this._postMessageTarget.postMessage(messages); }
+}
+class PostMessageBusSource {
     /**
      * @param {?=} eventTarget
      */
-    function PostMessageBusSource(eventTarget) {
-        var _this = this;
+    constructor(eventTarget) {
         this._channels = {};
         if (eventTarget) {
-            eventTarget.addEventListener('message', function (ev) { return _this._handleMessages(ev); });
+            eventTarget.addEventListener('message', (ev) => this._handleMessages(ev));
         }
         else {
             // if no eventTarget is given we assume we're in a WebWorker and listen on the global scope
-            var workerScope = self;
-            workerScope.addEventListener('message', function (ev) { return _this._handleMessages(ev); });
+            const /** @type {?} */ workerScope = /** @type {?} */ (self);
+            workerScope.addEventListener('message', (ev) => this._handleMessages(ev));
         }
     }
     /**
      * @param {?} zone
      * @return {?}
      */
-    PostMessageBusSource.prototype.attachToZone = function (zone) { this._zone = zone; };
+    attachToZone(zone) { this._zone = zone; }
     /**
      * @param {?} channel
      * @param {?=} runInZone
      * @return {?}
      */
-    PostMessageBusSource.prototype.initChannel = function (channel, runInZone) {
-        if (runInZone === void 0) { runInZone = true; }
+    initChannel(channel, runInZone = true) {
         if (this._channels.hasOwnProperty(channel)) {
-            throw new Error(channel + " has already been initialized");
+            throw new Error(`${channel} has already been initialized`);
         }
-        var /** @type {?} */ emitter = new EventEmitter(false);
-        var /** @type {?} */ channelInfo = new _Channel(emitter, runInZone);
+        const /** @type {?} */ emitter = new EventEmitter(false);
+        const /** @type {?} */ channelInfo = new _Channel(emitter, runInZone);
         this._channels[channel] = channelInfo;
-    };
+    }
     /**
      * @param {?} channel
      * @return {?}
      */
-    PostMessageBusSource.prototype.from = function (channel) {
+    from(channel) {
         if (this._channels.hasOwnProperty(channel)) {
             return this._channels[channel].emitter;
         }
         else {
-            throw new Error(channel + " is not set up. Did you forget to call initChannel?");
+            throw new Error(`${channel} is not set up. Did you forget to call initChannel?`);
         }
-    };
+    }
     /**
      * @param {?} ev
      * @return {?}
      */
-    PostMessageBusSource.prototype._handleMessages = function (ev) {
-        var /** @type {?} */ messages = ev.data;
-        for (var /** @type {?} */ i = 0; i < messages.length; i++) {
+    _handleMessages(ev) {
+        const /** @type {?} */ messages = ev.data;
+        for (let /** @type {?} */ i = 0; i < messages.length; i++) {
             this._handleMessage(messages[i]);
         }
-    };
+    }
     /**
      * @param {?} data
      * @return {?}
      */
-    PostMessageBusSource.prototype._handleMessage = function (data) {
-        var /** @type {?} */ channel = data.channel;
+    _handleMessage(data) {
+        const /** @type {?} */ channel = data.channel;
         if (this._channels.hasOwnProperty(channel)) {
-            var /** @type {?} */ channelInfo_1 = this._channels[channel];
-            if (channelInfo_1.runInZone) {
-                this._zone.run(function () { channelInfo_1.emitter.emit(data.message); });
+            const /** @type {?} */ channelInfo = this._channels[channel];
+            if (channelInfo.runInZone) {
+                this._zone.run(() => { channelInfo.emitter.emit(data.message); });
             }
             else {
-                channelInfo_1.emitter.emit(data.message);
+                channelInfo.emitter.emit(data.message);
             }
         }
-    };
-    return PostMessageBusSource;
-}());
+    }
+}
 /**
  * A TypeScript implementation of {\@link MessageBus} for communicating via JavaScript's
  * postMessage API.
  */
-var PostMessageBus = (function () {
+class PostMessageBus {
     /**
      * @param {?} sink
      * @param {?} source
      */
-    function PostMessageBus(sink, source) {
+    constructor(sink, source) {
         this.sink = sink;
         this.source = source;
     }
@@ -693,57 +618,57 @@ var PostMessageBus = (function () {
      * @param {?} zone
      * @return {?}
      */
-    PostMessageBus.prototype.attachToZone = function (zone) {
+    attachToZone(zone) {
         this.source.attachToZone(zone);
         this.sink.attachToZone(zone);
-    };
+    }
     /**
      * @param {?} channel
      * @param {?=} runInZone
      * @return {?}
      */
-    PostMessageBus.prototype.initChannel = function (channel, runInZone) {
-        if (runInZone === void 0) { runInZone = true; }
+    initChannel(channel, runInZone = true) {
         this.source.initChannel(channel, runInZone);
         this.sink.initChannel(channel, runInZone);
-    };
+    }
     /**
      * @param {?} channel
      * @return {?}
      */
-    PostMessageBus.prototype.from = function (channel) { return this.source.from(channel); };
+    from(channel) { return this.source.from(channel); }
     /**
      * @param {?} channel
      * @return {?}
      */
-    PostMessageBus.prototype.to = function (channel) { return this.sink.to(channel); };
-    return PostMessageBus;
-}());
+    to(channel) { return this.sink.to(channel); }
+}
 PostMessageBus.decorators = [
     { type: Injectable },
 ];
-/**
- * @nocollapse
- */
-PostMessageBus.ctorParameters = function () { return [
+/** @nocollapse */
+PostMessageBus.ctorParameters = () => [
     { type: PostMessageBusSink, },
     { type: PostMessageBusSource, },
-]; };
+];
 /**
  * Helper class that wraps a channel's {\@link EventEmitter} and
  * keeps track of if it should run in the zone.
  */
-var _Channel = (function () {
+class _Channel {
     /**
      * @param {?} emitter
      * @param {?} runInZone
      */
-    function _Channel(emitter, runInZone) {
+    constructor(emitter, runInZone) {
         this.emitter = emitter;
         this.runInZone = runInZone;
     }
-    return _Channel;
-}());
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -753,55 +678,36 @@ var _Channel = (function () {
  */
 /**
  * \@experimental WebWorker support in Angular is currently experimental.
- * @abstract
  */
-var ServiceMessageBrokerFactory = (function () {
-    function ServiceMessageBrokerFactory() {
-    }
+class ServiceMessageBrokerFactory {
     /**
-     * Initializes the given channel and attaches a new {\@link ServiceMessageBroker} to it.
-     * @abstract
-     * @param {?} channel
-     * @param {?=} runInZone
-     * @return {?}
-     */
-    ServiceMessageBrokerFactory.prototype.createMessageBroker = function (channel, runInZone) { };
-    return ServiceMessageBrokerFactory;
-}());
-var ServiceMessageBrokerFactory_ = (function (_super) {
-    __extends(ServiceMessageBrokerFactory_, _super);
-    /**
+     * \@internal
      * @param {?} _messageBus
      * @param {?} _serializer
      */
-    function ServiceMessageBrokerFactory_(_messageBus, _serializer) {
-        var _this = _super.call(this) || this;
-        _this._messageBus = _messageBus;
-        _this._serializer = _serializer;
-        return _this;
+    constructor(_messageBus, _serializer) {
+        this._messageBus = _messageBus;
+        this._serializer = _serializer;
     }
     /**
+     * Initializes the given channel and attaches a new {\@link ServiceMessageBroker} to it.
      * @param {?} channel
      * @param {?=} runInZone
      * @return {?}
      */
-    ServiceMessageBrokerFactory_.prototype.createMessageBroker = function (channel, runInZone) {
-        if (runInZone === void 0) { runInZone = true; }
+    createMessageBroker(channel, runInZone = true) {
         this._messageBus.initChannel(channel, runInZone);
-        return new ServiceMessageBroker_(this._messageBus, this._serializer, channel);
-    };
-    return ServiceMessageBrokerFactory_;
-}(ServiceMessageBrokerFactory));
-ServiceMessageBrokerFactory_.decorators = [
+        return new ServiceMessageBroker(this._messageBus, this._serializer, channel);
+    }
+}
+ServiceMessageBrokerFactory.decorators = [
     { type: Injectable },
 ];
-/**
- * @nocollapse
- */
-ServiceMessageBrokerFactory_.ctorParameters = function () { return [
+/** @nocollapse */
+ServiceMessageBrokerFactory.ctorParameters = () => [
     { type: MessageBus, },
     { type: Serializer, },
-]; };
+];
 /**
  * Helper class for UIComponents that allows components to register methods.
  * If a registered method message is received from the broker on the worker,
@@ -809,38 +715,21 @@ ServiceMessageBrokerFactory_.ctorParameters = function () { return [
  * If that method returns a promise, the UIMessageBroker returns the result to the worker.
  *
  * \@experimental WebWorker support in Angular is currently experimental.
- * @abstract
  */
-var ServiceMessageBroker = (function () {
-    function ServiceMessageBroker() {
-    }
+class ServiceMessageBroker {
     /**
-     * @abstract
-     * @param {?} methodName
-     * @param {?} signature
-     * @param {?} method
-     * @param {?=} returnType
-     * @return {?}
-     */
-    ServiceMessageBroker.prototype.registerMethod = function (methodName, signature, method, returnType) { };
-    return ServiceMessageBroker;
-}());
-var ServiceMessageBroker_ = (function (_super) {
-    __extends(ServiceMessageBroker_, _super);
-    /**
+     * \@internal
      * @param {?} messageBus
      * @param {?} _serializer
      * @param {?} channel
      */
-    function ServiceMessageBroker_(messageBus, _serializer, channel) {
-        var _this = _super.call(this) || this;
-        _this._serializer = _serializer;
-        _this.channel = channel;
-        _this._methods = new Map();
-        _this._sink = messageBus.to(channel);
-        var source = messageBus.from(channel);
-        source.subscribe({ next: function (message) { return _this._handleMessage(message); } });
-        return _this;
+    constructor(messageBus, _serializer, channel) {
+        this._serializer = _serializer;
+        this.channel = channel;
+        this._methods = new Map();
+        this._sink = messageBus.to(channel);
+        const /** @type {?} */ source = messageBus.from(channel);
+        source.subscribe({ next: (message) => this._handleMessage(message) });
     }
     /**
      * @param {?} methodName
@@ -849,56 +738,67 @@ var ServiceMessageBroker_ = (function (_super) {
      * @param {?=} returnType
      * @return {?}
      */
-    ServiceMessageBroker_.prototype.registerMethod = function (methodName, signature, method, returnType) {
-        var _this = this;
-        this._methods.set(methodName, function (message) {
-            var /** @type {?} */ serializedArgs = message.args;
-            var /** @type {?} */ numArgs = signature ? signature.length : 0;
-            var /** @type {?} */ deserializedArgs = new Array(numArgs);
-            for (var /** @type {?} */ i = 0; i < numArgs; i++) {
-                var /** @type {?} */ serializedArg = serializedArgs[i];
-                deserializedArgs[i] = _this._serializer.deserialize(serializedArg, signature[i]);
+    registerMethod(methodName, signature, method, returnType) {
+        this._methods.set(methodName, (message) => {
+            const /** @type {?} */ serializedArgs = message.args;
+            const /** @type {?} */ numArgs = signature ? signature.length : 0;
+            const /** @type {?} */ deserializedArgs = new Array(numArgs);
+            for (let /** @type {?} */ i = 0; i < numArgs; i++) {
+                const /** @type {?} */ serializedArg = serializedArgs[i];
+                deserializedArgs[i] = this._serializer.deserialize(serializedArg, /** @type {?} */ ((signature))[i]);
             }
-            var /** @type {?} */ promise = method.apply(void 0, deserializedArgs);
+            const /** @type {?} */ promise = method(...deserializedArgs);
             if (returnType && promise) {
-                _this._wrapWebWorkerPromise(message.id, promise, returnType);
+                this._wrapWebWorkerPromise(message.id, promise, returnType);
             }
         });
-    };
+    }
     /**
      * @param {?} message
      * @return {?}
      */
-    ServiceMessageBroker_.prototype._handleMessage = function (message) {
+    _handleMessage(message) {
         if (this._methods.has(message.method)) {
-            ((this._methods.get(message.method)))(message);
+            /** @type {?} */ ((this._methods.get(message.method)))(message);
         }
-    };
+    }
     /**
      * @param {?} id
      * @param {?} promise
      * @param {?} type
      * @return {?}
      */
-    ServiceMessageBroker_.prototype._wrapWebWorkerPromise = function (id, promise, type) {
-        var _this = this;
-        promise.then(function (result) {
-            _this._sink.emit({
+    _wrapWebWorkerPromise(id, promise, type) {
+        promise.then((result) => {
+            this._sink.emit({
                 'type': 'result',
-                'value': _this._serializer.serialize(result, type),
+                'value': this._serializer.serialize(result, type),
                 'id': id,
             });
         });
-    };
-    return ServiceMessageBroker_;
-}(ServiceMessageBroker));
+    }
+}
+/**
+ * \@experimental WebWorker support in Angular is currently experimental.
+ * @record
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * All channels used by angular's WebWorker components are listed here.
  * You should not use these channels in your application code.
  */
-var RENDERER_2_CHANNEL = 'v2.ng-Renderer';
-var EVENT_2_CHANNEL = 'v2.ng-Events';
-var ROUTER_CHANNEL = 'ng-Router';
+const RENDERER_2_CHANNEL = 'v2.ng-Renderer';
+const EVENT_2_CHANNEL = 'v2.ng-Events';
+const ROUTER_CHANNEL = 'ng-Router';
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -906,17 +806,17 @@ var ROUTER_CHANNEL = 'ng-Router';
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var MOUSE_EVENT_PROPERTIES = [
+const MOUSE_EVENT_PROPERTIES = [
     'altKey', 'button', 'clientX', 'clientY', 'metaKey', 'movementX', 'movementY', 'offsetX',
     'offsetY', 'region', 'screenX', 'screenY', 'shiftKey'
 ];
-var KEYBOARD_EVENT_PROPERTIES = [
+const KEYBOARD_EVENT_PROPERTIES = [
     'altkey', 'charCode', 'code', 'ctrlKey', 'isComposing', 'key', 'keyCode', 'location', 'metaKey',
     'repeat', 'shiftKey', 'which'
 ];
-var TRANSITION_EVENT_PROPERTIES = ['propertyName', 'elapsedTime', 'pseudoElement'];
-var EVENT_PROPERTIES = ['type', 'bubbles', 'cancelable'];
-var NODES_WITH_VALUE = new Set(['input', 'select', 'option', 'button', 'li', 'meter', 'progress', 'param', 'textarea']);
+const TRANSITION_EVENT_PROPERTIES = ['propertyName', 'elapsedTime', 'pseudoElement'];
+const EVENT_PROPERTIES = ['type', 'bubbles', 'cancelable'];
+const NODES_WITH_VALUE = new Set(['input', 'select', 'option', 'button', 'li', 'meter', 'progress', 'param', 'textarea']);
 /**
  * @param {?} e
  * @return {?}
@@ -929,7 +829,7 @@ function serializeGenericEvent(e) {
  * @return {?}
  */
 function serializeEventWithTarget(e) {
-    var /** @type {?} */ serializedEvent = serializeEvent(e, EVENT_PROPERTIES);
+    const /** @type {?} */ serializedEvent = serializeEvent(e, EVENT_PROPERTIES);
     return addTarget(e, serializedEvent);
 }
 /**
@@ -944,7 +844,7 @@ function serializeMouseEvent(e) {
  * @return {?}
  */
 function serializeKeyboardEvent(e) {
-    var /** @type {?} */ serializedEvent = serializeEvent(e, KEYBOARD_EVENT_PROPERTIES);
+    const /** @type {?} */ serializedEvent = serializeEvent(e, KEYBOARD_EVENT_PROPERTIES);
     return addTarget(e, serializedEvent);
 }
 /**
@@ -952,7 +852,7 @@ function serializeKeyboardEvent(e) {
  * @return {?}
  */
 function serializeTransitionEvent(e) {
-    var /** @type {?} */ serializedEvent = serializeEvent(e, TRANSITION_EVENT_PROPERTIES);
+    const /** @type {?} */ serializedEvent = serializeEvent(e, TRANSITION_EVENT_PROPERTIES);
     return addTarget(e, serializedEvent);
 }
 /**
@@ -961,8 +861,8 @@ function serializeTransitionEvent(e) {
  * @return {?}
  */
 function addTarget(e, serializedEvent) {
-    if (NODES_WITH_VALUE.has(((e.target)).tagName.toLowerCase())) {
-        var /** @type {?} */ target = (e.target);
+    if (NODES_WITH_VALUE.has((/** @type {?} */ (e.target)).tagName.toLowerCase())) {
+        const /** @type {?} */ target = /** @type {?} */ (e.target);
         serializedEvent['target'] = { 'value': target.value };
         if (target.files) {
             serializedEvent['target']['files'] = target.files;
@@ -976,26 +876,24 @@ function addTarget(e, serializedEvent) {
  * @return {?}
  */
 function serializeEvent(e, properties) {
-    var /** @type {?} */ serialized = {};
-    for (var /** @type {?} */ i = 0; i < properties.length; i++) {
-        var /** @type {?} */ prop = properties[i];
+    const /** @type {?} */ serialized = {};
+    for (let /** @type {?} */ i = 0; i < properties.length; i++) {
+        const /** @type {?} */ prop = properties[i];
         serialized[prop] = e[prop];
     }
     return serialized;
 }
+
 /**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
  */
-var EventDispatcher = (function () {
+class EventDispatcher {
     /**
      * @param {?} _sink
      * @param {?} _serializer
      */
-    function EventDispatcher(_sink, _serializer) {
+    constructor(_sink, _serializer) {
         this._sink = _sink;
         this._serializer = _serializer;
     }
@@ -1005,14 +903,14 @@ var EventDispatcher = (function () {
      * @param {?} element
      * @return {?}
      */
-    EventDispatcher.prototype.dispatchAnimationEvent = function (player, phaseName, element) {
+    dispatchAnimationEvent(player, phaseName, element) {
         this._sink.emit({
             'element': this._serializer.serialize(element, 2 /* RENDER_STORE_OBJECT */),
             'animationPlayer': this._serializer.serialize(player, 2 /* RENDER_STORE_OBJECT */),
             'phaseName': phaseName,
         });
         return true;
-    };
+    }
     /**
      * @param {?} element
      * @param {?} eventTarget
@@ -1020,8 +918,8 @@ var EventDispatcher = (function () {
      * @param {?} event
      * @return {?}
      */
-    EventDispatcher.prototype.dispatchRenderEvent = function (element, eventTarget, eventName, event) {
-        var /** @type {?} */ serializedEvent;
+    dispatchRenderEvent(element, eventTarget, eventName, event) {
+        let /** @type {?} */ serializedEvent;
         // TODO (jteplitz602): support custom events #3350
         switch (event.type) {
             case 'click':
@@ -1112,9 +1010,13 @@ var EventDispatcher = (function () {
         // TODO(kegluneq): Eventually, we want the user to indicate from the UI side whether the event
         // should be canceled, but for now just call `preventDefault` on the original DOM event.
         return false;
-    };
-    return EventDispatcher;
-}());
+    }
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -1122,7 +1024,7 @@ var EventDispatcher = (function () {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var MessageBasedRenderer2 = (function () {
+class MessageBasedRenderer2 {
     /**
      * @param {?} _brokerFactory
      * @param {?} _bus
@@ -1130,7 +1032,7 @@ var MessageBasedRenderer2 = (function () {
      * @param {?} _renderStore
      * @param {?} _rendererFactory
      */
-    function MessageBasedRenderer2(_brokerFactory, _bus, _serializer, _renderStore, _rendererFactory) {
+    constructor(_brokerFactory, _bus, _serializer, _renderStore, _rendererFactory) {
         this._brokerFactory = _brokerFactory;
         this._bus = _bus;
         this._serializer = _serializer;
@@ -1140,17 +1042,16 @@ var MessageBasedRenderer2 = (function () {
     /**
      * @return {?}
      */
-    MessageBasedRenderer2.prototype.start = function () {
-        var _this = this;
-        var /** @type {?} */ broker = this._brokerFactory.createMessageBroker(RENDERER_2_CHANNEL);
+    start() {
+        const /** @type {?} */ broker = this._brokerFactory.createMessageBroker(RENDERER_2_CHANNEL);
         this._bus.initChannel(EVENT_2_CHANNEL);
         this._eventDispatcher = new EventDispatcher(this._bus.to(EVENT_2_CHANNEL), this._serializer);
-        var _a = [
+        const [RSO, P, CRT] = [
             2 /* RENDER_STORE_OBJECT */,
             1 /* PRIMITIVE */,
             0 /* RENDERER_TYPE_2 */,
-        ], RSO = _a[0], P = _a[1], CRT = _a[2];
-        var /** @type {?} */ methods = [
+        ];
+        const /** @type {?} */ methods = [
             ['createRenderer', this.createRenderer, RSO, CRT, P],
             ['createElement', this.createElement, RSO, P, P, P],
             ['createComment', this.createComment, RSO, P, P], ['createText', this.createText, RSO, P, P],
@@ -1168,36 +1069,35 @@ var MessageBasedRenderer2 = (function () {
             ['listen', this.listen, RSO, RSO, P, P, P], ['unlisten', this.unlisten, RSO, RSO],
             ['destroy', this.destroy, RSO], ['destroyNode', this.destroyNode, RSO, P]
         ];
-        methods.forEach(function (_a) {
-            var name = _a[0], method = _a[1], argTypes = _a.slice(2);
-            broker.registerMethod(name, argTypes, method.bind(_this));
+        methods.forEach(([name, method, ...argTypes]) => {
+            broker.registerMethod(name, argTypes, method.bind(this));
         });
-    };
+    }
     /**
      * @param {?} r
      * @return {?}
      */
-    MessageBasedRenderer2.prototype.destroy = function (r) { r.destroy(); };
+    destroy(r) { r.destroy(); }
     /**
      * @param {?} r
      * @param {?} node
      * @return {?}
      */
-    MessageBasedRenderer2.prototype.destroyNode = function (r, node) {
+    destroyNode(r, node) {
         if (r.destroyNode) {
             r.destroyNode(node);
         }
         this._renderStore.remove(node);
-    };
+    }
     /**
      * @param {?} el
      * @param {?} type
      * @param {?} id
      * @return {?}
      */
-    MessageBasedRenderer2.prototype.createRenderer = function (el, type, id) {
+    createRenderer(el, type, id) {
         this._renderStore.store(this._rendererFactory.createRenderer(el, type), id);
-    };
+    }
     /**
      * @param {?} r
      * @param {?} name
@@ -1205,34 +1105,34 @@ var MessageBasedRenderer2 = (function () {
      * @param {?} id
      * @return {?}
      */
-    MessageBasedRenderer2.prototype.createElement = function (r, name, namespace, id) {
+    createElement(r, name, namespace, id) {
         this._renderStore.store(r.createElement(name, namespace), id);
-    };
+    }
     /**
      * @param {?} r
      * @param {?} value
      * @param {?} id
      * @return {?}
      */
-    MessageBasedRenderer2.prototype.createComment = function (r, value, id) {
+    createComment(r, value, id) {
         this._renderStore.store(r.createComment(value), id);
-    };
+    }
     /**
      * @param {?} r
      * @param {?} value
      * @param {?} id
      * @return {?}
      */
-    MessageBasedRenderer2.prototype.createText = function (r, value, id) {
+    createText(r, value, id) {
         this._renderStore.store(r.createText(value), id);
-    };
+    }
     /**
      * @param {?} r
      * @param {?} parent
      * @param {?} child
      * @return {?}
      */
-    MessageBasedRenderer2.prototype.appendChild = function (r, parent, child) { r.appendChild(parent, child); };
+    appendChild(r, parent, child) { r.appendChild(parent, child); }
     /**
      * @param {?} r
      * @param {?} parent
@@ -1240,43 +1140,43 @@ var MessageBasedRenderer2 = (function () {
      * @param {?} ref
      * @return {?}
      */
-    MessageBasedRenderer2.prototype.insertBefore = function (r, parent, child, ref) {
+    insertBefore(r, parent, child, ref) {
         r.insertBefore(parent, child, ref);
-    };
+    }
     /**
      * @param {?} r
      * @param {?} parent
      * @param {?} child
      * @return {?}
      */
-    MessageBasedRenderer2.prototype.removeChild = function (r, parent, child) { r.removeChild(parent, child); };
+    removeChild(r, parent, child) { r.removeChild(parent, child); }
     /**
      * @param {?} r
      * @param {?} selector
      * @param {?} id
      * @return {?}
      */
-    MessageBasedRenderer2.prototype.selectRootElement = function (r, selector, id) {
+    selectRootElement(r, selector, id) {
         this._renderStore.store(r.selectRootElement(selector), id);
-    };
+    }
     /**
      * @param {?} r
      * @param {?} node
      * @param {?} id
      * @return {?}
      */
-    MessageBasedRenderer2.prototype.parentNode = function (r, node, id) {
+    parentNode(r, node, id) {
         this._renderStore.store(r.parentNode(node), id);
-    };
+    }
     /**
      * @param {?} r
      * @param {?} node
      * @param {?} id
      * @return {?}
      */
-    MessageBasedRenderer2.prototype.nextSibling = function (r, node, id) {
+    nextSibling(r, node, id) {
         this._renderStore.store(r.nextSibling(node), id);
-    };
+    }
     /**
      * @param {?} r
      * @param {?} el
@@ -1285,9 +1185,9 @@ var MessageBasedRenderer2 = (function () {
      * @param {?} namespace
      * @return {?}
      */
-    MessageBasedRenderer2.prototype.setAttribute = function (r, el, name, value, namespace) {
+    setAttribute(r, el, name, value, namespace) {
         r.setAttribute(el, name, value, namespace);
-    };
+    }
     /**
      * @param {?} r
      * @param {?} el
@@ -1295,23 +1195,23 @@ var MessageBasedRenderer2 = (function () {
      * @param {?} namespace
      * @return {?}
      */
-    MessageBasedRenderer2.prototype.removeAttribute = function (r, el, name, namespace) {
+    removeAttribute(r, el, name, namespace) {
         r.removeAttribute(el, name, namespace);
-    };
+    }
     /**
      * @param {?} r
      * @param {?} el
      * @param {?} name
      * @return {?}
      */
-    MessageBasedRenderer2.prototype.addClass = function (r, el, name) { r.addClass(el, name); };
+    addClass(r, el, name) { r.addClass(el, name); }
     /**
      * @param {?} r
      * @param {?} el
      * @param {?} name
      * @return {?}
      */
-    MessageBasedRenderer2.prototype.removeClass = function (r, el, name) { r.removeClass(el, name); };
+    removeClass(r, el, name) { r.removeClass(el, name); }
     /**
      * @param {?} r
      * @param {?} el
@@ -1320,9 +1220,9 @@ var MessageBasedRenderer2 = (function () {
      * @param {?} flags
      * @return {?}
      */
-    MessageBasedRenderer2.prototype.setStyle = function (r, el, style, value, flags) {
+    setStyle(r, el, style, value, flags) {
         r.setStyle(el, style, value, flags);
-    };
+    }
     /**
      * @param {?} r
      * @param {?} el
@@ -1330,9 +1230,9 @@ var MessageBasedRenderer2 = (function () {
      * @param {?} flags
      * @return {?}
      */
-    MessageBasedRenderer2.prototype.removeStyle = function (r, el, style, flags) {
+    removeStyle(r, el, style, flags) {
         r.removeStyle(el, style, flags);
-    };
+    }
     /**
      * @param {?} r
      * @param {?} el
@@ -1340,16 +1240,16 @@ var MessageBasedRenderer2 = (function () {
      * @param {?} value
      * @return {?}
      */
-    MessageBasedRenderer2.prototype.setProperty = function (r, el, name, value) {
+    setProperty(r, el, name, value) {
         r.setProperty(el, name, value);
-    };
+    }
     /**
      * @param {?} r
      * @param {?} node
      * @param {?} value
      * @return {?}
      */
-    MessageBasedRenderer2.prototype.setValue = function (r, node, value) { r.setValue(node, value); };
+    setValue(r, node, value) { r.setValue(node, value); }
     /**
      * @param {?} r
      * @param {?} el
@@ -1358,35 +1258,36 @@ var MessageBasedRenderer2 = (function () {
      * @param {?} unlistenId
      * @return {?}
      */
-    MessageBasedRenderer2.prototype.listen = function (r, el, elName, eventName, unlistenId) {
-        var _this = this;
-        var /** @type {?} */ listener = function (event) {
-            return _this._eventDispatcher.dispatchRenderEvent(el, elName, eventName, event);
+    listen(r, el, elName, eventName, unlistenId) {
+        const /** @type {?} */ listener = (event) => {
+            return this._eventDispatcher.dispatchRenderEvent(el, elName, eventName, event);
         };
-        var /** @type {?} */ unlisten = r.listen(el || elName, eventName, listener);
+        const /** @type {?} */ unlisten = r.listen(el || elName, eventName, listener);
         this._renderStore.store(unlisten, unlistenId);
-    };
+    }
     /**
      * @param {?} r
      * @param {?} unlisten
      * @return {?}
      */
-    MessageBasedRenderer2.prototype.unlisten = function (r, unlisten) { unlisten(); };
-    return MessageBasedRenderer2;
-}());
+    unlisten(r, unlisten) { unlisten(); }
+}
 MessageBasedRenderer2.decorators = [
     { type: Injectable },
 ];
-/**
- * @nocollapse
- */
-MessageBasedRenderer2.ctorParameters = function () { return [
+/** @nocollapse */
+MessageBasedRenderer2.ctorParameters = () => [
     { type: ServiceMessageBrokerFactory, },
     { type: MessageBus, },
     { type: Serializer, },
     { type: RenderStore, },
     { type: RendererFactory2, },
-]; };
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -1400,65 +1301,81 @@ MessageBasedRenderer2.ctorParameters = function () { return [
  *
  * \@experimental WebWorker support is currently experimental.
  */
-var WebWorkerInstance = (function () {
-    function WebWorkerInstance() {
-    }
+class WebWorkerInstance {
     /**
      * \@internal
      * @param {?} worker
      * @param {?} bus
      * @return {?}
      */
-    WebWorkerInstance.prototype.init = function (worker, bus) {
+    init(worker, bus) {
         this.worker = worker;
         this.bus = bus;
-    };
-    return WebWorkerInstance;
-}());
+    }
+}
 WebWorkerInstance.decorators = [
     { type: Injectable },
 ];
-/**
- * @nocollapse
- */
-WebWorkerInstance.ctorParameters = function () { return []; };
+/** @nocollapse */
+WebWorkerInstance.ctorParameters = () => [];
 /**
  * \@experimental WebWorker support is currently experimental.
  */
-var WORKER_SCRIPT = new InjectionToken('WebWorkerScript');
+const WORKER_SCRIPT = new InjectionToken('WebWorkerScript');
 /**
  * A multi-provider used to automatically call the `start()` method after the service is
  * created.
  *
  * \@experimental WebWorker support is currently experimental.
  */
-var WORKER_UI_STARTABLE_MESSAGING_SERVICE = new InjectionToken('WorkerRenderStartableMsgService');
-var _WORKER_UI_PLATFORM_PROVIDERS = [
+const WORKER_UI_STARTABLE_MESSAGING_SERVICE = new InjectionToken('WorkerRenderStartableMsgService');
+const _WORKER_UI_PLATFORM_PROVIDERS = [
     { provide: NgZone, useFactory: createNgZone, deps: [] },
-    MessageBasedRenderer2,
+    {
+        provide: MessageBasedRenderer2,
+        deps: [ServiceMessageBrokerFactory, MessageBus, Serializer, RenderStore, RendererFactory2]
+    },
     { provide: WORKER_UI_STARTABLE_MESSAGING_SERVICE, useExisting: MessageBasedRenderer2, multi: true },
     ɵBROWSER_SANITIZATION_PROVIDERS,
     { provide: ErrorHandler, useFactory: _exceptionHandler, deps: [] },
-    { provide: DOCUMENT, useFactory: _document, deps: [] },
+    { provide: DOCUMENT$1, useFactory: _document, deps: [] },
     // TODO(jteplitz602): Investigate if we definitely need EVENT_MANAGER on the render thread
     // #5298
-    { provide: EVENT_MANAGER_PLUGINS, useClass: ɵDomEventsPlugin, multi: true },
-    { provide: EVENT_MANAGER_PLUGINS, useClass: ɵKeyEventsPlugin, multi: true },
-    { provide: EVENT_MANAGER_PLUGINS, useClass: ɵHammerGesturesPlugin, multi: true },
-    { provide: HAMMER_GESTURE_CONFIG, useClass: HammerGestureConfig },
+    {
+        provide: EVENT_MANAGER_PLUGINS,
+        useClass: ɵDomEventsPlugin,
+        deps: [DOCUMENT$1, NgZone],
+        multi: true
+    },
+    { provide: EVENT_MANAGER_PLUGINS, useClass: ɵKeyEventsPlugin, deps: [DOCUMENT$1], multi: true },
+    {
+        provide: EVENT_MANAGER_PLUGINS,
+        useClass: ɵHammerGesturesPlugin,
+        deps: [DOCUMENT$1, HAMMER_GESTURE_CONFIG],
+        multi: true
+    },
+    { provide: HAMMER_GESTURE_CONFIG, useClass: HammerGestureConfig, deps: [] },
     ɵAPP_ID_RANDOM_PROVIDER,
-    ɵDomRendererFactory2,
+    { provide: ɵDomRendererFactory2, deps: [EventManager, ɵDomSharedStylesHost] },
     { provide: RendererFactory2, useExisting: ɵDomRendererFactory2 },
     { provide: ɵSharedStylesHost, useExisting: ɵDomSharedStylesHost },
-    { provide: ServiceMessageBrokerFactory, useClass: ServiceMessageBrokerFactory_ },
-    { provide: ClientMessageBrokerFactory, useClass: ClientMessageBrokerFactory_ },
-    Serializer,
+    {
+        provide: ServiceMessageBrokerFactory,
+        useClass: ServiceMessageBrokerFactory,
+        deps: [MessageBus, Serializer]
+    },
+    {
+        provide: ClientMessageBrokerFactory,
+        useClass: ClientMessageBrokerFactory,
+        deps: [MessageBus, Serializer]
+    },
+    { provide: Serializer, deps: [RenderStore] },
     { provide: ON_WEB_WORKER, useValue: false },
-    RenderStore,
-    ɵDomSharedStylesHost,
-    Testability,
-    EventManager,
-    WebWorkerInstance,
+    { provide: RenderStore, deps: [] },
+    { provide: ɵDomSharedStylesHost, deps: [DOCUMENT$1] },
+    { provide: Testability, deps: [NgZone] },
+    { provide: EventManager, deps: [EVENT_MANAGER_PLUGINS, NgZone] },
+    { provide: WebWorkerInstance, deps: [] },
     {
         provide: PLATFORM_INITIALIZER,
         useFactory: initWebWorkerRenderPlatform,
@@ -1473,12 +1390,12 @@ var _WORKER_UI_PLATFORM_PROVIDERS = [
  * @return {?}
  */
 function initializeGenericWorkerRenderer(injector) {
-    var /** @type {?} */ bus = injector.get(MessageBus);
-    var /** @type {?} */ zone = injector.get(NgZone);
+    const /** @type {?} */ bus = injector.get(MessageBus);
+    const /** @type {?} */ zone = injector.get(NgZone);
     bus.attachToZone(zone);
     // initialize message services after the bus has been created
-    var /** @type {?} */ services = injector.get(WORKER_UI_STARTABLE_MESSAGING_SERVICE);
-    zone.runGuarded(function () { services.forEach(function (svc) { svc.start(); }); });
+    const /** @type {?} */ services = injector.get(WORKER_UI_STARTABLE_MESSAGING_SERVICE);
+    zone.runGuarded(() => { services.forEach((svc) => { svc.start(); }); });
 }
 /**
  * @param {?} instance
@@ -1492,17 +1409,17 @@ function messageBusFactory(instance) {
  * @return {?}
  */
 function initWebWorkerRenderPlatform(injector) {
-    return function () {
+    return () => {
         ɵBrowserDomAdapter.makeCurrent();
         ɵBrowserGetTestability.init();
-        var /** @type {?} */ scriptUri;
+        let /** @type {?} */ scriptUri;
         try {
             scriptUri = injector.get(WORKER_SCRIPT);
         }
-        catch (e) {
+        catch (/** @type {?} */ e) {
             throw new Error('You must provide your WebWorker\'s initialization script with the WORKER_SCRIPT token');
         }
-        var /** @type {?} */ instance = injector.get(WebWorkerInstance);
+        const /** @type {?} */ instance = injector.get(WebWorkerInstance);
         spawnWebWorker(scriptUri, instance);
         initializeGenericWorkerRenderer(injector);
     };
@@ -1510,7 +1427,7 @@ function initWebWorkerRenderPlatform(injector) {
 /**
  * \@experimental WebWorker support is currently experimental.
  */
-var platformWorkerUi = createPlatformFactory(platformCore, 'workerUi', _WORKER_UI_PLATFORM_PROVIDERS);
+const platformWorkerUi = createPlatformFactory(platformCore, 'workerUi', _WORKER_UI_PLATFORM_PROVIDERS);
 /**
  * @return {?}
  */
@@ -1536,12 +1453,17 @@ function createNgZone() {
  * @return {?}
  */
 function spawnWebWorker(uri, instance) {
-    var /** @type {?} */ webWorker = new Worker(uri);
-    var /** @type {?} */ sink = new PostMessageBusSink(webWorker);
-    var /** @type {?} */ source = new PostMessageBusSource(webWorker);
-    var /** @type {?} */ bus = new PostMessageBus(sink, source);
+    const /** @type {?} */ webWorker = new Worker(uri);
+    const /** @type {?} */ sink = new PostMessageBusSink(webWorker);
+    const /** @type {?} */ source = new PostMessageBusSource(webWorker);
+    const /** @type {?} */ bus = new PostMessageBus(sink, source);
     instance.init(webWorker, bus);
 }
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -1557,77 +1479,77 @@ function spawnWebWorker(uri, instance) {
 /**
  * \@stable
  */
-var VERSION = new Version('4.1.0-beta.1-683e657');
+const VERSION = new Version('5.0.0-beta.7-3215c4b');
+
 /**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
  */
-var MessageBasedPlatformLocation = (function () {
+class MessageBasedPlatformLocation {
     /**
      * @param {?} _brokerFactory
      * @param {?} _platformLocation
      * @param {?} bus
      * @param {?} _serializer
      */
-    function MessageBasedPlatformLocation(_brokerFactory, _platformLocation, bus, _serializer) {
+    constructor(_brokerFactory, _platformLocation, bus, _serializer) {
         this._brokerFactory = _brokerFactory;
         this._platformLocation = _platformLocation;
         this._serializer = _serializer;
-        this._platformLocation.onPopState(this._sendUrlChangeEvent.bind(this));
-        this._platformLocation.onHashChange(this._sendUrlChangeEvent.bind(this));
+        this._platformLocation.onPopState(/** @type {?} */ (this._sendUrlChangeEvent.bind(this)));
+        this._platformLocation.onHashChange(/** @type {?} */ (this._sendUrlChangeEvent.bind(this)));
         this._broker = this._brokerFactory.createMessageBroker(ROUTER_CHANNEL);
         this._channelSink = bus.to(ROUTER_CHANNEL);
     }
     /**
      * @return {?}
      */
-    MessageBasedPlatformLocation.prototype.start = function () {
-        var /** @type {?} */ P = 1;
+    start() {
+        const /** @type {?} */ P = 1;
         this._broker.registerMethod('getLocation', null, this._getLocation.bind(this), LocationType);
         this._broker.registerMethod('setPathname', [P], this._setPathname.bind(this));
         this._broker.registerMethod('pushState', [P, P, P], this._platformLocation.pushState.bind(this._platformLocation));
         this._broker.registerMethod('replaceState', [P, P, P], this._platformLocation.replaceState.bind(this._platformLocation));
         this._broker.registerMethod('forward', null, this._platformLocation.forward.bind(this._platformLocation));
         this._broker.registerMethod('back', null, this._platformLocation.back.bind(this._platformLocation));
-    };
+    }
     /**
      * @return {?}
      */
-    MessageBasedPlatformLocation.prototype._getLocation = function () {
+    _getLocation() {
         return Promise.resolve(this._platformLocation.location);
-    };
+    }
     /**
      * @param {?} e
      * @return {?}
      */
-    MessageBasedPlatformLocation.prototype._sendUrlChangeEvent = function (e) {
+    _sendUrlChangeEvent(e) {
         this._channelSink.emit({
             'event': { 'type': e.type },
             'location': this._serializer.serialize(this._platformLocation.location, LocationType),
         });
-    };
+    }
     /**
      * @param {?} pathname
      * @return {?}
      */
-    MessageBasedPlatformLocation.prototype._setPathname = function (pathname) { this._platformLocation.pathname = pathname; };
-    return MessageBasedPlatformLocation;
-}());
+    _setPathname(pathname) { this._platformLocation.pathname = pathname; }
+}
 MessageBasedPlatformLocation.decorators = [
     { type: Injectable },
 ];
-/**
- * @nocollapse
- */
-MessageBasedPlatformLocation.ctorParameters = function () { return [
+/** @nocollapse */
+MessageBasedPlatformLocation.ctorParameters = () => [
     { type: ServiceMessageBrokerFactory, },
     { type: ɵBrowserPlatformLocation, },
     { type: MessageBus, },
     { type: Serializer, },
-]; };
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -1640,20 +1562,27 @@ MessageBasedPlatformLocation.ctorParameters = function () { return [
  * include these providers when setting up the render thread.
  * \@experimental
  */
-var WORKER_UI_LOCATION_PROVIDERS = [
-    MessageBasedPlatformLocation, ɵBrowserPlatformLocation,
+const WORKER_UI_LOCATION_PROVIDERS = /** @type {?} */ ([
+    { provide: MessageBasedPlatformLocation, deps: [ServiceMessageBrokerFactory,
+            ɵBrowserPlatformLocation, MessageBus, Serializer] },
+    { provide: ɵBrowserPlatformLocation, deps: [DOCUMENT] },
     { provide: PLATFORM_INITIALIZER, useFactory: initUiLocation, multi: true, deps: [Injector] }
-];
+]);
 /**
  * @param {?} injector
  * @return {?}
  */
 function initUiLocation(injector) {
-    return function () {
-        var /** @type {?} */ zone = injector.get(NgZone);
-        zone.runGuarded(function () { return injector.get(MessageBasedPlatformLocation).start(); });
+    return () => {
+        const /** @type {?} */ zone = injector.get(NgZone);
+        zone.runGuarded(() => injector.get(MessageBasedPlatformLocation).start());
     };
 }
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -1661,166 +1590,153 @@ function initUiLocation(injector) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var WebWorkerPlatformLocation = (function (_super) {
-    __extends(WebWorkerPlatformLocation, _super);
+class WebWorkerPlatformLocation extends PlatformLocation {
     /**
      * @param {?} brokerFactory
      * @param {?} bus
      * @param {?} _serializer
      */
-    function WebWorkerPlatformLocation(brokerFactory, bus, _serializer) {
-        var _this = _super.call(this) || this;
-        _this._serializer = _serializer;
-        _this._popStateListeners = [];
-        _this._hashChangeListeners = [];
-        _this._location = ((null));
-        _this._broker = brokerFactory.createMessageBroker(ROUTER_CHANNEL);
-        _this._channelSource = bus.from(ROUTER_CHANNEL);
-        _this._channelSource.subscribe({
-            next: function (msg) {
-                var listeners = null;
+    constructor(brokerFactory, bus, _serializer) {
+        super();
+        this._serializer = _serializer;
+        this._popStateListeners = [];
+        this._hashChangeListeners = [];
+        this._location = /** @type {?} */ ((null));
+        this._broker = brokerFactory.createMessageBroker(ROUTER_CHANNEL);
+        this._channelSource = bus.from(ROUTER_CHANNEL);
+        this._channelSource.subscribe({
+            next: (msg) => {
+                let /** @type {?} */ listeners = null;
                 if (msg.hasOwnProperty('event')) {
-                    var type = msg['event']['type'];
+                    const /** @type {?} */ type = msg['event']['type'];
                     if (type === 'popstate') {
-                        listeners = _this._popStateListeners;
+                        listeners = this._popStateListeners;
                     }
                     else if (type === 'hashchange') {
-                        listeners = _this._hashChangeListeners;
+                        listeners = this._hashChangeListeners;
                     }
                     if (listeners) {
                         // There was a popState or hashChange event, so the location object thas been updated
-                        _this._location = _this._serializer.deserialize(msg['location'], LocationType);
-                        listeners.forEach(function (fn) { return fn(msg['event']); });
+                        this._location = this._serializer.deserialize(msg['location'], LocationType);
+                        listeners.forEach((fn) => fn(msg['event']));
                     }
                 }
             }
         });
-        _this.initialized = new Promise(function (res) { return _this.initializedResolve = res; });
-        return _this;
+        this.initialized = new Promise(res => this.initializedResolve = res);
     }
     /**
      * \@internal *
      * @return {?}
      */
-    WebWorkerPlatformLocation.prototype.init = function () {
-        var _this = this;
-        var /** @type {?} */ args = new UiArguments('getLocation');
-        return ((this._broker.runOnService(args, LocationType))).then(function (val) {
-            _this._location = val;
-            _this.initializedResolve();
+    init() {
+        const /** @type {?} */ args = new UiArguments('getLocation');
+        return /** @type {?} */ ((this._broker.runOnService(args, LocationType))).then((val) => {
+            this._location = val;
+            this.initializedResolve();
             return true;
-        }, function (err) { throw new Error(err); });
-    };
+        }, err => { throw new Error(err); });
+    }
     /**
      * @return {?}
      */
-    WebWorkerPlatformLocation.prototype.getBaseHrefFromDOM = function () {
+    getBaseHrefFromDOM() {
         throw new Error('Attempt to get base href from DOM from WebWorker. You must either provide a value for the APP_BASE_HREF token through DI or use the hash location strategy.');
-    };
+    }
     /**
      * @param {?} fn
      * @return {?}
      */
-    WebWorkerPlatformLocation.prototype.onPopState = function (fn) { this._popStateListeners.push(fn); };
+    onPopState(fn) { this._popStateListeners.push(fn); }
     /**
      * @param {?} fn
      * @return {?}
      */
-    WebWorkerPlatformLocation.prototype.onHashChange = function (fn) { this._hashChangeListeners.push(fn); };
-    Object.defineProperty(WebWorkerPlatformLocation.prototype, "pathname", {
-        /**
-         * @return {?}
-         */
-        get: function () { return this._location ? ((this._location.pathname)) : '<unknown>'; },
-        /**
-         * @param {?} newPath
-         * @return {?}
-         */
-        set: function (newPath) {
-            if (this._location === null) {
-                throw new Error('Attempt to set pathname before value is obtained from UI');
-            }
-            this._location.pathname = newPath;
-            var /** @type {?} */ fnArgs = [new FnArg(newPath, 1 /* PRIMITIVE */)];
-            var /** @type {?} */ args = new UiArguments('setPathname', fnArgs);
-            this._broker.runOnService(args, null);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(WebWorkerPlatformLocation.prototype, "search", {
-        /**
-         * @return {?}
-         */
-        get: function () { return this._location ? this._location.search : '<unknown>'; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(WebWorkerPlatformLocation.prototype, "hash", {
-        /**
-         * @return {?}
-         */
-        get: function () { return this._location ? this._location.hash : '<unknown>'; },
-        enumerable: true,
-        configurable: true
-    });
+    onHashChange(fn) { this._hashChangeListeners.push(fn); }
+    /**
+     * @return {?}
+     */
+    get pathname() { return this._location ? /** @type {?} */ ((this._location.pathname)) : '<unknown>'; }
+    /**
+     * @return {?}
+     */
+    get search() { return this._location ? this._location.search : '<unknown>'; }
+    /**
+     * @return {?}
+     */
+    get hash() { return this._location ? this._location.hash : '<unknown>'; }
+    /**
+     * @param {?} newPath
+     * @return {?}
+     */
+    set pathname(newPath) {
+        if (this._location === null) {
+            throw new Error('Attempt to set pathname before value is obtained from UI');
+        }
+        this._location.pathname = newPath;
+        const /** @type {?} */ fnArgs = [new FnArg(newPath, 1 /* PRIMITIVE */)];
+        const /** @type {?} */ args = new UiArguments('setPathname', fnArgs);
+        this._broker.runOnService(args, null);
+    }
     /**
      * @param {?} state
      * @param {?} title
      * @param {?} url
      * @return {?}
      */
-    WebWorkerPlatformLocation.prototype.pushState = function (state, title, url) {
-        var /** @type {?} */ fnArgs = [
+    pushState(state, title, url) {
+        const /** @type {?} */ fnArgs = [
             new FnArg(state, 1 /* PRIMITIVE */),
             new FnArg(title, 1 /* PRIMITIVE */),
             new FnArg(url, 1 /* PRIMITIVE */),
         ];
-        var /** @type {?} */ args = new UiArguments('pushState', fnArgs);
+        const /** @type {?} */ args = new UiArguments('pushState', fnArgs);
         this._broker.runOnService(args, null);
-    };
+    }
     /**
      * @param {?} state
      * @param {?} title
      * @param {?} url
      * @return {?}
      */
-    WebWorkerPlatformLocation.prototype.replaceState = function (state, title, url) {
-        var /** @type {?} */ fnArgs = [
+    replaceState(state, title, url) {
+        const /** @type {?} */ fnArgs = [
             new FnArg(state, 1 /* PRIMITIVE */),
             new FnArg(title, 1 /* PRIMITIVE */),
             new FnArg(url, 1 /* PRIMITIVE */),
         ];
-        var /** @type {?} */ args = new UiArguments('replaceState', fnArgs);
+        const /** @type {?} */ args = new UiArguments('replaceState', fnArgs);
         this._broker.runOnService(args, null);
-    };
+    }
     /**
      * @return {?}
      */
-    WebWorkerPlatformLocation.prototype.forward = function () {
-        var /** @type {?} */ args = new UiArguments('forward');
+    forward() {
+        const /** @type {?} */ args = new UiArguments('forward');
         this._broker.runOnService(args, null);
-    };
+    }
     /**
      * @return {?}
      */
-    WebWorkerPlatformLocation.prototype.back = function () {
-        var /** @type {?} */ args = new UiArguments('back');
+    back() {
+        const /** @type {?} */ args = new UiArguments('back');
         this._broker.runOnService(args, null);
-    };
-    return WebWorkerPlatformLocation;
-}(PlatformLocation));
+    }
+}
 WebWorkerPlatformLocation.decorators = [
     { type: Injectable },
 ];
-/**
- * @nocollapse
- */
-WebWorkerPlatformLocation.ctorParameters = function () { return [
+/** @nocollapse */
+WebWorkerPlatformLocation.ctorParameters = () => [
     { type: ClientMessageBrokerFactory, },
     { type: MessageBus, },
     { type: Serializer, },
-]; };
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -1829,11 +1745,12 @@ WebWorkerPlatformLocation.ctorParameters = function () { return [
  * found in the LICENSE file at https://angular.io/license
  */
 /**
- * Those providers should be added when the router is used in a worker context in addition to the
- * {\@link ROUTER_PROVIDERS} and after them.
+ * The {\@link PlatformLocation} providers that should be added when the {\@link Location} is used in
+ * a worker context.
+ *
  * \@experimental
  */
-var WORKER_APP_LOCATION_PROVIDERS = [
+const WORKER_APP_LOCATION_PROVIDERS = [
     { provide: PlatformLocation, useClass: WebWorkerPlatformLocation }, {
         provide: APP_INITIALIZER,
         useFactory: appInitFnFactory,
@@ -1855,8 +1772,13 @@ function locationInitialized(platformLocation) {
  * @return {?}
  */
 function appInitFnFactory(platformLocation, zone) {
-    return function () { return zone.runGuarded(function () { return platformLocation.init(); }); };
+    return () => zone.runGuarded(() => platformLocation.init());
 }
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -1864,88 +1786,84 @@ function appInitFnFactory(platformLocation, zone) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var NamedEventEmitter = (function () {
-    function NamedEventEmitter() {
-    }
+class NamedEventEmitter {
     /**
      * @param {?} eventName
      * @param {?} callback
      * @return {?}
      */
-    NamedEventEmitter.prototype.listen = function (eventName, callback) { this._getListeners(eventName).push(callback); };
+    listen(eventName, callback) { this._getListeners(eventName).push(callback); }
     /**
      * @param {?} eventName
      * @param {?} listener
      * @return {?}
      */
-    NamedEventEmitter.prototype.unlisten = function (eventName, listener) {
-        var /** @type {?} */ listeners = this._getListeners(eventName);
-        var /** @type {?} */ index = listeners.indexOf(listener);
+    unlisten(eventName, listener) {
+        const /** @type {?} */ listeners = this._getListeners(eventName);
+        const /** @type {?} */ index = listeners.indexOf(listener);
         if (index > -1) {
             listeners.splice(index, 1);
         }
-    };
+    }
     /**
      * @param {?} eventName
      * @param {?} event
      * @return {?}
      */
-    NamedEventEmitter.prototype.dispatchEvent = function (eventName, event) {
-        var /** @type {?} */ listeners = this._getListeners(eventName);
-        for (var /** @type {?} */ i = 0; i < listeners.length; i++) {
+    dispatchEvent(eventName, event) {
+        const /** @type {?} */ listeners = this._getListeners(eventName);
+        for (let /** @type {?} */ i = 0; i < listeners.length; i++) {
             listeners[i](event);
         }
-    };
+    }
     /**
      * @param {?} eventName
      * @return {?}
      */
-    NamedEventEmitter.prototype._getListeners = function (eventName) {
+    _getListeners(eventName) {
         if (!this._listeners) {
             this._listeners = new Map();
         }
-        var /** @type {?} */ listeners = this._listeners.get(eventName);
+        let /** @type {?} */ listeners = this._listeners.get(eventName);
         if (!listeners) {
             listeners = [];
             this._listeners.set(eventName, listeners);
         }
         return listeners;
-    };
-    return NamedEventEmitter;
-}());
+    }
+}
 /**
  * @param {?} target
  * @param {?} eventName
  * @return {?}
  */
 function eventNameWithTarget(target, eventName) {
-    return target + ":" + eventName;
+    return `${target}:${eventName}`;
 }
-var WebWorkerRendererFactory2 = (function () {
+class WebWorkerRendererFactory2 {
     /**
      * @param {?} messageBrokerFactory
      * @param {?} bus
      * @param {?} _serializer
      * @param {?} renderStore
      */
-    function WebWorkerRendererFactory2(messageBrokerFactory, bus, _serializer, renderStore) {
-        var _this = this;
+    constructor(messageBrokerFactory, bus, _serializer, renderStore) {
         this._serializer = _serializer;
         this.renderStore = renderStore;
         this.globalEvents = new NamedEventEmitter();
         this._messageBroker = messageBrokerFactory.createMessageBroker(RENDERER_2_CHANNEL);
         bus.initChannel(EVENT_2_CHANNEL);
-        var source = bus.from(EVENT_2_CHANNEL);
-        source.subscribe({ next: function (message) { return _this._dispatchEvent(message); } });
+        const /** @type {?} */ source = bus.from(EVENT_2_CHANNEL);
+        source.subscribe({ next: (message) => this._dispatchEvent(message) });
     }
     /**
      * @param {?} element
      * @param {?} type
      * @return {?}
      */
-    WebWorkerRendererFactory2.prototype.createRenderer = function (element, type) {
-        var /** @type {?} */ renderer = new WebWorkerRenderer2(this);
-        var /** @type {?} */ id = this.renderStore.allocateId();
+    createRenderer(element, type) {
+        const /** @type {?} */ renderer = new WebWorkerRenderer2(this);
+        const /** @type {?} */ id = this.renderStore.allocateId();
         this.renderStore.store(renderer, id);
         this.callUI('createRenderer', [
             new FnArg(element, 2 /* RENDER_STORE_OBJECT */),
@@ -1953,69 +1871,74 @@ var WebWorkerRendererFactory2 = (function () {
             new FnArg(renderer, 2 /* RENDER_STORE_OBJECT */),
         ]);
         return renderer;
-    };
+    }
+    /**
+     * @return {?}
+     */
+    begin() { }
+    /**
+     * @return {?}
+     */
+    end() { }
     /**
      * @param {?} fnName
      * @param {?} fnArgs
      * @return {?}
      */
-    WebWorkerRendererFactory2.prototype.callUI = function (fnName, fnArgs) {
-        var /** @type {?} */ args = new UiArguments(fnName, fnArgs);
+    callUI(fnName, fnArgs) {
+        const /** @type {?} */ args = new UiArguments(fnName, fnArgs);
         this._messageBroker.runOnService(args, null);
-    };
+    }
     /**
      * @return {?}
      */
-    WebWorkerRendererFactory2.prototype.allocateNode = function () {
-        var /** @type {?} */ result = new WebWorkerRenderNode();
-        var /** @type {?} */ id = this.renderStore.allocateId();
+    allocateNode() {
+        const /** @type {?} */ result = new WebWorkerRenderNode();
+        const /** @type {?} */ id = this.renderStore.allocateId();
         this.renderStore.store(result, id);
         return result;
-    };
+    }
     /**
      * @param {?} node
      * @return {?}
      */
-    WebWorkerRendererFactory2.prototype.freeNode = function (node) { this.renderStore.remove(node); };
+    freeNode(node) { this.renderStore.remove(node); }
     /**
      * @return {?}
      */
-    WebWorkerRendererFactory2.prototype.allocateId = function () { return this.renderStore.allocateId(); };
+    allocateId() { return this.renderStore.allocateId(); }
     /**
      * @param {?} message
      * @return {?}
      */
-    WebWorkerRendererFactory2.prototype._dispatchEvent = function (message) {
-        var /** @type {?} */ element = this._serializer.deserialize(message['element'], 2 /* RENDER_STORE_OBJECT */);
-        var /** @type {?} */ eventName = message['eventName'];
-        var /** @type {?} */ target = message['eventTarget'];
-        var /** @type {?} */ event = message['event'];
+    _dispatchEvent(message) {
+        const /** @type {?} */ element = this._serializer.deserialize(message['element'], 2 /* RENDER_STORE_OBJECT */);
+        const /** @type {?} */ eventName = message['eventName'];
+        const /** @type {?} */ target = message['eventTarget'];
+        const /** @type {?} */ event = message['event'];
         if (target) {
             this.globalEvents.dispatchEvent(eventNameWithTarget(target, eventName), event);
         }
         else {
             element.events.dispatchEvent(eventName, event);
         }
-    };
-    return WebWorkerRendererFactory2;
-}());
+    }
+}
 WebWorkerRendererFactory2.decorators = [
     { type: Injectable },
 ];
-/**
- * @nocollapse
- */
-WebWorkerRendererFactory2.ctorParameters = function () { return [
+/** @nocollapse */
+WebWorkerRendererFactory2.ctorParameters = () => [
     { type: ClientMessageBrokerFactory, },
     { type: MessageBus, },
     { type: Serializer, },
     { type: RenderStore, },
-]; };
-var WebWorkerRenderer2 = (function () {
+];
+class WebWorkerRenderer2 {
     /**
      * @param {?} _rendererFactory
      */
-    function WebWorkerRenderer2(_rendererFactory) {
+    constructor(_rendererFactory) {
         this._rendererFactory = _rendererFactory;
         this.data = Object.create(null);
         this.asFnArg = new FnArg(this, 2 /* RENDER_STORE_OBJECT */);
@@ -2023,71 +1946,71 @@ var WebWorkerRenderer2 = (function () {
     /**
      * @return {?}
      */
-    WebWorkerRenderer2.prototype.destroy = function () { this.callUIWithRenderer('destroy'); };
+    destroy() { this.callUIWithRenderer('destroy'); }
     /**
      * @param {?} node
      * @return {?}
      */
-    WebWorkerRenderer2.prototype.destroyNode = function (node) {
+    destroyNode(node) {
         this.callUIWithRenderer('destroyNode', [new FnArg(node, 2 /* RENDER_STORE_OBJECT */)]);
         this._rendererFactory.freeNode(node);
-    };
+    }
     /**
      * @param {?} name
      * @param {?=} namespace
      * @return {?}
      */
-    WebWorkerRenderer2.prototype.createElement = function (name, namespace) {
-        var /** @type {?} */ node = this._rendererFactory.allocateNode();
+    createElement(name, namespace) {
+        const /** @type {?} */ node = this._rendererFactory.allocateNode();
         this.callUIWithRenderer('createElement', [
             new FnArg(name),
             new FnArg(namespace),
             new FnArg(node, 2 /* RENDER_STORE_OBJECT */),
         ]);
         return node;
-    };
+    }
     /**
      * @param {?} value
      * @return {?}
      */
-    WebWorkerRenderer2.prototype.createComment = function (value) {
-        var /** @type {?} */ node = this._rendererFactory.allocateNode();
+    createComment(value) {
+        const /** @type {?} */ node = this._rendererFactory.allocateNode();
         this.callUIWithRenderer('createComment', [
             new FnArg(value),
             new FnArg(node, 2 /* RENDER_STORE_OBJECT */),
         ]);
         return node;
-    };
+    }
     /**
      * @param {?} value
      * @return {?}
      */
-    WebWorkerRenderer2.prototype.createText = function (value) {
-        var /** @type {?} */ node = this._rendererFactory.allocateNode();
+    createText(value) {
+        const /** @type {?} */ node = this._rendererFactory.allocateNode();
         this.callUIWithRenderer('createText', [
             new FnArg(value),
             new FnArg(node, 2 /* RENDER_STORE_OBJECT */),
         ]);
         return node;
-    };
+    }
     /**
      * @param {?} parent
      * @param {?} newChild
      * @return {?}
      */
-    WebWorkerRenderer2.prototype.appendChild = function (parent, newChild) {
+    appendChild(parent, newChild) {
         this.callUIWithRenderer('appendChild', [
             new FnArg(parent, 2 /* RENDER_STORE_OBJECT */),
             new FnArg(newChild, 2 /* RENDER_STORE_OBJECT */),
         ]);
-    };
+    }
     /**
      * @param {?} parent
      * @param {?} newChild
      * @param {?} refChild
      * @return {?}
      */
-    WebWorkerRenderer2.prototype.insertBefore = function (parent, newChild, refChild) {
+    insertBefore(parent, newChild, refChild) {
         if (!parent) {
             return;
         }
@@ -2096,54 +2019,54 @@ var WebWorkerRenderer2 = (function () {
             new FnArg(newChild, 2 /* RENDER_STORE_OBJECT */),
             new FnArg(refChild, 2 /* RENDER_STORE_OBJECT */),
         ]);
-    };
+    }
     /**
      * @param {?} parent
      * @param {?} oldChild
      * @return {?}
      */
-    WebWorkerRenderer2.prototype.removeChild = function (parent, oldChild) {
+    removeChild(parent, oldChild) {
         this.callUIWithRenderer('removeChild', [
             new FnArg(parent, 2 /* RENDER_STORE_OBJECT */),
             new FnArg(oldChild, 2 /* RENDER_STORE_OBJECT */),
         ]);
-    };
+    }
     /**
      * @param {?} selectorOrNode
      * @return {?}
      */
-    WebWorkerRenderer2.prototype.selectRootElement = function (selectorOrNode) {
-        var /** @type {?} */ node = this._rendererFactory.allocateNode();
+    selectRootElement(selectorOrNode) {
+        const /** @type {?} */ node = this._rendererFactory.allocateNode();
         this.callUIWithRenderer('selectRootElement', [
             new FnArg(selectorOrNode),
             new FnArg(node, 2 /* RENDER_STORE_OBJECT */),
         ]);
         return node;
-    };
+    }
     /**
      * @param {?} node
      * @return {?}
      */
-    WebWorkerRenderer2.prototype.parentNode = function (node) {
-        var /** @type {?} */ res = this._rendererFactory.allocateNode();
+    parentNode(node) {
+        const /** @type {?} */ res = this._rendererFactory.allocateNode();
         this.callUIWithRenderer('parentNode', [
             new FnArg(node, 2 /* RENDER_STORE_OBJECT */),
             new FnArg(res, 2 /* RENDER_STORE_OBJECT */),
         ]);
         return res;
-    };
+    }
     /**
      * @param {?} node
      * @return {?}
      */
-    WebWorkerRenderer2.prototype.nextSibling = function (node) {
-        var /** @type {?} */ res = this._rendererFactory.allocateNode();
+    nextSibling(node) {
+        const /** @type {?} */ res = this._rendererFactory.allocateNode();
         this.callUIWithRenderer('nextSibling', [
             new FnArg(node, 2 /* RENDER_STORE_OBJECT */),
             new FnArg(res, 2 /* RENDER_STORE_OBJECT */),
         ]);
         return res;
-    };
+    }
     /**
      * @param {?} el
      * @param {?} name
@@ -2151,49 +2074,49 @@ var WebWorkerRenderer2 = (function () {
      * @param {?=} namespace
      * @return {?}
      */
-    WebWorkerRenderer2.prototype.setAttribute = function (el, name, value, namespace) {
+    setAttribute(el, name, value, namespace) {
         this.callUIWithRenderer('setAttribute', [
             new FnArg(el, 2 /* RENDER_STORE_OBJECT */),
             new FnArg(name),
             new FnArg(value),
             new FnArg(namespace),
         ]);
-    };
+    }
     /**
      * @param {?} el
      * @param {?} name
      * @param {?=} namespace
      * @return {?}
      */
-    WebWorkerRenderer2.prototype.removeAttribute = function (el, name, namespace) {
+    removeAttribute(el, name, namespace) {
         this.callUIWithRenderer('removeAttribute', [
             new FnArg(el, 2 /* RENDER_STORE_OBJECT */),
             new FnArg(name),
             new FnArg(namespace),
         ]);
-    };
+    }
     /**
      * @param {?} el
      * @param {?} name
      * @return {?}
      */
-    WebWorkerRenderer2.prototype.addClass = function (el, name) {
+    addClass(el, name) {
         this.callUIWithRenderer('addClass', [
             new FnArg(el, 2 /* RENDER_STORE_OBJECT */),
             new FnArg(name),
         ]);
-    };
+    }
     /**
      * @param {?} el
      * @param {?} name
      * @return {?}
      */
-    WebWorkerRenderer2.prototype.removeClass = function (el, name) {
+    removeClass(el, name) {
         this.callUIWithRenderer('removeClass', [
             new FnArg(el, 2 /* RENDER_STORE_OBJECT */),
             new FnArg(name),
         ]);
-    };
+    }
     /**
      * @param {?} el
      * @param {?} style
@@ -2201,62 +2124,61 @@ var WebWorkerRenderer2 = (function () {
      * @param {?} flags
      * @return {?}
      */
-    WebWorkerRenderer2.prototype.setStyle = function (el, style, value, flags) {
+    setStyle(el, style, value, flags) {
         this.callUIWithRenderer('setStyle', [
             new FnArg(el, 2 /* RENDER_STORE_OBJECT */),
             new FnArg(style),
             new FnArg(value),
             new FnArg(flags),
         ]);
-    };
+    }
     /**
      * @param {?} el
      * @param {?} style
      * @param {?} flags
      * @return {?}
      */
-    WebWorkerRenderer2.prototype.removeStyle = function (el, style, flags) {
+    removeStyle(el, style, flags) {
         this.callUIWithRenderer('removeStyle', [
             new FnArg(el, 2 /* RENDER_STORE_OBJECT */),
             new FnArg(style),
             new FnArg(flags),
         ]);
-    };
+    }
     /**
      * @param {?} el
      * @param {?} name
      * @param {?} value
      * @return {?}
      */
-    WebWorkerRenderer2.prototype.setProperty = function (el, name, value) {
+    setProperty(el, name, value) {
         this.callUIWithRenderer('setProperty', [
             new FnArg(el, 2 /* RENDER_STORE_OBJECT */),
             new FnArg(name),
             new FnArg(value),
         ]);
-    };
+    }
     /**
      * @param {?} node
      * @param {?} value
      * @return {?}
      */
-    WebWorkerRenderer2.prototype.setValue = function (node, value) {
+    setValue(node, value) {
         this.callUIWithRenderer('setValue', [
             new FnArg(node, 2 /* RENDER_STORE_OBJECT */),
             new FnArg(value),
         ]);
-    };
+    }
     /**
      * @param {?} target
      * @param {?} eventName
      * @param {?} listener
      * @return {?}
      */
-    WebWorkerRenderer2.prototype.listen = function (target, eventName, listener) {
-        var _this = this;
-        var /** @type {?} */ unlistenId = this._rendererFactory.allocateId();
-        var _a = typeof target === 'string' ? [null, target, target + ":" + eventName] :
-            [target, null, null], targetEl = _a[0], targetName = _a[1], fullName = _a[2];
+    listen(target, eventName, listener) {
+        const /** @type {?} */ unlistenId = this._rendererFactory.allocateId();
+        const [targetEl, targetName, fullName] = typeof target === 'string' ? [null, target, `${target}:${eventName}`] :
+            [target, null, null];
         if (fullName) {
             this._rendererFactory.globalEvents.listen(fullName, listener);
         }
@@ -2269,34 +2191,36 @@ var WebWorkerRenderer2 = (function () {
             new FnArg(eventName),
             new FnArg(unlistenId),
         ]);
-        return function () {
+        return () => {
             if (fullName) {
-                _this._rendererFactory.globalEvents.unlisten(fullName, listener);
+                this._rendererFactory.globalEvents.unlisten(fullName, listener);
             }
             else {
                 targetEl.events.unlisten(eventName, listener);
             }
-            _this.callUIWithRenderer('unlisten', [new FnArg(unlistenId)]);
+            this.callUIWithRenderer('unlisten', [new FnArg(unlistenId)]);
         };
-    };
+    }
     /**
      * @param {?} fnName
      * @param {?=} fnArgs
      * @return {?}
      */
-    WebWorkerRenderer2.prototype.callUIWithRenderer = function (fnName, fnArgs) {
-        if (fnArgs === void 0) { fnArgs = []; }
+    callUIWithRenderer(fnName, fnArgs = []) {
         // always pass the renderer as the first arg
-        this._rendererFactory.callUI(fnName, [this.asFnArg].concat(fnArgs));
-    };
-    return WebWorkerRenderer2;
-}());
-var WebWorkerRenderNode = (function () {
-    function WebWorkerRenderNode() {
+        this._rendererFactory.callUI(fnName, [this.asFnArg, ...fnArgs]);
+    }
+}
+class WebWorkerRenderNode {
+    constructor() {
         this.events = new NamedEventEmitter();
     }
-    return WebWorkerRenderNode;
-}());
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -2309,20 +2233,16 @@ var WebWorkerRenderNode = (function () {
  *
  * Note: other methods all throw as the DOM is not accessible directly in web worker context.
  */
-var WorkerDomAdapter = (function (_super) {
-    __extends(WorkerDomAdapter, _super);
-    function WorkerDomAdapter() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
+class WorkerDomAdapter extends ɵDomAdapter {
     /**
      * @return {?}
      */
-    WorkerDomAdapter.makeCurrent = function () { ɵsetRootDomAdapter(new WorkerDomAdapter()); };
+    static makeCurrent() { ɵsetRootDomAdapter(new WorkerDomAdapter()); }
     /**
      * @param {?} error
      * @return {?}
      */
-    WorkerDomAdapter.prototype.logError = function (error) {
+    logError(error) {
         if (console.error) {
             console.error(error);
         }
@@ -2330,17 +2250,17 @@ var WorkerDomAdapter = (function (_super) {
             // tslint:disable-next-line:no-console
             console.log(error);
         }
-    };
+    }
     /**
      * @param {?} error
      * @return {?}
      */
-    WorkerDomAdapter.prototype.log = function (error) { console.log(error); };
+    log(error) { console.log(error); }
     /**
      * @param {?} error
      * @return {?}
      */
-    WorkerDomAdapter.prototype.logGroup = function (error) {
+    logGroup(error) {
         if (console.group) {
             console.group(error);
             this.logError(error);
@@ -2349,441 +2269,437 @@ var WorkerDomAdapter = (function (_super) {
             // tslint:disable-next-line:no-console
             console.log(error);
         }
-    };
+    }
     /**
      * @return {?}
      */
-    WorkerDomAdapter.prototype.logGroupEnd = function () {
+    logGroupEnd() {
         if (console.groupEnd) {
             console.groupEnd();
         }
-    };
+    }
     /**
      * @param {?} nodeA
      * @param {?} nodeB
      * @return {?}
      */
-    WorkerDomAdapter.prototype.contains = function (nodeA, nodeB) { throw 'not implemented'; };
+    contains(nodeA, nodeB) { throw 'not implemented'; }
     /**
      * @param {?} element
      * @param {?} name
      * @return {?}
      */
-    WorkerDomAdapter.prototype.hasProperty = function (element, name) { throw 'not implemented'; };
+    hasProperty(element, name) { throw 'not implemented'; }
     /**
      * @param {?} el
      * @param {?} name
      * @param {?} value
      * @return {?}
      */
-    WorkerDomAdapter.prototype.setProperty = function (el, name, value) { throw 'not implemented'; };
+    setProperty(el, name, value) { throw 'not implemented'; }
     /**
      * @param {?} el
      * @param {?} name
      * @return {?}
      */
-    WorkerDomAdapter.prototype.getProperty = function (el, name) { throw 'not implemented'; };
+    getProperty(el, name) { throw 'not implemented'; }
     /**
      * @param {?} el
      * @param {?} methodName
      * @param {?} args
      * @return {?}
      */
-    WorkerDomAdapter.prototype.invoke = function (el, methodName, args) { throw 'not implemented'; };
-    Object.defineProperty(WorkerDomAdapter.prototype, "attrToPropMap", {
-        /**
-         * @return {?}
-         */
-        get: function () { throw 'not implemented'; },
-        /**
-         * @param {?} value
-         * @return {?}
-         */
-        set: function (value) { throw 'not implemented'; },
-        enumerable: true,
-        configurable: true
-    });
+    invoke(el, methodName, args) { throw 'not implemented'; }
+    /**
+     * @return {?}
+     */
+    get attrToPropMap() { throw 'not implemented'; }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    set attrToPropMap(value) { throw 'not implemented'; }
     /**
      * @param {?} templateHtml
      * @return {?}
      */
-    WorkerDomAdapter.prototype.parse = function (templateHtml) { throw 'not implemented'; };
+    parse(templateHtml) { throw 'not implemented'; }
     /**
      * @param {?} el
      * @param {?} selector
      * @return {?}
      */
-    WorkerDomAdapter.prototype.querySelector = function (el, selector) { throw 'not implemented'; };
+    querySelector(el, selector) { throw 'not implemented'; }
     /**
      * @param {?} el
      * @param {?} selector
      * @return {?}
      */
-    WorkerDomAdapter.prototype.querySelectorAll = function (el, selector) { throw 'not implemented'; };
+    querySelectorAll(el, selector) { throw 'not implemented'; }
     /**
      * @param {?} el
      * @param {?} evt
      * @param {?} listener
      * @return {?}
      */
-    WorkerDomAdapter.prototype.on = function (el, evt, listener) { throw 'not implemented'; };
+    on(el, evt, listener) { throw 'not implemented'; }
     /**
      * @param {?} el
      * @param {?} evt
      * @param {?} listener
      * @return {?}
      */
-    WorkerDomAdapter.prototype.onAndCancel = function (el, evt, listener) { throw 'not implemented'; };
+    onAndCancel(el, evt, listener) { throw 'not implemented'; }
     /**
      * @param {?} el
      * @param {?} evt
      * @return {?}
      */
-    WorkerDomAdapter.prototype.dispatchEvent = function (el, evt) { throw 'not implemented'; };
+    dispatchEvent(el, evt) { throw 'not implemented'; }
     /**
      * @param {?} eventType
      * @return {?}
      */
-    WorkerDomAdapter.prototype.createMouseEvent = function (eventType) { throw 'not implemented'; };
+    createMouseEvent(eventType) { throw 'not implemented'; }
     /**
      * @param {?} eventType
      * @return {?}
      */
-    WorkerDomAdapter.prototype.createEvent = function (eventType) { throw 'not implemented'; };
+    createEvent(eventType) { throw 'not implemented'; }
     /**
      * @param {?} evt
      * @return {?}
      */
-    WorkerDomAdapter.prototype.preventDefault = function (evt) { throw 'not implemented'; };
+    preventDefault(evt) { throw 'not implemented'; }
     /**
      * @param {?} evt
      * @return {?}
      */
-    WorkerDomAdapter.prototype.isPrevented = function (evt) { throw 'not implemented'; };
+    isPrevented(evt) { throw 'not implemented'; }
     /**
      * @param {?} el
      * @return {?}
      */
-    WorkerDomAdapter.prototype.getInnerHTML = function (el) { throw 'not implemented'; };
+    getInnerHTML(el) { throw 'not implemented'; }
     /**
      * @param {?} el
      * @return {?}
      */
-    WorkerDomAdapter.prototype.getTemplateContent = function (el) { throw 'not implemented'; };
+    getTemplateContent(el) { throw 'not implemented'; }
     /**
      * @param {?} el
      * @return {?}
      */
-    WorkerDomAdapter.prototype.getOuterHTML = function (el) { throw 'not implemented'; };
+    getOuterHTML(el) { throw 'not implemented'; }
     /**
      * @param {?} node
      * @return {?}
      */
-    WorkerDomAdapter.prototype.nodeName = function (node) { throw 'not implemented'; };
+    nodeName(node) { throw 'not implemented'; }
     /**
      * @param {?} node
      * @return {?}
      */
-    WorkerDomAdapter.prototype.nodeValue = function (node) { throw 'not implemented'; };
+    nodeValue(node) { throw 'not implemented'; }
     /**
      * @param {?} node
      * @return {?}
      */
-    WorkerDomAdapter.prototype.type = function (node) { throw 'not implemented'; };
+    type(node) { throw 'not implemented'; }
     /**
      * @param {?} node
      * @return {?}
      */
-    WorkerDomAdapter.prototype.content = function (node) { throw 'not implemented'; };
+    content(node) { throw 'not implemented'; }
     /**
      * @param {?} el
      * @return {?}
      */
-    WorkerDomAdapter.prototype.firstChild = function (el) { throw 'not implemented'; };
+    firstChild(el) { throw 'not implemented'; }
     /**
      * @param {?} el
      * @return {?}
      */
-    WorkerDomAdapter.prototype.nextSibling = function (el) { throw 'not implemented'; };
+    nextSibling(el) { throw 'not implemented'; }
     /**
      * @param {?} el
      * @return {?}
      */
-    WorkerDomAdapter.prototype.parentElement = function (el) { throw 'not implemented'; };
+    parentElement(el) { throw 'not implemented'; }
     /**
      * @param {?} el
      * @return {?}
      */
-    WorkerDomAdapter.prototype.childNodes = function (el) { throw 'not implemented'; };
+    childNodes(el) { throw 'not implemented'; }
     /**
      * @param {?} el
      * @return {?}
      */
-    WorkerDomAdapter.prototype.childNodesAsList = function (el) { throw 'not implemented'; };
+    childNodesAsList(el) { throw 'not implemented'; }
     /**
      * @param {?} el
      * @return {?}
      */
-    WorkerDomAdapter.prototype.clearNodes = function (el) { throw 'not implemented'; };
-    /**
-     * @param {?} el
-     * @param {?} node
-     * @return {?}
-     */
-    WorkerDomAdapter.prototype.appendChild = function (el, node) { throw 'not implemented'; };
+    clearNodes(el) { throw 'not implemented'; }
     /**
      * @param {?} el
      * @param {?} node
      * @return {?}
      */
-    WorkerDomAdapter.prototype.removeChild = function (el, node) { throw 'not implemented'; };
+    appendChild(el, node) { throw 'not implemented'; }
+    /**
+     * @param {?} el
+     * @param {?} node
+     * @return {?}
+     */
+    removeChild(el, node) { throw 'not implemented'; }
     /**
      * @param {?} el
      * @param {?} newNode
      * @param {?} oldNode
      * @return {?}
      */
-    WorkerDomAdapter.prototype.replaceChild = function (el, newNode, oldNode) { throw 'not implemented'; };
+    replaceChild(el, newNode, oldNode) { throw 'not implemented'; }
     /**
      * @param {?} el
      * @return {?}
      */
-    WorkerDomAdapter.prototype.remove = function (el) { throw 'not implemented'; };
+    remove(el) { throw 'not implemented'; }
     /**
      * @param {?} parent
      * @param {?} el
      * @param {?} node
      * @return {?}
      */
-    WorkerDomAdapter.prototype.insertBefore = function (parent, el, node) { throw 'not implemented'; };
+    insertBefore(parent, el, node) { throw 'not implemented'; }
     /**
      * @param {?} parent
      * @param {?} el
      * @param {?} nodes
      * @return {?}
      */
-    WorkerDomAdapter.prototype.insertAllBefore = function (parent, el, nodes) { throw 'not implemented'; };
+    insertAllBefore(parent, el, nodes) { throw 'not implemented'; }
     /**
      * @param {?} parent
      * @param {?} el
      * @param {?} node
      * @return {?}
      */
-    WorkerDomAdapter.prototype.insertAfter = function (parent, el, node) { throw 'not implemented'; };
+    insertAfter(parent, el, node) { throw 'not implemented'; }
     /**
      * @param {?} el
      * @param {?} value
      * @return {?}
      */
-    WorkerDomAdapter.prototype.setInnerHTML = function (el, value) { throw 'not implemented'; };
+    setInnerHTML(el, value) { throw 'not implemented'; }
     /**
      * @param {?} el
      * @return {?}
      */
-    WorkerDomAdapter.prototype.getText = function (el) { throw 'not implemented'; };
-    /**
-     * @param {?} el
-     * @param {?} value
-     * @return {?}
-     */
-    WorkerDomAdapter.prototype.setText = function (el, value) { throw 'not implemented'; };
-    /**
-     * @param {?} el
-     * @return {?}
-     */
-    WorkerDomAdapter.prototype.getValue = function (el) { throw 'not implemented'; };
+    getText(el) { throw 'not implemented'; }
     /**
      * @param {?} el
      * @param {?} value
      * @return {?}
      */
-    WorkerDomAdapter.prototype.setValue = function (el, value) { throw 'not implemented'; };
+    setText(el, value) { throw 'not implemented'; }
     /**
      * @param {?} el
      * @return {?}
      */
-    WorkerDomAdapter.prototype.getChecked = function (el) { throw 'not implemented'; };
+    getValue(el) { throw 'not implemented'; }
     /**
      * @param {?} el
      * @param {?} value
      * @return {?}
      */
-    WorkerDomAdapter.prototype.setChecked = function (el, value) { throw 'not implemented'; };
+    setValue(el, value) { throw 'not implemented'; }
+    /**
+     * @param {?} el
+     * @return {?}
+     */
+    getChecked(el) { throw 'not implemented'; }
+    /**
+     * @param {?} el
+     * @param {?} value
+     * @return {?}
+     */
+    setChecked(el, value) { throw 'not implemented'; }
     /**
      * @param {?} text
      * @return {?}
      */
-    WorkerDomAdapter.prototype.createComment = function (text) { throw 'not implemented'; };
+    createComment(text) { throw 'not implemented'; }
     /**
      * @param {?} html
      * @return {?}
      */
-    WorkerDomAdapter.prototype.createTemplate = function (html) { throw 'not implemented'; };
+    createTemplate(html) { throw 'not implemented'; }
     /**
      * @param {?} tagName
      * @param {?=} doc
      * @return {?}
      */
-    WorkerDomAdapter.prototype.createElement = function (tagName, doc) { throw 'not implemented'; };
+    createElement(tagName, doc) { throw 'not implemented'; }
     /**
      * @param {?} ns
      * @param {?} tagName
      * @param {?=} doc
      * @return {?}
      */
-    WorkerDomAdapter.prototype.createElementNS = function (ns, tagName, doc) { throw 'not implemented'; };
+    createElementNS(ns, tagName, doc) { throw 'not implemented'; }
     /**
      * @param {?} text
      * @param {?=} doc
      * @return {?}
      */
-    WorkerDomAdapter.prototype.createTextNode = function (text, doc) { throw 'not implemented'; };
+    createTextNode(text, doc) { throw 'not implemented'; }
     /**
      * @param {?} attrName
      * @param {?} attrValue
      * @param {?=} doc
      * @return {?}
      */
-    WorkerDomAdapter.prototype.createScriptTag = function (attrName, attrValue, doc) {
+    createScriptTag(attrName, attrValue, doc) {
         throw 'not implemented';
-    };
+    }
     /**
      * @param {?} css
      * @param {?=} doc
      * @return {?}
      */
-    WorkerDomAdapter.prototype.createStyleElement = function (css, doc) { throw 'not implemented'; };
+    createStyleElement(css, doc) { throw 'not implemented'; }
     /**
      * @param {?} el
      * @return {?}
      */
-    WorkerDomAdapter.prototype.createShadowRoot = function (el) { throw 'not implemented'; };
+    createShadowRoot(el) { throw 'not implemented'; }
     /**
      * @param {?} el
      * @return {?}
      */
-    WorkerDomAdapter.prototype.getShadowRoot = function (el) { throw 'not implemented'; };
+    getShadowRoot(el) { throw 'not implemented'; }
     /**
      * @param {?} el
      * @return {?}
      */
-    WorkerDomAdapter.prototype.getHost = function (el) { throw 'not implemented'; };
+    getHost(el) { throw 'not implemented'; }
     /**
      * @param {?} el
      * @return {?}
      */
-    WorkerDomAdapter.prototype.getDistributedNodes = function (el) { throw 'not implemented'; };
+    getDistributedNodes(el) { throw 'not implemented'; }
     /**
      * @param {?} node
      * @return {?}
      */
-    WorkerDomAdapter.prototype.clone = function (node) { throw 'not implemented'; };
+    clone(node) { throw 'not implemented'; }
     /**
      * @param {?} element
      * @param {?} name
      * @return {?}
      */
-    WorkerDomAdapter.prototype.getElementsByClassName = function (element, name) { throw 'not implemented'; };
+    getElementsByClassName(element, name) { throw 'not implemented'; }
     /**
      * @param {?} element
      * @param {?} name
      * @return {?}
      */
-    WorkerDomAdapter.prototype.getElementsByTagName = function (element, name) { throw 'not implemented'; };
+    getElementsByTagName(element, name) { throw 'not implemented'; }
     /**
      * @param {?} element
      * @return {?}
      */
-    WorkerDomAdapter.prototype.classList = function (element) { throw 'not implemented'; };
-    /**
-     * @param {?} element
-     * @param {?} className
-     * @return {?}
-     */
-    WorkerDomAdapter.prototype.addClass = function (element, className) { throw 'not implemented'; };
+    classList(element) { throw 'not implemented'; }
     /**
      * @param {?} element
      * @param {?} className
      * @return {?}
      */
-    WorkerDomAdapter.prototype.removeClass = function (element, className) { throw 'not implemented'; };
+    addClass(element, className) { throw 'not implemented'; }
     /**
      * @param {?} element
      * @param {?} className
      * @return {?}
      */
-    WorkerDomAdapter.prototype.hasClass = function (element, className) { throw 'not implemented'; };
+    removeClass(element, className) { throw 'not implemented'; }
+    /**
+     * @param {?} element
+     * @param {?} className
+     * @return {?}
+     */
+    hasClass(element, className) { throw 'not implemented'; }
     /**
      * @param {?} element
      * @param {?} styleName
      * @param {?} styleValue
      * @return {?}
      */
-    WorkerDomAdapter.prototype.setStyle = function (element, styleName, styleValue) { throw 'not implemented'; };
+    setStyle(element, styleName, styleValue) { throw 'not implemented'; }
     /**
      * @param {?} element
      * @param {?} styleName
      * @return {?}
      */
-    WorkerDomAdapter.prototype.removeStyle = function (element, styleName) { throw 'not implemented'; };
+    removeStyle(element, styleName) { throw 'not implemented'; }
     /**
      * @param {?} element
      * @param {?} styleName
      * @return {?}
      */
-    WorkerDomAdapter.prototype.getStyle = function (element, styleName) { throw 'not implemented'; };
+    getStyle(element, styleName) { throw 'not implemented'; }
     /**
      * @param {?} element
      * @param {?} styleName
      * @param {?=} styleValue
      * @return {?}
      */
-    WorkerDomAdapter.prototype.hasStyle = function (element, styleName, styleValue) {
+    hasStyle(element, styleName, styleValue) {
         throw 'not implemented';
-    };
+    }
     /**
      * @param {?} element
      * @return {?}
      */
-    WorkerDomAdapter.prototype.tagName = function (element) { throw 'not implemented'; };
+    tagName(element) { throw 'not implemented'; }
     /**
      * @param {?} element
      * @return {?}
      */
-    WorkerDomAdapter.prototype.attributeMap = function (element) { throw 'not implemented'; };
+    attributeMap(element) { throw 'not implemented'; }
     /**
      * @param {?} element
      * @param {?} attribute
      * @return {?}
      */
-    WorkerDomAdapter.prototype.hasAttribute = function (element, attribute) { throw 'not implemented'; };
+    hasAttribute(element, attribute) { throw 'not implemented'; }
     /**
      * @param {?} element
      * @param {?} ns
      * @param {?} attribute
      * @return {?}
      */
-    WorkerDomAdapter.prototype.hasAttributeNS = function (element, ns, attribute) { throw 'not implemented'; };
+    hasAttributeNS(element, ns, attribute) { throw 'not implemented'; }
     /**
      * @param {?} element
      * @param {?} attribute
      * @return {?}
      */
-    WorkerDomAdapter.prototype.getAttribute = function (element, attribute) { throw 'not implemented'; };
+    getAttribute(element, attribute) { throw 'not implemented'; }
     /**
      * @param {?} element
      * @param {?} ns
      * @param {?} attribute
      * @return {?}
      */
-    WorkerDomAdapter.prototype.getAttributeNS = function (element, ns, attribute) { throw 'not implemented'; };
+    getAttributeNS(element, ns, attribute) { throw 'not implemented'; }
     /**
      * @param {?} element
      * @param {?} name
      * @param {?} value
      * @return {?}
      */
-    WorkerDomAdapter.prototype.setAttribute = function (element, name, value) { throw 'not implemented'; };
+    setAttribute(element, name, value) { throw 'not implemented'; }
     /**
      * @param {?} element
      * @param {?} ns
@@ -2791,204 +2707,206 @@ var WorkerDomAdapter = (function (_super) {
      * @param {?} value
      * @return {?}
      */
-    WorkerDomAdapter.prototype.setAttributeNS = function (element, ns, name, value) { throw 'not implemented'; };
+    setAttributeNS(element, ns, name, value) { throw 'not implemented'; }
     /**
      * @param {?} element
      * @param {?} attribute
      * @return {?}
      */
-    WorkerDomAdapter.prototype.removeAttribute = function (element, attribute) { throw 'not implemented'; };
+    removeAttribute(element, attribute) { throw 'not implemented'; }
     /**
      * @param {?} element
      * @param {?} ns
      * @param {?} attribute
      * @return {?}
      */
-    WorkerDomAdapter.prototype.removeAttributeNS = function (element, ns, attribute) { throw 'not implemented'; };
+    removeAttributeNS(element, ns, attribute) { throw 'not implemented'; }
     /**
      * @param {?} el
      * @return {?}
      */
-    WorkerDomAdapter.prototype.templateAwareRoot = function (el) { throw 'not implemented'; };
+    templateAwareRoot(el) { throw 'not implemented'; }
     /**
      * @return {?}
      */
-    WorkerDomAdapter.prototype.createHtmlDocument = function () { throw 'not implemented'; };
+    createHtmlDocument() { throw 'not implemented'; }
+    /**
+     * @return {?}
+     */
+    getDefaultDocument() { throw 'not implemented'; }
     /**
      * @param {?} el
      * @return {?}
      */
-    WorkerDomAdapter.prototype.getBoundingClientRect = function (el) { throw 'not implemented'; };
+    getBoundingClientRect(el) { throw 'not implemented'; }
     /**
      * @param {?} doc
      * @return {?}
      */
-    WorkerDomAdapter.prototype.getTitle = function (doc) { throw 'not implemented'; };
+    getTitle(doc) { throw 'not implemented'; }
     /**
      * @param {?} doc
      * @param {?} newTitle
      * @return {?}
      */
-    WorkerDomAdapter.prototype.setTitle = function (doc, newTitle) { throw 'not implemented'; };
+    setTitle(doc, newTitle) { throw 'not implemented'; }
     /**
      * @param {?} n
      * @param {?} selector
      * @return {?}
      */
-    WorkerDomAdapter.prototype.elementMatches = function (n, selector) { throw 'not implemented'; };
+    elementMatches(n, selector) { throw 'not implemented'; }
     /**
      * @param {?} el
      * @return {?}
      */
-    WorkerDomAdapter.prototype.isTemplateElement = function (el) { throw 'not implemented'; };
+    isTemplateElement(el) { throw 'not implemented'; }
     /**
      * @param {?} node
      * @return {?}
      */
-    WorkerDomAdapter.prototype.isTextNode = function (node) { throw 'not implemented'; };
+    isTextNode(node) { throw 'not implemented'; }
     /**
      * @param {?} node
      * @return {?}
      */
-    WorkerDomAdapter.prototype.isCommentNode = function (node) { throw 'not implemented'; };
+    isCommentNode(node) { throw 'not implemented'; }
     /**
      * @param {?} node
      * @return {?}
      */
-    WorkerDomAdapter.prototype.isElementNode = function (node) { throw 'not implemented'; };
+    isElementNode(node) { throw 'not implemented'; }
     /**
      * @param {?} node
      * @return {?}
      */
-    WorkerDomAdapter.prototype.hasShadowRoot = function (node) { throw 'not implemented'; };
+    hasShadowRoot(node) { throw 'not implemented'; }
     /**
      * @param {?} node
      * @return {?}
      */
-    WorkerDomAdapter.prototype.isShadowRoot = function (node) { throw 'not implemented'; };
+    isShadowRoot(node) { throw 'not implemented'; }
     /**
      * @param {?} node
      * @return {?}
      */
-    WorkerDomAdapter.prototype.importIntoDoc = function (node) { throw 'not implemented'; };
+    importIntoDoc(node) { throw 'not implemented'; }
     /**
      * @param {?} node
      * @return {?}
      */
-    WorkerDomAdapter.prototype.adoptNode = function (node) { throw 'not implemented'; };
+    adoptNode(node) { throw 'not implemented'; }
     /**
      * @param {?} element
      * @return {?}
      */
-    WorkerDomAdapter.prototype.getHref = function (element) { throw 'not implemented'; };
+    getHref(element) { throw 'not implemented'; }
     /**
      * @param {?} event
      * @return {?}
      */
-    WorkerDomAdapter.prototype.getEventKey = function (event) { throw 'not implemented'; };
+    getEventKey(event) { throw 'not implemented'; }
     /**
      * @param {?} element
      * @param {?} baseUrl
      * @param {?} href
      * @return {?}
      */
-    WorkerDomAdapter.prototype.resolveAndSetHref = function (element, baseUrl, href) { throw 'not implemented'; };
+    resolveAndSetHref(element, baseUrl, href) { throw 'not implemented'; }
     /**
      * @return {?}
      */
-    WorkerDomAdapter.prototype.supportsDOMEvents = function () { throw 'not implemented'; };
+    supportsDOMEvents() { throw 'not implemented'; }
     /**
      * @return {?}
      */
-    WorkerDomAdapter.prototype.supportsNativeShadowDOM = function () { throw 'not implemented'; };
+    supportsNativeShadowDOM() { throw 'not implemented'; }
     /**
      * @param {?} doc
      * @param {?} target
      * @return {?}
      */
-    WorkerDomAdapter.prototype.getGlobalEventTarget = function (doc, target) { throw 'not implemented'; };
+    getGlobalEventTarget(doc, target) { throw 'not implemented'; }
     /**
      * @return {?}
      */
-    WorkerDomAdapter.prototype.getHistory = function () { throw 'not implemented'; };
+    getHistory() { throw 'not implemented'; }
     /**
      * @return {?}
      */
-    WorkerDomAdapter.prototype.getLocation = function () { throw 'not implemented'; };
+    getLocation() { throw 'not implemented'; }
     /**
      * @param {?} doc
      * @return {?}
      */
-    WorkerDomAdapter.prototype.getBaseHref = function (doc) { throw 'not implemented'; };
+    getBaseHref(doc) { throw 'not implemented'; }
     /**
      * @return {?}
      */
-    WorkerDomAdapter.prototype.resetBaseElement = function () { throw 'not implemented'; };
+    resetBaseElement() { throw 'not implemented'; }
     /**
      * @return {?}
      */
-    WorkerDomAdapter.prototype.getUserAgent = function () { return 'Fake user agent'; };
+    getUserAgent() { return 'Fake user agent'; }
     /**
      * @param {?} element
      * @param {?} name
      * @param {?} value
      * @return {?}
      */
-    WorkerDomAdapter.prototype.setData = function (element, name, value) { throw 'not implemented'; };
+    setData(element, name, value) { throw 'not implemented'; }
     /**
      * @param {?} element
      * @return {?}
      */
-    WorkerDomAdapter.prototype.getComputedStyle = function (element) { throw 'not implemented'; };
+    getComputedStyle(element) { throw 'not implemented'; }
     /**
      * @param {?} element
      * @param {?} name
      * @return {?}
      */
-    WorkerDomAdapter.prototype.getData = function (element, name) { throw 'not implemented'; };
+    getData(element, name) { throw 'not implemented'; }
+    /**
+     * @return {?}
+     */
+    performanceNow() { throw 'not implemented'; }
+    /**
+     * @return {?}
+     */
+    getAnimationPrefix() { throw 'not implemented'; }
+    /**
+     * @return {?}
+     */
+    getTransitionEnd() { throw 'not implemented'; }
+    /**
+     * @return {?}
+     */
+    supportsAnimation() { throw 'not implemented'; }
+    /**
+     * @return {?}
+     */
+    supportsWebAnimation() { throw 'not implemented'; }
+    /**
+     * @return {?}
+     */
+    supportsCookies() { return false; }
+    /**
+     * @param {?} name
+     * @return {?}
+     */
+    getCookie(name) { throw 'not implemented'; }
     /**
      * @param {?} name
      * @param {?} value
      * @return {?}
      */
-    WorkerDomAdapter.prototype.setGlobalVar = function (name, value) { throw 'not implemented'; };
-    /**
-     * @return {?}
-     */
-    WorkerDomAdapter.prototype.performanceNow = function () { throw 'not implemented'; };
-    /**
-     * @return {?}
-     */
-    WorkerDomAdapter.prototype.getAnimationPrefix = function () { throw 'not implemented'; };
-    /**
-     * @return {?}
-     */
-    WorkerDomAdapter.prototype.getTransitionEnd = function () { throw 'not implemented'; };
-    /**
-     * @return {?}
-     */
-    WorkerDomAdapter.prototype.supportsAnimation = function () { throw 'not implemented'; };
-    /**
-     * @return {?}
-     */
-    WorkerDomAdapter.prototype.supportsWebAnimation = function () { throw 'not implemented'; };
-    /**
-     * @return {?}
-     */
-    WorkerDomAdapter.prototype.supportsCookies = function () { return false; };
-    /**
-     * @param {?} name
-     * @return {?}
-     */
-    WorkerDomAdapter.prototype.getCookie = function (name) { throw 'not implemented'; };
-    /**
-     * @param {?} name
-     * @param {?} value
-     * @return {?}
-     */
-    WorkerDomAdapter.prototype.setCookie = function (name, value) { throw 'not implemented'; };
-    return WorkerDomAdapter;
-}(ɵDomAdapter));
+    setCookie(name, value) { throw 'not implemented'; }
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -2999,7 +2917,7 @@ var WorkerDomAdapter = (function (_super) {
 /**
  * \@experimental
  */
-var platformWorkerApp = createPlatformFactory(platformCore, 'workerApp', [{ provide: PLATFORM_ID, useValue: ɵPLATFORM_WORKER_APP_ID }]);
+const platformWorkerApp = createPlatformFactory(platformCore, 'workerApp', [{ provide: PLATFORM_ID, useValue: ɵPLATFORM_WORKER_APP_ID }]);
 /**
  * @return {?}
  */
@@ -3007,9 +2925,9 @@ function errorHandler() {
     return new ErrorHandler();
 }
 // TODO(jteplitz602) remove this and compile with lib.webworker.d.ts (#3492)
-var _postMessage = {
-    postMessage: function (message, transferrables) {
-        ((postMessage))(message, transferrables);
+const _postMessage = {
+    postMessage: (message, transferrables) => {
+        (/** @type {?} */ (postMessage))(message, transferrables);
     }
 };
 /**
@@ -3017,9 +2935,9 @@ var _postMessage = {
  * @return {?}
  */
 function createMessageBus(zone) {
-    var /** @type {?} */ sink = new PostMessageBusSink(_postMessage);
-    var /** @type {?} */ source = new PostMessageBusSource();
-    var /** @type {?} */ bus = new PostMessageBus(sink, source);
+    const /** @type {?} */ sink = new PostMessageBusSink(_postMessage);
+    const /** @type {?} */ source = new PostMessageBusSource();
+    const /** @type {?} */ bus = new PostMessageBus(sink, source);
     bus.attachToZone(zone);
     return bus;
 }
@@ -3034,19 +2952,16 @@ function setupWebWorker() {
  *
  * \@experimental
  */
-var WorkerAppModule = (function () {
-    function WorkerAppModule() {
-    }
-    return WorkerAppModule;
-}());
+class WorkerAppModule {
+}
 WorkerAppModule.decorators = [
     { type: NgModule, args: [{
                 providers: [
                     ɵBROWSER_SANITIZATION_PROVIDERS,
                     Serializer,
-                    { provide: DOCUMENT, useValue: null },
-                    { provide: ClientMessageBrokerFactory, useClass: ClientMessageBrokerFactory_ },
-                    { provide: ServiceMessageBrokerFactory, useClass: ServiceMessageBrokerFactory_ },
+                    { provide: DOCUMENT$1, useValue: null },
+                    ClientMessageBrokerFactory,
+                    ServiceMessageBrokerFactory,
                     WebWorkerRendererFactory2,
                     { provide: RendererFactory2, useExisting: WebWorkerRendererFactory2 },
                     { provide: ON_WEB_WORKER, useValue: true },
@@ -3061,16 +2976,12 @@ WorkerAppModule.decorators = [
                 ]
             },] },
 ];
+/** @nocollapse */
+WorkerAppModule.ctorParameters = () => [];
+
 /**
- * @nocollapse
- */
-WorkerAppModule.ctorParameters = function () { return []; };
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
  */
 /**
  * Bootstraps the worker ui.
@@ -3080,14 +2991,19 @@ WorkerAppModule.ctorParameters = function () { return []; };
  * @param {?=} customProviders
  * @return {?}
  */
-function bootstrapWorkerUi(workerScriptUri, customProviders) {
-    if (customProviders === void 0) { customProviders = []; }
+function bootstrapWorkerUi(workerScriptUri, customProviders = []) {
     // For now, just creates the worker ui platform...
-    var /** @type {?} */ platform = platformWorkerUi([
-        { provide: WORKER_SCRIPT, useValue: workerScriptUri }
-    ].concat(customProviders));
+    const /** @type {?} */ platform = platformWorkerUi([
+        { provide: WORKER_SCRIPT, useValue: workerScriptUri },
+        ...customProviders,
+    ]);
     return Promise.resolve(platform);
 }
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -3098,11 +3014,18 @@ function bootstrapWorkerUi(workerScriptUri, customProviders) {
 /**
  * @module
  * @description
- * Entry point for all public APIs of the platform-browser package.
+ * Entry point for all public APIs of this package.
  */
+
 // This file only reexports content of the `src` folder. Keep it that way.
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * Generated bundle index. Do not edit.
  */
-export { VERSION, ClientMessageBroker, ClientMessageBrokerFactory, FnArg, UiArguments, MessageBus, PRIMITIVE, ServiceMessageBroker, ServiceMessageBrokerFactory, WORKER_UI_LOCATION_PROVIDERS, WORKER_APP_LOCATION_PROVIDERS, WorkerAppModule, platformWorkerApp, platformWorkerUi, bootstrapWorkerUi, ON_WEB_WORKER as ɵm, ClientMessageBrokerFactory_ as ɵa, RenderStore as ɵk, Serializer as ɵb, ServiceMessageBrokerFactory_ as ɵc, appInitFnFactory as ɵe, locationInitialized as ɵd, WebWorkerPlatformLocation as ɵj, WebWorkerRendererFactory2 as ɵl, createMessageBus as ɵg, errorHandler as ɵf, setupWebWorker as ɵh, _WORKER_UI_PLATFORM_PROVIDERS as ɵi };
-//# sourceMappingURL=platform-webworker.es5.js.map
+
+export { VERSION, ClientMessageBroker, ClientMessageBrokerFactory, FnArg, UiArguments, MessageBus, ServiceMessageBroker, ServiceMessageBrokerFactory, WORKER_UI_LOCATION_PROVIDERS, WORKER_APP_LOCATION_PROVIDERS, WorkerAppModule, platformWorkerApp, platformWorkerUi, bootstrapWorkerUi, ON_WEB_WORKER as ɵk, RenderStore as ɵh, Serializer as ɵa, appInitFnFactory as ɵc, locationInitialized as ɵb, WebWorkerPlatformLocation as ɵi, WebWorkerRendererFactory2 as ɵj, createMessageBus as ɵe, errorHandler as ɵd, setupWebWorker as ɵf, _WORKER_UI_PLATFORM_PROVIDERS as ɵg };
+//# sourceMappingURL=index.js.map

@@ -6,20 +6,12 @@
  * found in the LICENSE file at https://angular.io/license
  */
 import { Type } from '@angular/core';
-import { MessageBus } from './message_bus';
-import { Serializer, SerializerTypes } from './serializer';
+import { SerializerTypes } from './serializer';
 /**
  * @experimental WebWorker support in Angular is experimental.
  */
-export declare abstract class ClientMessageBrokerFactory {
-    /**
-     * Initializes the given channel and attaches a new {@link ClientMessageBroker} to it.
-     */
-    abstract createMessageBroker(channel: string, runInZone?: boolean): ClientMessageBroker;
-}
-export declare class ClientMessageBrokerFactory_ extends ClientMessageBrokerFactory {
+export declare class ClientMessageBrokerFactory {
     private _messageBus;
-    constructor(_messageBus: MessageBus, _serializer: Serializer);
     /**
      * Initializes the given channel and attaches a new {@link ClientMessageBroker} to it.
      */
@@ -28,16 +20,12 @@ export declare class ClientMessageBrokerFactory_ extends ClientMessageBrokerFact
 /**
  * @experimental WebWorker support in Angular is experimental.
  */
-export declare abstract class ClientMessageBroker {
-    abstract runOnService(args: UiArguments, returnType: Type<any> | SerializerTypes | null): Promise<any> | null;
-}
-export declare class ClientMessageBroker_ extends ClientMessageBroker {
-    channel: any;
+export declare class ClientMessageBroker {
+    private channel;
     private _pending;
     private _sink;
-    constructor(messageBus: MessageBus, _serializer: Serializer, channel: any);
     private _generateMessageId(name);
-    runOnService(args: UiArguments, returnType: Type<any> | SerializerTypes): Promise<any> | null;
+    runOnService(args: UiArguments, returnType: Type<any> | SerializerTypes | null): Promise<any> | null;
     private _handleMessage(message);
 }
 /**
@@ -53,6 +41,6 @@ export declare class FnArg {
  */
 export declare class UiArguments {
     method: string;
-    args: FnArg[];
-    constructor(method: string, args?: FnArg[]);
+    args: FnArg[] | undefined;
+    constructor(method: string, args?: FnArg[] | undefined);
 }
