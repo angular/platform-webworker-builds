@@ -1,5 +1,5 @@
 /**
- * @license Angular v5.0.0-beta.7-9bbf009
+ * @license Angular v5.0.0-beta.7-0f5c70d
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1479,7 +1479,7 @@ function spawnWebWorker(uri, instance) {
 /**
  * \@stable
  */
-const VERSION = new Version('5.0.0-beta.7-9bbf009');
+const VERSION = new Version('5.0.0-beta.7-0f5c70d');
 
 /**
  * @fileoverview added by tsickle
@@ -2255,7 +2255,10 @@ class WorkerDomAdapter extends ɵDomAdapter {
      * @param {?} error
      * @return {?}
      */
-    log(error) { console.log(error); }
+    log(error) {
+        // tslint:disable-next-line:no-console
+        console.log(error);
+    }
     /**
      * @param {?} error
      * @return {?}
