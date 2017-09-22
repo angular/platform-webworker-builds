@@ -1,5 +1,5 @@
 /**
- * @license Angular v5.0.0-beta.7-4c73b52
+ * @license Angular v5.0.0-beta.7-6e1896b
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -36,7 +36,7 @@ function __extends(d, b) {
 }
 
 /**
- * @license Angular v5.0.0-beta.7-4c73b52
+ * @license Angular v5.0.0-beta.7-6e1896b
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1811,7 +1811,7 @@ function spawnWebWorker(uri, instance) {
 /**
  * \@stable
  */
-var VERSION = new _angular_core.Version('5.0.0-beta.7-4c73b52');
+var VERSION = new _angular_core.Version('5.0.0-beta.7-6e1896b');
 
 /**
  * @fileoverview added by tsickle
@@ -3993,11 +3993,12 @@ var platformWorkerApp = _angular_core.createPlatformFactory(_angular_core.platfo
 function errorHandler() {
     return new _angular_core.ErrorHandler();
 }
+var ɵ0 = function (message, transferrables) {
+    (/** @type {?} */ (postMessage))(message, transferrables);
+};
 // TODO(jteplitz602) remove this and compile with lib.webworker.d.ts (#3492)
 var _postMessage = {
-    postMessage: function (message, transferrables) {
-        (/** @type {?} */ (postMessage))(message, transferrables);
-    }
+    postMessage: ɵ0
 };
 /**
  * @param {?} zone

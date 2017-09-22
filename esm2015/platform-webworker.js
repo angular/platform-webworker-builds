@@ -1,5 +1,5 @@
 /**
- * @license Angular v5.0.0-beta.7-4c73b52
+ * @license Angular v5.0.0-beta.7-6e1896b
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1479,7 +1479,7 @@ function spawnWebWorker(uri, instance) {
 /**
  * \@stable
  */
-const VERSION = new Version('5.0.0-beta.7-4c73b52');
+const VERSION = new Version('5.0.0-beta.7-6e1896b');
 
 /**
  * @fileoverview added by tsickle
@@ -2924,11 +2924,12 @@ const platformWorkerApp = createPlatformFactory(platformCore, 'workerApp', [{ pr
 function errorHandler() {
     return new ErrorHandler();
 }
+const ɵ0 = (message, transferrables) => {
+    (/** @type {?} */ (postMessage))(message, transferrables);
+};
 // TODO(jteplitz602) remove this and compile with lib.webworker.d.ts (#3492)
 const _postMessage = {
-    postMessage: (message, transferrables) => {
-        (/** @type {?} */ (postMessage))(message, transferrables);
-    }
+    postMessage: ɵ0
 };
 /**
  * @param {?} zone
