@@ -18,13 +18,14 @@ export declare class WebWorkerPlatformLocation extends PlatformLocation {
     private _channelSource;
     initialized: Promise<any>;
     private initializedResolve;
+    readonly search: string;
+    readonly hash: string;
     constructor(brokerFactory: ClientMessageBrokerFactory, bus: MessageBus, _serializer: Serializer);
     getBaseHrefFromDOM(): string;
     onPopState(fn: LocationChangeListener): void;
     onHashChange(fn: LocationChangeListener): void;
     pathname: string;
-    readonly search: string;
-    readonly hash: string;
+    private _setLocation(location);
     pushState(state: any, title: string, url: string): void;
     replaceState(state: any, title: string, url: string): void;
     forward(): void;
