@@ -1,5 +1,5 @@
 /**
- * @license Angular v5.0.0-beta.7-bed8ac7
+ * @license Angular v5.0.0-beta.7-14e8e88
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1479,7 +1479,7 @@ function spawnWebWorker(uri, instance) {
 /**
  * \@stable
  */
-const VERSION = new Version('5.0.0-beta.7-bed8ac7');
+const VERSION = new Version('5.0.0-beta.7-14e8e88');
 
 /**
  * @fileoverview added by tsickle
@@ -1617,7 +1617,7 @@ class WebWorkerPlatformLocation extends PlatformLocation {
                     }
                     if (listeners) {
                         // There was a popState or hashChange event, so the location object thas been updated
-                        this._setLocation(this._serializer.deserialize(msg['location'], LocationType));
+                        this._location = this._serializer.deserialize(msg['location'], LocationType);
                         listeners.forEach((fn) => fn(msg['event']));
                     }
                 }
@@ -1632,7 +1632,7 @@ class WebWorkerPlatformLocation extends PlatformLocation {
     init() {
         const /** @type {?} */ args = new UiArguments('getLocation');
         return /** @type {?} */ ((this._broker.runOnService(args, LocationType))).then((val) => {
-            this._setLocation(val);
+            this._location = val;
             this.initializedResolve();
             return true;
         }, err => { throw new Error(err); });
@@ -1658,6 +1658,14 @@ class WebWorkerPlatformLocation extends PlatformLocation {
      */
     get pathname() { return this._location ? /** @type {?} */ ((this._location.pathname)) : '<unknown>'; }
     /**
+     * @return {?}
+     */
+    get search() { return this._location ? this._location.search : '<unknown>'; }
+    /**
+     * @return {?}
+     */
+    get hash() { return this._location ? this._location.hash : '<unknown>'; }
+    /**
      * @param {?} newPath
      * @return {?}
      */
@@ -1669,15 +1677,6 @@ class WebWorkerPlatformLocation extends PlatformLocation {
         const /** @type {?} */ fnArgs = [new FnArg(newPath, 1 /* PRIMITIVE */)];
         const /** @type {?} */ args = new UiArguments('setPathname', fnArgs);
         this._broker.runOnService(args, null);
-    }
-    /**
-     * @param {?} location
-     * @return {?}
-     */
-    _setLocation(location) {
-        this._location = location;
-        (/** @type {?} */ (this)).search = this._location ? this._location.search : '<unknown>';
-        (/** @type {?} */ (this)).hash = this._location ? this._location.hash : '<unknown>';
     }
     /**
      * @param {?} state

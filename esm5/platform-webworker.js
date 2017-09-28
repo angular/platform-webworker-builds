@@ -1,5 +1,5 @@
 /**
- * @license Angular v5.0.0-beta.7-bed8ac7
+ * @license Angular v5.0.0-beta.7-14e8e88
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1779,7 +1779,7 @@ function spawnWebWorker(uri, instance) {
 /**
  * \@stable
  */
-var VERSION = new Version('5.0.0-beta.7-bed8ac7');
+var VERSION = new Version('5.0.0-beta.7-14e8e88');
 
 /**
  * @fileoverview added by tsickle
@@ -1923,7 +1923,7 @@ var WebWorkerPlatformLocation = (function (_super) {
                     if (listeners) {
                         // There was a popState or hashChange event, so the location object thas been updated
                         // There was a popState or hashChange event, so the location object thas been updated
-                        _this._setLocation(_this._serializer.deserialize(msg['location'], LocationType));
+                        _this._location = _this._serializer.deserialize(msg['location'], LocationType);
                         listeners.forEach(function (fn) { return fn(msg['event']); });
                     }
                 }
@@ -1945,7 +1945,7 @@ var WebWorkerPlatformLocation = (function (_super) {
         var _this = this;
         var /** @type {?} */ args = new UiArguments('getLocation');
         return /** @type {?} */ ((this._broker.runOnService(args, LocationType))).then(function (val) {
-            _this._setLocation(val);
+            _this._location = val;
             _this.initializedResolve();
             return true;
         }, function (err) { throw new Error(err); });
@@ -1998,19 +1998,22 @@ var WebWorkerPlatformLocation = (function (_super) {
         enumerable: true,
         configurable: true
     });
-    /**
-     * @param {?} location
-     * @return {?}
-     */
-    WebWorkerPlatformLocation.prototype._setLocation = /**
-     * @param {?} location
-     * @return {?}
-     */
-    function (location) {
-        this._location = location;
-        (/** @type {?} */ (this)).search = this._location ? this._location.search : '<unknown>';
-        (/** @type {?} */ (this)).hash = this._location ? this._location.hash : '<unknown>';
-    };
+    Object.defineProperty(WebWorkerPlatformLocation.prototype, "search", {
+        get: /**
+         * @return {?}
+         */
+        function () { return this._location ? this._location.search : '<unknown>'; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(WebWorkerPlatformLocation.prototype, "hash", {
+        get: /**
+         * @return {?}
+         */
+        function () { return this._location ? this._location.hash : '<unknown>'; },
+        enumerable: true,
+        configurable: true
+    });
     /**
      * @param {?} state
      * @param {?} title
