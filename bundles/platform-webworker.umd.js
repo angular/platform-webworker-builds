@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.4.4-544a7ad
+ * @license Angular v4.4.4-df91fd0
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -36,7 +36,7 @@ function __extends(d, b) {
 }
 
 /**
- * @license Angular v4.4.4-544a7ad
+ * @license Angular v4.4.4-df91fd0
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1586,7 +1586,7 @@ function spawnWebWorker(uri, instance) {
 /**
  * \@stable
  */
-var VERSION = new _angular_core.Version('4.4.4-544a7ad');
+var VERSION = new _angular_core.Version('4.4.4-df91fd0');
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -2373,7 +2373,10 @@ var WorkerDomAdapter = (function (_super) {
      * @param {?} error
      * @return {?}
      */
-    WorkerDomAdapter.prototype.log = function (error) { console.log(error); };
+    WorkerDomAdapter.prototype.log = function (error) {
+        // tslint:disable-next-line:no-console
+        console.log(error);
+    };
     /**
      * @param {?} error
      * @return {?}

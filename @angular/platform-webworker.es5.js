@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 /**
- * @license Angular v4.4.4-544a7ad
+ * @license Angular v4.4.4-df91fd0
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1553,7 +1553,7 @@ function spawnWebWorker(uri, instance) {
 /**
  * \@stable
  */
-var VERSION = new Version('4.4.4-544a7ad');
+var VERSION = new Version('4.4.4-df91fd0');
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -2340,7 +2340,10 @@ var WorkerDomAdapter = (function (_super) {
      * @param {?} error
      * @return {?}
      */
-    WorkerDomAdapter.prototype.log = function (error) { console.log(error); };
+    WorkerDomAdapter.prototype.log = function (error) {
+        // tslint:disable-next-line:no-console
+        console.log(error);
+    };
     /**
      * @param {?} error
      * @return {?}
