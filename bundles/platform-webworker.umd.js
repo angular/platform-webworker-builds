@@ -1,5 +1,5 @@
 /**
- * @license Angular v5.0.0-27ae0f9
+ * @license Angular v5.1.0-beta.0-2ea76cc
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -36,7 +36,7 @@ function __extends(d, b) {
 }
 
 /**
- * @license Angular v5.0.0-27ae0f9
+ * @license Angular v5.1.0-beta.0-2ea76cc
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1811,7 +1811,7 @@ function spawnWebWorker(uri, instance) {
 /**
  * \@stable
  */
-var VERSION = new _angular_core.Version('5.0.0-27ae0f9');
+var VERSION = new _angular_core.Version('5.1.0-beta.0-2ea76cc');
 
 /**
  * @fileoverview added by tsickle
