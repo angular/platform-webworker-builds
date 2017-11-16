@@ -1,5 +1,5 @@
 /**
- * @license Angular v5.1.0-beta.0-f8658cd
+ * @license Angular v5.1.0-beta.0-336041a
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -23,6 +23,13 @@ const ON_WEB_WORKER = new InjectionToken('WebWorker.onWebWorker');
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
+ */
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
  */
 /**
  * Message Bus is a low level API used to communicate between the UI and the background.
@@ -788,6 +795,13 @@ class ServiceMessageBroker {
  * @suppress {checkTypes} checked by tsc
  */
 /**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
  * All channels used by angular's WebWorker components are listed here.
  * You should not use these channels in your application code.
  */
@@ -1479,11 +1493,18 @@ function spawnWebWorker(uri, instance) {
 /**
  * \@stable
  */
-const VERSION = new Version('5.1.0-beta.0-f8658cd');
+const VERSION = new Version('5.1.0-beta.0-336041a');
 
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
+ */
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
  */
 class MessageBasedPlatformLocation {
     /**
@@ -2986,6 +3007,13 @@ WorkerAppModule.ctorParameters = () => [];
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
+ */
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
  */
 /**
  * Bootstraps the worker ui.
