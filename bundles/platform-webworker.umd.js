@@ -1,11 +1,11 @@
 /**
- * @license Angular v5.0.0-beta.7-3215c4b
+ * @license Angular v5.1.0-5a0076f
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/common'), require('@angular/core'), require('@angular/platform-browser')) :
-	typeof define === 'function' && define.amd ? define(['exports', '@angular/common', '@angular/core', '@angular/platform-browser'], factory) :
+	typeof define === 'function' && define.amd ? define('@angular/platform-webworker', ['exports', '@angular/common', '@angular/core', '@angular/platform-browser'], factory) :
 	(factory((global.ng = global.ng || {}, global.ng.platformWebworker = {}),global.ng.common,global.ng.core,global.ng.platformBrowser));
 }(this, (function (exports,_angular_common,_angular_core,_angular_platformBrowser) { 'use strict';
 
@@ -36,7 +36,7 @@ function __extends(d, b) {
 }
 
 /**
- * @license Angular v5.0.0-beta.7-3215c4b
+ * @license Angular v5.1.0-5a0076f
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -58,6 +58,13 @@ var ON_WEB_WORKER = new _angular_core.InjectionToken('WebWorker.onWebWorker');
  * @suppress {checkTypes} checked by tsc
  */
 /**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
  * Message Bus is a low level API used to communicate between the UI and the background.
  * Communication is based on a channel abstraction. Messages published in a
  * given channel to one MessageBusSink are received on the same channel
@@ -66,7 +73,7 @@ var ON_WEB_WORKER = new _angular_core.InjectionToken('WebWorker.onWebWorker');
  * \@experimental WebWorker support in Angular is currenlty experimental.
  * @abstract
  */
-var MessageBus = (function () {
+var MessageBus = /** @class */ (function () {
     function MessageBus() {
     }
     return MessageBus;
@@ -92,7 +99,7 @@ var MessageBus = (function () {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var RenderStore = (function () {
+var RenderStore = /** @class */ (function () {
     function RenderStore() {
         this._nextIndex = 0;
         this._lookupById = new Map();
@@ -177,7 +184,7 @@ var RenderStore = (function () {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var LocationType = (function () {
+var LocationType = /** @class */ (function () {
     function LocationType(href, protocol, host, hostname, port, pathname, search, hash, origin) {
         this.href = href;
         this.protocol = protocol;
@@ -191,7 +198,7 @@ var LocationType = (function () {
     }
     return LocationType;
 }());
-var Serializer = (function () {
+var Serializer = /** @class */ (function () {
     function Serializer(_renderStore) {
         this._renderStore = _renderStore;
     }
@@ -379,7 +386,7 @@ var Serializer = (function () {
 /**
  * \@experimental WebWorker support in Angular is experimental.
  */
-var ClientMessageBrokerFactory = (function () {
+var ClientMessageBrokerFactory = /** @class */ (function () {
     /** @internal */
     function ClientMessageBrokerFactory(_messageBus, _serializer) {
         this._messageBus = _messageBus;
@@ -418,7 +425,7 @@ var ClientMessageBrokerFactory = (function () {
 /**
  * \@experimental WebWorker support in Angular is experimental.
  */
-var ClientMessageBroker = (function () {
+var ClientMessageBroker = /** @class */ (function () {
     /** @internal */
     function ClientMessageBroker(messageBus, _serializer, channel) {
         var _this = this;
@@ -526,7 +533,7 @@ var ClientMessageBroker = (function () {
 /**
  * \@experimental WebWorker support in Angular is experimental.
  */
-var FnArg = (function () {
+var FnArg = /** @class */ (function () {
     function FnArg(value, type) {
         if (type === void 0) { type = 1 /* PRIMITIVE */; }
         this.value = value;
@@ -537,7 +544,7 @@ var FnArg = (function () {
 /**
  * \@experimental WebWorker support in Angular is experimental.
  */
-var UiArguments = (function () {
+var UiArguments = /** @class */ (function () {
     function UiArguments(method, args) {
         this.method = method;
         this.args = args;
@@ -560,7 +567,7 @@ var UiArguments = (function () {
  * @record
  */
 
-var PostMessageBusSink = (function () {
+var PostMessageBusSink = /** @class */ (function () {
     function PostMessageBusSink(_postMessageTarget) {
         this._postMessageTarget = _postMessageTarget;
         this._channels = {};
@@ -647,7 +654,7 @@ var PostMessageBusSink = (function () {
     function (messages) { this._postMessageTarget.postMessage(messages); };
     return PostMessageBusSink;
 }());
-var PostMessageBusSource = (function () {
+var PostMessageBusSource = /** @class */ (function () {
     function PostMessageBusSource(eventTarget) {
         var _this = this;
         this._channels = {};
@@ -744,7 +751,7 @@ var PostMessageBusSource = (function () {
  * A TypeScript implementation of {\@link MessageBus} for communicating via JavaScript's
  * postMessage API.
  */
-var PostMessageBus = (function () {
+var PostMessageBus = /** @class */ (function () {
     function PostMessageBus(sink, source) {
         this.sink = sink;
         this.source = source;
@@ -808,7 +815,7 @@ var PostMessageBus = (function () {
  * Helper class that wraps a channel's {\@link EventEmitter} and
  * keeps track of if it should run in the zone.
  */
-var _Channel = (function () {
+var _Channel = /** @class */ (function () {
     function _Channel(emitter, runInZone) {
         this.emitter = emitter;
         this.runInZone = runInZone;
@@ -830,7 +837,7 @@ var _Channel = (function () {
 /**
  * \@experimental WebWorker support in Angular is currently experimental.
  */
-var ServiceMessageBrokerFactory = (function () {
+var ServiceMessageBrokerFactory = /** @class */ (function () {
     /** @internal */
     function ServiceMessageBrokerFactory(_messageBus, _serializer) {
         this._messageBus = _messageBus;
@@ -874,7 +881,7 @@ var ServiceMessageBrokerFactory = (function () {
  *
  * \@experimental WebWorker support in Angular is currently experimental.
  */
-var ServiceMessageBroker = (function () {
+var ServiceMessageBroker = /** @class */ (function () {
     /** @internal */
     function ServiceMessageBroker(messageBus, _serializer, channel) {
         var _this = this;
@@ -960,6 +967,13 @@ var ServiceMessageBroker = (function () {
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
+ */
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
  */
 /**
  * All channels used by angular's WebWorker components are listed here.
@@ -1062,7 +1076,7 @@ function serializeEvent(e, properties) {
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
-var EventDispatcher = (function () {
+var EventDispatcher = /** @class */ (function () {
     function EventDispatcher(_sink, _serializer) {
         this._sink = _sink;
         this._serializer = _serializer;
@@ -1208,7 +1222,7 @@ var EventDispatcher = (function () {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var MessageBasedRenderer2 = (function () {
+var MessageBasedRenderer2 = /** @class */ (function () {
     function MessageBasedRenderer2(_brokerFactory, _bus, _serializer, _renderStore, _rendererFactory) {
         this._brokerFactory = _brokerFactory;
         this._bus = _bus;
@@ -1624,7 +1638,7 @@ var MessageBasedRenderer2 = (function () {
  *
  * \@experimental WebWorker support is currently experimental.
  */
-var WebWorkerInstance = (function () {
+var WebWorkerInstance = /** @class */ (function () {
     function WebWorkerInstance() {
     }
     /**
@@ -1811,13 +1825,20 @@ function spawnWebWorker(uri, instance) {
 /**
  * \@stable
  */
-var VERSION = new _angular_core.Version('5.0.0-beta.7-3215c4b');
+var VERSION = new _angular_core.Version('5.1.0-5a0076f');
 
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
-var MessageBasedPlatformLocation = (function () {
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+var MessageBasedPlatformLocation = /** @class */ (function () {
     function MessageBasedPlatformLocation(_brokerFactory, _platformLocation, bus, _serializer) {
         this._brokerFactory = _brokerFactory;
         this._platformLocation = _platformLocation;
@@ -1931,7 +1952,7 @@ function initUiLocation(injector) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var WebWorkerPlatformLocation = (function (_super) {
+var WebWorkerPlatformLocation = /** @class */ (function (_super) {
     __extends(WebWorkerPlatformLocation, _super);
     function WebWorkerPlatformLocation(brokerFactory, bus, _serializer) {
         var _this = _super.call(this) || this;
@@ -2173,7 +2194,7 @@ function appInitFnFactory(platformLocation, zone) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var NamedEventEmitter = (function () {
+var NamedEventEmitter = /** @class */ (function () {
     function NamedEventEmitter() {
     }
     /**
@@ -2249,7 +2270,7 @@ var NamedEventEmitter = (function () {
 function eventNameWithTarget(target, eventName) {
     return target + ":" + eventName;
 }
-var WebWorkerRendererFactory2 = (function () {
+var WebWorkerRendererFactory2 = /** @class */ (function () {
     function WebWorkerRendererFactory2(messageBrokerFactory, bus, _serializer, renderStore) {
         var _this = this;
         this._serializer = _serializer;
@@ -2369,7 +2390,7 @@ var WebWorkerRendererFactory2 = (function () {
     ]; };
     return WebWorkerRendererFactory2;
 }());
-var WebWorkerRenderer2 = (function () {
+var WebWorkerRenderer2 = /** @class */ (function () {
     function WebWorkerRenderer2(_rendererFactory) {
         this._rendererFactory = _rendererFactory;
         this.data = Object.create(null);
@@ -2752,7 +2773,7 @@ var WebWorkerRenderer2 = (function () {
     };
     return WebWorkerRenderer2;
 }());
-var WebWorkerRenderNode = (function () {
+var WebWorkerRenderNode = /** @class */ (function () {
     function WebWorkerRenderNode() {
         this.events = new NamedEventEmitter();
     }
@@ -2775,7 +2796,7 @@ var WebWorkerRenderNode = (function () {
  *
  * Note: other methods all throw as the DOM is not accessible directly in web worker context.
  */
-var WorkerDomAdapter = (function (_super) {
+var WorkerDomAdapter = /** @class */ (function (_super) {
     __extends(WorkerDomAdapter, _super);
     function WorkerDomAdapter() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -2804,7 +2825,6 @@ var WorkerDomAdapter = (function (_super) {
             console.log(error);
         }
     };
-    // tslint:disable-next-line:no-console
     /**
      * @param {?} error
      * @return {?}
@@ -2813,7 +2833,10 @@ var WorkerDomAdapter = (function (_super) {
      * @param {?} error
      * @return {?}
      */
-    function (error) { console.log(error); };
+    function (error) {
+        // tslint:disable-next-line:no-console
+        console.log(error);
+    };
     /**
      * @param {?} error
      * @return {?}
@@ -3993,11 +4016,12 @@ var platformWorkerApp = _angular_core.createPlatformFactory(_angular_core.platfo
 function errorHandler() {
     return new _angular_core.ErrorHandler();
 }
+var ɵ0 = function (message, transferrables) {
+    (/** @type {?} */ (postMessage))(message, transferrables);
+};
 // TODO(jteplitz602) remove this and compile with lib.webworker.d.ts (#3492)
 var _postMessage = {
-    postMessage: function (message, transferrables) {
-        (/** @type {?} */ (postMessage))(message, transferrables);
-    }
+    postMessage: ɵ0
 };
 /**
  * @param {?} zone
@@ -4021,7 +4045,7 @@ function setupWebWorker() {
  *
  * \@experimental
  */
-var WorkerAppModule = (function () {
+var WorkerAppModule = /** @class */ (function () {
     function WorkerAppModule() {
     }
     WorkerAppModule.decorators = [
@@ -4054,6 +4078,13 @@ var WorkerAppModule = (function () {
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
+ */
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
  */
 /**
  * Bootstraps the worker ui.

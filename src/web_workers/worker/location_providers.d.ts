@@ -25,7 +25,7 @@ export declare const WORKER_APP_LOCATION_PROVIDERS: ({
 } | {
     provide: InjectionToken<Promise<any>>;
     useFactory: (platformLocation: WebWorkerPlatformLocation) => Promise<any>;
-    deps: typeof PlatformLocation[];
+    deps: (typeof PlatformLocation)[];
 })[];
 export declare function locationInitialized(platformLocation: WebWorkerPlatformLocation): Promise<any>;
 export declare function appInitFnFactory(platformLocation: WebWorkerPlatformLocation, zone: NgZone): () => Promise<boolean>;
