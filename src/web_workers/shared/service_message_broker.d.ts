@@ -6,20 +6,15 @@
  * found in the LICENSE file at https://angular.io/license
  */
 import { Type } from '@angular/core';
-import { MessageBus } from '../shared/message_bus';
-import { Serializer, SerializerTypes } from '../shared/serializer';
+import { SerializerTypes } from '../shared/serializer';
 /**
  * @experimental WebWorker support in Angular is currently experimental.
  */
-export declare abstract class ServiceMessageBrokerFactory {
+export declare class ServiceMessageBrokerFactory {
+    private _messageBus;
     /**
      * Initializes the given channel and attaches a new {@link ServiceMessageBroker} to it.
      */
-    abstract createMessageBroker(channel: string, runInZone?: boolean): ServiceMessageBroker;
-}
-export declare class ServiceMessageBrokerFactory_ extends ServiceMessageBrokerFactory {
-    private _messageBus;
-    constructor(_messageBus: MessageBus, _serializer: Serializer);
     createMessageBroker(channel: string, runInZone?: boolean): ServiceMessageBroker;
 }
 /**
@@ -30,16 +25,12 @@ export declare class ServiceMessageBrokerFactory_ extends ServiceMessageBrokerFa
  *
  * @experimental WebWorker support in Angular is currently experimental.
  */
-export declare abstract class ServiceMessageBroker {
-    abstract registerMethod(methodName: string, signature: Array<Type<any> | SerializerTypes> | null, method: Function, returnType?: Type<any> | SerializerTypes): void;
-}
-export declare class ServiceMessageBroker_ extends ServiceMessageBroker {
+export declare class ServiceMessageBroker {
     private _serializer;
-    channel: string;
+    private channel;
     private _sink;
     private _methods;
-    constructor(messageBus: MessageBus, _serializer: Serializer, channel: string);
-    registerMethod(methodName: string, signature: Array<Type<any> | SerializerTypes>, method: (..._: any[]) => Promise<any> | void, returnType?: Type<any> | SerializerTypes): void;
+    registerMethod(methodName: string, signature: Array<Type<any> | SerializerTypes> | null, method: (..._: any[]) => Promise<any> | void, returnType?: Type<any> | SerializerTypes): void;
     private _handleMessage(message);
     private _wrapWebWorkerPromise(id, promise, type);
 }
