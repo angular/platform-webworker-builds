@@ -96,6 +96,7 @@ export declare class WorkerDomAdapter extends DomAdapter {
     removeAttributeNS(element: any, ns: string, attribute: string): void;
     templateAwareRoot(el: any): void;
     createHtmlDocument(): HTMLDocument;
+    getDefaultDocument(): Document;
     getBoundingClientRect(el: any): void;
     getTitle(doc: Document): string;
     setTitle(doc: Document, newTitle: string): void;
