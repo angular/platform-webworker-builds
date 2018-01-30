@@ -9,8 +9,9 @@ import { PlatformLocation } from '@angular/common';
 import { InjectionToken, NgZone } from '@angular/core';
 import { WebWorkerPlatformLocation } from './platform_location';
 /**
- * Those providers should be added when the router is used in a worker context in addition to the
- * {@link ROUTER_PROVIDERS} and after them.
+ * The {@link PlatformLocation} providers that should be added when the {@link Location} is used in
+ * a worker context.
+ *
  * @experimental
  */
 export declare const WORKER_APP_LOCATION_PROVIDERS: ({
@@ -24,7 +25,7 @@ export declare const WORKER_APP_LOCATION_PROVIDERS: ({
 } | {
     provide: InjectionToken<Promise<any>>;
     useFactory: (platformLocation: WebWorkerPlatformLocation) => Promise<any>;
-    deps: typeof PlatformLocation[];
+    deps: (typeof PlatformLocation)[];
 })[];
 export declare function locationInitialized(platformLocation: WebWorkerPlatformLocation): Promise<any>;
 export declare function appInitFnFactory(platformLocation: WebWorkerPlatformLocation, zone: NgZone): () => Promise<boolean>;
