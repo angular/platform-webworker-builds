@@ -17,15 +17,21 @@ import { WebWorkerPlatformLocation } from './platform_location';
 export declare const WORKER_APP_LOCATION_PROVIDERS: ({
     provide: typeof PlatformLocation;
     useClass: typeof WebWorkerPlatformLocation;
+    useFactory?: undefined;
+    multi?: undefined;
+    deps?: undefined;
 } | {
     provide: InjectionToken<(() => void)[]>;
-    useFactory: (platformLocation: WebWorkerPlatformLocation, zone: NgZone) => () => Promise<boolean>;
+    useFactory: typeof appInitFnFactory;
     multi: boolean;
     deps: (typeof NgZone | typeof PlatformLocation)[];
+    useClass?: undefined;
 } | {
     provide: InjectionToken<Promise<any>>;
-    useFactory: (platformLocation: WebWorkerPlatformLocation) => Promise<any>;
-    deps: typeof PlatformLocation[];
+    useFactory: typeof locationInitialized;
+    deps: (typeof PlatformLocation)[];
+    useClass?: undefined;
+    multi?: undefined;
 })[];
 export declare function locationInitialized(platformLocation: WebWorkerPlatformLocation): Promise<any>;
 export declare function appInitFnFactory(platformLocation: WebWorkerPlatformLocation, zone: NgZone): () => Promise<boolean>;
