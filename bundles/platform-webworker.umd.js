@@ -1,11 +1,11 @@
 /**
- * @license Angular v5.0.0-beta.6-3f585ba
- * (c) 2010-2017 Google, Inc. https://angular.io/
+ * @license Angular v6.0.0-beta.7-a7d6efe
+ * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/common'), require('@angular/core'), require('@angular/platform-browser')) :
-	typeof define === 'function' && define.amd ? define(['exports', '@angular/common', '@angular/core', '@angular/platform-browser'], factory) :
+	typeof define === 'function' && define.amd ? define('@angular/platform-webworker', ['exports', '@angular/common', '@angular/core', '@angular/platform-browser'], factory) :
 	(factory((global.ng = global.ng || {}, global.ng.platformWebworker = {}),global.ng.common,global.ng.core,global.ng.platformBrowser));
 }(this, (function (exports,_angular_common,_angular_core,_angular_platformBrowser) { 'use strict';
 
@@ -36,8 +36,8 @@ function __extends(d, b) {
 }
 
 /**
- * @license Angular v5.0.0-beta.6-3f585ba
- * (c) 2010-2017 Google, Inc. https://angular.io/
+ * @license Angular v6.0.0-beta.7-a7d6efe
+ * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
 /**
@@ -58,6 +58,13 @@ var ON_WEB_WORKER = new _angular_core.InjectionToken('WebWorker.onWebWorker');
  * @suppress {checkTypes} checked by tsc
  */
 /**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
  * Message Bus is a low level API used to communicate between the UI and the background.
  * Communication is based on a channel abstraction. Messages published in a
  * given channel to one MessageBusSink are received on the same channel
@@ -66,7 +73,7 @@ var ON_WEB_WORKER = new _angular_core.InjectionToken('WebWorker.onWebWorker');
  * \@experimental WebWorker support in Angular is currenlty experimental.
  * @abstract
  */
-var MessageBus = (function () {
+var MessageBus = /** @class */ (function () {
     function MessageBus() {
     }
     return MessageBus;
@@ -92,7 +99,7 @@ var MessageBus = (function () {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var RenderStore = (function () {
+var RenderStore = /** @class */ (function () {
     function RenderStore() {
         this._nextIndex = 0;
         this._lookupById = new Map();
@@ -177,7 +184,7 @@ var RenderStore = (function () {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var LocationType = (function () {
+var LocationType = /** @class */ (function () {
     function LocationType(href, protocol, host, hostname, port, pathname, search, hash, origin) {
         this.href = href;
         this.protocol = protocol;
@@ -191,7 +198,7 @@ var LocationType = (function () {
     }
     return LocationType;
 }());
-var Serializer = (function () {
+var Serializer = /** @class */ (function () {
     function Serializer(_renderStore) {
         this._renderStore = _renderStore;
     }
@@ -378,20 +385,12 @@ var Serializer = (function () {
  */
 /**
  * \@experimental WebWorker support in Angular is experimental.
- * @abstract
  */
-var ClientMessageBrokerFactory = (function () {
-    function ClientMessageBrokerFactory() {
-    }
-    return ClientMessageBrokerFactory;
-}());
-var ClientMessageBrokerFactory_ = (function (_super) {
-    __extends(ClientMessageBrokerFactory_, _super);
-    function ClientMessageBrokerFactory_(_messageBus, _serializer) {
-        var _this = _super.call(this) || this;
-        _this._messageBus = _messageBus;
-        _this._serializer = _serializer;
-        return _this;
+var ClientMessageBrokerFactory = /** @class */ (function () {
+    /** @internal */
+    function ClientMessageBrokerFactory(_messageBus, _serializer) {
+        this._messageBus = _messageBus;
+        this._serializer = _serializer;
     }
     /**
      * Initializes the given channel and attaches a new {@link ClientMessageBroker} to it.
@@ -402,7 +401,7 @@ var ClientMessageBrokerFactory_ = (function (_super) {
      * @param {?=} runInZone
      * @return {?}
      */
-    ClientMessageBrokerFactory_.prototype.createMessageBroker = /**
+    ClientMessageBrokerFactory.prototype.createMessageBroker = /**
      * Initializes the given channel and attaches a new {\@link ClientMessageBroker} to it.
      * @param {?} channel
      * @param {?=} runInZone
@@ -411,44 +410,37 @@ var ClientMessageBrokerFactory_ = (function (_super) {
     function (channel, runInZone) {
         if (runInZone === void 0) { runInZone = true; }
         this._messageBus.initChannel(channel, runInZone);
-        return new ClientMessageBroker_(this._messageBus, this._serializer, channel);
+        return new ClientMessageBroker(this._messageBus, this._serializer, channel);
     };
-    ClientMessageBrokerFactory_.decorators = [
+    ClientMessageBrokerFactory.decorators = [
         { type: _angular_core.Injectable },
     ];
     /** @nocollapse */
-    ClientMessageBrokerFactory_.ctorParameters = function () { return [
+    ClientMessageBrokerFactory.ctorParameters = function () { return [
         { type: MessageBus, },
         { type: Serializer, },
     ]; };
-    return ClientMessageBrokerFactory_;
-}(ClientMessageBrokerFactory));
+    return ClientMessageBrokerFactory;
+}());
 /**
  * \@experimental WebWorker support in Angular is experimental.
- * @abstract
  */
-var ClientMessageBroker = (function () {
-    function ClientMessageBroker() {
-    }
-    return ClientMessageBroker;
-}());
-var ClientMessageBroker_ = (function (_super) {
-    __extends(ClientMessageBroker_, _super);
-    function ClientMessageBroker_(messageBus, _serializer, channel) {
-        var _this = _super.call(this) || this;
-        _this.channel = channel;
-        _this._pending = new Map();
-        _this._sink = messageBus.to(channel);
-        _this._serializer = _serializer;
+var ClientMessageBroker = /** @class */ (function () {
+    /** @internal */
+    function ClientMessageBroker(messageBus, _serializer, channel) {
+        var _this = this;
+        this.channel = channel;
+        this._pending = new Map();
+        this._sink = messageBus.to(channel);
+        this._serializer = _serializer;
         var /** @type {?} */ source = messageBus.from(channel);
         source.subscribe({ next: function (message) { return _this._handleMessage(message); } });
-        return _this;
     }
     /**
      * @param {?} name
      * @return {?}
      */
-    ClientMessageBroker_.prototype._generateMessageId = /**
+    ClientMessageBroker.prototype._generateMessageId = /**
      * @param {?} name
      * @return {?}
      */
@@ -467,7 +459,7 @@ var ClientMessageBroker_ = (function (_super) {
      * @param {?} returnType
      * @return {?}
      */
-    ClientMessageBroker_.prototype.runOnService = /**
+    ClientMessageBroker.prototype.runOnService = /**
      * @param {?} args
      * @param {?} returnType
      * @return {?}
@@ -518,7 +510,7 @@ var ClientMessageBroker_ = (function (_super) {
      * @param {?} message
      * @return {?}
      */
-    ClientMessageBroker_.prototype._handleMessage = /**
+    ClientMessageBroker.prototype._handleMessage = /**
      * @param {?} message
      * @return {?}
      */
@@ -536,12 +528,12 @@ var ClientMessageBroker_ = (function (_super) {
             }
         }
     };
-    return ClientMessageBroker_;
-}(ClientMessageBroker));
+    return ClientMessageBroker;
+}());
 /**
  * \@experimental WebWorker support in Angular is experimental.
  */
-var FnArg = (function () {
+var FnArg = /** @class */ (function () {
     function FnArg(value, type) {
         if (type === void 0) { type = 1 /* PRIMITIVE */; }
         this.value = value;
@@ -552,7 +544,7 @@ var FnArg = (function () {
 /**
  * \@experimental WebWorker support in Angular is experimental.
  */
-var UiArguments = (function () {
+var UiArguments = /** @class */ (function () {
     function UiArguments(method, args) {
         this.method = method;
         this.args = args;
@@ -575,7 +567,7 @@ var UiArguments = (function () {
  * @record
  */
 
-var PostMessageBusSink = (function () {
+var PostMessageBusSink = /** @class */ (function () {
     function PostMessageBusSink(_postMessageTarget) {
         this._postMessageTarget = _postMessageTarget;
         this._channels = {};
@@ -662,7 +654,7 @@ var PostMessageBusSink = (function () {
     function (messages) { this._postMessageTarget.postMessage(messages); };
     return PostMessageBusSink;
 }());
-var PostMessageBusSource = (function () {
+var PostMessageBusSource = /** @class */ (function () {
     function PostMessageBusSource(eventTarget) {
         var _this = this;
         this._channels = {};
@@ -759,7 +751,7 @@ var PostMessageBusSource = (function () {
  * A TypeScript implementation of {\@link MessageBus} for communicating via JavaScript's
  * postMessage API.
  */
-var PostMessageBus = (function () {
+var PostMessageBus = /** @class */ (function () {
     function PostMessageBus(sink, source) {
         this.sink = sink;
         this.source = source;
@@ -823,7 +815,7 @@ var PostMessageBus = (function () {
  * Helper class that wraps a channel's {\@link EventEmitter} and
  * keeps track of if it should run in the zone.
  */
-var _Channel = (function () {
+var _Channel = /** @class */ (function () {
     function _Channel(emitter, runInZone) {
         this.emitter = emitter;
         this.runInZone = runInZone;
@@ -844,27 +836,24 @@ var _Channel = (function () {
  */
 /**
  * \@experimental WebWorker support in Angular is currently experimental.
- * @abstract
  */
-var ServiceMessageBrokerFactory = (function () {
-    function ServiceMessageBrokerFactory() {
-    }
-    return ServiceMessageBrokerFactory;
-}());
-var ServiceMessageBrokerFactory_ = (function (_super) {
-    __extends(ServiceMessageBrokerFactory_, _super);
-    function ServiceMessageBrokerFactory_(_messageBus, _serializer) {
-        var _this = _super.call(this) || this;
-        _this._messageBus = _messageBus;
-        _this._serializer = _serializer;
-        return _this;
+var ServiceMessageBrokerFactory = /** @class */ (function () {
+    /** @internal */
+    function ServiceMessageBrokerFactory(_messageBus, _serializer) {
+        this._messageBus = _messageBus;
+        this._serializer = _serializer;
     }
     /**
+     * Initializes the given channel and attaches a new {@link ServiceMessageBroker} to it.
+     */
+    /**
+     * Initializes the given channel and attaches a new {\@link ServiceMessageBroker} to it.
      * @param {?} channel
      * @param {?=} runInZone
      * @return {?}
      */
-    ServiceMessageBrokerFactory_.prototype.createMessageBroker = /**
+    ServiceMessageBrokerFactory.prototype.createMessageBroker = /**
+     * Initializes the given channel and attaches a new {\@link ServiceMessageBroker} to it.
      * @param {?} channel
      * @param {?=} runInZone
      * @return {?}
@@ -872,18 +861,18 @@ var ServiceMessageBrokerFactory_ = (function (_super) {
     function (channel, runInZone) {
         if (runInZone === void 0) { runInZone = true; }
         this._messageBus.initChannel(channel, runInZone);
-        return new ServiceMessageBroker_(this._messageBus, this._serializer, channel);
+        return new ServiceMessageBroker(this._messageBus, this._serializer, channel);
     };
-    ServiceMessageBrokerFactory_.decorators = [
+    ServiceMessageBrokerFactory.decorators = [
         { type: _angular_core.Injectable },
     ];
     /** @nocollapse */
-    ServiceMessageBrokerFactory_.ctorParameters = function () { return [
+    ServiceMessageBrokerFactory.ctorParameters = function () { return [
         { type: MessageBus, },
         { type: Serializer, },
     ]; };
-    return ServiceMessageBrokerFactory_;
-}(ServiceMessageBrokerFactory));
+    return ServiceMessageBrokerFactory;
+}());
 /**
  * Helper class for UIComponents that allows components to register methods.
  * If a registered method message is received from the broker on the worker,
@@ -891,24 +880,17 @@ var ServiceMessageBrokerFactory_ = (function (_super) {
  * If that method returns a promise, the UIMessageBroker returns the result to the worker.
  *
  * \@experimental WebWorker support in Angular is currently experimental.
- * @abstract
  */
-var ServiceMessageBroker = (function () {
-    function ServiceMessageBroker() {
-    }
-    return ServiceMessageBroker;
-}());
-var ServiceMessageBroker_ = (function (_super) {
-    __extends(ServiceMessageBroker_, _super);
-    function ServiceMessageBroker_(messageBus, _serializer, channel) {
-        var _this = _super.call(this) || this;
-        _this._serializer = _serializer;
-        _this.channel = channel;
-        _this._methods = new Map();
-        _this._sink = messageBus.to(channel);
+var ServiceMessageBroker = /** @class */ (function () {
+    /** @internal */
+    function ServiceMessageBroker(messageBus, _serializer, channel) {
+        var _this = this;
+        this._serializer = _serializer;
+        this.channel = channel;
+        this._methods = new Map();
+        this._sink = messageBus.to(channel);
         var /** @type {?} */ source = messageBus.from(channel);
         source.subscribe({ next: function (message) { return _this._handleMessage(message); } });
-        return _this;
     }
     /**
      * @param {?} methodName
@@ -917,7 +899,7 @@ var ServiceMessageBroker_ = (function (_super) {
      * @param {?=} returnType
      * @return {?}
      */
-    ServiceMessageBroker_.prototype.registerMethod = /**
+    ServiceMessageBroker.prototype.registerMethod = /**
      * @param {?} methodName
      * @param {?} signature
      * @param {?} method
@@ -932,7 +914,7 @@ var ServiceMessageBroker_ = (function (_super) {
             var /** @type {?} */ deserializedArgs = new Array(numArgs);
             for (var /** @type {?} */ i = 0; i < numArgs; i++) {
                 var /** @type {?} */ serializedArg = serializedArgs[i];
-                deserializedArgs[i] = _this._serializer.deserialize(serializedArg, signature[i]);
+                deserializedArgs[i] = _this._serializer.deserialize(serializedArg, /** @type {?} */ ((signature))[i]);
             }
             var /** @type {?} */ promise = method.apply(void 0, deserializedArgs);
             if (returnType && promise) {
@@ -944,7 +926,7 @@ var ServiceMessageBroker_ = (function (_super) {
      * @param {?} message
      * @return {?}
      */
-    ServiceMessageBroker_.prototype._handleMessage = /**
+    ServiceMessageBroker.prototype._handleMessage = /**
      * @param {?} message
      * @return {?}
      */
@@ -959,7 +941,7 @@ var ServiceMessageBroker_ = (function (_super) {
      * @param {?} type
      * @return {?}
      */
-    ServiceMessageBroker_.prototype._wrapWebWorkerPromise = /**
+    ServiceMessageBroker.prototype._wrapWebWorkerPromise = /**
      * @param {?} id
      * @param {?} promise
      * @param {?} type
@@ -975,8 +957,8 @@ var ServiceMessageBroker_ = (function (_super) {
             });
         });
     };
-    return ServiceMessageBroker_;
-}(ServiceMessageBroker));
+    return ServiceMessageBroker;
+}());
 /**
  * \@experimental WebWorker support in Angular is currently experimental.
  * @record
@@ -985,6 +967,13 @@ var ServiceMessageBroker_ = (function (_super) {
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
+ */
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
  */
 /**
  * All channels used by angular's WebWorker components are listed here.
@@ -1087,7 +1076,7 @@ function serializeEvent(e, properties) {
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
-var EventDispatcher = (function () {
+var EventDispatcher = /** @class */ (function () {
     function EventDispatcher(_sink, _serializer) {
         this._sink = _sink;
         this._serializer = _serializer;
@@ -1233,7 +1222,7 @@ var EventDispatcher = (function () {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var MessageBasedRenderer2 = (function () {
+var MessageBasedRenderer2 = /** @class */ (function () {
     function MessageBasedRenderer2(_brokerFactory, _bus, _serializer, _renderStore, _rendererFactory) {
         this._brokerFactory = _brokerFactory;
         this._bus = _bus;
@@ -1649,7 +1638,7 @@ var MessageBasedRenderer2 = (function () {
  *
  * \@experimental WebWorker support is currently experimental.
  */
-var WebWorkerInstance = (function () {
+var WebWorkerInstance = /** @class */ (function () {
     function WebWorkerInstance() {
     }
     /**
@@ -1718,12 +1707,12 @@ var _WORKER_UI_PLATFORM_PROVIDERS = [
     { provide: _angular_platformBrowser.ɵSharedStylesHost, useExisting: _angular_platformBrowser.ɵDomSharedStylesHost },
     {
         provide: ServiceMessageBrokerFactory,
-        useClass: ServiceMessageBrokerFactory_,
+        useClass: ServiceMessageBrokerFactory,
         deps: [MessageBus, Serializer]
     },
     {
         provide: ClientMessageBrokerFactory,
-        useClass: ClientMessageBrokerFactory_,
+        useClass: ClientMessageBrokerFactory,
         deps: [MessageBus, Serializer]
     },
     { provide: Serializer, deps: [RenderStore] },
@@ -1829,20 +1818,22 @@ function spawnWebWorker(uri, instance) {
  * found in the LICENSE file at https://angular.io/license
  */
 /**
- * @module
- * @description
- * Entry point for all public APIs of the common package.
- */
-/**
  * \@stable
  */
-var VERSION = new _angular_core.Version('5.0.0-beta.6-3f585ba');
+var VERSION = new _angular_core.Version('6.0.0-beta.7-a7d6efe');
 
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
-var MessageBasedPlatformLocation = (function () {
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+var MessageBasedPlatformLocation = /** @class */ (function () {
     function MessageBasedPlatformLocation(_brokerFactory, _platformLocation, bus, _serializer) {
         this._brokerFactory = _brokerFactory;
         this._platformLocation = _platformLocation;
@@ -1956,7 +1947,7 @@ function initUiLocation(injector) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var WebWorkerPlatformLocation = (function (_super) {
+var WebWorkerPlatformLocation = /** @class */ (function (_super) {
     __extends(WebWorkerPlatformLocation, _super);
     function WebWorkerPlatformLocation(brokerFactory, bus, _serializer) {
         var _this = _super.call(this) || this;
@@ -2198,7 +2189,7 @@ function appInitFnFactory(platformLocation, zone) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var NamedEventEmitter = (function () {
+var NamedEventEmitter = /** @class */ (function () {
     function NamedEventEmitter() {
     }
     /**
@@ -2274,7 +2265,7 @@ var NamedEventEmitter = (function () {
 function eventNameWithTarget(target, eventName) {
     return target + ":" + eventName;
 }
-var WebWorkerRendererFactory2 = (function () {
+var WebWorkerRendererFactory2 = /** @class */ (function () {
     function WebWorkerRendererFactory2(messageBrokerFactory, bus, _serializer, renderStore) {
         var _this = this;
         this._serializer = _serializer;
@@ -2394,7 +2385,7 @@ var WebWorkerRendererFactory2 = (function () {
     ]; };
     return WebWorkerRendererFactory2;
 }());
-var WebWorkerRenderer2 = (function () {
+var WebWorkerRenderer2 = /** @class */ (function () {
     function WebWorkerRenderer2(_rendererFactory) {
         this._rendererFactory = _rendererFactory;
         this.data = Object.create(null);
@@ -2777,7 +2768,7 @@ var WebWorkerRenderer2 = (function () {
     };
     return WebWorkerRenderer2;
 }());
-var WebWorkerRenderNode = (function () {
+var WebWorkerRenderNode = /** @class */ (function () {
     function WebWorkerRenderNode() {
         this.events = new NamedEventEmitter();
     }
@@ -2800,7 +2791,7 @@ var WebWorkerRenderNode = (function () {
  *
  * Note: other methods all throw as the DOM is not accessible directly in web worker context.
  */
-var WorkerDomAdapter = (function (_super) {
+var WorkerDomAdapter = /** @class */ (function (_super) {
     __extends(WorkerDomAdapter, _super);
     function WorkerDomAdapter() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -2829,7 +2820,6 @@ var WorkerDomAdapter = (function (_super) {
             console.log(error);
         }
     };
-    // tslint:disable-next-line:no-console
     /**
      * @param {?} error
      * @return {?}
@@ -2838,7 +2828,10 @@ var WorkerDomAdapter = (function (_super) {
      * @param {?} error
      * @return {?}
      */
-    function (error) { console.log(error); };
+    function (error) {
+        // tslint:disable-next-line:no-console
+        console.log(error);
+    };
     /**
      * @param {?} error
      * @return {?}
@@ -4018,11 +4011,12 @@ var platformWorkerApp = _angular_core.createPlatformFactory(_angular_core.platfo
 function errorHandler() {
     return new _angular_core.ErrorHandler();
 }
+var ɵ0 = function (message, transferrables) {
+    (/** @type {?} */ (postMessage))(message, transferrables);
+};
 // TODO(jteplitz602) remove this and compile with lib.webworker.d.ts (#3492)
 var _postMessage = {
-    postMessage: function (message, transferrables) {
-        (/** @type {?} */ (postMessage))(message, transferrables);
-    }
+    postMessage: ɵ0
 };
 /**
  * @param {?} zone
@@ -4046,7 +4040,7 @@ function setupWebWorker() {
  *
  * \@experimental
  */
-var WorkerAppModule = (function () {
+var WorkerAppModule = /** @class */ (function () {
     function WorkerAppModule() {
     }
     WorkerAppModule.decorators = [
@@ -4055,8 +4049,8 @@ var WorkerAppModule = (function () {
                         _angular_platformBrowser.ɵBROWSER_SANITIZATION_PROVIDERS,
                         Serializer,
                         { provide: _angular_platformBrowser.DOCUMENT, useValue: null },
-                        { provide: ClientMessageBrokerFactory, useClass: ClientMessageBrokerFactory_ },
-                        { provide: ServiceMessageBrokerFactory, useClass: ServiceMessageBrokerFactory_ },
+                        ClientMessageBrokerFactory,
+                        ServiceMessageBrokerFactory,
                         WebWorkerRendererFactory2,
                         { provide: _angular_core.RendererFactory2, useExisting: WebWorkerRendererFactory2 },
                         { provide: ON_WEB_WORKER, useValue: true },
@@ -4079,6 +4073,13 @@ var WorkerAppModule = (function () {
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
+ */
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
  */
 /**
  * Bootstraps the worker ui.
@@ -4111,19 +4112,17 @@ exports.WorkerAppModule = WorkerAppModule;
 exports.platformWorkerApp = platformWorkerApp;
 exports.platformWorkerUi = platformWorkerUi;
 exports.bootstrapWorkerUi = bootstrapWorkerUi;
-exports.ɵm = ON_WEB_WORKER;
-exports.ɵa = ClientMessageBrokerFactory_;
-exports.ɵk = RenderStore;
-exports.ɵb = Serializer;
-exports.ɵc = ServiceMessageBrokerFactory_;
-exports.ɵe = appInitFnFactory;
-exports.ɵd = locationInitialized;
-exports.ɵj = WebWorkerPlatformLocation;
-exports.ɵl = WebWorkerRendererFactory2;
-exports.ɵg = createMessageBus;
-exports.ɵf = errorHandler;
-exports.ɵh = setupWebWorker;
-exports.ɵi = _WORKER_UI_PLATFORM_PROVIDERS;
+exports.ɵk = ON_WEB_WORKER;
+exports.ɵh = RenderStore;
+exports.ɵa = Serializer;
+exports.ɵc = appInitFnFactory;
+exports.ɵb = locationInitialized;
+exports.ɵi = WebWorkerPlatformLocation;
+exports.ɵj = WebWorkerRendererFactory2;
+exports.ɵe = createMessageBus;
+exports.ɵd = errorHandler;
+exports.ɵf = setupWebWorker;
+exports.ɵg = _WORKER_UI_PLATFORM_PROVIDERS;
 
 Object.defineProperty(exports, '__esModule', { value: true });
 

@@ -1,6 +1,6 @@
 /**
- * @license Angular v5.0.0-beta.6-3f585ba
- * (c) 2010-2017 Google, Inc. https://angular.io/
+ * @license Angular v6.0.0-beta.7-a7d6efe
+ * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
 import { CommonModule, DOCUMENT, LOCATION_INITIALIZED, PlatformLocation, ɵPLATFORM_WORKER_APP_ID, ɵPLATFORM_WORKER_UI_ID } from '@angular/common';
@@ -23,6 +23,13 @@ const ON_WEB_WORKER = new InjectionToken('WebWorker.onWebWorker');
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
+ */
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
  */
 /**
  * Message Bus is a low level API used to communicate between the UI and the background.
@@ -294,17 +301,14 @@ Serializer.ctorParameters = () => [
  */
 /**
  * \@experimental WebWorker support in Angular is experimental.
- * @abstract
  */
 class ClientMessageBrokerFactory {
-}
-class ClientMessageBrokerFactory_ extends ClientMessageBrokerFactory {
     /**
+     * \@internal
      * @param {?} _messageBus
      * @param {?} _serializer
      */
     constructor(_messageBus, _serializer) {
-        super();
         this._messageBus = _messageBus;
         this._serializer = _serializer;
     }
@@ -316,31 +320,28 @@ class ClientMessageBrokerFactory_ extends ClientMessageBrokerFactory {
      */
     createMessageBroker(channel, runInZone = true) {
         this._messageBus.initChannel(channel, runInZone);
-        return new ClientMessageBroker_(this._messageBus, this._serializer, channel);
+        return new ClientMessageBroker(this._messageBus, this._serializer, channel);
     }
 }
-ClientMessageBrokerFactory_.decorators = [
+ClientMessageBrokerFactory.decorators = [
     { type: Injectable },
 ];
 /** @nocollapse */
-ClientMessageBrokerFactory_.ctorParameters = () => [
+ClientMessageBrokerFactory.ctorParameters = () => [
     { type: MessageBus, },
     { type: Serializer, },
 ];
 /**
  * \@experimental WebWorker support in Angular is experimental.
- * @abstract
  */
 class ClientMessageBroker {
-}
-class ClientMessageBroker_ extends ClientMessageBroker {
     /**
+     * \@internal
      * @param {?} messageBus
      * @param {?} _serializer
      * @param {?} channel
      */
     constructor(messageBus, _serializer, channel) {
-        super();
         this.channel = channel;
         this._pending = new Map();
         this._sink = messageBus.to(channel);
@@ -684,35 +685,33 @@ class _Channel {
  */
 /**
  * \@experimental WebWorker support in Angular is currently experimental.
- * @abstract
  */
 class ServiceMessageBrokerFactory {
-}
-class ServiceMessageBrokerFactory_ extends ServiceMessageBrokerFactory {
     /**
+     * \@internal
      * @param {?} _messageBus
      * @param {?} _serializer
      */
     constructor(_messageBus, _serializer) {
-        super();
         this._messageBus = _messageBus;
         this._serializer = _serializer;
     }
     /**
+     * Initializes the given channel and attaches a new {\@link ServiceMessageBroker} to it.
      * @param {?} channel
      * @param {?=} runInZone
      * @return {?}
      */
     createMessageBroker(channel, runInZone = true) {
         this._messageBus.initChannel(channel, runInZone);
-        return new ServiceMessageBroker_(this._messageBus, this._serializer, channel);
+        return new ServiceMessageBroker(this._messageBus, this._serializer, channel);
     }
 }
-ServiceMessageBrokerFactory_.decorators = [
+ServiceMessageBrokerFactory.decorators = [
     { type: Injectable },
 ];
 /** @nocollapse */
-ServiceMessageBrokerFactory_.ctorParameters = () => [
+ServiceMessageBrokerFactory.ctorParameters = () => [
     { type: MessageBus, },
     { type: Serializer, },
 ];
@@ -723,18 +722,15 @@ ServiceMessageBrokerFactory_.ctorParameters = () => [
  * If that method returns a promise, the UIMessageBroker returns the result to the worker.
  *
  * \@experimental WebWorker support in Angular is currently experimental.
- * @abstract
  */
 class ServiceMessageBroker {
-}
-class ServiceMessageBroker_ extends ServiceMessageBroker {
     /**
+     * \@internal
      * @param {?} messageBus
      * @param {?} _serializer
      * @param {?} channel
      */
     constructor(messageBus, _serializer, channel) {
-        super();
         this._serializer = _serializer;
         this.channel = channel;
         this._methods = new Map();
@@ -756,7 +752,7 @@ class ServiceMessageBroker_ extends ServiceMessageBroker {
             const /** @type {?} */ deserializedArgs = new Array(numArgs);
             for (let /** @type {?} */ i = 0; i < numArgs; i++) {
                 const /** @type {?} */ serializedArg = serializedArgs[i];
-                deserializedArgs[i] = this._serializer.deserialize(serializedArg, signature[i]);
+                deserializedArgs[i] = this._serializer.deserialize(serializedArg, /** @type {?} */ ((signature))[i]);
             }
             const /** @type {?} */ promise = method(...deserializedArgs);
             if (returnType && promise) {
@@ -797,6 +793,13 @@ class ServiceMessageBroker_ extends ServiceMessageBroker {
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
+ */
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
  */
 /**
  * All channels used by angular's WebWorker components are listed here.
@@ -1372,12 +1375,12 @@ const _WORKER_UI_PLATFORM_PROVIDERS = [
     { provide: ɵSharedStylesHost, useExisting: ɵDomSharedStylesHost },
     {
         provide: ServiceMessageBrokerFactory,
-        useClass: ServiceMessageBrokerFactory_,
+        useClass: ServiceMessageBrokerFactory,
         deps: [MessageBus, Serializer]
     },
     {
         provide: ClientMessageBrokerFactory,
-        useClass: ClientMessageBrokerFactory_,
+        useClass: ClientMessageBrokerFactory,
         deps: [MessageBus, Serializer]
     },
     { provide: Serializer, deps: [RenderStore] },
@@ -1483,18 +1486,20 @@ function spawnWebWorker(uri, instance) {
  * found in the LICENSE file at https://angular.io/license
  */
 /**
- * @module
- * @description
- * Entry point for all public APIs of the common package.
- */
-/**
  * \@stable
  */
-const VERSION = new Version('5.0.0-beta.6-3f585ba');
+const VERSION = new Version('6.0.0-beta.7-a7d6efe');
 
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
+ */
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
  */
 class MessageBasedPlatformLocation {
     /**
@@ -2266,7 +2271,10 @@ class WorkerDomAdapter extends ɵDomAdapter {
      * @param {?} error
      * @return {?}
      */
-    log(error) { console.log(error); }
+    log(error) {
+        // tslint:disable-next-line:no-console
+        console.log(error);
+    }
     /**
      * @param {?} error
      * @return {?}
@@ -2935,11 +2943,12 @@ const platformWorkerApp = createPlatformFactory(platformCore, 'workerApp', [{ pr
 function errorHandler() {
     return new ErrorHandler();
 }
+const ɵ0 = (message, transferrables) => {
+    (/** @type {?} */ (postMessage))(message, transferrables);
+};
 // TODO(jteplitz602) remove this and compile with lib.webworker.d.ts (#3492)
 const _postMessage = {
-    postMessage: (message, transferrables) => {
-        (/** @type {?} */ (postMessage))(message, transferrables);
-    }
+    postMessage: ɵ0
 };
 /**
  * @param {?} zone
@@ -2971,8 +2980,8 @@ WorkerAppModule.decorators = [
                     ɵBROWSER_SANITIZATION_PROVIDERS,
                     Serializer,
                     { provide: DOCUMENT$1, useValue: null },
-                    { provide: ClientMessageBrokerFactory, useClass: ClientMessageBrokerFactory_ },
-                    { provide: ServiceMessageBrokerFactory, useClass: ServiceMessageBrokerFactory_ },
+                    ClientMessageBrokerFactory,
+                    ServiceMessageBrokerFactory,
                     WebWorkerRendererFactory2,
                     { provide: RendererFactory2, useExisting: WebWorkerRendererFactory2 },
                     { provide: ON_WEB_WORKER, useValue: true },
@@ -2993,6 +3002,13 @@ WorkerAppModule.ctorParameters = () => [];
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
+ */
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
  */
 /**
  * Bootstraps the worker ui.
@@ -3038,5 +3054,5 @@ function bootstrapWorkerUi(workerScriptUri, customProviders = []) {
  * Generated bundle index. Do not edit.
  */
 
-export { VERSION, ClientMessageBroker, ClientMessageBrokerFactory, FnArg, UiArguments, MessageBus, ServiceMessageBroker, ServiceMessageBrokerFactory, WORKER_UI_LOCATION_PROVIDERS, WORKER_APP_LOCATION_PROVIDERS, WorkerAppModule, platformWorkerApp, platformWorkerUi, bootstrapWorkerUi, ON_WEB_WORKER as ɵm, ClientMessageBrokerFactory_ as ɵa, RenderStore as ɵk, Serializer as ɵb, ServiceMessageBrokerFactory_ as ɵc, appInitFnFactory as ɵe, locationInitialized as ɵd, WebWorkerPlatformLocation as ɵj, WebWorkerRendererFactory2 as ɵl, createMessageBus as ɵg, errorHandler as ɵf, setupWebWorker as ɵh, _WORKER_UI_PLATFORM_PROVIDERS as ɵi };
-//# sourceMappingURL=index.js.map
+export { VERSION, ClientMessageBroker, ClientMessageBrokerFactory, FnArg, UiArguments, MessageBus, ServiceMessageBroker, ServiceMessageBrokerFactory, WORKER_UI_LOCATION_PROVIDERS, WORKER_APP_LOCATION_PROVIDERS, WorkerAppModule, platformWorkerApp, platformWorkerUi, bootstrapWorkerUi, ON_WEB_WORKER as ɵk, RenderStore as ɵh, Serializer as ɵa, appInitFnFactory as ɵc, locationInitialized as ɵb, WebWorkerPlatformLocation as ɵi, WebWorkerRendererFactory2 as ɵj, createMessageBus as ɵe, errorHandler as ɵd, setupWebWorker as ɵf, _WORKER_UI_PLATFORM_PROVIDERS as ɵg };
+//# sourceMappingURL=platform-webworker.js.map
