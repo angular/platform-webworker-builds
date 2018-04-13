@@ -34,7 +34,7 @@ export function errorHandler() {
 const ɵ0 = (message, transferrables) => {
     (/** @type {?} */ (postMessage))(message, transferrables);
 };
-// TODO(jteplitz602) remove this and compile with lib.webworker.d.ts (#3492)
+// TODO(jteplitz602): remove this and compile with lib.webworker.d.ts (#3492)
 const /** @type {?} */ _postMessage = {
     postMessage: ɵ0
 };
