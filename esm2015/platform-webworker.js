@@ -1,5 +1,5 @@
 /**
- * @license Angular v5.2.9-a3204f8
+ * @license Angular v5.2.9-21f3301
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1488,7 +1488,7 @@ function spawnWebWorker(uri, instance) {
 /**
  * \@stable
  */
-const VERSION = new Version('5.2.9-a3204f8');
+const VERSION = new Version('5.2.9-21f3301');
 
 /**
  * @fileoverview added by tsickle
@@ -2946,7 +2946,7 @@ function errorHandler() {
 const ɵ0 = (message, transferrables) => {
     (/** @type {?} */ (postMessage))(message, transferrables);
 };
-// TODO(jteplitz602) remove this and compile with lib.webworker.d.ts (#3492)
+// TODO(jteplitz602): remove this and compile with lib.webworker.d.ts (#3492)
 const _postMessage = {
     postMessage: ɵ0
 };
