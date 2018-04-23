@@ -1,8 +1,4 @@
 /**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-/**
  * @license
  * Copyright Google Inc. All Rights Reserved.
  *
@@ -13,7 +9,7 @@ import { Injectable, ɵstringify as stringify } from '@angular/core';
 import { MessageBus } from './message_bus';
 import { Serializer } from './serializer';
 /**
- * \@experimental WebWorker support in Angular is experimental.
+ * @experimental WebWorker support in Angular is experimental.
  */
 var ClientMessageBrokerFactory = /** @class */ (function () {
     /** @internal */
@@ -25,24 +21,18 @@ var ClientMessageBrokerFactory = /** @class */ (function () {
      * Initializes the given channel and attaches a new {@link ClientMessageBroker} to it.
      */
     /**
-     * Initializes the given channel and attaches a new {\@link ClientMessageBroker} to it.
-     * @param {?} channel
-     * @param {?=} runInZone
-     * @return {?}
-     */
+       * Initializes the given channel and attaches a new {@link ClientMessageBroker} to it.
+       */
     ClientMessageBrokerFactory.prototype.createMessageBroker = /**
-     * Initializes the given channel and attaches a new {\@link ClientMessageBroker} to it.
-     * @param {?} channel
-     * @param {?=} runInZone
-     * @return {?}
-     */
+       * Initializes the given channel and attaches a new {@link ClientMessageBroker} to it.
+       */
     function (channel, runInZone) {
         if (runInZone === void 0) { runInZone = true; }
         this._messageBus.initChannel(channel, runInZone);
         return new ClientMessageBroker(this._messageBus, this._serializer, channel);
     };
     ClientMessageBrokerFactory.decorators = [
-        { type: Injectable },
+        { type: Injectable }
     ];
     /** @nocollapse */
     ClientMessageBrokerFactory.ctorParameters = function () { return [
@@ -52,37 +42,11 @@ var ClientMessageBrokerFactory = /** @class */ (function () {
     return ClientMessageBrokerFactory;
 }());
 export { ClientMessageBrokerFactory };
-function ClientMessageBrokerFactory_tsickle_Closure_declarations() {
-    /** @type {!Array<{type: !Function, args: (undefined|!Array<?>)}>} */
-    ClientMessageBrokerFactory.decorators;
-    /**
-     * @nocollapse
-     * @type {function(): !Array<(null|{type: ?, decorators: (undefined|!Array<{type: !Function, args: (undefined|!Array<?>)}>)})>}
-     */
-    ClientMessageBrokerFactory.ctorParameters;
-    /**
-     * \@internal
-     * @type {?}
-     */
-    ClientMessageBrokerFactory.prototype._serializer;
-    /** @type {?} */
-    ClientMessageBrokerFactory.prototype._messageBus;
-}
 /**
- * @record
- */
-function PromiseCompleter() { }
-function PromiseCompleter_tsickle_Closure_declarations() {
-    /** @type {?} */
-    PromiseCompleter.prototype.resolve;
-    /** @type {?} */
-    PromiseCompleter.prototype.reject;
-}
-/**
- * \@experimental WebWorker support in Angular is experimental.
+ * @experimental WebWorker support in Angular is experimental.
  */
 var /**
- * \@experimental WebWorker support in Angular is experimental.
+ * @experimental WebWorker support in Angular is experimental.
  */
 ClientMessageBroker = /** @class */ (function () {
     /** @internal */
@@ -92,40 +56,22 @@ ClientMessageBroker = /** @class */ (function () {
         this._pending = new Map();
         this._sink = messageBus.to(channel);
         this._serializer = _serializer;
-        var /** @type {?} */ source = messageBus.from(channel);
+        var source = messageBus.from(channel);
         source.subscribe({ next: function (message) { return _this._handleMessage(message); } });
     }
-    /**
-     * @param {?} name
-     * @return {?}
-     */
-    ClientMessageBroker.prototype._generateMessageId = /**
-     * @param {?} name
-     * @return {?}
-     */
-    function (name) {
-        var /** @type {?} */ time = stringify(new Date().getTime());
-        var /** @type {?} */ iteration = 0;
-        var /** @type {?} */ id = name + time + stringify(iteration);
+    ClientMessageBroker.prototype._generateMessageId = function (name) {
+        var time = stringify(new Date().getTime());
+        var iteration = 0;
+        var id = name + time + stringify(iteration);
         while (this._pending.has(id)) {
             id = "" + name + time + iteration;
             iteration++;
         }
         return id;
     };
-    /**
-     * @param {?} args
-     * @param {?} returnType
-     * @return {?}
-     */
-    ClientMessageBroker.prototype.runOnService = /**
-     * @param {?} args
-     * @param {?} returnType
-     * @return {?}
-     */
-    function (args, returnType) {
+    ClientMessageBroker.prototype.runOnService = function (args, returnType) {
         var _this = this;
-        var /** @type {?} */ fnArgs = [];
+        var fnArgs = [];
         if (args.args) {
             args.args.forEach(function (argument) {
                 if (argument.type != null) {
@@ -136,10 +82,10 @@ ClientMessageBroker = /** @class */ (function () {
                 }
             });
         }
-        var /** @type {?} */ promise;
-        var /** @type {?} */ id = null;
+        var promise;
+        var id = null;
         if (returnType != null) {
-            var /** @type {?} */ completer_1 = /** @type {?} */ ((undefined));
+            var completer_1 = (undefined);
             promise = new Promise(function (resolve, reject) { completer_1 = { resolve: resolve, reject: reject }; });
             id = this._generateMessageId(args.method);
             this._pending.set(id, completer_1);
@@ -155,7 +101,7 @@ ClientMessageBroker = /** @class */ (function () {
         else {
             promise = null;
         }
-        var /** @type {?} */ message = {
+        var message = {
             'method': args.method,
             'args': fnArgs,
         };
@@ -165,23 +111,15 @@ ClientMessageBroker = /** @class */ (function () {
         this._sink.emit(message);
         return promise;
     };
-    /**
-     * @param {?} message
-     * @return {?}
-     */
-    ClientMessageBroker.prototype._handleMessage = /**
-     * @param {?} message
-     * @return {?}
-     */
-    function (message) {
+    ClientMessageBroker.prototype._handleMessage = function (message) {
         if (message.type === 'result' || message.type === 'error') {
-            var /** @type {?} */ id = /** @type {?} */ ((message.id));
+            var id = (message.id);
             if (this._pending.has(id)) {
                 if (message.type === 'result') {
-                    /** @type {?} */ ((this._pending.get(id))).resolve(message.value);
+                    this._pending.get(id).resolve(message.value);
                 }
                 else {
-                    /** @type {?} */ ((this._pending.get(id))).reject(message.value);
+                    this._pending.get(id).reject(message.value);
                 }
                 this._pending.delete(id);
             }
@@ -190,51 +128,14 @@ ClientMessageBroker = /** @class */ (function () {
     return ClientMessageBroker;
 }());
 /**
- * \@experimental WebWorker support in Angular is experimental.
+ * @experimental WebWorker support in Angular is experimental.
  */
 export { ClientMessageBroker };
-function ClientMessageBroker_tsickle_Closure_declarations() {
-    /** @type {?} */
-    ClientMessageBroker.prototype._pending;
-    /** @type {?} */
-    ClientMessageBroker.prototype._sink;
-    /**
-     * \@internal
-     * @type {?}
-     */
-    ClientMessageBroker.prototype._serializer;
-    /** @type {?} */
-    ClientMessageBroker.prototype.channel;
-}
 /**
- * @record
- */
-function RequestMessageData() { }
-function RequestMessageData_tsickle_Closure_declarations() {
-    /** @type {?} */
-    RequestMessageData.prototype.method;
-    /** @type {?|undefined} */
-    RequestMessageData.prototype.args;
-    /** @type {?|undefined} */
-    RequestMessageData.prototype.id;
-}
-/**
- * @record
- */
-function ResponseMessageData() { }
-function ResponseMessageData_tsickle_Closure_declarations() {
-    /** @type {?} */
-    ResponseMessageData.prototype.type;
-    /** @type {?|undefined} */
-    ResponseMessageData.prototype.value;
-    /** @type {?|undefined} */
-    ResponseMessageData.prototype.id;
-}
-/**
- * \@experimental WebWorker support in Angular is experimental.
+ * @experimental WebWorker support in Angular is experimental.
  */
 var /**
- * \@experimental WebWorker support in Angular is experimental.
+ * @experimental WebWorker support in Angular is experimental.
  */
 FnArg = /** @class */ (function () {
     function FnArg(value, type) {
@@ -245,20 +146,14 @@ FnArg = /** @class */ (function () {
     return FnArg;
 }());
 /**
- * \@experimental WebWorker support in Angular is experimental.
+ * @experimental WebWorker support in Angular is experimental.
  */
 export { FnArg };
-function FnArg_tsickle_Closure_declarations() {
-    /** @type {?} */
-    FnArg.prototype.value;
-    /** @type {?} */
-    FnArg.prototype.type;
-}
 /**
- * \@experimental WebWorker support in Angular is experimental.
+ * @experimental WebWorker support in Angular is experimental.
  */
 var /**
- * \@experimental WebWorker support in Angular is experimental.
+ * @experimental WebWorker support in Angular is experimental.
  */
 UiArguments = /** @class */ (function () {
     function UiArguments(method, args) {
@@ -268,13 +163,8 @@ UiArguments = /** @class */ (function () {
     return UiArguments;
 }());
 /**
- * \@experimental WebWorker support in Angular is experimental.
+ * @experimental WebWorker support in Angular is experimental.
  */
 export { UiArguments };
-function UiArguments_tsickle_Closure_declarations() {
-    /** @type {?} */
-    UiArguments.prototype.method;
-    /** @type {?} */
-    UiArguments.prototype.args;
-}
-//# sourceMappingURL=client_message_broker.js.map
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xpZW50X21lc3NhZ2VfYnJva2VyLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiLi4vLi4vLi4vLi4vLi4vLi4vLi4vLi4vLi4vLi4vLi4vcGFja2FnZXMvcGxhdGZvcm0td2Vid29ya2VyL3NyYy93ZWJfd29ya2Vycy9zaGFyZWQvY2xpZW50X21lc3NhZ2VfYnJva2VyLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7QUFRQSxPQUFPLEVBQWUsVUFBVSxFQUFRLFVBQVUsSUFBSSxTQUFTLEVBQUMsTUFBTSxlQUFlLENBQUM7QUFDdEYsT0FBTyxFQUFDLFVBQVUsRUFBQyxNQUFNLGVBQWUsQ0FBQztBQUN6QyxPQUFPLEVBQUMsVUFBVSxFQUFrQixNQUFNLGNBQWMsQ0FBQzs7Ozs7SUFVdkQsZ0JBQWdCO0lBQ2hCLG9DQUFvQixXQUF1QixFQUFFLFdBQXVCO1FBQWhELGdCQUFXLEdBQVgsV0FBVyxDQUFZO1FBQ3pDLElBQUksQ0FBQyxXQUFXLEdBQUcsV0FBVyxDQUFDO0tBQ2hDO0lBRUQ7O09BRUc7Ozs7SUFDSCx3REFBbUI7OztJQUFuQixVQUFvQixPQUFlLEVBQUUsU0FBeUI7UUFBekIsMEJBQUEsRUFBQSxnQkFBeUI7UUFDNUQsSUFBSSxDQUFDLFdBQVcsQ0FBQyxXQUFXLENBQUMsT0FBTyxFQUFFLFNBQVMsQ0FBQyxDQUFDO1FBQ2pELE1BQU0sQ0FBQyxJQUFJLG1CQUFtQixDQUFDLElBQUksQ0FBQyxXQUFXLEVBQUUsSUFBSSxDQUFDLFdBQVcsRUFBRSxPQUFPLENBQUMsQ0FBQztLQUM3RTs7Z0JBaEJGLFVBQVU7Ozs7Z0JBTkgsVUFBVTtnQkFDVixVQUFVOztxQ0FWbEI7O1NBZ0JhLDBCQUEwQjs7OztBQTBCdkM7OztBQUFBO0lBTUUsZ0JBQWdCO0lBQ2hCLDZCQUFZLFVBQXNCLEVBQUUsV0FBdUIsRUFBVSxPQUFZO1FBQWpGLGlCQU1DO1FBTm9FLFlBQU8sR0FBUCxPQUFPLENBQUs7d0JBTjlELElBQUksR0FBRyxFQUE0QjtR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Qy9DO2dCQUNELElBQUksQ0FBQyxRQUFRLENBQUMsTUFBTSxDQUFDLEVBQUUsQ0FBQyxDQUFDO2FBQzFCO1NBQ0Y7S0FDRjs4QkEvSEg7SUFnSUMsQ0FBQTs7OztBQXRGRCwrQkFzRkM7Ozs7QUFpQkQ7OztBQUFBO0lBQ0UsZUFDVyxLQUFVLEVBQVMsSUFBMkQ7dURBQUE7UUFBOUUsVUFBSyxHQUFMLEtBQUssQ0FBSztRQUFTLFNBQUksR0FBSixJQUFJLENBQXVEO0tBQUk7Z0JBbkovRjtJQW9KQyxDQUFBOzs7O0FBSEQsaUJBR0M7Ozs7QUFLRDs7O0FBQUE7SUFDRSxxQkFBbUIsTUFBYyxFQUFTLElBQWM7UUFBckMsV0FBTSxHQUFOLE1BQU0sQ0FBUTtRQUFTLFNBQUksR0FBSixJQUFJLENBQVU7S0FBSTtzQkExSjlEO0lBMkpDLENBQUE7Ozs7QUFGRCx1QkFFQyIsInNvdXJjZXNDb250ZW50IjpbIi8qKlxuICogQGxpY2Vuc2VcbiAqIENvcHlyaWdodCBHb29nbGUgSW5jLiBBbGwgUmlnaHRzIFJlc2VydmVkLlxuICpcbiAqIFVzZSBvZiB0aGlzIHNvdXJjZSBjb2RlIGlzIGdvdmVybmVkIGJ5IGFuIE1JVC1zdHlsZSBsaWNlbnNlIHRoYXQgY2FuIGJlXG4gKiBmb3VuZCBpbiB0aGUgTElDRU5TRSBmaWxlIGF0IGh0dHBzOi8vYW5ndWxhci5pby9saWNlbnNlXG4gKi9cblxuaW1wb3J0IHtFdmVudEVtaXR0ZXIsIEluamVjdGFibGUsIFR5cGUsIMm1c3RyaW5naWZ5IGFzIHN0cmluZ2lmeX0gZnJvbSAnQGFuZ3VsYXIvY29yZSc7XG5pbXBvcnQge01lc3NhZ2VCdXN9IGZyb20gJy4vbWVzc2FnZV9idXMnO1xuaW1wb3J0IHtTZXJpYWxpemVyLCBTZXJpYWxpemVyVHlwZXN9IGZyb20gJy4vc2VyaWFsaXplcic7XG5cbi8qKlxuICogQGV4cGVyaW1lbnRhbCBXZWJXb3JrZXIgc3VwcG9ydCBpbiBBbmd1bGFyIGlzIGV4cGVyaW1lbnRhbC5cbiAqL1xuQEluamVjdGFibGUoKVxuZXhwb3J0IGNsYXNzIENsaWVudE1lc3NhZ2VCcm9rZXJGYWN0b3J5IHtcbiAgLyoqIEBpbnRlcm5hbCAqL1xuICBfc2VyaWFsaXplcjogU2VyaWFsaXplcjtcblxuICAvKiogQGludGVybmFsICovXG4gIGNvbnN0cnVjdG9yKHByaXZhdGUgX21lc3NhZ2VCdXM6IE1lc3NhZ2VCdXMsIF9zZXJpYWxpemVyOiBTZXJpYWxpemVyKSB7XG4gICAgdGhpcy5fc2VyaWFsaXplciA9IF9zZXJpYWxpemVyO1xuICB9XG5cbiAgLyoqXG4gICAqIEluaXRpYWxpemVzIHRoZSBnaXZlbiBjaGFubmVsIGFuZCBhdHRhY2hlcyBhIG5ldyB7QGxpbmsgQ2xpZW50TWVzc2FnZUJyb2tlcn0gdG8gaXQuXG4gICAqL1xuICBjcmVhdGVNZXNzYWdlQnJva2VyKGNoYW5uZWw6IHN0cmluZywgcnVuSW5ab25lOiBib29sZWFuID0gdHJ1ZSk6IENsaWVudE1lc3NhZ2VCcm9rZXIge1xuICAgIHRoaXMuX21lc3NhZ2VCdXMuaW5pdENoYW5uZWwoY2hhbm5lbCwgcnVuSW5ab25lKTtcbiAgICByZXR1cm4gbmV3IENsaWVudE1lc3NhZ2VCcm9rZXIodGhpcy5fbWVzc2FnZUJ1cywgdGhpcy5fc2VyaWFsaXplciwgY2hhbm5lbCk7XG4gIH1cbn1cblxuaW50ZXJmYWNlIFByb21pc2VDb21wbGV0ZXIge1xuICByZXNvbHZlOiAocmVzdWx0OiBhbnkpID0+IHZvaWQ7XG4gIHJlamVjdDogKGVycjogYW55KSA9PiB2b2lkO1xufVxuXG4vKipcbiAqIEBleHBlcmltZW50YWwgV2ViV29ya2VyIHN1cHBvcnQgaW4gQW5ndWxhciBpcyBleHBlcmltZW50YWwuXG4gKi9cbmV4cG9ydCBjbGFzcyBDbGllbnRNZXNzYWdlQnJva2VyIHtcbiAgcHJpdmF0ZSBfcGVuZGluZyA9IG5ldyBNYXA8c3RyaW5nLCBQcm9taXNlQ29tcGxldGVyPigpO1xuICBwcml2YXRlIF9zaW5rOiBFdmVudEVtaXR0ZXI8YW55PjtcbiAgLyoqIEBpbnRlcm5hbCAqL1xuICBwdWJsaWMgX3NlcmlhbGl6ZXI6IFNlcmlhbGl6ZXI7XG5cbiAgLyoqIEBpbnRlcm5hbCAqL1xuICBjb25zdHJ1Y3RvcihtZXNzYWdlQnVzOiBNZXNzYWdlQnVzLCBfc2VyaWFsaXplcjogU2VyaWFsaXplciwgcHJpdmF0ZSBjaGFubmVsOiBhbnkpIHtcbiAgICB0aGlzLl9zaW5rID0gbWVzc2FnZUJ1cy50byhjaGFubmVsKTtcbiAgICB0aGlzLl9zZXJpYWxpemVyID0gX3NlcmlhbGl6ZXI7XG4gICAgY29uc3Qgc291cmNlID0gbWVzc2FnZUJ1cy5mcm9tKGNoYW5uZWwpO1xuXG4gICAgc291cmNlLnN1YnNjcmliZSh7bmV4dDogKG1lc3NhZ2U6IFJlc3BvbnNlTWVzc2FnZURhdGEpID0+IHRoaXMuX2hhbmRsZU1lc3NhZ2UobWVzc2FnZSl9KTtcbiAgfVxuXG4gIHByaXZhdGUgX2dlbmVyYXRlTWVzc2FnZUlkKG5hbWU6IHN0cmluZyk6IHN0cmluZyB7XG4gICAgY29uc3QgdGltZTogc3RyaW5nID0gc3RyaW5naWZ5KG5ldyBEYXRlKCkuZ2V0VGltZSgpKTtcbiAgICBsZXQgaXRlcmF0aW9uOiBudW1iZXIgPSAwO1xuICAgIGxldCBpZDogc3RyaW5nID0gbmFtZSArIHRpbWUgKyBzdHJpbmdpZnkoaXRlcmF0aW9uKTtcbiAgICB3aGlsZSAodGhpcy5fcGVuZGluZy5oYXMoaWQpKSB7XG4gICAgICBpZCA9IGAke25hbWV9JHt0aW1lfSR7aXRlcmF0aW9ufWA7XG4gICAgICBpdGVyYXRpb24rKztcbiAgICB9XG4gICAgcmV0dXJuIGlkO1xuICB9XG5cbiAgcnVuT25TZXJ2aWNlKGFyZ3M6IFVpQXJndW1lbnRzLCByZXR1cm5UeXBlOiBUeXBlPGFueT58U2VyaWFsaXplclR5cGVzfG51bGwpOiBQcm9taXNlPGFueT58bnVsbCB7XG4gICAgY29uc3QgZm5BcmdzOiBhbnlbXSA9IFtdO1xuICAgIGlmIChhcmdzLmFyZ3MpIHtcbiAgICAgIGFyZ3MuYXJncy5mb3JFYWNoKGFyZ3VtZW50ID0+IHtcbiAgICAgICAgaWYgKGFyZ3VtZW50LnR5cGUgIT0gbnVsbCkge1xuICAgICAgICAgIGZuQXJncy5wdXNoKHRoaXMuX3NlcmlhbGl6ZXIuc2VyaWFsaXplKGFyZ3VtZW50LnZhbHVlLCBhcmd1bWVudC50eXBlKSk7XG4gICAgICAgIH0gZWxzZSB7XG4gICAgICAgICAgZm5BcmdzLnB1c2goYXJndW1lbnQudmFsdWUpO1xuICAgICAgICB9XG4gICAgICB9KTtcbiAgICB9XG5cbiAgICBsZXQgcHJvbWlzZTogUHJvbWlzZTxhbnk+fG51bGw7XG4gICAgbGV0IGlkOiBzdHJpbmd8bnVsbCA9IG51bGw7XG4gICAgaWYgKHJldHVyblR5cGUgIT0gbnVsbCkge1xuICAgICAgbGV0IGNvbXBsZXRlcjogUHJvbWlzZUNvbXBsZXRlciA9IHVuZGVmaW5lZCAhO1xuICAgICAgcHJvbWlzZSA9IG5ldyBQcm9taXNlKChyZXNvbHZlLCByZWplY3QpID0+IHsgY29tcGxldGVyID0ge3Jlc29sdmUsIHJlamVjdH07IH0pO1xuICAgICAgaWQgPSB0aGlzLl9nZW5lcmF0ZU1lc3NhZ2VJZChhcmdzLm1ldGhvZCk7XG4gICAgICB0aGlzLl9wZW5kaW5nLnNldChpZCwgY29tcGxldGVyKTtcblxuICAgICAgcHJvbWlzZS5jYXRjaCgoZXJyKSA9PiB7XG4gICAgICAgIGlmIChjb25zb2xlICYmIGNvbnNvbGUuZXJyb3IpIHtcbiAgICAgICAgICAvLyB0c2xpbnQ6ZGlzYWJsZS1uZXh0LWxpbmU6bm8tY29uc29sZVxuICAgICAgICAgIGNvbnNvbGUuZXJyb3IoZXJyKTtcbiAgICAgICAgfVxuXG4gICAgICAgIGNvbXBsZXRlci5yZWplY3QoZXJyKTtcbiAgICAgIH0pO1xuXG4gICAgICBwcm9taXNlID0gcHJvbWlzZS50aGVuKFxuICAgICAgICAgICh2OiBhbnkpID0+IHRoaXMuX3NlcmlhbGl6ZXIgPyB0aGlzLl9zZXJpYWxpemVyLmRlc2VyaWFsaXplKHYsIHJldHVyblR5cGUpIDogdik7XG4gICAgfSBlbHNlIHtcbiAgICAgIHByb21pc2UgPSBudWxsO1xuICAgIH1cblxuICAgIGNvbnN0IG1lc3NhZ2U6IFJlcXVlc3RNZXNzYWdlRGF0YSA9IHtcbiAgICAgICdtZXRob2QnOiBhcmdzLm1ldGhvZCxcbiAgICAgICdhcmdzJzogZm5BcmdzLFxuICAgIH07XG4gICAgaWYgKGlkICE9IG51bGwpIHtcbiAgICAgIG1lc3NhZ2VbJ2lkJ10gPSBpZDtcbiAgICB9XG4gICAgdGhpcy5fc2luay5lbWl0KG1lc3NhZ2UpO1xuXG4gICAgcmV0dXJuIHByb21pc2U7XG4gIH1cblxuICBwcml2YXRlIF9oYW5kbGVNZXNzYWdlKG1lc3NhZ2U6IFJlc3BvbnNlTWVzc2FnZURhdGEpOiB2b2lkIHtcbiAgICBpZiAobWVzc2FnZS50eXBlID09PSAncmVzdWx0JyB8fCBtZXNzYWdlLnR5cGUgPT09ICdlcnJvcicpIHtcbiAgICAgIGNvbnN0IGlkID0gbWVzc2FnZS5pZCAhO1xuICAgICAgaWYgKHRoaXMuX3BlbmRpbmcuaGFzKGlkKSkge1xuICAgICAgICBpZiAobWVzc2FnZS50eXBlID09PSAncmVzdWx0Jykge1xuICAgICAgICAgIHRoaXMuX3BlbmRpbmcuZ2V0KGlkKSAhLnJlc29sdmUobWVzc2FnZS52YWx1ZSk7XG4gICAgICAgIH0gZWxzZSB7XG4gICAgICAgICAgdGhpcy5fcGVuZGluZy5nZXQoaWQpICEucmVqZWN0KG1lc3NhZ2UudmFsdWUpO1xuICAgICAgICB9XG4gICAgICAgIHRoaXMuX3BlbmRpbmcuZGVsZXRlKGlkKTtcbiAgICAgIH1cbiAgICB9XG4gIH1cbn1cblxuaW50ZXJmYWNlIFJlcXVlc3RNZXNzYWdlRGF0YSB7XG4gIG1ldGhvZDogc3RyaW5nO1xuICBhcmdzPzogYW55W107XG4gIGlkPzogc3RyaW5nO1xufVxuXG5pbnRlcmZhY2UgUmVzcG9uc2VNZXNzYWdlRGF0YSB7XG4gIHR5cGU6ICdyZXN1bHQnfCdlcnJvcic7XG4gIHZhbHVlPzogYW55O1xuICBpZD86IHN0cmluZztcbn1cblxuLyoqXG4gKiBAZXhwZXJpbWVudGFsIFdlYldvcmtlciBzdXBwb3J0IGluIEFuZ3VsYXIgaXMgZXhwZXJpbWVudGFsLlxuICovXG5leHBvcnQgY2xhc3MgRm5Bcmcge1xuICBjb25zdHJ1Y3RvcihcbiAgICAgIHB1YmxpYyB2YWx1ZTogYW55LCBwdWJsaWMgdHlwZTogVHlwZTxhbnk+fFNlcmlhbGl6ZXJUeXBlcyA9IFNlcmlhbGl6ZXJUeXBlcy5QUklNSVRJVkUpIHt9XG59XG5cbi8qKlxuICogQGV4cGVyaW1lbnRhbCBXZWJXb3JrZXIgc3VwcG9ydCBpbiBBbmd1bGFyIGlzIGV4cGVyaW1lbnRhbC5cbiAqL1xuZXhwb3J0IGNsYXNzIFVpQXJndW1lbnRzIHtcbiAgY29uc3RydWN0b3IocHVibGljIG1ldGhvZDogc3RyaW5nLCBwdWJsaWMgYXJncz86IEZuQXJnW10pIHt9XG59XG4iXX0=

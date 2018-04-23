@@ -1,8 +1,9 @@
 /**
- * @license Angular v6.0.0-rc.5-60e5507
+ * @license Angular v6.0.0-rc.5+73.sha-ace6440
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
+
 import { CommonModule, DOCUMENT, LOCATION_INITIALIZED, PlatformLocation, ɵPLATFORM_WORKER_APP_ID, ɵPLATFORM_WORKER_UI_ID } from '@angular/common';
 import { APP_INITIALIZER, ApplicationModule, ErrorHandler, EventEmitter, Injectable, InjectionToken, Injector, NgModule, NgZone, PLATFORM_ID, PLATFORM_INITIALIZER, RenderComponentType, RendererFactory2, Testability, Version, createPlatformFactory, isDevMode, platformCore, ɵAPP_ID_RANDOM_PROVIDER, ɵstringify } from '@angular/core';
 import { DOCUMENT as DOCUMENT$1, EVENT_MANAGER_PLUGINS, EventManager, HAMMER_GESTURE_CONFIG, HammerGestureConfig, ɵBROWSER_SANITIZATION_PROVIDERS, ɵBrowserDomAdapter, ɵBrowserGetTestability, ɵBrowserPlatformLocation, ɵDomAdapter, ɵDomEventsPlugin, ɵDomRendererFactory2, ɵDomSharedStylesHost, ɵHammerGesturesPlugin, ɵKeyEventsPlugin, ɵSharedStylesHost, ɵsetRootDomAdapter } from '@angular/platform-browser';
@@ -111,7 +112,7 @@ class RenderStore {
     }
 }
 RenderStore.decorators = [
-    { type: Injectable },
+    { type: Injectable }
 ];
 /** @nocollapse */
 RenderStore.ctorParameters = () => [];
@@ -281,7 +282,7 @@ class Serializer {
     }
 }
 Serializer.decorators = [
-    { type: Injectable },
+    { type: Injectable }
 ];
 /** @nocollapse */
 Serializer.ctorParameters = () => [
@@ -324,7 +325,7 @@ class ClientMessageBrokerFactory {
     }
 }
 ClientMessageBrokerFactory.decorators = [
-    { type: Injectable },
+    { type: Injectable }
 ];
 /** @nocollapse */
 ClientMessageBrokerFactory.ctorParameters = () => [
@@ -650,7 +651,7 @@ class PostMessageBus {
     to(channel) { return this.sink.to(channel); }
 }
 PostMessageBus.decorators = [
-    { type: Injectable },
+    { type: Injectable }
 ];
 /** @nocollapse */
 PostMessageBus.ctorParameters = () => [
@@ -708,7 +709,7 @@ class ServiceMessageBrokerFactory {
     }
 }
 ServiceMessageBrokerFactory.decorators = [
-    { type: Injectable },
+    { type: Injectable }
 ];
 /** @nocollapse */
 ServiceMessageBrokerFactory.ctorParameters = () => [
@@ -1287,7 +1288,7 @@ class MessageBasedRenderer2 {
     unlisten(r, unlisten) { unlisten(); }
 }
 MessageBasedRenderer2.decorators = [
-    { type: Injectable },
+    { type: Injectable }
 ];
 /** @nocollapse */
 MessageBasedRenderer2.ctorParameters = () => [
@@ -1328,7 +1329,7 @@ class WebWorkerInstance {
     }
 }
 WebWorkerInstance.decorators = [
-    { type: Injectable },
+    { type: Injectable }
 ];
 /** @nocollapse */
 WebWorkerInstance.ctorParameters = () => [];
@@ -1488,7 +1489,7 @@ function spawnWebWorker(uri, instance) {
 /**
  *
  */
-const VERSION = new Version('6.0.0-rc.5-60e5507');
+const VERSION = new Version('6.0.0-rc.5+73.sha-ace6440');
 
 /**
  * @fileoverview added by tsickle
@@ -1552,7 +1553,7 @@ class MessageBasedPlatformLocation {
     _setPathname(pathname) { this._platformLocation.pathname = pathname; }
 }
 MessageBasedPlatformLocation.decorators = [
-    { type: Injectable },
+    { type: Injectable }
 ];
 /** @nocollapse */
 MessageBasedPlatformLocation.ctorParameters = () => [
@@ -1740,7 +1741,7 @@ class WebWorkerPlatformLocation extends PlatformLocation {
     }
 }
 WebWorkerPlatformLocation.decorators = [
-    { type: Injectable },
+    { type: Injectable }
 ];
 /** @nocollapse */
 WebWorkerPlatformLocation.ctorParameters = () => [
@@ -1941,7 +1942,7 @@ class WebWorkerRendererFactory2 {
     }
 }
 WebWorkerRendererFactory2.decorators = [
-    { type: Injectable },
+    { type: Injectable }
 ];
 /** @nocollapse */
 WebWorkerRendererFactory2.ctorParameters = () => [
@@ -2994,7 +2995,7 @@ WorkerAppModule.decorators = [
                     CommonModule,
                     ApplicationModule,
                 ]
-            },] },
+            },] }
 ];
 /** @nocollapse */
 WorkerAppModule.ctorParameters = () => [];
@@ -3051,8 +3052,20 @@ function bootstrapWorkerUi(workerScriptUri, customProviders = []) {
  * @suppress {checkTypes} checked by tsc
  */
 /**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+// This file is not used to build this module. It is only used during editing
+// by the TypeScript language service and during build for verification. `ngc`
+// replaces this file with production index.ts when it rewrites private symbol
+// names.
+
+/**
  * Generated bundle index. Do not edit.
  */
 
-export { VERSION, ClientMessageBroker, ClientMessageBrokerFactory, FnArg, UiArguments, MessageBus, ServiceMessageBroker, ServiceMessageBrokerFactory, WORKER_UI_LOCATION_PROVIDERS, WORKER_APP_LOCATION_PROVIDERS, WorkerAppModule, platformWorkerApp, platformWorkerUi, bootstrapWorkerUi, ON_WEB_WORKER as ɵk, RenderStore as ɵh, Serializer as ɵa, appInitFnFactory as ɵc, locationInitialized as ɵb, WebWorkerPlatformLocation as ɵi, WebWorkerRendererFactory2 as ɵj, createMessageBus as ɵe, errorHandler as ɵd, setupWebWorker as ɵf, _WORKER_UI_PLATFORM_PROVIDERS as ɵg };
+export { ON_WEB_WORKER as ɵangular_packages_platform_webworker_platform_webworker_k, RenderStore as ɵangular_packages_platform_webworker_platform_webworker_h, Serializer as ɵangular_packages_platform_webworker_platform_webworker_a, appInitFnFactory as ɵangular_packages_platform_webworker_platform_webworker_c, locationInitialized as ɵangular_packages_platform_webworker_platform_webworker_b, WebWorkerPlatformLocation as ɵangular_packages_platform_webworker_platform_webworker_i, WebWorkerRendererFactory2 as ɵangular_packages_platform_webworker_platform_webworker_j, createMessageBus as ɵangular_packages_platform_webworker_platform_webworker_e, errorHandler as ɵangular_packages_platform_webworker_platform_webworker_d, setupWebWorker as ɵangular_packages_platform_webworker_platform_webworker_f, _WORKER_UI_PLATFORM_PROVIDERS as ɵangular_packages_platform_webworker_platform_webworker_g, VERSION, ClientMessageBroker, ClientMessageBrokerFactory, FnArg, UiArguments, MessageBus, ServiceMessageBroker, ServiceMessageBrokerFactory, WORKER_UI_LOCATION_PROVIDERS, WORKER_APP_LOCATION_PROVIDERS, WorkerAppModule, platformWorkerApp, platformWorkerUi, bootstrapWorkerUi };
 //# sourceMappingURL=platform-webworker.js.map
