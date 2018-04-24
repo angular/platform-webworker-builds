@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.0.0-rc.5+80.sha-811a7f2
+ * @license Angular v6.0.0-rc.5+81.sha-43a49d3
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1489,7 +1489,7 @@ function spawnWebWorker(uri, instance) {
 /**
  *
  */
-const VERSION = new Version('6.0.0-rc.5+80.sha-811a7f2');
+const VERSION = new Version('6.0.0-rc.5+81.sha-43a49d3');
 
 /**
  * @fileoverview added by tsickle
