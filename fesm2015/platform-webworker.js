@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.0.0-rc.5+184.sha-e5e5c24
+ * @license Angular v6.0.0-rc.5+185.sha-5cf82f8
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -114,8 +114,6 @@ class RenderStore {
 RenderStore.decorators = [
     { type: Injectable }
 ];
-/** @nocollapse */
-RenderStore.ctorParameters = () => [];
 
 /**
  * @fileoverview added by tsickle
@@ -1331,8 +1329,6 @@ class WebWorkerInstance {
 WebWorkerInstance.decorators = [
     { type: Injectable }
 ];
-/** @nocollapse */
-WebWorkerInstance.ctorParameters = () => [];
 /**
  * \@experimental WebWorker support is currently experimental.
  */
@@ -1486,7 +1482,7 @@ function spawnWebWorker(uri, instance) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-const VERSION = new Version('6.0.0-rc.5+184.sha-e5e5c24');
+const VERSION = new Version('6.0.0-rc.5+185.sha-5cf82f8');
 
 /**
  * @fileoverview added by tsickle
@@ -2994,8 +2990,6 @@ WorkerAppModule.decorators = [
                 ]
             },] }
 ];
-/** @nocollapse */
-WorkerAppModule.ctorParameters = () => [];
 
 /**
  * @fileoverview added by tsickle
