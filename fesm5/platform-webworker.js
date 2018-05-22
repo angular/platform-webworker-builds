@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.0.0-rc.5+78.sha-e1c4930
+ * @license Angular v6.0.0-rc.5+215.sha-23a98b9
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -75,8 +75,6 @@ var RenderStore = /** @class */ (function () {
     RenderStore.decorators = [
         { type: Injectable }
     ];
-    /** @nocollapse */
-    RenderStore.ctorParameters = function () { return []; };
     return RenderStore;
 }());
 
@@ -919,8 +917,6 @@ var WebWorkerInstance = /** @class */ (function () {
     WebWorkerInstance.decorators = [
         { type: Injectable }
     ];
-    /** @nocollapse */
-    WebWorkerInstance.ctorParameters = function () { return []; };
     return WebWorkerInstance;
 }());
 /**
@@ -1048,10 +1044,7 @@ function spawnWebWorker(uri, instance) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-/**
- *
- */
-var VERSION = new Version('6.0.0-rc.5+78.sha-e1c4930');
+var VERSION = new Version('6.0.0-rc.5+215.sha-23a98b9');
 
 /**
  * @license
@@ -1784,8 +1777,6 @@ var WorkerAppModule = /** @class */ (function () {
                     ]
                 },] }
     ];
-    /** @nocollapse */
-    WorkerAppModule.ctorParameters = function () { return []; };
     return WorkerAppModule;
 }());
 
