@@ -1,6 +1,6 @@
 {
   "name": "@angular/platform-webworker",
-  "version": "6.0.0-rc.5+211.sha-373fa78",
+  "version": "6.0.0-rc.5+212.sha-0bdd30e",
   "description": "Angular - library for using Angular in a web browser with web workers",
   "main": "./bundles/platform-webworker.umd.js",
   "module": "./fesm5/platform-webworker.js",
@@ -16,9 +16,9 @@
     "tslib": "^1.9.0"
   },
   "peerDependencies": {
-    "@angular/common": "6.0.0-rc.5+211.sha-373fa78",
-    "@angular/core": "6.0.0-rc.5+211.sha-373fa78",
-    "@angular/platform-browser": "6.0.0-rc.5+211.sha-373fa78"
+    "@angular/common": "6.0.0-rc.5+212.sha-0bdd30e",
+    "@angular/core": "6.0.0-rc.5+212.sha-0bdd30e",
+    "@angular/platform-browser": "6.0.0-rc.5+212.sha-0bdd30e"
   },
   "repository": {
     "type": "git",
