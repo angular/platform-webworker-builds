@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.0.3+49.sha-2991b1b
+ * @license Angular v6.0.3+50.sha-d69ba73
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -114,8 +114,6 @@ class RenderStore {
 RenderStore.decorators = [
     { type: Injectable }
 ];
-/** @nocollapse */
-RenderStore.ctorParameters = () => [];
 
 /**
  * @fileoverview added by tsickle
@@ -286,7 +284,7 @@ Serializer.decorators = [
 ];
 /** @nocollapse */
 Serializer.ctorParameters = () => [
-    { type: RenderStore, },
+    { type: RenderStore }
 ];
 
 /**
@@ -329,8 +327,8 @@ ClientMessageBrokerFactory.decorators = [
 ];
 /** @nocollapse */
 ClientMessageBrokerFactory.ctorParameters = () => [
-    { type: MessageBus, },
-    { type: Serializer, },
+    { type: MessageBus },
+    { type: Serializer }
 ];
 /**
  * \@experimental WebWorker support in Angular is experimental.
@@ -655,8 +653,8 @@ PostMessageBus.decorators = [
 ];
 /** @nocollapse */
 PostMessageBus.ctorParameters = () => [
-    { type: PostMessageBusSink, },
-    { type: PostMessageBusSource, },
+    { type: PostMessageBusSink },
+    { type: PostMessageBusSource }
 ];
 /**
  * Helper class that wraps a channel's {\@link EventEmitter} and
@@ -713,8 +711,8 @@ ServiceMessageBrokerFactory.decorators = [
 ];
 /** @nocollapse */
 ServiceMessageBrokerFactory.ctorParameters = () => [
-    { type: MessageBus, },
-    { type: Serializer, },
+    { type: MessageBus },
+    { type: Serializer }
 ];
 /**
  * Helper class for UIComponents that allows components to register methods.
@@ -1292,11 +1290,11 @@ MessageBasedRenderer2.decorators = [
 ];
 /** @nocollapse */
 MessageBasedRenderer2.ctorParameters = () => [
-    { type: ServiceMessageBrokerFactory, },
-    { type: MessageBus, },
-    { type: Serializer, },
-    { type: RenderStore, },
-    { type: RendererFactory2, },
+    { type: ServiceMessageBrokerFactory },
+    { type: MessageBus },
+    { type: Serializer },
+    { type: RenderStore },
+    { type: RendererFactory2 }
 ];
 
 /**
@@ -1331,8 +1329,6 @@ class WebWorkerInstance {
 WebWorkerInstance.decorators = [
     { type: Injectable }
 ];
-/** @nocollapse */
-WebWorkerInstance.ctorParameters = () => [];
 /**
  * \@experimental WebWorker support is currently experimental.
  */
@@ -1486,7 +1482,7 @@ function spawnWebWorker(uri, instance) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-const VERSION = new Version('6.0.3+49.sha-2991b1b');
+const VERSION = new Version('6.0.3+50.sha-d69ba73');
 
 /**
  * @fileoverview added by tsickle
@@ -1554,10 +1550,10 @@ MessageBasedPlatformLocation.decorators = [
 ];
 /** @nocollapse */
 MessageBasedPlatformLocation.ctorParameters = () => [
-    { type: ServiceMessageBrokerFactory, },
-    { type: ɵBrowserPlatformLocation, },
-    { type: MessageBus, },
-    { type: Serializer, },
+    { type: ServiceMessageBrokerFactory },
+    { type: ɵBrowserPlatformLocation },
+    { type: MessageBus },
+    { type: Serializer }
 ];
 
 /**
@@ -1742,9 +1738,9 @@ WebWorkerPlatformLocation.decorators = [
 ];
 /** @nocollapse */
 WebWorkerPlatformLocation.ctorParameters = () => [
-    { type: ClientMessageBrokerFactory, },
-    { type: MessageBus, },
-    { type: Serializer, },
+    { type: ClientMessageBrokerFactory },
+    { type: MessageBus },
+    { type: Serializer }
 ];
 
 /**
@@ -1943,10 +1939,10 @@ WebWorkerRendererFactory2.decorators = [
 ];
 /** @nocollapse */
 WebWorkerRendererFactory2.ctorParameters = () => [
-    { type: ClientMessageBrokerFactory, },
-    { type: MessageBus, },
-    { type: Serializer, },
-    { type: RenderStore, },
+    { type: ClientMessageBrokerFactory },
+    { type: MessageBus },
+    { type: Serializer },
+    { type: RenderStore }
 ];
 class WebWorkerRenderer2 {
     /**
@@ -2994,8 +2990,6 @@ WorkerAppModule.decorators = [
                 ]
             },] }
 ];
-/** @nocollapse */
-WorkerAppModule.ctorParameters = () => [];
 
 /**
  * @fileoverview added by tsickle

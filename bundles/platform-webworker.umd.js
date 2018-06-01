@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.0.3+49.sha-2991b1b
+ * @license Angular v6.0.3+50.sha-d69ba73
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -143,8 +143,6 @@ var RenderStore = /** @class */ (function () {
     RenderStore.decorators = [
         { type: core.Injectable }
     ];
-    /** @nocollapse */
-    RenderStore.ctorParameters = function () { return []; };
     return RenderStore;
 }());
 
@@ -268,7 +266,7 @@ var Serializer = /** @class */ (function () {
     ];
     /** @nocollapse */
     Serializer.ctorParameters = function () { return [
-        { type: RenderStore, },
+        { type: RenderStore }
     ]; };
     return Serializer;
 }());
@@ -292,13 +290,7 @@ var ClientMessageBrokerFactory = /** @class */ (function () {
     /**
      * Initializes the given channel and attaches a new {@link ClientMessageBroker} to it.
      */
-    /**
-       * Initializes the given channel and attaches a new {@link ClientMessageBroker} to it.
-       */
-    ClientMessageBrokerFactory.prototype.createMessageBroker = /**
-       * Initializes the given channel and attaches a new {@link ClientMessageBroker} to it.
-       */
-    function (channel, runInZone) {
+    ClientMessageBrokerFactory.prototype.createMessageBroker = function (channel, runInZone) {
         if (runInZone === void 0) { runInZone = true; }
         this._messageBus.initChannel(channel, runInZone);
         return new ClientMessageBroker(this._messageBus, this._serializer, channel);
@@ -308,8 +300,8 @@ var ClientMessageBrokerFactory = /** @class */ (function () {
     ];
     /** @nocollapse */
     ClientMessageBrokerFactory.ctorParameters = function () { return [
-        { type: MessageBus, },
-        { type: Serializer, },
+        { type: MessageBus },
+        { type: Serializer }
     ]; };
     return ClientMessageBrokerFactory;
 }());
@@ -353,7 +345,7 @@ var ClientMessageBroker = /** @class */ (function () {
         var promise;
         var id = null;
         if (returnType != null) {
-            var completer_1 = (undefined);
+            var completer_1 = undefined;
             promise = new Promise(function (resolve, reject) { completer_1 = { resolve: resolve, reject: reject }; });
             id = this._generateMessageId(args.method);
             this._pending.set(id, completer_1);
@@ -381,7 +373,7 @@ var ClientMessageBroker = /** @class */ (function () {
     };
     ClientMessageBroker.prototype._handleMessage = function (message) {
         if (message.type === 'result' || message.type === 'error') {
-            var id = (message.id);
+            var id = message.id;
             if (this._pending.has(id)) {
                 if (message.type === 'result') {
                     this._pending.get(id).resolve(message.value);
@@ -547,8 +539,8 @@ var PostMessageBus = /** @class */ (function () {
     ];
     /** @nocollapse */
     PostMessageBus.ctorParameters = function () { return [
-        { type: PostMessageBusSink, },
-        { type: PostMessageBusSource, },
+        { type: PostMessageBusSink },
+        { type: PostMessageBusSource }
     ]; };
     return PostMessageBus;
 }());
@@ -583,13 +575,7 @@ var ServiceMessageBrokerFactory = /** @class */ (function () {
     /**
      * Initializes the given channel and attaches a new {@link ServiceMessageBroker} to it.
      */
-    /**
-       * Initializes the given channel and attaches a new {@link ServiceMessageBroker} to it.
-       */
-    ServiceMessageBrokerFactory.prototype.createMessageBroker = /**
-       * Initializes the given channel and attaches a new {@link ServiceMessageBroker} to it.
-       */
-    function (channel, runInZone) {
+    ServiceMessageBrokerFactory.prototype.createMessageBroker = function (channel, runInZone) {
         if (runInZone === void 0) { runInZone = true; }
         this._messageBus.initChannel(channel, runInZone);
         return new ServiceMessageBroker(this._messageBus, this._serializer, channel);
@@ -599,8 +585,8 @@ var ServiceMessageBrokerFactory = /** @class */ (function () {
     ];
     /** @nocollapse */
     ServiceMessageBrokerFactory.ctorParameters = function () { return [
-        { type: MessageBus, },
-        { type: Serializer, },
+        { type: MessageBus },
+        { type: Serializer }
     ]; };
     return ServiceMessageBrokerFactory;
 }());
@@ -952,11 +938,11 @@ var MessageBasedRenderer2 = /** @class */ (function () {
     ];
     /** @nocollapse */
     MessageBasedRenderer2.ctorParameters = function () { return [
-        { type: ServiceMessageBrokerFactory, },
-        { type: MessageBus, },
-        { type: Serializer, },
-        { type: RenderStore, },
-        { type: core.RendererFactory2, },
+        { type: ServiceMessageBrokerFactory },
+        { type: MessageBus },
+        { type: Serializer },
+        { type: RenderStore },
+        { type: core.RendererFactory2 }
     ]; };
     return MessageBasedRenderer2;
 }());
@@ -978,17 +964,13 @@ var WebWorkerInstance = /** @class */ (function () {
     function WebWorkerInstance() {
     }
     /** @internal */
-    /** @internal */
-    WebWorkerInstance.prototype.init = /** @internal */
-    function (worker, bus) {
+    WebWorkerInstance.prototype.init = function (worker, bus) {
         this.worker = worker;
         this.bus = bus;
     };
     WebWorkerInstance.decorators = [
         { type: core.Injectable }
     ];
-    /** @nocollapse */
-    WebWorkerInstance.ctorParameters = function () { return []; };
     return WebWorkerInstance;
 }());
 /**
@@ -1116,7 +1098,12 @@ function spawnWebWorker(uri, instance) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var VERSION = new core.Version('6.0.3+49.sha-2991b1b');
+/**
+ * @module
+ * @description
+ * Entry point for all public APIs of the common package.
+ */
+var VERSION = new core.Version('6.0.3+50.sha-d69ba73');
 
 /**
  * @license
@@ -1159,10 +1146,10 @@ var MessageBasedPlatformLocation = /** @class */ (function () {
     ];
     /** @nocollapse */
     MessageBasedPlatformLocation.ctorParameters = function () { return [
-        { type: ServiceMessageBrokerFactory, },
-        { type: platformBrowser.ɵBrowserPlatformLocation, },
-        { type: MessageBus, },
-        { type: Serializer, },
+        { type: ServiceMessageBrokerFactory },
+        { type: platformBrowser.ɵBrowserPlatformLocation },
+        { type: MessageBus },
+        { type: Serializer }
     ]; };
     return MessageBasedPlatformLocation;
 }());
@@ -1222,7 +1209,6 @@ var WebWorkerPlatformLocation = /** @class */ (function (_super) {
                     }
                     if (listeners) {
                         // There was a popState or hashChange event, so the location object thas been updated
-                        // There was a popState or hashChange event, so the location object thas been updated
                         _this._location = _this._serializer.deserialize(msg['location'], LocationType);
                         listeners.forEach(function (fn) { return fn(msg['event']); });
                     }
@@ -1233,9 +1219,7 @@ var WebWorkerPlatformLocation = /** @class */ (function (_super) {
         return _this;
     }
     /** @internal **/
-    /** @internal **/
-    WebWorkerPlatformLocation.prototype.init = /** @internal **/
-    function () {
+    WebWorkerPlatformLocation.prototype.init = function () {
         var _this = this;
         var args = new UiArguments('getLocation');
         return this._broker.runOnService(args, LocationType).then(function (val) {
@@ -1304,9 +1288,9 @@ var WebWorkerPlatformLocation = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     WebWorkerPlatformLocation.ctorParameters = function () { return [
-        { type: ClientMessageBrokerFactory, },
-        { type: MessageBus, },
-        { type: Serializer, },
+        { type: ClientMessageBrokerFactory },
+        { type: MessageBus },
+        { type: Serializer }
     ]; };
     return WebWorkerPlatformLocation;
 }(common.PlatformLocation));
@@ -1433,10 +1417,10 @@ var WebWorkerRendererFactory2 = /** @class */ (function () {
     ];
     /** @nocollapse */
     WebWorkerRendererFactory2.ctorParameters = function () { return [
-        { type: ClientMessageBrokerFactory, },
-        { type: MessageBus, },
-        { type: Serializer, },
-        { type: RenderStore, },
+        { type: ClientMessageBrokerFactory },
+        { type: MessageBus },
+        { type: Serializer },
+        { type: RenderStore }
     ]; };
     return WebWorkerRendererFactory2;
 }());
@@ -1849,8 +1833,6 @@ var WorkerAppModule = /** @class */ (function () {
                     ]
                 },] }
     ];
-    /** @nocollapse */
-    WorkerAppModule.ctorParameters = function () { return []; };
     return WorkerAppModule;
 }());
 
@@ -1882,6 +1864,11 @@ function bootstrapWorkerUi(workerScriptUri, customProviders) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+/**
+ * @module
+ * @description
+ * Entry point for all public APIs of this package.
+ */
 
 // This file only reexports content of the `src` folder. Keep it that way.
 
@@ -1892,6 +1879,10 @@ function bootstrapWorkerUi(workerScriptUri, customProviders) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+// This file is not used to build this module. It is only used during editing
+// by the TypeScript language service and during build for verification. `ngc`
+// replaces this file with production index.ts when it rewrites private symbol
+// names.
 
 /**
  * Generated bundle index. Do not edit.

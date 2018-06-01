@@ -60,16 +60,7 @@ export class RenderStore {
 RenderStore.decorators = [
     { type: Injectable }
 ];
-/** @nocollapse */
-RenderStore.ctorParameters = () => [];
 function RenderStore_tsickle_Closure_declarations() {
-    /** @type {!Array<{type: !Function, args: (undefined|!Array<?>)}>} */
-    RenderStore.decorators;
-    /**
-     * @nocollapse
-     * @type {function(): !Array<(null|{type: ?, decorators: (undefined|!Array<{type: !Function, args: (undefined|!Array<?>)}>)})>}
-     */
-    RenderStore.ctorParameters;
     /** @type {?} */
     RenderStore.prototype._nextIndex;
     /** @type {?} */
