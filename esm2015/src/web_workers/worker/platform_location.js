@@ -153,18 +153,11 @@ WebWorkerPlatformLocation.decorators = [
 ];
 /** @nocollapse */
 WebWorkerPlatformLocation.ctorParameters = () => [
-    { type: ClientMessageBrokerFactory, },
-    { type: MessageBus, },
-    { type: Serializer, },
+    { type: ClientMessageBrokerFactory },
+    { type: MessageBus },
+    { type: Serializer }
 ];
 function WebWorkerPlatformLocation_tsickle_Closure_declarations() {
-    /** @type {!Array<{type: !Function, args: (undefined|!Array<?>)}>} */
-    WebWorkerPlatformLocation.decorators;
-    /**
-     * @nocollapse
-     * @type {function(): !Array<(null|{type: ?, decorators: (undefined|!Array<{type: !Function, args: (undefined|!Array<?>)}>)})>}
-     */
-    WebWorkerPlatformLocation.ctorParameters;
     /** @type {?} */
     WebWorkerPlatformLocation.prototype._broker;
     /** @type {?} */
