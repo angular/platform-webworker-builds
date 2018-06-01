@@ -199,16 +199,9 @@ Serializer.decorators = [
 ];
 /** @nocollapse */
 Serializer.ctorParameters = () => [
-    { type: RenderStore, },
+    { type: RenderStore }
 ];
 function Serializer_tsickle_Closure_declarations() {
-    /** @type {!Array<{type: !Function, args: (undefined|!Array<?>)}>} */
-    Serializer.decorators;
-    /**
-     * @nocollapse
-     * @type {function(): !Array<(null|{type: ?, decorators: (undefined|!Array<{type: !Function, args: (undefined|!Array<?>)}>)})>}
-     */
-    Serializer.ctorParameters;
     /** @type {?} */
     Serializer.prototype._renderStore;
 }

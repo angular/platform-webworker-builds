@@ -269,20 +269,13 @@ MessageBasedRenderer2.decorators = [
 ];
 /** @nocollapse */
 MessageBasedRenderer2.ctorParameters = () => [
-    { type: ServiceMessageBrokerFactory, },
-    { type: MessageBus, },
-    { type: Serializer, },
-    { type: RenderStore, },
-    { type: RendererFactory2, },
+    { type: ServiceMessageBrokerFactory },
+    { type: MessageBus },
+    { type: Serializer },
+    { type: RenderStore },
+    { type: RendererFactory2 }
 ];
 function MessageBasedRenderer2_tsickle_Closure_declarations() {
-    /** @type {!Array<{type: !Function, args: (undefined|!Array<?>)}>} */
-    MessageBasedRenderer2.decorators;
-    /**
-     * @nocollapse
-     * @type {function(): !Array<(null|{type: ?, decorators: (undefined|!Array<{type: !Function, args: (undefined|!Array<?>)}>)})>}
-     */
-    MessageBasedRenderer2.ctorParameters;
     /** @type {?} */
     MessageBasedRenderer2.prototype._eventDispatcher;
     /** @type {?} */
