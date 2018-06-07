@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.0.4+1.sha-cfa5b65
+ * @license Angular v6.0.4+2.sha-7031972
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1103,7 +1103,7 @@ function spawnWebWorker(uri, instance) {
  * @description
  * Entry point for all public APIs of the common package.
  */
-var VERSION = new core.Version('6.0.4+1.sha-cfa5b65');
+var VERSION = new core.Version('6.0.4+2.sha-7031972');
 
 /**
  * @license
