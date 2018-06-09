@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.1.0-beta.0+23.sha-1135563
+ * @license Angular v6.1.0-beta.0+27.sha-49c5234
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1103,7 +1103,7 @@ function spawnWebWorker(uri, instance) {
  * @description
  * Entry point for all public APIs of the common package.
  */
-var VERSION = new core.Version('6.1.0-beta.0+23.sha-1135563');
+var VERSION = new core.Version('6.1.0-beta.0+27.sha-49c5234');
 
 /**
  * @license
@@ -1826,6 +1826,7 @@ var WorkerAppModule = /** @class */ (function () {
                         { provide: core.ErrorHandler, useFactory: errorHandler, deps: [] },
                         { provide: MessageBus, useFactory: createMessageBus, deps: [core.NgZone] },
                         { provide: core.APP_INITIALIZER, useValue: setupWebWorker, multi: true },
+                        { provide: common.ViewportScroller, useClass: common.ɵNullViewportScroller, deps: [] },
                     ],
                     exports: [
                         common.CommonModule,
