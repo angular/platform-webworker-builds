@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.1.0-beta.3+24.sha-3553977
+ * @license Angular v6.1.0-beta.3+26.sha-948e223
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -973,7 +973,7 @@ function spawnWebWorker(uri, instance) {
  * @description
  * Entry point for all public APIs of the common package.
  */
-const VERSION = new Version('6.1.0-beta.3+24.sha-3553977');
+const VERSION = new Version('6.1.0-beta.3+26.sha-948e223');
 
 /**
  * @license
