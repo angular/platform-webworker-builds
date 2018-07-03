@@ -13,7 +13,7 @@ import { RenderStore } from './render_store';
 export declare const enum SerializerTypes {
     RENDERER_TYPE_2 = 0,
     PRIMITIVE = 1,
-    RENDER_STORE_OBJECT = 2,
+    RENDER_STORE_OBJECT = 2
 }
 export declare class LocationType {
     href: string;
@@ -32,10 +32,10 @@ export declare class Serializer {
     constructor(_renderStore: RenderStore);
     serialize(obj: any, type?: Type<any> | SerializerTypes): Object;
     deserialize(map: any, type?: Type<any> | SerializerTypes, data?: any): any;
-    private _serializeLocation(loc);
-    private _deserializeLocation(loc);
-    private _serializeRenderComponentType(type);
-    private _deserializeRenderComponentType(props);
-    private _serializeRendererType2(type);
-    private _deserializeRendererType2(props);
+    private _serializeLocation;
+    private _deserializeLocation;
+    private _serializeRenderComponentType;
+    private _deserializeRenderComponentType;
+    private _serializeRendererType2;
+    private _deserializeRendererType2;
 }
