@@ -24,9 +24,9 @@ export declare class ClientMessageBroker {
     private channel;
     private _pending;
     private _sink;
-    private _generateMessageId(name);
+    private _generateMessageId;
     runOnService(args: UiArguments, returnType: Type<any> | SerializerTypes | null): Promise<any> | null;
-    private _handleMessage(message);
+    private _handleMessage;
 }
 /**
  * @experimental WebWorker support in Angular is experimental.
@@ -41,6 +41,6 @@ export declare class FnArg {
  */
 export declare class UiArguments {
     method: string;
-    args: FnArg[] | undefined;
+    args?: FnArg[] | undefined;
     constructor(method: string, args?: FnArg[] | undefined);
 }
