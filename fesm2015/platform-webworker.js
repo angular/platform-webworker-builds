@@ -1,23 +1,16 @@
 /**
- * @license Angular v6.1.0-beta.3+45.sha-fddd2af
+ * @license Angular v6.1.0-beta.3+47.sha-1e74ea9
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
 
-import { CommonModule, DOCUMENT, LOCATION_INITIALIZED, PlatformLocation, ViewportScroller, ɵNullViewportScroller, ɵPLATFORM_WORKER_APP_ID, ɵPLATFORM_WORKER_UI_ID } from '@angular/common';
-import { APP_INITIALIZER, ApplicationModule, ErrorHandler, EventEmitter, Injectable, InjectionToken, Injector, NgModule, NgZone, PLATFORM_ID, PLATFORM_INITIALIZER, RenderComponentType, RendererFactory2, Testability, Version, createPlatformFactory, isDevMode, platformCore, ɵAPP_ID_RANDOM_PROVIDER, ɵstringify } from '@angular/core';
-import { DOCUMENT as DOCUMENT$1, EVENT_MANAGER_PLUGINS, EventManager, HAMMER_GESTURE_CONFIG, HammerGestureConfig, ɵBROWSER_SANITIZATION_PROVIDERS, ɵBrowserDomAdapter, ɵBrowserGetTestability, ɵBrowserPlatformLocation, ɵDomAdapter, ɵDomEventsPlugin, ɵDomRendererFactory2, ɵDomSharedStylesHost, ɵHammerGesturesPlugin, ɵKeyEventsPlugin, ɵSharedStylesHost, ɵsetRootDomAdapter } from '@angular/platform-browser';
+import { InjectionToken, Injectable, RenderComponentType, ɵstringify, EventEmitter, RendererFactory2, ErrorHandler, Injector, NgZone, PLATFORM_ID, PLATFORM_INITIALIZER, Testability, createPlatformFactory, isDevMode, platformCore, ɵAPP_ID_RANDOM_PROVIDER, Version, APP_INITIALIZER, ApplicationModule, NgModule } from '@angular/core';
+import { ɵPLATFORM_WORKER_UI_ID, DOCUMENT as DOCUMENT$1, PlatformLocation, LOCATION_INITIALIZED, CommonModule, ViewportScroller, ɵNullViewportScroller, ɵPLATFORM_WORKER_APP_ID } from '@angular/common';
+import { DOCUMENT, EVENT_MANAGER_PLUGINS, EventManager, HAMMER_GESTURE_CONFIG, HammerGestureConfig, ɵBROWSER_SANITIZATION_PROVIDERS, ɵBrowserDomAdapter, ɵBrowserGetTestability, ɵDomEventsPlugin, ɵDomRendererFactory2, ɵDomSharedStylesHost, ɵHammerGesturesPlugin, ɵKeyEventsPlugin, ɵSharedStylesHost, ɵBrowserPlatformLocation, ɵDomAdapter, ɵsetRootDomAdapter } from '@angular/platform-browser';
 
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
- */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
  */
 /** @type {?} */
 const ON_WEB_WORKER = new InjectionToken('WebWorker.onWebWorker');
@@ -44,26 +37,10 @@ const ON_WEB_WORKER = new InjectionToken('WebWorker.onWebWorker');
  */
 class MessageBus {
 }
-/**
- * \@experimental WebWorker support in Angular is currenlty experimental.
- * @record
- */
-
-/**
- * \@experimental WebWorker support in Angular is currenlty experimental.
- * @record
- */
 
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
- */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
  */
 class RenderStore {
     constructor() {
@@ -120,13 +97,6 @@ RenderStore.decorators = [
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
- */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
  */
 class LocationType {
     /**
@@ -292,13 +262,6 @@ Serializer.ctorParameters = () => [
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
- */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
  */
 /**
  * \@experimental WebWorker support in Angular is experimental.
@@ -470,17 +433,6 @@ class UiArguments {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
- * @record
- */
-
 class PostMessageBusSink {
     /**
      * @param {?} _postMessageTarget
@@ -696,13 +648,6 @@ class _Channel {
  * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
  * \@experimental WebWorker support in Angular is currently experimental.
  */
 class ServiceMessageBrokerFactory {
@@ -810,10 +755,6 @@ class ServiceMessageBroker {
         });
     }
 }
-/**
- * \@experimental WebWorker support in Angular is currently experimental.
- * @record
- */
 
 /**
  * @fileoverview added by tsickle
@@ -1069,13 +1010,6 @@ class EventDispatcher {
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
- */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
  */
 class MessageBasedRenderer2 {
     /**
@@ -1346,13 +1280,6 @@ MessageBasedRenderer2.ctorParameters = () => [
  * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
  * Wrapper class that exposes the Worker
  * and underlying {\@link MessageBus} for lower level message passing.
  *
@@ -1394,20 +1321,20 @@ const _WORKER_UI_PLATFORM_PROVIDERS = [
     { provide: WORKER_UI_STARTABLE_MESSAGING_SERVICE, useExisting: MessageBasedRenderer2, multi: true },
     ɵBROWSER_SANITIZATION_PROVIDERS,
     { provide: ErrorHandler, useFactory: _exceptionHandler, deps: [] },
-    { provide: DOCUMENT$1, useFactory: _document, deps: [] },
+    { provide: DOCUMENT, useFactory: _document, deps: [] },
     // TODO(jteplitz602): Investigate if we definitely need EVENT_MANAGER on the render thread
     // #5298
     {
         provide: EVENT_MANAGER_PLUGINS,
         useClass: ɵDomEventsPlugin,
-        deps: [DOCUMENT$1, NgZone],
+        deps: [DOCUMENT, NgZone],
         multi: true
     },
-    { provide: EVENT_MANAGER_PLUGINS, useClass: ɵKeyEventsPlugin, deps: [DOCUMENT$1], multi: true },
+    { provide: EVENT_MANAGER_PLUGINS, useClass: ɵKeyEventsPlugin, deps: [DOCUMENT], multi: true },
     {
         provide: EVENT_MANAGER_PLUGINS,
         useClass: ɵHammerGesturesPlugin,
-        deps: [DOCUMENT$1, HAMMER_GESTURE_CONFIG],
+        deps: [DOCUMENT, HAMMER_GESTURE_CONFIG],
         multi: true
     },
     { provide: HAMMER_GESTURE_CONFIG, useClass: HammerGestureConfig, deps: [] },
@@ -1428,7 +1355,7 @@ const _WORKER_UI_PLATFORM_PROVIDERS = [
     { provide: Serializer, deps: [RenderStore] },
     { provide: ON_WEB_WORKER, useValue: false },
     { provide: RenderStore, deps: [] },
-    { provide: ɵDomSharedStylesHost, deps: [DOCUMENT$1] },
+    { provide: ɵDomSharedStylesHost, deps: [DOCUMENT] },
     { provide: Testability, deps: [NgZone] },
     { provide: EventManager, deps: [EVENT_MANAGER_PLUGINS, NgZone] },
     { provide: WebWorkerInstance, deps: [] },
@@ -1528,26 +1455,12 @@ function spawnWebWorker(uri, instance) {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 /** @type {?} */
-const VERSION = new Version('6.1.0-beta.3+45.sha-fddd2af');
+const VERSION = new Version('6.1.0-beta.3+47.sha-1e74ea9');
 
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
- */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
  */
 class MessageBasedPlatformLocation {
     /**
@@ -1570,7 +1483,7 @@ class MessageBasedPlatformLocation {
      */
     start() {
         /** @type {?} */
-        const P = 1;
+        const P = 1 /* PRIMITIVE */;
         this._broker.registerMethod('getLocation', null, this._getLocation.bind(this), LocationType);
         this._broker.registerMethod('setPathname', [P], this._setPathname.bind(this));
         this._broker.registerMethod('pushState', [P, P, P], this._platformLocation.pushState.bind(this._platformLocation));
@@ -1615,13 +1528,6 @@ MessageBasedPlatformLocation.ctorParameters = () => [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 /** *
  * A list of {\@link Provider}s. To use the router in a Worker enabled application you must
  * include these providers when setting up the render thread.
@@ -1630,7 +1536,7 @@ MessageBasedPlatformLocation.ctorParameters = () => [
 const WORKER_UI_LOCATION_PROVIDERS = /** @type {?} */ ([
     { provide: MessageBasedPlatformLocation, deps: [ServiceMessageBrokerFactory,
             ɵBrowserPlatformLocation, MessageBus, Serializer] },
-    { provide: ɵBrowserPlatformLocation, deps: [DOCUMENT] },
+    { provide: ɵBrowserPlatformLocation, deps: [DOCUMENT$1] },
     { provide: PLATFORM_INITIALIZER, useFactory: initUiLocation, multi: true, deps: [Injector] }
 ]);
 /**
@@ -1648,13 +1554,6 @@ function initUiLocation(injector) {
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
- */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
  */
 class WebWorkerPlatformLocation extends PlatformLocation {
     /**
@@ -1814,13 +1713,6 @@ WebWorkerPlatformLocation.ctorParameters = () => [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 /** *
  * The {\@link PlatformLocation} providers that should be added when the {\@link Location} is used in
  * a worker context.
@@ -1855,13 +1747,6 @@ function appInitFnFactory(platformLocation, zone) {
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
- */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
  */
 class NamedEventEmitter {
     /**
@@ -2318,13 +2203,6 @@ class WebWorkerRenderNode {
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
- */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
  */
 /**
  * This adapter is required to log error messages.
@@ -3008,13 +2886,6 @@ class WorkerDomAdapter extends ɵDomAdapter {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 /** *
  * \@experimental
   @type {?} */
@@ -3064,7 +2935,7 @@ WorkerAppModule.decorators = [
                 providers: [
                     ɵBROWSER_SANITIZATION_PROVIDERS,
                     Serializer,
-                    { provide: DOCUMENT$1, useValue: null },
+                    { provide: DOCUMENT, useValue: null },
                     ClientMessageBrokerFactory,
                     ServiceMessageBrokerFactory,
                     WebWorkerRendererFactory2,
@@ -3088,13 +2959,6 @@ WorkerAppModule.decorators = [
  * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
  * Bootstraps the worker ui.
  *
  * \@experimental
@@ -3115,36 +2979,12 @@ function bootstrapWorkerUi(workerScriptUri, customProviders = []) {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
- * @module
- * @description
- * Entry point for all public APIs of this package.
- */
-
 // This file only reexports content of the `src` folder. Keep it that way.
 
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-// This file is not used to build this module. It is only used during editing
-// by the TypeScript language service and during build for verification. `ngc`
-// replaces this file with production index.ts when it rewrites private symbol
-// names.
 
 /**
  * Generated bundle index. Do not edit.
