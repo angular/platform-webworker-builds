@@ -31,8 +31,8 @@ export declare class ServiceMessageBroker {
     private _sink;
     private _methods;
     registerMethod(methodName: string, signature: Array<Type<any> | SerializerTypes> | null, method: (..._: any[]) => Promise<any> | void, returnType?: Type<any> | SerializerTypes): void;
-    private _handleMessage(message);
-    private _wrapWebWorkerPromise(id, promise, type);
+    private _handleMessage;
+    private _wrapWebWorkerPromise;
 }
 /**
  * @experimental WebWorker support in Angular is currently experimental.

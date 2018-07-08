@@ -1,13 +1,13 @@
 /**
- * @license Angular v6.1.0-beta.1+46.sha-a5799e6
+ * @license Angular v6.1.0-beta.3+80.sha-6c604bd
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
 
-import { __extends, __read, __spread } from 'tslib';
-import { CommonModule, DOCUMENT, LOCATION_INITIALIZED, PlatformLocation, ViewportScroller, ɵNullViewportScroller, ɵPLATFORM_WORKER_APP_ID, ɵPLATFORM_WORKER_UI_ID } from '@angular/common';
-import { APP_INITIALIZER, ApplicationModule, ErrorHandler, EventEmitter, Injectable, InjectionToken, Injector, NgModule, NgZone, PLATFORM_ID, PLATFORM_INITIALIZER, RenderComponentType, RendererFactory2, Testability, Version, createPlatformFactory, isDevMode, platformCore, ɵAPP_ID_RANDOM_PROVIDER, ɵstringify } from '@angular/core';
-import { DOCUMENT as DOCUMENT$1, EVENT_MANAGER_PLUGINS, EventManager, HAMMER_GESTURE_CONFIG, HammerGestureConfig, ɵBROWSER_SANITIZATION_PROVIDERS, ɵBrowserDomAdapter, ɵBrowserGetTestability, ɵBrowserPlatformLocation, ɵDomAdapter, ɵDomEventsPlugin, ɵDomRendererFactory2, ɵDomSharedStylesHost, ɵHammerGesturesPlugin, ɵKeyEventsPlugin, ɵSharedStylesHost, ɵsetRootDomAdapter } from '@angular/platform-browser';
+import { InjectionToken, Injectable, RenderComponentType, ɵstringify, EventEmitter, RendererFactory2, ErrorHandler, Injector, NgZone, PLATFORM_ID, PLATFORM_INITIALIZER, Testability, createPlatformFactory, isDevMode, platformCore, ɵAPP_ID_RANDOM_PROVIDER, Version, APP_INITIALIZER, ApplicationModule, NgModule } from '@angular/core';
+import { __read, __spread, __extends } from 'tslib';
+import { ɵPLATFORM_WORKER_UI_ID, DOCUMENT as DOCUMENT$1, PlatformLocation, LOCATION_INITIALIZED, CommonModule, ViewportScroller, ɵNullViewportScroller, ɵPLATFORM_WORKER_APP_ID } from '@angular/common';
+import { DOCUMENT, EVENT_MANAGER_PLUGINS, EventManager, HAMMER_GESTURE_CONFIG, HammerGestureConfig, ɵBROWSER_SANITIZATION_PROVIDERS, ɵBrowserDomAdapter, ɵBrowserGetTestability, ɵDomEventsPlugin, ɵDomRendererFactory2, ɵDomSharedStylesHost, ɵHammerGesturesPlugin, ɵKeyEventsPlugin, ɵSharedStylesHost, ɵBrowserPlatformLocation, ɵDomAdapter, ɵsetRootDomAdapter } from '@angular/platform-browser';
 
 /**
  * @license
@@ -925,20 +925,20 @@ var _WORKER_UI_PLATFORM_PROVIDERS = [
     { provide: WORKER_UI_STARTABLE_MESSAGING_SERVICE, useExisting: MessageBasedRenderer2, multi: true },
     ɵBROWSER_SANITIZATION_PROVIDERS,
     { provide: ErrorHandler, useFactory: _exceptionHandler, deps: [] },
-    { provide: DOCUMENT$1, useFactory: _document, deps: [] },
+    { provide: DOCUMENT, useFactory: _document, deps: [] },
     // TODO(jteplitz602): Investigate if we definitely need EVENT_MANAGER on the render thread
     // #5298
     {
         provide: EVENT_MANAGER_PLUGINS,
         useClass: ɵDomEventsPlugin,
-        deps: [DOCUMENT$1, NgZone],
+        deps: [DOCUMENT, NgZone],
         multi: true
     },
-    { provide: EVENT_MANAGER_PLUGINS, useClass: ɵKeyEventsPlugin, deps: [DOCUMENT$1], multi: true },
+    { provide: EVENT_MANAGER_PLUGINS, useClass: ɵKeyEventsPlugin, deps: [DOCUMENT], multi: true },
     {
         provide: EVENT_MANAGER_PLUGINS,
         useClass: ɵHammerGesturesPlugin,
-        deps: [DOCUMENT$1, HAMMER_GESTURE_CONFIG],
+        deps: [DOCUMENT, HAMMER_GESTURE_CONFIG],
         multi: true
     },
     { provide: HAMMER_GESTURE_CONFIG, useClass: HammerGestureConfig, deps: [] },
@@ -959,7 +959,7 @@ var _WORKER_UI_PLATFORM_PROVIDERS = [
     { provide: Serializer, deps: [RenderStore] },
     { provide: ON_WEB_WORKER, useValue: false },
     { provide: RenderStore, deps: [] },
-    { provide: ɵDomSharedStylesHost, deps: [DOCUMENT$1] },
+    { provide: ɵDomSharedStylesHost, deps: [DOCUMENT] },
     { provide: Testability, deps: [NgZone] },
     { provide: EventManager, deps: [EVENT_MANAGER_PLUGINS, NgZone] },
     { provide: WebWorkerInstance, deps: [] },
@@ -1030,12 +1030,7 @@ function spawnWebWorker(uri, instance) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-/**
- * @module
- * @description
- * Entry point for all public APIs of the common package.
- */
-var VERSION = new Version('6.1.0-beta.1+46.sha-a5799e6');
+var VERSION = new Version('6.1.0-beta.3+80.sha-6c604bd');
 
 /**
  * @license
@@ -1055,7 +1050,7 @@ var MessageBasedPlatformLocation = /** @class */ (function () {
         this._channelSink = bus.to(ROUTER_CHANNEL);
     }
     MessageBasedPlatformLocation.prototype.start = function () {
-        var P = 1;
+        var P = 1 /* PRIMITIVE */;
         this._broker.registerMethod('getLocation', null, this._getLocation.bind(this), LocationType);
         this._broker.registerMethod('setPathname', [P], this._setPathname.bind(this));
         this._broker.registerMethod('pushState', [P, P, P], this._platformLocation.pushState.bind(this._platformLocation));
@@ -1101,7 +1096,7 @@ var MessageBasedPlatformLocation = /** @class */ (function () {
 var WORKER_UI_LOCATION_PROVIDERS = [
     { provide: MessageBasedPlatformLocation, deps: [ServiceMessageBrokerFactory,
             ɵBrowserPlatformLocation, MessageBus, Serializer] },
-    { provide: ɵBrowserPlatformLocation, deps: [DOCUMENT] },
+    { provide: ɵBrowserPlatformLocation, deps: [DOCUMENT$1] },
     { provide: PLATFORM_INITIALIZER, useFactory: initUiLocation, multi: true, deps: [Injector] }
 ];
 function initUiLocation(injector) {
@@ -1748,7 +1743,7 @@ var WorkerAppModule = /** @class */ (function () {
                     providers: [
                         ɵBROWSER_SANITIZATION_PROVIDERS,
                         Serializer,
-                        { provide: DOCUMENT$1, useValue: null },
+                        { provide: DOCUMENT, useValue: null },
                         ClientMessageBrokerFactory,
                         ServiceMessageBrokerFactory,
                         WebWorkerRendererFactory2,
@@ -1797,12 +1792,6 @@ function bootstrapWorkerUi(workerScriptUri, customProviders) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-/**
- * @module
- * @description
- * Entry point for all public APIs of this package.
- */
-
 // This file only reexports content of the `src` folder. Keep it that way.
 
 /**
@@ -1812,10 +1801,6 @@ function bootstrapWorkerUi(workerScriptUri, customProviders) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-// This file is not used to build this module. It is only used during editing
-// by the TypeScript language service and during build for verification. `ngc`
-// replaces this file with production index.ts when it rewrites private symbol
-// names.
 
 /**
  * Generated bundle index. Do not edit.
