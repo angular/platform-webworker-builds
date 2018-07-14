@@ -1,11 +1,11 @@
 /**
- * @license Angular v6.0.8+9.sha-15df5f7
+ * @license Angular v6.0.9+9.sha-1f163cd
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
 
 import { InjectionToken, Injectable, RenderComponentType, ɵstringify, EventEmitter, RendererFactory2, ErrorHandler, Injector, NgZone, PLATFORM_ID, PLATFORM_INITIALIZER, Testability, createPlatformFactory, isDevMode, platformCore, ɵAPP_ID_RANDOM_PROVIDER, Version, APP_INITIALIZER, ApplicationModule, NgModule } from '@angular/core';
-import { __extends, __read, __spread } from 'tslib';
+import { __read, __spread, __extends } from 'tslib';
 import { ɵPLATFORM_WORKER_UI_ID, DOCUMENT as DOCUMENT$1, PlatformLocation, LOCATION_INITIALIZED, CommonModule, ɵPLATFORM_WORKER_APP_ID } from '@angular/common';
 import { DOCUMENT, EVENT_MANAGER_PLUGINS, EventManager, HAMMER_GESTURE_CONFIG, HammerGestureConfig, ɵBROWSER_SANITIZATION_PROVIDERS, ɵBrowserDomAdapter, ɵBrowserGetTestability, ɵDomEventsPlugin, ɵDomRendererFactory2, ɵDomSharedStylesHost, ɵHammerGesturesPlugin, ɵKeyEventsPlugin, ɵSharedStylesHost, ɵBrowserPlatformLocation, ɵDomAdapter, ɵsetRootDomAdapter } from '@angular/platform-browser';
 
@@ -1030,7 +1030,7 @@ function spawnWebWorker(uri, instance) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var VERSION = new Version('6.0.8+9.sha-15df5f7');
+var VERSION = new Version('6.0.9+9.sha-1f163cd');
 
 /**
  * @license
