@@ -19,8 +19,8 @@ export declare class PostMessageBusSink implements MessageBusSink {
     attachToZone(zone: NgZone): void;
     initChannel(channel: string, runInZone?: boolean): void;
     to(channel: string): EventEmitter<any>;
-    private _handleOnEventDone();
-    private _sendMessages(messages);
+    private _handleOnEventDone;
+    private _sendMessages;
 }
 export declare class PostMessageBusSource implements MessageBusSource {
     private _zone;
@@ -29,8 +29,8 @@ export declare class PostMessageBusSource implements MessageBusSource {
     attachToZone(zone: NgZone): void;
     initChannel(channel: string, runInZone?: boolean): void;
     from(channel: string): EventEmitter<any>;
-    private _handleMessages(ev);
-    private _handleMessage(data);
+    private _handleMessages;
+    private _handleMessage;
 }
 /**
  * A TypeScript implementation of {@link MessageBus} for communicating via JavaScript's
