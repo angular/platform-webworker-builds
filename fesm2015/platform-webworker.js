@@ -1,29 +1,23 @@
 /**
- * @license Angular v6.0.0-rc.5+145.sha-741fa9e
+ * @license Angular v7.0.0-beta.1+25.sha-ca8c683
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
 
-import { CommonModule, DOCUMENT, LOCATION_INITIALIZED, PlatformLocation, ɵPLATFORM_WORKER_APP_ID, ɵPLATFORM_WORKER_UI_ID } from '@angular/common';
-import { APP_INITIALIZER, ApplicationModule, ErrorHandler, EventEmitter, Injectable, InjectionToken, Injector, NgModule, NgZone, PLATFORM_ID, PLATFORM_INITIALIZER, RenderComponentType, RendererFactory2, Testability, Version, createPlatformFactory, isDevMode, platformCore, ɵAPP_ID_RANDOM_PROVIDER, ɵstringify } from '@angular/core';
-import { DOCUMENT as DOCUMENT$1, EVENT_MANAGER_PLUGINS, EventManager, HAMMER_GESTURE_CONFIG, HammerGestureConfig, ɵBROWSER_SANITIZATION_PROVIDERS, ɵBrowserDomAdapter, ɵBrowserGetTestability, ɵBrowserPlatformLocation, ɵDomAdapter, ɵDomEventsPlugin, ɵDomRendererFactory2, ɵDomSharedStylesHost, ɵHammerGesturesPlugin, ɵKeyEventsPlugin, ɵSharedStylesHost, ɵsetRootDomAdapter } from '@angular/platform-browser';
+import { InjectionToken, Injectable, RenderComponentType, ɵstringify, EventEmitter, RendererFactory2, ErrorHandler, Injector, NgZone, PLATFORM_ID, PLATFORM_INITIALIZER, Testability, createPlatformFactory, isDevMode, platformCore, ɵAPP_ID_RANDOM_PROVIDER, Version, APP_INITIALIZER, ApplicationModule, NgModule } from '@angular/core';
+import { ɵPLATFORM_WORKER_UI_ID, DOCUMENT as DOCUMENT$1, PlatformLocation, LOCATION_INITIALIZED, CommonModule, ViewportScroller, ɵNullViewportScroller, ɵPLATFORM_WORKER_APP_ID } from '@angular/common';
+import { DOCUMENT, EVENT_MANAGER_PLUGINS, EventManager, HAMMER_GESTURE_CONFIG, HammerGestureConfig, ɵBROWSER_SANITIZATION_PROVIDERS, ɵBrowserDomAdapter, ɵBrowserGetTestability, ɵDomEventsPlugin, ɵDomRendererFactory2, ɵDomSharedStylesHost, ɵHammerGesturesPlugin, ɵKeyEventsPlugin, ɵSharedStylesHost, ɵBrowserPlatformLocation, ɵDomAdapter, ɵsetRootDomAdapter } from '@angular/platform-browser';
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
+/** @type {?} */
 const ON_WEB_WORKER = new InjectionToken('WebWorker.onWebWorker');
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -43,26 +37,10 @@ const ON_WEB_WORKER = new InjectionToken('WebWorker.onWebWorker');
  */
 class MessageBus {
 }
-/**
- * \@experimental WebWorker support in Angular is currenlty experimental.
- * @record
- */
-
-/**
- * \@experimental WebWorker support in Angular is currenlty experimental.
- * @record
- */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 class RenderStore {
     constructor() {
@@ -90,7 +68,8 @@ class RenderStore {
      * @return {?}
      */
     remove(obj) {
-        const /** @type {?} */ index = this._lookupByObject.get(obj);
+        /** @type {?} */
+        const index = this._lookupByObject.get(obj);
         if (index != null) {
             this._lookupByObject.delete(obj);
             this._lookupById.delete(index);
@@ -114,19 +93,10 @@ class RenderStore {
 RenderStore.decorators = [
     { type: Injectable }
 ];
-/** @nocollapse */
-RenderStore.ctorParameters = () => [];
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 class LocationType {
     /**
@@ -286,19 +256,12 @@ Serializer.decorators = [
 ];
 /** @nocollapse */
 Serializer.ctorParameters = () => [
-    { type: RenderStore, },
+    { type: RenderStore }
 ];
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * \@experimental WebWorker support in Angular is experimental.
@@ -329,8 +292,8 @@ ClientMessageBrokerFactory.decorators = [
 ];
 /** @nocollapse */
 ClientMessageBrokerFactory.ctorParameters = () => [
-    { type: MessageBus, },
-    { type: Serializer, },
+    { type: MessageBus },
+    { type: Serializer }
 ];
 /**
  * \@experimental WebWorker support in Angular is experimental.
@@ -347,7 +310,8 @@ class ClientMessageBroker {
         this._pending = new Map();
         this._sink = messageBus.to(channel);
         this._serializer = _serializer;
-        const /** @type {?} */ source = messageBus.from(channel);
+        /** @type {?} */
+        const source = messageBus.from(channel);
         source.subscribe({ next: (message) => this._handleMessage(message) });
     }
     /**
@@ -355,9 +319,12 @@ class ClientMessageBroker {
      * @return {?}
      */
     _generateMessageId(name) {
-        const /** @type {?} */ time = ɵstringify(new Date().getTime());
-        let /** @type {?} */ iteration = 0;
-        let /** @type {?} */ id = name + time + ɵstringify(iteration);
+        /** @type {?} */
+        const time = ɵstringify(new Date().getTime());
+        /** @type {?} */
+        let iteration = 0;
+        /** @type {?} */
+        let id = name + time + ɵstringify(iteration);
         while (this._pending.has(id)) {
             id = `${name}${time}${iteration}`;
             iteration++;
@@ -370,7 +337,8 @@ class ClientMessageBroker {
      * @return {?}
      */
     runOnService(args, returnType) {
-        const /** @type {?} */ fnArgs = [];
+        /** @type {?} */
+        const fnArgs = [];
         if (args.args) {
             args.args.forEach(argument => {
                 if (argument.type != null) {
@@ -381,10 +349,13 @@ class ClientMessageBroker {
                 }
             });
         }
-        let /** @type {?} */ promise;
-        let /** @type {?} */ id = null;
+        /** @type {?} */
+        let promise;
+        /** @type {?} */
+        let id = null;
         if (returnType != null) {
-            let /** @type {?} */ completer = /** @type {?} */ ((undefined));
+            /** @type {?} */
+            let completer = /** @type {?} */ ((undefined));
             promise = new Promise((resolve, reject) => { completer = { resolve, reject }; });
             id = this._generateMessageId(args.method);
             this._pending.set(id, completer);
@@ -400,7 +371,8 @@ class ClientMessageBroker {
         else {
             promise = null;
         }
-        const /** @type {?} */ message = {
+        /** @type {?} */
+        const message = {
             'method': args.method,
             'args': fnArgs,
         };
@@ -416,7 +388,8 @@ class ClientMessageBroker {
      */
     _handleMessage(message) {
         if (message.type === 'result' || message.type === 'error') {
-            const /** @type {?} */ id = /** @type {?} */ ((message.id));
+            /** @type {?} */
+            const id = /** @type {?} */ ((message.id));
             if (this._pending.has(id)) {
                 if (message.type === 'result') {
                     /** @type {?} */ ((this._pending.get(id))).resolve(message.value);
@@ -458,19 +431,8 @@ class UiArguments {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
- * @record
- */
-
 class PostMessageBusSink {
     /**
      * @param {?} _postMessageTarget
@@ -497,11 +459,14 @@ class PostMessageBusSink {
         if (this._channels.hasOwnProperty(channel)) {
             throw new Error(`${channel} has already been initialized`);
         }
-        const /** @type {?} */ emitter = new EventEmitter(false);
-        const /** @type {?} */ channelInfo = new _Channel(emitter, runInZone);
+        /** @type {?} */
+        const emitter = new EventEmitter(false);
+        /** @type {?} */
+        const channelInfo = new _Channel(emitter, runInZone);
         this._channels[channel] = channelInfo;
         emitter.subscribe((data) => {
-            const /** @type {?} */ message = { channel: channel, message: data };
+            /** @type {?} */
+            const message = { channel: channel, message: data };
             if (runInZone) {
                 this._messageBuffer.push(message);
             }
@@ -547,8 +512,8 @@ class PostMessageBusSource {
             eventTarget.addEventListener('message', (ev) => this._handleMessages(ev));
         }
         else {
-            // if no eventTarget is given we assume we're in a WebWorker and listen on the global scope
-            const /** @type {?} */ workerScope = /** @type {?} */ (self);
+            /** @type {?} */
+            const workerScope = /** @type {?} */ (self);
             workerScope.addEventListener('message', (ev) => this._handleMessages(ev));
         }
     }
@@ -566,8 +531,10 @@ class PostMessageBusSource {
         if (this._channels.hasOwnProperty(channel)) {
             throw new Error(`${channel} has already been initialized`);
         }
-        const /** @type {?} */ emitter = new EventEmitter(false);
-        const /** @type {?} */ channelInfo = new _Channel(emitter, runInZone);
+        /** @type {?} */
+        const emitter = new EventEmitter(false);
+        /** @type {?} */
+        const channelInfo = new _Channel(emitter, runInZone);
         this._channels[channel] = channelInfo;
     }
     /**
@@ -587,8 +554,9 @@ class PostMessageBusSource {
      * @return {?}
      */
     _handleMessages(ev) {
-        const /** @type {?} */ messages = ev.data;
-        for (let /** @type {?} */ i = 0; i < messages.length; i++) {
+        /** @type {?} */
+        const messages = ev.data;
+        for (let i = 0; i < messages.length; i++) {
             this._handleMessage(messages[i]);
         }
     }
@@ -597,9 +565,11 @@ class PostMessageBusSource {
      * @return {?}
      */
     _handleMessage(data) {
-        const /** @type {?} */ channel = data.channel;
+        /** @type {?} */
+        const channel = data.channel;
         if (this._channels.hasOwnProperty(channel)) {
-            const /** @type {?} */ channelInfo = this._channels[channel];
+            /** @type {?} */
+            const channelInfo = this._channels[channel];
             if (channelInfo.runInZone) {
                 this._zone.run(() => { channelInfo.emitter.emit(data.message); });
             }
@@ -655,8 +625,8 @@ PostMessageBus.decorators = [
 ];
 /** @nocollapse */
 PostMessageBus.ctorParameters = () => [
-    { type: PostMessageBusSink, },
-    { type: PostMessageBusSource, },
+    { type: PostMessageBusSink },
+    { type: PostMessageBusSource }
 ];
 /**
  * Helper class that wraps a channel's {\@link EventEmitter} and
@@ -675,14 +645,7 @@ class _Channel {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * \@experimental WebWorker support in Angular is currently experimental.
@@ -713,8 +676,8 @@ ServiceMessageBrokerFactory.decorators = [
 ];
 /** @nocollapse */
 ServiceMessageBrokerFactory.ctorParameters = () => [
-    { type: MessageBus, },
-    { type: Serializer, },
+    { type: MessageBus },
+    { type: Serializer }
 ];
 /**
  * Helper class for UIComponents that allows components to register methods.
@@ -736,7 +699,8 @@ class ServiceMessageBroker {
         this.channel = channel;
         this._methods = new Map();
         this._sink = messageBus.to(channel);
-        const /** @type {?} */ source = messageBus.from(channel);
+        /** @type {?} */
+        const source = messageBus.from(channel);
         source.subscribe({ next: (message) => this._handleMessage(message) });
     }
     /**
@@ -748,14 +712,19 @@ class ServiceMessageBroker {
      */
     registerMethod(methodName, signature, method, returnType) {
         this._methods.set(methodName, (message) => {
-            const /** @type {?} */ serializedArgs = message.args;
-            const /** @type {?} */ numArgs = signature ? signature.length : 0;
-            const /** @type {?} */ deserializedArgs = new Array(numArgs);
-            for (let /** @type {?} */ i = 0; i < numArgs; i++) {
-                const /** @type {?} */ serializedArg = serializedArgs[i];
+            /** @type {?} */
+            const serializedArgs = message.args;
+            /** @type {?} */
+            const numArgs = signature ? signature.length : 0;
+            /** @type {?} */
+            const deserializedArgs = new Array(numArgs);
+            for (let i = 0; i < numArgs; i++) {
+                /** @type {?} */
+                const serializedArg = serializedArgs[i];
                 deserializedArgs[i] = this._serializer.deserialize(serializedArg, /** @type {?} */ ((signature))[i]);
             }
-            const /** @type {?} */ promise = method(...deserializedArgs);
+            /** @type {?} */
+            const promise = method(...deserializedArgs);
             if (returnType && promise) {
                 this._wrapWebWorkerPromise(message.id, promise, returnType);
             }
@@ -786,14 +755,10 @@ class ServiceMessageBroker {
         });
     }
 }
-/**
- * \@experimental WebWorker support in Angular is currently experimental.
- * @record
- */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -802,17 +767,19 @@ class ServiceMessageBroker {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-/**
+/** *
  * All channels used by angular's WebWorker components are listed here.
  * You should not use these channels in your application code.
- */
+  @type {?} */
 const RENDERER_2_CHANNEL = 'v2.ng-Renderer';
+/** @type {?} */
 const EVENT_2_CHANNEL = 'v2.ng-Events';
+/** @type {?} */
 const ROUTER_CHANNEL = 'ng-Router';
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -821,16 +788,21 @@ const ROUTER_CHANNEL = 'ng-Router';
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+/** @type {?} */
 const MOUSE_EVENT_PROPERTIES = [
     'altKey', 'button', 'clientX', 'clientY', 'metaKey', 'movementX', 'movementY', 'offsetX',
     'offsetY', 'region', 'screenX', 'screenY', 'shiftKey'
 ];
+/** @type {?} */
 const KEYBOARD_EVENT_PROPERTIES = [
     'altkey', 'charCode', 'code', 'ctrlKey', 'isComposing', 'key', 'keyCode', 'location', 'metaKey',
     'repeat', 'shiftKey', 'which'
 ];
+/** @type {?} */
 const TRANSITION_EVENT_PROPERTIES = ['propertyName', 'elapsedTime', 'pseudoElement'];
+/** @type {?} */
 const EVENT_PROPERTIES = ['type', 'bubbles', 'cancelable'];
+/** @type {?} */
 const NODES_WITH_VALUE = new Set(['input', 'select', 'option', 'button', 'li', 'meter', 'progress', 'param', 'textarea']);
 /**
  * @param {?} e
@@ -844,7 +816,8 @@ function serializeGenericEvent(e) {
  * @return {?}
  */
 function serializeEventWithTarget(e) {
-    const /** @type {?} */ serializedEvent = serializeEvent(e, EVENT_PROPERTIES);
+    /** @type {?} */
+    const serializedEvent = serializeEvent(e, EVENT_PROPERTIES);
     return addTarget(e, serializedEvent);
 }
 /**
@@ -859,7 +832,8 @@ function serializeMouseEvent(e) {
  * @return {?}
  */
 function serializeKeyboardEvent(e) {
-    const /** @type {?} */ serializedEvent = serializeEvent(e, KEYBOARD_EVENT_PROPERTIES);
+    /** @type {?} */
+    const serializedEvent = serializeEvent(e, KEYBOARD_EVENT_PROPERTIES);
     return addTarget(e, serializedEvent);
 }
 /**
@@ -867,7 +841,8 @@ function serializeKeyboardEvent(e) {
  * @return {?}
  */
 function serializeTransitionEvent(e) {
-    const /** @type {?} */ serializedEvent = serializeEvent(e, TRANSITION_EVENT_PROPERTIES);
+    /** @type {?} */
+    const serializedEvent = serializeEvent(e, TRANSITION_EVENT_PROPERTIES);
     return addTarget(e, serializedEvent);
 }
 /**
@@ -877,7 +852,8 @@ function serializeTransitionEvent(e) {
  */
 function addTarget(e, serializedEvent) {
     if (NODES_WITH_VALUE.has((/** @type {?} */ (e.target)).tagName.toLowerCase())) {
-        const /** @type {?} */ target = /** @type {?} */ (e.target);
+        /** @type {?} */
+        const target = /** @type {?} */ (e.target);
         serializedEvent['target'] = { 'value': target.value };
         if (target.files) {
             serializedEvent['target']['files'] = target.files;
@@ -891,9 +867,11 @@ function addTarget(e, serializedEvent) {
  * @return {?}
  */
 function serializeEvent(e, properties) {
-    const /** @type {?} */ serialized = {};
-    for (let /** @type {?} */ i = 0; i < properties.length; i++) {
-        const /** @type {?} */ prop = properties[i];
+    /** @type {?} */
+    const serialized = {};
+    for (let i = 0; i < properties.length; i++) {
+        /** @type {?} */
+        const prop = properties[i];
         serialized[prop] = e[prop];
     }
     return serialized;
@@ -901,7 +879,7 @@ function serializeEvent(e, properties) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 class EventDispatcher {
     /**
@@ -934,7 +912,8 @@ class EventDispatcher {
      * @return {?}
      */
     dispatchRenderEvent(element, eventTarget, eventName, event) {
-        let /** @type {?} */ serializedEvent;
+        /** @type {?} */
+        let serializedEvent;
         // TODO (jteplitz602): support custom events #3350
         switch (event.type) {
             case 'click':
@@ -1030,14 +1009,7 @@ class EventDispatcher {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 class MessageBasedRenderer2 {
     /**
@@ -1058,7 +1030,8 @@ class MessageBasedRenderer2 {
      * @return {?}
      */
     start() {
-        const /** @type {?} */ broker = this._brokerFactory.createMessageBroker(RENDERER_2_CHANNEL);
+        /** @type {?} */
+        const broker = this._brokerFactory.createMessageBroker(RENDERER_2_CHANNEL);
         this._bus.initChannel(EVENT_2_CHANNEL);
         this._eventDispatcher = new EventDispatcher(this._bus.to(EVENT_2_CHANNEL), this._serializer);
         const [RSO, P, CRT] = [
@@ -1066,7 +1039,8 @@ class MessageBasedRenderer2 {
             1 /* PRIMITIVE */,
             0 /* RENDERER_TYPE_2 */,
         ];
-        const /** @type {?} */ methods = [
+        /** @type {?} */
+        const methods = [
             ['createRenderer', this.createRenderer, RSO, CRT, P],
             ['createElement', this.createElement, RSO, P, P, P],
             ['createComment', this.createComment, RSO, P, P], ['createText', this.createText, RSO, P, P],
@@ -1274,10 +1248,12 @@ class MessageBasedRenderer2 {
      * @return {?}
      */
     listen(r, el, elName, eventName, unlistenId) {
-        const /** @type {?} */ listener = (event) => {
+        /** @type {?} */
+        const listener = (event) => {
             return this._eventDispatcher.dispatchRenderEvent(el, elName, eventName, event);
         };
-        const /** @type {?} */ unlisten = r.listen(el || elName, eventName, listener);
+        /** @type {?} */
+        const unlisten = r.listen(el || elName, eventName, listener);
         this._renderStore.store(unlisten, unlistenId);
     }
     /**
@@ -1292,23 +1268,16 @@ MessageBasedRenderer2.decorators = [
 ];
 /** @nocollapse */
 MessageBasedRenderer2.ctorParameters = () => [
-    { type: ServiceMessageBrokerFactory, },
-    { type: MessageBus, },
-    { type: Serializer, },
-    { type: RenderStore, },
-    { type: RendererFactory2, },
+    { type: ServiceMessageBrokerFactory },
+    { type: MessageBus },
+    { type: Serializer },
+    { type: RenderStore },
+    { type: RendererFactory2 }
 ];
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * Wrapper class that exposes the Worker
@@ -1331,19 +1300,18 @@ class WebWorkerInstance {
 WebWorkerInstance.decorators = [
     { type: Injectable }
 ];
-/** @nocollapse */
-WebWorkerInstance.ctorParameters = () => [];
-/**
+/** *
  * \@experimental WebWorker support is currently experimental.
- */
+  @type {?} */
 const WORKER_SCRIPT = new InjectionToken('WebWorkerScript');
-/**
+/** *
  * A multi-provider used to automatically call the `start()` method after the service is
  * created.
  *
  * \@experimental WebWorker support is currently experimental.
- */
+  @type {?} */
 const WORKER_UI_STARTABLE_MESSAGING_SERVICE = new InjectionToken('WorkerRenderStartableMsgService');
+/** @type {?} */
 const _WORKER_UI_PLATFORM_PROVIDERS = [
     { provide: NgZone, useFactory: createNgZone, deps: [] },
     {
@@ -1353,20 +1321,20 @@ const _WORKER_UI_PLATFORM_PROVIDERS = [
     { provide: WORKER_UI_STARTABLE_MESSAGING_SERVICE, useExisting: MessageBasedRenderer2, multi: true },
     ɵBROWSER_SANITIZATION_PROVIDERS,
     { provide: ErrorHandler, useFactory: _exceptionHandler, deps: [] },
-    { provide: DOCUMENT$1, useFactory: _document, deps: [] },
+    { provide: DOCUMENT, useFactory: _document, deps: [] },
     // TODO(jteplitz602): Investigate if we definitely need EVENT_MANAGER on the render thread
     // #5298
     {
         provide: EVENT_MANAGER_PLUGINS,
         useClass: ɵDomEventsPlugin,
-        deps: [DOCUMENT$1, NgZone],
+        deps: [DOCUMENT, NgZone],
         multi: true
     },
-    { provide: EVENT_MANAGER_PLUGINS, useClass: ɵKeyEventsPlugin, deps: [DOCUMENT$1], multi: true },
+    { provide: EVENT_MANAGER_PLUGINS, useClass: ɵKeyEventsPlugin, deps: [DOCUMENT], multi: true },
     {
         provide: EVENT_MANAGER_PLUGINS,
         useClass: ɵHammerGesturesPlugin,
-        deps: [DOCUMENT$1, HAMMER_GESTURE_CONFIG],
+        deps: [DOCUMENT, HAMMER_GESTURE_CONFIG],
         multi: true
     },
     { provide: HAMMER_GESTURE_CONFIG, useClass: HammerGestureConfig, deps: [] },
@@ -1387,7 +1355,7 @@ const _WORKER_UI_PLATFORM_PROVIDERS = [
     { provide: Serializer, deps: [RenderStore] },
     { provide: ON_WEB_WORKER, useValue: false },
     { provide: RenderStore, deps: [] },
-    { provide: ɵDomSharedStylesHost, deps: [DOCUMENT$1] },
+    { provide: ɵDomSharedStylesHost, deps: [DOCUMENT] },
     { provide: Testability, deps: [NgZone] },
     { provide: EventManager, deps: [EVENT_MANAGER_PLUGINS, NgZone] },
     { provide: WebWorkerInstance, deps: [] },
@@ -1405,11 +1373,13 @@ const _WORKER_UI_PLATFORM_PROVIDERS = [
  * @return {?}
  */
 function initializeGenericWorkerRenderer(injector) {
-    const /** @type {?} */ bus = injector.get(MessageBus);
-    const /** @type {?} */ zone = injector.get(NgZone);
+    /** @type {?} */
+    const bus = injector.get(MessageBus);
+    /** @type {?} */
+    const zone = injector.get(NgZone);
     bus.attachToZone(zone);
-    // initialize message services after the bus has been created
-    const /** @type {?} */ services = injector.get(WORKER_UI_STARTABLE_MESSAGING_SERVICE);
+    /** @type {?} */
+    const services = injector.get(WORKER_UI_STARTABLE_MESSAGING_SERVICE);
     zone.runGuarded(() => { services.forEach((svc) => { svc.start(); }); });
 }
 /**
@@ -1427,21 +1397,23 @@ function initWebWorkerRenderPlatform(injector) {
     return () => {
         ɵBrowserDomAdapter.makeCurrent();
         ɵBrowserGetTestability.init();
-        let /** @type {?} */ scriptUri;
+        /** @type {?} */
+        let scriptUri;
         try {
             scriptUri = injector.get(WORKER_SCRIPT);
         }
-        catch (/** @type {?} */ e) {
+        catch (e) {
             throw new Error('You must provide your WebWorker\'s initialization script with the WORKER_SCRIPT token');
         }
-        const /** @type {?} */ instance = injector.get(WebWorkerInstance);
+        /** @type {?} */
+        const instance = injector.get(WebWorkerInstance);
         spawnWebWorker(scriptUri, instance);
         initializeGenericWorkerRenderer(injector);
     };
 }
-/**
+/** *
  * \@experimental WebWorker support is currently experimental.
- */
+  @type {?} */
 const platformWorkerUi = createPlatformFactory(platformCore, 'workerUi', _WORKER_UI_PLATFORM_PROVIDERS);
 /**
  * @return {?}
@@ -1468,39 +1440,27 @@ function createNgZone() {
  * @return {?}
  */
 function spawnWebWorker(uri, instance) {
-    const /** @type {?} */ webWorker = new Worker(uri);
-    const /** @type {?} */ sink = new PostMessageBusSink(webWorker);
-    const /** @type {?} */ source = new PostMessageBusSource(webWorker);
-    const /** @type {?} */ bus = new PostMessageBus(sink, source);
+    /** @type {?} */
+    const webWorker = new Worker(uri);
+    /** @type {?} */
+    const sink = new PostMessageBusSink(webWorker);
+    /** @type {?} */
+    const source = new PostMessageBusSource(webWorker);
+    /** @type {?} */
+    const bus = new PostMessageBus(sink, source);
     instance.init(webWorker, bus);
 }
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
- *
- */
-const VERSION = new Version('6.0.0-rc.5+145.sha-741fa9e');
+/** @type {?} */
+const VERSION = new Version('7.0.0-beta.1+25.sha-ca8c683');
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 class MessageBasedPlatformLocation {
     /**
@@ -1522,7 +1482,8 @@ class MessageBasedPlatformLocation {
      * @return {?}
      */
     start() {
-        const /** @type {?} */ P = 1;
+        /** @type {?} */
+        const P = 1 /* PRIMITIVE */;
         this._broker.registerMethod('getLocation', null, this._getLocation.bind(this), LocationType);
         this._broker.registerMethod('setPathname', [P], this._setPathname.bind(this));
         this._broker.registerMethod('pushState', [P, P, P], this._platformLocation.pushState.bind(this._platformLocation));
@@ -1557,32 +1518,25 @@ MessageBasedPlatformLocation.decorators = [
 ];
 /** @nocollapse */
 MessageBasedPlatformLocation.ctorParameters = () => [
-    { type: ServiceMessageBrokerFactory, },
-    { type: ɵBrowserPlatformLocation, },
-    { type: MessageBus, },
-    { type: Serializer, },
+    { type: ServiceMessageBrokerFactory },
+    { type: ɵBrowserPlatformLocation },
+    { type: MessageBus },
+    { type: Serializer }
 ];
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
+/** *
  * A list of {\@link Provider}s. To use the router in a Worker enabled application you must
  * include these providers when setting up the render thread.
  * \@experimental
- */
+  @type {?} */
 const WORKER_UI_LOCATION_PROVIDERS = /** @type {?} */ ([
     { provide: MessageBasedPlatformLocation, deps: [ServiceMessageBrokerFactory,
             ɵBrowserPlatformLocation, MessageBus, Serializer] },
-    { provide: ɵBrowserPlatformLocation, deps: [DOCUMENT] },
+    { provide: ɵBrowserPlatformLocation, deps: [DOCUMENT$1] },
     { provide: PLATFORM_INITIALIZER, useFactory: initUiLocation, multi: true, deps: [Injector] }
 ]);
 /**
@@ -1591,21 +1545,15 @@ const WORKER_UI_LOCATION_PROVIDERS = /** @type {?} */ ([
  */
 function initUiLocation(injector) {
     return () => {
-        const /** @type {?} */ zone = injector.get(NgZone);
+        /** @type {?} */
+        const zone = injector.get(NgZone);
         zone.runGuarded(() => injector.get(MessageBasedPlatformLocation).start());
     };
 }
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 class WebWorkerPlatformLocation extends PlatformLocation {
     /**
@@ -1623,9 +1571,11 @@ class WebWorkerPlatformLocation extends PlatformLocation {
         this._channelSource = bus.from(ROUTER_CHANNEL);
         this._channelSource.subscribe({
             next: (msg) => {
-                let /** @type {?} */ listeners = null;
+                /** @type {?} */
+                let listeners = null;
                 if (msg.hasOwnProperty('event')) {
-                    const /** @type {?} */ type = msg['event']['type'];
+                    /** @type {?} */
+                    const type = msg['event']['type'];
                     if (type === 'popstate') {
                         listeners = this._popStateListeners;
                     }
@@ -1647,7 +1597,8 @@ class WebWorkerPlatformLocation extends PlatformLocation {
      * @return {?}
      */
     init() {
-        const /** @type {?} */ args = new UiArguments('getLocation');
+        /** @type {?} */
+        const args = new UiArguments('getLocation');
         return /** @type {?} */ ((this._broker.runOnService(args, LocationType))).then((val) => {
             this._location = val;
             this.initializedResolve();
@@ -1691,8 +1642,10 @@ class WebWorkerPlatformLocation extends PlatformLocation {
             throw new Error('Attempt to set pathname before value is obtained from UI');
         }
         this._location.pathname = newPath;
-        const /** @type {?} */ fnArgs = [new FnArg(newPath, 1 /* PRIMITIVE */)];
-        const /** @type {?} */ args = new UiArguments('setPathname', fnArgs);
+        /** @type {?} */
+        const fnArgs = [new FnArg(newPath, 1 /* PRIMITIVE */)];
+        /** @type {?} */
+        const args = new UiArguments('setPathname', fnArgs);
         this._broker.runOnService(args, null);
     }
     /**
@@ -1702,12 +1655,14 @@ class WebWorkerPlatformLocation extends PlatformLocation {
      * @return {?}
      */
     pushState(state, title, url) {
-        const /** @type {?} */ fnArgs = [
+        /** @type {?} */
+        const fnArgs = [
             new FnArg(state, 1 /* PRIMITIVE */),
             new FnArg(title, 1 /* PRIMITIVE */),
             new FnArg(url, 1 /* PRIMITIVE */),
         ];
-        const /** @type {?} */ args = new UiArguments('pushState', fnArgs);
+        /** @type {?} */
+        const args = new UiArguments('pushState', fnArgs);
         this._broker.runOnService(args, null);
     }
     /**
@@ -1717,26 +1672,30 @@ class WebWorkerPlatformLocation extends PlatformLocation {
      * @return {?}
      */
     replaceState(state, title, url) {
-        const /** @type {?} */ fnArgs = [
+        /** @type {?} */
+        const fnArgs = [
             new FnArg(state, 1 /* PRIMITIVE */),
             new FnArg(title, 1 /* PRIMITIVE */),
             new FnArg(url, 1 /* PRIMITIVE */),
         ];
-        const /** @type {?} */ args = new UiArguments('replaceState', fnArgs);
+        /** @type {?} */
+        const args = new UiArguments('replaceState', fnArgs);
         this._broker.runOnService(args, null);
     }
     /**
      * @return {?}
      */
     forward() {
-        const /** @type {?} */ args = new UiArguments('forward');
+        /** @type {?} */
+        const args = new UiArguments('forward');
         this._broker.runOnService(args, null);
     }
     /**
      * @return {?}
      */
     back() {
-        const /** @type {?} */ args = new UiArguments('back');
+        /** @type {?} */
+        const args = new UiArguments('back');
         this._broker.runOnService(args, null);
     }
 }
@@ -1745,28 +1704,21 @@ WebWorkerPlatformLocation.decorators = [
 ];
 /** @nocollapse */
 WebWorkerPlatformLocation.ctorParameters = () => [
-    { type: ClientMessageBrokerFactory, },
-    { type: MessageBus, },
-    { type: Serializer, },
+    { type: ClientMessageBrokerFactory },
+    { type: MessageBus },
+    { type: Serializer }
 ];
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
+/** *
  * The {\@link PlatformLocation} providers that should be added when the {\@link Location} is used in
  * a worker context.
  *
  * \@experimental
- */
+  @type {?} */
 const WORKER_APP_LOCATION_PROVIDERS = [
     { provide: PlatformLocation, useClass: WebWorkerPlatformLocation }, {
         provide: APP_INITIALIZER,
@@ -1794,14 +1746,7 @@ function appInitFnFactory(platformLocation, zone) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 class NamedEventEmitter {
     /**
@@ -1816,8 +1761,10 @@ class NamedEventEmitter {
      * @return {?}
      */
     unlisten(eventName, listener) {
-        const /** @type {?} */ listeners = this._getListeners(eventName);
-        const /** @type {?} */ index = listeners.indexOf(listener);
+        /** @type {?} */
+        const listeners = this._getListeners(eventName);
+        /** @type {?} */
+        const index = listeners.indexOf(listener);
         if (index > -1) {
             listeners.splice(index, 1);
         }
@@ -1828,8 +1775,9 @@ class NamedEventEmitter {
      * @return {?}
      */
     dispatchEvent(eventName, event) {
-        const /** @type {?} */ listeners = this._getListeners(eventName);
-        for (let /** @type {?} */ i = 0; i < listeners.length; i++) {
+        /** @type {?} */
+        const listeners = this._getListeners(eventName);
+        for (let i = 0; i < listeners.length; i++) {
             listeners[i](event);
         }
     }
@@ -1841,7 +1789,8 @@ class NamedEventEmitter {
         if (!this._listeners) {
             this._listeners = new Map();
         }
-        let /** @type {?} */ listeners = this._listeners.get(eventName);
+        /** @type {?} */
+        let listeners = this._listeners.get(eventName);
         if (!listeners) {
             listeners = [];
             this._listeners.set(eventName, listeners);
@@ -1870,7 +1819,8 @@ class WebWorkerRendererFactory2 {
         this.globalEvents = new NamedEventEmitter();
         this._messageBroker = messageBrokerFactory.createMessageBroker(RENDERER_2_CHANNEL);
         bus.initChannel(EVENT_2_CHANNEL);
-        const /** @type {?} */ source = bus.from(EVENT_2_CHANNEL);
+        /** @type {?} */
+        const source = bus.from(EVENT_2_CHANNEL);
         source.subscribe({ next: (message) => this._dispatchEvent(message) });
     }
     /**
@@ -1879,8 +1829,10 @@ class WebWorkerRendererFactory2 {
      * @return {?}
      */
     createRenderer(element, type) {
-        const /** @type {?} */ renderer = new WebWorkerRenderer2(this);
-        const /** @type {?} */ id = this.renderStore.allocateId();
+        /** @type {?} */
+        const renderer = new WebWorkerRenderer2(this);
+        /** @type {?} */
+        const id = this.renderStore.allocateId();
         this.renderStore.store(renderer, id);
         this.callUI('createRenderer', [
             new FnArg(element, 2 /* RENDER_STORE_OBJECT */),
@@ -1903,15 +1855,18 @@ class WebWorkerRendererFactory2 {
      * @return {?}
      */
     callUI(fnName, fnArgs) {
-        const /** @type {?} */ args = new UiArguments(fnName, fnArgs);
+        /** @type {?} */
+        const args = new UiArguments(fnName, fnArgs);
         this._messageBroker.runOnService(args, null);
     }
     /**
      * @return {?}
      */
     allocateNode() {
-        const /** @type {?} */ result = new WebWorkerRenderNode();
-        const /** @type {?} */ id = this.renderStore.allocateId();
+        /** @type {?} */
+        const result = new WebWorkerRenderNode();
+        /** @type {?} */
+        const id = this.renderStore.allocateId();
         this.renderStore.store(result, id);
         return result;
     }
@@ -1929,10 +1884,14 @@ class WebWorkerRendererFactory2 {
      * @return {?}
      */
     _dispatchEvent(message) {
-        const /** @type {?} */ element = this._serializer.deserialize(message['element'], 2 /* RENDER_STORE_OBJECT */);
-        const /** @type {?} */ eventName = message['eventName'];
-        const /** @type {?} */ target = message['eventTarget'];
-        const /** @type {?} */ event = message['event'];
+        /** @type {?} */
+        const element = this._serializer.deserialize(message['element'], 2 /* RENDER_STORE_OBJECT */);
+        /** @type {?} */
+        const eventName = message['eventName'];
+        /** @type {?} */
+        const target = message['eventTarget'];
+        /** @type {?} */
+        const event = message['event'];
         if (target) {
             this.globalEvents.dispatchEvent(eventNameWithTarget(target, eventName), event);
         }
@@ -1946,10 +1905,10 @@ WebWorkerRendererFactory2.decorators = [
 ];
 /** @nocollapse */
 WebWorkerRendererFactory2.ctorParameters = () => [
-    { type: ClientMessageBrokerFactory, },
-    { type: MessageBus, },
-    { type: Serializer, },
-    { type: RenderStore, },
+    { type: ClientMessageBrokerFactory },
+    { type: MessageBus },
+    { type: Serializer },
+    { type: RenderStore }
 ];
 class WebWorkerRenderer2 {
     /**
@@ -1978,7 +1937,8 @@ class WebWorkerRenderer2 {
      * @return {?}
      */
     createElement(name, namespace) {
-        const /** @type {?} */ node = this._rendererFactory.allocateNode();
+        /** @type {?} */
+        const node = this._rendererFactory.allocateNode();
         this.callUIWithRenderer('createElement', [
             new FnArg(name),
             new FnArg(namespace),
@@ -1991,7 +1951,8 @@ class WebWorkerRenderer2 {
      * @return {?}
      */
     createComment(value) {
-        const /** @type {?} */ node = this._rendererFactory.allocateNode();
+        /** @type {?} */
+        const node = this._rendererFactory.allocateNode();
         this.callUIWithRenderer('createComment', [
             new FnArg(value),
             new FnArg(node, 2 /* RENDER_STORE_OBJECT */),
@@ -2003,7 +1964,8 @@ class WebWorkerRenderer2 {
      * @return {?}
      */
     createText(value) {
-        const /** @type {?} */ node = this._rendererFactory.allocateNode();
+        /** @type {?} */
+        const node = this._rendererFactory.allocateNode();
         this.callUIWithRenderer('createText', [
             new FnArg(value),
             new FnArg(node, 2 /* RENDER_STORE_OBJECT */),
@@ -2053,7 +2015,8 @@ class WebWorkerRenderer2 {
      * @return {?}
      */
     selectRootElement(selectorOrNode) {
-        const /** @type {?} */ node = this._rendererFactory.allocateNode();
+        /** @type {?} */
+        const node = this._rendererFactory.allocateNode();
         this.callUIWithRenderer('selectRootElement', [
             new FnArg(selectorOrNode),
             new FnArg(node, 2 /* RENDER_STORE_OBJECT */),
@@ -2065,7 +2028,8 @@ class WebWorkerRenderer2 {
      * @return {?}
      */
     parentNode(node) {
-        const /** @type {?} */ res = this._rendererFactory.allocateNode();
+        /** @type {?} */
+        const res = this._rendererFactory.allocateNode();
         this.callUIWithRenderer('parentNode', [
             new FnArg(node, 2 /* RENDER_STORE_OBJECT */),
             new FnArg(res, 2 /* RENDER_STORE_OBJECT */),
@@ -2077,7 +2041,8 @@ class WebWorkerRenderer2 {
      * @return {?}
      */
     nextSibling(node) {
-        const /** @type {?} */ res = this._rendererFactory.allocateNode();
+        /** @type {?} */
+        const res = this._rendererFactory.allocateNode();
         this.callUIWithRenderer('nextSibling', [
             new FnArg(node, 2 /* RENDER_STORE_OBJECT */),
             new FnArg(res, 2 /* RENDER_STORE_OBJECT */),
@@ -2193,7 +2158,8 @@ class WebWorkerRenderer2 {
      * @return {?}
      */
     listen(target, eventName, listener) {
-        const /** @type {?} */ unlistenId = this._rendererFactory.allocateId();
+        /** @type {?} */
+        const unlistenId = this._rendererFactory.allocateId();
         const [targetEl, targetName, fullName] = typeof target === 'string' ? [null, target, `${target}:${eventName}`] :
             [target, null, null];
         if (fullName) {
@@ -2236,14 +2202,7 @@ class WebWorkerRenderNode {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * This adapter is required to log error messages.
@@ -2925,18 +2884,11 @@ class WorkerDomAdapter extends ɵDomAdapter {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
+/** *
  * \@experimental
- */
+  @type {?} */
 const platformWorkerApp = createPlatformFactory(platformCore, 'workerApp', [{ provide: PLATFORM_ID, useValue: ɵPLATFORM_WORKER_APP_ID }]);
 /**
  * @return {?}
@@ -2947,7 +2899,7 @@ function errorHandler() {
 const ɵ0 = (message, transferrables) => {
     (/** @type {?} */ (postMessage))(message, transferrables);
 };
-// TODO(jteplitz602): remove this and compile with lib.webworker.d.ts (#3492)
+/** @type {?} */
 const _postMessage = {
     postMessage: ɵ0
 };
@@ -2956,9 +2908,12 @@ const _postMessage = {
  * @return {?}
  */
 function createMessageBus(zone) {
-    const /** @type {?} */ sink = new PostMessageBusSink(_postMessage);
-    const /** @type {?} */ source = new PostMessageBusSource();
-    const /** @type {?} */ bus = new PostMessageBus(sink, source);
+    /** @type {?} */
+    const sink = new PostMessageBusSink(_postMessage);
+    /** @type {?} */
+    const source = new PostMessageBusSource();
+    /** @type {?} */
+    const bus = new PostMessageBus(sink, source);
     bus.attachToZone(zone);
     return bus;
 }
@@ -2980,7 +2935,7 @@ WorkerAppModule.decorators = [
                 providers: [
                     ɵBROWSER_SANITIZATION_PROVIDERS,
                     Serializer,
-                    { provide: DOCUMENT$1, useValue: null },
+                    { provide: DOCUMENT, useValue: null },
                     ClientMessageBrokerFactory,
                     ServiceMessageBrokerFactory,
                     WebWorkerRendererFactory2,
@@ -2990,6 +2945,7 @@ WorkerAppModule.decorators = [
                     { provide: ErrorHandler, useFactory: errorHandler, deps: [] },
                     { provide: MessageBus, useFactory: createMessageBus, deps: [NgZone] },
                     { provide: APP_INITIALIZER, useValue: setupWebWorker, multi: true },
+                    { provide: ViewportScroller, useClass: ɵNullViewportScroller, deps: [] },
                 ],
                 exports: [
                     CommonModule,
@@ -2997,19 +2953,10 @@ WorkerAppModule.decorators = [
                 ]
             },] }
 ];
-/** @nocollapse */
-WorkerAppModule.ctorParameters = () => [];
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * Bootstraps the worker ui.
@@ -3020,8 +2967,8 @@ WorkerAppModule.ctorParameters = () => [];
  * @return {?}
  */
 function bootstrapWorkerUi(workerScriptUri, customProviders = []) {
-    // For now, just creates the worker ui platform...
-    const /** @type {?} */ platform = platformWorkerUi([
+    /** @type {?} */
+    const platform = platformWorkerUi([
         { provide: WORKER_SCRIPT, useValue: workerScriptUri },
         ...customProviders,
     ]);
@@ -3030,42 +2977,18 @@ function bootstrapWorkerUi(workerScriptUri, customProviders = []) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
- * @module
- * @description
- * Entry point for all public APIs of this package.
- */
-
 // This file only reexports content of the `src` folder. Keep it that way.
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-// This file is not used to build this module. It is only used during editing
-// by the TypeScript language service and during build for verification. `ngc`
-// replaces this file with production index.ts when it rewrites private symbol
-// names.
 
 /**
  * Generated bundle index. Do not edit.
  */
 
-export { ON_WEB_WORKER as ɵangular_packages_platform_webworker_platform_webworker_k, RenderStore as ɵangular_packages_platform_webworker_platform_webworker_h, Serializer as ɵangular_packages_platform_webworker_platform_webworker_a, appInitFnFactory as ɵangular_packages_platform_webworker_platform_webworker_c, locationInitialized as ɵangular_packages_platform_webworker_platform_webworker_b, WebWorkerPlatformLocation as ɵangular_packages_platform_webworker_platform_webworker_i, WebWorkerRendererFactory2 as ɵangular_packages_platform_webworker_platform_webworker_j, createMessageBus as ɵangular_packages_platform_webworker_platform_webworker_e, errorHandler as ɵangular_packages_platform_webworker_platform_webworker_d, setupWebWorker as ɵangular_packages_platform_webworker_platform_webworker_f, _WORKER_UI_PLATFORM_PROVIDERS as ɵangular_packages_platform_webworker_platform_webworker_g, VERSION, ClientMessageBroker, ClientMessageBrokerFactory, FnArg, UiArguments, MessageBus, ServiceMessageBroker, ServiceMessageBrokerFactory, WORKER_UI_LOCATION_PROVIDERS, WORKER_APP_LOCATION_PROVIDERS, WorkerAppModule, platformWorkerApp, platformWorkerUi, bootstrapWorkerUi };
+export { ON_WEB_WORKER as ɵangular_packages_platform_webworker_platform_webworker_k, RenderStore as ɵangular_packages_platform_webworker_platform_webworker_h, Serializer as ɵangular_packages_platform_webworker_platform_webworker_a, appInitFnFactory as ɵangular_packages_platform_webworker_platform_webworker_c, locationInitialized as ɵangular_packages_platform_webworker_platform_webworker_b, WebWorkerPlatformLocation as ɵangular_packages_platform_webworker_platform_webworker_i, WebWorkerRendererFactory2 as ɵangular_packages_platform_webworker_platform_webworker_j, createMessageBus as ɵangular_packages_platform_webworker_platform_webworker_e, errorHandler as ɵangular_packages_platform_webworker_platform_webworker_d, setupWebWorker as ɵangular_packages_platform_webworker_platform_webworker_f, _WORKER_UI_PLATFORM_PROVIDERS as ɵangular_packages_platform_webworker_platform_webworker_g, bootstrapWorkerUi, VERSION, ClientMessageBroker, ClientMessageBrokerFactory, FnArg, UiArguments, MessageBus, ServiceMessageBroker, ServiceMessageBrokerFactory, WORKER_UI_LOCATION_PROVIDERS, WORKER_APP_LOCATION_PROVIDERS, WorkerAppModule, platformWorkerApp, platformWorkerUi };
 //# sourceMappingURL=platform-webworker.js.map
