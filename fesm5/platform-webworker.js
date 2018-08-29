@@ -1,13 +1,13 @@
 /**
- * @license Angular v6.0.0-rc.5+217.sha-5dafa1a
+ * @license Angular v7.0.0-beta.3+76.sha-693c387
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
 
-import { __extends, __read, __spread } from 'tslib';
-import { CommonModule, DOCUMENT, LOCATION_INITIALIZED, PlatformLocation, ɵPLATFORM_WORKER_APP_ID, ɵPLATFORM_WORKER_UI_ID } from '@angular/common';
-import { APP_INITIALIZER, ApplicationModule, ErrorHandler, EventEmitter, Injectable, InjectionToken, Injector, NgModule, NgZone, PLATFORM_ID, PLATFORM_INITIALIZER, RenderComponentType, RendererFactory2, Testability, Version, createPlatformFactory, isDevMode, platformCore, ɵAPP_ID_RANDOM_PROVIDER, ɵstringify } from '@angular/core';
-import { DOCUMENT as DOCUMENT$1, EVENT_MANAGER_PLUGINS, EventManager, HAMMER_GESTURE_CONFIG, HammerGestureConfig, ɵBROWSER_SANITIZATION_PROVIDERS, ɵBrowserDomAdapter, ɵBrowserGetTestability, ɵBrowserPlatformLocation, ɵDomAdapter, ɵDomEventsPlugin, ɵDomRendererFactory2, ɵDomSharedStylesHost, ɵHammerGesturesPlugin, ɵKeyEventsPlugin, ɵSharedStylesHost, ɵsetRootDomAdapter } from '@angular/platform-browser';
+import { InjectionToken, Injectable, RenderComponentType, ɵstringify, EventEmitter, RendererFactory2, ErrorHandler, Injector, NgZone, PLATFORM_ID, PLATFORM_INITIALIZER, Testability, createPlatformFactory, isDevMode, platformCore, ɵAPP_ID_RANDOM_PROVIDER, Version, APP_INITIALIZER, ApplicationModule, NgModule } from '@angular/core';
+import { __decorate, __metadata, __extends, __read, __spread } from 'tslib';
+import { ɵPLATFORM_WORKER_UI_ID, DOCUMENT as DOCUMENT$1, PlatformLocation, LOCATION_INITIALIZED, CommonModule, ViewportScroller, ɵNullViewportScroller, ɵPLATFORM_WORKER_APP_ID } from '@angular/common';
+import { DOCUMENT, EVENT_MANAGER_PLUGINS, EventManager, HAMMER_GESTURE_CONFIG, HammerGestureConfig, ɵBROWSER_SANITIZATION_PROVIDERS, ɵBrowserDomAdapter, ɵBrowserGetTestability, ɵDomEventsPlugin, ɵDomRendererFactory2, ɵDomSharedStylesHost, ɵHammerGesturesPlugin, ɵKeyEventsPlugin, ɵSharedStylesHost, ɵBrowserPlatformLocation, ɵDomAdapter, ɵsetRootDomAdapter } from '@angular/platform-browser';
 
 /**
  * @license
@@ -72,9 +72,9 @@ var RenderStore = /** @class */ (function () {
     RenderStore.prototype.serialize = function (obj) {
         return obj == null ? null : this._lookupByObject.get(obj);
     };
-    RenderStore.decorators = [
-        { type: Injectable }
-    ];
+    RenderStore = __decorate([
+        Injectable()
+    ], RenderStore);
     return RenderStore;
 }());
 
@@ -193,13 +193,10 @@ var Serializer = /** @class */ (function () {
             data: this.deserialize(props['data'])
         };
     };
-    Serializer.decorators = [
-        { type: Injectable }
-    ];
-    /** @nocollapse */
-    Serializer.ctorParameters = function () { return [
-        { type: RenderStore, },
-    ]; };
+    Serializer = __decorate([
+        Injectable(),
+        __metadata("design:paramtypes", [RenderStore])
+    ], Serializer);
     return Serializer;
 }());
 
@@ -222,25 +219,15 @@ var ClientMessageBrokerFactory = /** @class */ (function () {
     /**
      * Initializes the given channel and attaches a new {@link ClientMessageBroker} to it.
      */
-    /**
-       * Initializes the given channel and attaches a new {@link ClientMessageBroker} to it.
-       */
-    ClientMessageBrokerFactory.prototype.createMessageBroker = /**
-       * Initializes the given channel and attaches a new {@link ClientMessageBroker} to it.
-       */
-    function (channel, runInZone) {
+    ClientMessageBrokerFactory.prototype.createMessageBroker = function (channel, runInZone) {
         if (runInZone === void 0) { runInZone = true; }
         this._messageBus.initChannel(channel, runInZone);
         return new ClientMessageBroker(this._messageBus, this._serializer, channel);
     };
-    ClientMessageBrokerFactory.decorators = [
-        { type: Injectable }
-    ];
-    /** @nocollapse */
-    ClientMessageBrokerFactory.ctorParameters = function () { return [
-        { type: MessageBus, },
-        { type: Serializer, },
-    ]; };
+    ClientMessageBrokerFactory = __decorate([
+        Injectable(),
+        __metadata("design:paramtypes", [MessageBus, Serializer])
+    ], ClientMessageBrokerFactory);
     return ClientMessageBrokerFactory;
 }());
 /**
@@ -283,7 +270,7 @@ var ClientMessageBroker = /** @class */ (function () {
         var promise;
         var id = null;
         if (returnType != null) {
-            var completer_1 = (undefined);
+            var completer_1 = undefined;
             promise = new Promise(function (resolve, reject) { completer_1 = { resolve: resolve, reject: reject }; });
             id = this._generateMessageId(args.method);
             this._pending.set(id, completer_1);
@@ -311,7 +298,7 @@ var ClientMessageBroker = /** @class */ (function () {
     };
     ClientMessageBroker.prototype._handleMessage = function (message) {
         if (message.type === 'result' || message.type === 'error') {
-            var id = (message.id);
+            var id = message.id;
             if (this._pending.has(id)) {
                 if (message.type === 'result') {
                     this._pending.get(id).resolve(message.value);
@@ -472,14 +459,10 @@ var PostMessageBus = /** @class */ (function () {
     };
     PostMessageBus.prototype.from = function (channel) { return this.source.from(channel); };
     PostMessageBus.prototype.to = function (channel) { return this.sink.to(channel); };
-    PostMessageBus.decorators = [
-        { type: Injectable }
-    ];
-    /** @nocollapse */
-    PostMessageBus.ctorParameters = function () { return [
-        { type: PostMessageBusSink, },
-        { type: PostMessageBusSource, },
-    ]; };
+    PostMessageBus = __decorate([
+        Injectable(),
+        __metadata("design:paramtypes", [PostMessageBusSink, PostMessageBusSource])
+    ], PostMessageBus);
     return PostMessageBus;
 }());
 /**
@@ -513,25 +496,15 @@ var ServiceMessageBrokerFactory = /** @class */ (function () {
     /**
      * Initializes the given channel and attaches a new {@link ServiceMessageBroker} to it.
      */
-    /**
-       * Initializes the given channel and attaches a new {@link ServiceMessageBroker} to it.
-       */
-    ServiceMessageBrokerFactory.prototype.createMessageBroker = /**
-       * Initializes the given channel and attaches a new {@link ServiceMessageBroker} to it.
-       */
-    function (channel, runInZone) {
+    ServiceMessageBrokerFactory.prototype.createMessageBroker = function (channel, runInZone) {
         if (runInZone === void 0) { runInZone = true; }
         this._messageBus.initChannel(channel, runInZone);
         return new ServiceMessageBroker(this._messageBus, this._serializer, channel);
     };
-    ServiceMessageBrokerFactory.decorators = [
-        { type: Injectable }
-    ];
-    /** @nocollapse */
-    ServiceMessageBrokerFactory.ctorParameters = function () { return [
-        { type: MessageBus, },
-        { type: Serializer, },
-    ]; };
+    ServiceMessageBrokerFactory = __decorate([
+        Injectable(),
+        __metadata("design:paramtypes", [MessageBus, Serializer])
+    ], ServiceMessageBrokerFactory);
     return ServiceMessageBrokerFactory;
 }());
 /**
@@ -877,17 +850,12 @@ var MessageBasedRenderer2 = /** @class */ (function () {
         this._renderStore.store(unlisten, unlistenId);
     };
     MessageBasedRenderer2.prototype.unlisten = function (r, unlisten) { unlisten(); };
-    MessageBasedRenderer2.decorators = [
-        { type: Injectable }
-    ];
-    /** @nocollapse */
-    MessageBasedRenderer2.ctorParameters = function () { return [
-        { type: ServiceMessageBrokerFactory, },
-        { type: MessageBus, },
-        { type: Serializer, },
-        { type: RenderStore, },
-        { type: RendererFactory2, },
-    ]; };
+    MessageBasedRenderer2 = __decorate([
+        Injectable(),
+        __metadata("design:paramtypes", [ServiceMessageBrokerFactory, MessageBus,
+            Serializer, RenderStore,
+            RendererFactory2])
+    ], MessageBasedRenderer2);
     return MessageBasedRenderer2;
 }());
 
@@ -908,15 +876,13 @@ var WebWorkerInstance = /** @class */ (function () {
     function WebWorkerInstance() {
     }
     /** @internal */
-    /** @internal */
-    WebWorkerInstance.prototype.init = /** @internal */
-    function (worker, bus) {
+    WebWorkerInstance.prototype.init = function (worker, bus) {
         this.worker = worker;
         this.bus = bus;
     };
-    WebWorkerInstance.decorators = [
-        { type: Injectable }
-    ];
+    WebWorkerInstance = __decorate([
+        Injectable()
+    ], WebWorkerInstance);
     return WebWorkerInstance;
 }());
 /**
@@ -939,20 +905,20 @@ var _WORKER_UI_PLATFORM_PROVIDERS = [
     { provide: WORKER_UI_STARTABLE_MESSAGING_SERVICE, useExisting: MessageBasedRenderer2, multi: true },
     ɵBROWSER_SANITIZATION_PROVIDERS,
     { provide: ErrorHandler, useFactory: _exceptionHandler, deps: [] },
-    { provide: DOCUMENT$1, useFactory: _document, deps: [] },
+    { provide: DOCUMENT, useFactory: _document, deps: [] },
     // TODO(jteplitz602): Investigate if we definitely need EVENT_MANAGER on the render thread
     // #5298
     {
         provide: EVENT_MANAGER_PLUGINS,
         useClass: ɵDomEventsPlugin,
-        deps: [DOCUMENT$1, NgZone],
+        deps: [DOCUMENT, NgZone],
         multi: true
     },
-    { provide: EVENT_MANAGER_PLUGINS, useClass: ɵKeyEventsPlugin, deps: [DOCUMENT$1], multi: true },
+    { provide: EVENT_MANAGER_PLUGINS, useClass: ɵKeyEventsPlugin, deps: [DOCUMENT], multi: true },
     {
         provide: EVENT_MANAGER_PLUGINS,
         useClass: ɵHammerGesturesPlugin,
-        deps: [DOCUMENT$1, HAMMER_GESTURE_CONFIG],
+        deps: [DOCUMENT, HAMMER_GESTURE_CONFIG],
         multi: true
     },
     { provide: HAMMER_GESTURE_CONFIG, useClass: HammerGestureConfig, deps: [] },
@@ -973,7 +939,7 @@ var _WORKER_UI_PLATFORM_PROVIDERS = [
     { provide: Serializer, deps: [RenderStore] },
     { provide: ON_WEB_WORKER, useValue: false },
     { provide: RenderStore, deps: [] },
-    { provide: ɵDomSharedStylesHost, deps: [DOCUMENT$1] },
+    { provide: ɵDomSharedStylesHost, deps: [DOCUMENT] },
     { provide: Testability, deps: [NgZone] },
     { provide: EventManager, deps: [EVENT_MANAGER_PLUGINS, NgZone] },
     { provide: WebWorkerInstance, deps: [] },
@@ -1044,7 +1010,7 @@ function spawnWebWorker(uri, instance) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var VERSION = new Version('6.0.0-rc.5+217.sha-5dafa1a');
+var VERSION = new Version('7.0.0-beta.3+76.sha-693c387');
 
 /**
  * @license
@@ -1064,7 +1030,7 @@ var MessageBasedPlatformLocation = /** @class */ (function () {
         this._channelSink = bus.to(ROUTER_CHANNEL);
     }
     MessageBasedPlatformLocation.prototype.start = function () {
-        var P = 1;
+        var P = 1 /* PRIMITIVE */;
         this._broker.registerMethod('getLocation', null, this._getLocation.bind(this), LocationType);
         this._broker.registerMethod('setPathname', [P], this._setPathname.bind(this));
         this._broker.registerMethod('pushState', [P, P, P], this._platformLocation.pushState.bind(this._platformLocation));
@@ -1082,16 +1048,12 @@ var MessageBasedPlatformLocation = /** @class */ (function () {
         });
     };
     MessageBasedPlatformLocation.prototype._setPathname = function (pathname) { this._platformLocation.pathname = pathname; };
-    MessageBasedPlatformLocation.decorators = [
-        { type: Injectable }
-    ];
-    /** @nocollapse */
-    MessageBasedPlatformLocation.ctorParameters = function () { return [
-        { type: ServiceMessageBrokerFactory, },
-        { type: ɵBrowserPlatformLocation, },
-        { type: MessageBus, },
-        { type: Serializer, },
-    ]; };
+    MessageBasedPlatformLocation = __decorate([
+        Injectable(),
+        __metadata("design:paramtypes", [ServiceMessageBrokerFactory,
+            ɵBrowserPlatformLocation, MessageBus,
+            Serializer])
+    ], MessageBasedPlatformLocation);
     return MessageBasedPlatformLocation;
 }());
 
@@ -1110,7 +1072,7 @@ var MessageBasedPlatformLocation = /** @class */ (function () {
 var WORKER_UI_LOCATION_PROVIDERS = [
     { provide: MessageBasedPlatformLocation, deps: [ServiceMessageBrokerFactory,
             ɵBrowserPlatformLocation, MessageBus, Serializer] },
-    { provide: ɵBrowserPlatformLocation, deps: [DOCUMENT] },
+    { provide: ɵBrowserPlatformLocation, deps: [DOCUMENT$1] },
     { provide: PLATFORM_INITIALIZER, useFactory: initUiLocation, multi: true, deps: [Injector] }
 ];
 function initUiLocation(injector) {
@@ -1150,7 +1112,6 @@ var WebWorkerPlatformLocation = /** @class */ (function (_super) {
                     }
                     if (listeners) {
                         // There was a popState or hashChange event, so the location object thas been updated
-                        // There was a popState or hashChange event, so the location object thas been updated
                         _this._location = _this._serializer.deserialize(msg['location'], LocationType);
                         listeners.forEach(function (fn) { return fn(msg['event']); });
                     }
@@ -1161,9 +1122,7 @@ var WebWorkerPlatformLocation = /** @class */ (function (_super) {
         return _this;
     }
     /** @internal **/
-    /** @internal **/
-    WebWorkerPlatformLocation.prototype.init = /** @internal **/
-    function () {
+    WebWorkerPlatformLocation.prototype.init = function () {
         var _this = this;
         var args = new UiArguments('getLocation');
         return this._broker.runOnService(args, LocationType).then(function (val) {
@@ -1227,15 +1186,10 @@ var WebWorkerPlatformLocation = /** @class */ (function (_super) {
         var args = new UiArguments('back');
         this._broker.runOnService(args, null);
     };
-    WebWorkerPlatformLocation.decorators = [
-        { type: Injectable }
-    ];
-    /** @nocollapse */
-    WebWorkerPlatformLocation.ctorParameters = function () { return [
-        { type: ClientMessageBrokerFactory, },
-        { type: MessageBus, },
-        { type: Serializer, },
-    ]; };
+    WebWorkerPlatformLocation = __decorate([
+        Injectable(),
+        __metadata("design:paramtypes", [ClientMessageBrokerFactory, MessageBus, Serializer])
+    ], WebWorkerPlatformLocation);
     return WebWorkerPlatformLocation;
 }(PlatformLocation));
 
@@ -1356,16 +1310,11 @@ var WebWorkerRendererFactory2 = /** @class */ (function () {
             element.events.dispatchEvent(eventName, event);
         }
     };
-    WebWorkerRendererFactory2.decorators = [
-        { type: Injectable }
-    ];
-    /** @nocollapse */
-    WebWorkerRendererFactory2.ctorParameters = function () { return [
-        { type: ClientMessageBrokerFactory, },
-        { type: MessageBus, },
-        { type: Serializer, },
-        { type: RenderStore, },
-    ]; };
+    WebWorkerRendererFactory2 = __decorate([
+        Injectable(),
+        __metadata("design:paramtypes", [ClientMessageBrokerFactory, MessageBus,
+            Serializer, RenderStore])
+    ], WebWorkerRendererFactory2);
     return WebWorkerRendererFactory2;
 }());
 var WebWorkerRenderer2 = /** @class */ (function () {
@@ -1755,28 +1704,29 @@ function setupWebWorker() {
 var WorkerAppModule = /** @class */ (function () {
     function WorkerAppModule() {
     }
-    WorkerAppModule.decorators = [
-        { type: NgModule, args: [{
-                    providers: [
-                        ɵBROWSER_SANITIZATION_PROVIDERS,
-                        Serializer,
-                        { provide: DOCUMENT$1, useValue: null },
-                        ClientMessageBrokerFactory,
-                        ServiceMessageBrokerFactory,
-                        WebWorkerRendererFactory2,
-                        { provide: RendererFactory2, useExisting: WebWorkerRendererFactory2 },
-                        { provide: ON_WEB_WORKER, useValue: true },
-                        RenderStore,
-                        { provide: ErrorHandler, useFactory: errorHandler, deps: [] },
-                        { provide: MessageBus, useFactory: createMessageBus, deps: [NgZone] },
-                        { provide: APP_INITIALIZER, useValue: setupWebWorker, multi: true },
-                    ],
-                    exports: [
-                        CommonModule,
-                        ApplicationModule,
-                    ]
-                },] }
-    ];
+    WorkerAppModule = __decorate([
+        NgModule({
+            providers: [
+                ɵBROWSER_SANITIZATION_PROVIDERS,
+                Serializer,
+                { provide: DOCUMENT, useValue: null },
+                ClientMessageBrokerFactory,
+                ServiceMessageBrokerFactory,
+                WebWorkerRendererFactory2,
+                { provide: RendererFactory2, useExisting: WebWorkerRendererFactory2 },
+                { provide: ON_WEB_WORKER, useValue: true },
+                RenderStore,
+                { provide: ErrorHandler, useFactory: errorHandler, deps: [] },
+                { provide: MessageBus, useFactory: createMessageBus, deps: [NgZone] },
+                { provide: APP_INITIALIZER, useValue: setupWebWorker, multi: true },
+                { provide: ViewportScroller, useClass: ɵNullViewportScroller, deps: [] },
+            ],
+            exports: [
+                CommonModule,
+                ApplicationModule,
+            ]
+        })
+    ], WorkerAppModule);
     return WorkerAppModule;
 }());
 
@@ -1808,7 +1758,6 @@ function bootstrapWorkerUi(workerScriptUri, customProviders) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-
 // This file only reexports content of the `src` folder. Keep it that way.
 
 /**

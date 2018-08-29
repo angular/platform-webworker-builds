@@ -15,7 +15,7 @@ export declare class NamedEventEmitter {
     listen(eventName: string, callback: Function): void;
     unlisten(eventName: string, listener: Function): void;
     dispatchEvent(eventName: string, event: any): void;
-    private _getListeners(eventName);
+    private _getListeners;
 }
 export declare class WebWorkerRendererFactory2 implements RendererFactory2 {
     private _serializer;
@@ -30,7 +30,7 @@ export declare class WebWorkerRendererFactory2 implements RendererFactory2 {
     allocateNode(): WebWorkerRenderNode;
     freeNode(node: any): void;
     allocateId(): number;
-    private _dispatchEvent(message);
+    private _dispatchEvent;
 }
 export declare class WebWorkerRenderer2 implements Renderer2 {
     private _rendererFactory;
@@ -59,7 +59,7 @@ export declare class WebWorkerRenderer2 implements Renderer2 {
     setProperty(el: any, name: string, value: any): void;
     setValue(node: any, value: string): void;
     listen(target: 'window' | 'document' | 'body' | any, eventName: string, listener: (event: any) => boolean): () => void;
-    private callUIWithRenderer(fnName, fnArgs?);
+    private callUIWithRenderer;
 }
 export declare class WebWorkerRenderNode {
     events: NamedEventEmitter;
