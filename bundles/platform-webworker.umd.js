@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.1.6+28.sha-d1063c6
+ * @license Angular v6.1.7+8.sha-b9a5ce1
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -37,6 +37,17 @@
         extendStatics(d, b);
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    }
+
+    function __decorate(decorators, target, key, desc) {
+        var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+        else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+        return c > 3 && r && Object.defineProperty(target, key, r), r;
+    }
+
+    function __metadata(metadataKey, metadataValue) {
+        if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(metadataKey, metadataValue);
     }
 
     function __read(o, n) {
@@ -125,9 +136,9 @@
         RenderStore.prototype.serialize = function (obj) {
             return obj == null ? null : this._lookupByObject.get(obj);
         };
-        RenderStore.decorators = [
-            { type: core.Injectable }
-        ];
+        RenderStore = __decorate([
+            core.Injectable()
+        ], RenderStore);
         return RenderStore;
     }());
 
@@ -246,13 +257,10 @@
                 data: this.deserialize(props['data'])
             };
         };
-        Serializer.decorators = [
-            { type: core.Injectable }
-        ];
-        /** @nocollapse */
-        Serializer.ctorParameters = function () { return [
-            { type: RenderStore }
-        ]; };
+        Serializer = __decorate([
+            core.Injectable(),
+            __metadata("design:paramtypes", [RenderStore])
+        ], Serializer);
         return Serializer;
     }());
 
@@ -280,14 +288,10 @@
             this._messageBus.initChannel(channel, runInZone);
             return new ClientMessageBroker(this._messageBus, this._serializer, channel);
         };
-        ClientMessageBrokerFactory.decorators = [
-            { type: core.Injectable }
-        ];
-        /** @nocollapse */
-        ClientMessageBrokerFactory.ctorParameters = function () { return [
-            { type: MessageBus },
-            { type: Serializer }
-        ]; };
+        ClientMessageBrokerFactory = __decorate([
+            core.Injectable(),
+            __metadata("design:paramtypes", [MessageBus, Serializer])
+        ], ClientMessageBrokerFactory);
         return ClientMessageBrokerFactory;
     }());
     /**
@@ -519,14 +523,10 @@
         };
         PostMessageBus.prototype.from = function (channel) { return this.source.from(channel); };
         PostMessageBus.prototype.to = function (channel) { return this.sink.to(channel); };
-        PostMessageBus.decorators = [
-            { type: core.Injectable }
-        ];
-        /** @nocollapse */
-        PostMessageBus.ctorParameters = function () { return [
-            { type: PostMessageBusSink },
-            { type: PostMessageBusSource }
-        ]; };
+        PostMessageBus = __decorate([
+            core.Injectable(),
+            __metadata("design:paramtypes", [PostMessageBusSink, PostMessageBusSource])
+        ], PostMessageBus);
         return PostMessageBus;
     }());
     /**
@@ -565,14 +565,10 @@
             this._messageBus.initChannel(channel, runInZone);
             return new ServiceMessageBroker(this._messageBus, this._serializer, channel);
         };
-        ServiceMessageBrokerFactory.decorators = [
-            { type: core.Injectable }
-        ];
-        /** @nocollapse */
-        ServiceMessageBrokerFactory.ctorParameters = function () { return [
-            { type: MessageBus },
-            { type: Serializer }
-        ]; };
+        ServiceMessageBrokerFactory = __decorate([
+            core.Injectable(),
+            __metadata("design:paramtypes", [MessageBus, Serializer])
+        ], ServiceMessageBrokerFactory);
         return ServiceMessageBrokerFactory;
     }());
     /**
@@ -918,17 +914,12 @@
             this._renderStore.store(unlisten, unlistenId);
         };
         MessageBasedRenderer2.prototype.unlisten = function (r, unlisten) { unlisten(); };
-        MessageBasedRenderer2.decorators = [
-            { type: core.Injectable }
-        ];
-        /** @nocollapse */
-        MessageBasedRenderer2.ctorParameters = function () { return [
-            { type: ServiceMessageBrokerFactory },
-            { type: MessageBus },
-            { type: Serializer },
-            { type: RenderStore },
-            { type: core.RendererFactory2 }
-        ]; };
+        MessageBasedRenderer2 = __decorate([
+            core.Injectable(),
+            __metadata("design:paramtypes", [ServiceMessageBrokerFactory, MessageBus,
+                Serializer, RenderStore,
+                core.RendererFactory2])
+        ], MessageBasedRenderer2);
         return MessageBasedRenderer2;
     }());
 
@@ -953,9 +944,9 @@
             this.worker = worker;
             this.bus = bus;
         };
-        WebWorkerInstance.decorators = [
-            { type: core.Injectable }
-        ];
+        WebWorkerInstance = __decorate([
+            core.Injectable()
+        ], WebWorkerInstance);
         return WebWorkerInstance;
     }());
     /**
@@ -1083,7 +1074,7 @@
      * Use of this source code is governed by an MIT-style license that can be
      * found in the LICENSE file at https://angular.io/license
      */
-    var VERSION = new core.Version('6.1.6+28.sha-d1063c6');
+    var VERSION = new core.Version('6.1.7+8.sha-b9a5ce1');
 
     /**
      * @license
@@ -1121,16 +1112,12 @@
             });
         };
         MessageBasedPlatformLocation.prototype._setPathname = function (pathname) { this._platformLocation.pathname = pathname; };
-        MessageBasedPlatformLocation.decorators = [
-            { type: core.Injectable }
-        ];
-        /** @nocollapse */
-        MessageBasedPlatformLocation.ctorParameters = function () { return [
-            { type: ServiceMessageBrokerFactory },
-            { type: platformBrowser.ɵBrowserPlatformLocation },
-            { type: MessageBus },
-            { type: Serializer }
-        ]; };
+        MessageBasedPlatformLocation = __decorate([
+            core.Injectable(),
+            __metadata("design:paramtypes", [ServiceMessageBrokerFactory,
+                platformBrowser.ɵBrowserPlatformLocation, MessageBus,
+                Serializer])
+        ], MessageBasedPlatformLocation);
         return MessageBasedPlatformLocation;
     }());
 
@@ -1263,15 +1250,10 @@
             var args = new UiArguments('back');
             this._broker.runOnService(args, null);
         };
-        WebWorkerPlatformLocation.decorators = [
-            { type: core.Injectable }
-        ];
-        /** @nocollapse */
-        WebWorkerPlatformLocation.ctorParameters = function () { return [
-            { type: ClientMessageBrokerFactory },
-            { type: MessageBus },
-            { type: Serializer }
-        ]; };
+        WebWorkerPlatformLocation = __decorate([
+            core.Injectable(),
+            __metadata("design:paramtypes", [ClientMessageBrokerFactory, MessageBus, Serializer])
+        ], WebWorkerPlatformLocation);
         return WebWorkerPlatformLocation;
     }(common.PlatformLocation));
 
@@ -1392,16 +1374,11 @@
                 element.events.dispatchEvent(eventName, event);
             }
         };
-        WebWorkerRendererFactory2.decorators = [
-            { type: core.Injectable }
-        ];
-        /** @nocollapse */
-        WebWorkerRendererFactory2.ctorParameters = function () { return [
-            { type: ClientMessageBrokerFactory },
-            { type: MessageBus },
-            { type: Serializer },
-            { type: RenderStore }
-        ]; };
+        WebWorkerRendererFactory2 = __decorate([
+            core.Injectable(),
+            __metadata("design:paramtypes", [ClientMessageBrokerFactory, MessageBus,
+                Serializer, RenderStore])
+        ], WebWorkerRendererFactory2);
         return WebWorkerRendererFactory2;
     }());
     var WebWorkerRenderer2 = /** @class */ (function () {
@@ -1791,29 +1768,29 @@
     var WorkerAppModule = /** @class */ (function () {
         function WorkerAppModule() {
         }
-        WorkerAppModule.decorators = [
-            { type: core.NgModule, args: [{
-                        providers: [
-                            platformBrowser.ɵBROWSER_SANITIZATION_PROVIDERS,
-                            Serializer,
-                            { provide: platformBrowser.DOCUMENT, useValue: null },
-                            ClientMessageBrokerFactory,
-                            ServiceMessageBrokerFactory,
-                            WebWorkerRendererFactory2,
-                            { provide: core.RendererFactory2, useExisting: WebWorkerRendererFactory2 },
-                            { provide: ON_WEB_WORKER, useValue: true },
-                            RenderStore,
-                            { provide: core.ErrorHandler, useFactory: errorHandler, deps: [] },
-                            { provide: MessageBus, useFactory: createMessageBus, deps: [core.NgZone] },
-                            { provide: core.APP_INITIALIZER, useValue: setupWebWorker, multi: true },
-                            { provide: common.ViewportScroller, useClass: common.ɵNullViewportScroller, deps: [] },
-                        ],
-                        exports: [
-                            common.CommonModule,
-                            core.ApplicationModule,
-                        ]
-                    },] }
-        ];
+        WorkerAppModule = __decorate([
+            core.NgModule({
+                providers: [
+                    platformBrowser.ɵBROWSER_SANITIZATION_PROVIDERS,
+                    Serializer,
+                    { provide: platformBrowser.DOCUMENT, useValue: null },
+                    ClientMessageBrokerFactory,
+                    ServiceMessageBrokerFactory,
+                    WebWorkerRendererFactory2,
+                    { provide: core.RendererFactory2, useExisting: WebWorkerRendererFactory2 },
+                    { provide: ON_WEB_WORKER, useValue: true },
+                    RenderStore,
+                    { provide: core.ErrorHandler, useFactory: errorHandler, deps: [] },
+                    { provide: MessageBus, useFactory: createMessageBus, deps: [core.NgZone] },
+                    { provide: core.APP_INITIALIZER, useValue: setupWebWorker, multi: true },
+                    { provide: common.ViewportScroller, useClass: common.ɵNullViewportScroller, deps: [] },
+                ],
+                exports: [
+                    common.CommonModule,
+                    core.ApplicationModule,
+                ]
+            })
+        ], WorkerAppModule);
         return WorkerAppModule;
     }());
 
