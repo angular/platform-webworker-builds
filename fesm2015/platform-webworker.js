@@ -1,5 +1,5 @@
 /**
- * @license Angular v7.0.0-rc.1+66.sha-ab9e114
+ * @license Angular v7.0.0-rc.1+65.sha-448ab9c
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1456,7 +1456,7 @@ function spawnWebWorker(uri, instance) {
  * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /** @type {?} */
-const VERSION = new Version('7.0.0-rc.1+66.sha-ab9e114');
+const VERSION = new Version('7.0.0-rc.1+65.sha-448ab9c');
 
 /**
  * @fileoverview added by tsickle
