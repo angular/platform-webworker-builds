@@ -8,7 +8,7 @@
 import { Type } from '@angular/core';
 import { SerializerTypes } from '../shared/serializer';
 /**
- * @experimental WebWorker support in Angular is currently experimental.
+ * @publicApi
  */
 export declare class ServiceMessageBrokerFactory {
     private _messageBus;
@@ -23,7 +23,7 @@ export declare class ServiceMessageBrokerFactory {
  * the UIMessageBroker deserializes its arguments and calls the registered method.
  * If that method returns a promise, the UIMessageBroker returns the result to the worker.
  *
- * @experimental WebWorker support in Angular is currently experimental.
+ * @publicApi
  */
 export declare class ServiceMessageBroker {
     private _serializer;
@@ -35,7 +35,7 @@ export declare class ServiceMessageBroker {
     private _wrapWebWorkerPromise;
 }
 /**
- * @experimental WebWorker support in Angular is currently experimental.
+ * @publicApi
  */
 export interface ReceivedMessage {
     method: string;
