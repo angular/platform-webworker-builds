@@ -8,7 +8,7 @@
 import { Type } from '@angular/core';
 import { SerializerTypes } from './serializer';
 /**
- * @experimental WebWorker support in Angular is experimental.
+ * @publicApi
  */
 export declare class ClientMessageBrokerFactory {
     private _messageBus;
@@ -18,7 +18,7 @@ export declare class ClientMessageBrokerFactory {
     createMessageBroker(channel: string, runInZone?: boolean): ClientMessageBroker;
 }
 /**
- * @experimental WebWorker support in Angular is experimental.
+ * @publicApi
  */
 export declare class ClientMessageBroker {
     private channel;
@@ -29,7 +29,7 @@ export declare class ClientMessageBroker {
     private _handleMessage;
 }
 /**
- * @experimental WebWorker support in Angular is experimental.
+ * @publicApi
  */
 export declare class FnArg {
     value: any;
@@ -37,7 +37,7 @@ export declare class FnArg {
     constructor(value: any, type?: Type<any> | SerializerTypes);
 }
 /**
- * @experimental WebWorker support in Angular is experimental.
+ * @publicApi
  */
 export declare class UiArguments {
     method: string;

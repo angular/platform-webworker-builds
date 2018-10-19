@@ -8,7 +8,7 @@
 import { ErrorHandler, NgZone, PlatformRef, StaticProvider } from '@angular/core';
 import { MessageBus } from './web_workers/shared/message_bus';
 /**
- * @experimental
+ * @publicApi
  */
 export declare const platformWorkerApp: (extraProviders?: StaticProvider[] | undefined) => PlatformRef;
 export declare function errorHandler(): ErrorHandler;
@@ -17,7 +17,7 @@ export declare function setupWebWorker(): void;
 /**
  * The ng module for the worker app side.
  *
- * @experimental
+ * @publicApi
  */
 export declare class WorkerAppModule {
 }

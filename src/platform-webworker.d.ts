@@ -18,6 +18,6 @@ export { platformWorkerUi } from './worker_render';
 /**
  * Bootstraps the worker ui.
  *
- * @experimental
+ * @publicApi
  */
 export declare function bootstrapWorkerUi(workerScriptUri: string, customProviders?: StaticProvider[]): Promise<PlatformRef>;
