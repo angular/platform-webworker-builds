@@ -1,11 +1,11 @@
 /**
- * @license Angular v7.0.0+32.sha-3f94759
+ * @license Angular v7.0.0+52.sha-778e1c2
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
 
 import { InjectionToken, Injectable, RenderComponentType, ɵstringify, EventEmitter, RendererFactory2, ErrorHandler, Injector, NgZone, PLATFORM_ID, PLATFORM_INITIALIZER, Testability, createPlatformFactory, isDevMode, platformCore, ɵAPP_ID_RANDOM_PROVIDER, Version, APP_INITIALIZER, ApplicationModule, NgModule } from '@angular/core';
-import { __decorate, __metadata, __extends, __read, __spread } from 'tslib';
+import { __decorate, __metadata, __extends, __spread, __read } from 'tslib';
 import { ɵPLATFORM_WORKER_UI_ID, DOCUMENT as DOCUMENT$1, PlatformLocation, LOCATION_INITIALIZED, CommonModule, ViewportScroller, ɵNullViewportScroller, ɵPLATFORM_WORKER_APP_ID } from '@angular/common';
 import { DOCUMENT, EVENT_MANAGER_PLUGINS, EventManager, HAMMER_GESTURE_CONFIG, HammerGestureConfig, ɵBROWSER_SANITIZATION_PROVIDERS, ɵBrowserDomAdapter, ɵBrowserGetTestability, ɵDomEventsPlugin, ɵDomRendererFactory2, ɵDomSharedStylesHost, ɵHammerGesturesPlugin, ɵKeyEventsPlugin, ɵSharedStylesHost, ɵBrowserPlatformLocation, ɵDomAdapter, ɵsetRootDomAdapter } from '@angular/platform-browser';
 
@@ -31,7 +31,7 @@ var ON_WEB_WORKER = new InjectionToken('WebWorker.onWebWorker');
  * given channel to one MessageBusSink are received on the same channel
  * by the corresponding MessageBusSource.
  *
- * @experimental WebWorker support in Angular is currenlty experimental.
+ * @publicApi
  */
 var MessageBus = /** @class */ (function () {
     function MessageBus() {
@@ -208,7 +208,7 @@ var Serializer = /** @class */ (function () {
  * found in the LICENSE file at https://angular.io/license
  */
 /**
- * @experimental WebWorker support in Angular is experimental.
+ * @publicApi
  */
 var ClientMessageBrokerFactory = /** @class */ (function () {
     /** @internal */
@@ -231,7 +231,7 @@ var ClientMessageBrokerFactory = /** @class */ (function () {
     return ClientMessageBrokerFactory;
 }());
 /**
- * @experimental WebWorker support in Angular is experimental.
+ * @publicApi
  */
 var ClientMessageBroker = /** @class */ (function () {
     /** @internal */
@@ -313,7 +313,7 @@ var ClientMessageBroker = /** @class */ (function () {
     return ClientMessageBroker;
 }());
 /**
- * @experimental WebWorker support in Angular is experimental.
+ * @publicApi
  */
 var FnArg = /** @class */ (function () {
     function FnArg(value, type) {
@@ -324,7 +324,7 @@ var FnArg = /** @class */ (function () {
     return FnArg;
 }());
 /**
- * @experimental WebWorker support in Angular is experimental.
+ * @publicApi
  */
 var UiArguments = /** @class */ (function () {
     function UiArguments(method, args) {
@@ -485,7 +485,7 @@ var _Channel = /** @class */ (function () {
  * found in the LICENSE file at https://angular.io/license
  */
 /**
- * @experimental WebWorker support in Angular is currently experimental.
+ * @publicApi
  */
 var ServiceMessageBrokerFactory = /** @class */ (function () {
     /** @internal */
@@ -513,7 +513,7 @@ var ServiceMessageBrokerFactory = /** @class */ (function () {
  * the UIMessageBroker deserializes its arguments and calls the registered method.
  * If that method returns a promise, the UIMessageBroker returns the result to the worker.
  *
- * @experimental WebWorker support in Angular is currently experimental.
+ * @publicApi
  */
 var ServiceMessageBroker = /** @class */ (function () {
     /** @internal */
@@ -870,7 +870,7 @@ var MessageBasedRenderer2 = /** @class */ (function () {
  * Wrapper class that exposes the Worker
  * and underlying {@link MessageBus} for lower level message passing.
  *
- * @experimental WebWorker support is currently experimental.
+ * @publicApi
  */
 var WebWorkerInstance = /** @class */ (function () {
     function WebWorkerInstance() {
@@ -886,14 +886,14 @@ var WebWorkerInstance = /** @class */ (function () {
     return WebWorkerInstance;
 }());
 /**
- * @experimental WebWorker support is currently experimental.
+ * @publicApi
  */
 var WORKER_SCRIPT = new InjectionToken('WebWorkerScript');
 /**
  * A multi-provider used to automatically call the `start()` method after the service is
  * created.
  *
- * @experimental WebWorker support is currently experimental.
+ * @publicApi
  */
 var WORKER_UI_STARTABLE_MESSAGING_SERVICE = new InjectionToken('WorkerRenderStartableMsgService');
 var _WORKER_UI_PLATFORM_PROVIDERS = [
@@ -980,7 +980,7 @@ function initWebWorkerRenderPlatform(injector) {
     };
 }
 /**
- * @experimental WebWorker support is currently experimental.
+ * @publicApi
  */
 var platformWorkerUi = createPlatformFactory(platformCore, 'workerUi', _WORKER_UI_PLATFORM_PROVIDERS);
 function _exceptionHandler() {
@@ -1010,7 +1010,10 @@ function spawnWebWorker(uri, instance) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var VERSION = new Version('7.0.0+32.sha-3f94759');
+/**
+ * @publicApi
+ */
+var VERSION = new Version('7.0.0+52.sha-778e1c2');
 
 /**
  * @license
@@ -1067,7 +1070,7 @@ var MessageBasedPlatformLocation = /** @class */ (function () {
 /**
  * A list of {@link Provider}s. To use the router in a Worker enabled application you must
  * include these providers when setting up the render thread.
- * @experimental
+ * @publicApi
  */
 var WORKER_UI_LOCATION_PROVIDERS = [
     { provide: MessageBasedPlatformLocation, deps: [ServiceMessageBrokerFactory,
@@ -1204,7 +1207,7 @@ var WebWorkerPlatformLocation = /** @class */ (function (_super) {
  * The {@link PlatformLocation} providers that should be added when the {@link Location} is used in
  * a worker context.
  *
- * @experimental
+ * @publicApi
  */
 var WORKER_APP_LOCATION_PROVIDERS = [
     { provide: PlatformLocation, useClass: WebWorkerPlatformLocation }, {
@@ -1673,7 +1676,7 @@ var WorkerDomAdapter = /** @class */ (function (_super) {
  * found in the LICENSE file at https://angular.io/license
  */
 /**
- * @experimental
+ * @publicApi
  */
 var platformWorkerApp = createPlatformFactory(platformCore, 'workerApp', [{ provide: PLATFORM_ID, useValue: ɵPLATFORM_WORKER_APP_ID }]);
 function errorHandler() {
@@ -1699,7 +1702,7 @@ function setupWebWorker() {
 /**
  * The ng module for the worker app side.
  *
- * @experimental
+ * @publicApi
  */
 var WorkerAppModule = /** @class */ (function () {
     function WorkerAppModule() {
@@ -1740,7 +1743,7 @@ var WorkerAppModule = /** @class */ (function () {
 /**
  * Bootstraps the worker ui.
  *
- * @experimental
+ * @publicApi
  */
 function bootstrapWorkerUi(workerScriptUri, customProviders) {
     if (customProviders === void 0) { customProviders = []; }
