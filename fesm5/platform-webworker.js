@@ -4,7 +4,7 @@
  * License: MIT
  */
 
-import { InjectionToken, Version, ɵstringify, RenderComponentType, EventEmitter, PLATFORM_INITIALIZER, Injector, NgZone, APP_INITIALIZER, defineInjectable, inject, createPlatformFactory, platformCore, PLATFORM_ID, ErrorHandler, ɵdefineNgModule, ApplicationModule, defineInjector, RendererFactory2, ɵAPP_ID_RANDOM_PROVIDER, Testability, isDevMode } from '@angular/core';
+import { InjectionToken, Version, ɵstringify, RenderComponentType, EventEmitter, PLATFORM_INITIALIZER, Injector, NgZone, APP_INITIALIZER, defineInjectable, inject, RendererFactory2, ErrorHandler, ɵAPP_ID_RANDOM_PROVIDER, Testability, PLATFORM_ID, createPlatformFactory, platformCore, isDevMode, ɵdefineNgModule, ApplicationModule, defineInjector } from '@angular/core';
 import { __spread, __extends, __read } from 'tslib';
 import { ɵPLATFORM_WORKER_UI_ID, DOCUMENT as DOCUMENT$1, PlatformLocation, LOCATION_INITIALIZED, CommonModule, ViewportScroller, ɵNullViewportScroller, ɵPLATFORM_WORKER_APP_ID } from '@angular/common';
 import { DOCUMENT, EVENT_MANAGER_PLUGINS, EventManager, HAMMER_GESTURE_CONFIG, HammerGestureConfig, ɵBROWSER_SANITIZATION_PROVIDERS, ɵBrowserDomAdapter, ɵBrowserGetTestability, ɵDomEventsPlugin, ɵDomRendererFactory2, ɵDomSharedStylesHost, ɵHammerGesturesPlugin, ɵKeyEventsPlugin, ɵSharedStylesHost, ɵBrowserPlatformLocation, ɵDomAdapter, ɵsetRootDomAdapter } from '@angular/platform-browser';
