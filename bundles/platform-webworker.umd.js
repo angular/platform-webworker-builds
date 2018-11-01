@@ -1,5 +1,5 @@
 /**
- * @license Angular v7.1.0-beta.1+6.sha-4e9f2e5
+ * @license Angular v7.1.0-beta.1+14.sha-2e7b5c5
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -128,6 +128,9 @@
         RenderStore.ngInjectableDef = i0.defineInjectable({ token: RenderStore, factory: function RenderStore_Factory(t) { return new (t || RenderStore)(); }, providedIn: null });
         return RenderStore;
     }());
+    /*@__PURE__*/ i0.ɵsetClassMetadata(RenderStore, [{
+            type: i0.Injectable
+        }], null, null);
 
     /**
      * @license
@@ -247,6 +250,11 @@
         Serializer.ngInjectableDef = i0.defineInjectable({ token: Serializer, factory: function Serializer_Factory(t) { return new (t || Serializer)(i0.inject(RenderStore)); }, providedIn: null });
         return Serializer;
     }());
+    /*@__PURE__*/ i0.ɵsetClassMetadata(Serializer, [{
+            type: i0.Injectable
+        }], [{
+            type: RenderStore
+        }], null);
 
     /**
      * @license
@@ -275,6 +283,13 @@
         ClientMessageBrokerFactory.ngInjectableDef = i0.defineInjectable({ token: ClientMessageBrokerFactory, factory: function ClientMessageBrokerFactory_Factory(t) { return new (t || ClientMessageBrokerFactory)(i0.inject(MessageBus), i0.inject(Serializer)); }, providedIn: null });
         return ClientMessageBrokerFactory;
     }());
+    /*@__PURE__*/ i0.ɵsetClassMetadata(ClientMessageBrokerFactory, [{
+            type: i0.Injectable
+        }], [{
+            type: MessageBus
+        }, {
+            type: Serializer
+        }], null);
     /**
      * @publicApi
      */
@@ -507,6 +522,13 @@
         PostMessageBus.ngInjectableDef = i0.defineInjectable({ token: PostMessageBus, factory: function PostMessageBus_Factory(t) { return new (t || PostMessageBus)(i0.inject(PostMessageBusSink), i0.inject(PostMessageBusSource)); }, providedIn: null });
         return PostMessageBus;
     }());
+    /*@__PURE__*/ i0.ɵsetClassMetadata(PostMessageBus, [{
+            type: i0.Injectable
+        }], [{
+            type: PostMessageBusSink
+        }, {
+            type: PostMessageBusSource
+        }], null);
     /**
      * Helper class that wraps a channel's {@link EventEmitter} and
      * keeps track of if it should run in the zone.
@@ -539,6 +561,13 @@
         ServiceMessageBrokerFactory.ngInjectableDef = i0.defineInjectable({ token: ServiceMessageBrokerFactory, factory: function ServiceMessageBrokerFactory_Factory(t) { return new (t || ServiceMessageBrokerFactory)(i0.inject(MessageBus), i0.inject(Serializer)); }, providedIn: null });
         return ServiceMessageBrokerFactory;
     }());
+    /*@__PURE__*/ i0.ɵsetClassMetadata(ServiceMessageBrokerFactory, [{
+            type: i0.Injectable
+        }], [{
+            type: MessageBus
+        }, {
+            type: Serializer
+        }], null);
     /**
      * Helper class for UIComponents that allows components to register methods.
      * If a registered method message is received from the broker on the worker,
@@ -878,6 +907,19 @@
         MessageBasedRenderer2.ngInjectableDef = i0.defineInjectable({ token: MessageBasedRenderer2, factory: function MessageBasedRenderer2_Factory(t) { return new (t || MessageBasedRenderer2)(i0.inject(ServiceMessageBrokerFactory), i0.inject(MessageBus), i0.inject(Serializer), i0.inject(RenderStore), i0.inject(i0.RendererFactory2)); }, providedIn: null });
         return MessageBasedRenderer2;
     }());
+    /*@__PURE__*/ i0.ɵsetClassMetadata(MessageBasedRenderer2, [{
+            type: i0.Injectable
+        }], [{
+            type: ServiceMessageBrokerFactory
+        }, {
+            type: MessageBus
+        }, {
+            type: Serializer
+        }, {
+            type: RenderStore
+        }, {
+            type: i0.RendererFactory2
+        }], null);
 
     /**
      * @license
@@ -903,6 +945,9 @@
         WebWorkerInstance.ngInjectableDef = i0.defineInjectable({ token: WebWorkerInstance, factory: function WebWorkerInstance_Factory(t) { return new (t || WebWorkerInstance)(); }, providedIn: null });
         return WebWorkerInstance;
     }());
+    /*@__PURE__*/ i0.ɵsetClassMetadata(WebWorkerInstance, [{
+            type: i0.Injectable
+        }], null, null);
     /**
      * @publicApi
      */
@@ -1031,7 +1076,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new i0.Version('7.1.0-beta.1+6.sha-4e9f2e5');
+    var VERSION = new i0.Version('7.1.0-beta.1+14.sha-2e7b5c5');
 
     var MessageBasedPlatformLocation = /** @class */ (function () {
         function MessageBasedPlatformLocation(_brokerFactory, _platformLocation, bus, _serializer) {
@@ -1065,6 +1110,17 @@
         MessageBasedPlatformLocation.ngInjectableDef = i0.defineInjectable({ token: MessageBasedPlatformLocation, factory: function MessageBasedPlatformLocation_Factory(t) { return new (t || MessageBasedPlatformLocation)(i0.inject(ServiceMessageBrokerFactory), i0.inject(platformBrowser.ɵBrowserPlatformLocation), i0.inject(MessageBus), i0.inject(Serializer)); }, providedIn: null });
         return MessageBasedPlatformLocation;
     }());
+    /*@__PURE__*/ i0.ɵsetClassMetadata(MessageBasedPlatformLocation, [{
+            type: i0.Injectable
+        }], [{
+            type: ServiceMessageBrokerFactory
+        }, {
+            type: platformBrowser.ɵBrowserPlatformLocation
+        }, {
+            type: MessageBus
+        }, {
+            type: Serializer
+        }], null);
 
     /**
      * @license
@@ -1191,6 +1247,15 @@
         WebWorkerPlatformLocation.ngInjectableDef = i0.defineInjectable({ token: WebWorkerPlatformLocation, factory: function WebWorkerPlatformLocation_Factory(t) { return new (t || WebWorkerPlatformLocation)(i0.inject(ClientMessageBrokerFactory), i0.inject(MessageBus), i0.inject(Serializer)); }, providedIn: null });
         return WebWorkerPlatformLocation;
     }(common.PlatformLocation));
+    /*@__PURE__*/ i0.ɵsetClassMetadata(WebWorkerPlatformLocation, [{
+            type: i0.Injectable
+        }], [{
+            type: ClientMessageBrokerFactory
+        }, {
+            type: MessageBus
+        }, {
+            type: Serializer
+        }], null);
 
     /**
      * @license
@@ -1305,6 +1370,17 @@
         WebWorkerRendererFactory2.ngInjectableDef = i0.defineInjectable({ token: WebWorkerRendererFactory2, factory: function WebWorkerRendererFactory2_Factory(t) { return new (t || WebWorkerRendererFactory2)(i0.inject(ClientMessageBrokerFactory), i0.inject(MessageBus), i0.inject(Serializer), i0.inject(RenderStore)); }, providedIn: null });
         return WebWorkerRendererFactory2;
     }());
+    /*@__PURE__*/ i0.ɵsetClassMetadata(WebWorkerRendererFactory2, [{
+            type: i0.Injectable
+        }], [{
+            type: ClientMessageBrokerFactory
+        }, {
+            type: MessageBus
+        }, {
+            type: Serializer
+        }, {
+            type: RenderStore
+        }], null);
     var WebWorkerRenderer2 = /** @class */ (function () {
         function WebWorkerRenderer2(_rendererFactory) {
             this._rendererFactory = _rendererFactory;
@@ -1713,6 +1789,30 @@
                 ]] });
         return WorkerAppModule;
     }());
+    /*@__PURE__*/ i0.ɵsetClassMetadata(WorkerAppModule, [{
+            type: i0.NgModule,
+            args: [{
+                    providers: [
+                        platformBrowser.ɵBROWSER_SANITIZATION_PROVIDERS,
+                        Serializer,
+                        { provide: platformBrowser.DOCUMENT, useValue: null },
+                        ClientMessageBrokerFactory,
+                        ServiceMessageBrokerFactory,
+                        WebWorkerRendererFactory2,
+                        { provide: i0.RendererFactory2, useExisting: WebWorkerRendererFactory2 },
+                        { provide: ON_WEB_WORKER, useValue: true },
+                        RenderStore,
+                        { provide: i0.ErrorHandler, useFactory: errorHandler, deps: [] },
+                        { provide: MessageBus, useFactory: createMessageBus, deps: [i0.NgZone] },
+                        { provide: i0.APP_INITIALIZER, useValue: setupWebWorker, multi: true },
+                        { provide: common.ViewportScroller, useClass: common.ɵNullViewportScroller, deps: [] },
+                    ],
+                    exports: [
+                        common.CommonModule,
+                        i0.ApplicationModule,
+                    ]
+                }]
+        }], null, null);
 
     /**
      * @license
