@@ -1,10 +1,10 @@
 /**
- * @license Angular v7.1.0-beta.1+74.sha-099d1a6
+ * @license Angular v7.1.0-beta.1+77.sha-7dbc103
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
 
-import { InjectionToken, Injectable, Version, ɵstringify, RenderComponentType, EventEmitter, RendererFactory2, APP_INITIALIZER, NgZone, PLATFORM_INITIALIZER, Injector, defineInjectable, inject, ɵsetClassMetadata, createPlatformFactory, platformCore, PLATFORM_ID, ErrorHandler, NgModule, ApplicationModule, ɵdefineNgModule, defineInjector, ɵAPP_ID_RANDOM_PROVIDER, Testability, isDevMode } from '@angular/core';
+import { InjectionToken, Injectable, Version, ɵstringify, RenderComponentType, EventEmitter, RendererFactory2, PLATFORM_INITIALIZER, Injector, NgZone, APP_INITIALIZER, defineInjectable, inject, ɵsetClassMetadata, createPlatformFactory, platformCore, PLATFORM_ID, ErrorHandler, NgModule, ApplicationModule, ɵdefineNgModule, defineInjector, ɵAPP_ID_RANDOM_PROVIDER, Testability, isDevMode } from '@angular/core';
 import { ɵPLATFORM_WORKER_UI_ID, DOCUMENT as DOCUMENT$1, PlatformLocation, LOCATION_INITIALIZED, CommonModule, ViewportScroller, ɵNullViewportScroller, ɵPLATFORM_WORKER_APP_ID } from '@angular/common';
 import { DOCUMENT, EVENT_MANAGER_PLUGINS, EventManager, HAMMER_GESTURE_CONFIG, HammerGestureConfig, ɵBROWSER_SANITIZATION_PROVIDERS, ɵBrowserDomAdapter, ɵBrowserGetTestability, ɵDomEventsPlugin, ɵDomRendererFactory2, ɵDomSharedStylesHost, ɵHammerGesturesPlugin, ɵKeyEventsPlugin, ɵSharedStylesHost, ɵBrowserPlatformLocation, ɵDomAdapter, ɵsetRootDomAdapter } from '@angular/platform-browser';
 
@@ -1537,7 +1537,7 @@ function spawnWebWorker(uri, instance) {
 /** *
  * \@publicApi
   @type {?} */
-const VERSION = new Version('7.1.0-beta.1+74.sha-099d1a6');
+const VERSION = new Version('7.1.0-beta.1+77.sha-7dbc103');
 
 /**
  * @fileoverview added by tsickle

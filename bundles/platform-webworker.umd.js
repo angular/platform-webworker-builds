@@ -1,5 +1,5 @@
 /**
- * @license Angular v7.1.0-beta.1+74.sha-099d1a6
+ * @license Angular v7.1.0-beta.1+77.sha-7dbc103
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1076,7 +1076,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new i0.Version('7.1.0-beta.1+74.sha-099d1a6');
+    var VERSION = new i0.Version('7.1.0-beta.1+77.sha-7dbc103');
 
     var MessageBasedPlatformLocation = /** @class */ (function () {
         function MessageBasedPlatformLocation(_brokerFactory, _platformLocation, bus, _serializer) {
