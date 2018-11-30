@@ -1,5 +1,5 @@
 /**
- * @license Angular v7.1.0+52.sha-2d51579
+ * @license Angular v7.1.0+55.sha-816ec0b
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1023,7 +1023,7 @@ function spawnWebWorker(uri, instance) {
 /**
  * @publicApi
  */
-var VERSION = new Version('7.1.0+52.sha-2d51579');
+var VERSION = new Version('7.1.0+55.sha-816ec0b');
 
 var MessageBasedPlatformLocation = /** @class */ (function () {
     function MessageBasedPlatformLocation(_brokerFactory, _platformLocation, bus, _serializer) {
