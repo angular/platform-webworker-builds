@@ -1,5 +1,5 @@
 /**
- * @license Angular v7.1.1+24.sha-9b4d959
+ * @license Angular v7.1.1+25.sha-5c57920
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1013,7 +1013,7 @@ function spawnWebWorker(uri, instance) {
 /**
  * @publicApi
  */
-var VERSION = new Version('7.1.1+24.sha-9b4d959');
+var VERSION = new Version('7.1.1+25.sha-5c57920');
 
 /**
  * @license
