@@ -1,5 +1,5 @@
 /**
- * @license Angular v7.2.0-beta.2+4.sha-042463f
+ * @license Angular v7.2.0-beta.2+8.sha-9c7fb0d
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -10,14 +10,14 @@ import { DOCUMENT, EVENT_MANAGER_PLUGINS, EventManager, HAMMER_GESTURE_CONFIG, H
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /** @type {?} */
 const ON_WEB_WORKER = new InjectionToken('WebWorker.onWebWorker');
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -40,7 +40,7 @@ class MessageBus {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class RenderStore {
     constructor() {
@@ -96,7 +96,7 @@ RenderStore.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class LocationType {
     /**
@@ -142,7 +142,7 @@ class Serializer {
             return obj.map(v => this.serialize(v, type));
         }
         if (type === 2 /* RENDER_STORE_OBJECT */) {
-            return /** @type {?} */ ((this._renderStore.serialize(obj)));
+            return (/** @type {?} */ (this._renderStore.serialize(obj)));
         }
         if (type === RenderComponentType) {
             return this._serializeRenderComponentType(obj);
@@ -261,7 +261,7 @@ Serializer.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * \@publicApi
@@ -355,7 +355,7 @@ class ClientMessageBroker {
         let id = null;
         if (returnType != null) {
             /** @type {?} */
-            let completer = /** @type {?} */ ((undefined));
+            let completer = (/** @type {?} */ (undefined));
             promise = new Promise((resolve, reject) => { completer = { resolve, reject }; });
             id = this._generateMessageId(args.method);
             this._pending.set(id, completer);
@@ -389,13 +389,13 @@ class ClientMessageBroker {
     _handleMessage(message) {
         if (message.type === 'result' || message.type === 'error') {
             /** @type {?} */
-            const id = /** @type {?} */ ((message.id));
+            const id = (/** @type {?} */ (message.id));
             if (this._pending.has(id)) {
                 if (message.type === 'result') {
-                    /** @type {?} */ ((this._pending.get(id))).resolve(message.value);
+                    (/** @type {?} */ (this._pending.get(id))).resolve(message.value);
                 }
                 else {
-                    /** @type {?} */ ((this._pending.get(id))).reject(message.value);
+                    (/** @type {?} */ (this._pending.get(id))).reject(message.value);
                 }
                 this._pending.delete(id);
             }
@@ -431,7 +431,7 @@ class UiArguments {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class PostMessageBusSink {
     /**
@@ -512,8 +512,9 @@ class PostMessageBusSource {
             eventTarget.addEventListener('message', (ev) => this._handleMessages(ev));
         }
         else {
+            // if no eventTarget is given we assume we're in a WebWorker and listen on the global scope
             /** @type {?} */
-            const workerScope = /** @type {?} */ (self);
+            const workerScope = (/** @type {?} */ (self));
             workerScope.addEventListener('message', (ev) => this._handleMessages(ev));
         }
     }
@@ -645,7 +646,7 @@ class _Channel {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * \@publicApi
@@ -721,7 +722,7 @@ class ServiceMessageBroker {
             for (let i = 0; i < numArgs; i++) {
                 /** @type {?} */
                 const serializedArg = serializedArgs[i];
-                deserializedArgs[i] = this._serializer.deserialize(serializedArg, /** @type {?} */ ((signature))[i]);
+                deserializedArgs[i] = this._serializer.deserialize(serializedArg, (/** @type {?} */ (signature))[i]);
             }
             /** @type {?} */
             const promise = method(...deserializedArgs);
@@ -736,7 +737,7 @@ class ServiceMessageBroker {
      */
     _handleMessage(message) {
         if (this._methods.has(message.method)) {
-            /** @type {?} */ ((this._methods.get(message.method)))(message);
+            (/** @type {?} */ (this._methods.get(message.method)))(message);
         }
     }
     /**
@@ -758,7 +759,7 @@ class ServiceMessageBroker {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -767,10 +768,11 @@ class ServiceMessageBroker {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-/** *
+/**
  * All channels used by angular's WebWorker components are listed here.
  * You should not use these channels in your application code.
-  @type {?} */
+ * @type {?}
+ */
 const RENDERER_2_CHANNEL = 'v2.ng-Renderer';
 /** @type {?} */
 const EVENT_2_CHANNEL = 'v2.ng-Events';
@@ -779,7 +781,7 @@ const ROUTER_CHANNEL = 'ng-Router';
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -811,6 +813,8 @@ const NODES_WITH_VALUE = new Set(['input', 'select', 'option', 'button', 'li', '
 function serializeGenericEvent(e) {
     return serializeEvent(e, EVENT_PROPERTIES);
 }
+// TODO(jteplitz602): Allow users to specify the properties they need rather than always
+// adding value and files #3374
 /**
  * @param {?} e
  * @return {?}
@@ -845,15 +849,16 @@ function serializeTransitionEvent(e) {
     const serializedEvent = serializeEvent(e, TRANSITION_EVENT_PROPERTIES);
     return addTarget(e, serializedEvent);
 }
+// TODO(jteplitz602): #3374. See above.
 /**
  * @param {?} e
  * @param {?} serializedEvent
  * @return {?}
  */
 function addTarget(e, serializedEvent) {
-    if (NODES_WITH_VALUE.has((/** @type {?} */ (e.target)).tagName.toLowerCase())) {
+    if (NODES_WITH_VALUE.has(((/** @type {?} */ (e.target))).tagName.toLowerCase())) {
         /** @type {?} */
-        const target = /** @type {?} */ (e.target);
+        const target = (/** @type {?} */ (e.target));
         serializedEvent['target'] = { 'value': target.value };
         if (target.files) {
             serializedEvent['target']['files'] = target.files;
@@ -879,7 +884,7 @@ function serializeEvent(e, properties) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class EventDispatcher {
     /**
@@ -1009,7 +1014,7 @@ class EventDispatcher {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class MessageBasedRenderer2 {
     /**
@@ -1277,7 +1282,7 @@ MessageBasedRenderer2.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * Wrapper class that exposes the Worker
@@ -1300,16 +1305,18 @@ class WebWorkerInstance {
 WebWorkerInstance.decorators = [
     { type: Injectable }
 ];
-/** *
+/**
  * \@publicApi
-  @type {?} */
+ * @type {?}
+ */
 const WORKER_SCRIPT = new InjectionToken('WebWorkerScript');
-/** *
+/**
  * A multi-provider used to automatically call the `start()` method after the service is
  * created.
  *
  * \@publicApi
-  @type {?} */
+ * @type {?}
+ */
 const WORKER_UI_STARTABLE_MESSAGING_SERVICE = new InjectionToken('WorkerRenderStartableMsgService');
 /** @type {?} */
 const _WORKER_UI_PLATFORM_PROVIDERS = [
@@ -1378,6 +1385,7 @@ function initializeGenericWorkerRenderer(injector) {
     /** @type {?} */
     const zone = injector.get(NgZone);
     bus.attachToZone(zone);
+    // initialize message services after the bus has been created
     /** @type {?} */
     const services = injector.get(WORKER_UI_STARTABLE_MESSAGING_SERVICE);
     zone.runGuarded(() => { services.forEach((svc) => { svc.start(); }); });
@@ -1411,9 +1419,10 @@ function initWebWorkerRenderPlatform(injector) {
         initializeGenericWorkerRenderer(injector);
     };
 }
-/** *
+/**
  * \@publicApi
-  @type {?} */
+ * @type {?}
+ */
 const platformWorkerUi = createPlatformFactory(platformCore, 'workerUi', _WORKER_UI_PLATFORM_PROVIDERS);
 /**
  * @return {?}
@@ -1453,16 +1462,17 @@ function spawnWebWorker(uri, instance) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
-/** *
+/**
  * \@publicApi
-  @type {?} */
-const VERSION = new Version('7.2.0-beta.2+4.sha-042463f');
+ * @type {?}
+ */
+const VERSION = new Version('7.2.0-beta.2+8.sha-9c7fb0d');
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class MessageBasedPlatformLocation {
     /**
@@ -1475,8 +1485,8 @@ class MessageBasedPlatformLocation {
         this._brokerFactory = _brokerFactory;
         this._platformLocation = _platformLocation;
         this._serializer = _serializer;
-        this._platformLocation.onPopState(/** @type {?} */ (this._sendUrlChangeEvent.bind(this)));
-        this._platformLocation.onHashChange(/** @type {?} */ (this._sendUrlChangeEvent.bind(this)));
+        this._platformLocation.onPopState((/** @type {?} */ (this._sendUrlChangeEvent.bind(this))));
+        this._platformLocation.onHashChange((/** @type {?} */ (this._sendUrlChangeEvent.bind(this))));
         this._broker = this._brokerFactory.createMessageBroker(ROUTER_CHANNEL);
         this._channelSink = bus.to(ROUTER_CHANNEL);
     }
@@ -1528,19 +1538,20 @@ MessageBasedPlatformLocation.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
-/** *
+/**
  * A list of {\@link Provider}s. To use the router in a Worker enabled application you must
  * include these providers when setting up the render thread.
  * \@publicApi
-  @type {?} */
-const WORKER_UI_LOCATION_PROVIDERS = /** @type {?} */ ([
+ * @type {?}
+ */
+const WORKER_UI_LOCATION_PROVIDERS = (/** @type {?} */ ([
     { provide: MessageBasedPlatformLocation, deps: [ServiceMessageBrokerFactory,
             ɵBrowserPlatformLocation, MessageBus, Serializer] },
     { provide: ɵBrowserPlatformLocation, deps: [DOCUMENT$1] },
     { provide: PLATFORM_INITIALIZER, useFactory: initUiLocation, multi: true, deps: [Injector] }
-]);
+]));
 /**
  * @param {?} injector
  * @return {?}
@@ -1555,7 +1566,7 @@ function initUiLocation(injector) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class WebWorkerPlatformLocation extends PlatformLocation {
     /**
@@ -1568,7 +1579,7 @@ class WebWorkerPlatformLocation extends PlatformLocation {
         this._serializer = _serializer;
         this._popStateListeners = [];
         this._hashChangeListeners = [];
-        this._location = /** @type {?} */ ((null));
+        this._location = (/** @type {?} */ (null));
         this._broker = brokerFactory.createMessageBroker(ROUTER_CHANNEL);
         this._channelSource = bus.from(ROUTER_CHANNEL);
         this._channelSource.subscribe({
@@ -1601,7 +1612,7 @@ class WebWorkerPlatformLocation extends PlatformLocation {
     init() {
         /** @type {?} */
         const args = new UiArguments('getLocation');
-        return /** @type {?} */ ((this._broker.runOnService(args, LocationType))).then((val) => {
+        return (/** @type {?} */ (this._broker.runOnService(args, LocationType))).then((val) => {
             this._location = val;
             this.initializedResolve();
             return true;
@@ -1626,7 +1637,7 @@ class WebWorkerPlatformLocation extends PlatformLocation {
     /**
      * @return {?}
      */
-    get pathname() { return this._location ? /** @type {?} */ ((this._location.pathname)) : '<unknown>'; }
+    get pathname() { return this._location ? (/** @type {?} */ (this._location.pathname)) : '<unknown>'; }
     /**
      * @return {?}
      */
@@ -1713,14 +1724,15 @@ WebWorkerPlatformLocation.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
-/** *
+/**
  * The {\@link PlatformLocation} providers that should be added when the {\@link Location} is used in
  * a worker context.
  *
  * \@publicApi
-  @type {?} */
+ * @type {?}
+ */
 const WORKER_APP_LOCATION_PROVIDERS = [
     { provide: PlatformLocation, useClass: WebWorkerPlatformLocation }, {
         provide: APP_INITIALIZER,
@@ -1748,7 +1760,7 @@ function appInitFnFactory(platformLocation, zone) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 class NamedEventEmitter {
     /**
@@ -2204,7 +2216,7 @@ class WebWorkerRenderNode {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * This adapter is required to log error messages.
@@ -2886,11 +2898,12 @@ class WorkerDomAdapter extends ɵDomAdapter {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
-/** *
+/**
  * \@publicApi
-  @type {?} */
+ * @type {?}
+ */
 const platformWorkerApp = createPlatformFactory(platformCore, 'workerApp', [{ provide: PLATFORM_ID, useValue: ɵPLATFORM_WORKER_APP_ID }]);
 /**
  * @return {?}
@@ -2898,8 +2911,9 @@ const platformWorkerApp = createPlatformFactory(platformCore, 'workerApp', [{ pr
 function errorHandler() {
     return new ErrorHandler();
 }
+// TODO(jteplitz602): remove this and compile with lib.webworker.d.ts (#3492)
 const ɵ0 = (message, transferrables) => {
-    (/** @type {?} */ (postMessage))(message, transferrables);
+    ((/** @type {?} */ (postMessage)))(message, transferrables);
 };
 /** @type {?} */
 const _postMessage = {
@@ -2958,7 +2972,7 @@ WorkerAppModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * Bootstraps the worker ui.
@@ -2969,6 +2983,7 @@ WorkerAppModule.decorators = [
  * @return {?}
  */
 function bootstrapWorkerUi(workerScriptUri, customProviders = []) {
+    // For now, just creates the worker ui platform...
     /** @type {?} */
     const platform = platformWorkerUi([
         { provide: WORKER_SCRIPT, useValue: workerScriptUri },
@@ -2979,13 +2994,12 @@ function bootstrapWorkerUi(workerScriptUri, customProviders = []) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
-// This file only reexports content of the `src` folder. Keep it that way.
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 
 /**
