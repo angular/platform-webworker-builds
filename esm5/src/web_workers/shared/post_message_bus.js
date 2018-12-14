@@ -133,11 +133,11 @@ var PostMessageBus = /** @class */ (function () {
 export { PostMessageBus };
 /*@__PURE__*/ i0.ɵsetClassMetadata(PostMessageBus, [{
         type: Injectable
-    }], [{
+    }], function () { return [{
         type: PostMessageBusSink
     }, {
         type: PostMessageBusSource
-    }], null);
+    }]; }, null);
 /**
  * Helper class that wraps a channel's {@link EventEmitter} and
  * keeps track of if it should run in the zone.
