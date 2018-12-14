@@ -32,11 +32,11 @@ var ClientMessageBrokerFactory = /** @class */ (function () {
 export { ClientMessageBrokerFactory };
 /*@__PURE__*/ i0.ɵsetClassMetadata(ClientMessageBrokerFactory, [{
         type: Injectable
-    }], [{
+    }], function () { return [{
         type: MessageBus
     }, {
         type: Serializer
-    }], null);
+    }]; }, null);
 /**
  * @publicApi
  */

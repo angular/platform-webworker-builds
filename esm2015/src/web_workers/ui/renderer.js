@@ -283,7 +283,7 @@ MessageBasedRenderer2.ctorParameters = () => [
 MessageBasedRenderer2.ngInjectableDef = i0.defineInjectable({ token: MessageBasedRenderer2, factory: function MessageBasedRenderer2_Factory(t) { return new (t || MessageBasedRenderer2)(i0.inject(ServiceMessageBrokerFactory), i0.inject(MessageBus), i0.inject(Serializer), i0.inject(RenderStore), i0.inject(RendererFactory2)); }, providedIn: null });
 /*@__PURE__*/ i0.ɵsetClassMetadata(MessageBasedRenderer2, [{
         type: Injectable
-    }], [{
+    }], function () { return [{
         type: ServiceMessageBrokerFactory
     }, {
         type: MessageBus
@@ -293,7 +293,7 @@ MessageBasedRenderer2.ngInjectableDef = i0.defineInjectable({ token: MessageBase
         type: RenderStore
     }, {
         type: RendererFactory2
-    }], null);
+    }]; }, null);
 if (false) {
     /** @type {?} */
     MessageBasedRenderer2.prototype._eventDispatcher;

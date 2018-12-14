@@ -1,5 +1,5 @@
 /**
- * @license Angular v7.2.0-beta.2+36.sha-7fae911
+ * @license Angular v7.2.0-beta.2+39.sha-d0d351c
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -199,9 +199,9 @@ var Serializer = /** @class */ (function () {
 }());
 /*@__PURE__*/ ɵsetClassMetadata(Serializer, [{
         type: Injectable
-    }], [{
+    }], function () { return [{
         type: RenderStore
-    }], null);
+    }]; }, null);
 
 /**
  * @license
@@ -232,11 +232,11 @@ var ClientMessageBrokerFactory = /** @class */ (function () {
 }());
 /*@__PURE__*/ ɵsetClassMetadata(ClientMessageBrokerFactory, [{
         type: Injectable
-    }], [{
+    }], function () { return [{
         type: MessageBus
     }, {
         type: Serializer
-    }], null);
+    }]; }, null);
 /**
  * @publicApi
  */
@@ -471,11 +471,11 @@ var PostMessageBus = /** @class */ (function () {
 }());
 /*@__PURE__*/ ɵsetClassMetadata(PostMessageBus, [{
         type: Injectable
-    }], [{
+    }], function () { return [{
         type: PostMessageBusSink
     }, {
         type: PostMessageBusSource
-    }], null);
+    }]; }, null);
 /**
  * Helper class that wraps a channel's {@link EventEmitter} and
  * keeps track of if it should run in the zone.
@@ -510,11 +510,11 @@ var ServiceMessageBrokerFactory = /** @class */ (function () {
 }());
 /*@__PURE__*/ ɵsetClassMetadata(ServiceMessageBrokerFactory, [{
         type: Injectable
-    }], [{
+    }], function () { return [{
         type: MessageBus
     }, {
         type: Serializer
-    }], null);
+    }]; }, null);
 /**
  * Helper class for UIComponents that allows components to register methods.
  * If a registered method message is received from the broker on the worker,
@@ -856,7 +856,7 @@ var MessageBasedRenderer2 = /** @class */ (function () {
 }());
 /*@__PURE__*/ ɵsetClassMetadata(MessageBasedRenderer2, [{
         type: Injectable
-    }], [{
+    }], function () { return [{
         type: ServiceMessageBrokerFactory
     }, {
         type: MessageBus
@@ -866,7 +866,7 @@ var MessageBasedRenderer2 = /** @class */ (function () {
         type: RenderStore
     }, {
         type: RendererFactory2
-    }], null);
+    }]; }, null);
 
 /**
  * @license
@@ -1023,7 +1023,7 @@ function spawnWebWorker(uri, instance) {
 /**
  * @publicApi
  */
-var VERSION = new Version('7.2.0-beta.2+36.sha-7fae911');
+var VERSION = new Version('7.2.0-beta.2+39.sha-d0d351c');
 
 var MessageBasedPlatformLocation = /** @class */ (function () {
     function MessageBasedPlatformLocation(_brokerFactory, _platformLocation, bus, _serializer) {
@@ -1059,7 +1059,7 @@ var MessageBasedPlatformLocation = /** @class */ (function () {
 }());
 /*@__PURE__*/ ɵsetClassMetadata(MessageBasedPlatformLocation, [{
         type: Injectable
-    }], [{
+    }], function () { return [{
         type: ServiceMessageBrokerFactory
     }, {
         type: ɵBrowserPlatformLocation
@@ -1067,7 +1067,7 @@ var MessageBasedPlatformLocation = /** @class */ (function () {
         type: MessageBus
     }, {
         type: Serializer
-    }], null);
+    }]; }, null);
 
 /**
  * @license
@@ -1196,13 +1196,13 @@ var WebWorkerPlatformLocation = /** @class */ (function (_super) {
 }(PlatformLocation));
 /*@__PURE__*/ ɵsetClassMetadata(WebWorkerPlatformLocation, [{
         type: Injectable
-    }], [{
+    }], function () { return [{
         type: ClientMessageBrokerFactory
     }, {
         type: MessageBus
     }, {
         type: Serializer
-    }], null);
+    }]; }, null);
 
 /**
  * @license
@@ -1319,7 +1319,7 @@ var WebWorkerRendererFactory2 = /** @class */ (function () {
 }());
 /*@__PURE__*/ ɵsetClassMetadata(WebWorkerRendererFactory2, [{
         type: Injectable
-    }], [{
+    }], function () { return [{
         type: ClientMessageBrokerFactory
     }, {
         type: MessageBus
@@ -1327,7 +1327,7 @@ var WebWorkerRendererFactory2 = /** @class */ (function () {
         type: Serializer
     }, {
         type: RenderStore
-    }], null);
+    }]; }, null);
 var WebWorkerRenderer2 = /** @class */ (function () {
     function WebWorkerRenderer2(_rendererFactory) {
         this._rendererFactory = _rendererFactory;
