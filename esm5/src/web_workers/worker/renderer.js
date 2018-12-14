@@ -101,7 +101,7 @@ var WebWorkerRendererFactory2 = /** @class */ (function () {
 export { WebWorkerRendererFactory2 };
 /*@__PURE__*/ i0.ɵsetClassMetadata(WebWorkerRendererFactory2, [{
         type: Injectable
-    }], [{
+    }], function () { return [{
         type: ClientMessageBrokerFactory
     }, {
         type: MessageBus
@@ -109,7 +109,7 @@ export { WebWorkerRendererFactory2 };
         type: Serializer
     }, {
         type: RenderStore
-    }], null);
+    }]; }, null);
 var WebWorkerRenderer2 = /** @class */ (function () {
     function WebWorkerRenderer2(_rendererFactory) {
         this._rendererFactory = _rendererFactory;

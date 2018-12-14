@@ -1,10 +1,10 @@
 /**
- * @license Angular v7.2.0-beta.2+30.sha-c6ae729
+ * @license Angular v7.2.0-beta.2+41.sha-522919a
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
 
-import { InjectionToken, Injectable, Version, ɵstringify, RenderComponentType, EventEmitter, RendererFactory2, PLATFORM_INITIALIZER, Injector, NgZone, APP_INITIALIZER, defineInjectable, inject, ɵsetClassMetadata, createPlatformFactory, platformCore, PLATFORM_ID, ErrorHandler, NgModule, ApplicationModule, ɵdefineNgModule, defineInjector, ɵAPP_ID_RANDOM_PROVIDER, Testability, isDevMode } from '@angular/core';
+import { InjectionToken, Injectable, Version, ɵstringify, RenderComponentType, EventEmitter, RendererFactory2, PLATFORM_INITIALIZER, Injector, NgZone, APP_INITIALIZER, defineInjectable, inject, ɵsetClassMetadata, ErrorHandler, ɵAPP_ID_RANDOM_PROVIDER, Testability, PLATFORM_ID, createPlatformFactory, platformCore, isDevMode, NgModule, ApplicationModule, ɵdefineNgModule, defineInjector } from '@angular/core';
 import { ɵPLATFORM_WORKER_UI_ID, DOCUMENT as DOCUMENT$1, PlatformLocation, LOCATION_INITIALIZED, CommonModule, ViewportScroller, ɵNullViewportScroller, ɵPLATFORM_WORKER_APP_ID } from '@angular/common';
 import { DOCUMENT, EVENT_MANAGER_PLUGINS, EventManager, HAMMER_GESTURE_CONFIG, HammerGestureConfig, ɵBROWSER_SANITIZATION_PROVIDERS, ɵBrowserDomAdapter, ɵBrowserGetTestability, ɵDomEventsPlugin, ɵDomRendererFactory2, ɵDomSharedStylesHost, ɵHammerGesturesPlugin, ɵKeyEventsPlugin, ɵSharedStylesHost, ɵBrowserPlatformLocation, ɵDomAdapter, ɵsetRootDomAdapter } from '@angular/platform-browser';
 
@@ -268,9 +268,9 @@ Serializer.ctorParameters = () => [
 Serializer.ngInjectableDef = defineInjectable({ token: Serializer, factory: function Serializer_Factory(t) { return new (t || Serializer)(inject(RenderStore)); }, providedIn: null });
 /*@__PURE__*/ ɵsetClassMetadata(Serializer, [{
         type: Injectable
-    }], [{
+    }], function () { return [{
         type: RenderStore
-    }], null);
+    }]; }, null);
 
 /**
  * @fileoverview added by tsickle
@@ -318,11 +318,11 @@ ClientMessageBrokerFactory.ctorParameters = () => [
 ClientMessageBrokerFactory.ngInjectableDef = defineInjectable({ token: ClientMessageBrokerFactory, factory: function ClientMessageBrokerFactory_Factory(t) { return new (t || ClientMessageBrokerFactory)(inject(MessageBus), inject(Serializer)); }, providedIn: null });
 /*@__PURE__*/ ɵsetClassMetadata(ClientMessageBrokerFactory, [{
         type: Injectable
-    }], [{
+    }], function () { return [{
         type: MessageBus
     }, {
         type: Serializer
-    }], null);
+    }]; }, null);
 /**
  * \@publicApi
  */
@@ -656,11 +656,11 @@ PostMessageBus.ctorParameters = () => [
 PostMessageBus.ngInjectableDef = defineInjectable({ token: PostMessageBus, factory: function PostMessageBus_Factory(t) { return new (t || PostMessageBus)(inject(PostMessageBusSink), inject(PostMessageBusSource)); }, providedIn: null });
 /*@__PURE__*/ ɵsetClassMetadata(PostMessageBus, [{
         type: Injectable
-    }], [{
+    }], function () { return [{
         type: PostMessageBusSink
     }, {
         type: PostMessageBusSource
-    }], null);
+    }]; }, null);
 /**
  * Helper class that wraps a channel's {\@link EventEmitter} and
  * keeps track of if it should run in the zone.
@@ -722,11 +722,11 @@ ServiceMessageBrokerFactory.ctorParameters = () => [
 ServiceMessageBrokerFactory.ngInjectableDef = defineInjectable({ token: ServiceMessageBrokerFactory, factory: function ServiceMessageBrokerFactory_Factory(t) { return new (t || ServiceMessageBrokerFactory)(inject(MessageBus), inject(Serializer)); }, providedIn: null });
 /*@__PURE__*/ ɵsetClassMetadata(ServiceMessageBrokerFactory, [{
         type: Injectable
-    }], [{
+    }], function () { return [{
         type: MessageBus
     }, {
         type: Serializer
-    }], null);
+    }]; }, null);
 /**
  * Helper class for UIComponents that allows components to register methods.
  * If a registered method message is received from the broker on the worker,
@@ -1336,7 +1336,7 @@ MessageBasedRenderer2.ctorParameters = () => [
 MessageBasedRenderer2.ngInjectableDef = defineInjectable({ token: MessageBasedRenderer2, factory: function MessageBasedRenderer2_Factory(t) { return new (t || MessageBasedRenderer2)(inject(ServiceMessageBrokerFactory), inject(MessageBus), inject(Serializer), inject(RenderStore), inject(RendererFactory2)); }, providedIn: null });
 /*@__PURE__*/ ɵsetClassMetadata(MessageBasedRenderer2, [{
         type: Injectable
-    }], [{
+    }], function () { return [{
         type: ServiceMessageBrokerFactory
     }, {
         type: MessageBus
@@ -1346,7 +1346,7 @@ MessageBasedRenderer2.ngInjectableDef = defineInjectable({ token: MessageBasedRe
         type: RenderStore
     }, {
         type: RendererFactory2
-    }], null);
+    }]; }, null);
 
 /**
  * @fileoverview added by tsickle
@@ -1547,7 +1547,7 @@ function spawnWebWorker(uri, instance) {
  * \@publicApi
  * @type {?}
  */
-const VERSION = new Version('7.2.0-beta.2+30.sha-c6ae729');
+const VERSION = new Version('7.2.0-beta.2+41.sha-522919a');
 
 /**
  * @fileoverview added by tsickle
@@ -1624,7 +1624,7 @@ MessageBasedPlatformLocation.ctorParameters = () => [
 MessageBasedPlatformLocation.ngInjectableDef = defineInjectable({ token: MessageBasedPlatformLocation, factory: function MessageBasedPlatformLocation_Factory(t) { return new (t || MessageBasedPlatformLocation)(inject(ServiceMessageBrokerFactory), inject(ɵBrowserPlatformLocation), inject(MessageBus), inject(Serializer)); }, providedIn: null });
 /*@__PURE__*/ ɵsetClassMetadata(MessageBasedPlatformLocation, [{
         type: Injectable
-    }], [{
+    }], function () { return [{
         type: ServiceMessageBrokerFactory
     }, {
         type: ɵBrowserPlatformLocation
@@ -1632,7 +1632,7 @@ MessageBasedPlatformLocation.ngInjectableDef = defineInjectable({ token: Message
         type: MessageBus
     }, {
         type: Serializer
-    }], null);
+    }]; }, null);
 
 /**
  * @fileoverview added by tsickle
@@ -1829,13 +1829,13 @@ WebWorkerPlatformLocation.ctorParameters = () => [
 WebWorkerPlatformLocation.ngInjectableDef = defineInjectable({ token: WebWorkerPlatformLocation, factory: function WebWorkerPlatformLocation_Factory(t) { return new (t || WebWorkerPlatformLocation)(inject(ClientMessageBrokerFactory), inject(MessageBus), inject(Serializer)); }, providedIn: null });
 /*@__PURE__*/ ɵsetClassMetadata(WebWorkerPlatformLocation, [{
         type: Injectable
-    }], [{
+    }], function () { return [{
         type: ClientMessageBrokerFactory
     }, {
         type: MessageBus
     }, {
         type: Serializer
-    }], null);
+    }]; }, null);
 
 /**
  * @fileoverview added by tsickle
@@ -2049,7 +2049,7 @@ WebWorkerRendererFactory2.ctorParameters = () => [
 WebWorkerRendererFactory2.ngInjectableDef = defineInjectable({ token: WebWorkerRendererFactory2, factory: function WebWorkerRendererFactory2_Factory(t) { return new (t || WebWorkerRendererFactory2)(inject(ClientMessageBrokerFactory), inject(MessageBus), inject(Serializer), inject(RenderStore)); }, providedIn: null });
 /*@__PURE__*/ ɵsetClassMetadata(WebWorkerRendererFactory2, [{
         type: Injectable
-    }], [{
+    }], function () { return [{
         type: ClientMessageBrokerFactory
     }, {
         type: MessageBus
@@ -2057,7 +2057,7 @@ WebWorkerRendererFactory2.ngInjectableDef = defineInjectable({ token: WebWorkerR
         type: Serializer
     }, {
         type: RenderStore
-    }], null);
+    }]; }, null);
 class WebWorkerRenderer2 {
     /**
      * @param {?} _rendererFactory
