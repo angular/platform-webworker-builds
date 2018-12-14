@@ -33,11 +33,11 @@ var ServiceMessageBrokerFactory = /** @class */ (function () {
 export { ServiceMessageBrokerFactory };
 /*@__PURE__*/ i0.ɵsetClassMetadata(ServiceMessageBrokerFactory, [{
         type: Injectable
-    }], function () { return [{
+    }], [{
         type: MessageBus
     }, {
         type: Serializer
-    }]; }, null);
+    }], null);
 /**
  * Helper class for UIComponents that allows components to register methods.
  * If a registered method message is received from the broker on the worker,

@@ -234,11 +234,11 @@ PostMessageBus.ctorParameters = () => [
 PostMessageBus.ngInjectableDef = i0.defineInjectable({ token: PostMessageBus, factory: function PostMessageBus_Factory(t) { return new (t || PostMessageBus)(i0.inject(PostMessageBusSink), i0.inject(PostMessageBusSource)); }, providedIn: null });
 /*@__PURE__*/ i0.ɵsetClassMetadata(PostMessageBus, [{
         type: Injectable
-    }], function () { return [{
+    }], [{
         type: PostMessageBusSink
     }, {
         type: PostMessageBusSource
-    }]; }, null);
+    }], null);
 if (false) {
     /** @type {?} */
     PostMessageBus.prototype.sink;

@@ -185,7 +185,7 @@ WebWorkerRendererFactory2.ctorParameters = () => [
 WebWorkerRendererFactory2.ngInjectableDef = i0.defineInjectable({ token: WebWorkerRendererFactory2, factory: function WebWorkerRendererFactory2_Factory(t) { return new (t || WebWorkerRendererFactory2)(i0.inject(ClientMessageBrokerFactory), i0.inject(MessageBus), i0.inject(Serializer), i0.inject(RenderStore)); }, providedIn: null });
 /*@__PURE__*/ i0.ɵsetClassMetadata(WebWorkerRendererFactory2, [{
         type: Injectable
-    }], function () { return [{
+    }], [{
         type: ClientMessageBrokerFactory
     }, {
         type: MessageBus
@@ -193,7 +193,7 @@ WebWorkerRendererFactory2.ngInjectableDef = i0.defineInjectable({ token: WebWork
         type: Serializer
     }, {
         type: RenderStore
-    }]; }, null);
+    }], null);
 if (false) {
     /** @type {?} */
     WebWorkerRendererFactory2.prototype.globalEvents;
