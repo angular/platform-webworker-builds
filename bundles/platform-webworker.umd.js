@@ -1,5 +1,5 @@
 /**
- * @license Angular v7.2.0-beta.2+38.sha-a954345
+ * @license Angular v7.2.0-beta.2+36.sha-7fae911
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -252,9 +252,9 @@
     }());
     /*@__PURE__*/ i0.ɵsetClassMetadata(Serializer, [{
             type: i0.Injectable
-        }], function () { return [{
+        }], [{
             type: RenderStore
-        }]; }, null);
+        }], null);
 
     /**
      * @license
@@ -285,11 +285,11 @@
     }());
     /*@__PURE__*/ i0.ɵsetClassMetadata(ClientMessageBrokerFactory, [{
             type: i0.Injectable
-        }], function () { return [{
+        }], [{
             type: MessageBus
         }, {
             type: Serializer
-        }]; }, null);
+        }], null);
     /**
      * @publicApi
      */
@@ -524,11 +524,11 @@
     }());
     /*@__PURE__*/ i0.ɵsetClassMetadata(PostMessageBus, [{
             type: i0.Injectable
-        }], function () { return [{
+        }], [{
             type: PostMessageBusSink
         }, {
             type: PostMessageBusSource
-        }]; }, null);
+        }], null);
     /**
      * Helper class that wraps a channel's {@link EventEmitter} and
      * keeps track of if it should run in the zone.
@@ -563,11 +563,11 @@
     }());
     /*@__PURE__*/ i0.ɵsetClassMetadata(ServiceMessageBrokerFactory, [{
             type: i0.Injectable
-        }], function () { return [{
+        }], [{
             type: MessageBus
         }, {
             type: Serializer
-        }]; }, null);
+        }], null);
     /**
      * Helper class for UIComponents that allows components to register methods.
      * If a registered method message is received from the broker on the worker,
@@ -909,7 +909,7 @@
     }());
     /*@__PURE__*/ i0.ɵsetClassMetadata(MessageBasedRenderer2, [{
             type: i0.Injectable
-        }], function () { return [{
+        }], [{
             type: ServiceMessageBrokerFactory
         }, {
             type: MessageBus
@@ -919,7 +919,7 @@
             type: RenderStore
         }, {
             type: i0.RendererFactory2
-        }]; }, null);
+        }], null);
 
     /**
      * @license
@@ -1076,7 +1076,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new i0.Version('7.2.0-beta.2+38.sha-a954345');
+    var VERSION = new i0.Version('7.2.0-beta.2+36.sha-7fae911');
 
     var MessageBasedPlatformLocation = /** @class */ (function () {
         function MessageBasedPlatformLocation(_brokerFactory, _platformLocation, bus, _serializer) {
@@ -1112,7 +1112,7 @@
     }());
     /*@__PURE__*/ i0.ɵsetClassMetadata(MessageBasedPlatformLocation, [{
             type: i0.Injectable
-        }], function () { return [{
+        }], [{
             type: ServiceMessageBrokerFactory
         }, {
             type: platformBrowser.ɵBrowserPlatformLocation
@@ -1120,7 +1120,7 @@
             type: MessageBus
         }, {
             type: Serializer
-        }]; }, null);
+        }], null);
 
     /**
      * @license
@@ -1249,13 +1249,13 @@
     }(common.PlatformLocation));
     /*@__PURE__*/ i0.ɵsetClassMetadata(WebWorkerPlatformLocation, [{
             type: i0.Injectable
-        }], function () { return [{
+        }], [{
             type: ClientMessageBrokerFactory
         }, {
             type: MessageBus
         }, {
             type: Serializer
-        }]; }, null);
+        }], null);
 
     /**
      * @license
@@ -1372,7 +1372,7 @@
     }());
     /*@__PURE__*/ i0.ɵsetClassMetadata(WebWorkerRendererFactory2, [{
             type: i0.Injectable
-        }], function () { return [{
+        }], [{
             type: ClientMessageBrokerFactory
         }, {
             type: MessageBus
@@ -1380,7 +1380,7 @@
             type: Serializer
         }, {
             type: RenderStore
-        }]; }, null);
+        }], null);
     var WebWorkerRenderer2 = /** @class */ (function () {
         function WebWorkerRenderer2(_rendererFactory) {
             this._rendererFactory = _rendererFactory;

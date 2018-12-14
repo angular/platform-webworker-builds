@@ -48,11 +48,11 @@ ServiceMessageBrokerFactory.ctorParameters = () => [
 ServiceMessageBrokerFactory.ngInjectableDef = i0.defineInjectable({ token: ServiceMessageBrokerFactory, factory: function ServiceMessageBrokerFactory_Factory(t) { return new (t || ServiceMessageBrokerFactory)(i0.inject(MessageBus), i0.inject(Serializer)); }, providedIn: null });
 /*@__PURE__*/ i0.ɵsetClassMetadata(ServiceMessageBrokerFactory, [{
         type: Injectable
-    }], function () { return [{
+    }], [{
         type: MessageBus
     }, {
         type: Serializer
-    }]; }, null);
+    }], null);
 if (false) {
     /**
      * \@internal
