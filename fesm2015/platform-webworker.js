@@ -1,5 +1,5 @@
 /**
- * @license Angular v7.2.0-beta.2+83.sha-b04bc5d
+ * @license Angular v7.2.0-beta.2+89.sha-69198ba
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -10,14 +10,14 @@ import { DOCUMENT, EVENT_MANAGER_PLUGINS, EventManager, HAMMER_GESTURE_CONFIG, H
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 const ON_WEB_WORKER = new InjectionToken('WebWorker.onWebWorker');
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -40,7 +40,7 @@ class MessageBus {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -190,6 +190,7 @@ class Serializer {
         throw new Error(`No deserializer for type ${ɵstringify(type)}`);
     }
     /**
+     * @private
      * @param {?} loc
      * @return {?}
      */
@@ -207,6 +208,7 @@ class Serializer {
         };
     }
     /**
+     * @private
      * @param {?} loc
      * @return {?}
      */
@@ -214,6 +216,7 @@ class Serializer {
         return new LocationType(loc['href'], loc['protocol'], loc['host'], loc['hostname'], loc['port'], loc['pathname'], loc['search'], loc['hash'], loc['origin']);
     }
     /**
+     * @private
      * @param {?} type
      * @return {?}
      */
@@ -227,6 +230,7 @@ class Serializer {
         };
     }
     /**
+     * @private
      * @param {?} props
      * @return {?}
      */
@@ -234,6 +238,7 @@ class Serializer {
         return new RenderComponentType(props['id'], props['templateUrl'], props['slotCount'], this.deserialize(props['encapsulation']), this.deserialize(props['styles']), {});
     }
     /**
+     * @private
      * @param {?} type
      * @return {?}
      */
@@ -246,6 +251,7 @@ class Serializer {
         };
     }
     /**
+     * @private
      * @param {?} props
      * @return {?}
      */
@@ -274,7 +280,7 @@ Serializer.ngInjectableDef = defineInjectable({ token: Serializer, factory: func
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -343,6 +349,7 @@ class ClientMessageBroker {
         source.subscribe({ next: (message) => this._handleMessage(message) });
     }
     /**
+     * @private
      * @param {?} name
      * @return {?}
      */
@@ -411,6 +418,7 @@ class ClientMessageBroker {
         return promise;
     }
     /**
+     * @private
      * @param {?} message
      * @return {?}
      */
@@ -512,6 +520,7 @@ class PostMessageBusSink {
         }
     }
     /**
+     * @private
      * @return {?}
      */
     _handleOnEventDone() {
@@ -521,6 +530,7 @@ class PostMessageBusSink {
         }
     }
     /**
+     * @private
      * @param {?} messages
      * @return {?}
      */
@@ -575,6 +585,7 @@ class PostMessageBusSource {
         }
     }
     /**
+     * @private
      * @param {?} ev
      * @return {?}
      */
@@ -586,6 +597,7 @@ class PostMessageBusSource {
         }
     }
     /**
+     * @private
      * @param {?} data
      * @return {?}
      */
@@ -678,7 +690,7 @@ class _Channel {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -779,6 +791,7 @@ class ServiceMessageBroker {
         });
     }
     /**
+     * @private
      * @param {?} message
      * @return {?}
      */
@@ -788,6 +801,7 @@ class ServiceMessageBroker {
         }
     }
     /**
+     * @private
      * @param {?} id
      * @param {?} promise
      * @param {?} type
@@ -806,7 +820,7 @@ class ServiceMessageBroker {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -828,7 +842,7 @@ const ROUTER_CHANNEL = 'ng-Router';
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -931,7 +945,7 @@ function serializeEvent(e, properties) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class EventDispatcher {
     /**
@@ -1061,7 +1075,7 @@ class EventDispatcher {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -1122,11 +1136,13 @@ class MessageBasedRenderer2 {
         });
     }
     /**
+     * @private
      * @param {?} r
      * @return {?}
      */
     destroy(r) { r.destroy(); }
     /**
+     * @private
      * @param {?} r
      * @param {?} node
      * @return {?}
@@ -1138,6 +1154,7 @@ class MessageBasedRenderer2 {
         this._renderStore.remove(node);
     }
     /**
+     * @private
      * @param {?} el
      * @param {?} type
      * @param {?} id
@@ -1147,6 +1164,7 @@ class MessageBasedRenderer2 {
         this._renderStore.store(this._rendererFactory.createRenderer(el, type), id);
     }
     /**
+     * @private
      * @param {?} r
      * @param {?} name
      * @param {?} namespace
@@ -1157,6 +1175,7 @@ class MessageBasedRenderer2 {
         this._renderStore.store(r.createElement(name, namespace), id);
     }
     /**
+     * @private
      * @param {?} r
      * @param {?} value
      * @param {?} id
@@ -1166,6 +1185,7 @@ class MessageBasedRenderer2 {
         this._renderStore.store(r.createComment(value), id);
     }
     /**
+     * @private
      * @param {?} r
      * @param {?} value
      * @param {?} id
@@ -1175,6 +1195,7 @@ class MessageBasedRenderer2 {
         this._renderStore.store(r.createText(value), id);
     }
     /**
+     * @private
      * @param {?} r
      * @param {?} parent
      * @param {?} child
@@ -1182,6 +1203,7 @@ class MessageBasedRenderer2 {
      */
     appendChild(r, parent, child) { r.appendChild(parent, child); }
     /**
+     * @private
      * @param {?} r
      * @param {?} parent
      * @param {?} child
@@ -1192,6 +1214,7 @@ class MessageBasedRenderer2 {
         r.insertBefore(parent, child, ref);
     }
     /**
+     * @private
      * @param {?} r
      * @param {?} parent
      * @param {?} child
@@ -1199,6 +1222,7 @@ class MessageBasedRenderer2 {
      */
     removeChild(r, parent, child) { r.removeChild(parent, child); }
     /**
+     * @private
      * @param {?} r
      * @param {?} selector
      * @param {?} id
@@ -1208,6 +1232,7 @@ class MessageBasedRenderer2 {
         this._renderStore.store(r.selectRootElement(selector), id);
     }
     /**
+     * @private
      * @param {?} r
      * @param {?} node
      * @param {?} id
@@ -1217,6 +1242,7 @@ class MessageBasedRenderer2 {
         this._renderStore.store(r.parentNode(node), id);
     }
     /**
+     * @private
      * @param {?} r
      * @param {?} node
      * @param {?} id
@@ -1226,6 +1252,7 @@ class MessageBasedRenderer2 {
         this._renderStore.store(r.nextSibling(node), id);
     }
     /**
+     * @private
      * @param {?} r
      * @param {?} el
      * @param {?} name
@@ -1237,6 +1264,7 @@ class MessageBasedRenderer2 {
         r.setAttribute(el, name, value, namespace);
     }
     /**
+     * @private
      * @param {?} r
      * @param {?} el
      * @param {?} name
@@ -1247,6 +1275,7 @@ class MessageBasedRenderer2 {
         r.removeAttribute(el, name, namespace);
     }
     /**
+     * @private
      * @param {?} r
      * @param {?} el
      * @param {?} name
@@ -1254,6 +1283,7 @@ class MessageBasedRenderer2 {
      */
     addClass(r, el, name) { r.addClass(el, name); }
     /**
+     * @private
      * @param {?} r
      * @param {?} el
      * @param {?} name
@@ -1261,6 +1291,7 @@ class MessageBasedRenderer2 {
      */
     removeClass(r, el, name) { r.removeClass(el, name); }
     /**
+     * @private
      * @param {?} r
      * @param {?} el
      * @param {?} style
@@ -1272,6 +1303,7 @@ class MessageBasedRenderer2 {
         r.setStyle(el, style, value, flags);
     }
     /**
+     * @private
      * @param {?} r
      * @param {?} el
      * @param {?} style
@@ -1282,6 +1314,7 @@ class MessageBasedRenderer2 {
         r.removeStyle(el, style, flags);
     }
     /**
+     * @private
      * @param {?} r
      * @param {?} el
      * @param {?} name
@@ -1292,6 +1325,7 @@ class MessageBasedRenderer2 {
         r.setProperty(el, name, value);
     }
     /**
+     * @private
      * @param {?} r
      * @param {?} node
      * @param {?} value
@@ -1299,6 +1333,7 @@ class MessageBasedRenderer2 {
      */
     setValue(r, node, value) { r.setValue(node, value); }
     /**
+     * @private
      * @param {?} r
      * @param {?} el
      * @param {?} elName
@@ -1316,6 +1351,7 @@ class MessageBasedRenderer2 {
         this._renderStore.store(unlisten, unlistenId);
     }
     /**
+     * @private
      * @param {?} r
      * @param {?} unlisten
      * @return {?}
@@ -1350,7 +1386,7 @@ MessageBasedRenderer2.ngInjectableDef = defineInjectable({ token: MessageBasedRe
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -1541,17 +1577,17 @@ function spawnWebWorker(uri, instance) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * \@publicApi
  * @type {?}
  */
-const VERSION = new Version('7.2.0-beta.2+83.sha-b04bc5d');
+const VERSION = new Version('7.2.0-beta.2+89.sha-69198ba');
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -1590,12 +1626,14 @@ class MessageBasedPlatformLocation {
         this._broker.registerMethod('back', null, this._platformLocation.back.bind(this._platformLocation));
     }
     /**
+     * @private
      * @return {?}
      */
     _getLocation() {
         return Promise.resolve(this._platformLocation.location);
     }
     /**
+     * @private
      * @param {?} e
      * @return {?}
      */
@@ -1606,6 +1644,7 @@ class MessageBasedPlatformLocation {
         });
     }
     /**
+     * @private
      * @param {?} pathname
      * @return {?}
      */
@@ -1636,7 +1675,7 @@ MessageBasedPlatformLocation.ngInjectableDef = defineInjectable({ token: Message
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * A list of {\@link Provider}s. To use the router in a Worker enabled application you must
@@ -1664,7 +1703,7 @@ function initUiLocation(injector) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -1839,7 +1878,7 @@ WebWorkerPlatformLocation.ngInjectableDef = defineInjectable({ token: WebWorkerP
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * The {\@link PlatformLocation} providers that should be added when the {\@link Location} is used in
@@ -1875,7 +1914,7 @@ function appInitFnFactory(platformLocation, zone) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -1918,6 +1957,7 @@ class NamedEventEmitter {
         }
     }
     /**
+     * @private
      * @param {?} eventName
      * @return {?}
      */
@@ -2016,6 +2056,7 @@ class WebWorkerRendererFactory2 {
      */
     allocateId() { return this.renderStore.allocateId(); }
     /**
+     * @private
      * @param {?} message
      * @return {?}
      */
@@ -2333,6 +2374,7 @@ class WebWorkerRenderer2 {
         };
     }
     /**
+     * @private
      * @param {?} fnName
      * @param {?=} fnArgs
      * @return {?}
@@ -2350,7 +2392,7 @@ class WebWorkerRenderNode {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * This adapter is required to log error messages.
@@ -3032,7 +3074,7 @@ class WorkerDomAdapter extends ɵDomAdapter {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -3156,7 +3198,7 @@ WorkerAppModule.ngInjectorDef = defineInjector({ factory: function WorkerAppModu
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Bootstraps the worker ui.
@@ -3178,12 +3220,12 @@ function bootstrapWorkerUi(workerScriptUri, customProviders = []) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 export { bootstrapWorkerUi, VERSION, ClientMessageBroker, ClientMessageBrokerFactory, FnArg, UiArguments, MessageBus, ServiceMessageBroker, ServiceMessageBrokerFactory, WORKER_UI_LOCATION_PROVIDERS, WORKER_APP_LOCATION_PROVIDERS, WorkerAppModule, platformWorkerApp, platformWorkerUi };
