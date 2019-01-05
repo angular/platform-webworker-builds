@@ -1,5 +1,5 @@
 /**
- * @license Angular v7.2.0-rc.0+64.sha-929334b
+ * @license Angular v7.2.0-rc.0+65.sha-b61dafa
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -981,7 +981,7 @@ function initWebWorkerRenderPlatform(injector) {
         try {
             scriptUri = injector.get(WORKER_SCRIPT);
         }
-        catch (e) {
+        catch (_a) {
             throw new Error('You must provide your WebWorker\'s initialization script with the WORKER_SCRIPT token');
         }
         var instance = injector.get(WebWorkerInstance);
@@ -1023,7 +1023,7 @@ function spawnWebWorker(uri, instance) {
 /**
  * @publicApi
  */
-var VERSION = new Version('7.2.0-rc.0+64.sha-929334b');
+var VERSION = new Version('7.2.0-rc.0+65.sha-b61dafa');
 
 var MessageBasedPlatformLocation = /** @class */ (function () {
     function MessageBasedPlatformLocation(_brokerFactory, _platformLocation, bus, _serializer) {
