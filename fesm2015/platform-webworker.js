@@ -1,12 +1,12 @@
 /**
- * @license Angular v7.2.0+103.sha-885f1af
+ * @license Angular v7.2.0+104.sha-b78351c
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
 
-import { InjectionToken, Injectable, RenderComponentType, ɵstringify, EventEmitter, RendererFactory2, ErrorHandler, Injector, NgZone, PLATFORM_ID, PLATFORM_INITIALIZER, Testability, createPlatformFactory, isDevMode, platformCore, ɵAPP_ID_RANDOM_PROVIDER, Version, APP_INITIALIZER, ApplicationModule, NgModule } from '@angular/core';
-import { ɵPLATFORM_WORKER_UI_ID, DOCUMENT as DOCUMENT$1, PlatformLocation, LOCATION_INITIALIZED, CommonModule, ViewportScroller, ɵNullViewportScroller, ɵPLATFORM_WORKER_APP_ID } from '@angular/common';
-import { DOCUMENT, EVENT_MANAGER_PLUGINS, EventManager, HAMMER_GESTURE_CONFIG, HammerGestureConfig, ɵBROWSER_SANITIZATION_PROVIDERS, ɵBrowserDomAdapter, ɵBrowserGetTestability, ɵDomEventsPlugin, ɵDomRendererFactory2, ɵDomSharedStylesHost, ɵHammerGesturesPlugin, ɵKeyEventsPlugin, ɵSharedStylesHost, ɵBrowserPlatformLocation, ɵDomAdapter, ɵsetRootDomAdapter } from '@angular/platform-browser';
+import { ɵPLATFORM_WORKER_UI_ID, DOCUMENT as DOCUMENT$1, PlatformLocation, LOCATION_INITIALIZED, ɵPLATFORM_WORKER_APP_ID, ViewportScroller, ɵNullViewportScroller, CommonModule } from '@angular/common';
+import { InjectionToken, Injectable, RenderComponentType, ɵstringify, EventEmitter, RendererFactory2, NgZone, ErrorHandler, ɵAPP_ID_RANDOM_PROVIDER, Testability, PLATFORM_INITIALIZER, Injector, PLATFORM_ID, createPlatformFactory, platformCore, isDevMode, Version, APP_INITIALIZER, NgModule, ApplicationModule } from '@angular/core';
+import { ɵBROWSER_SANITIZATION_PROVIDERS, DOCUMENT, EVENT_MANAGER_PLUGINS, ɵDomEventsPlugin, ɵKeyEventsPlugin, ɵHammerGesturesPlugin, HAMMER_GESTURE_CONFIG, HammerGestureConfig, ɵDomRendererFactory2, EventManager, ɵDomSharedStylesHost, ɵSharedStylesHost, ɵBrowserDomAdapter, ɵBrowserGetTestability, ɵBrowserPlatformLocation, ɵDomAdapter, ɵsetRootDomAdapter } from '@angular/platform-browser';
 
 /**
  * @fileoverview added by tsickle
@@ -1504,7 +1504,7 @@ function spawnWebWorker(uri, instance) {
  * \@publicApi
  * @type {?}
  */
-const VERSION = new Version('7.2.0+103.sha-885f1af');
+const VERSION = new Version('7.2.0+104.sha-b78351c');
 
 /**
  * @fileoverview added by tsickle
