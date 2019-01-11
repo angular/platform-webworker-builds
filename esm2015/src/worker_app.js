@@ -90,9 +90,9 @@ WorkerAppModule.decorators = [
                 ]
             },] },
 ];
-WorkerAppModule.ngModuleDef = i0.ɵdefineNgModule({ type: WorkerAppModule, bootstrap: [], declarations: [], imports: [], exports: [CommonModule,
+/** @nocollapse */ WorkerAppModule.ngModuleDef = i0.ɵdefineNgModule({ type: WorkerAppModule, bootstrap: [], declarations: [], imports: [], exports: [CommonModule,
         ApplicationModule] });
-WorkerAppModule.ngInjectorDef = i0.defineInjector({ factory: function WorkerAppModule_Factory(t) { return new (t || WorkerAppModule)(); }, providers: [
+/** @nocollapse */ WorkerAppModule.ngInjectorDef = i0.defineInjector({ factory: function WorkerAppModule_Factory(t) { return new (t || WorkerAppModule)(); }, providers: [
         BROWSER_SANITIZATION_PROVIDERS,
         Serializer,
         { provide: DOCUMENT, useValue: null },

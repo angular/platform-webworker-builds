@@ -42,7 +42,7 @@ export class WebWorkerInstance {
 WebWorkerInstance.decorators = [
     { type: Injectable },
 ];
-WebWorkerInstance.ngInjectableDef = i0.defineInjectable({ token: WebWorkerInstance, factory: function WebWorkerInstance_Factory(t) { return new (t || WebWorkerInstance)(); }, providedIn: null });
+/** @nocollapse */ WebWorkerInstance.ngInjectableDef = i0.defineInjectable({ token: WebWorkerInstance, factory: function WebWorkerInstance_Factory(t) { return new (t || WebWorkerInstance)(); }, providedIn: null });
 /*@__PURE__*/ i0.ɵsetClassMetadata(WebWorkerInstance, [{
         type: Injectable
     }], null, null);
