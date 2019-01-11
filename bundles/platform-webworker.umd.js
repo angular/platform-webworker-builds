@@ -1,14 +1,14 @@
 /**
- * @license Angular v7.2.0+103.sha-885f1af
+ * @license Angular v7.2.0+104.sha-b78351c
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
 
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/common'), require('@angular/platform-browser')) :
-    typeof define === 'function' && define.amd ? define('@angular/platform-webworker', ['exports', '@angular/core', '@angular/common', '@angular/platform-browser'], factory) :
-    (factory((global.ng = global.ng || {}, global.ng.platformWebworker = {}),global.ng.core,global.ng.common,global.ng.platformBrowser));
-}(this, (function (exports,i0,common,platformBrowser) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/common'), require('@angular/core'), require('@angular/platform-browser')) :
+    typeof define === 'function' && define.amd ? define('@angular/platform-webworker', ['exports', '@angular/common', '@angular/core', '@angular/platform-browser'], factory) :
+    (global = global || self, factory((global.ng = global.ng || {}, global.ng.platformWebworker = {}), global.ng.common, global.ng.core, global.ng.platformBrowser));
+}(this, function (exports, common, i0, platformBrowser) { 'use strict';
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation. All rights reserved.
@@ -1076,7 +1076,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new i0.Version('7.2.0+103.sha-885f1af');
+    var VERSION = new i0.Version('7.2.0+104.sha-b78351c');
 
     var MessageBasedPlatformLocation = /** @class */ (function () {
         function MessageBasedPlatformLocation(_brokerFactory, _platformLocation, bus, _serializer) {
@@ -1869,5 +1869,5 @@
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
-})));
+}));
 //# sourceMappingURL=platform-webworker.umd.js.map
