@@ -208,7 +208,7 @@ Serializer.decorators = [
 Serializer.ctorParameters = () => [
     { type: RenderStore }
 ];
-/** @nocollapse */ Serializer.ngInjectableDef = i0.defineInjectable({ token: Serializer, factory: function Serializer_Factory(t) { return new (t || Serializer)(i0.inject(RenderStore)); }, providedIn: null });
+Serializer.ngInjectableDef = i0.defineInjectable({ token: Serializer, factory: function Serializer_Factory(t) { return new (t || Serializer)(i0.inject(RenderStore)); }, providedIn: null });
 /*@__PURE__*/ i0.ɵsetClassMetadata(Serializer, [{
         type: Injectable
     }], function () { return [{

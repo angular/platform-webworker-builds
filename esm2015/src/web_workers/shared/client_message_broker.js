@@ -45,7 +45,7 @@ ClientMessageBrokerFactory.ctorParameters = () => [
     { type: MessageBus },
     { type: Serializer }
 ];
-/** @nocollapse */ ClientMessageBrokerFactory.ngInjectableDef = i0.defineInjectable({ token: ClientMessageBrokerFactory, factory: function ClientMessageBrokerFactory_Factory(t) { return new (t || ClientMessageBrokerFactory)(i0.inject(MessageBus), i0.inject(Serializer)); }, providedIn: null });
+ClientMessageBrokerFactory.ngInjectableDef = i0.defineInjectable({ token: ClientMessageBrokerFactory, factory: function ClientMessageBrokerFactory_Factory(t) { return new (t || ClientMessageBrokerFactory)(i0.inject(MessageBus), i0.inject(Serializer)); }, providedIn: null });
 /*@__PURE__*/ i0.ɵsetClassMetadata(ClientMessageBrokerFactory, [{
         type: Injectable
     }], function () { return [{

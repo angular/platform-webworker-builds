@@ -80,7 +80,7 @@ MessageBasedPlatformLocation.ctorParameters = () => [
     { type: MessageBus },
     { type: Serializer }
 ];
-/** @nocollapse */ MessageBasedPlatformLocation.ngInjectableDef = i0.defineInjectable({ token: MessageBasedPlatformLocation, factory: function MessageBasedPlatformLocation_Factory(t) { return new (t || MessageBasedPlatformLocation)(i0.inject(ServiceMessageBrokerFactory), i0.inject(BrowserPlatformLocation), i0.inject(MessageBus), i0.inject(Serializer)); }, providedIn: null });
+MessageBasedPlatformLocation.ngInjectableDef = i0.defineInjectable({ token: MessageBasedPlatformLocation, factory: function MessageBasedPlatformLocation_Factory(t) { return new (t || MessageBasedPlatformLocation)(i0.inject(ServiceMessageBrokerFactory), i0.inject(BrowserPlatformLocation), i0.inject(MessageBus), i0.inject(Serializer)); }, providedIn: null });
 /*@__PURE__*/ i0.ɵsetClassMetadata(MessageBasedPlatformLocation, [{
         type: Injectable
     }], function () { return [{

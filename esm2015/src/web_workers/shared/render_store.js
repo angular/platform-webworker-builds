@@ -62,7 +62,7 @@ export class RenderStore {
 RenderStore.decorators = [
     { type: Injectable },
 ];
-/** @nocollapse */ RenderStore.ngInjectableDef = i0.defineInjectable({ token: RenderStore, factory: function RenderStore_Factory(t) { return new (t || RenderStore)(); }, providedIn: null });
+RenderStore.ngInjectableDef = i0.defineInjectable({ token: RenderStore, factory: function RenderStore_Factory(t) { return new (t || RenderStore)(); }, providedIn: null });
 /*@__PURE__*/ i0.ɵsetClassMetadata(RenderStore, [{
         type: Injectable
     }], null, null);
