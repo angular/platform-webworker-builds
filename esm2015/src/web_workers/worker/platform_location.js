@@ -169,7 +169,7 @@ WebWorkerPlatformLocation.ctorParameters = () => [
     { type: MessageBus },
     { type: Serializer }
 ];
-WebWorkerPlatformLocation.ngInjectableDef = i0.defineInjectable({ token: WebWorkerPlatformLocation, factory: function WebWorkerPlatformLocation_Factory(t) { return new (t || WebWorkerPlatformLocation)(i0.inject(ClientMessageBrokerFactory), i0.inject(MessageBus), i0.inject(Serializer)); }, providedIn: null });
+/** @nocollapse */ WebWorkerPlatformLocation.ngInjectableDef = i0.defineInjectable({ token: WebWorkerPlatformLocation, factory: function WebWorkerPlatformLocation_Factory(t) { return new (t || WebWorkerPlatformLocation)(i0.inject(ClientMessageBrokerFactory), i0.inject(MessageBus), i0.inject(Serializer)); }, providedIn: null });
 /*@__PURE__*/ i0.ɵsetClassMetadata(WebWorkerPlatformLocation, [{
         type: Injectable
     }], function () { return [{
