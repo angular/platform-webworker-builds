@@ -1,4 +1,3 @@
-import * as i0 from '@angular/core';
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -8,6 +7,7 @@ import * as i0 from '@angular/core';
  */
 import { Type } from '@angular/core';
 import { RenderStore } from './render_store';
+import * as i0 from "@angular/core";
 /**
  * @publicApi
  */

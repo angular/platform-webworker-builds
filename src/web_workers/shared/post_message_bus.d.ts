@@ -1,4 +1,3 @@
-import * as i0 from '@angular/core';
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -8,6 +7,7 @@ import * as i0 from '@angular/core';
  */
 import { EventEmitter, NgZone } from '@angular/core';
 import { MessageBus, MessageBusSink, MessageBusSource } from './message_bus';
+import * as i0 from "@angular/core";
 export interface PostMessageTarget {
     postMessage: (message: any, transfer?: [ArrayBuffer]) => void;
 }

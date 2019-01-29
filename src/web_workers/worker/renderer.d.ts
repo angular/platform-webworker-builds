@@ -1,4 +1,3 @@
-import * as i0 from '@angular/core';
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -11,6 +10,7 @@ import { ClientMessageBrokerFactory, FnArg } from '../shared/client_message_brok
 import { MessageBus } from '../shared/message_bus';
 import { RenderStore } from '../shared/render_store';
 import { Serializer } from '../shared/serializer';
+import * as i0 from "@angular/core";
 export declare class NamedEventEmitter {
     private _listeners;
     listen(eventName: string, callback: Function): void;

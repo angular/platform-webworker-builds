@@ -1,4 +1,3 @@
-import * as i0 from '@angular/core';
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -8,6 +7,7 @@ import * as i0 from '@angular/core';
  */
 import { Type } from '@angular/core';
 import { SerializerTypes } from './serializer';
+import * as i0 from "@angular/core";
 /**
  * @publicApi
  */

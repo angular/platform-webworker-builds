@@ -1,4 +1,3 @@
-import * as i0 from '@angular/core';
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -11,6 +10,7 @@ import { MessageBus } from '../shared/message_bus';
 import { RenderStore } from '../shared/render_store';
 import { Serializer } from '../shared/serializer';
 import { ServiceMessageBrokerFactory } from '../shared/service_message_broker';
+import * as i0 from "@angular/core";
 export declare class MessageBasedRenderer2 {
     private _brokerFactory;
     private _bus;

@@ -1,4 +1,3 @@
-import * as i0 from '@angular/core';
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -10,6 +9,7 @@ import { LocationChangeListener, PlatformLocation } from '@angular/common';
 import { ClientMessageBrokerFactory } from '../shared/client_message_broker';
 import { MessageBus } from '../shared/message_bus';
 import { Serializer } from '../shared/serializer';
+import * as i0 from "@angular/core";
 export declare class WebWorkerPlatformLocation extends PlatformLocation {
     private _serializer;
     private _broker;
