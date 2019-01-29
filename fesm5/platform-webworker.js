@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.0.0-beta.1+68.sha-6e16338
+ * @license Angular v8.0.0-beta.1+83.sha-e18a52e
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1023,7 +1023,7 @@ function spawnWebWorker(uri, instance) {
 /**
  * @publicApi
  */
-var VERSION = new Version('8.0.0-beta.1+68.sha-6e16338');
+var VERSION = new Version('8.0.0-beta.1+83.sha-e18a52e');
 
 var MessageBasedPlatformLocation = /** @class */ (function () {
     function MessageBasedPlatformLocation(_brokerFactory, _platformLocation, bus, _serializer) {
@@ -1714,7 +1714,7 @@ function setupWebWorker() {
 var WorkerAppModule = /** @class */ (function () {
     function WorkerAppModule() {
     }
-    WorkerAppModule.ngModuleDef = ɵdefineNgModule({ type: WorkerAppModule, bootstrap: [], declarations: [], imports: [], exports: [CommonModule,
+    WorkerAppModule.ngModuleDef = ɵdefineNgModule({ type: WorkerAppModule, exports: [CommonModule,
             ApplicationModule] });
     WorkerAppModule.ngInjectorDef = defineInjector({ factory: function WorkerAppModule_Factory(t) { return new (t || WorkerAppModule)(); }, providers: [
             ɵBROWSER_SANITIZATION_PROVIDERS,
