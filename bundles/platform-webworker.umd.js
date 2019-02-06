@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.0.0-beta.3+17.sha-ae8b7b1
+ * @license Angular v8.0.0-beta.3+24.sha-43081a0
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1077,7 +1077,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new core.Version('8.0.0-beta.3+17.sha-ae8b7b1');
+    var VERSION = new core.Version('8.0.0-beta.3+24.sha-43081a0');
 
     /**
      * @license
@@ -1775,6 +1775,7 @@
             core.NgModule({
                 providers: [
                     platformBrowser.ɵBROWSER_SANITIZATION_PROVIDERS,
+                    { provide: core.ɵAPP_ROOT, useValue: true },
                     Serializer,
                     { provide: platformBrowser.DOCUMENT, useValue: null },
                     ClientMessageBrokerFactory,
