@@ -1,11 +1,11 @@
 /**
- * @license Angular v8.0.0-beta.3+17.sha-ae8b7b1
+ * @license Angular v8.0.0-beta.3+24.sha-43081a0
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
 
 import { ɵPLATFORM_WORKER_UI_ID, DOCUMENT as DOCUMENT$1, PlatformLocation, LOCATION_INITIALIZED, ɵPLATFORM_WORKER_APP_ID, ViewportScroller, ɵNullViewportScroller, CommonModule } from '@angular/common';
-import { InjectionToken, defineInjectable, ɵsetClassMetadata, Injectable, inject, RenderComponentType, ɵstringify, EventEmitter, RendererFactory2, createPlatformFactory, platformCore, NgZone, ErrorHandler, ɵAPP_ID_RANDOM_PROVIDER, Testability, PLATFORM_INITIALIZER, Injector, PLATFORM_ID, isDevMode, Version, APP_INITIALIZER, NgModule, ApplicationModule, ɵdefineNgModule, defineInjector } from '@angular/core';
+import { InjectionToken, defineInjectable, ɵsetClassMetadata, Injectable, inject, RenderComponentType, ɵstringify, EventEmitter, RendererFactory2, createPlatformFactory, platformCore, NgZone, ErrorHandler, ɵAPP_ID_RANDOM_PROVIDER, Testability, PLATFORM_INITIALIZER, Injector, PLATFORM_ID, isDevMode, Version, APP_INITIALIZER, NgModule, ɵAPP_ROOT, ApplicationModule, ɵdefineNgModule, defineInjector } from '@angular/core';
 import { ɵBROWSER_SANITIZATION_PROVIDERS, DOCUMENT, EVENT_MANAGER_PLUGINS, ɵDomEventsPlugin, ɵKeyEventsPlugin, ɵHammerGesturesPlugin, HAMMER_GESTURE_CONFIG, HammerGestureConfig, ɵDomRendererFactory2, EventManager, ɵDomSharedStylesHost, ɵSharedStylesHost, ɵBrowserDomAdapter, ɵBrowserGetTestability, ɵBrowserPlatformLocation, ɵDomAdapter, ɵsetRootDomAdapter } from '@angular/platform-browser';
 
 /**
@@ -1583,7 +1583,7 @@ function spawnWebWorker(uri, instance) {
  * \@publicApi
  * @type {?}
  */
-const VERSION = new Version('8.0.0-beta.3+17.sha-ae8b7b1');
+const VERSION = new Version('8.0.0-beta.3+24.sha-43081a0');
 
 /**
  * @fileoverview added by tsickle
@@ -3132,6 +3132,7 @@ WorkerAppModule.decorators = [
     { type: NgModule, args: [{
                 providers: [
                     ɵBROWSER_SANITIZATION_PROVIDERS,
+                    { provide: ɵAPP_ROOT, useValue: true },
                     Serializer,
                     { provide: DOCUMENT, useValue: null },
                     ClientMessageBrokerFactory,
@@ -3155,6 +3156,7 @@ WorkerAppModule.decorators = [
         ApplicationModule] });
 /** @nocollapse */ WorkerAppModule.ngInjectorDef = defineInjector({ factory: function WorkerAppModule_Factory(t) { return new (t || WorkerAppModule)(); }, providers: [
         ɵBROWSER_SANITIZATION_PROVIDERS,
+        { provide: ɵAPP_ROOT, useValue: true },
         Serializer,
         { provide: DOCUMENT, useValue: null },
         ClientMessageBrokerFactory,
@@ -3176,6 +3178,7 @@ WorkerAppModule.decorators = [
         args: [{
                 providers: [
                     ɵBROWSER_SANITIZATION_PROVIDERS,
+                    { provide: ɵAPP_ROOT, useValue: true },
                     Serializer,
                     { provide: DOCUMENT, useValue: null },
                     ClientMessageBrokerFactory,
