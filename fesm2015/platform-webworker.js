@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.0.0-beta.5+9.sha-58436fd
+ * @license Angular v8.0.0-beta.5+10.sha-be121bb
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -105,6 +105,10 @@ RenderStore.decorators = [
         type: Injectable
     }], null, null);
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 class LocationType {
     /**
      * @param {?} href
@@ -465,6 +469,10 @@ class UiArguments {
     }
 }
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 class PostMessageBusSink {
     /**
      * @param {?} _postMessageTarget
@@ -1583,7 +1591,7 @@ function spawnWebWorker(uri, instance) {
  * \@publicApi
  * @type {?}
  */
-const VERSION = new Version('8.0.0-beta.5+9.sha-58436fd');
+const VERSION = new Version('8.0.0-beta.5+10.sha-be121bb');
 
 /**
  * @fileoverview added by tsickle
