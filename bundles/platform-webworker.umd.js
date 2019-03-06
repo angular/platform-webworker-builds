@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.0.0-beta.6+85.sha-20a9dbe.with-local-changes
+ * @license Angular v8.0.0-beta.6+86.sha-881807d.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -8,7 +8,7 @@
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/common'), require('@angular/core'), require('@angular/platform-browser')) :
     typeof define === 'function' && define.amd ? define('@angular/platform-webworker', ['exports', '@angular/common', '@angular/core', '@angular/platform-browser'], factory) :
     (global = global || self, factory((global.ng = global.ng || {}, global.ng.platformWebworker = {}), global.ng.common, global.ng.core, global.ng.platformBrowser));
-}(this, function (exports, common, i0, platformBrowser) { 'use strict';
+}(this, function (exports, common, i0, i2) { 'use strict';
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation. All rights reserved.
@@ -252,9 +252,7 @@
     }());
     /*@__PURE__*/ i0.ɵsetClassMetadata(Serializer, [{
             type: i0.Injectable
-        }], function () { return [{
-            type: RenderStore
-        }]; }, null);
+        }], function () { return [{ type: RenderStore }]; }, null);
 
     /**
      * @license
@@ -285,11 +283,7 @@
     }());
     /*@__PURE__*/ i0.ɵsetClassMetadata(ClientMessageBrokerFactory, [{
             type: i0.Injectable
-        }], function () { return [{
-            type: MessageBus
-        }, {
-            type: Serializer
-        }]; }, null);
+        }], function () { return [{ type: MessageBus }, { type: Serializer }]; }, null);
     /**
      * @publicApi
      */
@@ -524,11 +518,7 @@
     }());
     /*@__PURE__*/ i0.ɵsetClassMetadata(PostMessageBus, [{
             type: i0.Injectable
-        }], function () { return [{
-            type: PostMessageBusSink
-        }, {
-            type: PostMessageBusSource
-        }]; }, null);
+        }], function () { return [{ type: PostMessageBusSink }, { type: PostMessageBusSource }]; }, null);
     /**
      * Helper class that wraps a channel's {@link EventEmitter} and
      * keeps track of if it should run in the zone.
@@ -563,11 +553,7 @@
     }());
     /*@__PURE__*/ i0.ɵsetClassMetadata(ServiceMessageBrokerFactory, [{
             type: i0.Injectable
-        }], function () { return [{
-            type: MessageBus
-        }, {
-            type: Serializer
-        }]; }, null);
+        }], function () { return [{ type: MessageBus }, { type: Serializer }]; }, null);
     /**
      * Helper class for UIComponents that allows components to register methods.
      * If a registered method message is received from the broker on the worker,
@@ -909,17 +895,7 @@
     }());
     /*@__PURE__*/ i0.ɵsetClassMetadata(MessageBasedRenderer2, [{
             type: i0.Injectable
-        }], function () { return [{
-            type: ServiceMessageBrokerFactory
-        }, {
-            type: MessageBus
-        }, {
-            type: Serializer
-        }, {
-            type: RenderStore
-        }, {
-            type: i0.RendererFactory2
-        }]; }, null);
+        }], function () { return [{ type: ServiceMessageBrokerFactory }, { type: MessageBus }, { type: Serializer }, { type: RenderStore }, { type: i0.RendererFactory2 }]; }, null);
 
     /**
      * @license
@@ -966,29 +942,29 @@
             deps: [ServiceMessageBrokerFactory, MessageBus, Serializer, RenderStore, i0.RendererFactory2]
         },
         { provide: WORKER_UI_STARTABLE_MESSAGING_SERVICE, useExisting: MessageBasedRenderer2, multi: true },
-        platformBrowser.ɵBROWSER_SANITIZATION_PROVIDERS,
+        i2.ɵBROWSER_SANITIZATION_PROVIDERS,
         { provide: i0.ErrorHandler, useFactory: _exceptionHandler, deps: [] },
-        { provide: platformBrowser.DOCUMENT, useFactory: _document, deps: [] },
+        { provide: i2.DOCUMENT, useFactory: _document, deps: [] },
         // TODO(jteplitz602): Investigate if we definitely need EVENT_MANAGER on the render thread
         // #5298
         {
-            provide: platformBrowser.EVENT_MANAGER_PLUGINS,
-            useClass: platformBrowser.ɵDomEventsPlugin,
-            deps: [platformBrowser.DOCUMENT, i0.NgZone],
+            provide: i2.EVENT_MANAGER_PLUGINS,
+            useClass: i2.ɵDomEventsPlugin,
+            deps: [i2.DOCUMENT, i0.NgZone],
             multi: true
         },
-        { provide: platformBrowser.EVENT_MANAGER_PLUGINS, useClass: platformBrowser.ɵKeyEventsPlugin, deps: [platformBrowser.DOCUMENT], multi: true },
+        { provide: i2.EVENT_MANAGER_PLUGINS, useClass: i2.ɵKeyEventsPlugin, deps: [i2.DOCUMENT], multi: true },
         {
-            provide: platformBrowser.EVENT_MANAGER_PLUGINS,
-            useClass: platformBrowser.ɵHammerGesturesPlugin,
-            deps: [platformBrowser.DOCUMENT, platformBrowser.HAMMER_GESTURE_CONFIG],
+            provide: i2.EVENT_MANAGER_PLUGINS,
+            useClass: i2.ɵHammerGesturesPlugin,
+            deps: [i2.DOCUMENT, i2.HAMMER_GESTURE_CONFIG],
             multi: true
         },
-        { provide: platformBrowser.HAMMER_GESTURE_CONFIG, useClass: platformBrowser.HammerGestureConfig, deps: [] },
+        { provide: i2.HAMMER_GESTURE_CONFIG, useClass: i2.HammerGestureConfig, deps: [] },
         i0.ɵAPP_ID_RANDOM_PROVIDER,
-        { provide: platformBrowser.ɵDomRendererFactory2, deps: [platformBrowser.EventManager, platformBrowser.ɵDomSharedStylesHost] },
-        { provide: i0.RendererFactory2, useExisting: platformBrowser.ɵDomRendererFactory2 },
-        { provide: platformBrowser.ɵSharedStylesHost, useExisting: platformBrowser.ɵDomSharedStylesHost },
+        { provide: i2.ɵDomRendererFactory2, deps: [i2.EventManager, i2.ɵDomSharedStylesHost] },
+        { provide: i0.RendererFactory2, useExisting: i2.ɵDomRendererFactory2 },
+        { provide: i2.ɵSharedStylesHost, useExisting: i2.ɵDomSharedStylesHost },
         {
             provide: ServiceMessageBrokerFactory,
             useClass: ServiceMessageBrokerFactory,
@@ -1002,9 +978,9 @@
         { provide: Serializer, deps: [RenderStore] },
         { provide: ON_WEB_WORKER, useValue: false },
         { provide: RenderStore, deps: [] },
-        { provide: platformBrowser.ɵDomSharedStylesHost, deps: [platformBrowser.DOCUMENT] },
+        { provide: i2.ɵDomSharedStylesHost, deps: [i2.DOCUMENT] },
         { provide: i0.Testability, deps: [i0.NgZone] },
-        { provide: platformBrowser.EventManager, deps: [platformBrowser.EVENT_MANAGER_PLUGINS, i0.NgZone] },
+        { provide: i2.EventManager, deps: [i2.EVENT_MANAGER_PLUGINS, i0.NgZone] },
         { provide: WebWorkerInstance, deps: [] },
         {
             provide: i0.PLATFORM_INITIALIZER,
@@ -1028,8 +1004,8 @@
     }
     function initWebWorkerRenderPlatform(injector) {
         return function () {
-            platformBrowser.ɵBrowserDomAdapter.makeCurrent();
-            platformBrowser.ɵBrowserGetTestability.init();
+            i2.ɵBrowserDomAdapter.makeCurrent();
+            i2.ɵBrowserGetTestability.init();
             var scriptUri;
             try {
                 scriptUri = injector.get(WORKER_SCRIPT);
@@ -1076,7 +1052,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new i0.Version('8.0.0-beta.6+85.sha-20a9dbe.with-local-changes');
+    var VERSION = new i0.Version('8.0.0-beta.6+86.sha-881807d.with-local-changes');
 
     var MessageBasedPlatformLocation = /** @class */ (function () {
         function MessageBasedPlatformLocation(_brokerFactory, _platformLocation, bus, _serializer) {
@@ -1107,20 +1083,12 @@
             });
         };
         MessageBasedPlatformLocation.prototype._setPathname = function (pathname) { this._platformLocation.pathname = pathname; };
-        MessageBasedPlatformLocation.ngInjectableDef = i0.defineInjectable({ token: MessageBasedPlatformLocation, factory: function MessageBasedPlatformLocation_Factory(t) { return new (t || MessageBasedPlatformLocation)(i0.inject(ServiceMessageBrokerFactory), i0.inject(platformBrowser.ɵBrowserPlatformLocation), i0.inject(MessageBus), i0.inject(Serializer)); }, providedIn: null });
+        MessageBasedPlatformLocation.ngInjectableDef = i0.defineInjectable({ token: MessageBasedPlatformLocation, factory: function MessageBasedPlatformLocation_Factory(t) { return new (t || MessageBasedPlatformLocation)(i0.inject(ServiceMessageBrokerFactory), i0.inject(i2.ɵBrowserPlatformLocation), i0.inject(MessageBus), i0.inject(Serializer)); }, providedIn: null });
         return MessageBasedPlatformLocation;
     }());
     /*@__PURE__*/ i0.ɵsetClassMetadata(MessageBasedPlatformLocation, [{
             type: i0.Injectable
-        }], function () { return [{
-            type: ServiceMessageBrokerFactory
-        }, {
-            type: platformBrowser.ɵBrowserPlatformLocation
-        }, {
-            type: MessageBus
-        }, {
-            type: Serializer
-        }]; }, null);
+        }], function () { return [{ type: ServiceMessageBrokerFactory }, { type: i2.ɵBrowserPlatformLocation }, { type: MessageBus }, { type: Serializer }]; }, null);
 
     /**
      * @license
@@ -1136,8 +1104,8 @@
      */
     var WORKER_UI_LOCATION_PROVIDERS = [
         { provide: MessageBasedPlatformLocation, deps: [ServiceMessageBrokerFactory,
-                platformBrowser.ɵBrowserPlatformLocation, MessageBus, Serializer] },
-        { provide: platformBrowser.ɵBrowserPlatformLocation, deps: [common.DOCUMENT] },
+                i2.ɵBrowserPlatformLocation, MessageBus, Serializer] },
+        { provide: i2.ɵBrowserPlatformLocation, deps: [common.DOCUMENT] },
         { provide: i0.PLATFORM_INITIALIZER, useFactory: initUiLocation, multi: true, deps: [i0.Injector] }
     ];
     function initUiLocation(injector) {
@@ -1249,13 +1217,7 @@
     }(common.PlatformLocation));
     /*@__PURE__*/ i0.ɵsetClassMetadata(WebWorkerPlatformLocation, [{
             type: i0.Injectable
-        }], function () { return [{
-            type: ClientMessageBrokerFactory
-        }, {
-            type: MessageBus
-        }, {
-            type: Serializer
-        }]; }, null);
+        }], function () { return [{ type: ClientMessageBrokerFactory }, { type: MessageBus }, { type: Serializer }]; }, null);
 
     /**
      * @license
@@ -1372,15 +1334,7 @@
     }());
     /*@__PURE__*/ i0.ɵsetClassMetadata(WebWorkerRendererFactory2, [{
             type: i0.Injectable
-        }], function () { return [{
-            type: ClientMessageBrokerFactory
-        }, {
-            type: MessageBus
-        }, {
-            type: Serializer
-        }, {
-            type: RenderStore
-        }]; }, null);
+        }], function () { return [{ type: ClientMessageBrokerFactory }, { type: MessageBus }, { type: Serializer }, { type: RenderStore }]; }, null);
     var WebWorkerRenderer2 = /** @class */ (function () {
         function WebWorkerRenderer2(_rendererFactory) {
             this._rendererFactory = _rendererFactory;
@@ -1576,7 +1530,7 @@
         function WorkerDomAdapter() {
             return _super !== null && _super.apply(this, arguments) || this;
         }
-        WorkerDomAdapter.makeCurrent = function () { platformBrowser.ɵsetRootDomAdapter(new WorkerDomAdapter()); };
+        WorkerDomAdapter.makeCurrent = function () { i2.ɵsetRootDomAdapter(new WorkerDomAdapter()); };
         WorkerDomAdapter.prototype.logError = function (error) {
             if (console.error) {
                 console.error(error);
@@ -1727,7 +1681,7 @@
         WorkerDomAdapter.prototype.getCookie = function (name) { throw 'not implemented'; };
         WorkerDomAdapter.prototype.setCookie = function (name, value) { throw 'not implemented'; };
         return WorkerDomAdapter;
-    }(platformBrowser.ɵDomAdapter));
+    }(i2.ɵDomAdapter));
 
     /**
      * @license
@@ -1770,10 +1724,10 @@
         WorkerAppModule.ngModuleDef = i0.ɵdefineNgModule({ type: WorkerAppModule, exports: [common.CommonModule,
                 i0.ApplicationModule] });
         WorkerAppModule.ngInjectorDef = i0.defineInjector({ factory: function WorkerAppModule_Factory(t) { return new (t || WorkerAppModule)(); }, providers: [
-                platformBrowser.ɵBROWSER_SANITIZATION_PROVIDERS,
+                i2.ɵBROWSER_SANITIZATION_PROVIDERS,
                 { provide: i0.ɵAPP_ROOT, useValue: true },
                 Serializer,
-                { provide: platformBrowser.DOCUMENT, useValue: null },
+                { provide: i2.DOCUMENT, useValue: null },
                 ClientMessageBrokerFactory,
                 ServiceMessageBrokerFactory,
                 WebWorkerRendererFactory2,
@@ -1794,10 +1748,10 @@
             type: i0.NgModule,
             args: [{
                     providers: [
-                        platformBrowser.ɵBROWSER_SANITIZATION_PROVIDERS,
+                        i2.ɵBROWSER_SANITIZATION_PROVIDERS,
                         { provide: i0.ɵAPP_ROOT, useValue: true },
                         Serializer,
-                        { provide: platformBrowser.DOCUMENT, useValue: null },
+                        { provide: i2.DOCUMENT, useValue: null },
                         ClientMessageBrokerFactory,
                         ServiceMessageBrokerFactory,
                         WebWorkerRendererFactory2,

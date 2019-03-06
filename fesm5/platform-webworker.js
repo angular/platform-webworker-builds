@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.0.0-beta.6+85.sha-20a9dbe.with-local-changes
+ * @license Angular v8.0.0-beta.6+86.sha-881807d.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -199,9 +199,7 @@ var Serializer = /** @class */ (function () {
 }());
 /*@__PURE__*/ ɵsetClassMetadata(Serializer, [{
         type: Injectable
-    }], function () { return [{
-        type: RenderStore
-    }]; }, null);
+    }], function () { return [{ type: RenderStore }]; }, null);
 
 /**
  * @license
@@ -232,11 +230,7 @@ var ClientMessageBrokerFactory = /** @class */ (function () {
 }());
 /*@__PURE__*/ ɵsetClassMetadata(ClientMessageBrokerFactory, [{
         type: Injectable
-    }], function () { return [{
-        type: MessageBus
-    }, {
-        type: Serializer
-    }]; }, null);
+    }], function () { return [{ type: MessageBus }, { type: Serializer }]; }, null);
 /**
  * @publicApi
  */
@@ -471,11 +465,7 @@ var PostMessageBus = /** @class */ (function () {
 }());
 /*@__PURE__*/ ɵsetClassMetadata(PostMessageBus, [{
         type: Injectable
-    }], function () { return [{
-        type: PostMessageBusSink
-    }, {
-        type: PostMessageBusSource
-    }]; }, null);
+    }], function () { return [{ type: PostMessageBusSink }, { type: PostMessageBusSource }]; }, null);
 /**
  * Helper class that wraps a channel's {@link EventEmitter} and
  * keeps track of if it should run in the zone.
@@ -510,11 +500,7 @@ var ServiceMessageBrokerFactory = /** @class */ (function () {
 }());
 /*@__PURE__*/ ɵsetClassMetadata(ServiceMessageBrokerFactory, [{
         type: Injectable
-    }], function () { return [{
-        type: MessageBus
-    }, {
-        type: Serializer
-    }]; }, null);
+    }], function () { return [{ type: MessageBus }, { type: Serializer }]; }, null);
 /**
  * Helper class for UIComponents that allows components to register methods.
  * If a registered method message is received from the broker on the worker,
@@ -856,17 +842,7 @@ var MessageBasedRenderer2 = /** @class */ (function () {
 }());
 /*@__PURE__*/ ɵsetClassMetadata(MessageBasedRenderer2, [{
         type: Injectable
-    }], function () { return [{
-        type: ServiceMessageBrokerFactory
-    }, {
-        type: MessageBus
-    }, {
-        type: Serializer
-    }, {
-        type: RenderStore
-    }, {
-        type: RendererFactory2
-    }]; }, null);
+    }], function () { return [{ type: ServiceMessageBrokerFactory }, { type: MessageBus }, { type: Serializer }, { type: RenderStore }, { type: RendererFactory2 }]; }, null);
 
 /**
  * @license
@@ -1023,7 +999,7 @@ function spawnWebWorker(uri, instance) {
 /**
  * @publicApi
  */
-var VERSION = new Version('8.0.0-beta.6+85.sha-20a9dbe.with-local-changes');
+var VERSION = new Version('8.0.0-beta.6+86.sha-881807d.with-local-changes');
 
 var MessageBasedPlatformLocation = /** @class */ (function () {
     function MessageBasedPlatformLocation(_brokerFactory, _platformLocation, bus, _serializer) {
@@ -1059,15 +1035,7 @@ var MessageBasedPlatformLocation = /** @class */ (function () {
 }());
 /*@__PURE__*/ ɵsetClassMetadata(MessageBasedPlatformLocation, [{
         type: Injectable
-    }], function () { return [{
-        type: ServiceMessageBrokerFactory
-    }, {
-        type: ɵBrowserPlatformLocation
-    }, {
-        type: MessageBus
-    }, {
-        type: Serializer
-    }]; }, null);
+    }], function () { return [{ type: ServiceMessageBrokerFactory }, { type: ɵBrowserPlatformLocation }, { type: MessageBus }, { type: Serializer }]; }, null);
 
 /**
  * @license
@@ -1196,13 +1164,7 @@ var WebWorkerPlatformLocation = /** @class */ (function (_super) {
 }(PlatformLocation));
 /*@__PURE__*/ ɵsetClassMetadata(WebWorkerPlatformLocation, [{
         type: Injectable
-    }], function () { return [{
-        type: ClientMessageBrokerFactory
-    }, {
-        type: MessageBus
-    }, {
-        type: Serializer
-    }]; }, null);
+    }], function () { return [{ type: ClientMessageBrokerFactory }, { type: MessageBus }, { type: Serializer }]; }, null);
 
 /**
  * @license
@@ -1319,15 +1281,7 @@ var WebWorkerRendererFactory2 = /** @class */ (function () {
 }());
 /*@__PURE__*/ ɵsetClassMetadata(WebWorkerRendererFactory2, [{
         type: Injectable
-    }], function () { return [{
-        type: ClientMessageBrokerFactory
-    }, {
-        type: MessageBus
-    }, {
-        type: Serializer
-    }, {
-        type: RenderStore
-    }]; }, null);
+    }], function () { return [{ type: ClientMessageBrokerFactory }, { type: MessageBus }, { type: Serializer }, { type: RenderStore }]; }, null);
 var WebWorkerRenderer2 = /** @class */ (function () {
     function WebWorkerRenderer2(_rendererFactory) {
         this._rendererFactory = _rendererFactory;
