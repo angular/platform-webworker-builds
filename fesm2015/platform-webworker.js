@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.0.0-beta.8+8.sha-9a7f560.with-local-changes
+ * @license Angular v8.0.0-beta.8+11.sha-7b20cec.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -10,14 +10,14 @@ import { ɵBROWSER_SANITIZATION_PROVIDERS, DOCUMENT, EVENT_MANAGER_PLUGINS, ɵDo
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 const ON_WEB_WORKER = new InjectionToken('WebWorker.onWebWorker');
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -40,7 +40,7 @@ class MessageBus {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -107,7 +107,7 @@ RenderStore.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class LocationType {
     /**
@@ -150,7 +150,11 @@ class Serializer {
             return obj;
         }
         if (Array.isArray(obj)) {
-            return obj.map(v => this.serialize(v, type));
+            return obj.map((/**
+             * @param {?} v
+             * @return {?}
+             */
+            v => this.serialize(v, type)));
         }
         if (type === 2 /* RENDER_STORE_OBJECT */) {
             return (/** @type {?} */ (this._renderStore.serialize(obj)));
@@ -177,7 +181,11 @@ class Serializer {
             return map;
         }
         if (Array.isArray(map)) {
-            return map.map(val => this.deserialize(val, type, data));
+            return map.map((/**
+             * @param {?} val
+             * @return {?}
+             */
+            val => this.deserialize(val, type, data)));
         }
         if (type === 2 /* RENDER_STORE_OBJECT */) {
             return this._renderStore.deserialize(map);
@@ -282,7 +290,7 @@ Serializer.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -344,7 +352,11 @@ class ClientMessageBroker {
         this._serializer = _serializer;
         /** @type {?} */
         const source = messageBus.from(channel);
-        source.subscribe({ next: (message) => this._handleMessage(message) });
+        source.subscribe({ next: (/**
+             * @param {?} message
+             * @return {?}
+             */
+            (message) => this._handleMessage(message)) });
     }
     /**
      * @private
@@ -373,14 +385,18 @@ class ClientMessageBroker {
         /** @type {?} */
         const fnArgs = [];
         if (args.args) {
-            args.args.forEach(argument => {
+            args.args.forEach((/**
+             * @param {?} argument
+             * @return {?}
+             */
+            argument => {
                 if (argument.type != null) {
                     fnArgs.push(this._serializer.serialize(argument.value, argument.type));
                 }
                 else {
                     fnArgs.push(argument.value);
                 }
-            });
+            }));
         }
         /** @type {?} */
         let promise;
@@ -389,17 +405,30 @@ class ClientMessageBroker {
         if (returnType != null) {
             /** @type {?} */
             let completer = (/** @type {?} */ (undefined));
-            promise = new Promise((resolve, reject) => { completer = { resolve, reject }; });
+            promise = new Promise((/**
+             * @param {?} resolve
+             * @param {?} reject
+             * @return {?}
+             */
+            (resolve, reject) => { completer = { resolve, reject }; }));
             id = this._generateMessageId(args.method);
             this._pending.set(id, completer);
-            promise.catch((err) => {
+            promise.catch((/**
+             * @param {?} err
+             * @return {?}
+             */
+            (err) => {
                 if (console && console.error) {
                     // tslint:disable-next-line:no-console
                     console.error(err);
                 }
                 completer.reject(err);
-            });
-            promise = promise.then((v) => this._serializer ? this._serializer.deserialize(v, returnType) : v);
+            }));
+            promise = promise.then((/**
+             * @param {?} v
+             * @return {?}
+             */
+            (v) => this._serializer ? this._serializer.deserialize(v, returnType) : v));
         }
         else {
             promise = null;
@@ -465,7 +494,7 @@ class UiArguments {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class PostMessageBusSink {
     /**
@@ -482,7 +511,13 @@ class PostMessageBusSink {
      */
     attachToZone(zone) {
         this._zone = zone;
-        this._zone.runOutsideAngular(() => { this._zone.onStable.subscribe({ next: () => { this._handleOnEventDone(); } }); });
+        this._zone.runOutsideAngular((/**
+         * @return {?}
+         */
+        () => { this._zone.onStable.subscribe({ next: (/**
+             * @return {?}
+             */
+            () => { this._handleOnEventDone(); }) }); }));
     }
     /**
      * @param {?} channel
@@ -498,7 +533,11 @@ class PostMessageBusSink {
         /** @type {?} */
         const channelInfo = new _Channel(emitter, runInZone);
         this._channels[channel] = channelInfo;
-        emitter.subscribe((data) => {
+        emitter.subscribe((/**
+         * @param {?} data
+         * @return {?}
+         */
+        (data) => {
             /** @type {?} */
             const message = { channel: channel, message: data };
             if (runInZone) {
@@ -507,7 +546,7 @@ class PostMessageBusSink {
             else {
                 this._sendMessages([message]);
             }
-        });
+        }));
     }
     /**
      * @param {?} channel
@@ -545,13 +584,21 @@ class PostMessageBusSource {
     constructor(eventTarget) {
         this._channels = {};
         if (eventTarget) {
-            eventTarget.addEventListener('message', (ev) => this._handleMessages(ev));
+            eventTarget.addEventListener('message', (/**
+             * @param {?} ev
+             * @return {?}
+             */
+            (ev) => this._handleMessages(ev)));
         }
         else {
             // if no eventTarget is given we assume we're in a WebWorker and listen on the global scope
             /** @type {?} */
             const workerScope = (/** @type {?} */ (self));
-            workerScope.addEventListener('message', (ev) => this._handleMessages(ev));
+            workerScope.addEventListener('message', (/**
+             * @param {?} ev
+             * @return {?}
+             */
+            (ev) => this._handleMessages(ev)));
         }
     }
     /**
@@ -610,7 +657,10 @@ class PostMessageBusSource {
             /** @type {?} */
             const channelInfo = this._channels[channel];
             if (channelInfo.runInZone) {
-                this._zone.run(() => { channelInfo.emitter.emit(data.message); });
+                this._zone.run((/**
+                 * @return {?}
+                 */
+                () => { channelInfo.emitter.emit(data.message); }));
             }
             else {
                 channelInfo.emitter.emit(data.message);
@@ -688,7 +738,7 @@ class _Channel {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -755,7 +805,11 @@ class ServiceMessageBroker {
         this._sink = messageBus.to(channel);
         /** @type {?} */
         const source = messageBus.from(channel);
-        source.subscribe({ next: (message) => this._handleMessage(message) });
+        source.subscribe({ next: (/**
+             * @param {?} message
+             * @return {?}
+             */
+            (message) => this._handleMessage(message)) });
     }
     /**
      * @param {?} methodName
@@ -765,7 +819,11 @@ class ServiceMessageBroker {
      * @return {?}
      */
     registerMethod(methodName, signature, method, returnType) {
-        this._methods.set(methodName, (message) => {
+        this._methods.set(methodName, (/**
+         * @param {?} message
+         * @return {?}
+         */
+        (message) => {
             /** @type {?} */
             const serializedArgs = message.args;
             /** @type {?} */
@@ -782,7 +840,7 @@ class ServiceMessageBroker {
             if (returnType && promise) {
                 this._wrapWebWorkerPromise(message.id, promise, returnType);
             }
-        });
+        }));
     }
     /**
      * @private
@@ -802,19 +860,23 @@ class ServiceMessageBroker {
      * @return {?}
      */
     _wrapWebWorkerPromise(id, promise, type) {
-        promise.then((result) => {
+        promise.then((/**
+         * @param {?} result
+         * @return {?}
+         */
+        (result) => {
             this._sink.emit({
                 'type': 'result',
                 'value': this._serializer.serialize(result, type),
                 'id': id,
             });
-        });
+        }));
     }
 }
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -836,7 +898,7 @@ const ROUTER_CHANNEL = 'ng-Router';
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -939,7 +1001,7 @@ function serializeEvent(e, properties) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class EventDispatcher {
     /**
@@ -1069,7 +1131,7 @@ class EventDispatcher {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -1125,9 +1187,13 @@ class MessageBasedRenderer2 {
             ['listen', this.listen, RSO, RSO, P, P, P], ['unlisten', this.unlisten, RSO, RSO],
             ['destroy', this.destroy, RSO], ['destroyNode', this.destroyNode, RSO, P]
         ];
-        methods.forEach(([name, method, ...argTypes]) => {
+        methods.forEach((/**
+         * @param {?} __0
+         * @return {?}
+         */
+        ([name, method, ...argTypes]) => {
             broker.registerMethod(name, argTypes, method.bind(this));
-        });
+        }));
     }
     /**
      * @private
@@ -1337,9 +1403,13 @@ class MessageBasedRenderer2 {
      */
     listen(r, el, elName, eventName, unlistenId) {
         /** @type {?} */
-        const listener = (event) => {
+        const listener = (/**
+         * @param {?} event
+         * @return {?}
+         */
+        (event) => {
             return this._eventDispatcher.dispatchRenderEvent(el, elName, eventName, event);
-        };
+        });
         /** @type {?} */
         const unlisten = r.listen(el || elName, eventName, listener);
         this._renderStore.store(unlisten, unlistenId);
@@ -1370,7 +1440,7 @@ MessageBasedRenderer2.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -1487,7 +1557,14 @@ function initializeGenericWorkerRenderer(injector) {
     // initialize message services after the bus has been created
     /** @type {?} */
     const services = injector.get(WORKER_UI_STARTABLE_MESSAGING_SERVICE);
-    zone.runGuarded(() => { services.forEach((svc) => { svc.start(); }); });
+    zone.runGuarded((/**
+     * @return {?}
+     */
+    () => { services.forEach((/**
+     * @param {?} svc
+     * @return {?}
+     */
+    (svc) => { svc.start(); })); }));
 }
 /**
  * @param {?} instance
@@ -1501,7 +1578,10 @@ function messageBusFactory(instance) {
  * @return {?}
  */
 function initWebWorkerRenderPlatform(injector) {
-    return () => {
+    return (/**
+     * @return {?}
+     */
+    () => {
         ɵBrowserDomAdapter.makeCurrent();
         ɵBrowserGetTestability.init();
         /** @type {?} */
@@ -1516,7 +1596,7 @@ function initWebWorkerRenderPlatform(injector) {
         const instance = injector.get(WebWorkerInstance);
         spawnWebWorker(scriptUri, instance);
         initializeGenericWorkerRenderer(injector);
-    };
+    });
 }
 /**
  * \@publicApi
@@ -1561,17 +1641,17 @@ function spawnWebWorker(uri, instance) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * \@publicApi
  * @type {?}
  */
-const VERSION = new Version('8.0.0-beta.8+8.sha-9a7f560.with-local-changes');
+const VERSION = new Version('8.0.0-beta.8+11.sha-7b20cec.with-local-changes');
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -1651,7 +1731,7 @@ MessageBasedPlatformLocation.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * A list of {\@link Provider}s. To use the router in a Worker enabled application you must
@@ -1670,16 +1750,22 @@ const WORKER_UI_LOCATION_PROVIDERS = (/** @type {?} */ ([
  * @return {?}
  */
 function initUiLocation(injector) {
-    return () => {
+    return (/**
+     * @return {?}
+     */
+    () => {
         /** @type {?} */
         const zone = injector.get(NgZone);
-        zone.runGuarded(() => injector.get(MessageBasedPlatformLocation).start());
-    };
+        zone.runGuarded((/**
+         * @return {?}
+         */
+        () => injector.get(MessageBasedPlatformLocation).start()));
+    });
 }
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -1703,7 +1789,11 @@ class WebWorkerPlatformLocation extends PlatformLocation {
         this._broker = brokerFactory.createMessageBroker(ROUTER_CHANNEL);
         this._channelSource = bus.from(ROUTER_CHANNEL);
         this._channelSource.subscribe({
-            next: (msg) => {
+            next: (/**
+             * @param {?} msg
+             * @return {?}
+             */
+            (msg) => {
                 /** @type {?} */
                 let listeners = null;
                 if (msg.hasOwnProperty('event')) {
@@ -1718,12 +1808,20 @@ class WebWorkerPlatformLocation extends PlatformLocation {
                     if (listeners) {
                         // There was a popState or hashChange event, so the location object thas been updated
                         this._location = this._serializer.deserialize(msg['location'], LocationType);
-                        listeners.forEach((fn) => fn(msg['event']));
+                        listeners.forEach((/**
+                         * @param {?} fn
+                         * @return {?}
+                         */
+                        (fn) => fn(msg['event'])));
                     }
                 }
-            }
+            })
         });
-        this.initialized = new Promise(res => this.initializedResolve = res);
+        this.initialized = new Promise((/**
+         * @param {?} res
+         * @return {?}
+         */
+        res => this.initializedResolve = res));
     }
     /**
      * \@internal *
@@ -1732,11 +1830,19 @@ class WebWorkerPlatformLocation extends PlatformLocation {
     init() {
         /** @type {?} */
         const args = new UiArguments('getLocation');
-        return (/** @type {?} */ (this._broker.runOnService(args, LocationType))).then((val) => {
+        return (/** @type {?} */ (this._broker.runOnService(args, LocationType))).then((/**
+         * @param {?} val
+         * @return {?}
+         */
+        (val) => {
             this._location = val;
             this.initializedResolve();
             return true;
-        }, err => { throw new Error(err); });
+        }), (/**
+         * @param {?} err
+         * @return {?}
+         */
+        err => { throw new Error(err); }));
     }
     /**
      * @return {?}
@@ -1848,7 +1954,7 @@ WebWorkerPlatformLocation.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * The {\@link PlatformLocation} providers that should be added when the {\@link Location} is used in
@@ -1879,12 +1985,18 @@ function locationInitialized(platformLocation) {
  * @return {?}
  */
 function appInitFnFactory(platformLocation, zone) {
-    return () => zone.runGuarded(() => platformLocation.init());
+    return (/**
+     * @return {?}
+     */
+    () => zone.runGuarded((/**
+     * @return {?}
+     */
+    () => platformLocation.init())));
 }
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -1967,7 +2079,11 @@ class WebWorkerRendererFactory2 {
         bus.initChannel(EVENT_2_CHANNEL);
         /** @type {?} */
         const source = bus.from(EVENT_2_CHANNEL);
-        source.subscribe({ next: (message) => this._dispatchEvent(message) });
+        source.subscribe({ next: (/**
+             * @param {?} message
+             * @return {?}
+             */
+            (message) => this._dispatchEvent(message)) });
     }
     /**
      * @param {?} element
@@ -2325,7 +2441,10 @@ class WebWorkerRenderer2 {
             new FnArg(eventName),
             new FnArg(unlistenId),
         ]);
-        return () => {
+        return (/**
+         * @return {?}
+         */
+        () => {
             if (fullName) {
                 this._rendererFactory.globalEvents.unlisten(fullName, listener);
             }
@@ -2333,7 +2452,7 @@ class WebWorkerRenderer2 {
                 targetEl.events.unlisten(eventName, listener);
             }
             this.callUIWithRenderer('unlisten', [new FnArg(unlistenId)]);
-        };
+        });
     }
     /**
      * @private
@@ -2354,7 +2473,7 @@ class WebWorkerRenderNode {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * This adapter is required to log error messages.
@@ -3036,7 +3155,7 @@ class WorkerDomAdapter extends ɵDomAdapter {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -3059,9 +3178,14 @@ function errorHandler() {
 // TODO(jteplitz602): remove this and compile with lib.webworker.d.ts (#3492)
 /** @type {?} */
 const _postMessage = {
-    postMessage: (message, transferrables) => {
+    postMessage: (/**
+     * @param {?} message
+     * @param {?=} transferrables
+     * @return {?}
+     */
+    (message, transferrables) => {
         ((/** @type {?} */ (postMessage)))(message, transferrables);
-    }
+    })
 };
 /**
  * @param {?} zone
@@ -3163,7 +3287,7 @@ WorkerAppModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Bootstraps the worker ui.
@@ -3185,12 +3309,12 @@ function bootstrapWorkerUi(workerScriptUri, customProviders = []) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 export { bootstrapWorkerUi, VERSION, ClientMessageBroker, ClientMessageBrokerFactory, FnArg, UiArguments, MessageBus, ServiceMessageBroker, ServiceMessageBrokerFactory, WORKER_UI_LOCATION_PROVIDERS, WORKER_APP_LOCATION_PROVIDERS, WorkerAppModule, platformWorkerApp, platformWorkerUi };
