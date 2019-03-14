@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.0.0-beta.8+29.sha-7b70760.with-local-changes
+ * @license Angular v8.0.0-beta.8+28.sha-6ab8c0b.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -969,20 +969,20 @@
         { provide: WORKER_UI_STARTABLE_MESSAGING_SERVICE, useExisting: MessageBasedRenderer2, multi: true },
         platformBrowser.ɵBROWSER_SANITIZATION_PROVIDERS,
         { provide: core.ErrorHandler, useFactory: _exceptionHandler, deps: [] },
-        { provide: common.DOCUMENT, useFactory: _document, deps: [] },
+        { provide: platformBrowser.DOCUMENT, useFactory: _document, deps: [] },
         // TODO(jteplitz602): Investigate if we definitely need EVENT_MANAGER on the render thread
         // #5298
         {
             provide: platformBrowser.EVENT_MANAGER_PLUGINS,
             useClass: platformBrowser.ɵDomEventsPlugin,
-            deps: [common.DOCUMENT, core.NgZone],
+            deps: [platformBrowser.DOCUMENT, core.NgZone],
             multi: true
         },
-        { provide: platformBrowser.EVENT_MANAGER_PLUGINS, useClass: platformBrowser.ɵKeyEventsPlugin, deps: [common.DOCUMENT], multi: true },
+        { provide: platformBrowser.EVENT_MANAGER_PLUGINS, useClass: platformBrowser.ɵKeyEventsPlugin, deps: [platformBrowser.DOCUMENT], multi: true },
         {
             provide: platformBrowser.EVENT_MANAGER_PLUGINS,
             useClass: platformBrowser.ɵHammerGesturesPlugin,
-            deps: [common.DOCUMENT, platformBrowser.HAMMER_GESTURE_CONFIG],
+            deps: [platformBrowser.DOCUMENT, platformBrowser.HAMMER_GESTURE_CONFIG],
             multi: true
         },
         { provide: platformBrowser.HAMMER_GESTURE_CONFIG, useClass: platformBrowser.HammerGestureConfig, deps: [] },
@@ -1003,7 +1003,7 @@
         { provide: Serializer, deps: [RenderStore] },
         { provide: ON_WEB_WORKER, useValue: false },
         { provide: RenderStore, deps: [] },
-        { provide: platformBrowser.ɵDomSharedStylesHost, deps: [common.DOCUMENT] },
+        { provide: platformBrowser.ɵDomSharedStylesHost, deps: [platformBrowser.DOCUMENT] },
         { provide: core.Testability, deps: [core.NgZone] },
         { provide: platformBrowser.EventManager, deps: [platformBrowser.EVENT_MANAGER_PLUGINS, core.NgZone] },
         { provide: WebWorkerInstance, deps: [] },
@@ -1077,7 +1077,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new core.Version('8.0.0-beta.8+29.sha-7b70760.with-local-changes');
+    var VERSION = new core.Version('8.0.0-beta.8+28.sha-6ab8c0b.with-local-changes');
 
     /**
      * @license
@@ -1777,7 +1777,7 @@
                     platformBrowser.ɵBROWSER_SANITIZATION_PROVIDERS,
                     { provide: core.ɵAPP_ROOT, useValue: true },
                     Serializer,
-                    { provide: common.DOCUMENT, useValue: null },
+                    { provide: platformBrowser.DOCUMENT, useValue: null },
                     ClientMessageBrokerFactory,
                     ServiceMessageBrokerFactory,
                     WebWorkerRendererFactory2,
