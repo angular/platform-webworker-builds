@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.0.0-beta.8+29.sha-7b70760.with-local-changes
+ * @license Angular v8.0.0-beta.8+28.sha-6ab8c0b.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -944,20 +944,20 @@
         { provide: WORKER_UI_STARTABLE_MESSAGING_SERVICE, useExisting: MessageBasedRenderer2, multi: true },
         i2.ɵBROWSER_SANITIZATION_PROVIDERS,
         { provide: i0.ErrorHandler, useFactory: _exceptionHandler, deps: [] },
-        { provide: common.DOCUMENT, useFactory: _document, deps: [] },
+        { provide: i2.DOCUMENT, useFactory: _document, deps: [] },
         // TODO(jteplitz602): Investigate if we definitely need EVENT_MANAGER on the render thread
         // #5298
         {
             provide: i2.EVENT_MANAGER_PLUGINS,
             useClass: i2.ɵDomEventsPlugin,
-            deps: [common.DOCUMENT, i0.NgZone],
+            deps: [i2.DOCUMENT, i0.NgZone],
             multi: true
         },
-        { provide: i2.EVENT_MANAGER_PLUGINS, useClass: i2.ɵKeyEventsPlugin, deps: [common.DOCUMENT], multi: true },
+        { provide: i2.EVENT_MANAGER_PLUGINS, useClass: i2.ɵKeyEventsPlugin, deps: [i2.DOCUMENT], multi: true },
         {
             provide: i2.EVENT_MANAGER_PLUGINS,
             useClass: i2.ɵHammerGesturesPlugin,
-            deps: [common.DOCUMENT, i2.HAMMER_GESTURE_CONFIG],
+            deps: [i2.DOCUMENT, i2.HAMMER_GESTURE_CONFIG],
             multi: true
         },
         { provide: i2.HAMMER_GESTURE_CONFIG, useClass: i2.HammerGestureConfig, deps: [] },
@@ -978,7 +978,7 @@
         { provide: Serializer, deps: [RenderStore] },
         { provide: ON_WEB_WORKER, useValue: false },
         { provide: RenderStore, deps: [] },
-        { provide: i2.ɵDomSharedStylesHost, deps: [common.DOCUMENT] },
+        { provide: i2.ɵDomSharedStylesHost, deps: [i2.DOCUMENT] },
         { provide: i0.Testability, deps: [i0.NgZone] },
         { provide: i2.EventManager, deps: [i2.EVENT_MANAGER_PLUGINS, i0.NgZone] },
         { provide: WebWorkerInstance, deps: [] },
@@ -1052,7 +1052,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new i0.Version('8.0.0-beta.8+29.sha-7b70760.with-local-changes');
+    var VERSION = new i0.Version('8.0.0-beta.8+28.sha-6ab8c0b.with-local-changes');
 
     var MessageBasedPlatformLocation = /** @class */ (function () {
         function MessageBasedPlatformLocation(_brokerFactory, _platformLocation, bus, _serializer) {
@@ -1727,7 +1727,7 @@
                 i2.ɵBROWSER_SANITIZATION_PROVIDERS,
                 { provide: i0.ɵAPP_ROOT, useValue: true },
                 Serializer,
-                { provide: common.DOCUMENT, useValue: null },
+                { provide: i2.DOCUMENT, useValue: null },
                 ClientMessageBrokerFactory,
                 ServiceMessageBrokerFactory,
                 WebWorkerRendererFactory2,
@@ -1751,7 +1751,7 @@
                         i2.ɵBROWSER_SANITIZATION_PROVIDERS,
                         { provide: i0.ɵAPP_ROOT, useValue: true },
                         Serializer,
-                        { provide: common.DOCUMENT, useValue: null },
+                        { provide: i2.DOCUMENT, useValue: null },
                         ClientMessageBrokerFactory,
                         ServiceMessageBrokerFactory,
                         WebWorkerRendererFactory2,
