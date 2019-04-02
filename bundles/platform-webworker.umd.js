@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.0.0-beta.10+117.sha-6b39c9c.with-local-changes
+ * @license Angular v8.0.0-beta.10+120.sha-60afe88.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1052,7 +1052,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new i0.Version('8.0.0-beta.10+117.sha-6b39c9c.with-local-changes');
+    var VERSION = new i0.Version('8.0.0-beta.10+120.sha-60afe88.with-local-changes');
 
     var MessageBasedPlatformLocation = /** @class */ (function () {
         function MessageBasedPlatformLocation(_brokerFactory, _platformLocation, bus, _serializer) {
@@ -1721,8 +1721,7 @@
     var WorkerAppModule = /** @class */ (function () {
         function WorkerAppModule() {
         }
-        WorkerAppModule.ngModuleDef = i0.ɵdefineNgModule({ type: WorkerAppModule, exports: [common.CommonModule,
-                i0.ApplicationModule] });
+        WorkerAppModule.ngModuleDef = i0.ɵdefineNgModule({ type: WorkerAppModule });
         WorkerAppModule.ngInjectorDef = i0.defineInjector({ factory: function WorkerAppModule_Factory(t) { return new (t || WorkerAppModule)(); }, providers: [
                 i2.ɵBROWSER_SANITIZATION_PROVIDERS,
                 { provide: i0.ɵAPP_ROOT, useValue: true },
@@ -1738,12 +1737,12 @@
                 { provide: MessageBus, useFactory: createMessageBus, deps: [i0.NgZone] },
                 { provide: i0.APP_INITIALIZER, useValue: setupWebWorker, multi: true },
                 { provide: common.ViewportScroller, useClass: common.ɵNullViewportScroller, deps: [] },
-            ], imports: [[
-                    common.CommonModule,
-                    i0.ApplicationModule,
-                ]] });
+            ], imports: [common.CommonModule,
+                i0.ApplicationModule] });
         return WorkerAppModule;
     }());
+    /*@__PURE__*/ i0.ɵsetNgModuleScope(WorkerAppModule, { exports: [common.CommonModule,
+            i0.ApplicationModule] });
     /*@__PURE__*/ i0.ɵsetClassMetadata(WorkerAppModule, [{
             type: i0.NgModule,
             args: [{

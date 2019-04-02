@@ -1,12 +1,12 @@
 /**
- * @license Angular v8.0.0-beta.10+117.sha-6b39c9c.with-local-changes
+ * @license Angular v8.0.0-beta.10+120.sha-60afe88.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
 
 import { __spread, __read, __extends } from 'tslib';
-import { DOCUMENT, ɵPLATFORM_WORKER_UI_ID, PlatformLocation, LOCATION_INITIALIZED, ɵPLATFORM_WORKER_APP_ID, CommonModule, ViewportScroller, ɵNullViewportScroller } from '@angular/common';
-import { InjectionToken, defineInjectable, ɵsetClassMetadata, Injectable, RenderComponentType, ɵstringify, inject, EventEmitter, RendererFactory2, createPlatformFactory, platformCore, NgZone, ErrorHandler, ɵAPP_ID_RANDOM_PROVIDER, Testability, PLATFORM_INITIALIZER, Injector, PLATFORM_ID, isDevMode, Version, APP_INITIALIZER, ɵdefineNgModule, ApplicationModule, defineInjector, ɵAPP_ROOT, NgModule } from '@angular/core';
+import { DOCUMENT, ɵPLATFORM_WORKER_UI_ID, PlatformLocation, LOCATION_INITIALIZED, ɵPLATFORM_WORKER_APP_ID, ViewportScroller, ɵNullViewportScroller, CommonModule } from '@angular/common';
+import { InjectionToken, defineInjectable, ɵsetClassMetadata, Injectable, RenderComponentType, ɵstringify, inject, EventEmitter, RendererFactory2, createPlatformFactory, platformCore, NgZone, ErrorHandler, ɵAPP_ID_RANDOM_PROVIDER, Testability, PLATFORM_INITIALIZER, Injector, PLATFORM_ID, isDevMode, Version, APP_INITIALIZER, ɵdefineNgModule, defineInjector, ɵAPP_ROOT, ApplicationModule, ɵsetNgModuleScope, NgModule } from '@angular/core';
 import { ɵBROWSER_SANITIZATION_PROVIDERS, EVENT_MANAGER_PLUGINS, ɵDomEventsPlugin, ɵKeyEventsPlugin, ɵHammerGesturesPlugin, HAMMER_GESTURE_CONFIG, HammerGestureConfig, ɵDomRendererFactory2, EventManager, ɵDomSharedStylesHost, ɵSharedStylesHost, ɵBrowserDomAdapter, ɵBrowserGetTestability, ɵBrowserPlatformLocation, ɵsetRootDomAdapter, ɵDomAdapter } from '@angular/platform-browser';
 
 /**
@@ -999,7 +999,7 @@ function spawnWebWorker(uri, instance) {
 /**
  * @publicApi
  */
-var VERSION = new Version('8.0.0-beta.10+117.sha-6b39c9c.with-local-changes');
+var VERSION = new Version('8.0.0-beta.10+120.sha-60afe88.with-local-changes');
 
 var MessageBasedPlatformLocation = /** @class */ (function () {
     function MessageBasedPlatformLocation(_brokerFactory, _platformLocation, bus, _serializer) {
@@ -1668,8 +1668,7 @@ function setupWebWorker() {
 var WorkerAppModule = /** @class */ (function () {
     function WorkerAppModule() {
     }
-    WorkerAppModule.ngModuleDef = ɵdefineNgModule({ type: WorkerAppModule, exports: [CommonModule,
-            ApplicationModule] });
+    WorkerAppModule.ngModuleDef = ɵdefineNgModule({ type: WorkerAppModule });
     WorkerAppModule.ngInjectorDef = defineInjector({ factory: function WorkerAppModule_Factory(t) { return new (t || WorkerAppModule)(); }, providers: [
             ɵBROWSER_SANITIZATION_PROVIDERS,
             { provide: ɵAPP_ROOT, useValue: true },
@@ -1685,12 +1684,12 @@ var WorkerAppModule = /** @class */ (function () {
             { provide: MessageBus, useFactory: createMessageBus, deps: [NgZone] },
             { provide: APP_INITIALIZER, useValue: setupWebWorker, multi: true },
             { provide: ViewportScroller, useClass: ɵNullViewportScroller, deps: [] },
-        ], imports: [[
-                CommonModule,
-                ApplicationModule,
-            ]] });
+        ], imports: [CommonModule,
+            ApplicationModule] });
     return WorkerAppModule;
 }());
+/*@__PURE__*/ ɵsetNgModuleScope(WorkerAppModule, { exports: [CommonModule,
+        ApplicationModule] });
 /*@__PURE__*/ ɵsetClassMetadata(WorkerAppModule, [{
         type: NgModule,
         args: [{
