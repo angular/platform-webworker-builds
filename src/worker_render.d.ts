@@ -10,7 +10,7 @@ import * as i0 from "@angular/core";
 export declare class WebWorkerInstance {
     worker: Worker;
     bus: MessageBus;
-    static ngInjectableDef: i0.ɵInjectableDef<WebWorkerInstance>;
+    static ngInjectableDef: i0.ΔInjectableDef<WebWorkerInstance>;
 }
 /**
  * @publicApi

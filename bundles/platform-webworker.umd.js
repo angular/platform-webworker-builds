@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.0.0-beta.11+55.sha-db62ccf.with-local-changes
+ * @license Angular v8.0.0-beta.11+57.sha-ef85336.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -125,7 +125,7 @@
         RenderStore.prototype.serialize = function (obj) {
             return obj == null ? null : this._lookupByObject.get(obj);
         };
-        RenderStore.ngInjectableDef = i0.defineInjectable({ token: RenderStore, factory: function RenderStore_Factory(t) { return new (t || RenderStore)(); }, providedIn: null });
+        RenderStore.ngInjectableDef = i0.ΔdefineInjectable({ token: RenderStore, factory: function RenderStore_Factory(t) { return new (t || RenderStore)(); }, providedIn: null });
         return RenderStore;
     }());
     /*@__PURE__*/ i0.ɵsetClassMetadata(RenderStore, [{
@@ -247,7 +247,7 @@
                 data: this.deserialize(props['data'])
             };
         };
-        Serializer.ngInjectableDef = i0.defineInjectable({ token: Serializer, factory: function Serializer_Factory(t) { return new (t || Serializer)(i0.inject(RenderStore)); }, providedIn: null });
+        Serializer.ngInjectableDef = i0.ΔdefineInjectable({ token: Serializer, factory: function Serializer_Factory(t) { return new (t || Serializer)(i0.Δinject(RenderStore)); }, providedIn: null });
         return Serializer;
     }());
     /*@__PURE__*/ i0.ɵsetClassMetadata(Serializer, [{
@@ -278,7 +278,7 @@
             this._messageBus.initChannel(channel, runInZone);
             return new ClientMessageBroker(this._messageBus, this._serializer, channel);
         };
-        ClientMessageBrokerFactory.ngInjectableDef = i0.defineInjectable({ token: ClientMessageBrokerFactory, factory: function ClientMessageBrokerFactory_Factory(t) { return new (t || ClientMessageBrokerFactory)(i0.inject(MessageBus), i0.inject(Serializer)); }, providedIn: null });
+        ClientMessageBrokerFactory.ngInjectableDef = i0.ΔdefineInjectable({ token: ClientMessageBrokerFactory, factory: function ClientMessageBrokerFactory_Factory(t) { return new (t || ClientMessageBrokerFactory)(i0.Δinject(MessageBus), i0.Δinject(Serializer)); }, providedIn: null });
         return ClientMessageBrokerFactory;
     }());
     /*@__PURE__*/ i0.ɵsetClassMetadata(ClientMessageBrokerFactory, [{
@@ -513,7 +513,7 @@
         };
         PostMessageBus.prototype.from = function (channel) { return this.source.from(channel); };
         PostMessageBus.prototype.to = function (channel) { return this.sink.to(channel); };
-        PostMessageBus.ngInjectableDef = i0.defineInjectable({ token: PostMessageBus, factory: function PostMessageBus_Factory(t) { return new (t || PostMessageBus)(i0.inject(PostMessageBusSink), i0.inject(PostMessageBusSource)); }, providedIn: null });
+        PostMessageBus.ngInjectableDef = i0.ΔdefineInjectable({ token: PostMessageBus, factory: function PostMessageBus_Factory(t) { return new (t || PostMessageBus)(i0.Δinject(PostMessageBusSink), i0.Δinject(PostMessageBusSource)); }, providedIn: null });
         return PostMessageBus;
     }());
     /*@__PURE__*/ i0.ɵsetClassMetadata(PostMessageBus, [{
@@ -548,7 +548,7 @@
             this._messageBus.initChannel(channel, runInZone);
             return new ServiceMessageBroker(this._messageBus, this._serializer, channel);
         };
-        ServiceMessageBrokerFactory.ngInjectableDef = i0.defineInjectable({ token: ServiceMessageBrokerFactory, factory: function ServiceMessageBrokerFactory_Factory(t) { return new (t || ServiceMessageBrokerFactory)(i0.inject(MessageBus), i0.inject(Serializer)); }, providedIn: null });
+        ServiceMessageBrokerFactory.ngInjectableDef = i0.ΔdefineInjectable({ token: ServiceMessageBrokerFactory, factory: function ServiceMessageBrokerFactory_Factory(t) { return new (t || ServiceMessageBrokerFactory)(i0.Δinject(MessageBus), i0.Δinject(Serializer)); }, providedIn: null });
         return ServiceMessageBrokerFactory;
     }());
     /*@__PURE__*/ i0.ɵsetClassMetadata(ServiceMessageBrokerFactory, [{
@@ -890,7 +890,7 @@
             this._renderStore.store(unlisten, unlistenId);
         };
         MessageBasedRenderer2.prototype.unlisten = function (r, unlisten) { unlisten(); };
-        MessageBasedRenderer2.ngInjectableDef = i0.defineInjectable({ token: MessageBasedRenderer2, factory: function MessageBasedRenderer2_Factory(t) { return new (t || MessageBasedRenderer2)(i0.inject(ServiceMessageBrokerFactory), i0.inject(MessageBus), i0.inject(Serializer), i0.inject(RenderStore), i0.inject(i0.RendererFactory2)); }, providedIn: null });
+        MessageBasedRenderer2.ngInjectableDef = i0.ΔdefineInjectable({ token: MessageBasedRenderer2, factory: function MessageBasedRenderer2_Factory(t) { return new (t || MessageBasedRenderer2)(i0.Δinject(ServiceMessageBrokerFactory), i0.Δinject(MessageBus), i0.Δinject(Serializer), i0.Δinject(RenderStore), i0.Δinject(i0.RendererFactory2)); }, providedIn: null });
         return MessageBasedRenderer2;
     }());
     /*@__PURE__*/ i0.ɵsetClassMetadata(MessageBasedRenderer2, [{
@@ -918,7 +918,7 @@
             this.worker = worker;
             this.bus = bus;
         };
-        WebWorkerInstance.ngInjectableDef = i0.defineInjectable({ token: WebWorkerInstance, factory: function WebWorkerInstance_Factory(t) { return new (t || WebWorkerInstance)(); }, providedIn: null });
+        WebWorkerInstance.ngInjectableDef = i0.ΔdefineInjectable({ token: WebWorkerInstance, factory: function WebWorkerInstance_Factory(t) { return new (t || WebWorkerInstance)(); }, providedIn: null });
         return WebWorkerInstance;
     }());
     /*@__PURE__*/ i0.ɵsetClassMetadata(WebWorkerInstance, [{
@@ -1052,7 +1052,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new i0.Version('8.0.0-beta.11+55.sha-db62ccf.with-local-changes');
+    var VERSION = new i0.Version('8.0.0-beta.11+57.sha-ef85336.with-local-changes');
 
     var MessageBasedPlatformLocation = /** @class */ (function () {
         function MessageBasedPlatformLocation(_brokerFactory, _platformLocation, bus, _serializer) {
@@ -1083,7 +1083,7 @@
             });
         };
         MessageBasedPlatformLocation.prototype._setPathname = function (pathname) { this._platformLocation.pathname = pathname; };
-        MessageBasedPlatformLocation.ngInjectableDef = i0.defineInjectable({ token: MessageBasedPlatformLocation, factory: function MessageBasedPlatformLocation_Factory(t) { return new (t || MessageBasedPlatformLocation)(i0.inject(ServiceMessageBrokerFactory), i0.inject(i2.ɵBrowserPlatformLocation), i0.inject(MessageBus), i0.inject(Serializer)); }, providedIn: null });
+        MessageBasedPlatformLocation.ngInjectableDef = i0.ΔdefineInjectable({ token: MessageBasedPlatformLocation, factory: function MessageBasedPlatformLocation_Factory(t) { return new (t || MessageBasedPlatformLocation)(i0.Δinject(ServiceMessageBrokerFactory), i0.Δinject(i2.ɵBrowserPlatformLocation), i0.Δinject(MessageBus), i0.Δinject(Serializer)); }, providedIn: null });
         return MessageBasedPlatformLocation;
     }());
     /*@__PURE__*/ i0.ɵsetClassMetadata(MessageBasedPlatformLocation, [{
@@ -1212,7 +1212,7 @@
             var args = new UiArguments('back');
             this._broker.runOnService(args, null);
         };
-        WebWorkerPlatformLocation.ngInjectableDef = i0.defineInjectable({ token: WebWorkerPlatformLocation, factory: function WebWorkerPlatformLocation_Factory(t) { return new (t || WebWorkerPlatformLocation)(i0.inject(ClientMessageBrokerFactory), i0.inject(MessageBus), i0.inject(Serializer)); }, providedIn: null });
+        WebWorkerPlatformLocation.ngInjectableDef = i0.ΔdefineInjectable({ token: WebWorkerPlatformLocation, factory: function WebWorkerPlatformLocation_Factory(t) { return new (t || WebWorkerPlatformLocation)(i0.Δinject(ClientMessageBrokerFactory), i0.Δinject(MessageBus), i0.Δinject(Serializer)); }, providedIn: null });
         return WebWorkerPlatformLocation;
     }(common.PlatformLocation));
     /*@__PURE__*/ i0.ɵsetClassMetadata(WebWorkerPlatformLocation, [{
@@ -1329,7 +1329,7 @@
                 element.events.dispatchEvent(eventName, event);
             }
         };
-        WebWorkerRendererFactory2.ngInjectableDef = i0.defineInjectable({ token: WebWorkerRendererFactory2, factory: function WebWorkerRendererFactory2_Factory(t) { return new (t || WebWorkerRendererFactory2)(i0.inject(ClientMessageBrokerFactory), i0.inject(MessageBus), i0.inject(Serializer), i0.inject(RenderStore)); }, providedIn: null });
+        WebWorkerRendererFactory2.ngInjectableDef = i0.ΔdefineInjectable({ token: WebWorkerRendererFactory2, factory: function WebWorkerRendererFactory2_Factory(t) { return new (t || WebWorkerRendererFactory2)(i0.Δinject(ClientMessageBrokerFactory), i0.Δinject(MessageBus), i0.Δinject(Serializer), i0.Δinject(RenderStore)); }, providedIn: null });
         return WebWorkerRendererFactory2;
     }());
     /*@__PURE__*/ i0.ɵsetClassMetadata(WebWorkerRendererFactory2, [{
@@ -1721,8 +1721,8 @@
     var WorkerAppModule = /** @class */ (function () {
         function WorkerAppModule() {
         }
-        WorkerAppModule.ngModuleDef = i0.ɵdefineNgModule({ type: WorkerAppModule });
-        WorkerAppModule.ngInjectorDef = i0.defineInjector({ factory: function WorkerAppModule_Factory(t) { return new (t || WorkerAppModule)(); }, providers: [
+        WorkerAppModule.ngModuleDef = i0.ΔdefineNgModule({ type: WorkerAppModule });
+        WorkerAppModule.ngInjectorDef = i0.ΔdefineInjector({ factory: function WorkerAppModule_Factory(t) { return new (t || WorkerAppModule)(); }, providers: [
                 i2.ɵBROWSER_SANITIZATION_PROVIDERS,
                 { provide: i0.ɵAPP_ROOT, useValue: true },
                 Serializer,
@@ -1741,7 +1741,7 @@
                 i0.ApplicationModule] });
         return WorkerAppModule;
     }());
-    /*@__PURE__*/ i0.ɵsetNgModuleScope(WorkerAppModule, { exports: [common.CommonModule,
+    /*@__PURE__*/ i0.ΔsetNgModuleScope(WorkerAppModule, { exports: [common.CommonModule,
             i0.ApplicationModule] });
     /*@__PURE__*/ i0.ɵsetClassMetadata(WorkerAppModule, [{
             type: i0.NgModule,
