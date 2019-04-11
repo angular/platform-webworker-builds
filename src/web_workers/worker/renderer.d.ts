@@ -32,7 +32,7 @@ export declare class WebWorkerRendererFactory2 implements RendererFactory2 {
     freeNode(node: any): void;
     allocateId(): number;
     private _dispatchEvent;
-    static ngInjectableDef: i0.ΔInjectableDef<WebWorkerRendererFactory2>;
+    static ngInjectableDef: i0.ɵɵInjectableDef<WebWorkerRendererFactory2>;
 }
 export declare class WebWorkerRenderer2 implements Renderer2 {
     private _rendererFactory;
