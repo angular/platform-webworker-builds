@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.0.0-beta.13+80.sha-9873356.with-local-changes
+ * @license Angular v8.0.0-beta.13+88.sha-8e8e89a.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1077,7 +1077,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new core.Version('8.0.0-beta.13+80.sha-9873356.with-local-changes');
+    var VERSION = new core.Version('8.0.0-beta.13+88.sha-8e8e89a.with-local-changes');
 
     /**
      * @license
@@ -1739,19 +1739,20 @@
      * Use of this source code is governed by an MIT-style license that can be
      * found in the LICENSE file at https://angular.io/license
      */
+    var ɵ0 = common.ɵPLATFORM_WORKER_APP_ID;
     /**
      * @publicApi
      */
-    var platformWorkerApp = core.createPlatformFactory(core.platformCore, 'workerApp', [{ provide: core.PLATFORM_ID, useValue: common.ɵPLATFORM_WORKER_APP_ID }]);
+    var platformWorkerApp = core.createPlatformFactory(core.platformCore, 'workerApp', [{ provide: core.PLATFORM_ID, useValue: ɵ0 }]);
     function errorHandler() {
         return new core.ErrorHandler();
     }
-    var ɵ0 = function (message, transferrables) {
+    var ɵ1 = function (message, transferrables) {
         postMessage(message, transferrables);
     };
     // TODO(jteplitz602): remove this and compile with lib.webworker.d.ts (#3492)
     var _postMessage = {
-        postMessage: ɵ0
+        postMessage: ɵ1
     };
     function createMessageBus(zone) {
         var sink = new PostMessageBusSink(_postMessage);
