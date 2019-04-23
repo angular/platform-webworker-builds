@@ -1,10 +1,10 @@
 /**
- * @license Angular v8.0.0-beta.13+80.sha-9873356.with-local-changes
+ * @license Angular v8.0.0-beta.13+82.sha-8e73f9b.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
 
-import { DOCUMENT, ɵPLATFORM_WORKER_UI_ID, PlatformLocation, LOCATION_INITIALIZED, ɵPLATFORM_WORKER_APP_ID, ViewportScroller, ɵNullViewportScroller, CommonModule } from '@angular/common';
+import { DOCUMENT, ɵPLATFORM_WORKER_UI_ID, PlatformLocation, LOCATION_INITIALIZED, ViewportScroller, ɵNullViewportScroller, CommonModule, ɵPLATFORM_WORKER_APP_ID } from '@angular/common';
 import { InjectionToken, Injectable, RenderComponentType, ɵstringify, EventEmitter, RendererFactory2, NgZone, ErrorHandler, ɵAPP_ID_RANDOM_PROVIDER, Testability, PLATFORM_INITIALIZER, Injector, PLATFORM_ID, createPlatformFactory, platformCore, isDevMode, Version, APP_INITIALIZER, NgModule, ɵAPP_ROOT, ApplicationModule } from '@angular/core';
 import { ɵBROWSER_SANITIZATION_PROVIDERS, EVENT_MANAGER_PLUGINS, ɵDomEventsPlugin, ɵKeyEventsPlugin, ɵHammerGesturesPlugin, HAMMER_GESTURE_CONFIG, HammerGestureConfig, ɵDomRendererFactory2, EventManager, ɵDomSharedStylesHost, ɵSharedStylesHost, ɵBrowserDomAdapter, ɵBrowserGetTestability, ɵBrowserPlatformLocation, ɵDomAdapter, ɵsetRootDomAdapter } from '@angular/platform-browser';
 
@@ -1584,7 +1584,7 @@ function spawnWebWorker(uri, instance) {
  * \@publicApi
  * @type {?}
  */
-const VERSION = new Version('8.0.0-beta.13+80.sha-9873356.with-local-changes');
+const VERSION = new Version('8.0.0-beta.13+82.sha-8e73f9b.with-local-changes');
 
 /**
  * @fileoverview added by tsickle
@@ -3061,11 +3061,12 @@ class WorkerDomAdapter extends ɵDomAdapter {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+const ɵ0 = ɵPLATFORM_WORKER_APP_ID;
 /**
  * \@publicApi
  * @type {?}
  */
-const platformWorkerApp = createPlatformFactory(platformCore, 'workerApp', [{ provide: PLATFORM_ID, useValue: ɵPLATFORM_WORKER_APP_ID }]);
+const platformWorkerApp = createPlatformFactory(platformCore, 'workerApp', [{ provide: PLATFORM_ID, useValue: ɵ0 }]);
 /**
  * @return {?}
  */
@@ -3073,7 +3074,7 @@ function errorHandler() {
     return new ErrorHandler();
 }
 // TODO(jteplitz602): remove this and compile with lib.webworker.d.ts (#3492)
-const ɵ0 = /**
+const ɵ1 = /**
  * @param {?} message
  * @param {?=} transferrables
  * @return {?}
@@ -3083,7 +3084,7 @@ const ɵ0 = /**
 };
 /** @type {?} */
 const _postMessage = {
-    postMessage: (ɵ0)
+    postMessage: (ɵ1)
 };
 /**
  * @param {?} zone
