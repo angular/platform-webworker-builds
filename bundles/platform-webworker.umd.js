@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.0.0-beta.14+19.sha-3938563.with-local-changes
+ * @license Angular v8.0.0-beta.14+31.sha-071ee64.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1077,7 +1077,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new core.Version('8.0.0-beta.14+19.sha-3938563.with-local-changes');
+    var VERSION = new core.Version('8.0.0-beta.14+31.sha-071ee64.with-local-changes');
 
     /**
      * @license
@@ -1203,17 +1203,23 @@
         };
         WebWorkerPlatformLocation.prototype.onPopState = function (fn) { this._popStateListeners.push(fn); };
         WebWorkerPlatformLocation.prototype.onHashChange = function (fn) { this._hashChangeListeners.push(fn); };
-        Object.defineProperty(WebWorkerPlatformLocation.prototype, "pathname", {
-            get: function () { return this._location ? this._location.pathname : '<unknown>'; },
-            set: function (newPath) {
-                if (this._location === null) {
-                    throw new Error('Attempt to set pathname before value is obtained from UI');
-                }
-                this._location.pathname = newPath;
-                var fnArgs = [new FnArg(newPath, 1 /* PRIMITIVE */)];
-                var args = new UiArguments('setPathname', fnArgs);
-                this._broker.runOnService(args, null);
-            },
+        Object.defineProperty(WebWorkerPlatformLocation.prototype, "href", {
+            get: function () { return this._location ? this._location.href : '<unknown>'; },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(WebWorkerPlatformLocation.prototype, "hostname", {
+            get: function () { return this._location ? this._location.host : '<unknown>'; },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(WebWorkerPlatformLocation.prototype, "port", {
+            get: function () { return this._location ? this._location.port : '<unknown>'; },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(WebWorkerPlatformLocation.prototype, "protocol", {
+            get: function () { return this._location ? this._location.protocol : '<unknown>'; },
             enumerable: true,
             configurable: true
         });
@@ -1224,6 +1230,19 @@
         });
         Object.defineProperty(WebWorkerPlatformLocation.prototype, "hash", {
             get: function () { return this._location ? this._location.hash : '<unknown>'; },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(WebWorkerPlatformLocation.prototype, "pathname", {
+            set: function (newPath) {
+                if (this._location === null) {
+                    throw new Error('Attempt to set pathname before value is obtained from UI');
+                }
+                this._location.pathname = newPath;
+                var fnArgs = [new FnArg(newPath, 1 /* PRIMITIVE */)];
+                var args = new UiArguments('setPathname', fnArgs);
+                this._broker.runOnService(args, null);
+            },
             enumerable: true,
             configurable: true
         });
@@ -1253,6 +1272,8 @@
             var args = new UiArguments('back');
             this._broker.runOnService(args, null);
         };
+        // History API isn't available on WebWorkers, therefore return undefined
+        WebWorkerPlatformLocation.prototype.getState = function () { return undefined; };
         WebWorkerPlatformLocation = __decorate([
             core.Injectable(),
             __metadata("design:paramtypes", [ClientMessageBrokerFactory, MessageBus, Serializer])

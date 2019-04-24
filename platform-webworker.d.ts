@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.0.0-beta.14+19.sha-3938563.with-local-changes
+ * @license Angular v8.0.0-beta.14+31.sha-071ee64.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -316,13 +316,18 @@ export declare class ɵangular_packages_platform_webworker_platform_webworker_i 
     getBaseHrefFromDOM(): string;
     onPopState(fn: LocationChangeListener): void;
     onHashChange(fn: LocationChangeListener): void;
-    pathname: string;
+    readonly href: string;
+    readonly hostname: string;
+    readonly port: string;
+    readonly protocol: string;
     readonly search: string;
     readonly hash: string;
+    pathname: string;
     pushState(state: any, title: string, url: string): void;
     replaceState(state: any, title: string, url: string): void;
     forward(): void;
     back(): void;
+    getState(): unknown;
 }
 
 export declare class ɵangular_packages_platform_webworker_platform_webworker_j implements RendererFactory2 {
