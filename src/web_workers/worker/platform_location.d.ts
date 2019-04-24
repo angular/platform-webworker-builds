@@ -23,12 +23,17 @@ export declare class WebWorkerPlatformLocation extends PlatformLocation {
     getBaseHrefFromDOM(): string;
     onPopState(fn: LocationChangeListener): void;
     onHashChange(fn: LocationChangeListener): void;
-    pathname: string;
+    readonly href: string;
+    readonly hostname: string;
+    readonly port: string;
+    readonly protocol: string;
     readonly search: string;
     readonly hash: string;
+    pathname: string;
     pushState(state: any, title: string, url: string): void;
     replaceState(state: any, title: string, url: string): void;
     forward(): void;
     back(): void;
+    getState(): unknown;
     static ngInjectableDef: i0.ɵɵInjectableDef<WebWorkerPlatformLocation>;
 }

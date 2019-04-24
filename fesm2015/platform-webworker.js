@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.0.0-beta.14+19.sha-3938563.with-local-changes
+ * @license Angular v8.0.0-beta.14+31.sha-071ee64.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1647,7 +1647,7 @@ function spawnWebWorker(uri, instance) {
  * \@publicApi
  * @type {?}
  */
-const VERSION = new Version('8.0.0-beta.14+19.sha-3938563.with-local-changes');
+const VERSION = new Version('8.0.0-beta.14+31.sha-071ee64.with-local-changes');
 
 /**
  * @fileoverview added by tsickle
@@ -1863,7 +1863,19 @@ class WebWorkerPlatformLocation extends PlatformLocation {
     /**
      * @return {?}
      */
-    get pathname() { return this._location ? (/** @type {?} */ (this._location.pathname)) : '<unknown>'; }
+    get href() { return this._location ? (/** @type {?} */ (this._location.href)) : '<unknown>'; }
+    /**
+     * @return {?}
+     */
+    get hostname() { return this._location ? (/** @type {?} */ (this._location.host)) : '<unknown>'; }
+    /**
+     * @return {?}
+     */
+    get port() { return this._location ? (/** @type {?} */ (this._location.port)) : '<unknown>'; }
+    /**
+     * @return {?}
+     */
+    get protocol() { return this._location ? (/** @type {?} */ (this._location.protocol)) : '<unknown>'; }
     /**
      * @return {?}
      */
@@ -1937,6 +1949,11 @@ class WebWorkerPlatformLocation extends PlatformLocation {
         const args = new UiArguments('back');
         this._broker.runOnService(args, null);
     }
+    // History API isn't available on WebWorkers, therefore return undefined
+    /**
+     * @return {?}
+     */
+    getState() { return undefined; }
 }
 WebWorkerPlatformLocation.decorators = [
     { type: Injectable },
