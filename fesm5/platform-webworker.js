@@ -1,5 +1,5 @@
 /**
- * @license Angular v7.2.14+13.sha-07f0385.with-local-changes
+ * @license Angular v7.2.14+17.sha-b4a2cbb.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1013,7 +1013,7 @@ function spawnWebWorker(uri, instance) {
 /**
  * @publicApi
  */
-var VERSION = new Version('7.2.14+13.sha-07f0385.with-local-changes');
+var VERSION = new Version('7.2.14+17.sha-b4a2cbb.with-local-changes');
 
 /**
  * @license
