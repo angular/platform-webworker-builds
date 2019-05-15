@@ -17,7 +17,7 @@ export declare class ServiceMessageBrokerFactory {
      * Initializes the given channel and attaches a new {@link ServiceMessageBroker} to it.
      */
     createMessageBroker(channel: string, runInZone?: boolean): ServiceMessageBroker;
-    static ngInjectableDef: i0.ɵɵInjectableDef<ServiceMessageBrokerFactory>;
+    static ngInjectableDef: i0.ΔInjectableDef<ServiceMessageBrokerFactory>;
 }
 /**
  * Helper class for UIComponents that allows components to register methods.

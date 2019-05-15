@@ -14,5 +14,5 @@ export declare class MessageBasedPlatformLocation {
     private _getLocation;
     private _sendUrlChangeEvent;
     private _setPathname;
-    static ngInjectableDef: i0.ɵɵInjectableDef<MessageBasedPlatformLocation>;
+    static ngInjectableDef: i0.ΔInjectableDef<MessageBasedPlatformLocation>;
 }

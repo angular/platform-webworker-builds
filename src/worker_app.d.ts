@@ -15,6 +15,6 @@ export declare function setupWebWorker(): void;
  * @publicApi
  */
 export declare class WorkerAppModule {
-    static ngModuleDef: i0.ɵɵNgModuleDefWithMeta<WorkerAppModule, never, never, [typeof i1.CommonModule, typeof i0.ApplicationModule]>;
-    static ngInjectorDef: i0.ɵɵInjectorDef<WorkerAppModule>;
+    static ngModuleDef: i0.ΔNgModuleDefWithMeta<WorkerAppModule, never, never, [typeof i1.CommonModule, typeof i0.ApplicationModule]>;
+    static ngInjectorDef: i0.ΔInjectorDef<WorkerAppModule>;
 }
