@@ -8,5 +8,5 @@ export declare class RenderStore {
     remove(obj: any): void;
     deserialize(id: number): any;
     serialize(obj: any): number | null | undefined;
-    static ngInjectableDef: i0.ΔInjectableDef<RenderStore>;
+    static ngInjectableDef: i0.ɵɵInjectableDef<RenderStore>;
 }

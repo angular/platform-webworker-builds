@@ -39,5 +39,5 @@ export declare class Serializer {
     private _deserializeRenderComponentType;
     private _serializeRendererType2;
     private _deserializeRendererType2;
-    static ngInjectableDef: i0.ΔInjectableDef<Serializer>;
+    static ngInjectableDef: i0.ɵɵInjectableDef<Serializer>;
 }

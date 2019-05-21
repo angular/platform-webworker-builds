@@ -35,5 +35,5 @@ export declare class WebWorkerPlatformLocation extends PlatformLocation {
     forward(): void;
     back(): void;
     getState(): unknown;
-    static ngInjectableDef: i0.ΔInjectableDef<WebWorkerPlatformLocation>;
+    static ngInjectableDef: i0.ɵɵInjectableDef<WebWorkerPlatformLocation>;
 }
