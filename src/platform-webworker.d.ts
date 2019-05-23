@@ -19,5 +19,6 @@ export { platformWorkerUi } from './worker_render';
  * Bootstraps the worker ui.
  *
  * @publicApi
+ * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
  */
 export declare function bootstrapWorkerUi(workerScriptUri: string, customProviders?: StaticProvider[]): Promise<PlatformRef>;

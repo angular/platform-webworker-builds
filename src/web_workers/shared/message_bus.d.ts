@@ -13,6 +13,7 @@ import { EventEmitter, NgZone } from '@angular/core';
  * by the corresponding MessageBusSource.
  *
  * @publicApi
+ * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
  */
 export declare abstract class MessageBus implements MessageBusSource, MessageBusSink {
     /**

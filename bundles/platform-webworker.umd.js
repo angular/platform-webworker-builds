@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.0.0-rc.0+327.sha-b5c8939.with-local-changes
+ * @license Angular v8.0.0-rc.0+329.sha-ccc76f7.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -85,6 +85,7 @@
      * by the corresponding MessageBusSource.
      *
      * @publicApi
+     * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
      */
     var MessageBus = /** @class */ (function () {
         function MessageBus() {
@@ -263,6 +264,7 @@
      */
     /**
      * @publicApi
+     * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
      */
     var ClientMessageBrokerFactory = /** @class */ (function () {
         /** @internal */
@@ -286,6 +288,7 @@
         }], function () { return [{ type: MessageBus }, { type: Serializer }]; }, null);
     /**
      * @publicApi
+     * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
      */
     var ClientMessageBroker = /** @class */ (function () {
         /** @internal */
@@ -533,6 +536,7 @@
 
     /**
      * @publicApi
+     * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
      */
     var ServiceMessageBrokerFactory = /** @class */ (function () {
         /** @internal */
@@ -561,6 +565,7 @@
      * If that method returns a promise, the UIMessageBroker returns the result to the worker.
      *
      * @publicApi
+     * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
      */
     var ServiceMessageBroker = /** @class */ (function () {
         /** @internal */
@@ -909,6 +914,7 @@
      * and underlying {@link MessageBus} for lower level message passing.
      *
      * @publicApi
+     * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
      */
     var WebWorkerInstance = /** @class */ (function () {
         function WebWorkerInstance() {
@@ -926,6 +932,7 @@
         }], null, null);
     /**
      * @publicApi
+     * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
      */
     var WORKER_SCRIPT = new i0.InjectionToken('WebWorkerScript');
     /**
@@ -933,6 +940,7 @@
      * created.
      *
      * @publicApi
+     * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
      */
     var WORKER_UI_STARTABLE_MESSAGING_SERVICE = new i0.InjectionToken('WorkerRenderStartableMsgService');
     var _WORKER_UI_PLATFORM_PROVIDERS = [
@@ -1051,8 +1059,9 @@
      */
     /**
      * @publicApi
+     * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
      */
-    var VERSION = new i0.Version('8.0.0-rc.0+327.sha-b5c8939.with-local-changes');
+    var VERSION = new i0.Version('8.0.0-rc.0+329.sha-ccc76f7.with-local-changes');
 
     var MessageBasedPlatformLocation = /** @class */ (function () {
         function MessageBasedPlatformLocation(_brokerFactory, _platformLocation, bus, _serializer) {
@@ -1101,6 +1110,7 @@
      * A list of {@link Provider}s. To use the router in a Worker enabled application you must
      * include these providers when setting up the render thread.
      * @publicApi
+     * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
      */
     var WORKER_UI_LOCATION_PROVIDERS = [
         { provide: MessageBasedPlatformLocation, deps: [ServiceMessageBrokerFactory,
@@ -1252,6 +1262,7 @@
      * a worker context.
      *
      * @publicApi
+     * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
      */
     var WORKER_APP_LOCATION_PROVIDERS = [
         { provide: common.PlatformLocation, useClass: WebWorkerPlatformLocation }, {
@@ -1713,6 +1724,7 @@
      */
     /**
      * @publicApi
+     * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
      */
     var platformWorkerApp = i0.createPlatformFactory(i0.platformCore, 'workerApp', [{ provide: i0.PLATFORM_ID, useValue: common.ɵPLATFORM_WORKER_APP_ID }]);
     function errorHandler() {
@@ -1738,6 +1750,7 @@
      * The ng module for the worker app side.
      *
      * @publicApi
+     * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
      */
     var WorkerAppModule = /** @class */ (function () {
         function WorkerAppModule() {
@@ -1801,6 +1814,7 @@
      * Bootstraps the worker ui.
      *
      * @publicApi
+     * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
      */
     function bootstrapWorkerUi(workerScriptUri, customProviders) {
         if (customProviders === void 0) { customProviders = []; }

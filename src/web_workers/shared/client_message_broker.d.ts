@@ -10,6 +10,7 @@ import { SerializerTypes } from './serializer';
 import * as i0 from "@angular/core";
 /**
  * @publicApi
+ * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
  */
 export declare class ClientMessageBrokerFactory {
     private _messageBus;
@@ -21,6 +22,7 @@ export declare class ClientMessageBrokerFactory {
 }
 /**
  * @publicApi
+ * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
  */
 export declare class ClientMessageBroker {
     private channel;
