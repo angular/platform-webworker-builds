@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.0.0-rc.4+57.sha-c8af830.with-local-changes
+ * @license Angular v8.0.0-rc.4+59.sha-361f181.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -22,11 +22,13 @@ import { Version } from '@angular/core';
  * Bootstraps the worker ui.
  *
  * @publicApi
+ * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
  */
 export declare function bootstrapWorkerUi(workerScriptUri: string, customProviders?: StaticProvider[]): Promise<PlatformRef>;
 
 /**
  * @publicApi
+ * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
  */
 export declare class ClientMessageBroker {
     private channel;
@@ -39,6 +41,7 @@ export declare class ClientMessageBroker {
 
 /**
  * @publicApi
+ * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
  */
 export declare class ClientMessageBrokerFactory {
     private _messageBus;
@@ -64,6 +67,7 @@ export declare class FnArg {
  * by the corresponding MessageBusSource.
  *
  * @publicApi
+ * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
  */
 export declare abstract class MessageBus implements MessageBusSource, MessageBusSink {
     /**
@@ -151,6 +155,7 @@ declare class NamedEventEmitter {
 
 /**
  * @publicApi
+ * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
  */
 export declare const platformWorkerApp: (extraProviders?: StaticProvider[] | undefined) => PlatformRef;
 
@@ -161,6 +166,7 @@ export declare const platformWorkerUi: (extraProviders?: StaticProvider[] | unde
 
 /**
  * @publicApi
+ * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
  */
 export declare interface ReceivedMessage {
     method: string;
@@ -171,6 +177,7 @@ export declare interface ReceivedMessage {
 
 /**
  * @publicApi
+ * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
  */
 export declare const enum SerializerTypes {
     RENDERER_TYPE_2 = 0,
@@ -185,6 +192,7 @@ export declare const enum SerializerTypes {
  * If that method returns a promise, the UIMessageBroker returns the result to the worker.
  *
  * @publicApi
+ * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
  */
 export declare class ServiceMessageBroker {
     private _serializer;
@@ -198,6 +206,7 @@ export declare class ServiceMessageBroker {
 
 /**
  * @publicApi
+ * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
  */
 export declare class ServiceMessageBrokerFactory {
     private _messageBus;
@@ -218,6 +227,7 @@ export declare class UiArguments {
 
 /**
  * @publicApi
+ * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
  */
 export declare const VERSION: Version;
 
@@ -230,6 +240,7 @@ declare class WebWorkerRenderNode {
  * a worker context.
  *
  * @publicApi
+ * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
  */
 export declare const WORKER_APP_LOCATION_PROVIDERS: ({
     provide: typeof PlatformLocation;
@@ -255,6 +266,7 @@ export declare const WORKER_APP_LOCATION_PROVIDERS: ({
  * A list of {@link Provider}s. To use the router in a Worker enabled application you must
  * include these providers when setting up the render thread.
  * @publicApi
+ * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
  */
 export declare const WORKER_UI_LOCATION_PROVIDERS: StaticProvider[];
 
@@ -262,6 +274,7 @@ export declare const WORKER_UI_LOCATION_PROVIDERS: StaticProvider[];
  * The ng module for the worker app side.
  *
  * @publicApi
+ * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
  */
 export declare class WorkerAppModule {
 }
