@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.1.0-next.1+8.sha-b4b7af8.with-local-changes
+ * @license Angular v8.1.0-next.1+9.sha-04587a3.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1061,7 +1061,7 @@
      * @publicApi
      * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
      */
-    var VERSION = new i0.Version('8.1.0-next.1+8.sha-b4b7af8.with-local-changes');
+    var VERSION = new i0.Version('8.1.0-next.1+9.sha-04587a3.with-local-changes');
 
     var MessageBasedPlatformLocation = /** @class */ (function () {
         function MessageBasedPlatformLocation(_brokerFactory, _platformLocation, bus, _serializer) {
