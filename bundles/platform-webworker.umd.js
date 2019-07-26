@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.2.0-next.2+93.sha-3a2b195.with-local-changes
+ * @license Angular v8.2.0-next.2+94.sha-6ece7db.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1069,6 +1069,9 @@
      */
     function spawnWebWorker(uri, instance) {
         var webWorker = new Worker(uri);
+        // webWorker is casted to any because the lib.d.ts signature changed in TS3.5 to require the
+        // transfer argument in postMessage method.
+        // this seems wrong but since all of this code is deprecated it shouldn't matter that much.
         var sink = new PostMessageBusSink(webWorker);
         var source = new PostMessageBusSource(webWorker);
         var bus = new PostMessageBus(sink, source);
@@ -1086,7 +1089,7 @@
      * @publicApi
      * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
      */
-    var VERSION = new core.Version('8.2.0-next.2+93.sha-3a2b195.with-local-changes');
+    var VERSION = new core.Version('8.2.0-next.2+94.sha-6ece7db.with-local-changes');
 
     /**
      * @license
