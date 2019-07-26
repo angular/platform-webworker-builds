@@ -9,7 +9,7 @@ import { EventEmitter, NgZone } from '@angular/core';
 import { MessageBus, MessageBusSink, MessageBusSource } from './message_bus';
 import * as i0 from "@angular/core";
 export interface PostMessageTarget {
-    postMessage: (message: any, transfer?: [ArrayBuffer]) => void;
+    postMessage: (message: any, transfer?: [Transferable]) => void;
 }
 export declare class PostMessageBusSink implements MessageBusSink {
     private _postMessageTarget;
