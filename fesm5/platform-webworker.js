@@ -1,12 +1,12 @@
 /**
- * @license Angular v9.0.0-next.1+11.sha-0ddf0c4.with-local-changes
+ * @license Angular v9.0.0-next.1+13.sha-c198a27.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
 
 import { __spread, __read, __extends } from 'tslib';
 import { DOCUMENT, ɵPLATFORM_WORKER_UI_ID, PlatformLocation, LOCATION_INITIALIZED, ɵPLATFORM_WORKER_APP_ID, ViewportScroller, ɵNullViewportScroller, CommonModule } from '@angular/common';
-import { InjectionToken, ɵɵdefineInjectable, ɵsetClassMetadata, Injectable, RenderComponentType, ɵstringify, ɵɵinject, EventEmitter, RendererFactory2, createPlatformFactory, platformCore, NgZone, ErrorHandler, ɵAPP_ID_RANDOM_PROVIDER, Testability, PLATFORM_INITIALIZER, Injector, PLATFORM_ID, isDevMode, Version, APP_INITIALIZER, ɵɵdefineNgModule, ɵɵdefineInjector, ɵAPP_ROOT, ApplicationModule, ɵɵsetNgModuleScope, NgModule } from '@angular/core';
+import { InjectionToken, ɵɵdefineInjectable, ɵsetClassMetadata, Injectable, RenderComponentType, ɵstringify, ɵɵinject, EventEmitter, RendererFactory2, NgZone, ErrorHandler, ɵAPP_ID_RANDOM_PROVIDER, Testability, PLATFORM_INITIALIZER, Injector, PLATFORM_ID, createPlatformFactory, platformCore, isDevMode, Version, APP_INITIALIZER, ɵɵdefineNgModule, ɵɵdefineInjector, ɵAPP_ROOT, ApplicationModule, ɵɵsetNgModuleScope, NgModule } from '@angular/core';
 import { ɵBROWSER_SANITIZATION_PROVIDERS, EVENT_MANAGER_PLUGINS, ɵDomEventsPlugin, ɵKeyEventsPlugin, ɵHammerGesturesPlugin, HAMMER_GESTURE_CONFIG, HammerGestureConfig, ɵDomRendererFactory2, EventManager, ɵDomSharedStylesHost, ɵSharedStylesHost, ɵBrowserDomAdapter, ɵBrowserGetTestability, ɵBrowserPlatformLocation, ɵsetRootDomAdapter, ɵDomAdapter } from '@angular/platform-browser';
 
 /**
@@ -1011,7 +1011,7 @@ function spawnWebWorker(uri, instance) {
  * @publicApi
  * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
  */
-var VERSION = new Version('9.0.0-next.1+11.sha-0ddf0c4.with-local-changes');
+var VERSION = new Version('9.0.0-next.1+13.sha-c198a27.with-local-changes');
 
 var MessageBasedPlatformLocation = /** @class */ (function () {
     function MessageBasedPlatformLocation(_brokerFactory, _platformLocation, bus, _serializer) {
