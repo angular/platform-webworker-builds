@@ -1,10 +1,10 @@
 /**
- * @license Angular v8.2.1+4.sha-6ec91dd.with-local-changes
+ * @license Angular v8.2.1+6.sha-eccb60c.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
 
-import { DOCUMENT, ɵPLATFORM_WORKER_UI_ID, PlatformLocation, LOCATION_INITIALIZED, ViewportScroller, ɵNullViewportScroller, CommonModule, ɵPLATFORM_WORKER_APP_ID } from '@angular/common';
+import { DOCUMENT, ɵPLATFORM_WORKER_UI_ID, PlatformLocation, LOCATION_INITIALIZED, ɵPLATFORM_WORKER_APP_ID, ViewportScroller, ɵNullViewportScroller, CommonModule } from '@angular/common';
 import { InjectionToken, Injectable, RenderComponentType, ɵstringify, EventEmitter, RendererFactory2, NgZone, ErrorHandler, ɵAPP_ID_RANDOM_PROVIDER, Testability, PLATFORM_INITIALIZER, Injector, PLATFORM_ID, createPlatformFactory, platformCore, isDevMode, Version, APP_INITIALIZER, NgModule, ɵAPP_ROOT, ApplicationModule } from '@angular/core';
 import { ɵBROWSER_SANITIZATION_PROVIDERS, EVENT_MANAGER_PLUGINS, ɵDomEventsPlugin, ɵKeyEventsPlugin, ɵHammerGesturesPlugin, HAMMER_GESTURE_CONFIG, HammerGestureConfig, ɵDomRendererFactory2, EventManager, ɵDomSharedStylesHost, ɵSharedStylesHost, ɵBrowserDomAdapter, ɵBrowserGetTestability, ɵBrowserPlatformLocation, ɵDomAdapter, ɵsetRootDomAdapter } from '@angular/platform-browser';
 
@@ -37,6 +37,110 @@ const ON_WEB_WORKER = new InjectionToken('WebWorker.onWebWorker');
  * @abstract
  */
 class MessageBus {
+}
+if (false) {
+    /**
+     * Sets up a new channel on the MessageBus.
+     * MUST be called before calling from or to on the channel.
+     * If runInZone is true then the source will emit events inside the angular zone
+     * and the sink will buffer messages and send only once the zone exits.
+     * if runInZone is false then the source will emit events inside the global zone
+     * and the sink will send messages immediately.
+     * @abstract
+     * @param {?} channel
+     * @param {?=} runInZone
+     * @return {?}
+     */
+    MessageBus.prototype.initChannel = function (channel, runInZone) { };
+    /**
+     * Assigns this bus to the given zone.
+     * Any callbacks attached to channels where runInZone was set to true on initialization
+     * will be executed in the given zone.
+     * @abstract
+     * @param {?} zone
+     * @return {?}
+     */
+    MessageBus.prototype.attachToZone = function (zone) { };
+    /**
+     * Returns an {\@link EventEmitter} that emits every time a message
+     * is received on the given channel.
+     * @abstract
+     * @param {?} channel
+     * @return {?}
+     */
+    MessageBus.prototype.from = function (channel) { };
+    /**
+     * Returns an {\@link EventEmitter} for the given channel
+     * To publish methods to that channel just call next on the returned emitter
+     * @abstract
+     * @param {?} channel
+     * @return {?}
+     */
+    MessageBus.prototype.to = function (channel) { };
+}
+/**
+ * \@publicApi
+ * @record
+ */
+function MessageBusSource() { }
+if (false) {
+    /**
+     * Sets up a new channel on the MessageBusSource.
+     * MUST be called before calling from on the channel.
+     * If runInZone is true then the source will emit events inside the angular zone.
+     * if runInZone is false then the source will emit events inside the global zone.
+     * @param {?} channel
+     * @param {?} runInZone
+     * @return {?}
+     */
+    MessageBusSource.prototype.initChannel = function (channel, runInZone) { };
+    /**
+     * Assigns this source to the given zone.
+     * Any channels which are initialized with runInZone set to true will emit events that will be
+     * executed within the given zone.
+     * @param {?} zone
+     * @return {?}
+     */
+    MessageBusSource.prototype.attachToZone = function (zone) { };
+    /**
+     * Returns an {\@link EventEmitter} that emits every time a message
+     * is received on the given channel.
+     * @param {?} channel
+     * @return {?}
+     */
+    MessageBusSource.prototype.from = function (channel) { };
+}
+/**
+ * \@publicApi
+ * @record
+ */
+function MessageBusSink() { }
+if (false) {
+    /**
+     * Sets up a new channel on the MessageBusSink.
+     * MUST be called before calling to on the channel.
+     * If runInZone is true the sink will buffer messages and send only once the zone exits.
+     * if runInZone is false the sink will send messages immediately.
+     * @param {?} channel
+     * @param {?} runInZone
+     * @return {?}
+     */
+    MessageBusSink.prototype.initChannel = function (channel, runInZone) { };
+    /**
+     * Assigns this sink to the given zone.
+     * Any channels which are initialized with runInZone set to true will wait for the given zone
+     * to exit before sending messages.
+     * @param {?} zone
+     * @return {?}
+     */
+    MessageBusSink.prototype.attachToZone = function (zone) { };
+    /**
+     * Returns an {\@link EventEmitter} for the given channel
+     * To publish methods to that channel just call next on the returned emitter
+     * @param {?} channel
+     * @return {?}
+     */
+    MessageBusSink.prototype.to = function (channel) { };
 }
 
 /**
@@ -94,11 +198,37 @@ class RenderStore {
 RenderStore.decorators = [
     { type: Injectable }
 ];
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    RenderStore.prototype._nextIndex;
+    /**
+     * @type {?}
+     * @private
+     */
+    RenderStore.prototype._lookupById;
+    /**
+     * @type {?}
+     * @private
+     */
+    RenderStore.prototype._lookupByObject;
+}
 
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+/** @enum {number} */
+const SerializerTypes = {
+    // RendererType2
+    RENDERER_TYPE_2: 0,
+    // Primitive types
+    PRIMITIVE: 1,
+    // An object stored in a RenderStore
+    RENDER_STORE_OBJECT: 2,
+};
 class LocationType {
     /**
      * @param {?} href
@@ -122,6 +252,26 @@ class LocationType {
         this.hash = hash;
         this.origin = origin;
     }
+}
+if (false) {
+    /** @type {?} */
+    LocationType.prototype.href;
+    /** @type {?} */
+    LocationType.prototype.protocol;
+    /** @type {?} */
+    LocationType.prototype.host;
+    /** @type {?} */
+    LocationType.prototype.hostname;
+    /** @type {?} */
+    LocationType.prototype.port;
+    /** @type {?} */
+    LocationType.prototype.pathname;
+    /** @type {?} */
+    LocationType.prototype.search;
+    /** @type {?} */
+    LocationType.prototype.hash;
+    /** @type {?} */
+    LocationType.prototype.origin;
 }
 class Serializer {
     /**
@@ -273,6 +423,13 @@ Serializer.decorators = [
 Serializer.ctorParameters = () => [
     { type: RenderStore }
 ];
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    Serializer.prototype._renderStore;
+}
 
 /**
  * @fileoverview added by tsickle
@@ -311,6 +468,28 @@ ClientMessageBrokerFactory.ctorParameters = () => [
     { type: MessageBus },
     { type: Serializer }
 ];
+if (false) {
+    /**
+     * \@internal
+     * @type {?}
+     */
+    ClientMessageBrokerFactory.prototype._serializer;
+    /**
+     * @type {?}
+     * @private
+     */
+    ClientMessageBrokerFactory.prototype._messageBus;
+}
+/**
+ * @record
+ */
+function PromiseCompleter() { }
+if (false) {
+    /** @type {?} */
+    PromiseCompleter.prototype.resolve;
+    /** @type {?} */
+    PromiseCompleter.prototype.reject;
+}
 /**
  * \@publicApi
  * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
@@ -442,6 +621,52 @@ class ClientMessageBroker {
         }
     }
 }
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    ClientMessageBroker.prototype._pending;
+    /**
+     * @type {?}
+     * @private
+     */
+    ClientMessageBroker.prototype._sink;
+    /**
+     * \@internal
+     * @type {?}
+     */
+    ClientMessageBroker.prototype._serializer;
+    /**
+     * @type {?}
+     * @private
+     */
+    ClientMessageBroker.prototype.channel;
+}
+/**
+ * @record
+ */
+function RequestMessageData() { }
+if (false) {
+    /** @type {?} */
+    RequestMessageData.prototype.method;
+    /** @type {?|undefined} */
+    RequestMessageData.prototype.args;
+    /** @type {?|undefined} */
+    RequestMessageData.prototype.id;
+}
+/**
+ * @record
+ */
+function ResponseMessageData() { }
+if (false) {
+    /** @type {?} */
+    ResponseMessageData.prototype.type;
+    /** @type {?|undefined} */
+    ResponseMessageData.prototype.value;
+    /** @type {?|undefined} */
+    ResponseMessageData.prototype.id;
+}
 /**
  * \@publicApi
  */
@@ -454,6 +679,12 @@ class FnArg {
         this.value = value;
         this.type = type;
     }
+}
+if (false) {
+    /** @type {?} */
+    FnArg.prototype.value;
+    /** @type {?} */
+    FnArg.prototype.type;
 }
 /**
  * \@publicApi
@@ -468,11 +699,25 @@ class UiArguments {
         this.args = args;
     }
 }
+if (false) {
+    /** @type {?} */
+    UiArguments.prototype.method;
+    /** @type {?} */
+    UiArguments.prototype.args;
+}
 
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+/**
+ * @record
+ */
+function PostMessageTarget() { }
+if (false) {
+    /** @type {?} */
+    PostMessageTarget.prototype.postMessage;
+}
 class PostMessageBusSink {
     /**
      * @param {?} _postMessageTarget
@@ -553,6 +798,28 @@ class PostMessageBusSink {
      * @return {?}
      */
     _sendMessages(messages) { this._postMessageTarget.postMessage(messages); }
+}
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    PostMessageBusSink.prototype._zone;
+    /**
+     * @type {?}
+     * @private
+     */
+    PostMessageBusSink.prototype._channels;
+    /**
+     * @type {?}
+     * @private
+     */
+    PostMessageBusSink.prototype._messageBuffer;
+    /**
+     * @type {?}
+     * @private
+     */
+    PostMessageBusSink.prototype._postMessageTarget;
 }
 class PostMessageBusSource {
     /**
@@ -645,6 +912,18 @@ class PostMessageBusSource {
         }
     }
 }
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    PostMessageBusSource.prototype._zone;
+    /**
+     * @type {?}
+     * @private
+     */
+    PostMessageBusSource.prototype._channels;
+}
 /**
  * A TypeScript implementation of {\@link MessageBus} for communicating via JavaScript's
  * postMessage API.
@@ -694,6 +973,12 @@ PostMessageBus.ctorParameters = () => [
     { type: PostMessageBusSink },
     { type: PostMessageBusSource }
 ];
+if (false) {
+    /** @type {?} */
+    PostMessageBus.prototype.sink;
+    /** @type {?} */
+    PostMessageBus.prototype.source;
+}
 /**
  * Helper class that wraps a channel's {\@link EventEmitter} and
  * keeps track of if it should run in the zone.
@@ -707,6 +992,12 @@ class _Channel {
         this.emitter = emitter;
         this.runInZone = runInZone;
     }
+}
+if (false) {
+    /** @type {?} */
+    _Channel.prototype.emitter;
+    /** @type {?} */
+    _Channel.prototype.runInZone;
 }
 
 /**
@@ -746,6 +1037,18 @@ ServiceMessageBrokerFactory.ctorParameters = () => [
     { type: MessageBus },
     { type: Serializer }
 ];
+if (false) {
+    /**
+     * \@internal
+     * @type {?}
+     */
+    ServiceMessageBrokerFactory.prototype._serializer;
+    /**
+     * @type {?}
+     * @private
+     */
+    ServiceMessageBrokerFactory.prototype._messageBus;
+}
 /**
  * Helper class for UIComponents that allows components to register methods.
  * If a registered method message is received from the broker on the worker,
@@ -836,6 +1139,44 @@ class ServiceMessageBroker {
             });
         }));
     }
+}
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    ServiceMessageBroker.prototype._sink;
+    /**
+     * @type {?}
+     * @private
+     */
+    ServiceMessageBroker.prototype._methods;
+    /**
+     * @type {?}
+     * @private
+     */
+    ServiceMessageBroker.prototype._serializer;
+    /**
+     * @type {?}
+     * @private
+     */
+    ServiceMessageBroker.prototype.channel;
+}
+/**
+ * \@publicApi
+ * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
+ * @record
+ */
+function ReceivedMessage() { }
+if (false) {
+    /** @type {?} */
+    ReceivedMessage.prototype.method;
+    /** @type {?} */
+    ReceivedMessage.prototype.args;
+    /** @type {?} */
+    ReceivedMessage.prototype.id;
+    /** @type {?} */
+    ReceivedMessage.prototype.type;
 }
 
 /**
@@ -1091,6 +1432,18 @@ class EventDispatcher {
         // should be canceled, but for now just call `preventDefault` on the original DOM event.
         return false;
     }
+}
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    EventDispatcher.prototype._sink;
+    /**
+     * @type {?}
+     * @private
+     */
+    EventDispatcher.prototype._serializer;
 }
 
 /**
@@ -1390,6 +1743,38 @@ MessageBasedRenderer2.ctorParameters = () => [
     { type: RenderStore },
     { type: RendererFactory2 }
 ];
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    MessageBasedRenderer2.prototype._eventDispatcher;
+    /**
+     * @type {?}
+     * @private
+     */
+    MessageBasedRenderer2.prototype._brokerFactory;
+    /**
+     * @type {?}
+     * @private
+     */
+    MessageBasedRenderer2.prototype._bus;
+    /**
+     * @type {?}
+     * @private
+     */
+    MessageBasedRenderer2.prototype._serializer;
+    /**
+     * @type {?}
+     * @private
+     */
+    MessageBasedRenderer2.prototype._renderStore;
+    /**
+     * @type {?}
+     * @private
+     */
+    MessageBasedRenderer2.prototype._rendererFactory;
+}
 
 /**
  * @fileoverview added by tsickle
@@ -1417,6 +1802,12 @@ class WebWorkerInstance {
 WebWorkerInstance.decorators = [
     { type: Injectable }
 ];
+if (false) {
+    /** @type {?} */
+    WebWorkerInstance.prototype.worker;
+    /** @type {?} */
+    WebWorkerInstance.prototype.bus;
+}
 /**
  * \@publicApi
  * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
@@ -1596,7 +1987,7 @@ function spawnWebWorker(uri, instance) {
  * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
  * @type {?}
  */
-const VERSION = new Version('8.2.1+4.sha-6ec91dd.with-local-changes');
+const VERSION = new Version('8.2.1+6.sha-eccb60c.with-local-changes');
 
 /**
  * @fileoverview added by tsickle
@@ -1666,6 +2057,33 @@ MessageBasedPlatformLocation.ctorParameters = () => [
     { type: MessageBus },
     { type: Serializer }
 ];
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    MessageBasedPlatformLocation.prototype._channelSink;
+    /**
+     * @type {?}
+     * @private
+     */
+    MessageBasedPlatformLocation.prototype._broker;
+    /**
+     * @type {?}
+     * @private
+     */
+    MessageBasedPlatformLocation.prototype._brokerFactory;
+    /**
+     * @type {?}
+     * @private
+     */
+    MessageBasedPlatformLocation.prototype._platformLocation;
+    /**
+     * @type {?}
+     * @private
+     */
+    MessageBasedPlatformLocation.prototype._serializer;
+}
 
 /**
  * @fileoverview added by tsickle
@@ -1896,6 +2314,45 @@ WebWorkerPlatformLocation.ctorParameters = () => [
     { type: MessageBus },
     { type: Serializer }
 ];
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    WebWorkerPlatformLocation.prototype._broker;
+    /**
+     * @type {?}
+     * @private
+     */
+    WebWorkerPlatformLocation.prototype._popStateListeners;
+    /**
+     * @type {?}
+     * @private
+     */
+    WebWorkerPlatformLocation.prototype._hashChangeListeners;
+    /**
+     * @type {?}
+     * @private
+     */
+    WebWorkerPlatformLocation.prototype._location;
+    /**
+     * @type {?}
+     * @private
+     */
+    WebWorkerPlatformLocation.prototype._channelSource;
+    /** @type {?} */
+    WebWorkerPlatformLocation.prototype.initialized;
+    /**
+     * @type {?}
+     * @private
+     */
+    WebWorkerPlatformLocation.prototype.initializedResolve;
+    /**
+     * @type {?}
+     * @private
+     */
+    WebWorkerPlatformLocation.prototype._serializer;
+}
 
 /**
  * @fileoverview added by tsickle
@@ -1994,6 +2451,13 @@ class NamedEventEmitter {
         }
         return listeners;
     }
+}
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    NamedEventEmitter.prototype._listeners;
 }
 /**
  * @param {?} target
@@ -2112,6 +2576,22 @@ WebWorkerRendererFactory2.ctorParameters = () => [
     { type: Serializer },
     { type: RenderStore }
 ];
+if (false) {
+    /** @type {?} */
+    WebWorkerRendererFactory2.prototype.globalEvents;
+    /**
+     * @type {?}
+     * @private
+     */
+    WebWorkerRendererFactory2.prototype._messageBroker;
+    /**
+     * @type {?}
+     * @private
+     */
+    WebWorkerRendererFactory2.prototype._serializer;
+    /** @type {?} */
+    WebWorkerRendererFactory2.prototype.renderStore;
+}
 class WebWorkerRenderer2 {
     /**
      * @param {?} _rendererFactory
@@ -2400,10 +2880,28 @@ class WebWorkerRenderer2 {
         this._rendererFactory.callUI(fnName, [this.asFnArg, ...fnArgs]);
     }
 }
+if (false) {
+    /** @type {?} */
+    WebWorkerRenderer2.prototype.data;
+    /**
+     * @type {?}
+     * @private
+     */
+    WebWorkerRenderer2.prototype.asFnArg;
+    /**
+     * @type {?}
+     * @private
+     */
+    WebWorkerRenderer2.prototype._rendererFactory;
+}
 class WebWorkerRenderNode {
     constructor() {
         this.events = new NamedEventEmitter();
     }
+}
+if (false) {
+    /** @type {?} */
+    WebWorkerRenderNode.prototype.events;
 }
 
 /**
