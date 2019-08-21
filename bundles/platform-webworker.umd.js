@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-next.2+74.sha-10ea3a9.with-local-changes
+ * @license Angular v9.0.0-next.2+76.sha-6477057.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -724,7 +724,7 @@
             this._methods.set(methodName, function (message) {
                 var serializedArgs = message.args;
                 var numArgs = signature ? signature.length : 0;
-                var deserializedArgs = new Array(numArgs);
+                var deserializedArgs = [];
                 for (var i = 0; i < numArgs; i++) {
                     var serializedArg = serializedArgs[i];
                     deserializedArgs[i] = _this._serializer.deserialize(serializedArg, signature[i]);
@@ -1213,7 +1213,7 @@
      * @publicApi
      * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
      */
-    var VERSION = new core.Version('9.0.0-next.2+74.sha-10ea3a9.with-local-changes');
+    var VERSION = new core.Version('9.0.0-next.2+76.sha-6477057.with-local-changes');
 
     /**
      * @license
