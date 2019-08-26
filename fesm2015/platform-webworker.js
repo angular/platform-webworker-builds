@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-next.3+30.sha-e79ba19.with-local-changes
+ * @license Angular v9.0.0-next.3+39.sha-cf4b944.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -2064,7 +2064,7 @@ function spawnWebWorker(uri, instance) {
  * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
  * @type {?}
  */
-const VERSION = new Version('9.0.0-next.3+30.sha-e79ba19.with-local-changes');
+const VERSION = new Version('9.0.0-next.3+39.sha-cf4b944.with-local-changes');
 
 /**
  * @fileoverview added by tsickle
@@ -3104,15 +3104,6 @@ class WorkerDomAdapter extends ɵDomAdapter {
      */
     invoke(el, methodName, args) { throw 'not implemented'; }
     /**
-     * @return {?}
-     */
-    get attrToPropMap() { throw 'not implemented'; }
-    /**
-     * @param {?} value
-     * @return {?}
-     */
-    set attrToPropMap(value) { throw 'not implemented'; }
-    /**
      * @param {?} templateHtml
      * @return {?}
      */
@@ -3170,21 +3161,6 @@ class WorkerDomAdapter extends ɵDomAdapter {
      */
     isPrevented(evt) { throw 'not implemented'; }
     /**
-     * @param {?} el
-     * @return {?}
-     */
-    getInnerHTML(el) { throw 'not implemented'; }
-    /**
-     * @param {?} el
-     * @return {?}
-     */
-    getTemplateContent(el) { throw 'not implemented'; }
-    /**
-     * @param {?} el
-     * @return {?}
-     */
-    getOuterHTML(el) { throw 'not implemented'; }
-    /**
      * @param {?} node
      * @return {?}
      */
@@ -3199,11 +3175,6 @@ class WorkerDomAdapter extends ɵDomAdapter {
      * @return {?}
      */
     type(node) { throw 'not implemented'; }
-    /**
-     * @param {?} node
-     * @return {?}
-     */
-    content(node) { throw 'not implemented'; }
     /**
      * @param {?} el
      * @return {?}
@@ -3248,13 +3219,6 @@ class WorkerDomAdapter extends ɵDomAdapter {
     removeChild(el, node) { throw 'not implemented'; }
     /**
      * @param {?} el
-     * @param {?} newNode
-     * @param {?} oldNode
-     * @return {?}
-     */
-    replaceChild(el, newNode, oldNode) { throw 'not implemented'; }
-    /**
-     * @param {?} el
      * @return {?}
      */
     remove(el) { throw 'not implemented'; }
@@ -3265,26 +3229,6 @@ class WorkerDomAdapter extends ɵDomAdapter {
      * @return {?}
      */
     insertBefore(parent, el, node) { throw 'not implemented'; }
-    /**
-     * @param {?} parent
-     * @param {?} el
-     * @param {?} nodes
-     * @return {?}
-     */
-    insertAllBefore(parent, el, nodes) { throw 'not implemented'; }
-    /**
-     * @param {?} parent
-     * @param {?} el
-     * @param {?} node
-     * @return {?}
-     */
-    insertAfter(parent, el, node) { throw 'not implemented'; }
-    /**
-     * @param {?} el
-     * @param {?} value
-     * @return {?}
-     */
-    setInnerHTML(el, value) { throw 'not implemented'; }
     /**
      * @param {?} el
      * @return {?}
@@ -3312,12 +3256,6 @@ class WorkerDomAdapter extends ɵDomAdapter {
      * @return {?}
      */
     getChecked(el) { throw 'not implemented'; }
-    /**
-     * @param {?} el
-     * @param {?} value
-     * @return {?}
-     */
-    setChecked(el, value) { throw 'not implemented'; }
     /**
      * @param {?} text
      * @return {?}
@@ -3348,31 +3286,6 @@ class WorkerDomAdapter extends ɵDomAdapter {
      */
     createTextNode(text, doc) { throw 'not implemented'; }
     /**
-     * @param {?} attrName
-     * @param {?} attrValue
-     * @param {?=} doc
-     * @return {?}
-     */
-    createScriptTag(attrName, attrValue, doc) {
-        throw 'not implemented';
-    }
-    /**
-     * @param {?} css
-     * @param {?=} doc
-     * @return {?}
-     */
-    createStyleElement(css, doc) { throw 'not implemented'; }
-    /**
-     * @param {?} el
-     * @return {?}
-     */
-    createShadowRoot(el) { throw 'not implemented'; }
-    /**
-     * @param {?} el
-     * @return {?}
-     */
-    getShadowRoot(el) { throw 'not implemented'; }
-    /**
      * @param {?} el
      * @return {?}
      */
@@ -3387,12 +3300,6 @@ class WorkerDomAdapter extends ɵDomAdapter {
      * @return {?}
      */
     clone(node) { throw 'not implemented'; }
-    /**
-     * @param {?} element
-     * @param {?} name
-     * @return {?}
-     */
-    getElementsByClassName(element, name) { throw 'not implemented'; }
     /**
      * @param {?} element
      * @param {?} name
@@ -3452,40 +3359,10 @@ class WorkerDomAdapter extends ɵDomAdapter {
     }
     /**
      * @param {?} element
-     * @return {?}
-     */
-    tagName(element) { throw 'not implemented'; }
-    /**
-     * @param {?} element
-     * @return {?}
-     */
-    attributeMap(element) { throw 'not implemented'; }
-    /**
-     * @param {?} element
-     * @param {?} attribute
-     * @return {?}
-     */
-    hasAttribute(element, attribute) { throw 'not implemented'; }
-    /**
-     * @param {?} element
-     * @param {?} ns
-     * @param {?} attribute
-     * @return {?}
-     */
-    hasAttributeNS(element, ns, attribute) { throw 'not implemented'; }
-    /**
-     * @param {?} element
      * @param {?} attribute
      * @return {?}
      */
     getAttribute(element, attribute) { throw 'not implemented'; }
-    /**
-     * @param {?} element
-     * @param {?} ns
-     * @param {?} attribute
-     * @return {?}
-     */
-    getAttributeNS(element, ns, attribute) { throw 'not implemented'; }
     /**
      * @param {?} element
      * @param {?} name
@@ -3515,11 +3392,6 @@ class WorkerDomAdapter extends ɵDomAdapter {
      */
     removeAttributeNS(element, ns, attribute) { throw 'not implemented'; }
     /**
-     * @param {?} el
-     * @return {?}
-     */
-    templateAwareRoot(el) { throw 'not implemented'; }
-    /**
      * @return {?}
      */
     createHtmlDocument() { throw 'not implemented'; }
@@ -3527,11 +3399,6 @@ class WorkerDomAdapter extends ɵDomAdapter {
      * @return {?}
      */
     getDefaultDocument() { throw 'not implemented'; }
-    /**
-     * @param {?} el
-     * @return {?}
-     */
-    getBoundingClientRect(el) { throw 'not implemented'; }
     /**
      * @param {?} doc
      * @return {?}
@@ -3550,21 +3417,6 @@ class WorkerDomAdapter extends ɵDomAdapter {
      */
     elementMatches(n, selector) { throw 'not implemented'; }
     /**
-     * @param {?} el
-     * @return {?}
-     */
-    isTemplateElement(el) { throw 'not implemented'; }
-    /**
-     * @param {?} node
-     * @return {?}
-     */
-    isTextNode(node) { throw 'not implemented'; }
-    /**
-     * @param {?} node
-     * @return {?}
-     */
-    isCommentNode(node) { throw 'not implemented'; }
-    /**
      * @param {?} node
      * @return {?}
      */
@@ -3573,47 +3425,16 @@ class WorkerDomAdapter extends ɵDomAdapter {
      * @param {?} node
      * @return {?}
      */
-    hasShadowRoot(node) { throw 'not implemented'; }
-    /**
-     * @param {?} node
-     * @return {?}
-     */
     isShadowRoot(node) { throw 'not implemented'; }
-    /**
-     * @param {?} node
-     * @return {?}
-     */
-    importIntoDoc(node) { throw 'not implemented'; }
-    /**
-     * @param {?} node
-     * @return {?}
-     */
-    adoptNode(node) { throw 'not implemented'; }
-    /**
-     * @param {?} element
-     * @return {?}
-     */
-    getHref(element) { throw 'not implemented'; }
     /**
      * @param {?} event
      * @return {?}
      */
     getEventKey(event) { throw 'not implemented'; }
     /**
-     * @param {?} element
-     * @param {?} baseUrl
-     * @param {?} href
-     * @return {?}
-     */
-    resolveAndSetHref(element, baseUrl, href) { throw 'not implemented'; }
-    /**
      * @return {?}
      */
     supportsDOMEvents() { throw 'not implemented'; }
-    /**
-     * @return {?}
-     */
-    supportsNativeShadowDOM() { throw 'not implemented'; }
     /**
      * @param {?} doc
      * @param {?} target
@@ -3642,43 +3463,9 @@ class WorkerDomAdapter extends ɵDomAdapter {
      */
     getUserAgent() { return 'Fake user agent'; }
     /**
-     * @param {?} element
-     * @param {?} name
-     * @param {?} value
-     * @return {?}
-     */
-    setData(element, name, value) { throw 'not implemented'; }
-    /**
-     * @param {?} element
-     * @return {?}
-     */
-    getComputedStyle(element) { throw 'not implemented'; }
-    /**
-     * @param {?} element
-     * @param {?} name
-     * @return {?}
-     */
-    getData(element, name) { throw 'not implemented'; }
-    /**
      * @return {?}
      */
     performanceNow() { throw 'not implemented'; }
-    /**
-     * @return {?}
-     */
-    getAnimationPrefix() { throw 'not implemented'; }
-    /**
-     * @return {?}
-     */
-    getTransitionEnd() { throw 'not implemented'; }
-    /**
-     * @return {?}
-     */
-    supportsAnimation() { throw 'not implemented'; }
-    /**
-     * @return {?}
-     */
-    supportsWebAnimation() { throw 'not implemented'; }
     /**
      * @return {?}
      */
@@ -3688,12 +3475,6 @@ class WorkerDomAdapter extends ɵDomAdapter {
      * @return {?}
      */
     getCookie(name) { throw 'not implemented'; }
-    /**
-     * @param {?} name
-     * @param {?} value
-     * @return {?}
-     */
-    setCookie(name, value) { throw 'not implemented'; }
 }
 
 /**
