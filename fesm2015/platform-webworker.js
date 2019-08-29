@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-next.4+7.sha-b094936.with-local-changes
+ * @license Angular v9.0.0-next.4+1.sha-46caf88.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1987,7 +1987,7 @@ function spawnWebWorker(uri, instance) {
  * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
  * @type {?}
  */
-const VERSION = new Version('9.0.0-next.4+7.sha-b094936.with-local-changes');
+const VERSION = new Version('9.0.0-next.4+1.sha-46caf88.with-local-changes');
 
 /**
  * @fileoverview added by tsickle
@@ -2922,6 +2922,19 @@ class WorkerDomAdapter extends ɵDomAdapter {
      * @param {?} error
      * @return {?}
      */
+    logError(error) {
+        if (console.error) {
+            console.error(error);
+        }
+        else {
+            // tslint:disable-next-line:no-console
+            console.log(error);
+        }
+    }
+    /**
+     * @param {?} error
+     * @return {?}
+     */
     log(error) {
         // tslint:disable-next-line:no-console
         console.log(error);
@@ -2933,13 +2946,7 @@ class WorkerDomAdapter extends ɵDomAdapter {
     logGroup(error) {
         if (console.group) {
             console.group(error);
-            if (console.error) {
-                console.error(error);
-            }
-            else {
-                // tslint:disable-next-line:no-console
-                console.log(error);
-            }
+            this.logError(error);
         }
         else {
             // tslint:disable-next-line:no-console
@@ -2955,6 +2962,18 @@ class WorkerDomAdapter extends ɵDomAdapter {
         }
     }
     /**
+     * @param {?} nodeA
+     * @param {?} nodeB
+     * @return {?}
+     */
+    contains(nodeA, nodeB) { throw 'not implemented'; }
+    /**
+     * @param {?} element
+     * @param {?} name
+     * @return {?}
+     */
+    hasProperty(element, name) { throw 'not implemented'; }
+    /**
      * @param {?} el
      * @param {?} name
      * @param {?} value
@@ -2967,6 +2986,18 @@ class WorkerDomAdapter extends ɵDomAdapter {
      * @return {?}
      */
     getProperty(el, name) { throw 'not implemented'; }
+    /**
+     * @param {?} el
+     * @param {?} methodName
+     * @param {?} args
+     * @return {?}
+     */
+    invoke(el, methodName, args) { throw 'not implemented'; }
+    /**
+     * @param {?} templateHtml
+     * @return {?}
+     */
+    parse(templateHtml) { throw 'not implemented'; }
     /**
      * @param {?} el
      * @param {?} selector
@@ -2985,6 +3016,13 @@ class WorkerDomAdapter extends ɵDomAdapter {
      * @param {?} listener
      * @return {?}
      */
+    on(el, evt, listener) { throw 'not implemented'; }
+    /**
+     * @param {?} el
+     * @param {?} evt
+     * @param {?} listener
+     * @return {?}
+     */
     onAndCancel(el, evt, listener) { throw 'not implemented'; }
     /**
      * @param {?} el
@@ -2992,6 +3030,46 @@ class WorkerDomAdapter extends ɵDomAdapter {
      * @return {?}
      */
     dispatchEvent(el, evt) { throw 'not implemented'; }
+    /**
+     * @param {?} eventType
+     * @return {?}
+     */
+    createMouseEvent(eventType) { throw 'not implemented'; }
+    /**
+     * @param {?} eventType
+     * @return {?}
+     */
+    createEvent(eventType) { throw 'not implemented'; }
+    /**
+     * @param {?} evt
+     * @return {?}
+     */
+    preventDefault(evt) { throw 'not implemented'; }
+    /**
+     * @param {?} evt
+     * @return {?}
+     */
+    isPrevented(evt) { throw 'not implemented'; }
+    /**
+     * @param {?} node
+     * @return {?}
+     */
+    nodeName(node) { throw 'not implemented'; }
+    /**
+     * @param {?} node
+     * @return {?}
+     */
+    nodeValue(node) { throw 'not implemented'; }
+    /**
+     * @param {?} node
+     * @return {?}
+     */
+    type(node) { throw 'not implemented'; }
+    /**
+     * @param {?} el
+     * @return {?}
+     */
+    firstChild(el) { throw 'not implemented'; }
     /**
      * @param {?} el
      * @return {?}
@@ -3002,6 +3080,16 @@ class WorkerDomAdapter extends ɵDomAdapter {
      * @return {?}
      */
     parentElement(el) { throw 'not implemented'; }
+    /**
+     * @param {?} el
+     * @return {?}
+     */
+    childNodes(el) { throw 'not implemented'; }
+    /**
+     * @param {?} el
+     * @return {?}
+     */
+    childNodesAsList(el) { throw 'not implemented'; }
     /**
      * @param {?} el
      * @return {?}
@@ -3033,15 +3121,41 @@ class WorkerDomAdapter extends ɵDomAdapter {
     insertBefore(parent, el, node) { throw 'not implemented'; }
     /**
      * @param {?} el
+     * @return {?}
+     */
+    getText(el) { throw 'not implemented'; }
+    /**
+     * @param {?} el
      * @param {?} value
      * @return {?}
      */
     setText(el, value) { throw 'not implemented'; }
     /**
+     * @param {?} el
+     * @return {?}
+     */
+    getValue(el) { throw 'not implemented'; }
+    /**
+     * @param {?} el
+     * @param {?} value
+     * @return {?}
+     */
+    setValue(el, value) { throw 'not implemented'; }
+    /**
+     * @param {?} el
+     * @return {?}
+     */
+    getChecked(el) { throw 'not implemented'; }
+    /**
      * @param {?} text
      * @return {?}
      */
     createComment(text) { throw 'not implemented'; }
+    /**
+     * @param {?} html
+     * @return {?}
+     */
+    createTemplate(html) { throw 'not implemented'; }
     /**
      * @param {?} tagName
      * @param {?=} doc
@@ -3067,11 +3181,26 @@ class WorkerDomAdapter extends ɵDomAdapter {
      */
     getHost(el) { throw 'not implemented'; }
     /**
+     * @param {?} el
+     * @return {?}
+     */
+    getDistributedNodes(el) { throw 'not implemented'; }
+    /**
+     * @param {?} node
+     * @return {?}
+     */
+    clone(node) { throw 'not implemented'; }
+    /**
      * @param {?} element
      * @param {?} name
      * @return {?}
      */
     getElementsByTagName(element, name) { throw 'not implemented'; }
+    /**
+     * @param {?} element
+     * @return {?}
+     */
+    classList(element) { throw 'not implemented'; }
     /**
      * @param {?} element
      * @param {?} className
@@ -3084,6 +3213,12 @@ class WorkerDomAdapter extends ɵDomAdapter {
      * @return {?}
      */
     removeClass(element, className) { throw 'not implemented'; }
+    /**
+     * @param {?} element
+     * @param {?} className
+     * @return {?}
+     */
+    hasClass(element, className) { throw 'not implemented'; }
     /**
      * @param {?} element
      * @param {?} styleName
@@ -3103,6 +3238,15 @@ class WorkerDomAdapter extends ɵDomAdapter {
      * @return {?}
      */
     getStyle(element, styleName) { throw 'not implemented'; }
+    /**
+     * @param {?} element
+     * @param {?} styleName
+     * @param {?=} styleValue
+     * @return {?}
+     */
+    hasStyle(element, styleName, styleValue) {
+        throw 'not implemented';
+    }
     /**
      * @param {?} element
      * @param {?} attribute
