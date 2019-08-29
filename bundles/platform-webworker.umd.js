@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-next.4.with-local-changes
+ * @license Angular v9.0.0-next.4+7.sha-b094936.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1213,7 +1213,7 @@
      * @publicApi
      * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
      */
-    var VERSION = new core.Version('9.0.0-next.4.with-local-changes');
+    var VERSION = new core.Version('9.0.0-next.4+7.sha-b094936.with-local-changes');
 
     /**
      * @license
@@ -1739,15 +1739,6 @@
             return _super !== null && _super.apply(this, arguments) || this;
         }
         WorkerDomAdapter.makeCurrent = function () { platformBrowser.ɵsetRootDomAdapter(new WorkerDomAdapter()); };
-        WorkerDomAdapter.prototype.logError = function (error) {
-            if (console.error) {
-                console.error(error);
-            }
-            else {
-                // tslint:disable-next-line:no-console
-                console.log(error);
-            }
-        };
         WorkerDomAdapter.prototype.log = function (error) {
             // tslint:disable-next-line:no-console
             console.log(error);
@@ -1755,7 +1746,13 @@
         WorkerDomAdapter.prototype.logGroup = function (error) {
             if (console.group) {
                 console.group(error);
-                this.logError(error);
+                if (console.error) {
+                    console.error(error);
+                }
+                else {
+                    // tslint:disable-next-line:no-console
+                    console.log(error);
+                }
             }
             else {
                 // tslint:disable-next-line:no-console
@@ -1767,58 +1764,31 @@
                 console.groupEnd();
             }
         };
-        WorkerDomAdapter.prototype.contains = function (nodeA, nodeB) { throw 'not implemented'; };
-        WorkerDomAdapter.prototype.hasProperty = function (element, name) { throw 'not implemented'; };
         WorkerDomAdapter.prototype.setProperty = function (el, name, value) { throw 'not implemented'; };
         WorkerDomAdapter.prototype.getProperty = function (el, name) { throw 'not implemented'; };
-        WorkerDomAdapter.prototype.invoke = function (el, methodName, args) { throw 'not implemented'; };
-        WorkerDomAdapter.prototype.parse = function (templateHtml) { throw 'not implemented'; };
         WorkerDomAdapter.prototype.querySelector = function (el, selector) { throw 'not implemented'; };
         WorkerDomAdapter.prototype.querySelectorAll = function (el, selector) { throw 'not implemented'; };
-        WorkerDomAdapter.prototype.on = function (el, evt, listener) { throw 'not implemented'; };
         WorkerDomAdapter.prototype.onAndCancel = function (el, evt, listener) { throw 'not implemented'; };
         WorkerDomAdapter.prototype.dispatchEvent = function (el, evt) { throw 'not implemented'; };
-        WorkerDomAdapter.prototype.createMouseEvent = function (eventType) { throw 'not implemented'; };
-        WorkerDomAdapter.prototype.createEvent = function (eventType) { throw 'not implemented'; };
-        WorkerDomAdapter.prototype.preventDefault = function (evt) { throw 'not implemented'; };
-        WorkerDomAdapter.prototype.isPrevented = function (evt) { throw 'not implemented'; };
-        WorkerDomAdapter.prototype.nodeName = function (node) { throw 'not implemented'; };
-        WorkerDomAdapter.prototype.nodeValue = function (node) { throw 'not implemented'; };
-        WorkerDomAdapter.prototype.type = function (node) { throw 'not implemented'; };
-        WorkerDomAdapter.prototype.firstChild = function (el) { throw 'not implemented'; };
         WorkerDomAdapter.prototype.nextSibling = function (el) { throw 'not implemented'; };
         WorkerDomAdapter.prototype.parentElement = function (el) { throw 'not implemented'; };
-        WorkerDomAdapter.prototype.childNodes = function (el) { throw 'not implemented'; };
-        WorkerDomAdapter.prototype.childNodesAsList = function (el) { throw 'not implemented'; };
         WorkerDomAdapter.prototype.clearNodes = function (el) { throw 'not implemented'; };
         WorkerDomAdapter.prototype.appendChild = function (el, node) { throw 'not implemented'; };
         WorkerDomAdapter.prototype.removeChild = function (el, node) { throw 'not implemented'; };
         WorkerDomAdapter.prototype.remove = function (el) { throw 'not implemented'; };
         WorkerDomAdapter.prototype.insertBefore = function (parent, el, node) { throw 'not implemented'; };
-        WorkerDomAdapter.prototype.getText = function (el) { throw 'not implemented'; };
         WorkerDomAdapter.prototype.setText = function (el, value) { throw 'not implemented'; };
-        WorkerDomAdapter.prototype.getValue = function (el) { throw 'not implemented'; };
-        WorkerDomAdapter.prototype.setValue = function (el, value) { throw 'not implemented'; };
-        WorkerDomAdapter.prototype.getChecked = function (el) { throw 'not implemented'; };
         WorkerDomAdapter.prototype.createComment = function (text) { throw 'not implemented'; };
-        WorkerDomAdapter.prototype.createTemplate = function (html) { throw 'not implemented'; };
         WorkerDomAdapter.prototype.createElement = function (tagName, doc) { throw 'not implemented'; };
         WorkerDomAdapter.prototype.createElementNS = function (ns, tagName, doc) { throw 'not implemented'; };
         WorkerDomAdapter.prototype.createTextNode = function (text, doc) { throw 'not implemented'; };
         WorkerDomAdapter.prototype.getHost = function (el) { throw 'not implemented'; };
-        WorkerDomAdapter.prototype.getDistributedNodes = function (el) { throw 'not implemented'; };
-        WorkerDomAdapter.prototype.clone = function (node) { throw 'not implemented'; };
         WorkerDomAdapter.prototype.getElementsByTagName = function (element, name) { throw 'not implemented'; };
-        WorkerDomAdapter.prototype.classList = function (element) { throw 'not implemented'; };
         WorkerDomAdapter.prototype.addClass = function (element, className) { throw 'not implemented'; };
         WorkerDomAdapter.prototype.removeClass = function (element, className) { throw 'not implemented'; };
-        WorkerDomAdapter.prototype.hasClass = function (element, className) { throw 'not implemented'; };
         WorkerDomAdapter.prototype.setStyle = function (element, styleName, styleValue) { throw 'not implemented'; };
         WorkerDomAdapter.prototype.removeStyle = function (element, styleName) { throw 'not implemented'; };
         WorkerDomAdapter.prototype.getStyle = function (element, styleName) { throw 'not implemented'; };
-        WorkerDomAdapter.prototype.hasStyle = function (element, styleName, styleValue) {
-            throw 'not implemented';
-        };
         WorkerDomAdapter.prototype.getAttribute = function (element, attribute) { throw 'not implemented'; };
         WorkerDomAdapter.prototype.setAttribute = function (element, name, value) { throw 'not implemented'; };
         WorkerDomAdapter.prototype.setAttributeNS = function (element, ns, name, value) { throw 'not implemented'; };
