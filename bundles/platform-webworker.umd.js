@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-next.4+39.sha-3758978.with-local-changes
+ * @license Angular v9.0.0-next.4+44.sha-1537791.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -8,7 +8,7 @@
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/common'), require('@angular/core'), require('@angular/platform-browser')) :
     typeof define === 'function' && define.amd ? define('@angular/platform-webworker', ['exports', '@angular/common', '@angular/core', '@angular/platform-browser'], factory) :
     (global = global || self, factory((global.ng = global.ng || {}, global.ng.platformWebworker = {}), global.ng.common, global.ng.core, global.ng.platformBrowser));
-}(this, function (exports, common, i0, i2) { 'use strict';
+}(this, function (exports, i2, i0, platformBrowser) { 'use strict';
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation. All rights reserved.
@@ -1085,29 +1085,29 @@
             deps: [ServiceMessageBrokerFactory, MessageBus, Serializer, RenderStore, i0.RendererFactory2]
         },
         { provide: WORKER_UI_STARTABLE_MESSAGING_SERVICE, useExisting: MessageBasedRenderer2, multi: true },
-        i2.ɵBROWSER_SANITIZATION_PROVIDERS,
+        platformBrowser.ɵBROWSER_SANITIZATION_PROVIDERS,
         { provide: i0.ErrorHandler, useFactory: _exceptionHandler, deps: [] },
-        { provide: common.DOCUMENT, useFactory: _document, deps: [] },
+        { provide: i2.DOCUMENT, useFactory: _document, deps: [] },
         // TODO(jteplitz602): Investigate if we definitely need EVENT_MANAGER on the render thread
         // #5298
         {
-            provide: i2.EVENT_MANAGER_PLUGINS,
-            useClass: i2.ɵDomEventsPlugin,
-            deps: [common.DOCUMENT, i0.NgZone],
+            provide: platformBrowser.EVENT_MANAGER_PLUGINS,
+            useClass: platformBrowser.ɵDomEventsPlugin,
+            deps: [i2.DOCUMENT, i0.NgZone],
             multi: true
         },
-        { provide: i2.EVENT_MANAGER_PLUGINS, useClass: i2.ɵKeyEventsPlugin, deps: [common.DOCUMENT], multi: true },
+        { provide: platformBrowser.EVENT_MANAGER_PLUGINS, useClass: platformBrowser.ɵKeyEventsPlugin, deps: [i2.DOCUMENT], multi: true },
         {
-            provide: i2.EVENT_MANAGER_PLUGINS,
-            useClass: i2.ɵHammerGesturesPlugin,
-            deps: [common.DOCUMENT, i2.HAMMER_GESTURE_CONFIG],
+            provide: platformBrowser.EVENT_MANAGER_PLUGINS,
+            useClass: platformBrowser.ɵHammerGesturesPlugin,
+            deps: [i2.DOCUMENT, platformBrowser.HAMMER_GESTURE_CONFIG],
             multi: true
         },
-        { provide: i2.HAMMER_GESTURE_CONFIG, useClass: i2.HammerGestureConfig, deps: [] },
+        { provide: platformBrowser.HAMMER_GESTURE_CONFIG, useClass: platformBrowser.HammerGestureConfig, deps: [] },
         i0.ɵAPP_ID_RANDOM_PROVIDER,
-        { provide: i2.ɵDomRendererFactory2, deps: [i2.EventManager, i2.ɵDomSharedStylesHost] },
-        { provide: i0.RendererFactory2, useExisting: i2.ɵDomRendererFactory2 },
-        { provide: i2.ɵSharedStylesHost, useExisting: i2.ɵDomSharedStylesHost },
+        { provide: platformBrowser.ɵDomRendererFactory2, deps: [platformBrowser.EventManager, platformBrowser.ɵDomSharedStylesHost] },
+        { provide: i0.RendererFactory2, useExisting: platformBrowser.ɵDomRendererFactory2 },
+        { provide: platformBrowser.ɵSharedStylesHost, useExisting: platformBrowser.ɵDomSharedStylesHost },
         {
             provide: ServiceMessageBrokerFactory,
             useClass: ServiceMessageBrokerFactory,
@@ -1121,9 +1121,9 @@
         { provide: Serializer, deps: [RenderStore] },
         { provide: ON_WEB_WORKER, useValue: false },
         { provide: RenderStore, deps: [] },
-        { provide: i2.ɵDomSharedStylesHost, deps: [common.DOCUMENT] },
+        { provide: platformBrowser.ɵDomSharedStylesHost, deps: [i2.DOCUMENT] },
         { provide: i0.Testability, deps: [i0.NgZone] },
-        { provide: i2.EventManager, deps: [i2.EVENT_MANAGER_PLUGINS, i0.NgZone] },
+        { provide: platformBrowser.EventManager, deps: [platformBrowser.EVENT_MANAGER_PLUGINS, i0.NgZone] },
         { provide: WebWorkerInstance, deps: [] },
         {
             provide: i0.PLATFORM_INITIALIZER,
@@ -1131,7 +1131,7 @@
             multi: true,
             deps: [i0.Injector]
         },
-        { provide: i0.PLATFORM_ID, useValue: common.ɵPLATFORM_WORKER_UI_ID },
+        { provide: i0.PLATFORM_ID, useValue: i2.ɵPLATFORM_WORKER_UI_ID },
         { provide: MessageBus, useFactory: messageBusFactory, deps: [WebWorkerInstance] },
     ];
     function initializeGenericWorkerRenderer(injector) {
@@ -1147,8 +1147,8 @@
     }
     function initWebWorkerRenderPlatform(injector) {
         return function () {
-            i2.ɵBrowserDomAdapter.makeCurrent();
-            i2.ɵBrowserGetTestability.init();
+            platformBrowser.ɵBrowserDomAdapter.makeCurrent();
+            platformBrowser.ɵBrowserGetTestability.init();
             var scriptUri;
             try {
                 scriptUri = injector.get(WORKER_SCRIPT);
@@ -1199,8 +1199,15 @@
      * @publicApi
      * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
      */
-    var VERSION = new i0.Version('9.0.0-next.4+39.sha-3758978.with-local-changes');
+    var VERSION = new i0.Version('9.0.0-next.4+44.sha-1537791.with-local-changes');
 
+    /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
     var MessageBasedPlatformLocation = /** @class */ (function () {
         function MessageBasedPlatformLocation(_brokerFactory, _platformLocation, bus, _serializer) {
             this._brokerFactory = _brokerFactory;
@@ -1253,7 +1260,7 @@
     var WORKER_UI_LOCATION_PROVIDERS = [
         { provide: MessageBasedPlatformLocation, deps: [ServiceMessageBrokerFactory,
                 i2.ɵBrowserPlatformLocation, MessageBus, Serializer] },
-        { provide: i2.ɵBrowserPlatformLocation, deps: [common.DOCUMENT] },
+        { provide: i2.ɵBrowserPlatformLocation, deps: [i2.DOCUMENT] },
         { provide: i0.PLATFORM_INITIALIZER, useFactory: initUiLocation, multi: true, deps: [i0.Injector] }
     ];
     function initUiLocation(injector) {
@@ -1383,7 +1390,7 @@
         WebWorkerPlatformLocation.prototype.getState = function () { return undefined; };
         WebWorkerPlatformLocation.ngInjectableDef = i0.ɵɵdefineInjectable({ token: WebWorkerPlatformLocation, factory: function WebWorkerPlatformLocation_Factory(t) { return new (t || WebWorkerPlatformLocation)(i0.ɵɵinject(ClientMessageBrokerFactory), i0.ɵɵinject(MessageBus), i0.ɵɵinject(Serializer)); }, providedIn: null });
         return WebWorkerPlatformLocation;
-    }(common.PlatformLocation));
+    }(i2.PlatformLocation));
     /*@__PURE__*/ i0.ɵsetClassMetadata(WebWorkerPlatformLocation, [{
             type: i0.Injectable
         }], function () { return [{ type: ClientMessageBrokerFactory }, { type: MessageBus }, { type: Serializer }]; }, null);
@@ -1403,13 +1410,13 @@
      * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
      */
     var WORKER_APP_LOCATION_PROVIDERS = [
-        { provide: common.PlatformLocation, useClass: WebWorkerPlatformLocation }, {
+        { provide: i2.PlatformLocation, useClass: WebWorkerPlatformLocation }, {
             provide: i0.APP_INITIALIZER,
             useFactory: appInitFnFactory,
             multi: true,
-            deps: [common.PlatformLocation, i0.NgZone]
+            deps: [i2.PlatformLocation, i0.NgZone]
         },
-        { provide: common.LOCATION_INITIALIZED, useFactory: locationInitialized, deps: [common.PlatformLocation] }
+        { provide: i2.LOCATION_INITIALIZED, useFactory: locationInitialized, deps: [i2.PlatformLocation] }
     ];
     function locationInitialized(platformLocation) {
         return platformLocation.initialized;
@@ -1788,7 +1795,7 @@
      * @publicApi
      * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
      */
-    var platformWorkerApp = i0.createPlatformFactory(i0.platformCore, 'workerApp', [{ provide: i0.PLATFORM_ID, useValue: common.ɵPLATFORM_WORKER_APP_ID }]);
+    var platformWorkerApp = i0.createPlatformFactory(i0.platformCore, 'workerApp', [{ provide: i0.PLATFORM_ID, useValue: i2.ɵPLATFORM_WORKER_APP_ID }]);
     function errorHandler() {
         return new i0.ErrorHandler();
     }
@@ -1819,10 +1826,10 @@
         }
         WorkerAppModule.ngModuleDef = i0.ɵɵdefineNgModule({ type: WorkerAppModule });
         WorkerAppModule.ngInjectorDef = i0.ɵɵdefineInjector({ factory: function WorkerAppModule_Factory(t) { return new (t || WorkerAppModule)(); }, providers: [
-                i2.ɵBROWSER_SANITIZATION_PROVIDERS,
-                { provide: i0.ɵAPP_ROOT, useValue: true },
+                platformBrowser.ɵBROWSER_SANITIZATION_PROVIDERS,
+                { provide: i0.ɵINJECTOR_SCOPE, useValue: 'root' },
                 Serializer,
-                { provide: common.DOCUMENT, useValue: null },
+                { provide: i2.DOCUMENT, useValue: null },
                 ClientMessageBrokerFactory,
                 ServiceMessageBrokerFactory,
                 WebWorkerRendererFactory2,
@@ -1832,21 +1839,21 @@
                 { provide: i0.ErrorHandler, useFactory: errorHandler, deps: [] },
                 { provide: MessageBus, useFactory: createMessageBus, deps: [i0.NgZone] },
                 { provide: i0.APP_INITIALIZER, useValue: setupWebWorker, multi: true },
-                { provide: common.ViewportScroller, useClass: common.ɵNullViewportScroller, deps: [] },
-            ], imports: [common.CommonModule,
+                { provide: i2.ViewportScroller, useClass: i2.ɵNullViewportScroller, deps: [] },
+            ], imports: [i2.CommonModule,
                 i0.ApplicationModule] });
         return WorkerAppModule;
     }());
-    /*@__PURE__*/ i0.ɵɵsetNgModuleScope(WorkerAppModule, { exports: [common.CommonModule,
+    /*@__PURE__*/ i0.ɵɵsetNgModuleScope(WorkerAppModule, { exports: [i2.CommonModule,
             i0.ApplicationModule] });
     /*@__PURE__*/ i0.ɵsetClassMetadata(WorkerAppModule, [{
             type: i0.NgModule,
             args: [{
                     providers: [
-                        i2.ɵBROWSER_SANITIZATION_PROVIDERS,
-                        { provide: i0.ɵAPP_ROOT, useValue: true },
+                        platformBrowser.ɵBROWSER_SANITIZATION_PROVIDERS,
+                        { provide: i0.ɵINJECTOR_SCOPE, useValue: 'root' },
                         Serializer,
-                        { provide: common.DOCUMENT, useValue: null },
+                        { provide: i2.DOCUMENT, useValue: null },
                         ClientMessageBrokerFactory,
                         ServiceMessageBrokerFactory,
                         WebWorkerRendererFactory2,
@@ -1856,10 +1863,10 @@
                         { provide: i0.ErrorHandler, useFactory: errorHandler, deps: [] },
                         { provide: MessageBus, useFactory: createMessageBus, deps: [i0.NgZone] },
                         { provide: i0.APP_INITIALIZER, useValue: setupWebWorker, multi: true },
-                        { provide: common.ViewportScroller, useClass: common.ɵNullViewportScroller, deps: [] },
+                        { provide: i2.ViewportScroller, useClass: i2.ɵNullViewportScroller, deps: [] },
                     ],
                     exports: [
-                        common.CommonModule,
+                        i2.CommonModule,
                         i0.ApplicationModule,
                     ]
                 }]

@@ -5,7 +5,7 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import { ɵDomAdapter as DomAdapter } from '@angular/platform-browser';
+import { ɵDomAdapter as DomAdapter } from '@angular/common';
 /**
  * This adapter is required to log error messages.
  *

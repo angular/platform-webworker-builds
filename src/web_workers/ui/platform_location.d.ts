@@ -1,4 +1,11 @@
-import { ɵBrowserPlatformLocation as BrowserPlatformLocation } from '@angular/platform-browser';
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+import { ɵBrowserPlatformLocation as BrowserPlatformLocation } from '@angular/common';
 import { MessageBus } from '../shared/message_bus';
 import { Serializer } from '../shared/serializer';
 import { ServiceMessageBrokerFactory } from '../shared/service_message_broker';

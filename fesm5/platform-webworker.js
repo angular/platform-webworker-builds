@@ -1,13 +1,13 @@
 /**
- * @license Angular v9.0.0-next.4+39.sha-3758978.with-local-changes
+ * @license Angular v9.0.0-next.4+44.sha-1537791.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
 
 import { __spread, __read, __extends } from 'tslib';
-import { DOCUMENT, ɵPLATFORM_WORKER_UI_ID, PlatformLocation, LOCATION_INITIALIZED, ɵPLATFORM_WORKER_APP_ID, ViewportScroller, ɵNullViewportScroller, CommonModule } from '@angular/common';
-import { InjectionToken, ɵɵdefineInjectable, ɵsetClassMetadata, Injectable, RenderComponentType, ɵstringify, ɵɵinject, EventEmitter, RendererFactory2, NgZone, ErrorHandler, ɵAPP_ID_RANDOM_PROVIDER, Testability, PLATFORM_INITIALIZER, Injector, PLATFORM_ID, createPlatformFactory, platformCore, isDevMode, Version, APP_INITIALIZER, ɵɵdefineNgModule, ɵɵdefineInjector, ɵAPP_ROOT, ApplicationModule, ɵɵsetNgModuleScope, NgModule } from '@angular/core';
-import { ɵBROWSER_SANITIZATION_PROVIDERS, EVENT_MANAGER_PLUGINS, ɵDomEventsPlugin, ɵKeyEventsPlugin, ɵHammerGesturesPlugin, HAMMER_GESTURE_CONFIG, HammerGestureConfig, ɵDomRendererFactory2, EventManager, ɵDomSharedStylesHost, ɵSharedStylesHost, ɵBrowserDomAdapter, ɵBrowserGetTestability, ɵBrowserPlatformLocation, ɵsetRootDomAdapter, ɵDomAdapter } from '@angular/platform-browser';
+import { DOCUMENT, ɵPLATFORM_WORKER_UI_ID, ɵBrowserPlatformLocation, PlatformLocation, LOCATION_INITIALIZED, ɵsetRootDomAdapter, ɵDomAdapter, ɵPLATFORM_WORKER_APP_ID, ViewportScroller, ɵNullViewportScroller, CommonModule } from '@angular/common';
+import { InjectionToken, ɵɵdefineInjectable, ɵsetClassMetadata, Injectable, RenderComponentType, ɵstringify, ɵɵinject, EventEmitter, RendererFactory2, NgZone, ErrorHandler, ɵAPP_ID_RANDOM_PROVIDER, Testability, PLATFORM_INITIALIZER, Injector, PLATFORM_ID, createPlatformFactory, platformCore, isDevMode, Version, APP_INITIALIZER, ɵɵdefineNgModule, ɵɵdefineInjector, ɵINJECTOR_SCOPE, ApplicationModule, ɵɵsetNgModuleScope, NgModule } from '@angular/core';
+import { ɵBROWSER_SANITIZATION_PROVIDERS, EVENT_MANAGER_PLUGINS, ɵDomEventsPlugin, ɵKeyEventsPlugin, ɵHammerGesturesPlugin, HAMMER_GESTURE_CONFIG, HammerGestureConfig, ɵDomRendererFactory2, EventManager, ɵDomSharedStylesHost, ɵSharedStylesHost, ɵBrowserDomAdapter, ɵBrowserGetTestability } from '@angular/platform-browser';
 
 /**
  * @license
@@ -1011,8 +1011,15 @@ function spawnWebWorker(uri, instance) {
  * @publicApi
  * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
  */
-var VERSION = new Version('9.0.0-next.4+39.sha-3758978.with-local-changes');
+var VERSION = new Version('9.0.0-next.4+44.sha-1537791.with-local-changes');
 
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
 var MessageBasedPlatformLocation = /** @class */ (function () {
     function MessageBasedPlatformLocation(_brokerFactory, _platformLocation, bus, _serializer) {
         this._brokerFactory = _brokerFactory;
@@ -1632,7 +1639,7 @@ var WorkerAppModule = /** @class */ (function () {
     WorkerAppModule.ngModuleDef = ɵɵdefineNgModule({ type: WorkerAppModule });
     WorkerAppModule.ngInjectorDef = ɵɵdefineInjector({ factory: function WorkerAppModule_Factory(t) { return new (t || WorkerAppModule)(); }, providers: [
             ɵBROWSER_SANITIZATION_PROVIDERS,
-            { provide: ɵAPP_ROOT, useValue: true },
+            { provide: ɵINJECTOR_SCOPE, useValue: 'root' },
             Serializer,
             { provide: DOCUMENT, useValue: null },
             ClientMessageBrokerFactory,
@@ -1656,7 +1663,7 @@ var WorkerAppModule = /** @class */ (function () {
         args: [{
                 providers: [
                     ɵBROWSER_SANITIZATION_PROVIDERS,
-                    { provide: ɵAPP_ROOT, useValue: true },
+                    { provide: ɵINJECTOR_SCOPE, useValue: 'root' },
                     Serializer,
                     { provide: DOCUMENT, useValue: null },
                     ClientMessageBrokerFactory,
