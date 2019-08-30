@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-next.4+39.sha-3758978.with-local-changes
+ * @license Angular v9.0.0-next.4+44.sha-1537791.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -242,25 +242,7 @@ declare class WebWorkerRenderNode {
  * @publicApi
  * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
  */
-export declare const WORKER_APP_LOCATION_PROVIDERS: ({
-    provide: typeof PlatformLocation;
-    useClass: typeof ɵangular_packages_platform_webworker_platform_webworker_i;
-    useFactory?: undefined;
-    multi?: undefined;
-    deps?: undefined;
-} | {
-    provide: InjectionToken<(() => void)[]>;
-    useFactory: typeof ɵangular_packages_platform_webworker_platform_webworker_c;
-    multi: boolean;
-    deps: (typeof NgZone | typeof PlatformLocation)[];
-    useClass?: undefined;
-} | {
-    provide: InjectionToken<Promise<any>>;
-    useFactory: typeof ɵangular_packages_platform_webworker_platform_webworker_b;
-    deps: (typeof PlatformLocation)[];
-    useClass?: undefined;
-    multi?: undefined;
-})[];
+export declare const WORKER_APP_LOCATION_PROVIDERS: StaticProvider[];
 
 /**
  * A list of {@link Provider}s. To use the router in a Worker enabled application you must

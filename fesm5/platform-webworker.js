@@ -1,13 +1,13 @@
 /**
- * @license Angular v9.0.0-next.4+39.sha-3758978.with-local-changes
+ * @license Angular v9.0.0-next.4+44.sha-1537791.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
 
 import { __decorate, __metadata, __spread, __read, __extends } from 'tslib';
-import { DOCUMENT, ɵPLATFORM_WORKER_UI_ID, PlatformLocation, LOCATION_INITIALIZED, ɵPLATFORM_WORKER_APP_ID, ViewportScroller, ɵNullViewportScroller, CommonModule } from '@angular/common';
-import { InjectionToken, Injectable, RenderComponentType, ɵstringify, EventEmitter, RendererFactory2, NgZone, ErrorHandler, ɵAPP_ID_RANDOM_PROVIDER, Testability, PLATFORM_INITIALIZER, Injector, PLATFORM_ID, createPlatformFactory, platformCore, isDevMode, Version, APP_INITIALIZER, NgModule, ɵAPP_ROOT, ApplicationModule } from '@angular/core';
-import { ɵBROWSER_SANITIZATION_PROVIDERS, EVENT_MANAGER_PLUGINS, ɵDomEventsPlugin, ɵKeyEventsPlugin, ɵHammerGesturesPlugin, HAMMER_GESTURE_CONFIG, HammerGestureConfig, ɵDomRendererFactory2, EventManager, ɵDomSharedStylesHost, ɵSharedStylesHost, ɵBrowserDomAdapter, ɵBrowserGetTestability, ɵBrowserPlatformLocation, ɵsetRootDomAdapter, ɵDomAdapter } from '@angular/platform-browser';
+import { DOCUMENT, ɵPLATFORM_WORKER_UI_ID, ɵBrowserPlatformLocation, PlatformLocation, LOCATION_INITIALIZED, ɵsetRootDomAdapter, ɵDomAdapter, ɵPLATFORM_WORKER_APP_ID, ViewportScroller, ɵNullViewportScroller, CommonModule } from '@angular/common';
+import { InjectionToken, Injectable, RenderComponentType, ɵstringify, EventEmitter, RendererFactory2, NgZone, ErrorHandler, ɵAPP_ID_RANDOM_PROVIDER, Testability, PLATFORM_INITIALIZER, Injector, PLATFORM_ID, createPlatformFactory, platformCore, isDevMode, Version, APP_INITIALIZER, NgModule, ɵINJECTOR_SCOPE, ApplicationModule } from '@angular/core';
+import { ɵBROWSER_SANITIZATION_PROVIDERS, EVENT_MANAGER_PLUGINS, ɵDomEventsPlugin, ɵKeyEventsPlugin, ɵHammerGesturesPlugin, HAMMER_GESTURE_CONFIG, HammerGestureConfig, ɵDomRendererFactory2, EventManager, ɵDomSharedStylesHost, ɵSharedStylesHost, ɵBrowserDomAdapter, ɵBrowserGetTestability } from '@angular/platform-browser';
 
 /**
  * @license
@@ -1025,7 +1025,7 @@ function spawnWebWorker(uri, instance) {
  * @publicApi
  * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
  */
-var VERSION = new Version('9.0.0-next.4+39.sha-3758978.with-local-changes');
+var VERSION = new Version('9.0.0-next.4+44.sha-1537791.with-local-changes');
 
 /**
  * @license
@@ -1673,7 +1673,7 @@ var WorkerAppModule = /** @class */ (function () {
         NgModule({
             providers: [
                 ɵBROWSER_SANITIZATION_PROVIDERS,
-                { provide: ɵAPP_ROOT, useValue: true },
+                { provide: ɵINJECTOR_SCOPE, useValue: 'root' },
                 Serializer,
                 { provide: DOCUMENT, useValue: null },
                 ClientMessageBrokerFactory,

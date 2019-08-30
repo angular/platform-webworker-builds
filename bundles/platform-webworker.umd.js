@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-next.4+39.sha-3758978.with-local-changes
+ * @license Angular v9.0.0-next.4+44.sha-1537791.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1213,7 +1213,7 @@
      * @publicApi
      * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
      */
-    var VERSION = new core.Version('9.0.0-next.4+39.sha-3758978.with-local-changes');
+    var VERSION = new core.Version('9.0.0-next.4+44.sha-1537791.with-local-changes');
 
     /**
      * @license
@@ -1254,7 +1254,7 @@
         MessageBasedPlatformLocation = __decorate([
             core.Injectable(),
             __metadata("design:paramtypes", [ServiceMessageBrokerFactory,
-                platformBrowser.ɵBrowserPlatformLocation, MessageBus,
+                common.ɵBrowserPlatformLocation, MessageBus,
                 Serializer])
         ], MessageBasedPlatformLocation);
         return MessageBasedPlatformLocation;
@@ -1275,8 +1275,8 @@
      */
     var WORKER_UI_LOCATION_PROVIDERS = [
         { provide: MessageBasedPlatformLocation, deps: [ServiceMessageBrokerFactory,
-                platformBrowser.ɵBrowserPlatformLocation, MessageBus, Serializer] },
-        { provide: platformBrowser.ɵBrowserPlatformLocation, deps: [common.DOCUMENT] },
+                common.ɵBrowserPlatformLocation, MessageBus, Serializer] },
+        { provide: common.ɵBrowserPlatformLocation, deps: [common.DOCUMENT] },
         { provide: core.PLATFORM_INITIALIZER, useFactory: initUiLocation, multi: true, deps: [core.Injector] }
     ];
     function initUiLocation(injector) {
@@ -1738,7 +1738,7 @@
         function WorkerDomAdapter() {
             return _super !== null && _super.apply(this, arguments) || this;
         }
-        WorkerDomAdapter.makeCurrent = function () { platformBrowser.ɵsetRootDomAdapter(new WorkerDomAdapter()); };
+        WorkerDomAdapter.makeCurrent = function () { common.ɵsetRootDomAdapter(new WorkerDomAdapter()); };
         WorkerDomAdapter.prototype.log = function (error) {
             // tslint:disable-next-line:no-console
             console.log(error);
@@ -1813,7 +1813,7 @@
         WorkerDomAdapter.prototype.supportsCookies = function () { return false; };
         WorkerDomAdapter.prototype.getCookie = function (name) { throw 'not implemented'; };
         return WorkerDomAdapter;
-    }(platformBrowser.ɵDomAdapter));
+    }(common.ɵDomAdapter));
 
     /**
      * @license
@@ -1861,7 +1861,7 @@
             core.NgModule({
                 providers: [
                     platformBrowser.ɵBROWSER_SANITIZATION_PROVIDERS,
-                    { provide: core.ɵAPP_ROOT, useValue: true },
+                    { provide: core.ɵINJECTOR_SCOPE, useValue: 'root' },
                     Serializer,
                     { provide: common.DOCUMENT, useValue: null },
                     ClientMessageBrokerFactory,
