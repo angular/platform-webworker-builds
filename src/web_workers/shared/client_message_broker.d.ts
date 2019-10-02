@@ -18,6 +18,7 @@ export declare class ClientMessageBrokerFactory {
      * Initializes the given channel and attaches a new {@link ClientMessageBroker} to it.
      */
     createMessageBroker(channel: string, runInZone?: boolean): ClientMessageBroker;
+    static ngFactoryDef: i0.ɵɵFactoryDef<ClientMessageBrokerFactory>;
     static ngInjectableDef: i0.ɵɵInjectableDef<ClientMessageBrokerFactory>;
 }
 /**
