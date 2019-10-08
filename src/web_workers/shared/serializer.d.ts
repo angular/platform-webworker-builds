@@ -36,8 +36,6 @@ export declare class Serializer {
     deserialize(map: any, type?: Type<any> | SerializerTypes, data?: any): any;
     private _serializeLocation;
     private _deserializeLocation;
-    private _serializeRenderComponentType;
-    private _deserializeRenderComponentType;
     private _serializeRendererType2;
     private _deserializeRendererType2;
     static ngFactoryDef: i0.ɵɵFactoryDef<Serializer>;
