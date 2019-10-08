@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-next.9+64.sha-c507dda.with-local-changes
+ * @license Angular v9.0.0-next.9+65.sha-2265cb5.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -304,9 +304,6 @@
             if (type === 2 /* RENDER_STORE_OBJECT */) {
                 return this._renderStore.serialize(obj);
             }
-            if (type === core.RenderComponentType) {
-                return this._serializeRenderComponentType(obj);
-            }
             if (type === 0 /* RENDERER_TYPE_2 */) {
                 return this._serializeRendererType2(obj);
             }
@@ -326,9 +323,6 @@
             }
             if (type === 2 /* RENDER_STORE_OBJECT */) {
                 return this._renderStore.deserialize(map);
-            }
-            if (type === core.RenderComponentType) {
-                return this._deserializeRenderComponentType(map);
             }
             if (type === 0 /* RENDERER_TYPE_2 */) {
                 return this._deserializeRendererType2(map);
@@ -353,18 +347,6 @@
         };
         Serializer.prototype._deserializeLocation = function (loc) {
             return new LocationType(loc['href'], loc['protocol'], loc['host'], loc['hostname'], loc['port'], loc['pathname'], loc['search'], loc['hash'], loc['origin']);
-        };
-        Serializer.prototype._serializeRenderComponentType = function (type) {
-            return {
-                'id': type.id,
-                'templateUrl': type.templateUrl,
-                'slotCount': type.slotCount,
-                'encapsulation': this.serialize(type.encapsulation),
-                'styles': this.serialize(type.styles),
-            };
-        };
-        Serializer.prototype._deserializeRenderComponentType = function (props) {
-            return new core.RenderComponentType(props['id'], props['templateUrl'], props['slotCount'], this.deserialize(props['encapsulation']), this.deserialize(props['styles']), {});
         };
         Serializer.prototype._serializeRendererType2 = function (type) {
             return {
@@ -1213,7 +1195,7 @@
      * @publicApi
      * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
      */
-    var VERSION = new core.Version('9.0.0-next.9+64.sha-c507dda.with-local-changes');
+    var VERSION = new core.Version('9.0.0-next.9+65.sha-2265cb5.with-local-changes');
 
     /**
      * @license

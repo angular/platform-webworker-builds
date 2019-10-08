@@ -1,11 +1,11 @@
 /**
- * @license Angular v9.0.0-next.9+64.sha-c507dda.with-local-changes
+ * @license Angular v9.0.0-next.9+65.sha-2265cb5.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
 
 import { DOCUMENT, ɵPLATFORM_WORKER_UI_ID, ɵBrowserPlatformLocation, PlatformLocation, LOCATION_INITIALIZED, ɵDomAdapter, ɵsetRootDomAdapter, ɵPLATFORM_WORKER_APP_ID, ViewportScroller, ɵNullViewportScroller, CommonModule } from '@angular/common';
-import { InjectionToken, Injectable, RenderComponentType, ɵstringify, EventEmitter, RendererFactory2, NgZone, ErrorHandler, ɵAPP_ID_RANDOM_PROVIDER, Testability, PLATFORM_INITIALIZER, Injector, PLATFORM_ID, createPlatformFactory, platformCore, isDevMode, Version, APP_INITIALIZER, NgModule, ɵINJECTOR_SCOPE, ApplicationModule } from '@angular/core';
+import { InjectionToken, Injectable, ɵstringify, EventEmitter, RendererFactory2, NgZone, ErrorHandler, ɵAPP_ID_RANDOM_PROVIDER, Testability, PLATFORM_INITIALIZER, Injector, PLATFORM_ID, createPlatformFactory, platformCore, isDevMode, Version, APP_INITIALIZER, NgModule, ɵINJECTOR_SCOPE, ApplicationModule } from '@angular/core';
 import { ɵBROWSER_SANITIZATION_PROVIDERS, EVENT_MANAGER_PLUGINS, ɵDomEventsPlugin, ɵKeyEventsPlugin, ɵHammerGesturesPlugin, HAMMER_GESTURE_CONFIG, HammerGestureConfig, ɵDomRendererFactory2, EventManager, ɵDomSharedStylesHost, ɵSharedStylesHost, ɵBrowserDomAdapter, ɵBrowserGetTestability } from '@angular/platform-browser';
 
 /**
@@ -299,9 +299,6 @@ class Serializer {
         if (type === 2 /* RENDER_STORE_OBJECT */) {
             return (/** @type {?} */ (this._renderStore.serialize(obj)));
         }
-        if (type === RenderComponentType) {
-            return this._serializeRenderComponentType(obj);
-        }
         if (type === 0 /* RENDERER_TYPE_2 */) {
             return this._serializeRendererType2(obj);
         }
@@ -329,9 +326,6 @@ class Serializer {
         }
         if (type === 2 /* RENDER_STORE_OBJECT */) {
             return this._renderStore.deserialize(map);
-        }
-        if (type === RenderComponentType) {
-            return this._deserializeRenderComponentType(map);
         }
         if (type === 0 /* RENDERER_TYPE_2 */) {
             return this._deserializeRendererType2(map);
@@ -366,28 +360,6 @@ class Serializer {
      */
     _deserializeLocation(loc) {
         return new LocationType(loc['href'], loc['protocol'], loc['host'], loc['hostname'], loc['port'], loc['pathname'], loc['search'], loc['hash'], loc['origin']);
-    }
-    /**
-     * @private
-     * @param {?} type
-     * @return {?}
-     */
-    _serializeRenderComponentType(type) {
-        return {
-            'id': type.id,
-            'templateUrl': type.templateUrl,
-            'slotCount': type.slotCount,
-            'encapsulation': this.serialize(type.encapsulation),
-            'styles': this.serialize(type.styles),
-        };
-    }
-    /**
-     * @private
-     * @param {?} props
-     * @return {?}
-     */
-    _deserializeRenderComponentType(props) {
-        return new RenderComponentType(props['id'], props['templateUrl'], props['slotCount'], this.deserialize(props['encapsulation']), this.deserialize(props['styles']), {});
     }
     /**
      * @private
@@ -1987,7 +1959,7 @@ function spawnWebWorker(uri, instance) {
  * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
  * @type {?}
  */
-const VERSION = new Version('9.0.0-next.9+64.sha-c507dda.with-local-changes');
+const VERSION = new Version('9.0.0-next.9+65.sha-2265cb5.with-local-changes');
 
 /**
  * @fileoverview added by tsickle
