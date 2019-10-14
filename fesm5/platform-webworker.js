@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-next.10+73.sha-f433d66.with-local-changes
+ * @license Angular v9.0.0-next.10+75.sha-fc93daf.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1000,7 +1000,7 @@ function spawnWebWorker(uri, instance) {
  * @publicApi
  * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
  */
-var VERSION = new Version('9.0.0-next.10+73.sha-f433d66.with-local-changes');
+var VERSION = new Version('9.0.0-next.10+75.sha-fc93daf.with-local-changes');
 
 /**
  * @license
@@ -1599,7 +1599,7 @@ function setupWebWorker() {
 var WorkerAppModule = /** @class */ (function () {
     function WorkerAppModule() {
     }
-    WorkerAppModule.ngModuleDef = ɵɵdefineNgModule({ type: WorkerAppModule });
+    WorkerAppModule.ɵmod = ɵɵdefineNgModule({ type: WorkerAppModule });
     WorkerAppModule.ngInjectorDef = ɵɵdefineInjector({ factory: function WorkerAppModule_Factory(t) { return new (t || WorkerAppModule)(); }, providers: [
             ɵBROWSER_SANITIZATION_PROVIDERS,
             { provide: ɵINJECTOR_SCOPE, useValue: 'root' },

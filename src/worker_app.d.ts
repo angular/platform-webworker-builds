@@ -17,6 +17,6 @@ export declare function setupWebWorker(): void;
  * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
  */
 export declare class WorkerAppModule {
-    static ngModuleDef: i0.ɵɵNgModuleDefWithMeta<WorkerAppModule, never, never, [typeof i1.CommonModule, typeof i0.ApplicationModule]>;
+    static ɵmod: i0.ɵɵNgModuleDefWithMeta<WorkerAppModule, never, never, [typeof i1.CommonModule, typeof i0.ApplicationModule]>;
     static ngInjectorDef: i0.ɵɵInjectorDef<WorkerAppModule>;
 }
