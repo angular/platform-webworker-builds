@@ -38,6 +38,6 @@ export declare class Serializer {
     private _deserializeLocation;
     private _serializeRendererType2;
     private _deserializeRendererType2;
-    static ngFactoryDef: i0.ɵɵFactoryDef<Serializer>;
+    static ɵfac: i0.ɵɵFactoryDef<Serializer>;
     static ngInjectableDef: i0.ɵɵInjectableDef<Serializer>;
 }

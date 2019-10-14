@@ -11,7 +11,7 @@ import * as i0 from "@angular/core";
 export declare class WebWorkerInstance {
     worker: Worker;
     bus: MessageBus;
-    static ngFactoryDef: i0.ɵɵFactoryDef<WebWorkerInstance>;
+    static ɵfac: i0.ɵɵFactoryDef<WebWorkerInstance>;
     static ngInjectableDef: i0.ɵɵInjectableDef<WebWorkerInstance>;
 }
 /**
