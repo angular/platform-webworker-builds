@@ -12,7 +12,7 @@ export declare class WebWorkerInstance {
     worker: Worker;
     bus: MessageBus;
     static ɵfac: i0.ɵɵFactoryDef<WebWorkerInstance>;
-    static ngInjectableDef: i0.ɵɵInjectableDef<WebWorkerInstance>;
+    static ɵprov: i0.ɵɵInjectableDef<WebWorkerInstance>;
 }
 /**
  * @publicApi

@@ -19,7 +19,7 @@ export declare class ClientMessageBrokerFactory {
      */
     createMessageBroker(channel: string, runInZone?: boolean): ClientMessageBroker;
     static ɵfac: i0.ɵɵFactoryDef<ClientMessageBrokerFactory>;
-    static ngInjectableDef: i0.ɵɵInjectableDef<ClientMessageBrokerFactory>;
+    static ɵprov: i0.ɵɵInjectableDef<ClientMessageBrokerFactory>;
 }
 /**
  * @publicApi

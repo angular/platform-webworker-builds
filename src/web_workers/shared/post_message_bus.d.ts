@@ -46,5 +46,5 @@ export declare class PostMessageBus implements MessageBus {
     from(channel: string): EventEmitter<any>;
     to(channel: string): EventEmitter<any>;
     static ɵfac: i0.ɵɵFactoryDef<PostMessageBus>;
-    static ngInjectableDef: i0.ɵɵInjectableDef<PostMessageBus>;
+    static ɵprov: i0.ɵɵInjectableDef<PostMessageBus>;
 }

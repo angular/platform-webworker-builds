@@ -19,7 +19,7 @@ export declare class ServiceMessageBrokerFactory {
      */
     createMessageBroker(channel: string, runInZone?: boolean): ServiceMessageBroker;
     static ɵfac: i0.ɵɵFactoryDef<ServiceMessageBrokerFactory>;
-    static ngInjectableDef: i0.ɵɵInjectableDef<ServiceMessageBrokerFactory>;
+    static ɵprov: i0.ɵɵInjectableDef<ServiceMessageBrokerFactory>;
 }
 /**
  * Helper class for UIComponents that allows components to register methods.

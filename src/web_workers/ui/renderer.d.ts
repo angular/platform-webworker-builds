@@ -43,5 +43,5 @@ export declare class MessageBasedRenderer2 {
     private listen;
     private unlisten;
     static ɵfac: i0.ɵɵFactoryDef<MessageBasedRenderer2>;
-    static ngInjectableDef: i0.ɵɵInjectableDef<MessageBasedRenderer2>;
+    static ɵprov: i0.ɵɵInjectableDef<MessageBasedRenderer2>;
 }

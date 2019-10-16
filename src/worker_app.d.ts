@@ -18,5 +18,5 @@ export declare function setupWebWorker(): void;
  */
 export declare class WorkerAppModule {
     static ɵmod: i0.ɵɵNgModuleDefWithMeta<WorkerAppModule, never, never, [typeof i1.CommonModule, typeof i0.ApplicationModule]>;
-    static ngInjectorDef: i0.ɵɵInjectorDef<WorkerAppModule>;
+    static ɵinj: i0.ɵɵInjectorDef<WorkerAppModule>;
 }
