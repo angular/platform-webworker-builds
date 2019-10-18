@@ -5,7 +5,7 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import * as tslib_1 from "tslib";
+import { __read, __spread } from "tslib";
 import { WORKER_SCRIPT, platformWorkerUi } from './worker_render';
 export { VERSION } from './version';
 export { ClientMessageBroker, ClientMessageBrokerFactory, FnArg, UiArguments } from './web_workers/shared/client_message_broker';
@@ -24,7 +24,7 @@ export { platformWorkerUi } from './worker_render';
 export function bootstrapWorkerUi(workerScriptUri, customProviders) {
     if (customProviders === void 0) { customProviders = []; }
     // For now, just creates the worker ui platform...
-    var platform = platformWorkerUi(tslib_1.__spread([
+    var platform = platformWorkerUi(__spread([
         { provide: WORKER_SCRIPT, useValue: workerScriptUri }
     ], customProviders));
     return Promise.resolve(platform);
