@@ -5,7 +5,7 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import * as tslib_1 from "tslib";
+import { __decorate } from "tslib";
 import { CommonModule, DOCUMENT, ViewportScroller, ɵNullViewportScroller as NullViewportScroller, ɵPLATFORM_WORKER_APP_ID as PLATFORM_WORKER_APP_ID } from '@angular/common';
 import { APP_INITIALIZER, ApplicationModule, ErrorHandler, NgModule, NgZone, PLATFORM_ID, RendererFactory2, createPlatformFactory, platformCore, ɵINJECTOR_SCOPE as INJECTOR_SCOPE } from '@angular/core';
 import { ɵBROWSER_SANITIZATION_PROVIDERS as BROWSER_SANITIZATION_PROVIDERS } from '@angular/platform-browser';
@@ -53,7 +53,7 @@ export function setupWebWorker() {
 var WorkerAppModule = /** @class */ (function () {
     function WorkerAppModule() {
     }
-    WorkerAppModule = tslib_1.__decorate([
+    WorkerAppModule = __decorate([
         NgModule({
             providers: [
                 BROWSER_SANITIZATION_PROVIDERS,
