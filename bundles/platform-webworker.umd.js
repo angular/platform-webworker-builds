@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-rc.0+77.sha-2ed04ff.with-local-changes
+ * @license Angular v9.0.0-rc.0+69.sha-41560b4.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -8,7 +8,7 @@
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/common'), require('@angular/core'), require('@angular/platform-browser')) :
     typeof define === 'function' && define.amd ? define('@angular/platform-webworker', ['exports', '@angular/common', '@angular/core', '@angular/platform-browser'], factory) :
     (global = global || self, factory((global.ng = global.ng || {}, global.ng.platformWebworker = {}), global.ng.common, global.ng.core, global.ng.platformBrowser));
-}(this, (function (exports, i2, i0, platformBrowser) { 'use strict';
+}(this, function (exports, i2, i0, platformBrowser) { 'use strict';
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation. All rights reserved.
@@ -1198,7 +1198,7 @@
      * @publicApi
      * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
      */
-    var VERSION = new i0.Version('9.0.0-rc.0+77.sha-2ed04ff.with-local-changes');
+    var VERSION = new i0.Version('9.0.0-rc.0+69.sha-41560b4.with-local-changes');
 
     /**
      * @license
@@ -1884,22 +1884,22 @@
      * found in the LICENSE file at https://angular.io/license
      */
 
+    exports.bootstrapWorkerUi = bootstrapWorkerUi;
+    exports.VERSION = VERSION;
     exports.ClientMessageBroker = ClientMessageBroker;
     exports.ClientMessageBrokerFactory = ClientMessageBrokerFactory;
     exports.FnArg = FnArg;
+    exports.UiArguments = UiArguments;
     exports.MessageBus = MessageBus;
     exports.ServiceMessageBroker = ServiceMessageBroker;
     exports.ServiceMessageBrokerFactory = ServiceMessageBrokerFactory;
-    exports.UiArguments = UiArguments;
-    exports.VERSION = VERSION;
-    exports.WORKER_APP_LOCATION_PROVIDERS = WORKER_APP_LOCATION_PROVIDERS;
     exports.WORKER_UI_LOCATION_PROVIDERS = WORKER_UI_LOCATION_PROVIDERS;
+    exports.WORKER_APP_LOCATION_PROVIDERS = WORKER_APP_LOCATION_PROVIDERS;
     exports.WorkerAppModule = WorkerAppModule;
-    exports.bootstrapWorkerUi = bootstrapWorkerUi;
     exports.platformWorkerApp = platformWorkerApp;
     exports.platformWorkerUi = platformWorkerUi;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
-})));
+}));
 //# sourceMappingURL=platform-webworker.umd.js.map

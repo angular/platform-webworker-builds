@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-rc.0+77.sha-2ed04ff.with-local-changes
+ * @license Angular v9.0.0-rc.0+69.sha-41560b4.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1000,7 +1000,7 @@ function spawnWebWorker(uri, instance) {
  * @publicApi
  * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
  */
-var VERSION = new Version('9.0.0-rc.0+77.sha-2ed04ff.with-local-changes');
+var VERSION = new Version('9.0.0-rc.0+69.sha-41560b4.with-local-changes');
 
 /**
  * @license
@@ -1686,5 +1686,5 @@ function bootstrapWorkerUi(workerScriptUri, customProviders) {
  * found in the LICENSE file at https://angular.io/license
  */
 
-export { ClientMessageBroker, ClientMessageBrokerFactory, FnArg, MessageBus, ServiceMessageBroker, ServiceMessageBrokerFactory, UiArguments, VERSION, WORKER_APP_LOCATION_PROVIDERS, WORKER_UI_LOCATION_PROVIDERS, WorkerAppModule, bootstrapWorkerUi, platformWorkerApp, platformWorkerUi };
+export { bootstrapWorkerUi, VERSION, ClientMessageBroker, ClientMessageBrokerFactory, FnArg, UiArguments, MessageBus, ServiceMessageBroker, ServiceMessageBrokerFactory, WORKER_UI_LOCATION_PROVIDERS, WORKER_APP_LOCATION_PROVIDERS, WorkerAppModule, platformWorkerApp, platformWorkerUi };
 //# sourceMappingURL=platform-webworker.js.map
