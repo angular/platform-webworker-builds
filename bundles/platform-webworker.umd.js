@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-rc.0+66.sha-1735135.with-local-changes
+ * @license Angular v9.0.0-rc.0+75.sha-114317c.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -8,7 +8,7 @@
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/common'), require('@angular/core'), require('@angular/platform-browser')) :
     typeof define === 'function' && define.amd ? define('@angular/platform-webworker', ['exports', '@angular/common', '@angular/core', '@angular/platform-browser'], factory) :
     (global = global || self, factory((global.ng = global.ng || {}, global.ng.platformWebworker = {}), global.ng.common, global.ng.core, global.ng.platformBrowser));
-}(this, function (exports, common, core, platformBrowser) { 'use strict';
+}(this, (function (exports, common, core, platformBrowser) { 'use strict';
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation. All rights reserved.
@@ -1205,7 +1205,7 @@
      * @publicApi
      * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
      */
-    var VERSION = new core.Version('9.0.0-rc.0+66.sha-1735135.with-local-changes');
+    var VERSION = new core.Version('9.0.0-rc.0+75.sha-114317c.with-local-changes');
 
     /**
      * @license
@@ -1890,33 +1890,33 @@
      * Generated bundle index. Do not edit.
      */
 
-    exports.ɵangular_packages_platform_webworker_platform_webworker_k = ON_WEB_WORKER;
-    exports.ɵangular_packages_platform_webworker_platform_webworker_h = RenderStore;
-    exports.ɵangular_packages_platform_webworker_platform_webworker_a = Serializer;
-    exports.ɵangular_packages_platform_webworker_platform_webworker_c = appInitFnFactory;
-    exports.ɵangular_packages_platform_webworker_platform_webworker_b = locationInitialized;
-    exports.ɵangular_packages_platform_webworker_platform_webworker_i = WebWorkerPlatformLocation;
-    exports.ɵangular_packages_platform_webworker_platform_webworker_j = WebWorkerRendererFactory2;
-    exports.ɵangular_packages_platform_webworker_platform_webworker_e = createMessageBus;
-    exports.ɵangular_packages_platform_webworker_platform_webworker_d = errorHandler;
-    exports.ɵangular_packages_platform_webworker_platform_webworker_f = setupWebWorker;
-    exports.ɵangular_packages_platform_webworker_platform_webworker_g = _WORKER_UI_PLATFORM_PROVIDERS;
-    exports.bootstrapWorkerUi = bootstrapWorkerUi;
-    exports.VERSION = VERSION;
     exports.ClientMessageBroker = ClientMessageBroker;
     exports.ClientMessageBrokerFactory = ClientMessageBrokerFactory;
     exports.FnArg = FnArg;
-    exports.UiArguments = UiArguments;
     exports.MessageBus = MessageBus;
     exports.ServiceMessageBroker = ServiceMessageBroker;
     exports.ServiceMessageBrokerFactory = ServiceMessageBrokerFactory;
-    exports.WORKER_UI_LOCATION_PROVIDERS = WORKER_UI_LOCATION_PROVIDERS;
+    exports.UiArguments = UiArguments;
+    exports.VERSION = VERSION;
     exports.WORKER_APP_LOCATION_PROVIDERS = WORKER_APP_LOCATION_PROVIDERS;
+    exports.WORKER_UI_LOCATION_PROVIDERS = WORKER_UI_LOCATION_PROVIDERS;
     exports.WorkerAppModule = WorkerAppModule;
+    exports.bootstrapWorkerUi = bootstrapWorkerUi;
     exports.platformWorkerApp = platformWorkerApp;
     exports.platformWorkerUi = platformWorkerUi;
+    exports.ɵangular_packages_platform_webworker_platform_webworker_a = Serializer;
+    exports.ɵangular_packages_platform_webworker_platform_webworker_b = locationInitialized;
+    exports.ɵangular_packages_platform_webworker_platform_webworker_c = appInitFnFactory;
+    exports.ɵangular_packages_platform_webworker_platform_webworker_d = errorHandler;
+    exports.ɵangular_packages_platform_webworker_platform_webworker_e = createMessageBus;
+    exports.ɵangular_packages_platform_webworker_platform_webworker_f = setupWebWorker;
+    exports.ɵangular_packages_platform_webworker_platform_webworker_g = _WORKER_UI_PLATFORM_PROVIDERS;
+    exports.ɵangular_packages_platform_webworker_platform_webworker_h = RenderStore;
+    exports.ɵangular_packages_platform_webworker_platform_webworker_i = WebWorkerPlatformLocation;
+    exports.ɵangular_packages_platform_webworker_platform_webworker_j = WebWorkerRendererFactory2;
+    exports.ɵangular_packages_platform_webworker_platform_webworker_k = ON_WEB_WORKER;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
-}));
+})));
 //# sourceMappingURL=platform-webworker.umd.js.map
