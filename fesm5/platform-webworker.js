@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-rc.0+69.sha-41560b4.with-local-changes
+ * @license Angular v9.0.0-rc.0+78.sha-a20979d.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1007,7 +1007,7 @@ function spawnWebWorker(uri, instance) {
  * @publicApi
  * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
  */
-var VERSION = new Version('9.0.0-rc.0+69.sha-41560b4.with-local-changes');
+var VERSION = new Version('9.0.0-rc.0+78.sha-a20979d.with-local-changes');
 
 /**
  * @license
@@ -1692,5 +1692,5 @@ function bootstrapWorkerUi(workerScriptUri, customProviders) {
  * Generated bundle index. Do not edit.
  */
 
-export { ON_WEB_WORKER as ɵangular_packages_platform_webworker_platform_webworker_k, RenderStore as ɵangular_packages_platform_webworker_platform_webworker_h, Serializer as ɵangular_packages_platform_webworker_platform_webworker_a, appInitFnFactory as ɵangular_packages_platform_webworker_platform_webworker_c, locationInitialized as ɵangular_packages_platform_webworker_platform_webworker_b, WebWorkerPlatformLocation as ɵangular_packages_platform_webworker_platform_webworker_i, WebWorkerRendererFactory2 as ɵangular_packages_platform_webworker_platform_webworker_j, createMessageBus as ɵangular_packages_platform_webworker_platform_webworker_e, errorHandler as ɵangular_packages_platform_webworker_platform_webworker_d, setupWebWorker as ɵangular_packages_platform_webworker_platform_webworker_f, _WORKER_UI_PLATFORM_PROVIDERS as ɵangular_packages_platform_webworker_platform_webworker_g, bootstrapWorkerUi, VERSION, ClientMessageBroker, ClientMessageBrokerFactory, FnArg, UiArguments, MessageBus, ServiceMessageBroker, ServiceMessageBrokerFactory, WORKER_UI_LOCATION_PROVIDERS, WORKER_APP_LOCATION_PROVIDERS, WorkerAppModule, platformWorkerApp, platformWorkerUi };
+export { ClientMessageBroker, ClientMessageBrokerFactory, FnArg, MessageBus, ServiceMessageBroker, ServiceMessageBrokerFactory, UiArguments, VERSION, WORKER_APP_LOCATION_PROVIDERS, WORKER_UI_LOCATION_PROVIDERS, WorkerAppModule, bootstrapWorkerUi, platformWorkerApp, platformWorkerUi, Serializer as ɵangular_packages_platform_webworker_platform_webworker_a, locationInitialized as ɵangular_packages_platform_webworker_platform_webworker_b, appInitFnFactory as ɵangular_packages_platform_webworker_platform_webworker_c, errorHandler as ɵangular_packages_platform_webworker_platform_webworker_d, createMessageBus as ɵangular_packages_platform_webworker_platform_webworker_e, setupWebWorker as ɵangular_packages_platform_webworker_platform_webworker_f, _WORKER_UI_PLATFORM_PROVIDERS as ɵangular_packages_platform_webworker_platform_webworker_g, RenderStore as ɵangular_packages_platform_webworker_platform_webworker_h, WebWorkerPlatformLocation as ɵangular_packages_platform_webworker_platform_webworker_i, WebWorkerRendererFactory2 as ɵangular_packages_platform_webworker_platform_webworker_j, ON_WEB_WORKER as ɵangular_packages_platform_webworker_platform_webworker_k };
 //# sourceMappingURL=platform-webworker.js.map
