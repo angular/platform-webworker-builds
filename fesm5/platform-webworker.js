@@ -1,12 +1,12 @@
 /**
- * @license Angular v9.0.0-rc.1+54.sha-e511bfc.with-local-changes
+ * @license Angular v9.0.0-rc.1+51.sha-d8be830.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
 
 import { __spread, __read, __extends } from 'tslib';
 import { DOCUMENT, ɵPLATFORM_WORKER_UI_ID, ɵBrowserPlatformLocation, PlatformLocation, LOCATION_INITIALIZED, ɵsetRootDomAdapter, ɵDomAdapter, ɵPLATFORM_WORKER_APP_ID, ViewportScroller, ɵNullViewportScroller, CommonModule } from '@angular/common';
-import { InjectionToken, ɵɵdefineInjectable, ɵsetClassMetadata, Injectable, ɵstringify, ɵɵinject, EventEmitter, RendererFactory2, NgZone, ErrorHandler, ɵAPP_ID_RANDOM_PROVIDER, Testability, PLATFORM_INITIALIZER, Injector, PLATFORM_ID, createPlatformFactory, platformCore, ɵsetDocument, isDevMode, Version, APP_INITIALIZER, ɵɵdefineNgModule, ɵɵdefineInjector, ɵINJECTOR_SCOPE, ApplicationModule, ɵɵsetNgModuleScope, NgModule } from '@angular/core';
+import { InjectionToken, ɵɵdefineInjectable, ɵsetClassMetadata, Injectable, ɵstringify, ɵɵinject, EventEmitter, RendererFactory2, NgZone, ErrorHandler, ɵAPP_ID_RANDOM_PROVIDER, Testability, PLATFORM_INITIALIZER, Injector, PLATFORM_ID, createPlatformFactory, platformCore, isDevMode, Version, APP_INITIALIZER, ɵɵdefineNgModule, ɵɵdefineInjector, ɵINJECTOR_SCOPE, ApplicationModule, ɵɵsetNgModuleScope, NgModule } from '@angular/core';
 import { ɵBROWSER_SANITIZATION_PROVIDERS, EVENT_MANAGER_PLUGINS, ɵDomEventsPlugin, ɵKeyEventsPlugin, ɵHammerGesturesPlugin, HAMMER_GESTURE_CONFIG, HammerGestureConfig, ɵDomRendererFactory2, EventManager, ɵDomSharedStylesHost, ɵSharedStylesHost, ɵBrowserDomAdapter, ɵBrowserGetTestability } from '@angular/platform-browser';
 
 /**
@@ -970,8 +970,6 @@ function _exceptionHandler() {
     return new ErrorHandler();
 }
 function _document() {
-    // Tell ivy about the global document
-    ɵsetDocument(document);
     return document;
 }
 function createNgZone() {
@@ -1002,7 +1000,7 @@ function spawnWebWorker(uri, instance) {
  * @publicApi
  * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
  */
-var VERSION = new Version('9.0.0-rc.1+54.sha-e511bfc.with-local-changes');
+var VERSION = new Version('9.0.0-rc.1+51.sha-d8be830.with-local-changes');
 
 /**
  * @license

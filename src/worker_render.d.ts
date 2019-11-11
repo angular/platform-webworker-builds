@@ -1,4 +1,4 @@
-import { InjectionToken, StaticProvider } from '@angular/core';
+import { InjectionToken, PlatformRef, StaticProvider } from '@angular/core';
 import { MessageBus } from './web_workers/shared/message_bus';
 import * as i0 from "@angular/core";
 /**
@@ -33,4 +33,4 @@ export declare const _WORKER_UI_PLATFORM_PROVIDERS: StaticProvider[];
 /**
  * @publicApi
  */
-export declare const platformWorkerUi: (extraProviders?: StaticProvider[] | undefined) => import("@angular/core").PlatformRef;
+export declare const platformWorkerUi: (extraProviders?: StaticProvider[] | undefined) => PlatformRef;
