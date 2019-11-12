@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-rc.1+51.sha-d8be830.with-local-changes
+ * @license Angular v9.0.0-rc.1+56.sha-942e2eb.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1175,6 +1175,8 @@
         return new core.ErrorHandler();
     }
     function _document() {
+        // Tell ivy about the global document
+        core.ɵsetDocument(document);
         return document;
     }
     function createNgZone() {
@@ -1205,7 +1207,7 @@
      * @publicApi
      * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
      */
-    var VERSION = new core.Version('9.0.0-rc.1+51.sha-d8be830.with-local-changes');
+    var VERSION = new core.Version('9.0.0-rc.1+56.sha-942e2eb.with-local-changes');
 
     /**
      * @license

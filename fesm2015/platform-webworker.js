@@ -1,11 +1,11 @@
 /**
- * @license Angular v9.0.0-rc.1+51.sha-d8be830.with-local-changes
+ * @license Angular v9.0.0-rc.1+56.sha-942e2eb.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
 
 import { DOCUMENT, ɵPLATFORM_WORKER_UI_ID, ɵBrowserPlatformLocation, PlatformLocation, LOCATION_INITIALIZED, ɵDomAdapter, ɵsetRootDomAdapter, ɵPLATFORM_WORKER_APP_ID, ViewportScroller, ɵNullViewportScroller, CommonModule } from '@angular/common';
-import { InjectionToken, Injectable, ɵstringify, EventEmitter, RendererFactory2, NgZone, ErrorHandler, ɵAPP_ID_RANDOM_PROVIDER, Testability, PLATFORM_INITIALIZER, Injector, PLATFORM_ID, createPlatformFactory, platformCore, isDevMode, Version, APP_INITIALIZER, NgModule, ɵINJECTOR_SCOPE, ApplicationModule } from '@angular/core';
+import { InjectionToken, Injectable, ɵstringify, EventEmitter, RendererFactory2, NgZone, ErrorHandler, ɵAPP_ID_RANDOM_PROVIDER, Testability, PLATFORM_INITIALIZER, Injector, PLATFORM_ID, createPlatformFactory, platformCore, ɵsetDocument, isDevMode, Version, APP_INITIALIZER, NgModule, ɵINJECTOR_SCOPE, ApplicationModule } from '@angular/core';
 import { ɵBROWSER_SANITIZATION_PROVIDERS, EVENT_MANAGER_PLUGINS, ɵDomEventsPlugin, ɵKeyEventsPlugin, ɵHammerGesturesPlugin, HAMMER_GESTURE_CONFIG, HammerGestureConfig, ɵDomRendererFactory2, EventManager, ɵDomSharedStylesHost, ɵSharedStylesHost, ɵBrowserDomAdapter, ɵBrowserGetTestability } from '@angular/platform-browser';
 
 /**
@@ -1921,6 +1921,8 @@ function _exceptionHandler() {
  * @return {?}
  */
 function _document() {
+    // Tell ivy about the global document
+    ɵsetDocument(document);
     return document;
 }
 /**
@@ -1959,7 +1961,7 @@ function spawnWebWorker(uri, instance) {
  * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
  * @type {?}
  */
-const VERSION = new Version('9.0.0-rc.1+51.sha-d8be830.with-local-changes');
+const VERSION = new Version('9.0.0-rc.1+56.sha-942e2eb.with-local-changes');
 
 /**
  * @fileoverview added by tsickle
