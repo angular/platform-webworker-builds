@@ -1,11 +1,11 @@
 /**
- * @license Angular v9.0.0-next.12+25.sha-083d4b8.with-local-changes
+ * @license Angular v9.0.0-rc.1+58.sha-dbd55fc.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
 
 import { DOCUMENT, ɵPLATFORM_WORKER_UI_ID, ɵBrowserPlatformLocation, PlatformLocation, LOCATION_INITIALIZED, ɵDomAdapter, ɵsetRootDomAdapter, ɵPLATFORM_WORKER_APP_ID, ViewportScroller, ɵNullViewportScroller, CommonModule } from '@angular/common';
-import { InjectionToken, Injectable, ɵstringify, EventEmitter, RendererFactory2, NgZone, ErrorHandler, ɵAPP_ID_RANDOM_PROVIDER, Testability, PLATFORM_INITIALIZER, Injector, PLATFORM_ID, createPlatformFactory, platformCore, isDevMode, Version, APP_INITIALIZER, NgModule, ɵINJECTOR_SCOPE, ApplicationModule } from '@angular/core';
+import { InjectionToken, Injectable, ɵstringify, EventEmitter, RendererFactory2, NgZone, ErrorHandler, ɵAPP_ID_RANDOM_PROVIDER, Testability, PLATFORM_INITIALIZER, Injector, PLATFORM_ID, createPlatformFactory, platformCore, ɵsetDocument, isDevMode, Version, APP_INITIALIZER, NgModule, ɵINJECTOR_SCOPE, ApplicationModule } from '@angular/core';
 import { ɵBROWSER_SANITIZATION_PROVIDERS, EVENT_MANAGER_PLUGINS, ɵDomEventsPlugin, ɵKeyEventsPlugin, ɵHammerGesturesPlugin, HAMMER_GESTURE_CONFIG, HammerGestureConfig, ɵDomRendererFactory2, EventManager, ɵDomSharedStylesHost, ɵSharedStylesHost, ɵBrowserDomAdapter, ɵBrowserGetTestability } from '@angular/platform-browser';
 
 /**
@@ -1921,6 +1921,8 @@ function _exceptionHandler() {
  * @return {?}
  */
 function _document() {
+    // Tell ivy about the global document
+    ɵsetDocument(document);
     return document;
 }
 /**
@@ -1959,7 +1961,7 @@ function spawnWebWorker(uri, instance) {
  * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
  * @type {?}
  */
-const VERSION = new Version('9.0.0-next.12+25.sha-083d4b8.with-local-changes');
+const VERSION = new Version('9.0.0-rc.1+58.sha-dbd55fc.with-local-changes');
 
 /**
  * @fileoverview added by tsickle
@@ -3141,5 +3143,5 @@ function bootstrapWorkerUi(workerScriptUri, customProviders = []) {
  * Generated bundle index. Do not edit.
  */
 
-export { ON_WEB_WORKER as ɵangular_packages_platform_webworker_platform_webworker_k, RenderStore as ɵangular_packages_platform_webworker_platform_webworker_h, Serializer as ɵangular_packages_platform_webworker_platform_webworker_a, appInitFnFactory as ɵangular_packages_platform_webworker_platform_webworker_c, locationInitialized as ɵangular_packages_platform_webworker_platform_webworker_b, WebWorkerPlatformLocation as ɵangular_packages_platform_webworker_platform_webworker_i, WebWorkerRendererFactory2 as ɵangular_packages_platform_webworker_platform_webworker_j, createMessageBus as ɵangular_packages_platform_webworker_platform_webworker_e, errorHandler as ɵangular_packages_platform_webworker_platform_webworker_d, setupWebWorker as ɵangular_packages_platform_webworker_platform_webworker_f, _WORKER_UI_PLATFORM_PROVIDERS as ɵangular_packages_platform_webworker_platform_webworker_g, bootstrapWorkerUi, VERSION, ClientMessageBroker, ClientMessageBrokerFactory, FnArg, UiArguments, MessageBus, ServiceMessageBroker, ServiceMessageBrokerFactory, WORKER_UI_LOCATION_PROVIDERS, WORKER_APP_LOCATION_PROVIDERS, WorkerAppModule, platformWorkerApp, platformWorkerUi };
+export { ClientMessageBroker, ClientMessageBrokerFactory, FnArg, MessageBus, ServiceMessageBroker, ServiceMessageBrokerFactory, UiArguments, VERSION, WORKER_APP_LOCATION_PROVIDERS, WORKER_UI_LOCATION_PROVIDERS, WorkerAppModule, bootstrapWorkerUi, platformWorkerApp, platformWorkerUi, Serializer as ɵangular_packages_platform_webworker_platform_webworker_a, locationInitialized as ɵangular_packages_platform_webworker_platform_webworker_b, appInitFnFactory as ɵangular_packages_platform_webworker_platform_webworker_c, errorHandler as ɵangular_packages_platform_webworker_platform_webworker_d, createMessageBus as ɵangular_packages_platform_webworker_platform_webworker_e, setupWebWorker as ɵangular_packages_platform_webworker_platform_webworker_f, _WORKER_UI_PLATFORM_PROVIDERS as ɵangular_packages_platform_webworker_platform_webworker_g, RenderStore as ɵangular_packages_platform_webworker_platform_webworker_h, WebWorkerPlatformLocation as ɵangular_packages_platform_webworker_platform_webworker_i, WebWorkerRendererFactory2 as ɵangular_packages_platform_webworker_platform_webworker_j, ON_WEB_WORKER as ɵangular_packages_platform_webworker_platform_webworker_k };
 //# sourceMappingURL=platform-webworker.js.map
