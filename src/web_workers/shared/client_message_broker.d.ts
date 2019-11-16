@@ -35,7 +35,6 @@ export declare class ClientMessageBroker {
 }
 /**
  * @publicApi
- * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
  */
 export declare class FnArg {
     value: any;
@@ -44,7 +43,6 @@ export declare class FnArg {
 }
 /**
  * @publicApi
- * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
  */
 export declare class UiArguments {
     method: string;

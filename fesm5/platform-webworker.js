@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-rc.1+135.sha-a48573e.with-local-changes
+ * @license Angular v9.0.0-rc.1+128.sha-7eb3e3b.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -303,7 +303,6 @@ var ClientMessageBroker = /** @class */ (function () {
 }());
 /**
  * @publicApi
- * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
  */
 var FnArg = /** @class */ (function () {
     function FnArg(value, type) {
@@ -315,7 +314,6 @@ var FnArg = /** @class */ (function () {
 }());
 /**
  * @publicApi
- * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
  */
 var UiArguments = /** @class */ (function () {
     function UiArguments(method, args) {
@@ -966,7 +964,6 @@ function initWebWorkerRenderPlatform(injector) {
 }
 /**
  * @publicApi
- * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
  */
 var platformWorkerUi = createPlatformFactory(platformCore, 'workerUi', _WORKER_UI_PLATFORM_PROVIDERS);
 function _exceptionHandler() {
@@ -1005,7 +1002,7 @@ function spawnWebWorker(uri, instance) {
  * @publicApi
  * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
  */
-var VERSION = new Version('9.0.0-rc.1+135.sha-a48573e.with-local-changes');
+var VERSION = new Version('9.0.0-rc.1+128.sha-7eb3e3b.with-local-changes');
 
 /**
  * @license
