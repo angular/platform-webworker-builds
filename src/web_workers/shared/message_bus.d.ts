@@ -44,6 +44,7 @@ export declare abstract class MessageBus implements MessageBusSource, MessageBus
 }
 /**
  * @publicApi
+ * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
  */
 export interface MessageBusSource {
     /**
@@ -67,6 +68,7 @@ export interface MessageBusSource {
 }
 /**
  * @publicApi
+ * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
  */
 export interface MessageBusSink {
     /**

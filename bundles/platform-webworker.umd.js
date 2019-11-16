@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-rc.1+127.sha-c89eed5.with-local-changes
+ * @license Angular v9.0.0-rc.1+134.sha-6fadb7a.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -501,6 +501,7 @@
     }());
     /**
      * @publicApi
+     * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
      */
     var FnArg = /** @class */ (function () {
         function FnArg(value, type) {
@@ -512,6 +513,7 @@
     }());
     /**
      * @publicApi
+     * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
      */
     var UiArguments = /** @class */ (function () {
         function UiArguments(method, args) {
@@ -1162,6 +1164,7 @@
     }
     /**
      * @publicApi
+     * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
      */
     var platformWorkerUi = i0.createPlatformFactory(i0.platformCore, 'workerUi', _WORKER_UI_PLATFORM_PROVIDERS);
     function _exceptionHandler() {
@@ -1200,7 +1203,7 @@
      * @publicApi
      * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
      */
-    var VERSION = new i0.Version('9.0.0-rc.1+127.sha-c89eed5.with-local-changes');
+    var VERSION = new i0.Version('9.0.0-rc.1+134.sha-6fadb7a.with-local-changes');
 
     /**
      * @license
