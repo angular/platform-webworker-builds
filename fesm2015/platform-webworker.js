@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-rc.1+135.sha-a48573e.with-local-changes
+ * @license Angular v9.0.0-rc.1+128.sha-7eb3e3b.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -80,7 +80,6 @@ if (false) {
 }
 /**
  * \@publicApi
- * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
  * @record
  */
 function MessageBusSource() { }
@@ -113,7 +112,6 @@ if (false) {
 }
 /**
  * \@publicApi
- * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
  * @record
  */
 function MessageBusSink() { }
@@ -643,7 +641,6 @@ if (false) {
 }
 /**
  * \@publicApi
- * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
  */
 class FnArg {
     /**
@@ -663,7 +660,6 @@ if (false) {
 }
 /**
  * \@publicApi
- * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
  */
 class UiArguments {
     /**
@@ -1912,7 +1908,6 @@ function initWebWorkerRenderPlatform(injector) {
 }
 /**
  * \@publicApi
- * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
  * @type {?}
  */
 const platformWorkerUi = createPlatformFactory(platformCore, 'workerUi', _WORKER_UI_PLATFORM_PROVIDERS);
@@ -1966,7 +1961,7 @@ function spawnWebWorker(uri, instance) {
  * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
  * @type {?}
  */
-const VERSION = new Version('9.0.0-rc.1+135.sha-a48573e.with-local-changes');
+const VERSION = new Version('9.0.0-rc.1+128.sha-7eb3e3b.with-local-changes');
 
 /**
  * @fileoverview added by tsickle
