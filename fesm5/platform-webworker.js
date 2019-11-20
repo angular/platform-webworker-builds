@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-rc.1+188.sha-b54ed98.with-local-changes
+ * @license Angular v9.0.0-rc.1+197.sha-55748db.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -77,9 +77,9 @@ var RenderStore = /** @class */ (function () {
     RenderStore.ɵprov = ɵɵdefineInjectable({ token: RenderStore, factory: function (t) { return RenderStore.ɵfac(t); }, providedIn: null });
     return RenderStore;
 }());
-/*@__PURE__*/ ɵsetClassMetadata(RenderStore, [{
+/*@__PURE__*/ (function () { ɵsetClassMetadata(RenderStore, [{
         type: Injectable
-    }], null, null);
+    }], null, null); })();
 
 /**
  * @license
@@ -182,9 +182,9 @@ var Serializer = /** @class */ (function () {
     Serializer.ɵprov = ɵɵdefineInjectable({ token: Serializer, factory: function (t) { return Serializer.ɵfac(t); }, providedIn: null });
     return Serializer;
 }());
-/*@__PURE__*/ ɵsetClassMetadata(Serializer, [{
+/*@__PURE__*/ (function () { ɵsetClassMetadata(Serializer, [{
         type: Injectable
-    }], function () { return [{ type: RenderStore }]; }, null);
+    }], function () { return [{ type: RenderStore }]; }, null); })();
 
 /**
  * @license
@@ -215,9 +215,9 @@ var ClientMessageBrokerFactory = /** @class */ (function () {
     ClientMessageBrokerFactory.ɵprov = ɵɵdefineInjectable({ token: ClientMessageBrokerFactory, factory: function (t) { return ClientMessageBrokerFactory.ɵfac(t); }, providedIn: null });
     return ClientMessageBrokerFactory;
 }());
-/*@__PURE__*/ ɵsetClassMetadata(ClientMessageBrokerFactory, [{
+/*@__PURE__*/ (function () { ɵsetClassMetadata(ClientMessageBrokerFactory, [{
         type: Injectable
-    }], function () { return [{ type: MessageBus }, { type: Serializer }]; }, null);
+    }], function () { return [{ type: MessageBus }, { type: Serializer }]; }, null); })();
 /**
  * @publicApi
  * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
@@ -454,9 +454,9 @@ var PostMessageBus = /** @class */ (function () {
     PostMessageBus.ɵprov = ɵɵdefineInjectable({ token: PostMessageBus, factory: function (t) { return PostMessageBus.ɵfac(t); }, providedIn: null });
     return PostMessageBus;
 }());
-/*@__PURE__*/ ɵsetClassMetadata(PostMessageBus, [{
+/*@__PURE__*/ (function () { ɵsetClassMetadata(PostMessageBus, [{
         type: Injectable
-    }], function () { return [{ type: PostMessageBusSink }, { type: PostMessageBusSource }]; }, null);
+    }], function () { return [{ type: PostMessageBusSink }, { type: PostMessageBusSource }]; }, null); })();
 /**
  * Helper class that wraps a channel's {@link EventEmitter} and
  * keeps track of if it should run in the zone.
@@ -491,9 +491,9 @@ var ServiceMessageBrokerFactory = /** @class */ (function () {
     ServiceMessageBrokerFactory.ɵprov = ɵɵdefineInjectable({ token: ServiceMessageBrokerFactory, factory: function (t) { return ServiceMessageBrokerFactory.ɵfac(t); }, providedIn: null });
     return ServiceMessageBrokerFactory;
 }());
-/*@__PURE__*/ ɵsetClassMetadata(ServiceMessageBrokerFactory, [{
+/*@__PURE__*/ (function () { ɵsetClassMetadata(ServiceMessageBrokerFactory, [{
         type: Injectable
-    }], function () { return [{ type: MessageBus }, { type: Serializer }]; }, null);
+    }], function () { return [{ type: MessageBus }, { type: Serializer }]; }, null); })();
 /**
  * Helper class for UIComponents that allows components to register methods.
  * If a registered method message is received from the broker on the worker,
@@ -835,9 +835,9 @@ var MessageBasedRenderer2 = /** @class */ (function () {
     MessageBasedRenderer2.ɵprov = ɵɵdefineInjectable({ token: MessageBasedRenderer2, factory: function (t) { return MessageBasedRenderer2.ɵfac(t); }, providedIn: null });
     return MessageBasedRenderer2;
 }());
-/*@__PURE__*/ ɵsetClassMetadata(MessageBasedRenderer2, [{
+/*@__PURE__*/ (function () { ɵsetClassMetadata(MessageBasedRenderer2, [{
         type: Injectable
-    }], function () { return [{ type: ServiceMessageBrokerFactory }, { type: MessageBus }, { type: Serializer }, { type: RenderStore }, { type: RendererFactory2 }]; }, null);
+    }], function () { return [{ type: ServiceMessageBrokerFactory }, { type: MessageBus }, { type: Serializer }, { type: RenderStore }, { type: RendererFactory2 }]; }, null); })();
 
 /**
  * @license
@@ -865,9 +865,9 @@ var WebWorkerInstance = /** @class */ (function () {
     WebWorkerInstance.ɵprov = ɵɵdefineInjectable({ token: WebWorkerInstance, factory: function (t) { return WebWorkerInstance.ɵfac(t); }, providedIn: null });
     return WebWorkerInstance;
 }());
-/*@__PURE__*/ ɵsetClassMetadata(WebWorkerInstance, [{
+/*@__PURE__*/ (function () { ɵsetClassMetadata(WebWorkerInstance, [{
         type: Injectable
-    }], null, null);
+    }], null, null); })();
 /**
  * @publicApi
  * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
@@ -1005,7 +1005,7 @@ function spawnWebWorker(uri, instance) {
  * @publicApi
  * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
  */
-var VERSION = new Version('9.0.0-rc.1+188.sha-b54ed98.with-local-changes');
+var VERSION = new Version('9.0.0-rc.1+197.sha-55748db.with-local-changes');
 
 /**
  * @license
@@ -1047,9 +1047,9 @@ var MessageBasedPlatformLocation = /** @class */ (function () {
     MessageBasedPlatformLocation.ɵprov = ɵɵdefineInjectable({ token: MessageBasedPlatformLocation, factory: function (t) { return MessageBasedPlatformLocation.ɵfac(t); }, providedIn: null });
     return MessageBasedPlatformLocation;
 }());
-/*@__PURE__*/ ɵsetClassMetadata(MessageBasedPlatformLocation, [{
+/*@__PURE__*/ (function () { ɵsetClassMetadata(MessageBasedPlatformLocation, [{
         type: Injectable
-    }], function () { return [{ type: ServiceMessageBrokerFactory }, { type: ɵBrowserPlatformLocation }, { type: MessageBus }, { type: Serializer }]; }, null);
+    }], function () { return [{ type: ServiceMessageBrokerFactory }, { type: ɵBrowserPlatformLocation }, { type: MessageBus }, { type: Serializer }]; }, null); })();
 
 /**
  * @license
@@ -1199,9 +1199,9 @@ var WebWorkerPlatformLocation = /** @class */ (function (_super) {
     WebWorkerPlatformLocation.ɵprov = ɵɵdefineInjectable({ token: WebWorkerPlatformLocation, factory: function (t) { return WebWorkerPlatformLocation.ɵfac(t); }, providedIn: null });
     return WebWorkerPlatformLocation;
 }(PlatformLocation));
-/*@__PURE__*/ ɵsetClassMetadata(WebWorkerPlatformLocation, [{
+/*@__PURE__*/ (function () { ɵsetClassMetadata(WebWorkerPlatformLocation, [{
         type: Injectable
-    }], function () { return [{ type: ClientMessageBrokerFactory }, { type: MessageBus }, { type: Serializer }]; }, null);
+    }], function () { return [{ type: ClientMessageBrokerFactory }, { type: MessageBus }, { type: Serializer }]; }, null); })();
 
 /**
  * @license
@@ -1318,9 +1318,9 @@ var WebWorkerRendererFactory2 = /** @class */ (function () {
     WebWorkerRendererFactory2.ɵprov = ɵɵdefineInjectable({ token: WebWorkerRendererFactory2, factory: function (t) { return WebWorkerRendererFactory2.ɵfac(t); }, providedIn: null });
     return WebWorkerRendererFactory2;
 }());
-/*@__PURE__*/ ɵsetClassMetadata(WebWorkerRendererFactory2, [{
+/*@__PURE__*/ (function () { ɵsetClassMetadata(WebWorkerRendererFactory2, [{
         type: Injectable
-    }], function () { return [{ type: ClientMessageBrokerFactory }, { type: MessageBus }, { type: Serializer }, { type: RenderStore }]; }, null);
+    }], function () { return [{ type: ClientMessageBrokerFactory }, { type: MessageBus }, { type: Serializer }, { type: RenderStore }]; }, null); })();
 var WebWorkerRenderer2 = /** @class */ (function () {
     function WebWorkerRenderer2(_rendererFactory) {
         this._rendererFactory = _rendererFactory;
@@ -1626,7 +1626,7 @@ var WorkerAppModule = /** @class */ (function () {
 }());
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵɵsetNgModuleScope(WorkerAppModule, { exports: [CommonModule,
         ApplicationModule] }); })();
-/*@__PURE__*/ ɵsetClassMetadata(WorkerAppModule, [{
+/*@__PURE__*/ (function () { ɵsetClassMetadata(WorkerAppModule, [{
         type: NgModule,
         args: [{
                 providers: [
@@ -1650,7 +1650,7 @@ var WorkerAppModule = /** @class */ (function () {
                     ApplicationModule,
                 ]
             }]
-    }], null, null);
+    }], null, null); })();
 
 /**
  * @license
