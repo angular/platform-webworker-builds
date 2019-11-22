@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-rc.1+226.sha-a37bf9a.with-local-changes
+ * @license Angular v9.0.0-rc.1+227.sha-3c335c3.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -10,6 +10,7 @@ import { ɵBROWSER_SANITIZATION_PROVIDERS, EVENT_MANAGER_PLUGINS, ɵDomEventsPlu
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/platform-webworker/src/web_workers/shared/api.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
@@ -17,6 +18,7 @@ const ON_WEB_WORKER = new InjectionToken('WebWorker.onWebWorker');
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/platform-webworker/src/web_workers/shared/message_bus.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
@@ -147,6 +149,7 @@ if (false) {
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/platform-webworker/src/web_workers/shared/render_store.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
@@ -232,6 +235,7 @@ if (false) {
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/platform-webworker/src/web_workers/shared/serializer.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
@@ -431,6 +435,7 @@ if (false) {
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/platform-webworker/src/web_workers/shared/client_message_broker.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
@@ -720,6 +725,7 @@ if (false) {
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/platform-webworker/src/web_workers/shared/post_message_bus.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
@@ -1026,6 +1032,7 @@ if (false) {
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/platform-webworker/src/web_workers/shared/service_message_broker.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
@@ -1217,6 +1224,7 @@ if (false) {
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/platform-webworker/src/web_workers/shared/messaging_api.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
@@ -1239,6 +1247,7 @@ const ROUTER_CHANNEL = 'ng-Router';
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/platform-webworker/src/web_workers/ui/event_serializer.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
@@ -1342,6 +1351,7 @@ function serializeEvent(e, properties) {
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/platform-webworker/src/web_workers/ui/event_dispatcher.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class EventDispatcher {
@@ -1484,6 +1494,7 @@ if (false) {
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/platform-webworker/src/web_workers/ui/renderer.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
@@ -1826,6 +1837,7 @@ if (false) {
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/platform-webworker/src/worker_render.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
@@ -2043,6 +2055,7 @@ function spawnWebWorker(uri, instance) {
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/platform-webworker/src/version.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
@@ -2050,10 +2063,11 @@ function spawnWebWorker(uri, instance) {
  * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
  * @type {?}
  */
-const VERSION = new Version('9.0.0-rc.1+226.sha-a37bf9a.with-local-changes');
+const VERSION = new Version('9.0.0-rc.1+227.sha-3c335c3.with-local-changes');
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/platform-webworker/src/web_workers/ui/platform_location.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
@@ -2162,6 +2176,7 @@ if (false) {
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/platform-webworker/src/web_workers/ui/location_providers.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
@@ -2197,6 +2212,7 @@ function initUiLocation(injector) {
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/platform-webworker/src/web_workers/worker/platform_location.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
@@ -2443,6 +2459,7 @@ if (false) {
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/platform-webworker/src/web_workers/worker/location_providers.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
@@ -2487,6 +2504,7 @@ function appInitFnFactory(platformLocation, zone) {
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/platform-webworker/src/web_workers/worker/renderer.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
@@ -3006,6 +3024,7 @@ if (false) {
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/platform-webworker/src/web_workers/worker/worker_adapter.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
@@ -3150,6 +3169,7 @@ class WorkerDomAdapter extends ɵDomAdapter {
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/platform-webworker/src/worker_app.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
@@ -3283,6 +3303,7 @@ WorkerAppModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/platform-webworker/src/platform-webworker.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
@@ -3306,11 +3327,13 @@ function bootstrapWorkerUi(workerScriptUri, customProviders = []) {
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/platform-webworker/public_api.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/platform-webworker/index.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
