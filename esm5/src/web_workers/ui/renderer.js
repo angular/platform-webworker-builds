@@ -120,7 +120,7 @@ var MessageBasedRenderer2 = /** @class */ (function () {
     };
     MessageBasedRenderer2.prototype.unlisten = function (r, unlisten) { unlisten(); };
     MessageBasedRenderer2.ɵfac = function MessageBasedRenderer2_Factory(t) { return new (t || MessageBasedRenderer2)(i0.ɵɵinject(i1.ServiceMessageBrokerFactory), i0.ɵɵinject(i2.MessageBus), i0.ɵɵinject(i3.Serializer), i0.ɵɵinject(i4.RenderStore), i0.ɵɵinject(i0.RendererFactory2)); };
-    MessageBasedRenderer2.ɵprov = i0.ɵɵdefineInjectable({ token: MessageBasedRenderer2, factory: MessageBasedRenderer2.ɵfac, providedIn: null });
+    MessageBasedRenderer2.ɵprov = i0.ɵɵdefineInjectable({ token: MessageBasedRenderer2, factory: MessageBasedRenderer2.ɵfac });
     return MessageBasedRenderer2;
 }());
 export { MessageBasedRenderer2 };

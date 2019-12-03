@@ -197,7 +197,7 @@ WebWorkerRendererFactory2.ctorParameters = () => [
     { type: RenderStore }
 ];
 /** @nocollapse */ WebWorkerRendererFactory2.ɵfac = function WebWorkerRendererFactory2_Factory(t) { return new (t || WebWorkerRendererFactory2)(i0.ɵɵinject(i1.ClientMessageBrokerFactory), i0.ɵɵinject(i2.MessageBus), i0.ɵɵinject(i3.Serializer), i0.ɵɵinject(i4.RenderStore)); };
-/** @nocollapse */ WebWorkerRendererFactory2.ɵprov = i0.ɵɵdefineInjectable({ token: WebWorkerRendererFactory2, factory: WebWorkerRendererFactory2.ɵfac, providedIn: null });
+/** @nocollapse */ WebWorkerRendererFactory2.ɵprov = i0.ɵɵdefineInjectable({ token: WebWorkerRendererFactory2, factory: WebWorkerRendererFactory2.ɵfac });
 /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(WebWorkerRendererFactory2, [{
         type: Injectable
     }], function () { return [{ type: i1.ClientMessageBrokerFactory }, { type: i2.MessageBus }, { type: i3.Serializer }, { type: i4.RenderStore }]; }, null); })();

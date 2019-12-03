@@ -276,7 +276,7 @@ PostMessageBus.ctorParameters = () => [
     { type: PostMessageBusSource }
 ];
 /** @nocollapse */ PostMessageBus.ɵfac = function PostMessageBus_Factory(t) { return new (t || PostMessageBus)(i0.ɵɵinject(PostMessageBusSink), i0.ɵɵinject(PostMessageBusSource)); };
-/** @nocollapse */ PostMessageBus.ɵprov = i0.ɵɵdefineInjectable({ token: PostMessageBus, factory: PostMessageBus.ɵfac, providedIn: null });
+/** @nocollapse */ PostMessageBus.ɵprov = i0.ɵɵdefineInjectable({ token: PostMessageBus, factory: PostMessageBus.ɵfac });
 /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(PostMessageBus, [{
         type: Injectable
     }], function () { return [{ type: PostMessageBusSink }, { type: PostMessageBusSource }]; }, null); })();

@@ -30,7 +30,7 @@ var ClientMessageBrokerFactory = /** @class */ (function () {
         return new ClientMessageBroker(this._messageBus, this._serializer, channel);
     };
     ClientMessageBrokerFactory.ɵfac = function ClientMessageBrokerFactory_Factory(t) { return new (t || ClientMessageBrokerFactory)(i0.ɵɵinject(i1.MessageBus), i0.ɵɵinject(i2.Serializer)); };
-    ClientMessageBrokerFactory.ɵprov = i0.ɵɵdefineInjectable({ token: ClientMessageBrokerFactory, factory: ClientMessageBrokerFactory.ɵfac, providedIn: null });
+    ClientMessageBrokerFactory.ɵprov = i0.ɵɵdefineInjectable({ token: ClientMessageBrokerFactory, factory: ClientMessageBrokerFactory.ɵfac });
     return ClientMessageBrokerFactory;
 }());
 export { ClientMessageBrokerFactory };

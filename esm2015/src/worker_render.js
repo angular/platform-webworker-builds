@@ -45,7 +45,7 @@ WebWorkerInstance.decorators = [
     { type: Injectable },
 ];
 /** @nocollapse */ WebWorkerInstance.ɵfac = function WebWorkerInstance_Factory(t) { return new (t || WebWorkerInstance)(); };
-/** @nocollapse */ WebWorkerInstance.ɵprov = i0.ɵɵdefineInjectable({ token: WebWorkerInstance, factory: WebWorkerInstance.ɵfac, providedIn: null });
+/** @nocollapse */ WebWorkerInstance.ɵprov = i0.ɵɵdefineInjectable({ token: WebWorkerInstance, factory: WebWorkerInstance.ɵfac });
 /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(WebWorkerInstance, [{
         type: Injectable
     }], null, null); })();

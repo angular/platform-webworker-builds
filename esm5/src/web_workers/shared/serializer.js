@@ -101,7 +101,7 @@ var Serializer = /** @class */ (function () {
         };
     };
     Serializer.ɵfac = function Serializer_Factory(t) { return new (t || Serializer)(i0.ɵɵinject(i1.RenderStore)); };
-    Serializer.ɵprov = i0.ɵɵdefineInjectable({ token: Serializer, factory: Serializer.ɵfac, providedIn: null });
+    Serializer.ɵprov = i0.ɵɵdefineInjectable({ token: Serializer, factory: Serializer.ɵfac });
     return Serializer;
 }());
 export { Serializer };

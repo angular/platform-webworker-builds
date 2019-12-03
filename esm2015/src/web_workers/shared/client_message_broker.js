@@ -50,7 +50,7 @@ ClientMessageBrokerFactory.ctorParameters = () => [
     { type: Serializer }
 ];
 /** @nocollapse */ ClientMessageBrokerFactory.ɵfac = function ClientMessageBrokerFactory_Factory(t) { return new (t || ClientMessageBrokerFactory)(i0.ɵɵinject(i1.MessageBus), i0.ɵɵinject(i2.Serializer)); };
-/** @nocollapse */ ClientMessageBrokerFactory.ɵprov = i0.ɵɵdefineInjectable({ token: ClientMessageBrokerFactory, factory: ClientMessageBrokerFactory.ɵfac, providedIn: null });
+/** @nocollapse */ ClientMessageBrokerFactory.ɵprov = i0.ɵɵdefineInjectable({ token: ClientMessageBrokerFactory, factory: ClientMessageBrokerFactory.ɵfac });
 /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(ClientMessageBrokerFactory, [{
         type: Injectable
     }], function () { return [{ type: i1.MessageBus }, { type: i2.Serializer }]; }, null); })();

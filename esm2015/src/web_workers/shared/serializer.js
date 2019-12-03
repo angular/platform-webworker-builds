@@ -191,7 +191,7 @@ Serializer.ctorParameters = () => [
     { type: RenderStore }
 ];
 /** @nocollapse */ Serializer.ɵfac = function Serializer_Factory(t) { return new (t || Serializer)(i0.ɵɵinject(i1.RenderStore)); };
-/** @nocollapse */ Serializer.ɵprov = i0.ɵɵdefineInjectable({ token: Serializer, factory: Serializer.ɵfac, providedIn: null });
+/** @nocollapse */ Serializer.ɵprov = i0.ɵɵdefineInjectable({ token: Serializer, factory: Serializer.ɵfac });
 /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(Serializer, [{
         type: Injectable
     }], function () { return [{ type: i1.RenderStore }]; }, null); })();

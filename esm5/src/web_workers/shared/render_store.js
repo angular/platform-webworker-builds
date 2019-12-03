@@ -34,7 +34,7 @@ var RenderStore = /** @class */ (function () {
         return obj == null ? null : this._lookupByObject.get(obj);
     };
     RenderStore.ɵfac = function RenderStore_Factory(t) { return new (t || RenderStore)(); };
-    RenderStore.ɵprov = i0.ɵɵdefineInjectable({ token: RenderStore, factory: RenderStore.ɵfac, providedIn: null });
+    RenderStore.ɵprov = i0.ɵɵdefineInjectable({ token: RenderStore, factory: RenderStore.ɵfac });
     return RenderStore;
 }());
 export { RenderStore };

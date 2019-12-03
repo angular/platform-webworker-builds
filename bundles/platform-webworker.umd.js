@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-rc.1+335.sha-56f4e56.with-local-changes
+ * @license Angular v9.0.0-rc.1+336.sha-67eac73.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -272,7 +272,7 @@
             return obj == null ? null : this._lookupByObject.get(obj);
         };
         RenderStore.ɵfac = function RenderStore_Factory(t) { return new (t || RenderStore)(); };
-        RenderStore.ɵprov = i0.ɵɵdefineInjectable({ token: RenderStore, factory: RenderStore.ɵfac, providedIn: null });
+        RenderStore.ɵprov = i0.ɵɵdefineInjectable({ token: RenderStore, factory: RenderStore.ɵfac });
         return RenderStore;
     }());
     /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(RenderStore, [{
@@ -377,7 +377,7 @@
             };
         };
         Serializer.ɵfac = function Serializer_Factory(t) { return new (t || Serializer)(i0.ɵɵinject(RenderStore)); };
-        Serializer.ɵprov = i0.ɵɵdefineInjectable({ token: Serializer, factory: Serializer.ɵfac, providedIn: null });
+        Serializer.ɵprov = i0.ɵɵdefineInjectable({ token: Serializer, factory: Serializer.ɵfac });
         return Serializer;
     }());
     /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(Serializer, [{
@@ -410,7 +410,7 @@
             return new ClientMessageBroker(this._messageBus, this._serializer, channel);
         };
         ClientMessageBrokerFactory.ɵfac = function ClientMessageBrokerFactory_Factory(t) { return new (t || ClientMessageBrokerFactory)(i0.ɵɵinject(MessageBus), i0.ɵɵinject(Serializer)); };
-        ClientMessageBrokerFactory.ɵprov = i0.ɵɵdefineInjectable({ token: ClientMessageBrokerFactory, factory: ClientMessageBrokerFactory.ɵfac, providedIn: null });
+        ClientMessageBrokerFactory.ɵprov = i0.ɵɵdefineInjectable({ token: ClientMessageBrokerFactory, factory: ClientMessageBrokerFactory.ɵfac });
         return ClientMessageBrokerFactory;
     }());
     /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(ClientMessageBrokerFactory, [{
@@ -649,7 +649,7 @@
         PostMessageBus.prototype.from = function (channel) { return this.source.from(channel); };
         PostMessageBus.prototype.to = function (channel) { return this.sink.to(channel); };
         PostMessageBus.ɵfac = function PostMessageBus_Factory(t) { return new (t || PostMessageBus)(i0.ɵɵinject(PostMessageBusSink), i0.ɵɵinject(PostMessageBusSource)); };
-        PostMessageBus.ɵprov = i0.ɵɵdefineInjectable({ token: PostMessageBus, factory: PostMessageBus.ɵfac, providedIn: null });
+        PostMessageBus.ɵprov = i0.ɵɵdefineInjectable({ token: PostMessageBus, factory: PostMessageBus.ɵfac });
         return PostMessageBus;
     }());
     /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(PostMessageBus, [{
@@ -686,7 +686,7 @@
             return new ServiceMessageBroker(this._messageBus, this._serializer, channel);
         };
         ServiceMessageBrokerFactory.ɵfac = function ServiceMessageBrokerFactory_Factory(t) { return new (t || ServiceMessageBrokerFactory)(i0.ɵɵinject(MessageBus), i0.ɵɵinject(Serializer)); };
-        ServiceMessageBrokerFactory.ɵprov = i0.ɵɵdefineInjectable({ token: ServiceMessageBrokerFactory, factory: ServiceMessageBrokerFactory.ɵfac, providedIn: null });
+        ServiceMessageBrokerFactory.ɵprov = i0.ɵɵdefineInjectable({ token: ServiceMessageBrokerFactory, factory: ServiceMessageBrokerFactory.ɵfac });
         return ServiceMessageBrokerFactory;
     }());
     /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(ServiceMessageBrokerFactory, [{
@@ -1030,7 +1030,7 @@
         };
         MessageBasedRenderer2.prototype.unlisten = function (r, unlisten) { unlisten(); };
         MessageBasedRenderer2.ɵfac = function MessageBasedRenderer2_Factory(t) { return new (t || MessageBasedRenderer2)(i0.ɵɵinject(ServiceMessageBrokerFactory), i0.ɵɵinject(MessageBus), i0.ɵɵinject(Serializer), i0.ɵɵinject(RenderStore), i0.ɵɵinject(i0.RendererFactory2)); };
-        MessageBasedRenderer2.ɵprov = i0.ɵɵdefineInjectable({ token: MessageBasedRenderer2, factory: MessageBasedRenderer2.ɵfac, providedIn: null });
+        MessageBasedRenderer2.ɵprov = i0.ɵɵdefineInjectable({ token: MessageBasedRenderer2, factory: MessageBasedRenderer2.ɵfac });
         return MessageBasedRenderer2;
     }());
     /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(MessageBasedRenderer2, [{
@@ -1060,7 +1060,7 @@
             this.bus = bus;
         };
         WebWorkerInstance.ɵfac = function WebWorkerInstance_Factory(t) { return new (t || WebWorkerInstance)(); };
-        WebWorkerInstance.ɵprov = i0.ɵɵdefineInjectable({ token: WebWorkerInstance, factory: WebWorkerInstance.ɵfac, providedIn: null });
+        WebWorkerInstance.ɵprov = i0.ɵɵdefineInjectable({ token: WebWorkerInstance, factory: WebWorkerInstance.ɵfac });
         return WebWorkerInstance;
     }());
     /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(WebWorkerInstance, [{
@@ -1203,7 +1203,7 @@
      * @publicApi
      * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
      */
-    var VERSION = new i0.Version('9.0.0-rc.1+335.sha-56f4e56.with-local-changes');
+    var VERSION = new i0.Version('9.0.0-rc.1+336.sha-67eac73.with-local-changes');
 
     /**
      * @license
@@ -1242,7 +1242,7 @@
         };
         MessageBasedPlatformLocation.prototype._setPathname = function (pathname) { this._platformLocation.pathname = pathname; };
         MessageBasedPlatformLocation.ɵfac = function MessageBasedPlatformLocation_Factory(t) { return new (t || MessageBasedPlatformLocation)(i0.ɵɵinject(ServiceMessageBrokerFactory), i0.ɵɵinject(i2.ɵBrowserPlatformLocation), i0.ɵɵinject(MessageBus), i0.ɵɵinject(Serializer)); };
-        MessageBasedPlatformLocation.ɵprov = i0.ɵɵdefineInjectable({ token: MessageBasedPlatformLocation, factory: MessageBasedPlatformLocation.ɵfac, providedIn: null });
+        MessageBasedPlatformLocation.ɵprov = i0.ɵɵdefineInjectable({ token: MessageBasedPlatformLocation, factory: MessageBasedPlatformLocation.ɵfac });
         return MessageBasedPlatformLocation;
     }());
     /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(MessageBasedPlatformLocation, [{
@@ -1394,7 +1394,7 @@
         // History API isn't available on WebWorkers, therefore return undefined
         WebWorkerPlatformLocation.prototype.getState = function () { return undefined; };
         WebWorkerPlatformLocation.ɵfac = function WebWorkerPlatformLocation_Factory(t) { return new (t || WebWorkerPlatformLocation)(i0.ɵɵinject(ClientMessageBrokerFactory), i0.ɵɵinject(MessageBus), i0.ɵɵinject(Serializer)); };
-        WebWorkerPlatformLocation.ɵprov = i0.ɵɵdefineInjectable({ token: WebWorkerPlatformLocation, factory: WebWorkerPlatformLocation.ɵfac, providedIn: null });
+        WebWorkerPlatformLocation.ɵprov = i0.ɵɵdefineInjectable({ token: WebWorkerPlatformLocation, factory: WebWorkerPlatformLocation.ɵfac });
         return WebWorkerPlatformLocation;
     }(i2.PlatformLocation));
     /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(WebWorkerPlatformLocation, [{
@@ -1513,7 +1513,7 @@
             }
         };
         WebWorkerRendererFactory2.ɵfac = function WebWorkerRendererFactory2_Factory(t) { return new (t || WebWorkerRendererFactory2)(i0.ɵɵinject(ClientMessageBrokerFactory), i0.ɵɵinject(MessageBus), i0.ɵɵinject(Serializer), i0.ɵɵinject(RenderStore)); };
-        WebWorkerRendererFactory2.ɵprov = i0.ɵɵdefineInjectable({ token: WebWorkerRendererFactory2, factory: WebWorkerRendererFactory2.ɵfac, providedIn: null });
+        WebWorkerRendererFactory2.ɵprov = i0.ɵɵdefineInjectable({ token: WebWorkerRendererFactory2, factory: WebWorkerRendererFactory2.ɵfac });
         return WebWorkerRendererFactory2;
     }());
     /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(WebWorkerRendererFactory2, [{

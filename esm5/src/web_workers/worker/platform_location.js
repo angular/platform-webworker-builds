@@ -135,7 +135,7 @@ var WebWorkerPlatformLocation = /** @class */ (function (_super) {
     // History API isn't available on WebWorkers, therefore return undefined
     WebWorkerPlatformLocation.prototype.getState = function () { return undefined; };
     WebWorkerPlatformLocation.ɵfac = function WebWorkerPlatformLocation_Factory(t) { return new (t || WebWorkerPlatformLocation)(i0.ɵɵinject(i1.ClientMessageBrokerFactory), i0.ɵɵinject(i2.MessageBus), i0.ɵɵinject(i3.Serializer)); };
-    WebWorkerPlatformLocation.ɵprov = i0.ɵɵdefineInjectable({ token: WebWorkerPlatformLocation, factory: WebWorkerPlatformLocation.ɵfac, providedIn: null });
+    WebWorkerPlatformLocation.ɵprov = i0.ɵɵdefineInjectable({ token: WebWorkerPlatformLocation, factory: WebWorkerPlatformLocation.ɵfac });
     return WebWorkerPlatformLocation;
 }(PlatformLocation));
 export { WebWorkerPlatformLocation };

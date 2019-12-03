@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-rc.1+335.sha-56f4e56.with-local-changes
+ * @license Angular v9.0.0-rc.1+336.sha-67eac73.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -211,7 +211,7 @@ RenderStore.decorators = [
     { type: Injectable },
 ];
 /** @nocollapse */ RenderStore.ɵfac = function RenderStore_Factory(t) { return new (t || RenderStore)(); };
-/** @nocollapse */ RenderStore.ɵprov = ɵɵdefineInjectable({ token: RenderStore, factory: RenderStore.ɵfac, providedIn: null });
+/** @nocollapse */ RenderStore.ɵprov = ɵɵdefineInjectable({ token: RenderStore, factory: RenderStore.ɵfac });
 /*@__PURE__*/ (function () { ɵsetClassMetadata(RenderStore, [{
         type: Injectable
     }], null, null); })();
@@ -421,7 +421,7 @@ Serializer.ctorParameters = () => [
     { type: RenderStore }
 ];
 /** @nocollapse */ Serializer.ɵfac = function Serializer_Factory(t) { return new (t || Serializer)(ɵɵinject(RenderStore)); };
-/** @nocollapse */ Serializer.ɵprov = ɵɵdefineInjectable({ token: Serializer, factory: Serializer.ɵfac, providedIn: null });
+/** @nocollapse */ Serializer.ɵprov = ɵɵdefineInjectable({ token: Serializer, factory: Serializer.ɵfac });
 /*@__PURE__*/ (function () { ɵsetClassMetadata(Serializer, [{
         type: Injectable
     }], function () { return [{ type: RenderStore }]; }, null); })();
@@ -479,7 +479,7 @@ ClientMessageBrokerFactory.ctorParameters = () => [
     { type: Serializer }
 ];
 /** @nocollapse */ ClientMessageBrokerFactory.ɵfac = function ClientMessageBrokerFactory_Factory(t) { return new (t || ClientMessageBrokerFactory)(ɵɵinject(MessageBus), ɵɵinject(Serializer)); };
-/** @nocollapse */ ClientMessageBrokerFactory.ɵprov = ɵɵdefineInjectable({ token: ClientMessageBrokerFactory, factory: ClientMessageBrokerFactory.ɵfac, providedIn: null });
+/** @nocollapse */ ClientMessageBrokerFactory.ɵprov = ɵɵdefineInjectable({ token: ClientMessageBrokerFactory, factory: ClientMessageBrokerFactory.ɵfac });
 /*@__PURE__*/ (function () { ɵsetClassMetadata(ClientMessageBrokerFactory, [{
         type: Injectable
     }], function () { return [{ type: MessageBus }, { type: Serializer }]; }, null); })();
@@ -999,7 +999,7 @@ PostMessageBus.ctorParameters = () => [
     { type: PostMessageBusSource }
 ];
 /** @nocollapse */ PostMessageBus.ɵfac = function PostMessageBus_Factory(t) { return new (t || PostMessageBus)(ɵɵinject(PostMessageBusSink), ɵɵinject(PostMessageBusSource)); };
-/** @nocollapse */ PostMessageBus.ɵprov = ɵɵdefineInjectable({ token: PostMessageBus, factory: PostMessageBus.ɵfac, providedIn: null });
+/** @nocollapse */ PostMessageBus.ɵprov = ɵɵdefineInjectable({ token: PostMessageBus, factory: PostMessageBus.ɵfac });
 /*@__PURE__*/ (function () { ɵsetClassMetadata(PostMessageBus, [{
         type: Injectable
     }], function () { return [{ type: PostMessageBusSink }, { type: PostMessageBusSource }]; }, null); })();
@@ -1076,7 +1076,7 @@ ServiceMessageBrokerFactory.ctorParameters = () => [
     { type: Serializer }
 ];
 /** @nocollapse */ ServiceMessageBrokerFactory.ɵfac = function ServiceMessageBrokerFactory_Factory(t) { return new (t || ServiceMessageBrokerFactory)(ɵɵinject(MessageBus), ɵɵinject(Serializer)); };
-/** @nocollapse */ ServiceMessageBrokerFactory.ɵprov = ɵɵdefineInjectable({ token: ServiceMessageBrokerFactory, factory: ServiceMessageBrokerFactory.ɵfac, providedIn: null });
+/** @nocollapse */ ServiceMessageBrokerFactory.ɵprov = ɵɵdefineInjectable({ token: ServiceMessageBrokerFactory, factory: ServiceMessageBrokerFactory.ɵfac });
 /*@__PURE__*/ (function () { ɵsetClassMetadata(ServiceMessageBrokerFactory, [{
         type: Injectable
     }], function () { return [{ type: MessageBus }, { type: Serializer }]; }, null); })();
@@ -1798,7 +1798,7 @@ MessageBasedRenderer2.ctorParameters = () => [
     { type: RendererFactory2 }
 ];
 /** @nocollapse */ MessageBasedRenderer2.ɵfac = function MessageBasedRenderer2_Factory(t) { return new (t || MessageBasedRenderer2)(ɵɵinject(ServiceMessageBrokerFactory), ɵɵinject(MessageBus), ɵɵinject(Serializer), ɵɵinject(RenderStore), ɵɵinject(RendererFactory2)); };
-/** @nocollapse */ MessageBasedRenderer2.ɵprov = ɵɵdefineInjectable({ token: MessageBasedRenderer2, factory: MessageBasedRenderer2.ɵfac, providedIn: null });
+/** @nocollapse */ MessageBasedRenderer2.ɵprov = ɵɵdefineInjectable({ token: MessageBasedRenderer2, factory: MessageBasedRenderer2.ɵfac });
 /*@__PURE__*/ (function () { ɵsetClassMetadata(MessageBasedRenderer2, [{
         type: Injectable
     }], function () { return [{ type: ServiceMessageBrokerFactory }, { type: MessageBus }, { type: Serializer }, { type: RenderStore }, { type: RendererFactory2 }]; }, null); })();
@@ -1870,7 +1870,7 @@ WebWorkerInstance.decorators = [
     { type: Injectable },
 ];
 /** @nocollapse */ WebWorkerInstance.ɵfac = function WebWorkerInstance_Factory(t) { return new (t || WebWorkerInstance)(); };
-/** @nocollapse */ WebWorkerInstance.ɵprov = ɵɵdefineInjectable({ token: WebWorkerInstance, factory: WebWorkerInstance.ɵfac, providedIn: null });
+/** @nocollapse */ WebWorkerInstance.ɵprov = ɵɵdefineInjectable({ token: WebWorkerInstance, factory: WebWorkerInstance.ɵfac });
 /*@__PURE__*/ (function () { ɵsetClassMetadata(WebWorkerInstance, [{
         type: Injectable
     }], null, null); })();
@@ -2063,7 +2063,7 @@ function spawnWebWorker(uri, instance) {
  * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
  * @type {?}
  */
-const VERSION = new Version('9.0.0-rc.1+335.sha-56f4e56.with-local-changes');
+const VERSION = new Version('9.0.0-rc.1+336.sha-67eac73.with-local-changes');
 
 /**
  * @fileoverview added by tsickle
@@ -2142,7 +2142,7 @@ MessageBasedPlatformLocation.ctorParameters = () => [
     { type: Serializer }
 ];
 /** @nocollapse */ MessageBasedPlatformLocation.ɵfac = function MessageBasedPlatformLocation_Factory(t) { return new (t || MessageBasedPlatformLocation)(ɵɵinject(ServiceMessageBrokerFactory), ɵɵinject(ɵBrowserPlatformLocation), ɵɵinject(MessageBus), ɵɵinject(Serializer)); };
-/** @nocollapse */ MessageBasedPlatformLocation.ɵprov = ɵɵdefineInjectable({ token: MessageBasedPlatformLocation, factory: MessageBasedPlatformLocation.ɵfac, providedIn: null });
+/** @nocollapse */ MessageBasedPlatformLocation.ɵprov = ɵɵdefineInjectable({ token: MessageBasedPlatformLocation, factory: MessageBasedPlatformLocation.ɵfac });
 /*@__PURE__*/ (function () { ɵsetClassMetadata(MessageBasedPlatformLocation, [{
         type: Injectable
     }], function () { return [{ type: ServiceMessageBrokerFactory }, { type: ɵBrowserPlatformLocation }, { type: MessageBus }, { type: Serializer }]; }, null); })();
@@ -2413,7 +2413,7 @@ WebWorkerPlatformLocation.ctorParameters = () => [
     { type: Serializer }
 ];
 /** @nocollapse */ WebWorkerPlatformLocation.ɵfac = function WebWorkerPlatformLocation_Factory(t) { return new (t || WebWorkerPlatformLocation)(ɵɵinject(ClientMessageBrokerFactory), ɵɵinject(MessageBus), ɵɵinject(Serializer)); };
-/** @nocollapse */ WebWorkerPlatformLocation.ɵprov = ɵɵdefineInjectable({ token: WebWorkerPlatformLocation, factory: WebWorkerPlatformLocation.ɵfac, providedIn: null });
+/** @nocollapse */ WebWorkerPlatformLocation.ɵprov = ɵɵdefineInjectable({ token: WebWorkerPlatformLocation, factory: WebWorkerPlatformLocation.ɵfac });
 /*@__PURE__*/ (function () { ɵsetClassMetadata(WebWorkerPlatformLocation, [{
         type: Injectable
     }], function () { return [{ type: ClientMessageBrokerFactory }, { type: MessageBus }, { type: Serializer }]; }, null); })();
@@ -2690,7 +2690,7 @@ WebWorkerRendererFactory2.ctorParameters = () => [
     { type: RenderStore }
 ];
 /** @nocollapse */ WebWorkerRendererFactory2.ɵfac = function WebWorkerRendererFactory2_Factory(t) { return new (t || WebWorkerRendererFactory2)(ɵɵinject(ClientMessageBrokerFactory), ɵɵinject(MessageBus), ɵɵinject(Serializer), ɵɵinject(RenderStore)); };
-/** @nocollapse */ WebWorkerRendererFactory2.ɵprov = ɵɵdefineInjectable({ token: WebWorkerRendererFactory2, factory: WebWorkerRendererFactory2.ɵfac, providedIn: null });
+/** @nocollapse */ WebWorkerRendererFactory2.ɵprov = ɵɵdefineInjectable({ token: WebWorkerRendererFactory2, factory: WebWorkerRendererFactory2.ɵfac });
 /*@__PURE__*/ (function () { ɵsetClassMetadata(WebWorkerRendererFactory2, [{
         type: Injectable
     }], function () { return [{ type: ClientMessageBrokerFactory }, { type: MessageBus }, { type: Serializer }, { type: RenderStore }]; }, null); })();

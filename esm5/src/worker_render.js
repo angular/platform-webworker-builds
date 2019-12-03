@@ -33,7 +33,7 @@ var WebWorkerInstance = /** @class */ (function () {
         this.bus = bus;
     };
     WebWorkerInstance.ɵfac = function WebWorkerInstance_Factory(t) { return new (t || WebWorkerInstance)(); };
-    WebWorkerInstance.ɵprov = i0.ɵɵdefineInjectable({ token: WebWorkerInstance, factory: WebWorkerInstance.ɵfac, providedIn: null });
+    WebWorkerInstance.ɵprov = i0.ɵɵdefineInjectable({ token: WebWorkerInstance, factory: WebWorkerInstance.ɵfac });
     return WebWorkerInstance;
 }());
 export { WebWorkerInstance };

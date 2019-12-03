@@ -31,7 +31,7 @@ var ServiceMessageBrokerFactory = /** @class */ (function () {
         return new ServiceMessageBroker(this._messageBus, this._serializer, channel);
     };
     ServiceMessageBrokerFactory.ɵfac = function ServiceMessageBrokerFactory_Factory(t) { return new (t || ServiceMessageBrokerFactory)(i0.ɵɵinject(i1.MessageBus), i0.ɵɵinject(i2.Serializer)); };
-    ServiceMessageBrokerFactory.ɵprov = i0.ɵɵdefineInjectable({ token: ServiceMessageBrokerFactory, factory: ServiceMessageBrokerFactory.ɵfac, providedIn: null });
+    ServiceMessageBrokerFactory.ɵprov = i0.ɵɵdefineInjectable({ token: ServiceMessageBrokerFactory, factory: ServiceMessageBrokerFactory.ɵfac });
     return ServiceMessageBrokerFactory;
 }());
 export { ServiceMessageBrokerFactory };

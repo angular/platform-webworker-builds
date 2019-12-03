@@ -64,7 +64,7 @@ RenderStore.decorators = [
     { type: Injectable },
 ];
 /** @nocollapse */ RenderStore.ɵfac = function RenderStore_Factory(t) { return new (t || RenderStore)(); };
-/** @nocollapse */ RenderStore.ɵprov = i0.ɵɵdefineInjectable({ token: RenderStore, factory: RenderStore.ɵfac, providedIn: null });
+/** @nocollapse */ RenderStore.ɵprov = i0.ɵɵdefineInjectable({ token: RenderStore, factory: RenderStore.ɵfac });
 /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(RenderStore, [{
         type: Injectable
     }], null, null); })();
