@@ -1,6 +1,6 @@
 /**
- * @license Angular v9.0.0-rc.1+636.sha-142363a
- * (c) 2010-2019 Google LLC. https://angular.io/
+ * @license Angular v0.0.0
+ * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
 
@@ -314,13 +314,13 @@ export declare class ɵangular_packages_platform_webworker_platform_webworker_i 
     getBaseHrefFromDOM(): string;
     onPopState(fn: LocationChangeListener): void;
     onHashChange(fn: LocationChangeListener): void;
-    readonly href: string;
-    readonly hostname: string;
-    readonly port: string;
-    readonly protocol: string;
-    readonly search: string;
-    readonly hash: string;
-    pathname: string;
+    get href(): string;
+    get hostname(): string;
+    get port(): string;
+    get protocol(): string;
+    get search(): string;
+    get hash(): string;
+    set pathname(newPath: string);
     pushState(state: any, title: string, url: string): void;
     replaceState(state: any, title: string, url: string): void;
     forward(): void;
