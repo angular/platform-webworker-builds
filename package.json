@@ -1,6 +1,6 @@
 {
   "name": "@angular/platform-webworker",
-  "version": "9.1.0-next.1+58.sha-0a1a989",
+  "version": "9.1.0-next.1+61.sha-1e20b2c",
   "description": "Angular - library for using Angular in a web browser with web workers",
   "main": "./bundles/platform-webworker.umd.js",
   "module": "./fesm5/platform-webworker.js",
@@ -13,14 +13,15 @@
   "author": "angular",
   "license": "MIT",
   "peerDependencies": {
-    "@angular/common": "9.1.0-next.1+58.sha-0a1a989",
-    "@angular/core": "9.1.0-next.1+58.sha-0a1a989",
-    "@angular/platform-browser": "9.1.0-next.1+58.sha-0a1a989",
+    "@angular/common": "9.1.0-next.1+61.sha-1e20b2c",
+    "@angular/core": "9.1.0-next.1+61.sha-1e20b2c",
+    "@angular/platform-browser": "9.1.0-next.1+61.sha-1e20b2c",
     "tslib": "^1.10.0"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/angular/angular.git"
+    "url": "https://github.com/angular/angular.git",
+    "directory": "packages/platform-webworker"
   },
   "ng-update": {
     "packageGroup": [
