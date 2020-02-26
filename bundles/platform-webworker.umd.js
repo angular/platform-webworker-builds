@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.1.0-next.1+66.sha-a7ed74f
+ * @license Angular v9.1.0-next.1+69.sha-df816c9
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1203,7 +1203,7 @@
      * @publicApi
      * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
      */
-    var VERSION = new i0.Version('9.1.0-next.1+66.sha-a7ed74f');
+    var VERSION = new i0.Version('9.1.0-next.1+69.sha-df816c9');
 
     /**
      * @license
