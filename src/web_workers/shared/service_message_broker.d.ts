@@ -18,7 +18,7 @@ export declare class ServiceMessageBrokerFactory {
      * Initializes the given channel and attaches a new {@link ServiceMessageBroker} to it.
      */
     createMessageBroker(channel: string, runInZone?: boolean): ServiceMessageBroker;
-    static ɵfac: i0.ɵɵFactoryDef<ServiceMessageBrokerFactory>;
+    static ɵfac: i0.ɵɵFactoryDef<ServiceMessageBrokerFactory, never>;
     static ɵprov: i0.ɵɵInjectableDef<ServiceMessageBrokerFactory>;
 }
 /**

@@ -45,6 +45,6 @@ export declare class PostMessageBus implements MessageBus {
     initChannel(channel: string, runInZone?: boolean): void;
     from(channel: string): EventEmitter<any>;
     to(channel: string): EventEmitter<any>;
-    static ɵfac: i0.ɵɵFactoryDef<PostMessageBus>;
+    static ɵfac: i0.ɵɵFactoryDef<PostMessageBus, never>;
     static ɵprov: i0.ɵɵInjectableDef<PostMessageBus>;
 }

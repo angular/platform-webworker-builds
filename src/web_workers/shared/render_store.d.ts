@@ -8,6 +8,6 @@ export declare class RenderStore {
     remove(obj: any): void;
     deserialize(id: number): any;
     serialize(obj: any): number | null | undefined;
-    static ɵfac: i0.ɵɵFactoryDef<RenderStore>;
+    static ɵfac: i0.ɵɵFactoryDef<RenderStore, never>;
     static ɵprov: i0.ɵɵInjectableDef<RenderStore>;
 }

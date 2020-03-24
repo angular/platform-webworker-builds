@@ -18,7 +18,7 @@ export declare class ClientMessageBrokerFactory {
      * Initializes the given channel and attaches a new {@link ClientMessageBroker} to it.
      */
     createMessageBroker(channel: string, runInZone?: boolean): ClientMessageBroker;
-    static ɵfac: i0.ɵɵFactoryDef<ClientMessageBrokerFactory>;
+    static ɵfac: i0.ɵɵFactoryDef<ClientMessageBrokerFactory, never>;
     static ɵprov: i0.ɵɵInjectableDef<ClientMessageBrokerFactory>;
 }
 /**

@@ -35,6 +35,6 @@ export declare class WebWorkerPlatformLocation extends PlatformLocation {
     forward(): void;
     back(): void;
     getState(): unknown;
-    static ɵfac: i0.ɵɵFactoryDef<WebWorkerPlatformLocation>;
+    static ɵfac: i0.ɵɵFactoryDef<WebWorkerPlatformLocation, never>;
     static ɵprov: i0.ɵɵInjectableDef<WebWorkerPlatformLocation>;
 }

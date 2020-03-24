@@ -42,6 +42,6 @@ export declare class MessageBasedRenderer2 {
     private setValue;
     private listen;
     private unlisten;
-    static ɵfac: i0.ɵɵFactoryDef<MessageBasedRenderer2>;
+    static ɵfac: i0.ɵɵFactoryDef<MessageBasedRenderer2, never>;
     static ɵprov: i0.ɵɵInjectableDef<MessageBasedRenderer2>;
 }

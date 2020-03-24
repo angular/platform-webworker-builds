@@ -21,6 +21,6 @@ export declare class MessageBasedPlatformLocation {
     private _getLocation;
     private _sendUrlChangeEvent;
     private _setPathname;
-    static ɵfac: i0.ɵɵFactoryDef<MessageBasedPlatformLocation>;
+    static ɵfac: i0.ɵɵFactoryDef<MessageBasedPlatformLocation, never>;
     static ɵprov: i0.ɵɵInjectableDef<MessageBasedPlatformLocation>;
 }

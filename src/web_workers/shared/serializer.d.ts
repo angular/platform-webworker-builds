@@ -38,6 +38,6 @@ export declare class Serializer {
     private _deserializeLocation;
     private _serializeRendererType2;
     private _deserializeRendererType2;
-    static ɵfac: i0.ɵɵFactoryDef<Serializer>;
+    static ɵfac: i0.ɵɵFactoryDef<Serializer, never>;
     static ɵprov: i0.ɵɵInjectableDef<Serializer>;
 }
