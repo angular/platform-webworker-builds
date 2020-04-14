@@ -13,7 +13,7 @@ export { SerializerTypes } from './web_workers/shared/serializer';
 export { ReceivedMessage, ServiceMessageBroker, ServiceMessageBrokerFactory } from './web_workers/shared/service_message_broker';
 export { WORKER_UI_LOCATION_PROVIDERS } from './web_workers/ui/location_providers';
 export { WORKER_APP_LOCATION_PROVIDERS } from './web_workers/worker/location_providers';
-export { WorkerAppModule, platformWorkerApp } from './worker_app';
+export { platformWorkerApp, WorkerAppModule } from './worker_app';
 export { platformWorkerUi } from './worker_render';
 /**
  * Bootstraps the worker ui.
