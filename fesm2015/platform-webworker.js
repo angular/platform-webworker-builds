@@ -1,5 +1,5 @@
 /**
- * @license Angular v10.0.0-next.1+32.sha-5e80e7e
+ * @license Angular v10.0.0-next.1+33.sha-698b028
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -161,7 +161,9 @@ class RenderStore {
     /**
      * @return {?}
      */
-    allocateId() { return this._nextIndex++; }
+    allocateId() {
+        return this._nextIndex++;
+    }
     /**
      * @param {?} obj
      * @param {?} id
@@ -545,7 +547,9 @@ class ClientMessageBroker {
              * @param {?} reject
              * @return {?}
              */
-            (resolve, reject) => { completer = { resolve, reject }; }));
+            (resolve, reject) => {
+                completer = { resolve, reject };
+            }));
             id = this._generateMessageId(args.method);
             this._pending.set(id, completer);
             promise.catch((/**
@@ -718,10 +722,16 @@ class PostMessageBusSink {
         this._zone.runOutsideAngular((/**
          * @return {?}
          */
-        () => { this._zone.onStable.subscribe({ next: (/**
-             * @return {?}
-             */
-            () => { this._handleOnEventDone(); }) }); }));
+        () => {
+            this._zone.onStable.subscribe({
+                next: (/**
+                 * @return {?}
+                 */
+                () => {
+                    this._handleOnEventDone();
+                })
+            });
+        }));
     }
     /**
      * @param {?} channel
@@ -779,7 +789,9 @@ class PostMessageBusSink {
      * @param {?} messages
      * @return {?}
      */
-    _sendMessages(messages) { this._postMessageTarget.postMessage(messages); }
+    _sendMessages(messages) {
+        this._postMessageTarget.postMessage(messages);
+    }
 }
 if (false) {
     /**
@@ -831,7 +843,9 @@ class PostMessageBusSource {
      * @param {?} zone
      * @return {?}
      */
-    attachToZone(zone) { this._zone = zone; }
+    attachToZone(zone) {
+        this._zone = zone;
+    }
     /**
      * @param {?} channel
      * @param {?=} runInZone
@@ -886,7 +900,9 @@ class PostMessageBusSource {
                 this._zone.run((/**
                  * @return {?}
                  */
-                () => { channelInfo.emitter.emit(data.message); }));
+                () => {
+                    channelInfo.emitter.emit(data.message);
+                }));
             }
             else {
                 channelInfo.emitter.emit(data.message);
@@ -940,12 +956,16 @@ class PostMessageBus {
      * @param {?} channel
      * @return {?}
      */
-    from(channel) { return this.source.from(channel); }
+    from(channel) {
+        return this.source.from(channel);
+    }
     /**
      * @param {?} channel
      * @return {?}
      */
-    to(channel) { return this.sink.to(channel); }
+    to(channel) {
+        return this.sink.to(channel);
+    }
 }
 PostMessageBus.decorators = [
     { type: Injectable }
@@ -1469,20 +1489,26 @@ class MessageBasedRenderer2 {
         const methods = [
             ['createRenderer', this.createRenderer, RSO, CRT, P],
             ['createElement', this.createElement, RSO, P, P, P],
-            ['createComment', this.createComment, RSO, P, P], ['createText', this.createText, RSO, P, P],
+            ['createComment', this.createComment, RSO, P, P],
+            ['createText', this.createText, RSO, P, P],
             ['appendChild', this.appendChild, RSO, RSO, RSO],
             ['insertBefore', this.insertBefore, RSO, RSO, RSO, RSO],
             ['removeChild', this.removeChild, RSO, RSO, RSO],
             ['selectRootElement', this.selectRootElement, RSO, P, P],
-            ['parentNode', this.parentNode, RSO, RSO, P], ['nextSibling', this.nextSibling, RSO, RSO, P],
+            ['parentNode', this.parentNode, RSO, RSO, P],
+            ['nextSibling', this.nextSibling, RSO, RSO, P],
             ['setAttribute', this.setAttribute, RSO, RSO, P, P, P],
             ['removeAttribute', this.removeAttribute, RSO, RSO, P, P],
-            ['addClass', this.addClass, RSO, RSO, P], ['removeClass', this.removeClass, RSO, RSO, P],
+            ['addClass', this.addClass, RSO, RSO, P],
+            ['removeClass', this.removeClass, RSO, RSO, P],
             ['setStyle', this.setStyle, RSO, RSO, P, P, P],
             ['removeStyle', this.removeStyle, RSO, RSO, P, P],
-            ['setProperty', this.setProperty, RSO, RSO, P, P], ['setValue', this.setValue, RSO, RSO, P],
-            ['listen', this.listen, RSO, RSO, P, P, P], ['unlisten', this.unlisten, RSO, RSO],
-            ['destroy', this.destroy, RSO], ['destroyNode', this.destroyNode, RSO, P]
+            ['setProperty', this.setProperty, RSO, RSO, P, P],
+            ['setValue', this.setValue, RSO, RSO, P],
+            ['listen', this.listen, RSO, RSO, P, P, P],
+            ['unlisten', this.unlisten, RSO, RSO],
+            ['destroy', this.destroy, RSO],
+            ['destroyNode', this.destroyNode, RSO, P]
         ];
         methods.forEach((/**
          * @param {?} __0
@@ -1497,7 +1523,9 @@ class MessageBasedRenderer2 {
      * @param {?} r
      * @return {?}
      */
-    destroy(r) { r.destroy(); }
+    destroy(r) {
+        r.destroy();
+    }
     /**
      * @private
      * @param {?} r
@@ -1558,7 +1586,9 @@ class MessageBasedRenderer2 {
      * @param {?} child
      * @return {?}
      */
-    appendChild(r, parent, child) { r.appendChild(parent, child); }
+    appendChild(r, parent, child) {
+        r.appendChild(parent, child);
+    }
     /**
      * @private
      * @param {?} r
@@ -1577,7 +1607,9 @@ class MessageBasedRenderer2 {
      * @param {?} child
      * @return {?}
      */
-    removeChild(r, parent, child) { r.removeChild(parent, child); }
+    removeChild(r, parent, child) {
+        r.removeChild(parent, child);
+    }
     /**
      * @private
      * @param {?} r
@@ -1638,7 +1670,9 @@ class MessageBasedRenderer2 {
      * @param {?} name
      * @return {?}
      */
-    addClass(r, el, name) { r.addClass(el, name); }
+    addClass(r, el, name) {
+        r.addClass(el, name);
+    }
     /**
      * @private
      * @param {?} r
@@ -1646,7 +1680,9 @@ class MessageBasedRenderer2 {
      * @param {?} name
      * @return {?}
      */
-    removeClass(r, el, name) { r.removeClass(el, name); }
+    removeClass(r, el, name) {
+        r.removeClass(el, name);
+    }
     /**
      * @private
      * @param {?} r
@@ -1688,7 +1724,9 @@ class MessageBasedRenderer2 {
      * @param {?} value
      * @return {?}
      */
-    setValue(r, node, value) { r.setValue(node, value); }
+    setValue(r, node, value) {
+        r.setValue(node, value);
+    }
     /**
      * @private
      * @param {?} r
@@ -1717,7 +1755,9 @@ class MessageBasedRenderer2 {
      * @param {?} unlisten
      * @return {?}
      */
-    unlisten(r, unlisten) { unlisten(); }
+    unlisten(r, unlisten) {
+        unlisten();
+    }
 }
 MessageBasedRenderer2.decorators = [
     { type: Injectable }
@@ -1884,11 +1924,15 @@ function initializeGenericWorkerRenderer(injector) {
     zone.runGuarded((/**
      * @return {?}
      */
-    () => { services.forEach((/**
-     * @param {?} svc
-     * @return {?}
-     */
-    (svc) => { svc.start(); })); }));
+    () => {
+        services.forEach((/**
+         * @param {?} svc
+         * @return {?}
+         */
+        (svc) => {
+            svc.start();
+        }));
+    }));
 }
 /**
  * @param {?} instance
@@ -1979,7 +2023,7 @@ function spawnWebWorker(uri, instance) {
  * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
  * @type {?}
  */
-const VERSION = new Version('10.0.0-next.1+32.sha-5e80e7e');
+const VERSION = new Version('10.0.0-next.1+33.sha-698b028');
 
 /**
  * @fileoverview added by tsickle
@@ -2038,7 +2082,9 @@ class MessageBasedPlatformLocation {
      * @param {?} pathname
      * @return {?}
      */
-    _setPathname(pathname) { this._platformLocation.pathname = pathname; }
+    _setPathname(pathname) {
+        this._platformLocation.pathname = pathname;
+    }
 }
 MessageBasedPlatformLocation.decorators = [
     { type: Injectable }
@@ -2091,8 +2137,10 @@ if (false) {
  * @type {?}
  */
 const WORKER_UI_LOCATION_PROVIDERS = (/** @type {?} */ ([
-    { provide: MessageBasedPlatformLocation, deps: [ServiceMessageBrokerFactory,
-            ɵBrowserPlatformLocation, MessageBus, Serializer] },
+    {
+        provide: MessageBasedPlatformLocation,
+        deps: [ServiceMessageBrokerFactory, ɵBrowserPlatformLocation, MessageBus, Serializer]
+    },
     { provide: ɵBrowserPlatformLocation, deps: [DOCUMENT] },
     { provide: PLATFORM_INITIALIZER, useFactory: initUiLocation, multi: true, deps: [Injector] }
 ]));
@@ -2187,7 +2235,9 @@ class WebWorkerPlatformLocation extends PlatformLocation {
          * @param {?} err
          * @return {?}
          */
-        err => { throw new Error(err); }));
+        err => {
+            throw new Error(err);
+        }));
     }
     /**
      * @return {?}
@@ -2199,36 +2249,52 @@ class WebWorkerPlatformLocation extends PlatformLocation {
      * @param {?} fn
      * @return {?}
      */
-    onPopState(fn) { this._popStateListeners.push(fn); }
+    onPopState(fn) {
+        this._popStateListeners.push(fn);
+    }
     /**
      * @param {?} fn
      * @return {?}
      */
-    onHashChange(fn) { this._hashChangeListeners.push(fn); }
+    onHashChange(fn) {
+        this._hashChangeListeners.push(fn);
+    }
     /**
      * @return {?}
      */
-    get href() { return this._location ? (/** @type {?} */ (this._location.href)) : '<unknown>'; }
+    get href() {
+        return this._location ? (/** @type {?} */ (this._location.href)) : '<unknown>';
+    }
     /**
      * @return {?}
      */
-    get hostname() { return this._location ? (/** @type {?} */ (this._location.host)) : '<unknown>'; }
+    get hostname() {
+        return this._location ? (/** @type {?} */ (this._location.host)) : '<unknown>';
+    }
     /**
      * @return {?}
      */
-    get port() { return this._location ? (/** @type {?} */ (this._location.port)) : '<unknown>'; }
+    get port() {
+        return this._location ? (/** @type {?} */ (this._location.port)) : '<unknown>';
+    }
     /**
      * @return {?}
      */
-    get protocol() { return this._location ? (/** @type {?} */ (this._location.protocol)) : '<unknown>'; }
+    get protocol() {
+        return this._location ? (/** @type {?} */ (this._location.protocol)) : '<unknown>';
+    }
     /**
      * @return {?}
      */
-    get search() { return this._location ? this._location.search : '<unknown>'; }
+    get search() {
+        return this._location ? this._location.search : '<unknown>';
+    }
     /**
      * @return {?}
      */
-    get hash() { return this._location ? this._location.hash : '<unknown>'; }
+    get hash() {
+        return this._location ? this._location.hash : '<unknown>';
+    }
     /**
      * @param {?} newPath
      * @return {?}
@@ -2298,7 +2364,9 @@ class WebWorkerPlatformLocation extends PlatformLocation {
     /**
      * @return {?}
      */
-    getState() { return undefined; }
+    getState() {
+        return undefined;
+    }
 }
 WebWorkerPlatformLocation.decorators = [
     { type: Injectable }
@@ -2405,7 +2473,9 @@ class NamedEventEmitter {
      * @param {?} callback
      * @return {?}
      */
-    listen(eventName, callback) { this._getListeners(eventName).push(callback); }
+    listen(eventName, callback) {
+        this._getListeners(eventName).push(callback);
+    }
     /**
      * @param {?} eventName
      * @param {?} listener
@@ -2537,11 +2607,15 @@ class WebWorkerRendererFactory2 {
      * @param {?} node
      * @return {?}
      */
-    freeNode(node) { this.renderStore.remove(node); }
+    freeNode(node) {
+        this.renderStore.remove(node);
+    }
     /**
      * @return {?}
      */
-    allocateId() { return this.renderStore.allocateId(); }
+    allocateId() {
+        return this.renderStore.allocateId();
+    }
     /**
      * @private
      * @param {?} message
@@ -2602,7 +2676,9 @@ class WebWorkerRenderer2 {
     /**
      * @return {?}
      */
-    destroy() { this.callUIWithRenderer('destroy'); }
+    destroy() {
+        this.callUIWithRenderer('destroy');
+    }
     /**
      * @param {?} node
      * @return {?}
@@ -2916,7 +2992,9 @@ class WorkerDomAdapter extends ɵDomAdapter {
     /**
      * @return {?}
      */
-    static makeCurrent() { ɵsetRootDomAdapter(new WorkerDomAdapter()); }
+    static makeCurrent() {
+        ɵsetRootDomAdapter(new WorkerDomAdapter());
+    }
     /**
      * @param {?} error
      * @return {?}
@@ -2958,93 +3036,131 @@ class WorkerDomAdapter extends ɵDomAdapter {
      * @param {?} name
      * @return {?}
      */
-    getProperty(el, name) { throw 'not implemented'; }
+    getProperty(el, name) {
+        throw 'not implemented';
+    }
     /**
      * @param {?} el
      * @param {?} evt
      * @param {?} listener
      * @return {?}
      */
-    onAndCancel(el, evt, listener) { throw 'not implemented'; }
+    onAndCancel(el, evt, listener) {
+        throw 'not implemented';
+    }
     /**
      * @param {?} el
      * @param {?} evt
      * @return {?}
      */
-    dispatchEvent(el, evt) { throw 'not implemented'; }
+    dispatchEvent(el, evt) {
+        throw 'not implemented';
+    }
     /**
      * @param {?} el
      * @return {?}
      */
-    remove(el) { throw 'not implemented'; }
+    remove(el) {
+        throw 'not implemented';
+    }
     /**
      * @param {?} tagName
      * @param {?=} doc
      * @return {?}
      */
-    createElement(tagName, doc) { throw 'not implemented'; }
+    createElement(tagName, doc) {
+        throw 'not implemented';
+    }
     /**
      * @return {?}
      */
-    createHtmlDocument() { throw 'not implemented'; }
+    createHtmlDocument() {
+        throw 'not implemented';
+    }
     /**
      * @return {?}
      */
-    getDefaultDocument() { throw 'not implemented'; }
+    getDefaultDocument() {
+        throw 'not implemented';
+    }
     /**
      * @param {?} node
      * @return {?}
      */
-    isElementNode(node) { throw 'not implemented'; }
+    isElementNode(node) {
+        throw 'not implemented';
+    }
     /**
      * @param {?} node
      * @return {?}
      */
-    isShadowRoot(node) { throw 'not implemented'; }
+    isShadowRoot(node) {
+        throw 'not implemented';
+    }
     /**
      * @return {?}
      */
-    supportsDOMEvents() { throw 'not implemented'; }
+    supportsDOMEvents() {
+        throw 'not implemented';
+    }
     /**
      * @param {?} doc
      * @param {?} target
      * @return {?}
      */
-    getGlobalEventTarget(doc, target) { throw 'not implemented'; }
+    getGlobalEventTarget(doc, target) {
+        throw 'not implemented';
+    }
     /**
      * @return {?}
      */
-    getHistory() { throw 'not implemented'; }
+    getHistory() {
+        throw 'not implemented';
+    }
     /**
      * @return {?}
      */
-    getLocation() { throw 'not implemented'; }
+    getLocation() {
+        throw 'not implemented';
+    }
     /**
      * @param {?} doc
      * @return {?}
      */
-    getBaseHref(doc) { throw 'not implemented'; }
+    getBaseHref(doc) {
+        throw 'not implemented';
+    }
     /**
      * @return {?}
      */
-    resetBaseElement() { throw 'not implemented'; }
+    resetBaseElement() {
+        throw 'not implemented';
+    }
     /**
      * @return {?}
      */
-    getUserAgent() { return 'Fake user agent'; }
+    getUserAgent() {
+        return 'Fake user agent';
+    }
     /**
      * @return {?}
      */
-    performanceNow() { throw 'not implemented'; }
+    performanceNow() {
+        throw 'not implemented';
+    }
     /**
      * @return {?}
      */
-    supportsCookies() { return false; }
+    supportsCookies() {
+        return false;
+    }
     /**
      * @param {?} name
      * @return {?}
      */
-    getCookie(name) { throw 'not implemented'; }
+    getCookie(name) {
+        throw 'not implemented';
+    }
 }
 
 /**

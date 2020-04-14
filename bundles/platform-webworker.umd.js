@@ -1,5 +1,5 @@
 /**
- * @license Angular v10.0.0-next.1+32.sha-5e80e7e
+ * @license Angular v10.0.0-next.1+33.sha-698b028
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -268,7 +268,9 @@
             this._lookupById = new Map();
             this._lookupByObject = new Map();
         }
-        RenderStore.prototype.allocateId = function () { return this._nextIndex++; };
+        RenderStore.prototype.allocateId = function () {
+            return this._nextIndex++;
+        };
         RenderStore.prototype.store = function (obj, id) {
             if (id == null)
                 return;
@@ -471,7 +473,9 @@
             var id = null;
             if (returnType != null) {
                 var completer_1 = undefined;
-                promise = new Promise(function (resolve, reject) { completer_1 = { resolve: resolve, reject: reject }; });
+                promise = new Promise(function (resolve, reject) {
+                    completer_1 = { resolve: resolve, reject: reject };
+                });
                 id = this._generateMessageId(args.method);
                 this._pending.set(id, completer_1);
                 promise.catch(function (err) {
@@ -552,7 +556,13 @@
         PostMessageBusSink.prototype.attachToZone = function (zone) {
             var _this = this;
             this._zone = zone;
-            this._zone.runOutsideAngular(function () { _this._zone.onStable.subscribe({ next: function () { _this._handleOnEventDone(); } }); });
+            this._zone.runOutsideAngular(function () {
+                _this._zone.onStable.subscribe({
+                    next: function () {
+                        _this._handleOnEventDone();
+                    }
+                });
+            });
         };
         PostMessageBusSink.prototype.initChannel = function (channel, runInZone) {
             var _this = this;
@@ -587,7 +597,9 @@
                 this._messageBuffer = [];
             }
         };
-        PostMessageBusSink.prototype._sendMessages = function (messages) { this._postMessageTarget.postMessage(messages); };
+        PostMessageBusSink.prototype._sendMessages = function (messages) {
+            this._postMessageTarget.postMessage(messages);
+        };
         return PostMessageBusSink;
     }());
     var PostMessageBusSource = /** @class */ (function () {
@@ -603,7 +615,9 @@
                 workerScope.addEventListener('message', function (ev) { return _this._handleMessages(ev); });
             }
         }
-        PostMessageBusSource.prototype.attachToZone = function (zone) { this._zone = zone; };
+        PostMessageBusSource.prototype.attachToZone = function (zone) {
+            this._zone = zone;
+        };
         PostMessageBusSource.prototype.initChannel = function (channel, runInZone) {
             if (runInZone === void 0) { runInZone = true; }
             if (this._channels.hasOwnProperty(channel)) {
@@ -632,7 +646,9 @@
             if (this._channels.hasOwnProperty(channel)) {
                 var channelInfo_1 = this._channels[channel];
                 if (channelInfo_1.runInZone) {
-                    this._zone.run(function () { channelInfo_1.emitter.emit(data.message); });
+                    this._zone.run(function () {
+                        channelInfo_1.emitter.emit(data.message);
+                    });
                 }
                 else {
                     channelInfo_1.emitter.emit(data.message);
@@ -659,8 +675,12 @@
             this.source.initChannel(channel, runInZone);
             this.sink.initChannel(channel, runInZone);
         };
-        PostMessageBus.prototype.from = function (channel) { return this.source.from(channel); };
-        PostMessageBus.prototype.to = function (channel) { return this.sink.to(channel); };
+        PostMessageBus.prototype.from = function (channel) {
+            return this.source.from(channel);
+        };
+        PostMessageBus.prototype.to = function (channel) {
+            return this.sink.to(channel);
+        };
         PostMessageBus = __decorate([
             core.Injectable(),
             __metadata("design:paramtypes", [PostMessageBusSink, PostMessageBusSource])
@@ -974,27 +994,35 @@
             var methods = [
                 ['createRenderer', this.createRenderer, RSO, CRT, P],
                 ['createElement', this.createElement, RSO, P, P, P],
-                ['createComment', this.createComment, RSO, P, P], ['createText', this.createText, RSO, P, P],
+                ['createComment', this.createComment, RSO, P, P],
+                ['createText', this.createText, RSO, P, P],
                 ['appendChild', this.appendChild, RSO, RSO, RSO],
                 ['insertBefore', this.insertBefore, RSO, RSO, RSO, RSO],
                 ['removeChild', this.removeChild, RSO, RSO, RSO],
                 ['selectRootElement', this.selectRootElement, RSO, P, P],
-                ['parentNode', this.parentNode, RSO, RSO, P], ['nextSibling', this.nextSibling, RSO, RSO, P],
+                ['parentNode', this.parentNode, RSO, RSO, P],
+                ['nextSibling', this.nextSibling, RSO, RSO, P],
                 ['setAttribute', this.setAttribute, RSO, RSO, P, P, P],
                 ['removeAttribute', this.removeAttribute, RSO, RSO, P, P],
-                ['addClass', this.addClass, RSO, RSO, P], ['removeClass', this.removeClass, RSO, RSO, P],
+                ['addClass', this.addClass, RSO, RSO, P],
+                ['removeClass', this.removeClass, RSO, RSO, P],
                 ['setStyle', this.setStyle, RSO, RSO, P, P, P],
                 ['removeStyle', this.removeStyle, RSO, RSO, P, P],
-                ['setProperty', this.setProperty, RSO, RSO, P, P], ['setValue', this.setValue, RSO, RSO, P],
-                ['listen', this.listen, RSO, RSO, P, P, P], ['unlisten', this.unlisten, RSO, RSO],
-                ['destroy', this.destroy, RSO], ['destroyNode', this.destroyNode, RSO, P]
+                ['setProperty', this.setProperty, RSO, RSO, P, P],
+                ['setValue', this.setValue, RSO, RSO, P],
+                ['listen', this.listen, RSO, RSO, P, P, P],
+                ['unlisten', this.unlisten, RSO, RSO],
+                ['destroy', this.destroy, RSO],
+                ['destroyNode', this.destroyNode, RSO, P]
             ];
             methods.forEach(function (_a) {
                 var _b = __read(_a), name = _b[0], method = _b[1], argTypes = _b.slice(2);
                 broker.registerMethod(name, argTypes, method.bind(_this));
             });
         };
-        MessageBasedRenderer2.prototype.destroy = function (r) { r.destroy(); };
+        MessageBasedRenderer2.prototype.destroy = function (r) {
+            r.destroy();
+        };
         MessageBasedRenderer2.prototype.destroyNode = function (r, node) {
             if (r.destroyNode) {
                 r.destroyNode(node);
@@ -1013,11 +1041,15 @@
         MessageBasedRenderer2.prototype.createText = function (r, value, id) {
             this._renderStore.store(r.createText(value), id);
         };
-        MessageBasedRenderer2.prototype.appendChild = function (r, parent, child) { r.appendChild(parent, child); };
+        MessageBasedRenderer2.prototype.appendChild = function (r, parent, child) {
+            r.appendChild(parent, child);
+        };
         MessageBasedRenderer2.prototype.insertBefore = function (r, parent, child, ref) {
             r.insertBefore(parent, child, ref);
         };
-        MessageBasedRenderer2.prototype.removeChild = function (r, parent, child) { r.removeChild(parent, child); };
+        MessageBasedRenderer2.prototype.removeChild = function (r, parent, child) {
+            r.removeChild(parent, child);
+        };
         MessageBasedRenderer2.prototype.selectRootElement = function (r, selector, id) {
             this._renderStore.store(r.selectRootElement(selector), id);
         };
@@ -1033,8 +1065,12 @@
         MessageBasedRenderer2.prototype.removeAttribute = function (r, el, name, namespace) {
             r.removeAttribute(el, name, namespace);
         };
-        MessageBasedRenderer2.prototype.addClass = function (r, el, name) { r.addClass(el, name); };
-        MessageBasedRenderer2.prototype.removeClass = function (r, el, name) { r.removeClass(el, name); };
+        MessageBasedRenderer2.prototype.addClass = function (r, el, name) {
+            r.addClass(el, name);
+        };
+        MessageBasedRenderer2.prototype.removeClass = function (r, el, name) {
+            r.removeClass(el, name);
+        };
         MessageBasedRenderer2.prototype.setStyle = function (r, el, style, value, flags) {
             r.setStyle(el, style, value, flags);
         };
@@ -1044,7 +1080,9 @@
         MessageBasedRenderer2.prototype.setProperty = function (r, el, name, value) {
             r.setProperty(el, name, value);
         };
-        MessageBasedRenderer2.prototype.setValue = function (r, node, value) { r.setValue(node, value); };
+        MessageBasedRenderer2.prototype.setValue = function (r, node, value) {
+            r.setValue(node, value);
+        };
         MessageBasedRenderer2.prototype.listen = function (r, el, elName, eventName, unlistenId) {
             var _this = this;
             var listener = function (event) {
@@ -1053,7 +1091,9 @@
             var unlisten = r.listen(el || elName, eventName, listener);
             this._renderStore.store(unlisten, unlistenId);
         };
-        MessageBasedRenderer2.prototype.unlisten = function (r, unlisten) { unlisten(); };
+        MessageBasedRenderer2.prototype.unlisten = function (r, unlisten) {
+            unlisten();
+        };
         MessageBasedRenderer2 = __decorate([
             core.Injectable(),
             __metadata("design:paramtypes", [ServiceMessageBrokerFactory, MessageBus,
@@ -1165,7 +1205,11 @@
         bus.attachToZone(zone);
         // initialize message services after the bus has been created
         var services = injector.get(WORKER_UI_STARTABLE_MESSAGING_SERVICE);
-        zone.runGuarded(function () { services.forEach(function (svc) { svc.start(); }); });
+        zone.runGuarded(function () {
+            services.forEach(function (svc) {
+                svc.start();
+            });
+        });
     }
     function messageBusFactory(instance) {
         return instance.bus;
@@ -1227,7 +1271,7 @@
      * @publicApi
      * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
      */
-    var VERSION = new core.Version('10.0.0-next.1+32.sha-5e80e7e');
+    var VERSION = new core.Version('10.0.0-next.1+33.sha-698b028');
 
     /**
      * @license
@@ -1264,7 +1308,9 @@
                 'location': this._serializer.serialize(this._platformLocation.location, LocationType),
             });
         };
-        MessageBasedPlatformLocation.prototype._setPathname = function (pathname) { this._platformLocation.pathname = pathname; };
+        MessageBasedPlatformLocation.prototype._setPathname = function (pathname) {
+            this._platformLocation.pathname = pathname;
+        };
         MessageBasedPlatformLocation = __decorate([
             core.Injectable(),
             __metadata("design:paramtypes", [ServiceMessageBrokerFactory,
@@ -1288,8 +1334,10 @@
      * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
      */
     var WORKER_UI_LOCATION_PROVIDERS = [
-        { provide: MessageBasedPlatformLocation, deps: [ServiceMessageBrokerFactory,
-                common.ɵBrowserPlatformLocation, MessageBus, Serializer] },
+        {
+            provide: MessageBasedPlatformLocation,
+            deps: [ServiceMessageBrokerFactory, common.ɵBrowserPlatformLocation, MessageBus, Serializer]
+        },
         { provide: common.ɵBrowserPlatformLocation, deps: [common.DOCUMENT] },
         { provide: core.PLATFORM_INITIALIZER, useFactory: initUiLocation, multi: true, deps: [core.Injector] }
     ];
@@ -1347,40 +1395,58 @@
                 _this._location = val;
                 _this.initializedResolve();
                 return true;
-            }, function (err) { throw new Error(err); });
+            }, function (err) {
+                throw new Error(err);
+            });
         };
         WebWorkerPlatformLocation.prototype.getBaseHrefFromDOM = function () {
             throw new Error('Attempt to get base href from DOM from WebWorker. You must either provide a value for the APP_BASE_HREF token through DI or use the hash location strategy.');
         };
-        WebWorkerPlatformLocation.prototype.onPopState = function (fn) { this._popStateListeners.push(fn); };
-        WebWorkerPlatformLocation.prototype.onHashChange = function (fn) { this._hashChangeListeners.push(fn); };
+        WebWorkerPlatformLocation.prototype.onPopState = function (fn) {
+            this._popStateListeners.push(fn);
+        };
+        WebWorkerPlatformLocation.prototype.onHashChange = function (fn) {
+            this._hashChangeListeners.push(fn);
+        };
         Object.defineProperty(WebWorkerPlatformLocation.prototype, "href", {
-            get: function () { return this._location ? this._location.href : '<unknown>'; },
+            get: function () {
+                return this._location ? this._location.href : '<unknown>';
+            },
             enumerable: true,
             configurable: true
         });
         Object.defineProperty(WebWorkerPlatformLocation.prototype, "hostname", {
-            get: function () { return this._location ? this._location.host : '<unknown>'; },
+            get: function () {
+                return this._location ? this._location.host : '<unknown>';
+            },
             enumerable: true,
             configurable: true
         });
         Object.defineProperty(WebWorkerPlatformLocation.prototype, "port", {
-            get: function () { return this._location ? this._location.port : '<unknown>'; },
+            get: function () {
+                return this._location ? this._location.port : '<unknown>';
+            },
             enumerable: true,
             configurable: true
         });
         Object.defineProperty(WebWorkerPlatformLocation.prototype, "protocol", {
-            get: function () { return this._location ? this._location.protocol : '<unknown>'; },
+            get: function () {
+                return this._location ? this._location.protocol : '<unknown>';
+            },
             enumerable: true,
             configurable: true
         });
         Object.defineProperty(WebWorkerPlatformLocation.prototype, "search", {
-            get: function () { return this._location ? this._location.search : '<unknown>'; },
+            get: function () {
+                return this._location ? this._location.search : '<unknown>';
+            },
             enumerable: true,
             configurable: true
         });
         Object.defineProperty(WebWorkerPlatformLocation.prototype, "hash", {
-            get: function () { return this._location ? this._location.hash : '<unknown>'; },
+            get: function () {
+                return this._location ? this._location.hash : '<unknown>';
+            },
             enumerable: true,
             configurable: true
         });
@@ -1424,7 +1490,9 @@
             this._broker.runOnService(args, null);
         };
         // History API isn't available on WebWorkers, therefore return undefined
-        WebWorkerPlatformLocation.prototype.getState = function () { return undefined; };
+        WebWorkerPlatformLocation.prototype.getState = function () {
+            return undefined;
+        };
         WebWorkerPlatformLocation = __decorate([
             core.Injectable(),
             __metadata("design:paramtypes", [ClientMessageBrokerFactory, MessageBus, Serializer])
@@ -1472,7 +1540,9 @@
     var NamedEventEmitter = /** @class */ (function () {
         function NamedEventEmitter() {
         }
-        NamedEventEmitter.prototype.listen = function (eventName, callback) { this._getListeners(eventName).push(callback); };
+        NamedEventEmitter.prototype.listen = function (eventName, callback) {
+            this._getListeners(eventName).push(callback);
+        };
         NamedEventEmitter.prototype.unlisten = function (eventName, listener) {
             var listeners = this._getListeners(eventName);
             var index = listeners.indexOf(listener);
@@ -1536,8 +1606,12 @@
             this.renderStore.store(result, id);
             return result;
         };
-        WebWorkerRendererFactory2.prototype.freeNode = function (node) { this.renderStore.remove(node); };
-        WebWorkerRendererFactory2.prototype.allocateId = function () { return this.renderStore.allocateId(); };
+        WebWorkerRendererFactory2.prototype.freeNode = function (node) {
+            this.renderStore.remove(node);
+        };
+        WebWorkerRendererFactory2.prototype.allocateId = function () {
+            return this.renderStore.allocateId();
+        };
         WebWorkerRendererFactory2.prototype._dispatchEvent = function (message) {
             var element = this._serializer.deserialize(message['element'], 2 /* RENDER_STORE_OBJECT */);
             var eventName = message['eventName'];
@@ -1563,7 +1637,9 @@
             this.data = Object.create(null);
             this.asFnArg = new FnArg(this, 2 /* RENDER_STORE_OBJECT */);
         }
-        WebWorkerRenderer2.prototype.destroy = function () { this.callUIWithRenderer('destroy'); };
+        WebWorkerRenderer2.prototype.destroy = function () {
+            this.callUIWithRenderer('destroy');
+        };
         WebWorkerRenderer2.prototype.destroyNode = function (node) {
             this.callUIWithRenderer('destroyNode', [new FnArg(node, 2 /* RENDER_STORE_OBJECT */)]);
             this._rendererFactory.freeNode(node);
@@ -1752,7 +1828,9 @@
         function WorkerDomAdapter() {
             return _super !== null && _super.apply(this, arguments) || this;
         }
-        WorkerDomAdapter.makeCurrent = function () { common.ɵsetRootDomAdapter(new WorkerDomAdapter()); };
+        WorkerDomAdapter.makeCurrent = function () {
+            common.ɵsetRootDomAdapter(new WorkerDomAdapter());
+        };
         WorkerDomAdapter.prototype.log = function (error) {
             // tslint:disable-next-line:no-console
             console.log(error);
@@ -1778,25 +1856,63 @@
                 console.groupEnd();
             }
         };
-        WorkerDomAdapter.prototype.getProperty = function (el, name) { throw 'not implemented'; };
-        WorkerDomAdapter.prototype.onAndCancel = function (el, evt, listener) { throw 'not implemented'; };
-        WorkerDomAdapter.prototype.dispatchEvent = function (el, evt) { throw 'not implemented'; };
-        WorkerDomAdapter.prototype.remove = function (el) { throw 'not implemented'; };
-        WorkerDomAdapter.prototype.createElement = function (tagName, doc) { throw 'not implemented'; };
-        WorkerDomAdapter.prototype.createHtmlDocument = function () { throw 'not implemented'; };
-        WorkerDomAdapter.prototype.getDefaultDocument = function () { throw 'not implemented'; };
-        WorkerDomAdapter.prototype.isElementNode = function (node) { throw 'not implemented'; };
-        WorkerDomAdapter.prototype.isShadowRoot = function (node) { throw 'not implemented'; };
-        WorkerDomAdapter.prototype.supportsDOMEvents = function () { throw 'not implemented'; };
-        WorkerDomAdapter.prototype.getGlobalEventTarget = function (doc, target) { throw 'not implemented'; };
-        WorkerDomAdapter.prototype.getHistory = function () { throw 'not implemented'; };
-        WorkerDomAdapter.prototype.getLocation = function () { throw 'not implemented'; };
-        WorkerDomAdapter.prototype.getBaseHref = function (doc) { throw 'not implemented'; };
-        WorkerDomAdapter.prototype.resetBaseElement = function () { throw 'not implemented'; };
-        WorkerDomAdapter.prototype.getUserAgent = function () { return 'Fake user agent'; };
-        WorkerDomAdapter.prototype.performanceNow = function () { throw 'not implemented'; };
-        WorkerDomAdapter.prototype.supportsCookies = function () { return false; };
-        WorkerDomAdapter.prototype.getCookie = function (name) { throw 'not implemented'; };
+        WorkerDomAdapter.prototype.getProperty = function (el, name) {
+            throw 'not implemented';
+        };
+        WorkerDomAdapter.prototype.onAndCancel = function (el, evt, listener) {
+            throw 'not implemented';
+        };
+        WorkerDomAdapter.prototype.dispatchEvent = function (el, evt) {
+            throw 'not implemented';
+        };
+        WorkerDomAdapter.prototype.remove = function (el) {
+            throw 'not implemented';
+        };
+        WorkerDomAdapter.prototype.createElement = function (tagName, doc) {
+            throw 'not implemented';
+        };
+        WorkerDomAdapter.prototype.createHtmlDocument = function () {
+            throw 'not implemented';
+        };
+        WorkerDomAdapter.prototype.getDefaultDocument = function () {
+            throw 'not implemented';
+        };
+        WorkerDomAdapter.prototype.isElementNode = function (node) {
+            throw 'not implemented';
+        };
+        WorkerDomAdapter.prototype.isShadowRoot = function (node) {
+            throw 'not implemented';
+        };
+        WorkerDomAdapter.prototype.supportsDOMEvents = function () {
+            throw 'not implemented';
+        };
+        WorkerDomAdapter.prototype.getGlobalEventTarget = function (doc, target) {
+            throw 'not implemented';
+        };
+        WorkerDomAdapter.prototype.getHistory = function () {
+            throw 'not implemented';
+        };
+        WorkerDomAdapter.prototype.getLocation = function () {
+            throw 'not implemented';
+        };
+        WorkerDomAdapter.prototype.getBaseHref = function (doc) {
+            throw 'not implemented';
+        };
+        WorkerDomAdapter.prototype.resetBaseElement = function () {
+            throw 'not implemented';
+        };
+        WorkerDomAdapter.prototype.getUserAgent = function () {
+            return 'Fake user agent';
+        };
+        WorkerDomAdapter.prototype.performanceNow = function () {
+            throw 'not implemented';
+        };
+        WorkerDomAdapter.prototype.supportsCookies = function () {
+            return false;
+        };
+        WorkerDomAdapter.prototype.getCookie = function (name) {
+            throw 'not implemented';
+        };
         return WorkerDomAdapter;
     }(common.ɵDomAdapter));
 
