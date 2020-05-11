@@ -1,13 +1,13 @@
 {
   "name": "@angular/platform-webworker",
-  "version": "10.0.0-next.6+23.sha-286fbf4",
+  "version": "10.0.0-next.6+22.sha-40025f5",
   "description": "Angular - library for using Angular in a web browser with web workers",
   "author": "angular",
   "license": "MIT",
   "peerDependencies": {
-    "@angular/common": "10.0.0-next.6+23.sha-286fbf4",
-    "@angular/core": "10.0.0-next.6+23.sha-286fbf4",
-    "@angular/platform-browser": "10.0.0-next.6+23.sha-286fbf4",
+    "@angular/common": "10.0.0-next.6+22.sha-40025f5",
+    "@angular/core": "10.0.0-next.6+22.sha-40025f5",
+    "@angular/platform-browser": "10.0.0-next.6+22.sha-40025f5",
     "tslib": "^1.10.0"
   },
   "repository": {
