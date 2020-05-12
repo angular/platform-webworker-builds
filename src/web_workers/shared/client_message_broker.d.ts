@@ -10,7 +10,8 @@ import { SerializerTypes } from './serializer';
 import * as i0 from "@angular/core";
 /**
  * @publicApi
- * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
+ * @deprecated platform-webworker is deprecated in Angular and will be removed in a future version
+ *     of Angular
  */
 export declare class ClientMessageBrokerFactory {
     private _messageBus;
@@ -23,7 +24,8 @@ export declare class ClientMessageBrokerFactory {
 }
 /**
  * @publicApi
- * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
+ * @deprecated platform-webworker is deprecated in Angular and will be removed in a future version
+ *     of Angular
  */
 export declare class ClientMessageBroker {
     private channel;
@@ -35,7 +37,8 @@ export declare class ClientMessageBroker {
 }
 /**
  * @publicApi
- * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
+ * @deprecated platform-webworker is deprecated in Angular and will be removed in a future version
+ *     of Angular
  */
 export declare class FnArg {
     value: any;
@@ -44,7 +47,8 @@ export declare class FnArg {
 }
 /**
  * @publicApi
- * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
+ * @deprecated platform-webworker is deprecated in Angular and will be removed in a future version
+ *     of Angular
  */
 export declare class UiArguments {
     method: string;

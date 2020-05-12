@@ -6,7 +6,8 @@ import * as i0 from "@angular/core";
  * and underlying {@link MessageBus} for lower level message passing.
  *
  * @publicApi
- * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
+ * @deprecated platform-webworker is deprecated in Angular and will be removed in a future version
+ *     of Angular
  */
 export declare class WebWorkerInstance {
     worker: Worker;
@@ -16,7 +17,8 @@ export declare class WebWorkerInstance {
 }
 /**
  * @publicApi
- * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
+ * @deprecated platform-webworker is deprecated in Angular and will be removed in a future version
+ *     of Angular
  */
 export declare const WORKER_SCRIPT: InjectionToken<string>;
 /**
@@ -24,7 +26,8 @@ export declare const WORKER_SCRIPT: InjectionToken<string>;
  * created.
  *
  * @publicApi
- * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
+ * @deprecated platform-webworker is deprecated in Angular and will be removed in a future version
+ *     of Angular
  */
 export declare const WORKER_UI_STARTABLE_MESSAGING_SERVICE: InjectionToken<{
     start: () => void;
@@ -32,6 +35,7 @@ export declare const WORKER_UI_STARTABLE_MESSAGING_SERVICE: InjectionToken<{
 export declare const _WORKER_UI_PLATFORM_PROVIDERS: StaticProvider[];
 /**
  * @publicApi
- * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
+ * @deprecated platform-webworker is deprecated in Angular and will be removed in a future version
+ *     of Angular
  */
 export declare const platformWorkerUi: (extraProviders?: StaticProvider[] | undefined) => import("@angular/core").PlatformRef;
