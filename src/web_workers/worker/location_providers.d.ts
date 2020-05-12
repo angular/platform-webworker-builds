@@ -12,7 +12,8 @@ import { WebWorkerPlatformLocation } from './platform_location';
  * a worker context.
  *
  * @publicApi
- * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
+ * @deprecated platform-webworker is deprecated in Angular and will be removed in a future version
+ *     of Angular
  */
 export declare const WORKER_APP_LOCATION_PROVIDERS: StaticProvider[];
 export declare function locationInitialized(platformLocation: WebWorkerPlatformLocation): Promise<any>;

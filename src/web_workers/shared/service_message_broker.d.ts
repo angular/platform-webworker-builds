@@ -10,7 +10,8 @@ import { SerializerTypes } from '../shared/serializer';
 import * as i0 from "@angular/core";
 /**
  * @publicApi
- * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
+ * @deprecated platform-webworker is deprecated in Angular and will be removed in a future version
+ *     of Angular
  */
 export declare class ServiceMessageBrokerFactory {
     private _messageBus;
@@ -28,7 +29,8 @@ export declare class ServiceMessageBrokerFactory {
  * If that method returns a promise, the UIMessageBroker returns the result to the worker.
  *
  * @publicApi
- * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
+ * @deprecated platform-webworker is deprecated in Angular and will be removed in a future version
+ *     of Angular
  */
 export declare class ServiceMessageBroker {
     private _serializer;
@@ -41,7 +43,8 @@ export declare class ServiceMessageBroker {
 }
 /**
  * @publicApi
- * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
+ * @deprecated platform-webworker is deprecated in Angular and will be removed in a future version
+ *     of Angular
  */
 export interface ReceivedMessage {
     method: string;

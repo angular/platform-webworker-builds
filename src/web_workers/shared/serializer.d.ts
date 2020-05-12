@@ -10,7 +10,8 @@ import { RenderStore } from './render_store';
 import * as i0 from "@angular/core";
 /**
  * @publicApi
- * @deprecated platform-webworker is deprecated in Angular and will be removed in version 10
+ * @deprecated platform-webworker is deprecated in Angular and will be removed in a future version
+ *     of Angular
  */
 export declare const enum SerializerTypes {
     RENDERER_TYPE_2 = 0,
