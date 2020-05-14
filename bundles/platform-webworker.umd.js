@@ -1,5 +1,5 @@
 /**
- * @license Angular v10.0.0-next.7+17.sha-2418c6a
+ * @license Angular v10.0.0-next.7+43.sha-f16ca1c
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1283,7 +1283,7 @@
      * @deprecated platform-webworker is deprecated in Angular and will be removed in a future version
      *     of Angular
      */
-    var VERSION = new core.Version('10.0.0-next.7+17.sha-2418c6a');
+    var VERSION = new core.Version('10.0.0-next.7+43.sha-f16ca1c');
 
     /**
      * @license
@@ -1425,42 +1425,42 @@
             get: function () {
                 return this._location ? this._location.href : '<unknown>';
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(WebWorkerPlatformLocation.prototype, "hostname", {
             get: function () {
                 return this._location ? this._location.host : '<unknown>';
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(WebWorkerPlatformLocation.prototype, "port", {
             get: function () {
                 return this._location ? this._location.port : '<unknown>';
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(WebWorkerPlatformLocation.prototype, "protocol", {
             get: function () {
                 return this._location ? this._location.protocol : '<unknown>';
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(WebWorkerPlatformLocation.prototype, "search", {
             get: function () {
                 return this._location ? this._location.search : '<unknown>';
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(WebWorkerPlatformLocation.prototype, "hash", {
             get: function () {
                 return this._location ? this._location.hash : '<unknown>';
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(WebWorkerPlatformLocation.prototype, "pathname", {
@@ -1473,7 +1473,7 @@
                 var args = new UiArguments('setPathname', fnArgs);
                 this._broker.runOnService(args, null);
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         WebWorkerPlatformLocation.prototype.pushState = function (state, title, url) {
@@ -1529,7 +1529,8 @@
      *     of Angular
      */
     var WORKER_APP_LOCATION_PROVIDERS = [
-        { provide: common.PlatformLocation, useClass: WebWorkerPlatformLocation }, {
+        { provide: common.PlatformLocation, useClass: WebWorkerPlatformLocation },
+        {
             provide: core.APP_INITIALIZER,
             useFactory: appInitFnFactory,
             multi: true,
