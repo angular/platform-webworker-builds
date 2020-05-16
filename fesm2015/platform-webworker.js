@@ -1,5 +1,5 @@
 /**
- * @license Angular v10.0.0-next.7+64.sha-7f58c57
+ * @license Angular v10.0.0-next.7+66.sha-3f9b3d7
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -2081,7 +2081,7 @@ function spawnWebWorker(uri, instance) {
  *     of Angular
  * @type {?}
  */
-const VERSION = new Version('10.0.0-next.7+64.sha-7f58c57');
+const VERSION = new Version('10.0.0-next.7+66.sha-3f9b3d7');
 
 /**
  * @fileoverview added by tsickle
