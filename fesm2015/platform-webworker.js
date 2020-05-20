@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.1.8+12.sha-3eee536
+ * @license Angular v9.1.8+19.sha-1465372
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -2038,7 +2038,7 @@ function spawnWebWorker(uri, instance) {
  *     of Angular
  * @type {?}
  */
-const VERSION = new Version('9.1.8+12.sha-3eee536');
+const VERSION = new Version('9.1.8+19.sha-1465372');
 
 /**
  * @fileoverview added by tsickle
