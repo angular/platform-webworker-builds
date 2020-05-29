@@ -1,10 +1,9 @@
 /**
- * @license Angular v10.0.0-rc.0+34.sha-bd7393f
+ * @license Angular v10.0.0-rc.0+35.sha-4d0e175
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
 
-import { __decorate, __metadata } from 'tslib';
 import { DOCUMENT, ɵPLATFORM_WORKER_UI_ID, ɵBrowserPlatformLocation, PlatformLocation, LOCATION_INITIALIZED, ɵDomAdapter, ɵsetRootDomAdapter, ɵPLATFORM_WORKER_APP_ID, ViewportScroller, ɵNullViewportScroller, CommonModule } from '@angular/common';
 import { InjectionToken, Injectable, ɵstringify, EventEmitter, RendererFactory2, NgZone, ErrorHandler, ɵAPP_ID_RANDOM_PROVIDER, Testability, PLATFORM_INITIALIZER, Injector, PLATFORM_ID, createPlatformFactory, platformCore, ɵsetDocument, isDevMode, Version, APP_INITIALIZER, NgModule, ɵINJECTOR_SCOPE, ApplicationModule } from '@angular/core';
 import { ɵBROWSER_SANITIZATION_PROVIDERS, EVENT_MANAGER_PLUGINS, ɵDomEventsPlugin, ɵKeyEventsPlugin, ɵHammerGesturesPlugin, HAMMER_GESTURE_CONFIG, HammerGestureConfig, ɵDomRendererFactory2, EventManager, ɵDomSharedStylesHost, ɵSharedStylesHost, ɵBrowserDomAdapter, ɵBrowserGetTestability } from '@angular/platform-browser';
@@ -46,7 +45,7 @@ class MessageBus {
  * found in the LICENSE file at https://angular.io/license
  */
 let RenderStore = /** @class */ (() => {
-    let RenderStore = class RenderStore {
+    class RenderStore {
         constructor() {
             this._nextIndex = 0;
             this._lookupById = new Map();
@@ -74,10 +73,10 @@ let RenderStore = /** @class */ (() => {
         serialize(obj) {
             return obj == null ? null : this._lookupByObject.get(obj);
         }
-    };
-    RenderStore = __decorate([
-        Injectable()
-    ], RenderStore);
+    }
+    RenderStore.decorators = [
+        { type: Injectable }
+    ];
     return RenderStore;
 })();
 
@@ -102,7 +101,7 @@ class LocationType {
     }
 }
 let Serializer = /** @class */ (() => {
-    let Serializer = class Serializer {
+    class Serializer {
         constructor(_renderStore) {
             this._renderStore = _renderStore;
         }
@@ -174,11 +173,14 @@ let Serializer = /** @class */ (() => {
                 data: this.deserialize(props['data'])
             };
         }
-    };
-    Serializer = __decorate([
-        Injectable(),
-        __metadata("design:paramtypes", [RenderStore])
-    ], Serializer);
+    }
+    Serializer.decorators = [
+        { type: Injectable }
+    ];
+    /** @nocollapse */
+    Serializer.ctorParameters = () => [
+        { type: RenderStore }
+    ];
     return Serializer;
 })();
 
@@ -195,7 +197,7 @@ let Serializer = /** @class */ (() => {
  *     of Angular
  */
 let ClientMessageBrokerFactory = /** @class */ (() => {
-    let ClientMessageBrokerFactory = class ClientMessageBrokerFactory {
+    class ClientMessageBrokerFactory {
         /** @internal */
         constructor(_messageBus, _serializer) {
             this._messageBus = _messageBus;
@@ -208,11 +210,15 @@ let ClientMessageBrokerFactory = /** @class */ (() => {
             this._messageBus.initChannel(channel, runInZone);
             return new ClientMessageBroker(this._messageBus, this._serializer, channel);
         }
-    };
-    ClientMessageBrokerFactory = __decorate([
-        Injectable(),
-        __metadata("design:paramtypes", [MessageBus, Serializer])
-    ], ClientMessageBrokerFactory);
+    }
+    ClientMessageBrokerFactory.decorators = [
+        { type: Injectable }
+    ];
+    /** @nocollapse */
+    ClientMessageBrokerFactory.ctorParameters = () => [
+        { type: MessageBus },
+        { type: Serializer }
+    ];
     return ClientMessageBrokerFactory;
 })();
 /**
@@ -436,7 +442,7 @@ class PostMessageBusSource {
  * postMessage API.
  */
 let PostMessageBus = /** @class */ (() => {
-    let PostMessageBus = class PostMessageBus {
+    class PostMessageBus {
         constructor(sink, source) {
             this.sink = sink;
             this.source = source;
@@ -455,11 +461,15 @@ let PostMessageBus = /** @class */ (() => {
         to(channel) {
             return this.sink.to(channel);
         }
-    };
-    PostMessageBus = __decorate([
-        Injectable(),
-        __metadata("design:paramtypes", [PostMessageBusSink, PostMessageBusSource])
-    ], PostMessageBus);
+    }
+    PostMessageBus.decorators = [
+        { type: Injectable }
+    ];
+    /** @nocollapse */
+    PostMessageBus.ctorParameters = () => [
+        { type: PostMessageBusSink },
+        { type: PostMessageBusSource }
+    ];
     return PostMessageBus;
 })();
 /**
@@ -486,7 +496,7 @@ class _Channel {
  *     of Angular
  */
 let ServiceMessageBrokerFactory = /** @class */ (() => {
-    let ServiceMessageBrokerFactory = class ServiceMessageBrokerFactory {
+    class ServiceMessageBrokerFactory {
         /** @internal */
         constructor(_messageBus, _serializer) {
             this._messageBus = _messageBus;
@@ -499,11 +509,15 @@ let ServiceMessageBrokerFactory = /** @class */ (() => {
             this._messageBus.initChannel(channel, runInZone);
             return new ServiceMessageBroker(this._messageBus, this._serializer, channel);
         }
-    };
-    ServiceMessageBrokerFactory = __decorate([
-        Injectable(),
-        __metadata("design:paramtypes", [MessageBus, Serializer])
-    ], ServiceMessageBrokerFactory);
+    }
+    ServiceMessageBrokerFactory.decorators = [
+        { type: Injectable }
+    ];
+    /** @nocollapse */
+    ServiceMessageBrokerFactory.ctorParameters = () => [
+        { type: MessageBus },
+        { type: Serializer }
+    ];
     return ServiceMessageBrokerFactory;
 })();
 /**
@@ -746,7 +760,7 @@ class EventDispatcher {
  * found in the LICENSE file at https://angular.io/license
  */
 let MessageBasedRenderer2 = /** @class */ (() => {
-    let MessageBasedRenderer2 = class MessageBasedRenderer2 {
+    class MessageBasedRenderer2 {
         constructor(_brokerFactory, _bus, _serializer, _renderStore, _rendererFactory) {
             this._brokerFactory = _brokerFactory;
             this._bus = _bus;
@@ -864,13 +878,18 @@ let MessageBasedRenderer2 = /** @class */ (() => {
         unlisten(r, unlisten) {
             unlisten();
         }
-    };
-    MessageBasedRenderer2 = __decorate([
-        Injectable(),
-        __metadata("design:paramtypes", [ServiceMessageBrokerFactory, MessageBus,
-            Serializer, RenderStore,
-            RendererFactory2])
-    ], MessageBasedRenderer2);
+    }
+    MessageBasedRenderer2.decorators = [
+        { type: Injectable }
+    ];
+    /** @nocollapse */
+    MessageBasedRenderer2.ctorParameters = () => [
+        { type: ServiceMessageBrokerFactory },
+        { type: MessageBus },
+        { type: Serializer },
+        { type: RenderStore },
+        { type: RendererFactory2 }
+    ];
     return MessageBasedRenderer2;
 })();
 
@@ -890,16 +909,16 @@ let MessageBasedRenderer2 = /** @class */ (() => {
  *     of Angular
  */
 let WebWorkerInstance = /** @class */ (() => {
-    let WebWorkerInstance = class WebWorkerInstance {
+    class WebWorkerInstance {
         /** @internal */
         init(worker, bus) {
             this.worker = worker;
             this.bus = bus;
         }
-    };
-    WebWorkerInstance = __decorate([
-        Injectable()
-    ], WebWorkerInstance);
+    }
+    WebWorkerInstance.decorators = [
+        { type: Injectable }
+    ];
     return WebWorkerInstance;
 })();
 /**
@@ -1047,7 +1066,7 @@ function spawnWebWorker(uri, instance) {
  * @deprecated platform-webworker is deprecated in Angular and will be removed in a future version
  *     of Angular
  */
-const VERSION = new Version('10.0.0-rc.0+34.sha-bd7393f');
+const VERSION = new Version('10.0.0-rc.0+35.sha-4d0e175');
 
 /**
  * @license
@@ -1057,7 +1076,7 @@ const VERSION = new Version('10.0.0-rc.0+34.sha-bd7393f');
  * found in the LICENSE file at https://angular.io/license
  */
 let MessageBasedPlatformLocation = /** @class */ (() => {
-    let MessageBasedPlatformLocation = class MessageBasedPlatformLocation {
+    class MessageBasedPlatformLocation {
         constructor(_brokerFactory, _platformLocation, bus, _serializer) {
             this._brokerFactory = _brokerFactory;
             this._platformLocation = _platformLocation;
@@ -1088,13 +1107,17 @@ let MessageBasedPlatformLocation = /** @class */ (() => {
         _setPathname(pathname) {
             this._platformLocation.pathname = pathname;
         }
-    };
-    MessageBasedPlatformLocation = __decorate([
-        Injectable(),
-        __metadata("design:paramtypes", [ServiceMessageBrokerFactory,
-            ɵBrowserPlatformLocation, MessageBus,
-            Serializer])
-    ], MessageBasedPlatformLocation);
+    }
+    MessageBasedPlatformLocation.decorators = [
+        { type: Injectable }
+    ];
+    /** @nocollapse */
+    MessageBasedPlatformLocation.ctorParameters = () => [
+        { type: ServiceMessageBrokerFactory },
+        { type: ɵBrowserPlatformLocation },
+        { type: MessageBus },
+        { type: Serializer }
+    ];
     return MessageBasedPlatformLocation;
 })();
 
@@ -1135,7 +1158,7 @@ function initUiLocation(injector) {
  * found in the LICENSE file at https://angular.io/license
  */
 let WebWorkerPlatformLocation = /** @class */ (() => {
-    let WebWorkerPlatformLocation = class WebWorkerPlatformLocation extends PlatformLocation {
+    class WebWorkerPlatformLocation extends PlatformLocation {
         constructor(brokerFactory, bus, _serializer) {
             super();
             this._serializer = _serializer;
@@ -1242,11 +1265,16 @@ let WebWorkerPlatformLocation = /** @class */ (() => {
         getState() {
             return undefined;
         }
-    };
-    WebWorkerPlatformLocation = __decorate([
-        Injectable(),
-        __metadata("design:paramtypes", [ClientMessageBrokerFactory, MessageBus, Serializer])
-    ], WebWorkerPlatformLocation);
+    }
+    WebWorkerPlatformLocation.decorators = [
+        { type: Injectable }
+    ];
+    /** @nocollapse */
+    WebWorkerPlatformLocation.ctorParameters = () => [
+        { type: ClientMessageBrokerFactory },
+        { type: MessageBus },
+        { type: Serializer }
+    ];
     return WebWorkerPlatformLocation;
 })();
 
@@ -1322,7 +1350,7 @@ function eventNameWithTarget(target, eventName) {
     return `${target}:${eventName}`;
 }
 let WebWorkerRendererFactory2 = /** @class */ (() => {
-    let WebWorkerRendererFactory2 = class WebWorkerRendererFactory2 {
+    class WebWorkerRendererFactory2 {
         constructor(messageBrokerFactory, bus, _serializer, renderStore) {
             this._serializer = _serializer;
             this.renderStore = renderStore;
@@ -1373,12 +1401,17 @@ let WebWorkerRendererFactory2 = /** @class */ (() => {
                 element.events.dispatchEvent(eventName, event);
             }
         }
-    };
-    WebWorkerRendererFactory2 = __decorate([
-        Injectable(),
-        __metadata("design:paramtypes", [ClientMessageBrokerFactory, MessageBus,
-            Serializer, RenderStore])
-    ], WebWorkerRendererFactory2);
+    }
+    WebWorkerRendererFactory2.decorators = [
+        { type: Injectable }
+    ];
+    /** @nocollapse */
+    WebWorkerRendererFactory2.ctorParameters = () => [
+        { type: ClientMessageBrokerFactory },
+        { type: MessageBus },
+        { type: Serializer },
+        { type: RenderStore }
+    ];
     return WebWorkerRendererFactory2;
 })();
 class WebWorkerRenderer2 {
@@ -1699,32 +1732,32 @@ function setupWebWorker() {
  *     of Angular
  */
 let WorkerAppModule = /** @class */ (() => {
-    let WorkerAppModule = class WorkerAppModule {
-    };
-    WorkerAppModule = __decorate([
-        NgModule({
-            providers: [
-                ɵBROWSER_SANITIZATION_PROVIDERS,
-                { provide: ɵINJECTOR_SCOPE, useValue: 'root' },
-                Serializer,
-                { provide: DOCUMENT, useValue: null },
-                ClientMessageBrokerFactory,
-                ServiceMessageBrokerFactory,
-                WebWorkerRendererFactory2,
-                { provide: RendererFactory2, useExisting: WebWorkerRendererFactory2 },
-                { provide: ON_WEB_WORKER, useValue: true },
-                RenderStore,
-                { provide: ErrorHandler, useFactory: errorHandler, deps: [] },
-                { provide: MessageBus, useFactory: createMessageBus, deps: [NgZone] },
-                { provide: APP_INITIALIZER, useValue: setupWebWorker, multi: true },
-                { provide: ViewportScroller, useClass: ɵNullViewportScroller, deps: [] },
-            ],
-            exports: [
-                CommonModule,
-                ApplicationModule,
-            ]
-        })
-    ], WorkerAppModule);
+    class WorkerAppModule {
+    }
+    WorkerAppModule.decorators = [
+        { type: NgModule, args: [{
+                    providers: [
+                        ɵBROWSER_SANITIZATION_PROVIDERS,
+                        { provide: ɵINJECTOR_SCOPE, useValue: 'root' },
+                        Serializer,
+                        { provide: DOCUMENT, useValue: null },
+                        ClientMessageBrokerFactory,
+                        ServiceMessageBrokerFactory,
+                        WebWorkerRendererFactory2,
+                        { provide: RendererFactory2, useExisting: WebWorkerRendererFactory2 },
+                        { provide: ON_WEB_WORKER, useValue: true },
+                        RenderStore,
+                        { provide: ErrorHandler, useFactory: errorHandler, deps: [] },
+                        { provide: MessageBus, useFactory: createMessageBus, deps: [NgZone] },
+                        { provide: APP_INITIALIZER, useValue: setupWebWorker, multi: true },
+                        { provide: ViewportScroller, useClass: ɵNullViewportScroller, deps: [] },
+                    ],
+                    exports: [
+                        CommonModule,
+                        ApplicationModule,
+                    ]
+                },] }
+    ];
     return WorkerAppModule;
 })();
 
