@@ -1,5 +1,5 @@
 /**
- * @license Angular v10.0.0-rc.0+22.sha-82761ec
+ * @license Angular v10.0.0-rc.0+23.sha-d16a7f3
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -305,9 +305,9 @@
         RenderStore.prototype.serialize = function (obj) {
             return obj == null ? null : this._lookupByObject.get(obj);
         };
-        RenderStore = __decorate([
-            core.Injectable()
-        ], RenderStore);
+        RenderStore.decorators = [
+            { type: core.Injectable }
+        ];
         return RenderStore;
     }());
 
@@ -408,10 +408,13 @@
                 data: this.deserialize(props['data'])
             };
         };
-        Serializer = __decorate([
-            core.Injectable(),
-            __metadata("design:paramtypes", [RenderStore])
-        ], Serializer);
+        Serializer.decorators = [
+            { type: core.Injectable }
+        ];
+        /** @nocollapse */
+        Serializer.ctorParameters = function () { return [
+            { type: RenderStore }
+        ]; };
         return Serializer;
     }());
 
@@ -441,10 +444,14 @@
             this._messageBus.initChannel(channel, runInZone);
             return new ClientMessageBroker(this._messageBus, this._serializer, channel);
         };
-        ClientMessageBrokerFactory = __decorate([
-            core.Injectable(),
-            __metadata("design:paramtypes", [MessageBus, Serializer])
-        ], ClientMessageBrokerFactory);
+        ClientMessageBrokerFactory.decorators = [
+            { type: core.Injectable }
+        ];
+        /** @nocollapse */
+        ClientMessageBrokerFactory.ctorParameters = function () { return [
+            { type: MessageBus },
+            { type: Serializer }
+        ]; };
         return ClientMessageBrokerFactory;
     }());
     /**
@@ -700,10 +707,14 @@
         PostMessageBus.prototype.to = function (channel) {
             return this.sink.to(channel);
         };
-        PostMessageBus = __decorate([
-            core.Injectable(),
-            __metadata("design:paramtypes", [PostMessageBusSink, PostMessageBusSource])
-        ], PostMessageBus);
+        PostMessageBus.decorators = [
+            { type: core.Injectable }
+        ];
+        /** @nocollapse */
+        PostMessageBus.ctorParameters = function () { return [
+            { type: PostMessageBusSink },
+            { type: PostMessageBusSource }
+        ]; };
         return PostMessageBus;
     }());
     /**
@@ -744,10 +755,14 @@
             this._messageBus.initChannel(channel, runInZone);
             return new ServiceMessageBroker(this._messageBus, this._serializer, channel);
         };
-        ServiceMessageBrokerFactory = __decorate([
-            core.Injectable(),
-            __metadata("design:paramtypes", [MessageBus, Serializer])
-        ], ServiceMessageBrokerFactory);
+        ServiceMessageBrokerFactory.decorators = [
+            { type: core.Injectable }
+        ];
+        /** @nocollapse */
+        ServiceMessageBrokerFactory.ctorParameters = function () { return [
+            { type: MessageBus },
+            { type: Serializer }
+        ]; };
         return ServiceMessageBrokerFactory;
     }());
     /**
@@ -1115,12 +1130,17 @@
         MessageBasedRenderer2.prototype.unlisten = function (r, unlisten) {
             unlisten();
         };
-        MessageBasedRenderer2 = __decorate([
-            core.Injectable(),
-            __metadata("design:paramtypes", [ServiceMessageBrokerFactory, MessageBus,
-                Serializer, RenderStore,
-                core.RendererFactory2])
-        ], MessageBasedRenderer2);
+        MessageBasedRenderer2.decorators = [
+            { type: core.Injectable }
+        ];
+        /** @nocollapse */
+        MessageBasedRenderer2.ctorParameters = function () { return [
+            { type: ServiceMessageBrokerFactory },
+            { type: MessageBus },
+            { type: Serializer },
+            { type: RenderStore },
+            { type: core.RendererFactory2 }
+        ]; };
         return MessageBasedRenderer2;
     }());
 
@@ -1147,9 +1167,9 @@
             this.worker = worker;
             this.bus = bus;
         };
-        WebWorkerInstance = __decorate([
-            core.Injectable()
-        ], WebWorkerInstance);
+        WebWorkerInstance.decorators = [
+            { type: core.Injectable }
+        ];
         return WebWorkerInstance;
     }());
     /**
@@ -1297,7 +1317,7 @@
      * @deprecated platform-webworker is deprecated in Angular and will be removed in a future version
      *     of Angular
      */
-    var VERSION = new core.Version('10.0.0-rc.0+22.sha-82761ec');
+    var VERSION = new core.Version('10.0.0-rc.0+23.sha-d16a7f3');
 
     /**
      * @license
@@ -1337,12 +1357,16 @@
         MessageBasedPlatformLocation.prototype._setPathname = function (pathname) {
             this._platformLocation.pathname = pathname;
         };
-        MessageBasedPlatformLocation = __decorate([
-            core.Injectable(),
-            __metadata("design:paramtypes", [ServiceMessageBrokerFactory,
-                common.ɵBrowserPlatformLocation, MessageBus,
-                Serializer])
-        ], MessageBasedPlatformLocation);
+        MessageBasedPlatformLocation.decorators = [
+            { type: core.Injectable }
+        ];
+        /** @nocollapse */
+        MessageBasedPlatformLocation.ctorParameters = function () { return [
+            { type: ServiceMessageBrokerFactory },
+            { type: common.ɵBrowserPlatformLocation },
+            { type: MessageBus },
+            { type: Serializer }
+        ]; };
         return MessageBasedPlatformLocation;
     }());
 
@@ -1520,10 +1544,15 @@
         WebWorkerPlatformLocation.prototype.getState = function () {
             return undefined;
         };
-        WebWorkerPlatformLocation = __decorate([
-            core.Injectable(),
-            __metadata("design:paramtypes", [ClientMessageBrokerFactory, MessageBus, Serializer])
-        ], WebWorkerPlatformLocation);
+        WebWorkerPlatformLocation.decorators = [
+            { type: core.Injectable }
+        ];
+        /** @nocollapse */
+        WebWorkerPlatformLocation.ctorParameters = function () { return [
+            { type: ClientMessageBrokerFactory },
+            { type: MessageBus },
+            { type: Serializer }
+        ]; };
         return WebWorkerPlatformLocation;
     }(common.PlatformLocation));
 
@@ -1653,11 +1682,16 @@
                 element.events.dispatchEvent(eventName, event);
             }
         };
-        WebWorkerRendererFactory2 = __decorate([
-            core.Injectable(),
-            __metadata("design:paramtypes", [ClientMessageBrokerFactory, MessageBus,
-                Serializer, RenderStore])
-        ], WebWorkerRendererFactory2);
+        WebWorkerRendererFactory2.decorators = [
+            { type: core.Injectable }
+        ];
+        /** @nocollapse */
+        WebWorkerRendererFactory2.ctorParameters = function () { return [
+            { type: ClientMessageBrokerFactory },
+            { type: MessageBus },
+            { type: Serializer },
+            { type: RenderStore }
+        ]; };
         return WebWorkerRendererFactory2;
     }());
     var WebWorkerRenderer2 = /** @class */ (function () {
@@ -1989,30 +2023,30 @@
     var WorkerAppModule = /** @class */ (function () {
         function WorkerAppModule() {
         }
-        WorkerAppModule = __decorate([
-            core.NgModule({
-                providers: [
-                    platformBrowser.ɵBROWSER_SANITIZATION_PROVIDERS,
-                    { provide: core.ɵINJECTOR_SCOPE, useValue: 'root' },
-                    Serializer,
-                    { provide: common.DOCUMENT, useValue: null },
-                    ClientMessageBrokerFactory,
-                    ServiceMessageBrokerFactory,
-                    WebWorkerRendererFactory2,
-                    { provide: core.RendererFactory2, useExisting: WebWorkerRendererFactory2 },
-                    { provide: ON_WEB_WORKER, useValue: true },
-                    RenderStore,
-                    { provide: core.ErrorHandler, useFactory: errorHandler, deps: [] },
-                    { provide: MessageBus, useFactory: createMessageBus, deps: [core.NgZone] },
-                    { provide: core.APP_INITIALIZER, useValue: setupWebWorker, multi: true },
-                    { provide: common.ViewportScroller, useClass: common.ɵNullViewportScroller, deps: [] },
-                ],
-                exports: [
-                    common.CommonModule,
-                    core.ApplicationModule,
-                ]
-            })
-        ], WorkerAppModule);
+        WorkerAppModule.decorators = [
+            { type: core.NgModule, args: [{
+                        providers: [
+                            platformBrowser.ɵBROWSER_SANITIZATION_PROVIDERS,
+                            { provide: core.ɵINJECTOR_SCOPE, useValue: 'root' },
+                            Serializer,
+                            { provide: common.DOCUMENT, useValue: null },
+                            ClientMessageBrokerFactory,
+                            ServiceMessageBrokerFactory,
+                            WebWorkerRendererFactory2,
+                            { provide: core.RendererFactory2, useExisting: WebWorkerRendererFactory2 },
+                            { provide: ON_WEB_WORKER, useValue: true },
+                            RenderStore,
+                            { provide: core.ErrorHandler, useFactory: errorHandler, deps: [] },
+                            { provide: MessageBus, useFactory: createMessageBus, deps: [core.NgZone] },
+                            { provide: core.APP_INITIALIZER, useValue: setupWebWorker, multi: true },
+                            { provide: common.ViewportScroller, useClass: common.ɵNullViewportScroller, deps: [] },
+                        ],
+                        exports: [
+                            common.CommonModule,
+                            core.ApplicationModule,
+                        ]
+                    },] }
+        ];
         return WorkerAppModule;
     }());
 
