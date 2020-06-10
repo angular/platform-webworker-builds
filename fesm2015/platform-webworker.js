@@ -1,5 +1,5 @@
 /**
- * @license Angular v10.0.0-rc.3+14.sha-9d397eb
+ * @license Angular v10.0.0-rc.3+16.sha-742f3d6
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -177,7 +177,6 @@ let Serializer = /** @class */ (() => {
     Serializer.decorators = [
         { type: Injectable }
     ];
-    /** @nocollapse */
     Serializer.ctorParameters = () => [
         { type: RenderStore }
     ];
@@ -214,7 +213,6 @@ let ClientMessageBrokerFactory = /** @class */ (() => {
     ClientMessageBrokerFactory.decorators = [
         { type: Injectable }
     ];
-    /** @nocollapse */
     ClientMessageBrokerFactory.ctorParameters = () => [
         { type: MessageBus },
         { type: Serializer }
@@ -465,7 +463,6 @@ let PostMessageBus = /** @class */ (() => {
     PostMessageBus.decorators = [
         { type: Injectable }
     ];
-    /** @nocollapse */
     PostMessageBus.ctorParameters = () => [
         { type: PostMessageBusSink },
         { type: PostMessageBusSource }
@@ -513,7 +510,6 @@ let ServiceMessageBrokerFactory = /** @class */ (() => {
     ServiceMessageBrokerFactory.decorators = [
         { type: Injectable }
     ];
-    /** @nocollapse */
     ServiceMessageBrokerFactory.ctorParameters = () => [
         { type: MessageBus },
         { type: Serializer }
@@ -882,7 +878,6 @@ let MessageBasedRenderer2 = /** @class */ (() => {
     MessageBasedRenderer2.decorators = [
         { type: Injectable }
     ];
-    /** @nocollapse */
     MessageBasedRenderer2.ctorParameters = () => [
         { type: ServiceMessageBrokerFactory },
         { type: MessageBus },
@@ -1066,7 +1061,7 @@ function spawnWebWorker(uri, instance) {
  * @deprecated platform-webworker is deprecated in Angular and will be removed in a future version
  *     of Angular
  */
-const VERSION = new Version('10.0.0-rc.3+14.sha-9d397eb');
+const VERSION = new Version('10.0.0-rc.3+16.sha-742f3d6');
 
 /**
  * @license
@@ -1111,7 +1106,6 @@ let MessageBasedPlatformLocation = /** @class */ (() => {
     MessageBasedPlatformLocation.decorators = [
         { type: Injectable }
     ];
-    /** @nocollapse */
     MessageBasedPlatformLocation.ctorParameters = () => [
         { type: ServiceMessageBrokerFactory },
         { type: ɵBrowserPlatformLocation },
@@ -1269,7 +1263,6 @@ let WebWorkerPlatformLocation = /** @class */ (() => {
     WebWorkerPlatformLocation.decorators = [
         { type: Injectable }
     ];
-    /** @nocollapse */
     WebWorkerPlatformLocation.ctorParameters = () => [
         { type: ClientMessageBrokerFactory },
         { type: MessageBus },
@@ -1405,7 +1398,6 @@ let WebWorkerRendererFactory2 = /** @class */ (() => {
     WebWorkerRendererFactory2.decorators = [
         { type: Injectable }
     ];
-    /** @nocollapse */
     WebWorkerRendererFactory2.ctorParameters = () => [
         { type: ClientMessageBrokerFactory },
         { type: MessageBus },
