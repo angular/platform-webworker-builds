@@ -1,5 +1,5 @@
 /**
- * @license Angular v10.0.0-rc.0+113.sha-0a1d078
+ * @license Angular v10.0.0-rc.0+114.sha-401ef71
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -411,7 +411,6 @@
         Serializer.decorators = [
             { type: core.Injectable }
         ];
-        /** @nocollapse */
         Serializer.ctorParameters = function () { return [
             { type: RenderStore }
         ]; };
@@ -447,7 +446,6 @@
         ClientMessageBrokerFactory.decorators = [
             { type: core.Injectable }
         ];
-        /** @nocollapse */
         ClientMessageBrokerFactory.ctorParameters = function () { return [
             { type: MessageBus },
             { type: Serializer }
@@ -710,7 +708,6 @@
         PostMessageBus.decorators = [
             { type: core.Injectable }
         ];
-        /** @nocollapse */
         PostMessageBus.ctorParameters = function () { return [
             { type: PostMessageBusSink },
             { type: PostMessageBusSource }
@@ -758,7 +755,6 @@
         ServiceMessageBrokerFactory.decorators = [
             { type: core.Injectable }
         ];
-        /** @nocollapse */
         ServiceMessageBrokerFactory.ctorParameters = function () { return [
             { type: MessageBus },
             { type: Serializer }
@@ -1133,7 +1129,6 @@
         MessageBasedRenderer2.decorators = [
             { type: core.Injectable }
         ];
-        /** @nocollapse */
         MessageBasedRenderer2.ctorParameters = function () { return [
             { type: ServiceMessageBrokerFactory },
             { type: MessageBus },
@@ -1317,7 +1312,7 @@
      * @deprecated platform-webworker is deprecated in Angular and will be removed in a future version
      *     of Angular
      */
-    var VERSION = new core.Version('10.0.0-rc.0+113.sha-0a1d078');
+    var VERSION = new core.Version('10.0.0-rc.0+114.sha-401ef71');
 
     /**
      * @license
@@ -1360,7 +1355,6 @@
         MessageBasedPlatformLocation.decorators = [
             { type: core.Injectable }
         ];
-        /** @nocollapse */
         MessageBasedPlatformLocation.ctorParameters = function () { return [
             { type: ServiceMessageBrokerFactory },
             { type: common.ɵBrowserPlatformLocation },
@@ -1547,7 +1541,6 @@
         WebWorkerPlatformLocation.decorators = [
             { type: core.Injectable }
         ];
-        /** @nocollapse */
         WebWorkerPlatformLocation.ctorParameters = function () { return [
             { type: ClientMessageBrokerFactory },
             { type: MessageBus },
@@ -1685,7 +1678,6 @@
         WebWorkerRendererFactory2.decorators = [
             { type: core.Injectable }
         ];
-        /** @nocollapse */
         WebWorkerRendererFactory2.ctorParameters = function () { return [
             { type: ClientMessageBrokerFactory },
             { type: MessageBus },
