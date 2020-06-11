@@ -1,5 +1,5 @@
 /**
- * @license Angular v10.0.0-rc.4+6.sha-c2f4a9b
+ * @license Angular v10.0.0-rc.4+14.sha-38c48be
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -44,41 +44,38 @@ class MessageBus {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-let RenderStore = /** @class */ (() => {
-    class RenderStore {
-        constructor() {
-            this._nextIndex = 0;
-            this._lookupById = new Map();
-            this._lookupByObject = new Map();
-        }
-        allocateId() {
-            return this._nextIndex++;
-        }
-        store(obj, id) {
-            if (id == null)
-                return;
-            this._lookupById.set(id, obj);
-            this._lookupByObject.set(obj, id);
-        }
-        remove(obj) {
-            const index = this._lookupByObject.get(obj);
-            if (index != null) {
-                this._lookupByObject.delete(obj);
-                this._lookupById.delete(index);
-            }
-        }
-        deserialize(id) {
-            return this._lookupById.has(id) ? this._lookupById.get(id) : null;
-        }
-        serialize(obj) {
-            return obj == null ? null : this._lookupByObject.get(obj);
+class RenderStore {
+    constructor() {
+        this._nextIndex = 0;
+        this._lookupById = new Map();
+        this._lookupByObject = new Map();
+    }
+    allocateId() {
+        return this._nextIndex++;
+    }
+    store(obj, id) {
+        if (id == null)
+            return;
+        this._lookupById.set(id, obj);
+        this._lookupByObject.set(obj, id);
+    }
+    remove(obj) {
+        const index = this._lookupByObject.get(obj);
+        if (index != null) {
+            this._lookupByObject.delete(obj);
+            this._lookupById.delete(index);
         }
     }
-    RenderStore.decorators = [
-        { type: Injectable }
-    ];
-    return RenderStore;
-})();
+    deserialize(id) {
+        return this._lookupById.has(id) ? this._lookupById.get(id) : null;
+    }
+    serialize(obj) {
+        return obj == null ? null : this._lookupByObject.get(obj);
+    }
+}
+RenderStore.decorators = [
+    { type: Injectable }
+];
 
 /**
  * @license
@@ -100,88 +97,85 @@ class LocationType {
         this.origin = origin;
     }
 }
-let Serializer = /** @class */ (() => {
-    class Serializer {
-        constructor(_renderStore) {
-            this._renderStore = _renderStore;
-        }
-        serialize(obj, type = 1 /* PRIMITIVE */) {
-            if (obj == null || type === 1 /* PRIMITIVE */) {
-                return obj;
-            }
-            if (Array.isArray(obj)) {
-                return obj.map(v => this.serialize(v, type));
-            }
-            if (type === 2 /* RENDER_STORE_OBJECT */) {
-                return this._renderStore.serialize(obj);
-            }
-            if (type === 0 /* RENDERER_TYPE_2 */) {
-                return this._serializeRendererType2(obj);
-            }
-            if (type === LocationType) {
-                return this._serializeLocation(obj);
-            }
-            throw new Error(`No serializer for type ${ɵstringify(type)}`);
-        }
-        deserialize(map, type = 1 /* PRIMITIVE */, data) {
-            if (map == null || type === 1 /* PRIMITIVE */) {
-                return map;
-            }
-            if (Array.isArray(map)) {
-                return map.map(val => this.deserialize(val, type, data));
-            }
-            if (type === 2 /* RENDER_STORE_OBJECT */) {
-                return this._renderStore.deserialize(map);
-            }
-            if (type === 0 /* RENDERER_TYPE_2 */) {
-                return this._deserializeRendererType2(map);
-            }
-            if (type === LocationType) {
-                return this._deserializeLocation(map);
-            }
-            throw new Error(`No deserializer for type ${ɵstringify(type)}`);
-        }
-        _serializeLocation(loc) {
-            return {
-                'href': loc.href,
-                'protocol': loc.protocol,
-                'host': loc.host,
-                'hostname': loc.hostname,
-                'port': loc.port,
-                'pathname': loc.pathname,
-                'search': loc.search,
-                'hash': loc.hash,
-                'origin': loc.origin,
-            };
-        }
-        _deserializeLocation(loc) {
-            return new LocationType(loc['href'], loc['protocol'], loc['host'], loc['hostname'], loc['port'], loc['pathname'], loc['search'], loc['hash'], loc['origin']);
-        }
-        _serializeRendererType2(type) {
-            return {
-                'id': type.id,
-                'encapsulation': this.serialize(type.encapsulation),
-                'styles': this.serialize(type.styles),
-                'data': this.serialize(type.data),
-            };
-        }
-        _deserializeRendererType2(props) {
-            return {
-                id: props['id'],
-                encapsulation: props['encapsulation'],
-                styles: this.deserialize(props['styles']),
-                data: this.deserialize(props['data'])
-            };
-        }
+class Serializer {
+    constructor(_renderStore) {
+        this._renderStore = _renderStore;
     }
-    Serializer.decorators = [
-        { type: Injectable }
-    ];
-    Serializer.ctorParameters = () => [
-        { type: RenderStore }
-    ];
-    return Serializer;
-})();
+    serialize(obj, type = 1 /* PRIMITIVE */) {
+        if (obj == null || type === 1 /* PRIMITIVE */) {
+            return obj;
+        }
+        if (Array.isArray(obj)) {
+            return obj.map(v => this.serialize(v, type));
+        }
+        if (type === 2 /* RENDER_STORE_OBJECT */) {
+            return this._renderStore.serialize(obj);
+        }
+        if (type === 0 /* RENDERER_TYPE_2 */) {
+            return this._serializeRendererType2(obj);
+        }
+        if (type === LocationType) {
+            return this._serializeLocation(obj);
+        }
+        throw new Error(`No serializer for type ${ɵstringify(type)}`);
+    }
+    deserialize(map, type = 1 /* PRIMITIVE */, data) {
+        if (map == null || type === 1 /* PRIMITIVE */) {
+            return map;
+        }
+        if (Array.isArray(map)) {
+            return map.map(val => this.deserialize(val, type, data));
+        }
+        if (type === 2 /* RENDER_STORE_OBJECT */) {
+            return this._renderStore.deserialize(map);
+        }
+        if (type === 0 /* RENDERER_TYPE_2 */) {
+            return this._deserializeRendererType2(map);
+        }
+        if (type === LocationType) {
+            return this._deserializeLocation(map);
+        }
+        throw new Error(`No deserializer for type ${ɵstringify(type)}`);
+    }
+    _serializeLocation(loc) {
+        return {
+            'href': loc.href,
+            'protocol': loc.protocol,
+            'host': loc.host,
+            'hostname': loc.hostname,
+            'port': loc.port,
+            'pathname': loc.pathname,
+            'search': loc.search,
+            'hash': loc.hash,
+            'origin': loc.origin,
+        };
+    }
+    _deserializeLocation(loc) {
+        return new LocationType(loc['href'], loc['protocol'], loc['host'], loc['hostname'], loc['port'], loc['pathname'], loc['search'], loc['hash'], loc['origin']);
+    }
+    _serializeRendererType2(type) {
+        return {
+            'id': type.id,
+            'encapsulation': this.serialize(type.encapsulation),
+            'styles': this.serialize(type.styles),
+            'data': this.serialize(type.data),
+        };
+    }
+    _deserializeRendererType2(props) {
+        return {
+            id: props['id'],
+            encapsulation: props['encapsulation'],
+            styles: this.deserialize(props['styles']),
+            data: this.deserialize(props['data'])
+        };
+    }
+}
+Serializer.decorators = [
+    { type: Injectable }
+];
+Serializer.ctorParameters = () => [
+    { type: RenderStore }
+];
 
 /**
  * @license
@@ -195,30 +189,27 @@ let Serializer = /** @class */ (() => {
  * @deprecated platform-webworker is deprecated in Angular and will be removed in a future version
  *     of Angular
  */
-let ClientMessageBrokerFactory = /** @class */ (() => {
-    class ClientMessageBrokerFactory {
-        /** @internal */
-        constructor(_messageBus, _serializer) {
-            this._messageBus = _messageBus;
-            this._serializer = _serializer;
-        }
-        /**
-         * Initializes the given channel and attaches a new {@link ClientMessageBroker} to it.
-         */
-        createMessageBroker(channel, runInZone = true) {
-            this._messageBus.initChannel(channel, runInZone);
-            return new ClientMessageBroker(this._messageBus, this._serializer, channel);
-        }
+class ClientMessageBrokerFactory {
+    /** @internal */
+    constructor(_messageBus, _serializer) {
+        this._messageBus = _messageBus;
+        this._serializer = _serializer;
     }
-    ClientMessageBrokerFactory.decorators = [
-        { type: Injectable }
-    ];
-    ClientMessageBrokerFactory.ctorParameters = () => [
-        { type: MessageBus },
-        { type: Serializer }
-    ];
-    return ClientMessageBrokerFactory;
-})();
+    /**
+     * Initializes the given channel and attaches a new {@link ClientMessageBroker} to it.
+     */
+    createMessageBroker(channel, runInZone = true) {
+        this._messageBus.initChannel(channel, runInZone);
+        return new ClientMessageBroker(this._messageBus, this._serializer, channel);
+    }
+}
+ClientMessageBrokerFactory.decorators = [
+    { type: Injectable }
+];
+ClientMessageBrokerFactory.ctorParameters = () => [
+    { type: MessageBus },
+    { type: Serializer }
+];
 /**
  * @publicApi
  * @deprecated platform-webworker is deprecated in Angular and will be removed in a future version
@@ -439,36 +430,33 @@ class PostMessageBusSource {
  * A TypeScript implementation of {@link MessageBus} for communicating via JavaScript's
  * postMessage API.
  */
-let PostMessageBus = /** @class */ (() => {
-    class PostMessageBus {
-        constructor(sink, source) {
-            this.sink = sink;
-            this.source = source;
-        }
-        attachToZone(zone) {
-            this.source.attachToZone(zone);
-            this.sink.attachToZone(zone);
-        }
-        initChannel(channel, runInZone = true) {
-            this.source.initChannel(channel, runInZone);
-            this.sink.initChannel(channel, runInZone);
-        }
-        from(channel) {
-            return this.source.from(channel);
-        }
-        to(channel) {
-            return this.sink.to(channel);
-        }
+class PostMessageBus {
+    constructor(sink, source) {
+        this.sink = sink;
+        this.source = source;
     }
-    PostMessageBus.decorators = [
-        { type: Injectable }
-    ];
-    PostMessageBus.ctorParameters = () => [
-        { type: PostMessageBusSink },
-        { type: PostMessageBusSource }
-    ];
-    return PostMessageBus;
-})();
+    attachToZone(zone) {
+        this.source.attachToZone(zone);
+        this.sink.attachToZone(zone);
+    }
+    initChannel(channel, runInZone = true) {
+        this.source.initChannel(channel, runInZone);
+        this.sink.initChannel(channel, runInZone);
+    }
+    from(channel) {
+        return this.source.from(channel);
+    }
+    to(channel) {
+        return this.sink.to(channel);
+    }
+}
+PostMessageBus.decorators = [
+    { type: Injectable }
+];
+PostMessageBus.ctorParameters = () => [
+    { type: PostMessageBusSink },
+    { type: PostMessageBusSource }
+];
 /**
  * Helper class that wraps a channel's {@link EventEmitter} and
  * keeps track of if it should run in the zone.
@@ -492,30 +480,27 @@ class _Channel {
  * @deprecated platform-webworker is deprecated in Angular and will be removed in a future version
  *     of Angular
  */
-let ServiceMessageBrokerFactory = /** @class */ (() => {
-    class ServiceMessageBrokerFactory {
-        /** @internal */
-        constructor(_messageBus, _serializer) {
-            this._messageBus = _messageBus;
-            this._serializer = _serializer;
-        }
-        /**
-         * Initializes the given channel and attaches a new {@link ServiceMessageBroker} to it.
-         */
-        createMessageBroker(channel, runInZone = true) {
-            this._messageBus.initChannel(channel, runInZone);
-            return new ServiceMessageBroker(this._messageBus, this._serializer, channel);
-        }
+class ServiceMessageBrokerFactory {
+    /** @internal */
+    constructor(_messageBus, _serializer) {
+        this._messageBus = _messageBus;
+        this._serializer = _serializer;
     }
-    ServiceMessageBrokerFactory.decorators = [
-        { type: Injectable }
-    ];
-    ServiceMessageBrokerFactory.ctorParameters = () => [
-        { type: MessageBus },
-        { type: Serializer }
-    ];
-    return ServiceMessageBrokerFactory;
-})();
+    /**
+     * Initializes the given channel and attaches a new {@link ServiceMessageBroker} to it.
+     */
+    createMessageBroker(channel, runInZone = true) {
+        this._messageBus.initChannel(channel, runInZone);
+        return new ServiceMessageBroker(this._messageBus, this._serializer, channel);
+    }
+}
+ServiceMessageBrokerFactory.decorators = [
+    { type: Injectable }
+];
+ServiceMessageBrokerFactory.ctorParameters = () => [
+    { type: MessageBus },
+    { type: Serializer }
+];
 /**
  * Helper class for UIComponents that allows components to register methods.
  * If a registered method message is received from the broker on the worker,
@@ -755,138 +740,135 @@ class EventDispatcher {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-let MessageBasedRenderer2 = /** @class */ (() => {
-    class MessageBasedRenderer2 {
-        constructor(_brokerFactory, _bus, _serializer, _renderStore, _rendererFactory) {
-            this._brokerFactory = _brokerFactory;
-            this._bus = _bus;
-            this._serializer = _serializer;
-            this._renderStore = _renderStore;
-            this._rendererFactory = _rendererFactory;
-        }
-        start() {
-            const broker = this._brokerFactory.createMessageBroker(RENDERER_2_CHANNEL);
-            this._bus.initChannel(EVENT_2_CHANNEL);
-            this._eventDispatcher = new EventDispatcher(this._bus.to(EVENT_2_CHANNEL), this._serializer);
-            const [RSO, P, CRT] = [
-                2 /* RENDER_STORE_OBJECT */,
-                1 /* PRIMITIVE */,
-                0 /* RENDERER_TYPE_2 */,
-            ];
-            const methods = [
-                ['createRenderer', this.createRenderer, RSO, CRT, P],
-                ['createElement', this.createElement, RSO, P, P, P],
-                ['createComment', this.createComment, RSO, P, P],
-                ['createText', this.createText, RSO, P, P],
-                ['appendChild', this.appendChild, RSO, RSO, RSO],
-                ['insertBefore', this.insertBefore, RSO, RSO, RSO, RSO],
-                ['removeChild', this.removeChild, RSO, RSO, RSO],
-                ['selectRootElement', this.selectRootElement, RSO, P, P],
-                ['parentNode', this.parentNode, RSO, RSO, P],
-                ['nextSibling', this.nextSibling, RSO, RSO, P],
-                ['setAttribute', this.setAttribute, RSO, RSO, P, P, P],
-                ['removeAttribute', this.removeAttribute, RSO, RSO, P, P],
-                ['addClass', this.addClass, RSO, RSO, P],
-                ['removeClass', this.removeClass, RSO, RSO, P],
-                ['setStyle', this.setStyle, RSO, RSO, P, P, P],
-                ['removeStyle', this.removeStyle, RSO, RSO, P, P],
-                ['setProperty', this.setProperty, RSO, RSO, P, P],
-                ['setValue', this.setValue, RSO, RSO, P],
-                ['listen', this.listen, RSO, RSO, P, P, P],
-                ['unlisten', this.unlisten, RSO, RSO],
-                ['destroy', this.destroy, RSO],
-                ['destroyNode', this.destroyNode, RSO, P]
-            ];
-            methods.forEach(([name, method, ...argTypes]) => {
-                broker.registerMethod(name, argTypes, method.bind(this));
-            });
-        }
-        destroy(r) {
-            r.destroy();
-        }
-        destroyNode(r, node) {
-            if (r.destroyNode) {
-                r.destroyNode(node);
-            }
-            this._renderStore.remove(node);
-        }
-        createRenderer(el, type, id) {
-            this._renderStore.store(this._rendererFactory.createRenderer(el, type), id);
-        }
-        createElement(r, name, namespace, id) {
-            this._renderStore.store(r.createElement(name, namespace), id);
-        }
-        createComment(r, value, id) {
-            this._renderStore.store(r.createComment(value), id);
-        }
-        createText(r, value, id) {
-            this._renderStore.store(r.createText(value), id);
-        }
-        appendChild(r, parent, child) {
-            r.appendChild(parent, child);
-        }
-        insertBefore(r, parent, child, ref) {
-            r.insertBefore(parent, child, ref);
-        }
-        removeChild(r, parent, child) {
-            r.removeChild(parent, child);
-        }
-        selectRootElement(r, selector, id) {
-            this._renderStore.store(r.selectRootElement(selector), id);
-        }
-        parentNode(r, node, id) {
-            this._renderStore.store(r.parentNode(node), id);
-        }
-        nextSibling(r, node, id) {
-            this._renderStore.store(r.nextSibling(node), id);
-        }
-        setAttribute(r, el, name, value, namespace) {
-            r.setAttribute(el, name, value, namespace);
-        }
-        removeAttribute(r, el, name, namespace) {
-            r.removeAttribute(el, name, namespace);
-        }
-        addClass(r, el, name) {
-            r.addClass(el, name);
-        }
-        removeClass(r, el, name) {
-            r.removeClass(el, name);
-        }
-        setStyle(r, el, style, value, flags) {
-            r.setStyle(el, style, value, flags);
-        }
-        removeStyle(r, el, style, flags) {
-            r.removeStyle(el, style, flags);
-        }
-        setProperty(r, el, name, value) {
-            r.setProperty(el, name, value);
-        }
-        setValue(r, node, value) {
-            r.setValue(node, value);
-        }
-        listen(r, el, elName, eventName, unlistenId) {
-            const listener = (event) => {
-                return this._eventDispatcher.dispatchRenderEvent(el, elName, eventName, event);
-            };
-            const unlisten = r.listen(el || elName, eventName, listener);
-            this._renderStore.store(unlisten, unlistenId);
-        }
-        unlisten(r, unlisten) {
-            unlisten();
-        }
+class MessageBasedRenderer2 {
+    constructor(_brokerFactory, _bus, _serializer, _renderStore, _rendererFactory) {
+        this._brokerFactory = _brokerFactory;
+        this._bus = _bus;
+        this._serializer = _serializer;
+        this._renderStore = _renderStore;
+        this._rendererFactory = _rendererFactory;
     }
-    MessageBasedRenderer2.decorators = [
-        { type: Injectable }
-    ];
-    MessageBasedRenderer2.ctorParameters = () => [
-        { type: ServiceMessageBrokerFactory },
-        { type: MessageBus },
-        { type: Serializer },
-        { type: RenderStore },
-        { type: RendererFactory2 }
-    ];
-    return MessageBasedRenderer2;
-})();
+    start() {
+        const broker = this._brokerFactory.createMessageBroker(RENDERER_2_CHANNEL);
+        this._bus.initChannel(EVENT_2_CHANNEL);
+        this._eventDispatcher = new EventDispatcher(this._bus.to(EVENT_2_CHANNEL), this._serializer);
+        const [RSO, P, CRT] = [
+            2 /* RENDER_STORE_OBJECT */,
+            1 /* PRIMITIVE */,
+            0 /* RENDERER_TYPE_2 */,
+        ];
+        const methods = [
+            ['createRenderer', this.createRenderer, RSO, CRT, P],
+            ['createElement', this.createElement, RSO, P, P, P],
+            ['createComment', this.createComment, RSO, P, P],
+            ['createText', this.createText, RSO, P, P],
+            ['appendChild', this.appendChild, RSO, RSO, RSO],
+            ['insertBefore', this.insertBefore, RSO, RSO, RSO, RSO],
+            ['removeChild', this.removeChild, RSO, RSO, RSO],
+            ['selectRootElement', this.selectRootElement, RSO, P, P],
+            ['parentNode', this.parentNode, RSO, RSO, P],
+            ['nextSibling', this.nextSibling, RSO, RSO, P],
+            ['setAttribute', this.setAttribute, RSO, RSO, P, P, P],
+            ['removeAttribute', this.removeAttribute, RSO, RSO, P, P],
+            ['addClass', this.addClass, RSO, RSO, P],
+            ['removeClass', this.removeClass, RSO, RSO, P],
+            ['setStyle', this.setStyle, RSO, RSO, P, P, P],
+            ['removeStyle', this.removeStyle, RSO, RSO, P, P],
+            ['setProperty', this.setProperty, RSO, RSO, P, P],
+            ['setValue', this.setValue, RSO, RSO, P],
+            ['listen', this.listen, RSO, RSO, P, P, P],
+            ['unlisten', this.unlisten, RSO, RSO],
+            ['destroy', this.destroy, RSO],
+            ['destroyNode', this.destroyNode, RSO, P]
+        ];
+        methods.forEach(([name, method, ...argTypes]) => {
+            broker.registerMethod(name, argTypes, method.bind(this));
+        });
+    }
+    destroy(r) {
+        r.destroy();
+    }
+    destroyNode(r, node) {
+        if (r.destroyNode) {
+            r.destroyNode(node);
+        }
+        this._renderStore.remove(node);
+    }
+    createRenderer(el, type, id) {
+        this._renderStore.store(this._rendererFactory.createRenderer(el, type), id);
+    }
+    createElement(r, name, namespace, id) {
+        this._renderStore.store(r.createElement(name, namespace), id);
+    }
+    createComment(r, value, id) {
+        this._renderStore.store(r.createComment(value), id);
+    }
+    createText(r, value, id) {
+        this._renderStore.store(r.createText(value), id);
+    }
+    appendChild(r, parent, child) {
+        r.appendChild(parent, child);
+    }
+    insertBefore(r, parent, child, ref) {
+        r.insertBefore(parent, child, ref);
+    }
+    removeChild(r, parent, child) {
+        r.removeChild(parent, child);
+    }
+    selectRootElement(r, selector, id) {
+        this._renderStore.store(r.selectRootElement(selector), id);
+    }
+    parentNode(r, node, id) {
+        this._renderStore.store(r.parentNode(node), id);
+    }
+    nextSibling(r, node, id) {
+        this._renderStore.store(r.nextSibling(node), id);
+    }
+    setAttribute(r, el, name, value, namespace) {
+        r.setAttribute(el, name, value, namespace);
+    }
+    removeAttribute(r, el, name, namespace) {
+        r.removeAttribute(el, name, namespace);
+    }
+    addClass(r, el, name) {
+        r.addClass(el, name);
+    }
+    removeClass(r, el, name) {
+        r.removeClass(el, name);
+    }
+    setStyle(r, el, style, value, flags) {
+        r.setStyle(el, style, value, flags);
+    }
+    removeStyle(r, el, style, flags) {
+        r.removeStyle(el, style, flags);
+    }
+    setProperty(r, el, name, value) {
+        r.setProperty(el, name, value);
+    }
+    setValue(r, node, value) {
+        r.setValue(node, value);
+    }
+    listen(r, el, elName, eventName, unlistenId) {
+        const listener = (event) => {
+            return this._eventDispatcher.dispatchRenderEvent(el, elName, eventName, event);
+        };
+        const unlisten = r.listen(el || elName, eventName, listener);
+        this._renderStore.store(unlisten, unlistenId);
+    }
+    unlisten(r, unlisten) {
+        unlisten();
+    }
+}
+MessageBasedRenderer2.decorators = [
+    { type: Injectable }
+];
+MessageBasedRenderer2.ctorParameters = () => [
+    { type: ServiceMessageBrokerFactory },
+    { type: MessageBus },
+    { type: Serializer },
+    { type: RenderStore },
+    { type: RendererFactory2 }
+];
 
 /**
  * @license
@@ -903,19 +885,16 @@ let MessageBasedRenderer2 = /** @class */ (() => {
  * @deprecated platform-webworker is deprecated in Angular and will be removed in a future version
  *     of Angular
  */
-let WebWorkerInstance = /** @class */ (() => {
-    class WebWorkerInstance {
-        /** @internal */
-        init(worker, bus) {
-            this.worker = worker;
-            this.bus = bus;
-        }
+class WebWorkerInstance {
+    /** @internal */
+    init(worker, bus) {
+        this.worker = worker;
+        this.bus = bus;
     }
-    WebWorkerInstance.decorators = [
-        { type: Injectable }
-    ];
-    return WebWorkerInstance;
-})();
+}
+WebWorkerInstance.decorators = [
+    { type: Injectable }
+];
 /**
  * @publicApi
  * @deprecated platform-webworker is deprecated in Angular and will be removed in a future version
@@ -1061,7 +1040,7 @@ function spawnWebWorker(uri, instance) {
  * @deprecated platform-webworker is deprecated in Angular and will be removed in a future version
  *     of Angular
  */
-const VERSION = new Version('10.0.0-rc.4+6.sha-c2f4a9b');
+const VERSION = new Version('10.0.0-rc.4+14.sha-38c48be');
 
 /**
  * @license
@@ -1070,50 +1049,47 @@ const VERSION = new Version('10.0.0-rc.4+6.sha-c2f4a9b');
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-let MessageBasedPlatformLocation = /** @class */ (() => {
-    class MessageBasedPlatformLocation {
-        constructor(_brokerFactory, _platformLocation, bus, _serializer) {
-            this._brokerFactory = _brokerFactory;
-            this._platformLocation = _platformLocation;
-            this._serializer = _serializer;
-            this._platformLocation.onPopState(this._sendUrlChangeEvent.bind(this));
-            this._platformLocation.onHashChange(this._sendUrlChangeEvent.bind(this));
-            this._broker = this._brokerFactory.createMessageBroker(ROUTER_CHANNEL);
-            this._channelSink = bus.to(ROUTER_CHANNEL);
-        }
-        start() {
-            const P = 1 /* PRIMITIVE */;
-            this._broker.registerMethod('getLocation', null, this._getLocation.bind(this), LocationType);
-            this._broker.registerMethod('setPathname', [P], this._setPathname.bind(this));
-            this._broker.registerMethod('pushState', [P, P, P], this._platformLocation.pushState.bind(this._platformLocation));
-            this._broker.registerMethod('replaceState', [P, P, P], this._platformLocation.replaceState.bind(this._platformLocation));
-            this._broker.registerMethod('forward', null, this._platformLocation.forward.bind(this._platformLocation));
-            this._broker.registerMethod('back', null, this._platformLocation.back.bind(this._platformLocation));
-        }
-        _getLocation() {
-            return Promise.resolve(this._platformLocation.location);
-        }
-        _sendUrlChangeEvent(e) {
-            this._channelSink.emit({
-                'event': { 'type': e.type },
-                'location': this._serializer.serialize(this._platformLocation.location, LocationType),
-            });
-        }
-        _setPathname(pathname) {
-            this._platformLocation.pathname = pathname;
-        }
+class MessageBasedPlatformLocation {
+    constructor(_brokerFactory, _platformLocation, bus, _serializer) {
+        this._brokerFactory = _brokerFactory;
+        this._platformLocation = _platformLocation;
+        this._serializer = _serializer;
+        this._platformLocation.onPopState(this._sendUrlChangeEvent.bind(this));
+        this._platformLocation.onHashChange(this._sendUrlChangeEvent.bind(this));
+        this._broker = this._brokerFactory.createMessageBroker(ROUTER_CHANNEL);
+        this._channelSink = bus.to(ROUTER_CHANNEL);
     }
-    MessageBasedPlatformLocation.decorators = [
-        { type: Injectable }
-    ];
-    MessageBasedPlatformLocation.ctorParameters = () => [
-        { type: ServiceMessageBrokerFactory },
-        { type: ɵBrowserPlatformLocation },
-        { type: MessageBus },
-        { type: Serializer }
-    ];
-    return MessageBasedPlatformLocation;
-})();
+    start() {
+        const P = 1 /* PRIMITIVE */;
+        this._broker.registerMethod('getLocation', null, this._getLocation.bind(this), LocationType);
+        this._broker.registerMethod('setPathname', [P], this._setPathname.bind(this));
+        this._broker.registerMethod('pushState', [P, P, P], this._platformLocation.pushState.bind(this._platformLocation));
+        this._broker.registerMethod('replaceState', [P, P, P], this._platformLocation.replaceState.bind(this._platformLocation));
+        this._broker.registerMethod('forward', null, this._platformLocation.forward.bind(this._platformLocation));
+        this._broker.registerMethod('back', null, this._platformLocation.back.bind(this._platformLocation));
+    }
+    _getLocation() {
+        return Promise.resolve(this._platformLocation.location);
+    }
+    _sendUrlChangeEvent(e) {
+        this._channelSink.emit({
+            'event': { 'type': e.type },
+            'location': this._serializer.serialize(this._platformLocation.location, LocationType),
+        });
+    }
+    _setPathname(pathname) {
+        this._platformLocation.pathname = pathname;
+    }
+}
+MessageBasedPlatformLocation.decorators = [
+    { type: Injectable }
+];
+MessageBasedPlatformLocation.ctorParameters = () => [
+    { type: ServiceMessageBrokerFactory },
+    { type: ɵBrowserPlatformLocation },
+    { type: MessageBus },
+    { type: Serializer }
+];
 
 /**
  * @license
@@ -1151,125 +1127,122 @@ function initUiLocation(injector) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-let WebWorkerPlatformLocation = /** @class */ (() => {
-    class WebWorkerPlatformLocation extends PlatformLocation {
-        constructor(brokerFactory, bus, _serializer) {
-            super();
-            this._serializer = _serializer;
-            this._popStateListeners = [];
-            this._hashChangeListeners = [];
-            this._location = null;
-            this._broker = brokerFactory.createMessageBroker(ROUTER_CHANNEL);
-            this._channelSource = bus.from(ROUTER_CHANNEL);
-            this._channelSource.subscribe({
-                next: (msg) => {
-                    let listeners = null;
-                    if (msg.hasOwnProperty('event')) {
-                        const type = msg['event']['type'];
-                        if (type === 'popstate') {
-                            listeners = this._popStateListeners;
-                        }
-                        else if (type === 'hashchange') {
-                            listeners = this._hashChangeListeners;
-                        }
-                        if (listeners) {
-                            // There was a popState or hashChange event, so the location object thas been updated
-                            this._location = this._serializer.deserialize(msg['location'], LocationType);
-                            listeners.forEach((fn) => fn(msg['event']));
-                        }
+class WebWorkerPlatformLocation extends PlatformLocation {
+    constructor(brokerFactory, bus, _serializer) {
+        super();
+        this._serializer = _serializer;
+        this._popStateListeners = [];
+        this._hashChangeListeners = [];
+        this._location = null;
+        this._broker = brokerFactory.createMessageBroker(ROUTER_CHANNEL);
+        this._channelSource = bus.from(ROUTER_CHANNEL);
+        this._channelSource.subscribe({
+            next: (msg) => {
+                let listeners = null;
+                if (msg.hasOwnProperty('event')) {
+                    const type = msg['event']['type'];
+                    if (type === 'popstate') {
+                        listeners = this._popStateListeners;
+                    }
+                    else if (type === 'hashchange') {
+                        listeners = this._hashChangeListeners;
+                    }
+                    if (listeners) {
+                        // There was a popState or hashChange event, so the location object thas been updated
+                        this._location = this._serializer.deserialize(msg['location'], LocationType);
+                        listeners.forEach((fn) => fn(msg['event']));
                     }
                 }
-            });
-            this.initialized = new Promise(res => this.initializedResolve = res);
-        }
-        /** @internal **/
-        init() {
-            const args = new UiArguments('getLocation');
-            return this._broker.runOnService(args, LocationType).then((val) => {
-                this._location = val;
-                this.initializedResolve();
-                return true;
-            }, err => {
-                throw new Error(err);
-            });
-        }
-        getBaseHrefFromDOM() {
-            throw new Error('Attempt to get base href from DOM from WebWorker. You must either provide a value for the APP_BASE_HREF token through DI or use the hash location strategy.');
-        }
-        onPopState(fn) {
-            this._popStateListeners.push(fn);
-        }
-        onHashChange(fn) {
-            this._hashChangeListeners.push(fn);
-        }
-        get href() {
-            return this._location ? this._location.href : '<unknown>';
-        }
-        get hostname() {
-            return this._location ? this._location.host : '<unknown>';
-        }
-        get port() {
-            return this._location ? this._location.port : '<unknown>';
-        }
-        get protocol() {
-            return this._location ? this._location.protocol : '<unknown>';
-        }
-        get search() {
-            return this._location ? this._location.search : '<unknown>';
-        }
-        get hash() {
-            return this._location ? this._location.hash : '<unknown>';
-        }
-        set pathname(newPath) {
-            if (this._location === null) {
-                throw new Error('Attempt to set pathname before value is obtained from UI');
             }
-            this._location.pathname = newPath;
-            const fnArgs = [new FnArg(newPath, 1 /* PRIMITIVE */)];
-            const args = new UiArguments('setPathname', fnArgs);
-            this._broker.runOnService(args, null);
-        }
-        pushState(state, title, url) {
-            const fnArgs = [
-                new FnArg(state, 1 /* PRIMITIVE */),
-                new FnArg(title, 1 /* PRIMITIVE */),
-                new FnArg(url, 1 /* PRIMITIVE */),
-            ];
-            const args = new UiArguments('pushState', fnArgs);
-            this._broker.runOnService(args, null);
-        }
-        replaceState(state, title, url) {
-            const fnArgs = [
-                new FnArg(state, 1 /* PRIMITIVE */),
-                new FnArg(title, 1 /* PRIMITIVE */),
-                new FnArg(url, 1 /* PRIMITIVE */),
-            ];
-            const args = new UiArguments('replaceState', fnArgs);
-            this._broker.runOnService(args, null);
-        }
-        forward() {
-            const args = new UiArguments('forward');
-            this._broker.runOnService(args, null);
-        }
-        back() {
-            const args = new UiArguments('back');
-            this._broker.runOnService(args, null);
-        }
-        // History API isn't available on WebWorkers, therefore return undefined
-        getState() {
-            return undefined;
-        }
+        });
+        this.initialized = new Promise(res => this.initializedResolve = res);
     }
-    WebWorkerPlatformLocation.decorators = [
-        { type: Injectable }
-    ];
-    WebWorkerPlatformLocation.ctorParameters = () => [
-        { type: ClientMessageBrokerFactory },
-        { type: MessageBus },
-        { type: Serializer }
-    ];
-    return WebWorkerPlatformLocation;
-})();
+    /** @internal **/
+    init() {
+        const args = new UiArguments('getLocation');
+        return this._broker.runOnService(args, LocationType).then((val) => {
+            this._location = val;
+            this.initializedResolve();
+            return true;
+        }, err => {
+            throw new Error(err);
+        });
+    }
+    getBaseHrefFromDOM() {
+        throw new Error('Attempt to get base href from DOM from WebWorker. You must either provide a value for the APP_BASE_HREF token through DI or use the hash location strategy.');
+    }
+    onPopState(fn) {
+        this._popStateListeners.push(fn);
+    }
+    onHashChange(fn) {
+        this._hashChangeListeners.push(fn);
+    }
+    get href() {
+        return this._location ? this._location.href : '<unknown>';
+    }
+    get hostname() {
+        return this._location ? this._location.host : '<unknown>';
+    }
+    get port() {
+        return this._location ? this._location.port : '<unknown>';
+    }
+    get protocol() {
+        return this._location ? this._location.protocol : '<unknown>';
+    }
+    get search() {
+        return this._location ? this._location.search : '<unknown>';
+    }
+    get hash() {
+        return this._location ? this._location.hash : '<unknown>';
+    }
+    set pathname(newPath) {
+        if (this._location === null) {
+            throw new Error('Attempt to set pathname before value is obtained from UI');
+        }
+        this._location.pathname = newPath;
+        const fnArgs = [new FnArg(newPath, 1 /* PRIMITIVE */)];
+        const args = new UiArguments('setPathname', fnArgs);
+        this._broker.runOnService(args, null);
+    }
+    pushState(state, title, url) {
+        const fnArgs = [
+            new FnArg(state, 1 /* PRIMITIVE */),
+            new FnArg(title, 1 /* PRIMITIVE */),
+            new FnArg(url, 1 /* PRIMITIVE */),
+        ];
+        const args = new UiArguments('pushState', fnArgs);
+        this._broker.runOnService(args, null);
+    }
+    replaceState(state, title, url) {
+        const fnArgs = [
+            new FnArg(state, 1 /* PRIMITIVE */),
+            new FnArg(title, 1 /* PRIMITIVE */),
+            new FnArg(url, 1 /* PRIMITIVE */),
+        ];
+        const args = new UiArguments('replaceState', fnArgs);
+        this._broker.runOnService(args, null);
+    }
+    forward() {
+        const args = new UiArguments('forward');
+        this._broker.runOnService(args, null);
+    }
+    back() {
+        const args = new UiArguments('back');
+        this._broker.runOnService(args, null);
+    }
+    // History API isn't available on WebWorkers, therefore return undefined
+    getState() {
+        return undefined;
+    }
+}
+WebWorkerPlatformLocation.decorators = [
+    { type: Injectable }
+];
+WebWorkerPlatformLocation.ctorParameters = () => [
+    { type: ClientMessageBrokerFactory },
+    { type: MessageBus },
+    { type: Serializer }
+];
 
 /**
  * @license
@@ -1342,70 +1315,67 @@ class NamedEventEmitter {
 function eventNameWithTarget(target, eventName) {
     return `${target}:${eventName}`;
 }
-let WebWorkerRendererFactory2 = /** @class */ (() => {
-    class WebWorkerRendererFactory2 {
-        constructor(messageBrokerFactory, bus, _serializer, renderStore) {
-            this._serializer = _serializer;
-            this.renderStore = renderStore;
-            this.globalEvents = new NamedEventEmitter();
-            this._messageBroker = messageBrokerFactory.createMessageBroker(RENDERER_2_CHANNEL);
-            bus.initChannel(EVENT_2_CHANNEL);
-            const source = bus.from(EVENT_2_CHANNEL);
-            source.subscribe({ next: (message) => this._dispatchEvent(message) });
+class WebWorkerRendererFactory2 {
+    constructor(messageBrokerFactory, bus, _serializer, renderStore) {
+        this._serializer = _serializer;
+        this.renderStore = renderStore;
+        this.globalEvents = new NamedEventEmitter();
+        this._messageBroker = messageBrokerFactory.createMessageBroker(RENDERER_2_CHANNEL);
+        bus.initChannel(EVENT_2_CHANNEL);
+        const source = bus.from(EVENT_2_CHANNEL);
+        source.subscribe({ next: (message) => this._dispatchEvent(message) });
+    }
+    createRenderer(element, type) {
+        const renderer = new WebWorkerRenderer2(this);
+        const id = this.renderStore.allocateId();
+        this.renderStore.store(renderer, id);
+        this.callUI('createRenderer', [
+            new FnArg(element, 2 /* RENDER_STORE_OBJECT */),
+            new FnArg(type, 0 /* RENDERER_TYPE_2 */),
+            new FnArg(renderer, 2 /* RENDER_STORE_OBJECT */),
+        ]);
+        return renderer;
+    }
+    begin() { }
+    end() { }
+    callUI(fnName, fnArgs) {
+        const args = new UiArguments(fnName, fnArgs);
+        this._messageBroker.runOnService(args, null);
+    }
+    allocateNode() {
+        const result = new WebWorkerRenderNode();
+        const id = this.renderStore.allocateId();
+        this.renderStore.store(result, id);
+        return result;
+    }
+    freeNode(node) {
+        this.renderStore.remove(node);
+    }
+    allocateId() {
+        return this.renderStore.allocateId();
+    }
+    _dispatchEvent(message) {
+        const element = this._serializer.deserialize(message['element'], 2 /* RENDER_STORE_OBJECT */);
+        const eventName = message['eventName'];
+        const target = message['eventTarget'];
+        const event = message['event'];
+        if (target) {
+            this.globalEvents.dispatchEvent(eventNameWithTarget(target, eventName), event);
         }
-        createRenderer(element, type) {
-            const renderer = new WebWorkerRenderer2(this);
-            const id = this.renderStore.allocateId();
-            this.renderStore.store(renderer, id);
-            this.callUI('createRenderer', [
-                new FnArg(element, 2 /* RENDER_STORE_OBJECT */),
-                new FnArg(type, 0 /* RENDERER_TYPE_2 */),
-                new FnArg(renderer, 2 /* RENDER_STORE_OBJECT */),
-            ]);
-            return renderer;
-        }
-        begin() { }
-        end() { }
-        callUI(fnName, fnArgs) {
-            const args = new UiArguments(fnName, fnArgs);
-            this._messageBroker.runOnService(args, null);
-        }
-        allocateNode() {
-            const result = new WebWorkerRenderNode();
-            const id = this.renderStore.allocateId();
-            this.renderStore.store(result, id);
-            return result;
-        }
-        freeNode(node) {
-            this.renderStore.remove(node);
-        }
-        allocateId() {
-            return this.renderStore.allocateId();
-        }
-        _dispatchEvent(message) {
-            const element = this._serializer.deserialize(message['element'], 2 /* RENDER_STORE_OBJECT */);
-            const eventName = message['eventName'];
-            const target = message['eventTarget'];
-            const event = message['event'];
-            if (target) {
-                this.globalEvents.dispatchEvent(eventNameWithTarget(target, eventName), event);
-            }
-            else {
-                element.events.dispatchEvent(eventName, event);
-            }
+        else {
+            element.events.dispatchEvent(eventName, event);
         }
     }
-    WebWorkerRendererFactory2.decorators = [
-        { type: Injectable }
-    ];
-    WebWorkerRendererFactory2.ctorParameters = () => [
-        { type: ClientMessageBrokerFactory },
-        { type: MessageBus },
-        { type: Serializer },
-        { type: RenderStore }
-    ];
-    return WebWorkerRendererFactory2;
-})();
+}
+WebWorkerRendererFactory2.decorators = [
+    { type: Injectable }
+];
+WebWorkerRendererFactory2.ctorParameters = () => [
+    { type: ClientMessageBrokerFactory },
+    { type: MessageBus },
+    { type: Serializer },
+    { type: RenderStore }
+];
 class WebWorkerRenderer2 {
     constructor(_rendererFactory) {
         this._rendererFactory = _rendererFactory;
@@ -1723,35 +1693,32 @@ function setupWebWorker() {
  * @deprecated platform-webworker is deprecated in Angular and will be removed in a future version
  *     of Angular
  */
-let WorkerAppModule = /** @class */ (() => {
-    class WorkerAppModule {
-    }
-    WorkerAppModule.decorators = [
-        { type: NgModule, args: [{
-                    providers: [
-                        ɵBROWSER_SANITIZATION_PROVIDERS,
-                        { provide: ɵINJECTOR_SCOPE, useValue: 'root' },
-                        Serializer,
-                        { provide: DOCUMENT, useValue: null },
-                        ClientMessageBrokerFactory,
-                        ServiceMessageBrokerFactory,
-                        WebWorkerRendererFactory2,
-                        { provide: RendererFactory2, useExisting: WebWorkerRendererFactory2 },
-                        { provide: ON_WEB_WORKER, useValue: true },
-                        RenderStore,
-                        { provide: ErrorHandler, useFactory: errorHandler, deps: [] },
-                        { provide: MessageBus, useFactory: createMessageBus, deps: [NgZone] },
-                        { provide: APP_INITIALIZER, useValue: setupWebWorker, multi: true },
-                        { provide: ViewportScroller, useClass: ɵNullViewportScroller, deps: [] },
-                    ],
-                    exports: [
-                        CommonModule,
-                        ApplicationModule,
-                    ]
-                },] }
-    ];
-    return WorkerAppModule;
-})();
+class WorkerAppModule {
+}
+WorkerAppModule.decorators = [
+    { type: NgModule, args: [{
+                providers: [
+                    ɵBROWSER_SANITIZATION_PROVIDERS,
+                    { provide: ɵINJECTOR_SCOPE, useValue: 'root' },
+                    Serializer,
+                    { provide: DOCUMENT, useValue: null },
+                    ClientMessageBrokerFactory,
+                    ServiceMessageBrokerFactory,
+                    WebWorkerRendererFactory2,
+                    { provide: RendererFactory2, useExisting: WebWorkerRendererFactory2 },
+                    { provide: ON_WEB_WORKER, useValue: true },
+                    RenderStore,
+                    { provide: ErrorHandler, useFactory: errorHandler, deps: [] },
+                    { provide: MessageBus, useFactory: createMessageBus, deps: [NgZone] },
+                    { provide: APP_INITIALIZER, useValue: setupWebWorker, multi: true },
+                    { provide: ViewportScroller, useClass: ɵNullViewportScroller, deps: [] },
+                ],
+                exports: [
+                    CommonModule,
+                    ApplicationModule,
+                ]
+            },] }
+];
 
 /**
  * @license
