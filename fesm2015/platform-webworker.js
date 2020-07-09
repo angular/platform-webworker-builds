@@ -1,5 +1,5 @@
 /**
- * @license Angular v10.1.0-next.0+18.sha-c40cbec
+ * @license Angular v10.1.0-next.0+19.sha-1550663
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1032,7 +1032,7 @@ function spawnWebWorker(uri, instance) {
  * @deprecated platform-webworker is deprecated in Angular and will be removed in a future version
  *     of Angular
  */
-const VERSION = new Version('10.1.0-next.0+18.sha-c40cbec');
+const VERSION = new Version('10.1.0-next.0+19.sha-1550663');
 
 /**
  * @license
@@ -1758,6 +1758,10 @@ function bootstrapWorkerUi(workerScriptUri, customProviders = []) {
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
+ */
+
+/**
+ * Generated bundle index. Do not edit.
  */
 
 export { ClientMessageBroker, ClientMessageBrokerFactory, FnArg, MessageBus, ServiceMessageBroker, ServiceMessageBrokerFactory, UiArguments, VERSION, WORKER_APP_LOCATION_PROVIDERS, WORKER_UI_LOCATION_PROVIDERS, WorkerAppModule, bootstrapWorkerUi, platformWorkerApp, platformWorkerUi };

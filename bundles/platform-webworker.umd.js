@@ -1,5 +1,5 @@
 /**
- * @license Angular v10.1.0-next.0+18.sha-c40cbec
+ * @license Angular v10.1.0-next.0+19.sha-1550663
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1377,7 +1377,7 @@
      * @deprecated platform-webworker is deprecated in Angular and will be removed in a future version
      *     of Angular
      */
-    var VERSION = new i0.Version('10.1.0-next.0+18.sha-c40cbec');
+    var VERSION = new i0.Version('10.1.0-next.0+19.sha-1550663');
 
     var MessageBasedPlatformLocation = /** @class */ (function () {
         function MessageBasedPlatformLocation(_brokerFactory, _platformLocation, bus, _serializer) {
@@ -2128,6 +2128,10 @@
      *
      * Use of this source code is governed by an MIT-style license that can be
      * found in the LICENSE file at https://angular.io/license
+     */
+
+    /**
+     * Generated bundle index. Do not edit.
      */
 
     exports.ClientMessageBroker = ClientMessageBroker;
