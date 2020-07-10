@@ -1,5 +1,5 @@
 /**
- * @license Angular v10.1.0-next.0+20.sha-4b4b745
+ * @license Angular v10.1.0-next.0+22.sha-9bd4b74
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1377,7 +1377,7 @@
      * @deprecated platform-webworker is deprecated in Angular and will be removed in a future version
      *     of Angular
      */
-    var VERSION = new i0.Version('10.1.0-next.0+20.sha-4b4b745');
+    var VERSION = new i0.Version('10.1.0-next.0+22.sha-9bd4b74');
 
     var MessageBasedPlatformLocation = /** @class */ (function () {
         function MessageBasedPlatformLocation(_brokerFactory, _platformLocation, bus, _serializer) {
