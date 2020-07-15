@@ -1,5 +1,5 @@
 /**
- * @license Angular v10.0.4+11.sha-739bf5c
+ * @license Angular v10.0.4+12.sha-6e32972
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1371,7 +1371,7 @@
      * @deprecated platform-webworker is deprecated in Angular and will be removed in a future version
      *     of Angular
      */
-    var VERSION = new core.Version('10.0.4+11.sha-739bf5c');
+    var VERSION = new core.Version('10.0.4+12.sha-6e32972');
 
     /**
      * @license
