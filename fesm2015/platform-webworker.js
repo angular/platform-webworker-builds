@@ -1,5 +1,5 @@
 /**
- * @license Angular v10.1.0-next.4+28.sha-6ff28ac
+ * @license Angular v10.1.0-next.4+27.sha-0de93fd
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1040,7 +1040,7 @@ function spawnWebWorker(uri, instance) {
  * @deprecated platform-webworker is deprecated in Angular and will be removed in a future version
  *     of Angular
  */
-const VERSION = new Version('10.1.0-next.4+28.sha-6ff28ac');
+const VERSION = new Version('10.1.0-next.4+27.sha-0de93fd');
 
 /**
  * @license
