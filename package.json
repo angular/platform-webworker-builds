@@ -1,6 +1,6 @@
 {
   "name": "@angular/platform-webworker",
-  "version": "10.1.0-next.5+17.sha-d5f819e",
+  "version": "10.1.0-next.5+18.sha-b071495",
   "description": "Angular - library for using Angular in a web browser with web workers",
   "author": "angular",
   "license": "MIT",
@@ -8,9 +8,9 @@
     "tslib": "^2.0.0"
   },
   "peerDependencies": {
-    "@angular/common": "10.1.0-next.5+17.sha-d5f819e",
-    "@angular/core": "10.1.0-next.5+17.sha-d5f819e",
-    "@angular/platform-browser": "10.1.0-next.5+17.sha-d5f819e"
+    "@angular/common": "10.1.0-next.5+18.sha-b071495",
+    "@angular/core": "10.1.0-next.5+18.sha-b071495",
+    "@angular/platform-browser": "10.1.0-next.5+18.sha-b071495"
   },
   "repository": {
     "type": "git",
